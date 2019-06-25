@@ -1,0 +1,659 @@
+(setglobal Asmgen!
+  (let
+    (Error = (makeblock 248 "Asmgen.Error" (caml_fresh_oo_id 0))
+     liveness =
+       (function phrase
+         (funct-body asmcomp/asmgen.ml(30)<ghost>:1289-1329
+           (before asmcomp/asmgen.ml(30):1298-1329
+             (seq
+               (after asmcomp/asmgen.ml(30):1298-1321
+                 (apply (field 1 (global Liveness!)) phrase))
+               (before asmcomp/asmgen.ml(30):1323-1329 phrase)))))
+     dump_if =
+       (function ppf flag message phrase
+         (funct-body asmcomp/asmgen.ml(32)<ghost>:1343-1419
+           (before asmcomp/asmgen.ml(33):1371-1419
+             (if (field 0 flag)
+               (before asmcomp/asmgen.ml(33):1385-1419
+                 (after asmcomp/asmgen.ml(33):1385-1419
+                   (apply (field 8 (global Printmach!)) message ppf phrase)))
+               0a))))
+     pass_dump_if =
+       (function ppf flag message phrase
+         (funct-body asmcomp/asmgen.ml(35)<ghost>:1438-1505
+           (before asmcomp/asmgen.ml(36):1466-1505
+             (seq
+               (after asmcomp/asmgen.ml(36):1466-1497
+                 (apply dump_if ppf flag message phrase))
+               (before asmcomp/asmgen.ml(36):1499-1505 phrase)))))
+     pass_dump_linear_if =
+       (function ppf flag message phrase
+         (funct-body asmcomp/asmgen.ml(38)<ghost>:1531-1644
+           (before asmcomp/asmgen.ml(39):1559-1644
+             (seq
+               (if (field 0 flag)
+                 (before asmcomp/asmgen.ml(39):1573-1634
+                   (after asmcomp/asmgen.ml(39):1573-1634
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [11: "*** " [2: 0a [17: 4a [15: [17: 4a 0a]]]]]
+                        "*** %s@.%a@."]
+                       message (field 1 (global Printlinear!)) phrase)))
+                 0a)
+               (before asmcomp/asmgen.ml(40):1638-1644 phrase))))))
+    (letrec
+      (regalloc
+         (function ppf_dump round[int] fd
+           (funct-body asmcomp/asmgen.ml(42)<ghost>:1663-2598
+             (before asmcomp/asmgen.ml(43):1686-2598
+               (seq
+                 (if (> round 50)
+                   (before asmcomp/asmgen.ml(44):1709-1818
+                     (after asmcomp/asmgen.ml(44):1709-1818
+                       (apply (field 0 (global Misc!))
+                         (after asmcomp/asmgen.ml(44):1720-1818
+                           (apply (field 27 (global Stdlib!)) (field 0 fd)
+                             ": function too complex, cannot complete register allocation")))))
+                   0a)
+                 (before asmcomp/asmgen.ml(46):1822-2598
+                   (seq
+                     (after asmcomp/asmgen.ml(46):1822-1871
+                       (apply dump_if ppf_dump (field 80 (global Clflags!))
+                         "Liveness analysis" fd))
+                     (before asmcomp/asmgen.ml(47):1875-2598
+                       (seq
+                         (if (field 0 (field 19 (global Clflags!)))
+                           (before asmcomp/asmgen.ml(47):1896-2055
+                             (seq
+                               (after asmcomp/asmgen.ml(49):1928-1955
+                                 (apply (field 5 (global Interval!)) fd))
+                               (before asmcomp/asmgen.ml(50):1961-2049
+                                 (seq
+                                   (if (field 0 (field 91 (global Clflags!)))
+                                     (before asmcomp/asmgen.ml(50):1984-2015
+                                       (after asmcomp/asmgen.ml(50):1984-2015
+                                         (apply
+                                           (field 10 (global Printmach!))
+                                           ppf_dump 0a)))
+                                     0a)
+                                   (before asmcomp/asmgen.ml(51):2021-2049
+                                     (after asmcomp/asmgen.ml(51):2021-2049
+                                       (apply (field 0 (global Linscan!)) 0a)))))))
+                           (before asmcomp/asmgen.ml(52):2061-2280
+                             (seq
+                               (after asmcomp/asmgen.ml(54):2096-2117
+                                 (apply (field 0 (global Interf!)) fd))
+                               (before asmcomp/asmgen.ml(55):2123-2274
+                                 (seq
+                                   (if (field 0 (field 85 (global Clflags!)))
+                                     (before asmcomp/asmgen.ml(55):2144-2179
+                                       (after asmcomp/asmgen.ml(55):2144-2179
+                                         (apply (field 9 (global Printmach!))
+                                           ppf_dump 0a)))
+                                     0a)
+                                   (before asmcomp/asmgen.ml(56):2185-2274
+                                     (seq
+                                       (if
+                                         (field 0
+                                           (field 86 (global Clflags!)))
+                                         (before asmcomp/asmgen.ml(56):2206-2239
+                                           (after asmcomp/asmgen.ml(56):2206-2239
+                                             (apply
+                                               (field 11 (global Printmach!))
+                                               ppf_dump 0a)))
+                                         0a)
+                                       (before asmcomp/asmgen.ml(57):2245-2274
+                                         (after asmcomp/asmgen.ml(57):2245-2274
+                                           (apply
+                                             (field 0 (global Coloring!)) 0a))))))))))
+                         (before asmcomp/asmgen.ml(59):2284-2598
+                           (seq
+                             (after asmcomp/asmgen.ml(59):2284-2345
+                               (apply dump_if ppf_dump
+                                 (field 87 (global Clflags!))
+                                 "After register allocation" fd))
+                             (before asmcomp/asmgen.ml(60):2349-2598
+                               (let
+                                 (*match* =
+                                    (after asmcomp/asmgen.ml(60):2378-2395
+                                      (apply (field 0 (global Reload!)) fd))
+                                  redo_regalloc =a (field 1 *match*)
+                                  newfd =a (field 0 *match*))
+                                 (before asmcomp/asmgen.ml(61):2401-2598
+                                   (seq
+                                     (after asmcomp/asmgen.ml(61):2401-2471
+                                       (apply dump_if ppf_dump
+                                         (field 88 (global Clflags!))
+                                         "After insertion of reloading code"
+                                         newfd))
+                                     (before asmcomp/asmgen.ml(62):2475-2598
+                                       (if redo_regalloc
+                                         (before asmcomp/asmgen.ml(62):2497-2587
+                                           (seq
+                                             (after asmcomp/asmgen.ml(63):2507-2519
+                                               (apply
+                                                 (field 19 (global Reg!)) 0a))
+                                             (before asmcomp/asmgen.ml(63):2521-2581
+                                               (seq
+                                                 (after asmcomp/asmgen.ml(63):2521-2543
+                                                   (apply
+                                                     (field 1
+                                                       (global Liveness!))
+                                                     newfd))
+                                                 (before asmcomp/asmgen.ml(63):2545-2581
+                                                   (after asmcomp/asmgen.ml(63):2545-2581
+                                                     (apply regalloc ppf_dump
+                                                       (+ round 1) newfd)))))))
+                                         (before asmcomp/asmgen.ml(64):2593-2598
+                                           newfd))))))))))))))))))
+      (let
+        (++ =
+           (function x f
+             (funct-body asmcomp/asmgen.ml(66)<ghost>:2609-2618
+               (before asmcomp/asmgen.ml(66):2615-2618
+                 (after asmcomp/asmgen.ml(66):2615-2618 (apply f x)))))
+         compile_fundecl =
+           (function ppf_dump fd_cmm
+             (funct-body asmcomp/asmgen.ml(68)<ghost>:2640-4095
+               (before asmcomp/asmgen.ml(69):2661-4095
+                 (seq
+                   (after asmcomp/asmgen.ml(69):2661-2673
+                     (apply (field 30 (global Proc!)) 0a))
+                   (before asmcomp/asmgen.ml(70):2677-4095
+                     (seq
+                       (after asmcomp/asmgen.ml(70):2677-2688
+                         (apply (field 16 (global Reg!)) 0a))
+                       (before asmcomp/asmgen.ml(71):2692-4095
+                         (after asmcomp/asmgen.ml(71):2692-4095
+                           (apply ++
+                             (after asmcomp/asmgen.ml(71):2692-4038
+                               (apply ++
+                                 (after asmcomp/asmgen.ml(71):2692-3957
+                                   (apply ++
+                                     (after asmcomp/asmgen.ml(71):2692-3888
+                                       (apply ++
+                                         (after asmcomp/asmgen.ml(71):2692-3824
+                                           (apply ++
+                                             (after asmcomp/asmgen.ml(71):2692-3757
+                                               (apply ++
+                                                 (after asmcomp/asmgen.ml(71):2692-3680
+                                                   (apply ++
+                                                     (after asmcomp/asmgen.ml(71):2692-3609
+                                                       (apply ++
+                                                         (after asmcomp/asmgen.ml(71):2692-3552
+                                                           (apply ++
+                                                             (after asmcomp/asmgen.ml(71):2692-3485
+                                                               (apply ++
+                                                                 (after asmcomp/asmgen.ml(71):2692-3426
+                                                                   (apply ++
+                                                                    (after asmcomp/asmgen.ml(71):2692-3371
+                                                                    (apply ++
+                                                                    (after asmcomp/asmgen.ml(71):2692-3314
+                                                                    (apply ++
+                                                                    (after asmcomp/asmgen.ml(71):2692-3255
+                                                                    (apply ++
+                                                                    (after asmcomp/asmgen.ml(71):2692-3198
+                                                                    (apply ++
+                                                                    (after asmcomp/asmgen.ml(71):2692-3133
+                                                                    (apply ++
+                                                                    (after asmcomp/asmgen.ml(71):2692-3076
+                                                                    (apply ++
+                                                                    (after asmcomp/asmgen.ml(71):2692-3028
+                                                                    (apply ++
+                                                                    (after asmcomp/asmgen.ml(71):2692-2973
+                                                                    (apply ++
+                                                                    (after asmcomp/asmgen.ml(71):2692-2904
+                                                                    (apply ++
+                                                                    (after asmcomp/asmgen.ml(71):2692-2837
+                                                                    (apply ++
+                                                                    (after asmcomp/asmgen.ml(71):2692-2765
+                                                                    (apply ++
+                                                                    fd_cmm
+                                                                    (after asmcomp/asmgen.ml(72):2704-2765
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Profile!))
+                                                                    [0: 1a]
+                                                                    "selection"
+                                                                    (field 0
+                                                                    (global Selection!))))))
+                                                                    (after asmcomp/asmgen.ml(73):2771-2837
+                                                                    (apply
+                                                                    pass_dump_if
+                                                                    ppf_dump
+                                                                    (field 78
+                                                                    (global Clflags!))
+                                                                    "After instruction selection"))))
+                                                                    (after asmcomp/asmgen.ml(74):2843-2904
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Profile!))
+                                                                    [0: 1a]
+                                                                    "comballoc"
+                                                                    (field 0
+                                                                    (global Comballoc!))))))
+                                                                    (after asmcomp/asmgen.ml(75):2910-2973
+                                                                    (apply
+                                                                    pass_dump_if
+                                                                    ppf_dump
+                                                                    (field 93
+                                                                    (global Clflags!))
+                                                                    "After allocation combining"))))
+                                                                    (after asmcomp/asmgen.ml(76):2979-3028
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Profile!))
+                                                                    [0: 1a]
+                                                                    "cse"
+                                                                    (field 1
+                                                                    (global CSE!))))))
+                                                                    (after asmcomp/asmgen.ml(77):3034-3076
+                                                                    (apply
+                                                                    pass_dump_if
+                                                                    ppf_dump
+                                                                    (field 79
+                                                                    (global Clflags!))
+                                                                    "After CSE"))))
+                                                                    (after asmcomp/asmgen.ml(78):3082-3133
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Profile!))
+                                                                    [0: 1a]
+                                                                    "liveness"
+                                                                    liveness))))
+                                                                    (after asmcomp/asmgen.ml(79):3139-3198
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Profile!))
+                                                                    [0: 1a]
+                                                                    "deadcode"
+                                                                    (field 0
+                                                                    (global Deadcode!))))))
+                                                                    (after asmcomp/asmgen.ml(80):3204-3255
+                                                                    (apply
+                                                                    pass_dump_if
+                                                                    ppf_dump
+                                                                    (field 80
+                                                                    (global Clflags!))
+                                                                    "Liveness analysis"))))
+                                                                    (after asmcomp/asmgen.ml(81):3261-3314
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Profile!))
+                                                                    [0: 1a]
+                                                                    "spill"
+                                                                    (field 0
+                                                                    (global Spill!))))))
+                                                                    (after asmcomp/asmgen.ml(82):3320-3371
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Profile!))
+                                                                    [0: 1a]
+                                                                    "liveness"
+                                                                    liveness))))
+                                                                    (after asmcomp/asmgen.ml(83):3377-3426
+                                                                    (apply
+                                                                    pass_dump_if
+                                                                    ppf_dump
+                                                                    (field 83
+                                                                    (global Clflags!))
+                                                                    "After spilling"))))
+                                                                 (after asmcomp/asmgen.ml(84):3432-3485
+                                                                   (apply
+                                                                    (field 2
+                                                                    (global Profile!))
+                                                                    [0: 1a]
+                                                                    "split"
+                                                                    (field 0
+                                                                    (global Split!))))))
+                                                             (after asmcomp/asmgen.ml(85):3491-3552
+                                                               (apply
+                                                                 pass_dump_if
+                                                                 ppf_dump
+                                                                 (field 84
+                                                                   (global Clflags!))
+                                                                 "After live range splitting"))))
+                                                         (after asmcomp/asmgen.ml(86):3558-3609
+                                                           (apply
+                                                             (field 2
+                                                               (global Profile!))
+                                                             [0: 1a]
+                                                             "liveness"
+                                                             liveness))))
+                                                     (after asmcomp/asmgen.ml(87):3615-3680
+                                                       (apply
+                                                         (field 2
+                                                           (global Profile!))
+                                                         [0: 1a] "regalloc"
+                                                         (after asmcomp/asmgen.ml(87):3658-3680
+                                                           (apply regalloc
+                                                             ppf_dump 1))))))
+                                                 (after asmcomp/asmgen.ml(88):3686-3757
+                                                   (apply
+                                                     (field 2
+                                                       (global Profile!))
+                                                     [0: 1a] "available_regs"
+                                                     (field 0
+                                                       (global Available_regs!))))))
+                                             (after asmcomp/asmgen.ml(89):3763-3824
+                                               (apply
+                                                 (field 2 (global Profile!))
+                                                 [0: 1a] "linearize"
+                                                 (field 4
+                                                   (global Linearize!))))))
+                                         (after asmcomp/asmgen.ml(90):3830-3888
+                                           (apply pass_dump_linear_if
+                                             ppf_dump
+                                             (field 90 (global Clflags!))
+                                             "Linearized code"))))
+                                     (after asmcomp/asmgen.ml(91):3894-3957
+                                       (apply (field 2 (global Profile!))
+                                         [0: 1a] "scheduling"
+                                         (field 0 (global Scheduling!))))))
+                                 (after asmcomp/asmgen.ml(92):3963-4038
+                                   (apply pass_dump_linear_if ppf_dump
+                                     (field 89 (global Clflags!))
+                                     "After instruction scheduling"))))
+                             (after asmcomp/asmgen.ml(93):4044-4095
+                               (apply (field 2 (global Profile!)) [0: 1a]
+                                 "emit" (field 0 (global Emit!)))))))))))))
+         compile_phrase =
+           (function ppf_dump p
+             (funct-body asmcomp/asmgen.ml(95)<ghost>:4116-4285
+               (before asmcomp/asmgen.ml(96):4132-4285
+                 (seq
+                   (if (field 0 (field 77 (global Clflags!)))
+                     (before asmcomp/asmgen.ml(96):4150-4191
+                       (after asmcomp/asmgen.ml(96):4150-4191
+                         (apply (field 122 (global Stdlib__format!)) ppf_dump
+                           [0: [15: [17: 4a 0a]] "%a@."]
+                           (field 10 (global Printcmm!)) p)))
+                     0a)
+                   (before asmcomp/asmgen.ml(97):4195-4285
+                     (switch* p
+                      case tag 0:
+                       (let (fd =a (field 0 p))
+                         (before asmcomp/asmgen.ml(98):4228-4256
+                           (after asmcomp/asmgen.ml(98):4228-4256
+                             (apply compile_fundecl ppf_dump fd))))
+                      case tag 1:
+                       (let (dl =a (field 0 p))
+                         (before asmcomp/asmgen.ml(99):4273-4285
+                           (after asmcomp/asmgen.ml(99):4273-4285
+                             (apply (field 1 (global Emit!)) dl))))))))))
+         compile_genfuns =
+           (function ppf_dump f
+             (funct-body asmcomp/asmgen.ml(104)<ghost>:4419-4645
+               (before asmcomp/asmgen.ml(105):4435-4645
+                 (after asmcomp/asmgen.ml(105):4435-4645
+                   (apply (field 14 (global Stdlib__list!))
+                     (function ph
+                       (funct-body asmcomp/asmgen.ml(106):4449-4575
+                         (catch
+                           (switch* ph
+                            case tag 0:
+                             (let
+                               (*match* =a (field 0 ph)
+                                name =a (field 0 *match*))
+                               (before asmcomp/asmgen.ml(107):4509-4515
+                                 (if
+                                   (after asmcomp/asmgen.ml(107):4509-4515
+                                     (apply f name))
+                                   (before asmcomp/asmgen.ml(108):4530-4557
+                                     (after asmcomp/asmgen.ml(108):4530-4557
+                                       (apply compile_phrase ppf_dump ph)))
+                                   (exit 4))))
+                            case tag 1: (exit 4))
+                          with (4)
+                           (before asmcomp/asmgen.ml(109):4572-4574 0a))))
+                     (after asmcomp/asmgen.ml(110):4580-4645
+                       (apply (field 4 (global Cmmgen!)) 1a
+                         (makeblock 0
+                           (after asmcomp/asmgen.ml(110):4612-4643
+                             (apply (field 3 (global Compilenv!)) 0a))
+                           0a))))))))
+         compile_unit =
+           (function asm_filename keep_asm obj_filename gen
+             (funct-body asmcomp/asmgen.ml(112)<ghost>:4664-5507
+               (before asmcomp/asmgen.ml(113):4707-5507
+                 (let
+                   (create_asm =
+                      (|| keep_asm
+                        (not (field 0 (field 25 (global Emitaux!))))))
+                   (before asmcomp/asmgen.ml(114):4779-5507
+                     (seq
+                       (setfield_imm 0 (field 26 (global Emitaux!))
+                         create_asm)
+                       (before asmcomp/asmgen.ml(115):4820-5507
+                         (after asmcomp/asmgen.ml(115):4820-5507
+                           (apply (field 3 (global Misc!)) 0a
+                             (makeblock 0
+                               (function param
+                                 (funct-body asmcomp/asmgen.ml(116):4856-4892
+                                   (before asmcomp/asmgen.ml(116):4867-4891
+                                     (after asmcomp/asmgen.ml(116):4867-4891
+                                       (apply (field 15 (global Misc!))
+                                         obj_filename))))))
+                             (function param
+                               (funct-body asmcomp/asmgen.ml(117):4897-5507
+                                 (before asmcomp/asmgen.ml(118):4915-5501
+                                   (seq
+                                     (if create_asm
+                                       (before asmcomp/asmgen.ml(118):4934-4981
+                                         (setfield_ptr 0
+                                           (field 0 (global Emitaux!))
+                                           (after asmcomp/asmgen.ml(118):4960-4981
+                                             (apply
+                                               (field 59 (global Stdlib!))
+                                               asm_filename))))
+                                       0a)
+                                     (before asmcomp/asmgen.ml(119):4990-5501
+                                       (seq
+                                         (after asmcomp/asmgen.ml(119):4990-5214
+                                           (apply (field 3 (global Misc!))
+                                             (makeblock 0
+                                               (function param
+                                                 (funct-body asmcomp/asmgen.ml(120):5028-5105
+                                                   (before asmcomp/asmgen.ml(121):5052-5104
+                                                     (if create_asm
+                                                       (before asmcomp/asmgen.ml(121):5071-5104
+                                                         (after asmcomp/asmgen.ml(121):5071-5104
+                                                           (apply
+                                                             (field 75
+                                                               (global Stdlib!))
+                                                             (field 0
+                                                               (field 0
+                                                                 (global Emitaux!))))))
+                                                       0a)))))
+                                             (makeblock 0
+                                               (function param
+                                                 (funct-body asmcomp/asmgen.ml(122):5130-5214
+                                                   (before asmcomp/asmgen.ml(123):5154-5213
+                                                     (if
+                                                       (&& create_asm
+                                                         (not keep_asm))
+                                                       (before asmcomp/asmgen.ml(123):5189-5213
+                                                         (after asmcomp/asmgen.ml(123):5189-5213
+                                                           (apply
+                                                             (field 15
+                                                               (global Misc!))
+                                                             asm_filename)))
+                                                       0a)))))
+                                             gen))
+                                         (before asmcomp/asmgen.ml(124):5223-5501
+                                           (let
+                                             (assemble_result =[int]
+                                                (after asmcomp/asmgen.ml(125):5254-5337
+                                                  (apply
+                                                    (field 2
+                                                      (global Profile!))
+                                                    0a "assemble"
+                                                    (after asmcomp/asmgen.ml(126):5291-5324
+                                                      (apply
+                                                        (field 29
+                                                          (global Proc!))
+                                                        asm_filename))
+                                                    obj_filename)))
+                                             (before asmcomp/asmgen.ml(128):5355-5501
+                                               (seq
+                                                 (if (!= assemble_result 0)
+                                                   (before asmcomp/asmgen.ml(129):5391-5433
+                                                     (raise
+                                                       (after asmcomp/asmgen.ml(129):5396-5433
+                                                         (makeblock 0 Error
+                                                           (makeblock 0
+                                                             asm_filename)))))
+                                                   0a)
+                                                 (before asmcomp/asmgen.ml(130):5442-5501
+                                                   (if
+                                                     (&& create_asm
+                                                       (not keep_asm))
+                                                     (before asmcomp/asmgen.ml(130):5477-5501
+                                                       (after asmcomp/asmgen.ml(130):5477-5501
+                                                         (apply
+                                                           (field 15
+                                                             (global Misc!))
+                                                           asm_filename)))
+                                                     0a)))))))))))))))))))))
+         end_gen_implementation =
+           (function toplevel ppf_dump clambda
+             (funct-body asmcomp/asmgen.ml(133)<ghost>:5536-6420
+               (before asmcomp/asmgen.ml(135):5599-6420
+                 (seq
+                   (after asmcomp/asmgen.ml(135):5599-5621
+                     (apply (field 2 (global Emit!)) 0a))
+                   (before asmcomp/asmgen.ml(136):5625-6420
+                     (seq
+                       (after asmcomp/asmgen.ml(136):5625-5771
+                         (apply ++
+                           (after asmcomp/asmgen.ml(136):5625-5751
+                             (apply ++
+                               (after asmcomp/asmgen.ml(136):5625-5674
+                                 (apply ++ clambda
+                                   (after asmcomp/asmgen.ml(137):5638-5674
+                                     (apply (field 2 (global Profile!)) 0a
+                                       "cmm" (field 0 (global Cmmgen!))))))
+                               (after asmcomp/asmgen.ml(138):5680-5751
+                                 (apply (field 2 (global Profile!)) 0a
+                                   "compile_phrases"
+                                   (after asmcomp/asmgen.ml(138):5713-5751
+                                     (apply (field 14 (global Stdlib__list!))
+                                       (after asmcomp/asmgen.ml(138):5724-5750
+                                         (apply compile_phrase ppf_dump))))))))
+                           (function param
+                             (funct-body asmcomp/asmgen.ml(139):5757-5771
+                               (before asmcomp/asmgen.ml(139):5768-5770 0a)))))
+                       (before asmcomp/asmgen.ml(140):5775-6420
+                         (seq
+                           (if toplevel
+                             (let (f =a (field 0 toplevel))
+                               (before asmcomp/asmgen.ml(140):5819-5846
+                                 (after asmcomp/asmgen.ml(140):5819-5846
+                                   (apply compile_genfuns ppf_dump f))))
+                             (before asmcomp/asmgen.ml(140):5804-5806 0a))
+                           (before asmcomp/asmgen.ml(146):6139-6420
+                             (seq
+                               (after asmcomp/asmgen.ml(146):6139-6396
+                                 (apply compile_phrase ppf_dump
+                                   (after asmcomp/asmgen.ml(147):6168-6396
+                                     (apply (field 7 (global Cmmgen!))
+                                       (after asmcomp/asmgen.ml(148):6201-6395
+                                         (apply
+                                           (field 19 (global Stdlib__list!))
+                                           (function prim
+                                             (funct-body asmcomp/asmgen.ml(148):6218-6350
+                                               (before asmcomp/asmgen.ml(149):6242-6349
+                                                 (if
+                                                   (not
+                                                     (after asmcomp/asmgen.ml(149):6249-6289
+                                                       (apply
+                                                         (field 6
+                                                           (global Primitive!))
+                                                         prim)))
+                                                   (before asmcomp/asmgen.ml(149):6295-6299
+                                                     0a)
+                                                   (before asmcomp/asmgen.ml(150):6316-6349
+                                                     (makeblock 0
+                                                       (after asmcomp/asmgen.ml(150):6321-6349
+                                                         (apply
+                                                           (field 4
+                                                             (global Primitive!))
+                                                           prim))))))))
+                                           (field 0
+                                             (field 10 (global Translmod!)))))))))
+                               (before asmcomp/asmgen.ml(152):6400-6420
+                                 (after asmcomp/asmgen.ml(152):6400-6420
+                                   (apply (field 3 (global Emit!)) 0a)))))))))))))
+         compile_implementation =
+           (function toplevel backend filename prefixname middle_end ppf_dump
+             program
+             (funct-body asmcomp/asmgen.ml(162)<ghost>:6628-7214
+               (before asmcomp/asmgen.ml(164):6728-7214
+                 (let
+                   (asmfile =
+                      (if
+                        (|| (field 0 (field 75 (global Clflags!)))
+                          (field 0 (field 25 (global Emitaux!))))
+                        (before asmcomp/asmgen.ml(166):6810-6830
+                          (after asmcomp/asmgen.ml(166):6810-6830
+                            (apply (field 27 (global Stdlib!)) prefixname
+                              (field 42 (global Config!)))))
+                        (before asmcomp/asmgen.ml(167):6840-6876
+                          (after asmcomp/asmgen.ml(167):6840-6876
+                            (apply (field 14 (global Stdlib__filename!)) 0a
+                              "camlasm" (field 42 (global Config!)))))))
+                   (before asmcomp/asmgen.ml(169):6884-7214
+                     (after asmcomp/asmgen.ml(169):6884-7214
+                       (apply compile_unit asmfile
+                         (field 0 (field 75 (global Clflags!)))
+                         (after asmcomp/asmgen.ml(169):6920-6942
+                           (apply (field 27 (global Stdlib!)) prefixname
+                             (field 41 (global Config!))))
+                         (function param
+                           (funct-body asmcomp/asmgen.ml(170):6947-7214
+                             (before asmcomp/asmgen.ml(171):6964-7213
+                               (seq
+                                 (after asmcomp/asmgen.ml(171):6964-7028
+                                   (apply
+                                     (field 13 (field 5 (global Ident!)))
+                                     (field 36 (global Compilenv!))
+                                     (field 2 program)))
+                                 (before asmcomp/asmgen.ml(172):7036-7213
+                                   (let
+                                     (clambda_with_constants =
+                                        (after asmcomp/asmgen.ml(173):7073-7132
+                                          (apply middle_end backend filename
+                                            prefixname ppf_dump program)))
+                                     (before asmcomp/asmgen.ml(175):7148-7213
+                                       (after asmcomp/asmgen.ml(175):7148-7213
+                                         (apply end_gen_implementation
+                                           toplevel ppf_dump
+                                           clambda_with_constants))))))))))))))))
+         report_error =
+           (function ppf param
+             (funct-body asmcomp/asmgen.ml(179)<ghost>:7253-7391
+               (let (file =a (field 0 param))
+                 (before asmcomp/asmgen.ml(181):7302-7391
+                   (after asmcomp/asmgen.ml(181):7302-7391
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [11: "Assembler error, input left in file " [15: 0a]]
+                        "Assembler error, input left in file %a"]
+                       (field 18 (global Location!)) file))))))
+         *match* =
+           (after asmcomp/asmgen.ml(185):7404-7548
+             (apply (field 46 (global Location!))
+               (function param
+                 (funct-body asmcomp/asmgen.ml(186):7439-7548
+                   (let (tag =a (field 0 param))
+                     (if (== tag Error)
+                       (let (err =a (field 1 param))
+                         (before asmcomp/asmgen.ml(187):7470-7524
+                           (makeblock 0
+                             (after asmcomp/asmgen.ml(187):7475-7524
+                               (apply (field 45 (global Location!))
+                                 report_error err)))))
+                       (before asmcomp/asmgen.ml(188):7538-7542 0a))))))))
+        (pseudo _none_(0)<ghost>:-1--1
+          (makeblock 0 compile_implementation compile_phrase Error
+            report_error compile_unit))))))

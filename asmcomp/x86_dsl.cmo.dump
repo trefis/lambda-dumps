@@ -1,0 +1,867 @@
+(setglobal X86_dsl!
+  (let
+    (sym =
+       (function s
+         (funct-body asmcomp/x86_dsl.ml(37)<ghost>:1731-1740
+           (before asmcomp/x86_dsl.ml(37):1735-1740 (makeblock 1 s))))
+     nat =
+       (function n[nativeint]
+         (funct-body asmcomp/x86_dsl.ml(39)<ghost>:1750-1780
+           (before asmcomp/x86_dsl.ml(39):1754-1780
+             (makeblock 0 (int64) (int64_of_nativeint n)))))
+     int =
+       (function n[int]
+         (funct-body asmcomp/x86_dsl.ml(40)<ghost>:1789-1813
+           (before asmcomp/x86_dsl.ml(40):1793-1813
+             (makeblock 0 (int64) (Int64.of_int n)))))
+     const_32 =
+       (function n[int32]
+         (funct-body asmcomp/x86_dsl.ml(42)<ghost>:1828-1856
+           (before asmcomp/x86_dsl.ml(42):1832-1856
+             (makeblock 0 (int64) (int64_of_int32 n)))))
+     const_nat =
+       (function n[nativeint]
+         (funct-body asmcomp/x86_dsl.ml(43)<ghost>:1871-1903
+           (before asmcomp/x86_dsl.ml(43):1875-1903
+             (makeblock 0 (int64) (int64_of_nativeint n)))))
+     const =
+       (function n[int]
+         (funct-body asmcomp/x86_dsl.ml(44)<ghost>:1914-1940
+           (before asmcomp/x86_dsl.ml(44):1918-1940
+             (makeblock 0 (int64) (Int64.of_int n)))))
+     al = [2: 0a]
+     ah = [3: 0a]
+     cl = [2: 2a]
+     ax = [4: 0a]
+     rax = [6: 0a]
+     r10 = [6: 10a]
+     r11 = [6: 11a]
+     r13 = [6: 13a]
+     r14 = [6: 14a]
+     r15 = [6: 15a]
+     rsp = [6: 4a]
+     rbp = [6: 5a]
+     xmm15 = [7: [0: 15]]
+     eax = [5: 0a]
+     ebx = [5: 1a]
+     ecx = [5: 2a]
+     edx = [5: 3a]
+     ebp = [5: 5a]
+     esp = [5: 4a]
+     st0 = [7: [1: 0]]
+     st1 = [7: [1: 1]]
+     mem32 =
+       (function typ *opt* base sym displ[int] idx
+         (funct-body asmcomp/x86_dsl.ml(68)<ghost>:2382-2497
+           (before asmcomp/x86_dsl.ml(69):2424-2497
+             (let
+               (scale =[int]
+                  (if *opt*
+                    (let (*sth* =a (field 0 *opt*))
+                      (before asmcomp/x86_dsl.ml(68):2396-2397 *sth*))
+                    (before asmcomp/x86_dsl.ml(68):2396-2397 1)))
+               (before asmcomp/x86_dsl.ml(69):2424-2497
+                 (seq
+                   (if (>= scale 0) 0a
+                     (raise
+                       (after asmcomp/x86_dsl.ml(69):2424-2442
+                         (makeblock 0 (global Assert_failure!)
+                           [0: "asmcomp/x86_dsl.ml" 69 2]))))
+                   (before asmcomp/x86_dsl.ml(70):2446-2497
+                     (makeblock 8
+                       (makeblock 0 (*,*,*,int,*,*,int) 1a typ idx scale base
+                         sym displ)))))))))
+     mem64 =
+       (function typ *opt* base sym displ[int] idx
+         (funct-body asmcomp/x86_dsl.ml(72)<ghost>:2509-2623
+           (before asmcomp/x86_dsl.ml(73):2551-2623
+             (let
+               (scale =[int]
+                  (if *opt*
+                    (let (*sth* =a (field 0 *opt*))
+                      (before asmcomp/x86_dsl.ml(72):2523-2524 *sth*))
+                    (before asmcomp/x86_dsl.ml(72):2523-2524 1)))
+               (before asmcomp/x86_dsl.ml(73):2551-2623
+                 (seq
+                   (if (> scale 0) 0a
+                     (raise
+                       (after asmcomp/x86_dsl.ml(73):2551-2568
+                         (makeblock 0 (global Assert_failure!)
+                           [0: "asmcomp/x86_dsl.ml" 73 2]))))
+                   (before asmcomp/x86_dsl.ml(74):2572-2623
+                     (makeblock 8
+                       (makeblock 0 (*,*,*,int,*,*,int) 0a typ idx scale base
+                         sym displ)))))))))
+     mem64_rip =
+       (function typ *opt* s
+         (funct-body asmcomp/x86_dsl.ml(76)<ghost>:2639-2683
+           (before asmcomp/x86_dsl.ml(77):2660-2683
+             (let
+               (ofs =[int]
+                  (if *opt*
+                    (let (*sth* =a (field 0 *opt*))
+                      (before asmcomp/x86_dsl.ml(76):2651-2652 *sth*))
+                    (before asmcomp/x86_dsl.ml(76):2651-2652 0)))
+               (before asmcomp/x86_dsl.ml(77):2660-2683
+                 (makeblock 9 (*,*,int) typ s ofs))))))
+     D =
+       (module-defn(D) asmcomp/x86_dsl.ml(79):2685-3969
+         (let
+           (section =
+              (function segment flags args
+                (funct-body asmcomp/x86_dsl.ml(80)<ghost>:2717-2780
+                  (before asmcomp/x86_dsl.ml(80):2738-2780
+                    (after asmcomp/x86_dsl.ml(80):2738-2780
+                      (apply (field 12 (global X86_proc!))
+                        (makeblock 9 segment flags args))))))
+            align =
+              (function n[int]
+                (funct-body asmcomp/x86_dsl.ml(81)<ghost>:2793-2825
+                  (before asmcomp/x86_dsl.ml(81):2797-2825
+                    (after asmcomp/x86_dsl.ml(81):2797-2825
+                      (apply (field 12 (global X86_proc!))
+                        (makeblock 1 (*,int) 0a n))))))
+            byte =
+              (function n
+                (funct-body asmcomp/x86_dsl.ml(82)<ghost>:2837-2859
+                  (before asmcomp/x86_dsl.ml(82):2841-2859
+                    (after asmcomp/x86_dsl.ml(82):2841-2859
+                      (apply (field 12 (global X86_proc!)) (makeblock 2 n))))))
+            bytes =
+              (function s
+                (funct-body asmcomp/x86_dsl.ml(83)<ghost>:2872-2895
+                  (before asmcomp/x86_dsl.ml(83):2876-2895
+                    (after asmcomp/x86_dsl.ml(83):2876-2895
+                      (apply (field 12 (global X86_proc!)) (makeblock 3 s))))))
+            cfi_adjust_cfa_offset =
+              (function n[int]
+                (funct-body asmcomp/x86_dsl.ml(84)<ghost>:2924-2963
+                  (before asmcomp/x86_dsl.ml(84):2928-2963
+                    (after asmcomp/x86_dsl.ml(84):2928-2963
+                      (apply (field 12 (global X86_proc!))
+                        (makeblock 14 (int) n))))))
+            cfi_endproc =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(85)<ghost>:2982-3008
+                  (before asmcomp/x86_dsl.ml(85):2987-3008
+                    (after asmcomp/x86_dsl.ml(85):2987-3008
+                      (apply (field 12 (global X86_proc!)) 1a)))))
+            cfi_startproc =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(86)<ghost>:3029-3057
+                  (before asmcomp/x86_dsl.ml(86):3034-3057
+                    (after asmcomp/x86_dsl.ml(86):3034-3057
+                      (apply (field 12 (global X86_proc!)) 2a)))))
+            comment =
+              (function s
+                (funct-body asmcomp/x86_dsl.ml(87)<ghost>:3072-3097
+                  (before asmcomp/x86_dsl.ml(87):3076-3097
+                    (after asmcomp/x86_dsl.ml(87):3076-3097
+                      (apply (field 12 (global X86_proc!)) (makeblock 4 s))))))
+            data =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(88)<ghost>:3109-3141
+                  (before asmcomp/x86_dsl.ml(88):3114-3141
+                    (after asmcomp/x86_dsl.ml(88):3114-3141
+                      (apply section [0: ".data" 0a] 0a 0a)))))
+            extrn =
+              (function s ptr
+                (funct-body asmcomp/x86_dsl.ml(89)<ghost>:3154-3191
+                  (before asmcomp/x86_dsl.ml(89):3162-3191
+                    (after asmcomp/x86_dsl.ml(89):3162-3191
+                      (apply (field 12 (global X86_proc!))
+                        (makeblock 12 s ptr))))))
+            file =
+              (function file_num[int] file_name
+                (funct-body asmcomp/x86_dsl.ml(90)<ghost>:3203-3264
+                  (before asmcomp/x86_dsl.ml(90):3226-3264
+                    (after asmcomp/x86_dsl.ml(90):3226-3264
+                      (apply (field 12 (global X86_proc!))
+                        (makeblock 15 (int,*) file_num file_name))))))
+            global =
+              (function s
+                (funct-body asmcomp/x86_dsl.ml(91)<ghost>:3278-3302
+                  (before asmcomp/x86_dsl.ml(91):3282-3302
+                    (after asmcomp/x86_dsl.ml(91):3282-3302
+                      (apply (field 12 (global X86_proc!)) (makeblock 5 s))))))
+            indirect_symbol =
+              (function s
+                (funct-body asmcomp/x86_dsl.ml(92)<ghost>:3325-3358
+                  (before asmcomp/x86_dsl.ml(92):3329-3358
+                    (after asmcomp/x86_dsl.ml(92):3329-3358
+                      (apply (field 12 (global X86_proc!)) (makeblock 16 s))))))
+            label =
+              (function *opt* s
+                (funct-body asmcomp/x86_dsl.ml(93)<ghost>:3371-3418
+                  (before asmcomp/x86_dsl.ml(93):3389-3418
+                    (let
+                      (typ =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before asmcomp/x86_dsl.ml(93):3379-3383 *sth*))
+                           (before asmcomp/x86_dsl.ml(93):3379-3383 0a)))
+                      (before asmcomp/x86_dsl.ml(93):3389-3418
+                        (after asmcomp/x86_dsl.ml(93):3389-3418
+                          (apply (field 12 (global X86_proc!))
+                            (makeblock 7 s typ))))))))
+            loc =
+              (function file_num[int] line[int] col[int]
+                (funct-body asmcomp/x86_dsl.ml(94)<ghost>:3429-3489
+                  (before asmcomp/x86_dsl.ml(94):3452-3489
+                    (after asmcomp/x86_dsl.ml(94):3452-3489
+                      (apply (field 12 (global X86_proc!))
+                        (makeblock 17 (int,int,int) file_num line col))))))
+            long =
+              (function cst
+                (funct-body asmcomp/x86_dsl.ml(95)<ghost>:3501-3527
+                  (before asmcomp/x86_dsl.ml(95):3507-3527
+                    (after asmcomp/x86_dsl.ml(95):3507-3527
+                      (apply (field 12 (global X86_proc!)) (makeblock 6 cst))))))
+            mode386 =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(96)<ghost>:3542-3564
+                  (before asmcomp/x86_dsl.ml(96):3547-3564
+                    (after asmcomp/x86_dsl.ml(96):3547-3564
+                      (apply (field 12 (global X86_proc!)) 0a)))))
+            model =
+              (function name
+                (funct-body asmcomp/x86_dsl.ml(97)<ghost>:3577-3606
+                  (before asmcomp/x86_dsl.ml(97):3584-3606
+                    (after asmcomp/x86_dsl.ml(97):3584-3606
+                      (apply (field 12 (global X86_proc!))
+                        (makeblock 13 name))))))
+            private_extern =
+              (function s
+                (funct-body asmcomp/x86_dsl.ml(98)<ghost>:3628-3660
+                  (before asmcomp/x86_dsl.ml(98):3632-3660
+                    (after asmcomp/x86_dsl.ml(98):3632-3660
+                      (apply (field 12 (global X86_proc!)) (makeblock 18 s))))))
+            qword =
+              (function cst
+                (funct-body asmcomp/x86_dsl.ml(99)<ghost>:3673-3699
+                  (before asmcomp/x86_dsl.ml(99):3679-3699
+                    (after asmcomp/x86_dsl.ml(99):3679-3699
+                      (apply (field 12 (global X86_proc!)) (makeblock 8 cst))))))
+            setvar =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(100)<ghost>:3713-3744
+                  (let (y =a (field 1 param) x =a (field 0 param))
+                    (before asmcomp/x86_dsl.ml(100):3722-3744
+                      (after asmcomp/x86_dsl.ml(100):3722-3744
+                        (apply (field 12 (global X86_proc!))
+                          (makeblock 19 x y)))))))
+            size =
+              (function name cst
+                (funct-body asmcomp/x86_dsl.ml(101)<ghost>:3756-3795
+                  (before asmcomp/x86_dsl.ml(101):3767-3795
+                    (after asmcomp/x86_dsl.ml(101):3767-3795
+                      (apply (field 12 (global X86_proc!))
+                        (makeblock 20 name cst))))))
+            space =
+              (function n[int]
+                (funct-body asmcomp/x86_dsl.ml(102)<ghost>:3808-3831
+                  (before asmcomp/x86_dsl.ml(102):3812-3831
+                    (after asmcomp/x86_dsl.ml(102):3812-3831
+                      (apply (field 12 (global X86_proc!))
+                        (makeblock 10 (int) n))))))
+            text =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(103)<ghost>:3843-3875
+                  (before asmcomp/x86_dsl.ml(103):3848-3875
+                    (after asmcomp/x86_dsl.ml(103):3848-3875
+                      (apply section [0: ".text" 0a] 0a 0a)))))
+            type_ =
+              (function name typ
+                (funct-body asmcomp/x86_dsl.ml(104)<ghost>:3888-3927
+                  (before asmcomp/x86_dsl.ml(104):3899-3927
+                    (after asmcomp/x86_dsl.ml(104):3899-3927
+                      (apply (field 12 (global X86_proc!))
+                        (makeblock 21 name typ))))))
+            word =
+              (function cst
+                (funct-body asmcomp/x86_dsl.ml(105)<ghost>:3939-3965
+                  (before asmcomp/x86_dsl.ml(105):3945-3965
+                    (after asmcomp/x86_dsl.ml(105):3945-3965
+                      (apply (field 12 (global X86_proc!))
+                        (makeblock 11 cst)))))))
+           (pseudo asmcomp/x86_dsl.ml(79):2696-3969
+             (makeblock 0 section align byte bytes cfi_adjust_cfa_offset
+               cfi_endproc cfi_startproc comment data extrn file global
+               indirect_symbol label loc long mode386 model private_extern
+               qword setvar size space text type_ word))))
+     I =
+       (module-defn(I) asmcomp/x86_dsl.ml(108):3971-6824
+         (let
+           (add =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(109)<ghost>:3999-4022
+                  (before asmcomp/x86_dsl.ml(109):4005-4022
+                    (after asmcomp/x86_dsl.ml(109):4005-4022
+                      (apply (field 11 (global X86_proc!)) (makeblock 0 x y))))))
+            addsd =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(110)<ghost>:4035-4060
+                  (before asmcomp/x86_dsl.ml(110):4041-4060
+                    (after asmcomp/x86_dsl.ml(110):4041-4060
+                      (apply (field 11 (global X86_proc!)) (makeblock 1 x y))))))
+            and_ =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(111)<ghost>:4072-4094
+                  (before asmcomp/x86_dsl.ml(111):4077-4094
+                    (after asmcomp/x86_dsl.ml(111):4077-4094
+                      (apply (field 11 (global X86_proc!)) (makeblock 2 x y))))))
+            andpd =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(112)<ghost>:4107-4132
+                  (before asmcomp/x86_dsl.ml(112):4113-4132
+                    (after asmcomp/x86_dsl.ml(112):4113-4132
+                      (apply (field 11 (global X86_proc!)) (makeblock 3 x y))))))
+            bswap =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(113)<ghost>:4145-4163
+                  (before asmcomp/x86_dsl.ml(113):4149-4163
+                    (after asmcomp/x86_dsl.ml(113):4149-4163
+                      (apply (field 11 (global X86_proc!)) (makeblock 4 x))))))
+            call =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(114)<ghost>:4175-4192
+                  (before asmcomp/x86_dsl.ml(114):4179-4192
+                    (after asmcomp/x86_dsl.ml(114):4179-4192
+                      (apply (field 11 (global X86_proc!)) (makeblock 5 x))))))
+            cdq =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(115)<ghost>:4203-4216
+                  (before asmcomp/x86_dsl.ml(115):4208-4216
+                    (after asmcomp/x86_dsl.ml(115):4208-4216
+                      (apply (field 11 (global X86_proc!)) 0a)))))
+            cmp =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(116)<ghost>:4227-4250
+                  (before asmcomp/x86_dsl.ml(116):4233-4250
+                    (after asmcomp/x86_dsl.ml(116):4233-4250
+                      (apply (field 11 (global X86_proc!)) (makeblock 7 x y))))))
+            comisd =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(117)<ghost>:4264-4290
+                  (before asmcomp/x86_dsl.ml(117):4270-4290
+                    (after asmcomp/x86_dsl.ml(117):4270-4290
+                      (apply (field 11 (global X86_proc!)) (makeblock 8 x y))))))
+            cqo =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(118)<ghost>:4301-4314
+                  (before asmcomp/x86_dsl.ml(118):4306-4314
+                    (after asmcomp/x86_dsl.ml(118):4306-4314
+                      (apply (field 11 (global X86_proc!)) 1a)))))
+            cvtsd2ss =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(119)<ghost>:4330-4358
+                  (before asmcomp/x86_dsl.ml(119):4336-4358
+                    (after asmcomp/x86_dsl.ml(119):4336-4358
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 10 x y))))))
+            cvtsi2sd =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(120)<ghost>:4374-4402
+                  (before asmcomp/x86_dsl.ml(120):4380-4402
+                    (after asmcomp/x86_dsl.ml(120):4380-4402
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 11 x y))))))
+            cvtss2sd =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(121)<ghost>:4418-4446
+                  (before asmcomp/x86_dsl.ml(121):4424-4446
+                    (after asmcomp/x86_dsl.ml(121):4424-4446
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 12 x y))))))
+            cvttsd2si =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(122)<ghost>:4463-4492
+                  (before asmcomp/x86_dsl.ml(122):4469-4492
+                    (after asmcomp/x86_dsl.ml(122):4469-4492
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 13 x y))))))
+            dec =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(123)<ghost>:4503-4519
+                  (before asmcomp/x86_dsl.ml(123):4507-4519
+                    (after asmcomp/x86_dsl.ml(123):4507-4519
+                      (apply (field 11 (global X86_proc!)) (makeblock 14 x))))))
+            divsd =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(124)<ghost>:4532-4557
+                  (before asmcomp/x86_dsl.ml(124):4538-4557
+                    (after asmcomp/x86_dsl.ml(124):4538-4557
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 15 x y))))))
+            fabs =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(125)<ghost>:4569-4583
+                  (before asmcomp/x86_dsl.ml(125):4574-4583
+                    (after asmcomp/x86_dsl.ml(125):4574-4583
+                      (apply (field 11 (global X86_proc!)) 2a)))))
+            fadd =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(126)<ghost>:4595-4612
+                  (before asmcomp/x86_dsl.ml(126):4599-4612
+                    (after asmcomp/x86_dsl.ml(126):4599-4612
+                      (apply (field 11 (global X86_proc!)) (makeblock 16 x))))))
+            faddp =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(127)<ghost>:4625-4650
+                  (before asmcomp/x86_dsl.ml(127):4631-4650
+                    (after asmcomp/x86_dsl.ml(127):4631-4650
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 17 x y))))))
+            fchs =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(128)<ghost>:4662-4676
+                  (before asmcomp/x86_dsl.ml(128):4667-4676
+                    (after asmcomp/x86_dsl.ml(128):4667-4676
+                      (apply (field 11 (global X86_proc!)) 3a)))))
+            fcomp =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(129)<ghost>:4689-4707
+                  (before asmcomp/x86_dsl.ml(129):4693-4707
+                    (after asmcomp/x86_dsl.ml(129):4693-4707
+                      (apply (field 11 (global X86_proc!)) (makeblock 18 x))))))
+            fcompp =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(130)<ghost>:4721-4737
+                  (before asmcomp/x86_dsl.ml(130):4726-4737
+                    (after asmcomp/x86_dsl.ml(130):4726-4737
+                      (apply (field 11 (global X86_proc!)) 4a)))))
+            fcos =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(131)<ghost>:4749-4763
+                  (before asmcomp/x86_dsl.ml(131):4754-4763
+                    (after asmcomp/x86_dsl.ml(131):4754-4763
+                      (apply (field 11 (global X86_proc!)) 5a)))))
+            fdiv =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(132)<ghost>:4775-4792
+                  (before asmcomp/x86_dsl.ml(132):4779-4792
+                    (after asmcomp/x86_dsl.ml(132):4779-4792
+                      (apply (field 11 (global X86_proc!)) (makeblock 19 x))))))
+            fdivp =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(133)<ghost>:4805-4830
+                  (before asmcomp/x86_dsl.ml(133):4811-4830
+                    (after asmcomp/x86_dsl.ml(133):4811-4830
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 20 x y))))))
+            fdivr =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(134)<ghost>:4843-4861
+                  (before asmcomp/x86_dsl.ml(134):4847-4861
+                    (after asmcomp/x86_dsl.ml(134):4847-4861
+                      (apply (field 11 (global X86_proc!)) (makeblock 21 x))))))
+            fdivrp =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(135)<ghost>:4875-4901
+                  (before asmcomp/x86_dsl.ml(135):4881-4901
+                    (after asmcomp/x86_dsl.ml(135):4881-4901
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 22 x y))))))
+            fild =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(136)<ghost>:4913-4930
+                  (before asmcomp/x86_dsl.ml(136):4917-4930
+                    (after asmcomp/x86_dsl.ml(136):4917-4930
+                      (apply (field 11 (global X86_proc!)) (makeblock 23 x))))))
+            fistp =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(137)<ghost>:4943-4961
+                  (before asmcomp/x86_dsl.ml(137):4947-4961
+                    (after asmcomp/x86_dsl.ml(137):4947-4961
+                      (apply (field 11 (global X86_proc!)) (makeblock 24 x))))))
+            fld =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(138)<ghost>:4972-4988
+                  (before asmcomp/x86_dsl.ml(138):4976-4988
+                    (after asmcomp/x86_dsl.ml(138):4976-4988
+                      (apply (field 11 (global X86_proc!)) (makeblock 25 x))))))
+            fld1 =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(139)<ghost>:5000-5014
+                  (before asmcomp/x86_dsl.ml(139):5005-5014
+                    (after asmcomp/x86_dsl.ml(139):5005-5014
+                      (apply (field 11 (global X86_proc!)) 6a)))))
+            fldcw =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(140)<ghost>:5027-5045
+                  (before asmcomp/x86_dsl.ml(140):5031-5045
+                    (after asmcomp/x86_dsl.ml(140):5031-5045
+                      (apply (field 11 (global X86_proc!)) (makeblock 26 x))))))
+            fldlg2 =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(141)<ghost>:5059-5075
+                  (before asmcomp/x86_dsl.ml(141):5064-5075
+                    (after asmcomp/x86_dsl.ml(141):5064-5075
+                      (apply (field 11 (global X86_proc!)) 7a)))))
+            fldln2 =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(142)<ghost>:5089-5105
+                  (before asmcomp/x86_dsl.ml(142):5094-5105
+                    (after asmcomp/x86_dsl.ml(142):5094-5105
+                      (apply (field 11 (global X86_proc!)) 8a)))))
+            fldz =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(143)<ghost>:5117-5131
+                  (before asmcomp/x86_dsl.ml(143):5122-5131
+                    (after asmcomp/x86_dsl.ml(143):5122-5131
+                      (apply (field 11 (global X86_proc!)) 9a)))))
+            fmul =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(144)<ghost>:5143-5160
+                  (before asmcomp/x86_dsl.ml(144):5147-5160
+                    (after asmcomp/x86_dsl.ml(144):5147-5160
+                      (apply (field 11 (global X86_proc!)) (makeblock 27 x))))))
+            fmulp =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(145)<ghost>:5173-5198
+                  (before asmcomp/x86_dsl.ml(145):5179-5198
+                    (after asmcomp/x86_dsl.ml(145):5179-5198
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 28 x y))))))
+            fnstcw =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(146)<ghost>:5212-5231
+                  (before asmcomp/x86_dsl.ml(146):5216-5231
+                    (after asmcomp/x86_dsl.ml(146):5216-5231
+                      (apply (field 11 (global X86_proc!)) (makeblock 29 x))))))
+            fnstsw =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(147)<ghost>:5245-5264
+                  (before asmcomp/x86_dsl.ml(147):5249-5264
+                    (after asmcomp/x86_dsl.ml(147):5249-5264
+                      (apply (field 11 (global X86_proc!)) (makeblock 30 x))))))
+            fpatan =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(148)<ghost>:5278-5294
+                  (before asmcomp/x86_dsl.ml(148):5283-5294
+                    (after asmcomp/x86_dsl.ml(148):5283-5294
+                      (apply (field 11 (global X86_proc!)) 10a)))))
+            fptan =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(149)<ghost>:5307-5322
+                  (before asmcomp/x86_dsl.ml(149):5312-5322
+                    (after asmcomp/x86_dsl.ml(149):5312-5322
+                      (apply (field 11 (global X86_proc!)) 11a)))))
+            fsin =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(150)<ghost>:5334-5348
+                  (before asmcomp/x86_dsl.ml(150):5339-5348
+                    (after asmcomp/x86_dsl.ml(150):5339-5348
+                      (apply (field 11 (global X86_proc!)) 12a)))))
+            fsqrt =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(151)<ghost>:5361-5376
+                  (before asmcomp/x86_dsl.ml(151):5366-5376
+                    (after asmcomp/x86_dsl.ml(151):5366-5376
+                      (apply (field 11 (global X86_proc!)) 13a)))))
+            fstp =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(152)<ghost>:5388-5405
+                  (before asmcomp/x86_dsl.ml(152):5392-5405
+                    (after asmcomp/x86_dsl.ml(152):5392-5405
+                      (apply (field 11 (global X86_proc!)) (makeblock 31 x))))))
+            fsub =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(153)<ghost>:5417-5434
+                  (before asmcomp/x86_dsl.ml(153):5421-5434
+                    (after asmcomp/x86_dsl.ml(153):5421-5434
+                      (apply (field 11 (global X86_proc!)) (makeblock 32 x))))))
+            fsubp =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(154)<ghost>:5447-5472
+                  (before asmcomp/x86_dsl.ml(154):5453-5472
+                    (after asmcomp/x86_dsl.ml(154):5453-5472
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 33 x y))))))
+            fsubr =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(155)<ghost>:5485-5503
+                  (before asmcomp/x86_dsl.ml(155):5489-5503
+                    (after asmcomp/x86_dsl.ml(155):5489-5503
+                      (apply (field 11 (global X86_proc!)) (makeblock 34 x))))))
+            fsubrp =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(156)<ghost>:5517-5543
+                  (before asmcomp/x86_dsl.ml(156):5523-5543
+                    (after asmcomp/x86_dsl.ml(156):5523-5543
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 35 x y))))))
+            fxch =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(157)<ghost>:5555-5572
+                  (before asmcomp/x86_dsl.ml(157):5559-5572
+                    (after asmcomp/x86_dsl.ml(157):5559-5572
+                      (apply (field 11 (global X86_proc!)) (makeblock 36 x))))))
+            fyl2x =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(158)<ghost>:5585-5600
+                  (before asmcomp/x86_dsl.ml(158):5590-5600
+                    (after asmcomp/x86_dsl.ml(158):5590-5600
+                      (apply (field 11 (global X86_proc!)) 14a)))))
+            hlt =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(159)<ghost>:5611-5624
+                  (before asmcomp/x86_dsl.ml(159):5616-5624
+                    (after asmcomp/x86_dsl.ml(159):5616-5624
+                      (apply (field 11 (global X86_proc!)) 15a)))))
+            idiv =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(160)<ghost>:5636-5653
+                  (before asmcomp/x86_dsl.ml(160):5640-5653
+                    (after asmcomp/x86_dsl.ml(160):5640-5653
+                      (apply (field 11 (global X86_proc!)) (makeblock 37 x))))))
+            imul =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(161)<ghost>:5665-5689
+                  (before asmcomp/x86_dsl.ml(161):5671-5689
+                    (after asmcomp/x86_dsl.ml(161):5671-5689
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 38 x y))))))
+            inc =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(162)<ghost>:5700-5716
+                  (before asmcomp/x86_dsl.ml(162):5704-5716
+                    (after asmcomp/x86_dsl.ml(162):5704-5716
+                      (apply (field 11 (global X86_proc!)) (makeblock 39 x))))))
+            j =
+              (function cond x
+                (funct-body asmcomp/x86_dsl.ml(163)<ghost>:5725-5752
+                  (before asmcomp/x86_dsl.ml(163):5734-5752
+                    (after asmcomp/x86_dsl.ml(163):5734-5752
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 40 cond x))))))
+            ja = (after asmcomp/x86_dsl.ml(164):5764-5767 (apply j 7a))
+            jae = (after asmcomp/x86_dsl.ml(165):5780-5784 (apply j 5a))
+            jb = (after asmcomp/x86_dsl.ml(166):5796-5799 (apply j 4a))
+            jbe = (after asmcomp/x86_dsl.ml(167):5812-5816 (apply j 6a))
+            je = (after asmcomp/x86_dsl.ml(168):5828-5831 (apply j 8a))
+            jg = (after asmcomp/x86_dsl.ml(169):5843-5846 (apply j 3a))
+            jmp =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(170)<ghost>:5857-5873
+                  (before asmcomp/x86_dsl.ml(170):5861-5873
+                    (after asmcomp/x86_dsl.ml(170):5861-5873
+                      (apply (field 11 (global X86_proc!)) (makeblock 41 x))))))
+            jne = (after asmcomp/x86_dsl.ml(171):5886-5890 (apply j 9a))
+            jp = (after asmcomp/x86_dsl.ml(172):5902-5905 (apply j 14a))
+            lea =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(173)<ghost>:5916-5939
+                  (before asmcomp/x86_dsl.ml(173):5922-5939
+                    (after asmcomp/x86_dsl.ml(173):5922-5939
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 42 x y))))))
+            mov =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(174)<ghost>:5950-5973
+                  (before asmcomp/x86_dsl.ml(174):5956-5973
+                    (after asmcomp/x86_dsl.ml(174):5956-5973
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 43 x y))))))
+            movapd =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(175)<ghost>:5987-6013
+                  (before asmcomp/x86_dsl.ml(175):5993-6013
+                    (after asmcomp/x86_dsl.ml(175):5993-6013
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 44 x y))))))
+            movsd =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(176)<ghost>:6026-6051
+                  (before asmcomp/x86_dsl.ml(176):6032-6051
+                    (after asmcomp/x86_dsl.ml(176):6032-6051
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 46 x y))))))
+            movss =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(177)<ghost>:6064-6089
+                  (before asmcomp/x86_dsl.ml(177):6070-6089
+                    (after asmcomp/x86_dsl.ml(177):6070-6089
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 47 x y))))))
+            movsx =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(178)<ghost>:6102-6127
+                  (before asmcomp/x86_dsl.ml(178):6108-6127
+                    (after asmcomp/x86_dsl.ml(178):6108-6127
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 48 x y))))))
+            movsxd =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(179)<ghost>:6141-6168
+                  (before asmcomp/x86_dsl.ml(179):6147-6168
+                    (after asmcomp/x86_dsl.ml(179):6147-6168
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 49 x y))))))
+            movzx =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(180)<ghost>:6181-6206
+                  (before asmcomp/x86_dsl.ml(180):6187-6206
+                    (after asmcomp/x86_dsl.ml(180):6187-6206
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 50 x y))))))
+            mulsd =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(181)<ghost>:6219-6244
+                  (before asmcomp/x86_dsl.ml(181):6225-6244
+                    (after asmcomp/x86_dsl.ml(181):6225-6244
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 51 x y))))))
+            nop =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(182)<ghost>:6255-6268
+                  (before asmcomp/x86_dsl.ml(182):6260-6268
+                    (after asmcomp/x86_dsl.ml(182):6260-6268
+                      (apply (field 11 (global X86_proc!)) 17a)))))
+            or_ =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(183)<ghost>:6279-6301
+                  (before asmcomp/x86_dsl.ml(183):6285-6301
+                    (after asmcomp/x86_dsl.ml(183):6285-6301
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 53 x y))))))
+            pop =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(184)<ghost>:6312-6328
+                  (before asmcomp/x86_dsl.ml(184):6316-6328
+                    (after asmcomp/x86_dsl.ml(184):6316-6328
+                      (apply (field 11 (global X86_proc!)) (makeblock 54 x))))))
+            push =
+              (function x
+                (funct-body asmcomp/x86_dsl.ml(185)<ghost>:6340-6357
+                  (before asmcomp/x86_dsl.ml(185):6344-6357
+                    (after asmcomp/x86_dsl.ml(185):6344-6357
+                      (apply (field 11 (global X86_proc!)) (makeblock 55 x))))))
+            ret =
+              (function param
+                (funct-body asmcomp/x86_dsl.ml(186)<ghost>:6368-6381
+                  (before asmcomp/x86_dsl.ml(186):6373-6381
+                    (after asmcomp/x86_dsl.ml(186):6373-6381
+                      (apply (field 11 (global X86_proc!)) 18a)))))
+            sal =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(187)<ghost>:6392-6415
+                  (before asmcomp/x86_dsl.ml(187):6398-6415
+                    (after asmcomp/x86_dsl.ml(187):6398-6415
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 57 x y))))))
+            sar =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(188)<ghost>:6426-6449
+                  (before asmcomp/x86_dsl.ml(188):6432-6449
+                    (after asmcomp/x86_dsl.ml(188):6432-6449
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 58 x y))))))
+            set =
+              (function cond x
+                (funct-body asmcomp/x86_dsl.ml(189)<ghost>:6460-6489
+                  (before asmcomp/x86_dsl.ml(189):6469-6489
+                    (after asmcomp/x86_dsl.ml(189):6469-6489
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 59 cond x))))))
+            shr =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(190)<ghost>:6500-6523
+                  (before asmcomp/x86_dsl.ml(190):6506-6523
+                    (after asmcomp/x86_dsl.ml(190):6506-6523
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 60 x y))))))
+            sqrtsd =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(191)<ghost>:6537-6563
+                  (before asmcomp/x86_dsl.ml(191):6543-6563
+                    (after asmcomp/x86_dsl.ml(191):6543-6563
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 61 x y))))))
+            sub =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(192)<ghost>:6574-6597
+                  (before asmcomp/x86_dsl.ml(192):6580-6597
+                    (after asmcomp/x86_dsl.ml(192):6580-6597
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 62 x y))))))
+            subsd =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(193)<ghost>:6611-6636
+                  (before asmcomp/x86_dsl.ml(193):6617-6636
+                    (after asmcomp/x86_dsl.ml(193):6617-6636
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 63 x y))))))
+            test =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(194)<ghost>:6648-6671
+                  (before asmcomp/x86_dsl.ml(194):6653-6671
+                    (after asmcomp/x86_dsl.ml(194):6653-6671
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 64 x y))))))
+            ucomisd =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(195)<ghost>:6686-6713
+                  (before asmcomp/x86_dsl.ml(195):6692-6713
+                    (after asmcomp/x86_dsl.ml(195):6692-6713
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 65 x y))))))
+            xchg =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(196)<ghost>:6725-6749
+                  (before asmcomp/x86_dsl.ml(196):6731-6749
+                    (after asmcomp/x86_dsl.ml(196):6731-6749
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 66 x y))))))
+            xor =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(197)<ghost>:6760-6782
+                  (before asmcomp/x86_dsl.ml(197):6765-6782
+                    (after asmcomp/x86_dsl.ml(197):6765-6782
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 67 x y))))))
+            xorpd =
+              (function x y
+                (funct-body asmcomp/x86_dsl.ml(198)<ghost>:6795-6820
+                  (before asmcomp/x86_dsl.ml(198):6801-6820
+                    (after asmcomp/x86_dsl.ml(198):6801-6820
+                      (apply (field 11 (global X86_proc!))
+                        (makeblock 68 x y)))))))
+           (pseudo asmcomp/x86_dsl.ml(108):3982-6824
+             (makeblock 0 add addsd and_ andpd bswap call cdq cmp comisd cqo
+               cvtsd2ss cvtsi2sd cvtss2sd cvttsd2si dec divsd fabs fadd faddp
+               fchs fcomp fcompp fcos fdiv fdivp fdivr fdivrp fild fistp fld
+               fld1 fldcw fldlg2 fldln2 fldz fmul fmulp fnstcw fnstsw fpatan
+               fptan fsin fsqrt fstp fsub fsubp fsubr fsubrp fxch fyl2x hlt
+               idiv imul inc j ja jae jb jbe je jg jmp jne jp lea mov movapd
+               movsd movss movsx movsxd movzx mulsd nop or_ pop push ret sal
+               sar set shr sqrtsd sub subsd test ucomisd xchg xor xorpd)))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 sym nat int const_32 const_nat const al ah cl ax rax r10
+        r11 r13 r14 r15 rsp rbp xmm15 eax ebx ecx edx ebp esp st0 st1 mem32
+        mem64 mem64_rip
+        (makeblock 0 (field 1 D) (field 2 D) (field 3 D) (field 4 D)
+          (field 5 D) (field 6 D) (field 7 D) (field 8 D) (field 9 D)
+          (field 10 D) (field 11 D) (field 12 D) (field 13 D) (field 14 D)
+          (field 15 D) (field 16 D) (field 17 D) (field 18 D) (field 19 D)
+          (field 0 D) (field 20 D) (field 21 D) (field 22 D) (field 23 D)
+          (field 24 D) (field 25 D))
+        (makeblock 0 (field 0 I) (field 1 I) (field 2 I) (field 3 I)
+          (field 4 I) (field 5 I) (field 6 I) (field 7 I) (field 8 I)
+          (field 9 I) (field 10 I) (field 11 I) (field 12 I) (field 13 I)
+          (field 14 I) (field 15 I) (field 16 I) (field 17 I) (field 18 I)
+          (field 19 I) (field 20 I) (field 21 I) (field 22 I) (field 23 I)
+          (field 24 I) (field 25 I) (field 26 I) (field 27 I) (field 28 I)
+          (field 30 I) (field 29 I) (field 31 I) (field 32 I) (field 33 I)
+          (field 34 I) (field 35 I) (field 36 I) (field 37 I) (field 38 I)
+          (field 39 I) (field 40 I) (field 41 I) (field 42 I) (field 43 I)
+          (field 44 I) (field 45 I) (field 46 I) (field 47 I) (field 48 I)
+          (field 49 I) (field 50 I) (field 51 I) (field 52 I) (field 53 I)
+          (field 54 I) (field 55 I) (field 56 I) (field 57 I) (field 58 I)
+          (field 59 I) (field 60 I) (field 61 I) (field 62 I) (field 63 I)
+          (field 64 I) (field 65 I) (field 66 I) (field 67 I) (field 68 I)
+          (field 69 I) (field 70 I) (field 71 I) (field 72 I) (field 73 I)
+          (field 74 I) (field 75 I) (field 76 I) (field 77 I) (field 78 I)
+          (field 79 I) (field 80 I) (field 81 I) (field 82 I) (field 83 I)
+          (field 84 I) (field 85 I) (field 86 I) (field 87 I) (field 88 I)
+          (field 89 I))))))

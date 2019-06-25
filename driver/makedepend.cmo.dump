@@ -1,0 +1,2567 @@
+(setglobal Makedepend!
+  (let
+    (ppf = (field 105 (global Stdlib__format!))
+     load_path = (makemutable 0 0a)
+     ml_synonyms = (makemutable 0 [0: ".ml" 0a])
+     mli_synonyms = (makemutable 0 [0: ".mli" 0a])
+     shared = (makemutable 0 0a)
+     native_only = (makemutable 0 0a)
+     bytecode_only = (makemutable 0 0a)
+     raw_dependencies = (makemutable 0 0a)
+     sort_files = (makemutable 0 0a)
+     all_dependencies = (makemutable 0 0a)
+     one_line = (makemutable 0 0a)
+     files = (makemutable 0 0a)
+     allow_approximation = (makemutable 0 0a)
+     map_files = (makemutable 0 0a)
+     module_map =
+       (makemutable 0
+         (field 0 (field 39 (field 3 (field 11 (global Misc!))))))
+     debug = (makemutable 0 0a)
+     Error_occurred =
+       (module-defn(Error_occurred) driver/makedepend.ml(42):1750-2028
+         (let
+           (error_occurred = (makemutable 0 0a)
+            get =
+              (function param
+                (funct-body driver/makedepend.ml(49)<ghost>:1966-1986
+                  (before driver/makedepend.ml(49):1971-1986
+                    (field 0 error_occurred))))
+            set =
+              (function param
+                (funct-body driver/makedepend.ml(50)<ghost>:1997-2024
+                  (before driver/makedepend.ml(50):2002-2024
+                    (setfield_imm 0 error_occurred 1a)))))
+           (pseudo driver/makedepend.ml(45):1834-2028 (makeblock 0 set get))))
+     fix_slash =
+       (function s
+         (funct-body driver/makedepend.ml(56)<ghost>:2133-2235
+           (before driver/makedepend.ml(57):2139-2235
+             (if
+               (after driver/makedepend.ml(57):2142-2162
+                 (caml_string_equal (field 3 (global Stdlib__sys!)) "Unix"))
+               (before driver/makedepend.ml(57):2168-2169 s)
+               (before driver/makedepend.ml(57):2175-2235
+                 (after driver/makedepend.ml(57):2175-2235
+                   (apply (field 9 (field 3 (field 11 (global Misc!))))
+                     (function c[int] : int
+                       (funct-body driver/makedepend.ml(58):2196-2227
+                         (if (!= c 92)
+                           (before driver/makedepend.ml(58):2225-2226 c)
+                           (before driver/makedepend.ml(58):2214-2217 '/'))))
+                     s)))))))
+     dirs =
+       (makemutable 0
+         (field 0 (field 39 (field 3 (field 11 (global Misc!))))))
+     readdir =
+       (function dir
+         (funct-body driver/makedepend.ml(64)<ghost>:2408-2736
+           (before driver/makedepend.ml(65):2416-2736
+             (try
+               (after driver/makedepend.ml(66):2424-2449
+                 (apply
+                   (field 26 (field 39 (field 3 (field 11 (global Misc!)))))
+                   dir (field 0 dirs)))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before driver/makedepend.ml(68):2474-2736
+                   (let
+                     (contents =
+                        (try
+                          (after driver/makedepend.ml(70):2507-2522
+                            (caml_sys_read_directory dir))
+                         with exn
+                          (let (tag =a (field 0 exn))
+                            (if (== tag (field 10 (global Stdlib!)))
+                              (let (msg =a (field 1 exn))
+                                (before driver/makedepend.ml(72):2559-2669
+                                  (seq
+                                    (after driver/makedepend.ml(72):2559-2624
+                                      (apply
+                                        (field 122 (global Stdlib__format!))
+                                        (field 105 (global Stdlib__format!))
+                                        [0:
+                                         [18:
+                                          [1: [0: 0a ""]]
+                                          [11:
+                                           "Bad -I option: "
+                                           [2: 0a [17: 0a [17: 4a 0a]]]]]
+                                         "@[Bad -I option: %s@]@."]
+                                        msg))
+                                    (before driver/makedepend.ml(73):2634-2669
+                                      (seq
+                                        (after driver/makedepend.ml(73):2634-2655
+                                          (apply (field 0 Error_occurred) 0a))
+                                        (before driver/makedepend.ml(74):2665-2669
+                                          (makearray[addr])))))))
+                              (reraise exn)))))
+                     (before driver/makedepend.ml(76):2681-2736
+                       (seq
+                         (setfield_ptr 0 dirs
+                           (after driver/makedepend.ml(76):2689-2722
+                             (apply
+                               (field 3
+                                 (field 39
+                                   (field 3 (field 11 (global Misc!)))))
+                               dir contents (field 0 dirs))))
+                         (before driver/makedepend.ml(77):2728-2736 contents)))))
+                 (reraise exn))))))
+     add_to_list =
+       (function li s
+         (funct-body driver/makedepend.ml(79)<ghost>:2754-2777
+           (before driver/makedepend.ml(80):2763-2777
+             (setfield_ptr 0 li (makeblock 0 s (field 0 li))))))
+     add_to_load_path =
+       (function dir
+         (funct-body driver/makedepend.ml(82)<ghost>:2800-3075
+           (before driver/makedepend.ml(83):2808-3075
+             (try
+               (let
+                 (dir =
+                    (after driver/makedepend.ml(84):2826-2875
+                      (apply (field 16 (global Misc!))
+                        (field 1 (global Config!)) dir)))
+                 (before driver/makedepend.ml(85):2883-2954
+                   (let
+                     (contents =
+                        (after driver/makedepend.ml(85):2898-2909
+                          (apply readdir dir)))
+                     (before driver/makedepend.ml(86):2917-2954
+                       (after driver/makedepend.ml(86):2917-2954
+                         (apply add_to_list load_path
+                           (makeblock 0 dir contents)))))))
+              with exn
+               (let (tag =a (field 0 exn))
+                 (if (== tag (field 10 (global Stdlib!)))
+                   (let (msg =a (field 1 exn))
+                     (before driver/makedepend.ml(88):2983-3075
+                       (seq
+                         (after driver/makedepend.ml(88):2983-3048
+                           (apply (field 122 (global Stdlib__format!))
+                             (field 105 (global Stdlib__format!))
+                             [0:
+                              [18:
+                               [1: [0: 0a ""]]
+                               [11:
+                                "Bad -I option: "
+                                [2: 0a [17: 0a [17: 4a 0a]]]]]
+                              "@[Bad -I option: %s@]@."]
+                             msg))
+                         (before driver/makedepend.ml(89):3054-3075
+                           (after driver/makedepend.ml(89):3054-3075
+                             (apply (field 0 Error_occurred) 0a))))))
+                   (reraise exn)))))))
+     add_to_synonym_list =
+       (function synonyms suffix
+         (funct-body driver/makedepend.ml(91)<ghost>:3101-3325
+           (before driver/makedepend.ml(92):3121-3325
+             (if
+               (&& (> (string.length suffix) 1)
+                 (==
+                   (after driver/makedepend.ml(92):3154-3164
+                     (string.get suffix 0))
+                   '.'))
+               (before driver/makedepend.ml(93):3180-3207
+                 (after driver/makedepend.ml(93):3180-3207
+                   (apply add_to_list synonyms suffix)))
+               (before driver/makedepend.ml(94):3215-3325
+                 (seq
+                   (after driver/makedepend.ml(95):3225-3292
+                     (apply (field 122 (global Stdlib__format!))
+                       (field 105 (global Stdlib__format!))
+                       [0:
+                        [18:
+                         [1: [0: 0a ""]]
+                         [11:
+                          "Bad suffix: '"
+                          [2: 0a [12: '\'' [17: 0a [17: 4a 0a]]]]]]
+                        "@[Bad suffix: '%s'@]@."]
+                       suffix))
+                   (before driver/makedepend.ml(96):3298-3319
+                     (after driver/makedepend.ml(96):3298-3319
+                       (apply (field 0 Error_occurred) 0a)))))))))
+     find_module_in_load_path =
+       (function name
+         (funct-body driver/makedepend.ml(100)<ghost>:3408-4154
+           (before driver/makedepend.ml(101):3417-4154
+             (let
+               (names =
+                  (after driver/makedepend.ml(101):3429-3492
+                    (apply (field 16 (global Stdlib__list!))
+                      (function ext
+                        (funct-body driver/makedepend.ml(101):3438-3461
+                          (before driver/makedepend.ml(101):3450-3460
+                            (after driver/makedepend.ml(101):3450-3460
+                              (apply (field 27 (global Stdlib!)) name ext)))))
+                      (after driver/makedepend.ml(101):3462-3492
+                        (apply (field 36 (global Stdlib!))
+                          (field 0 mli_synonyms) (field 0 ml_synonyms))))))
+               (before driver/makedepend.ml(102):3498-4154
+                 (let
+                   (unames =
+                      (let
+                        (uname =
+                           (after driver/makedepend.ml(103):3527-3557
+                             (apply
+                               (field 31 (field 3 (field 11 (global Misc!))))
+                               name)))
+                        (before driver/makedepend.ml(104):3565-3629
+                          (after driver/makedepend.ml(104):3565-3629
+                            (apply (field 16 (global Stdlib__list!))
+                              (function ext
+                                (funct-body driver/makedepend.ml(104):3574-3598
+                                  (before driver/makedepend.ml(104):3586-3597
+                                    (after driver/makedepend.ml(104):3586-3597
+                                      (apply (field 27 (global Stdlib!))
+                                        uname ext)))))
+                              (after driver/makedepend.ml(104):3599-3629
+                                (apply (field 36 (global Stdlib!))
+                                  (field 0 mli_synonyms)
+                                  (field 0 ml_synonyms))))))))
+                   (before driver/makedepend.ml(106):3637-4154
+                     (letrec
+                       (find_in_array
+                          (function a pos[int]
+                            (funct-body driver/makedepend.ml(106)<ghost>:3659-3861
+                              (before driver/makedepend.ml(107):3671-3861
+                                (if (>= pos (array.length[addr] a))
+                                  (before driver/makedepend.ml(107):3701-3705
+                                    0a)
+                                  (before driver/makedepend.ml(107):3711-3861
+                                    (let
+                                      (s =
+                                         (after driver/makedepend.ml(108):3731-3738
+                                           (array.get[addr] a pos)))
+                                      (before driver/makedepend.ml(109):3748-3853
+                                        (if
+                                          (||
+                                            (after driver/makedepend.ml(109):3751-3767
+                                              (apply
+                                                (field 31
+                                                  (global Stdlib__list!))
+                                                s names))
+                                            (after driver/makedepend.ml(109):3771-3788
+                                              (apply
+                                                (field 31
+                                                  (global Stdlib__list!))
+                                                s unames)))
+                                          (before driver/makedepend.ml(110):3802-3808
+                                            (makeblock 0 s))
+                                          (before driver/makedepend.ml(112):3828-3853
+                                            (after driver/makedepend.ml(112):3828-3853
+                                              (apply find_in_array a
+                                                (+ pos 1)))))))))))))
+                       (before driver/makedepend.ml(114):3867-4154
+                         (letrec
+                           (find_in_path
+                              (function param
+                                (funct-body driver/makedepend.ml(114):3890-4125
+                                  (if param
+                                    (let
+                                      (rem =a (field 1 param)
+                                       *match* =a (field 0 param)
+                                       contents =a (field 1 *match*)
+                                       dir =a (field 0 *match*))
+                                      (before driver/makedepend.ml(117):3961-4125
+                                        (let
+                                          (*match* =
+                                             (after driver/makedepend.ml(117):3967-3991
+                                               (apply find_in_array contents
+                                                 0)))
+                                          (if *match*
+                                            (let
+                                              (truename =a (field 0 *match*))
+                                              (before driver/makedepend.ml(119):4032-4092
+                                                (if
+                                                  (after driver/makedepend.ml(119):4035-4044
+                                                    (caml_string_equal dir
+                                                      "."))
+                                                  (before driver/makedepend.ml(119):4050-4058
+                                                    truename)
+                                                  (before driver/makedepend.ml(119):4064-4092
+                                                    (after driver/makedepend.ml(119):4064-4092
+                                                      (apply
+                                                        (field 3
+                                                          (global Stdlib__filename!))
+                                                        dir truename))))))
+                                            (before driver/makedepend.ml(120):4109-4125
+                                              (after driver/makedepend.ml(120):4109-4125
+                                                (apply find_in_path rem)))))))
+                                    (before driver/makedepend.ml(115):3909-3924
+                                      (raise
+                                        (after driver/makedepend.ml(115):3915-3924
+                                          (field 7 (global Stdlib!)))))))))
+                           (before driver/makedepend.ml(121):4131-4154
+                             (after driver/makedepend.ml(121):4131-4154
+                               (apply find_in_path (field 0 load_path))))))))))))))
+     find_dependency =
+       (function target_kind modname param
+         (funct-body driver/makedepend.ml(123)<ghost>:4176-5751
+           (let (opt_deps =a (field 1 param) byt_deps =a (field 0 param))
+             (before driver/makedepend.ml(124):4221-5751
+               (try
+                 (let
+                   (filename =
+                      (after driver/makedepend.ml(125):4244-4276
+                        (apply find_module_in_load_path modname)))
+                   (before driver/makedepend.ml(126):4284-5706
+                     (let
+                       (basename =
+                          (after driver/makedepend.ml(126):4299-4331
+                            (apply (field 11 (global Stdlib__filename!))
+                              filename)))
+                       (before driver/makedepend.ml(127):4339-5706
+                         (let
+                           (cmi_file =
+                              (after driver/makedepend.ml(127):4354-4371
+                                (apply (field 27 (global Stdlib!)) basename
+                                  ".cmi")))
+                           (before driver/makedepend.ml(128):4379-5706
+                             (let
+                               (cmx_file =
+                                  (after driver/makedepend.ml(128):4394-4411
+                                    (apply (field 27 (global Stdlib!))
+                                      basename ".cmx")))
+                               (before driver/makedepend.ml(129):4419-5706
+                                 (let
+                                   (mli_exists =
+                                      (after driver/makedepend.ml(130):4442-4513
+                                        (apply
+                                          (field 28 (global Stdlib__list!))
+                                          (function ext
+                                            (funct-body driver/makedepend.ml(130):4454-4499
+                                              (before driver/makedepend.ml(130):4466-4498
+                                                (after driver/makedepend.ml(130):4466-4498
+                                                  (caml_sys_file_exists
+                                                    (after driver/makedepend.ml(130):4482-4498
+                                                      (apply
+                                                        (field 27
+                                                          (global Stdlib!))
+                                                        basename ext)))))))
+                                          (field 0 mli_synonyms))))
+                                   (before driver/makedepend.ml(131):4521-5706
+                                     (let
+                                       (ml_exists =
+                                          (after driver/makedepend.ml(132):4543-4613
+                                            (apply
+                                              (field 28
+                                                (global Stdlib__list!))
+                                              (function ext
+                                                (funct-body driver/makedepend.ml(132):4555-4600
+                                                  (before driver/makedepend.ml(132):4567-4599
+                                                    (after driver/makedepend.ml(132):4567-4599
+                                                      (caml_sys_file_exists
+                                                        (after driver/makedepend.ml(132):4583-4599
+                                                          (apply
+                                                            (field 27
+                                                              (global Stdlib!))
+                                                            basename ext)))))))
+                                              (field 0 ml_synonyms))))
+                                       (before driver/makedepend.ml(133):4621-5706
+                                         (if mli_exists
+                                           (before driver/makedepend.ml(134):4646-5147
+                                             (let
+                                               (new_opt_dep =
+                                                  (if
+                                                    (field 0
+                                                      all_dependencies)
+                                                    (before driver/makedepend.ml(136):4708-4848
+                                                      (if target_kind
+                                                        (before driver/makedepend.ml(137):4750-4762
+                                                          (makeblock 0
+                                                            cmi_file 0a))
+                                                        (before driver/makedepend.ml(139):4796-4848
+                                                          (makeblock 0
+                                                            cmi_file
+                                                            (if ml_exists
+                                                              (before driver/makedepend.ml(139):4827-4839
+                                                                (makeblock 0
+                                                                  cmx_file
+                                                                  0a))
+                                                              (before driver/makedepend.ml(139):4845-4847
+                                                                0a))))))
+                                                    (before driver/makedepend.ml(143):5020-5084
+                                                      (if ml_exists
+                                                        (before driver/makedepend.ml(144):5046-5058
+                                                          (makeblock 0
+                                                            cmx_file 0a))
+                                                        (before driver/makedepend.ml(145):5072-5084
+                                                          (makeblock 0
+                                                            cmi_file 0a))))))
+                                               (before driver/makedepend.ml(147):5100-5147
+                                                 (makeblock 0
+                                                   (makeblock 0 cmi_file
+                                                     byt_deps)
+                                                   (after driver/makedepend.ml(147):5124-5146
+                                                     (apply
+                                                       (field 36
+                                                         (global Stdlib!))
+                                                       new_opt_dep opt_deps))))))
+                                           (before driver/makedepend.ml(150):5191-5706
+                                             (let
+                                               (bytenames =
+                                                  (if
+                                                    (field 0
+                                                      all_dependencies)
+                                                    (before driver/makedepend.ml(152):5251-5337
+                                                      (if target_kind
+                                                        (before driver/makedepend.ml(153):5293-5305
+                                                          (makeblock 0
+                                                            cmi_file 0a))
+                                                        (before driver/makedepend.ml(154):5325-5337
+                                                          (makeblock 0
+                                                            cmi_file 0a))))
+                                                    (before driver/makedepend.ml(157):5403-5457
+                                                      (makeblock 0
+                                                        (after driver/makedepend.ml(157):5404-5456
+                                                          (apply
+                                                            (field 27
+                                                              (global Stdlib!))
+                                                            basename
+                                                            (if
+                                                              (field 0
+                                                                native_only)
+                                                              (before driver/makedepend.ml(157):5437-5443
+                                                                ".cmx")
+                                                              (before driver/makedepend.ml(157):5449-5455
+                                                                ".cmo"))))
+                                                        0a))))
+                                               (before driver/makedepend.ml(158):5467-5706
+                                                 (let
+                                                   (optnames =
+                                                      (if
+                                                        (field 0
+                                                          all_dependencies)
+                                                        (before driver/makedepend.ml(160):5524-5620
+                                                          (if target_kind
+                                                            (before driver/makedepend.ml(161):5566-5578
+                                                              (makeblock 0
+                                                                cmi_file 0a))
+                                                            (before driver/makedepend.ml(162):5598-5620
+                                                              (makeblock 0
+                                                                cmi_file
+                                                                (makeblock 0
+                                                                  cmx_file
+                                                                  0a)))))
+                                                        (before driver/makedepend.ml(163):5634-5646
+                                                          (makeblock 0
+                                                            cmx_file 0a))))
+                                                   (before driver/makedepend.ml(165):5662-5706
+                                                     (makeblock 0
+                                                       (after driver/makedepend.ml(165):5663-5683
+                                                         (apply
+                                                           (field 36
+                                                             (global Stdlib!))
+                                                           bytenames
+                                                           byt_deps))
+                                                       (after driver/makedepend.ml(165):5685-5705
+                                                         (apply
+                                                           (field 36
+                                                             (global Stdlib!))
+                                                           optnames opt_deps)))))))))))))))))))))
+                with exn
+                 (if (== exn (field 7 (global Stdlib!)))
+                   (before driver/makedepend.ml(167):5731-5751
+                     (makeblock 0 byt_deps opt_deps))
+                   (reraise exn)))))))
+     escaped_eol = " \\\n    "
+     depends_on = ":"
+     escaped_eol = escaped_eol
+     depends_on = depends_on
+     print_filename =
+       (function s
+         (funct-body driver/makedepend.ml(171)<ghost>:5824-6536
+           (before driver/makedepend.ml(172):5830-6536
+             (let
+               (s =
+                  (if (field 0 (field 127 (global Clflags!)))
+                    (before driver/makedepend.ml(172):5867-5878
+                      (after driver/makedepend.ml(172):5867-5878
+                        (apply fix_slash s)))
+                    (before driver/makedepend.ml(172):5884-5885 s)))
+               (before driver/makedepend.ml(173):5891-6536
+                 (if
+                   (not
+                     (after driver/makedepend.ml(173):5898-5921
+                       (apply (field 21 (field 3 (field 11 (global Misc!))))
+                         s ' ')))
+                   (before driver/makedepend.ml(173):5927-5958
+                     (after driver/makedepend.ml(173):5927-5958
+                       (apply (field 41 (global Stdlib!)) s)))
+                   (before driver/makedepend.ml(175):5964-6536
+                     (letrec
+                       (count
+                          (function n[int] i[int] : int
+                            (funct-body driver/makedepend.ml(176)<ghost>:5988-6104
+                              (before driver/makedepend.ml(177):6000-6104
+                                (if (>= i (string.length s))
+                                  (before driver/makedepend.ml(177):6029-6030
+                                    n)
+                                  (before driver/makedepend.ml(178):6042-6104
+                                    (if
+                                      (==
+                                        (after driver/makedepend.ml(178):6045-6050
+                                          (string.get s i))
+                                        ' ')
+                                      (before driver/makedepend.ml(178):6062-6079
+                                        (after driver/makedepend.ml(178):6062-6079
+                                          (apply count (+ n 1) (+ i 1))))
+                                      (before driver/makedepend.ml(179):6091-6104
+                                        (after driver/makedepend.ml(179):6091-6104
+                                          (apply count n (+ i 1)))))))))))
+                       (before driver/makedepend.ml(181):6116-6530
+                         (let
+                           (spaces =[int]
+                              (after driver/makedepend.ml(181):6129-6138
+                                (apply count 0 0)))
+                           (before driver/makedepend.ml(182):6146-6530
+                             (let
+                               (result =
+                                  (after driver/makedepend.ml(182):6159-6198
+                                    (caml_create_bytes
+                                      (+ (string.length s) spaces))))
+                               (before driver/makedepend.ml(183):6206-6530
+                                 (letrec
+                                   (loop
+                                      (function i[int] j[int]
+                                        (funct-body driver/makedepend.ml(183)<ghost>:6219-6485
+                                          (before driver/makedepend.ml(184):6231-6485
+                                            (if (>= i (string.length s))
+                                              (before driver/makedepend.ml(184):6260-6262
+                                                0a)
+                                              (before driver/makedepend.ml(185):6274-6485
+                                                (if
+                                                  (==
+                                                    (after driver/makedepend.ml(185):6277-6282
+                                                      (string.get s i))
+                                                    ' ')
+                                                  (before driver/makedepend.ml(185):6294-6404
+                                                    (seq
+                                                      (after driver/makedepend.ml(186):6308-6331
+                                                        (bytes.set result j
+                                                          '\\'))
+                                                      (before driver/makedepend.ml(187):6341-6394
+                                                        (seq
+                                                          (after driver/makedepend.ml(187):6341-6367
+                                                            (bytes.set result
+                                                              (+ j 1) ' '))
+                                                          (before driver/makedepend.ml(188):6377-6393
+                                                            (after driver/makedepend.ml(188):6377-6393
+                                                              (apply loop
+                                                                (+ i 1)
+                                                                (+ j 2))))))))
+                                                  (before driver/makedepend.ml(189):6410-6485
+                                                    (seq
+                                                      (after driver/makedepend.ml(190):6424-6448
+                                                        (bytes.set result j
+                                                          (after driver/makedepend.ml(190):6443-6448
+                                                            (string.get s i))))
+                                                      (before driver/makedepend.ml(191):6458-6474
+                                                        (after driver/makedepend.ml(191):6458-6474
+                                                          (apply loop 
+                                                            (+ i 1) (+ j 1)))))))))))))
+                                   (before driver/makedepend.ml(194):6497-6530
+                                     (seq
+                                       (after driver/makedepend.ml(194):6497-6505
+                                         (apply loop 0 0))
+                                       (before driver/makedepend.ml(195):6511-6529
+                                         (after driver/makedepend.ml(195):6511-6529
+                                           (apply (field 42 (global Stdlib!))
+                                             result)))))))))))))))))))
+     print_dependencies =
+       (function target_files deps
+         (funct-body driver/makedepend.ml(199)<ghost>:6564-7318
+           (before driver/makedepend.ml(200):6586-7318
+             (let (pos = (makemutable 0 (int) 0))
+               (before driver/makedepend.ml(201):6607-7318
+                 (let
+                   (print_on_same_line =
+                      (function item
+                        (funct-body driver/makedepend.ml(201)<ghost>:6630-6743
+                          (before driver/makedepend.ml(202):6641-6743
+                            (seq
+                              (if (!= (field 0 pos) 0)
+                                (before driver/makedepend.ml(202):6659-6675
+                                  (after driver/makedepend.ml(202):6659-6675
+                                    (apply (field 41 (global Stdlib!)) " ")))
+                                0a)
+                              (before driver/makedepend.ml(203):6681-6743
+                                (seq
+                                  (after driver/makedepend.ml(203):6681-6700
+                                    (apply print_filename item))
+                                  (before driver/makedepend.ml(204):6706-6742
+                                    (setfield_imm 0 pos
+                                      (+
+                                        (+ (field 0 pos)
+                                          (string.length item))
+                                        1))))))))))
+                   (before driver/makedepend.ml(206):6751-7318
+                     (let
+                       (print_on_new_line =
+                          (function item
+                            (funct-body driver/makedepend.ml(206)<ghost>:6773-6869
+                              (before driver/makedepend.ml(207):6784-6869
+                                (seq
+                                  (after driver/makedepend.ml(207):6784-6808
+                                    (apply (field 41 (global Stdlib!))
+                                      escaped_eol))
+                                  (before driver/makedepend.ml(208):6814-6869
+                                    (seq
+                                      (after driver/makedepend.ml(208):6814-6833
+                                        (apply print_filename item))
+                                      (before driver/makedepend.ml(209):6839-6868
+                                        (setfield_imm 0 pos
+                                          (+ (string.length item) 4))))))))))
+                       (before driver/makedepend.ml(211):6877-7318
+                         (let
+                           (print_compact =
+                              (function item
+                                (funct-body driver/makedepend.ml(211)<ghost>:6895-7024
+                                  (before driver/makedepend.ml(212):6906-7024
+                                    (if
+                                      (|| (field 0 one_line)
+                                        (<=
+                                          (+ (+ (field 0 pos) 1)
+                                            (string.length item))
+                                          77))
+                                      (before driver/makedepend.ml(213):6969-6992
+                                        (after driver/makedepend.ml(213):6969-6992
+                                          (apply print_on_same_line item)))
+                                      (before driver/makedepend.ml(214):7002-7024
+                                        (after driver/makedepend.ml(214):7002-7024
+                                          (apply print_on_new_line item))))))))
+                           (before driver/makedepend.ml(216):7032-7318
+                             (let
+                               (print_dep =
+                                  (function item
+                                    (funct-body driver/makedepend.ml(216)<ghost>:7046-7134
+                                      (before driver/makedepend.ml(217):7057-7134
+                                        (if (field 0 one_line)
+                                          (before driver/makedepend.ml(218):7079-7102
+                                            (after driver/makedepend.ml(218):7079-7102
+                                              (apply print_on_same_line item)))
+                                          (before driver/makedepend.ml(219):7112-7134
+                                            (after driver/makedepend.ml(219):7112-7134
+                                              (apply print_on_new_line item))))))))
+                               (before driver/makedepend.ml(221):7142-7318
+                                 (seq
+                                   (after driver/makedepend.ml(221):7142-7178
+                                     (apply (field 14 (global Stdlib__list!))
+                                       print_compact target_files))
+                                   (before driver/makedepend.ml(222):7182-7318
+                                     (seq
+                                       (after driver/makedepend.ml(222):7182-7198
+                                         (apply (field 41 (global Stdlib!))
+                                           " "))
+                                       (before driver/makedepend.ml(222):7200-7318
+                                         (seq
+                                           (after driver/makedepend.ml(222):7200-7223
+                                             (apply
+                                               (field 41 (global Stdlib!))
+                                               depends_on))
+                                           (before driver/makedepend.ml(223):7227-7318
+                                             (seq
+                                               (setfield_imm 0 pos
+                                                 (+
+                                                   (+ (field 0 pos)
+                                                     (string.length
+                                                       depends_on))
+                                                   1))
+                                               (before driver/makedepend.ml(224):7273-7318
+                                                 (seq
+                                                   (after driver/makedepend.ml(224):7273-7297
+                                                     (apply
+                                                       (field 14
+                                                         (global Stdlib__list!))
+                                                       print_dep deps))
+                                                   (before driver/makedepend.ml(225):7301-7318
+                                                     (after driver/makedepend.ml(225):7301-7318
+                                                       (apply
+                                                         (field 41
+                                                           (global Stdlib!))
+                                                         "\n")))))))))))))))))))))))))
+     print_raw_dependencies =
+       (function source_file deps
+         (funct-body driver/makedepend.ml(227)<ghost>:7347-7746
+           (before driver/makedepend.ml(228):7368-7746
+             (seq
+               (after driver/makedepend.ml(228):7368-7394
+                 (apply print_filename source_file))
+               (before driver/makedepend.ml(228):7396-7746
+                 (seq
+                   (after driver/makedepend.ml(228):7396-7419
+                     (apply (field 41 (global Stdlib!)) depends_on))
+                   (before driver/makedepend.ml(229):7423-7746
+                     (seq
+                       (after driver/makedepend.ml(229):7423-7727
+                         (apply
+                           (field 13
+                             (field 38 (field 3 (field 11 (global Misc!)))))
+                           (function dep
+                             (funct-body driver/makedepend.ml(230):7443-7718
+                               (before driver/makedepend.ml(232):7496-7717
+                                 (if
+                                   (&& (> (string.length dep) 0)
+                                     (let
+                                       (*match* =
+                                          (after driver/makedepend.ml(233):7543-7550
+                                            (string.get dep 0)))
+                                       (catch
+                                         (catch
+                                           (if (>= *match* 91)
+                                             (if (>= *match* 128) (exit 6)
+                                               (exit 7))
+                                             (if (>= *match* 65) (exit 6)
+                                               (exit 7)))
+                                          with (7)
+                                           (before driver/makedepend.ml(235):7627-7632
+                                             0a))
+                                        with (6)
+                                         (before driver/makedepend.ml(234):7601-7605
+                                           1a))))
+                                   (before driver/makedepend.ml(236):7647-7717
+                                     (seq
+                                       (after driver/makedepend.ml(237):7663-7677
+                                         (apply (field 40 (global Stdlib!))
+                                           ' '))
+                                       (before driver/makedepend.ml(238):7689-7705
+                                         (after driver/makedepend.ml(238):7689-7705
+                                           (apply (field 41 (global Stdlib!))
+                                             dep)))))
+                                   0a))))
+                           deps))
+                       (before driver/makedepend.ml(241):7731-7746
+                         (after driver/makedepend.ml(241):7731-7746
+                           (apply (field 40 (global Stdlib!)) '\n')))))))))))
+     print_exception =
+       (function exn
+         (funct-body driver/makedepend.ml(246)<ghost>:7793-7851
+           (before driver/makedepend.ml(247):7801-7851
+             (after driver/makedepend.ml(247):7801-7851
+               (apply (field 51 (global Location!))
+                 (field 105 (global Stdlib__format!)) exn)))))
+     report_err =
+       (function exn
+         (funct-body driver/makedepend.ml(249)<ghost>:7868-7920
+           (before driver/makedepend.ml(250):7876-7920
+             (seq
+               (after driver/makedepend.ml(250):7876-7897
+                 (apply (field 0 Error_occurred) 0a))
+               (before driver/makedepend.ml(251):7901-7920
+                 (after driver/makedepend.ml(251):7901-7920
+                   (apply print_exception exn)))))))
+     tool_name = "ocamldep")
+    (letrec
+      (lexical_approximation
+         (function lexbuf
+           (funct-body driver/makedepend.ml(255)<ghost>:7980-9035
+             (before driver/makedepend.ml(264):8302-9035
+               (try
+                 (letrec
+                   (process
+                      (function after_lident lexbuf
+                        (funct-body driver/makedepend.ml(265)<ghost>:8326-8771
+                          (before driver/makedepend.ml(266):8354-8771
+                            (let
+                              (*match* =
+                                 (after driver/makedepend.ml(266):8360-8378
+                                   (apply (field 1 (global Lexer!)) lexbuf)))
+                              (catch
+                                (catch
+                                  (switch *match*
+                                   case int 75:
+                                    (before driver/makedepend.ml(274):8735-8737
+                                      0a)
+                                   case int 80:
+                                    (before driver/makedepend.ml(272):8619-8631
+                                      (if after_lident
+                                        (before driver/makedepend.ml(272):8635-8655
+                                          (after driver/makedepend.ml(272):8635-8655
+                                            (apply process 0a lexbuf)))
+                                        (exit 9)))
+                                   case int 95: (exit 9)
+                                   case tag 0:
+                                    (let (name =a (field 0 *match*))
+                                      (before driver/makedepend.ml(268):8424-8547
+                                        (seq
+                                          (setfield_ptr 0
+                                            (field 3 (global Depend!))
+                                            (after driver/makedepend.ml(269):8467-8515
+                                              (apply
+                                                (field 3
+                                                  (field 38
+                                                    (field 3
+                                                      (field 11
+                                                        (global Misc!)))))
+                                                name
+                                                (field 0
+                                                  (field 3 (global Depend!))))))
+                                          (before driver/makedepend.ml(270):8527-8547
+                                            (after driver/makedepend.ml(270):8527-8547
+                                              (apply process 0a lexbuf))))))
+                                   case tag 4:
+                                    (before driver/makedepend.ml(271):8575-8594
+                                      (after driver/makedepend.ml(271):8575-8594
+                                        (apply process 1a lexbuf)))
+                                   default: (exit 10))
+                                 with (10)
+                                  (before driver/makedepend.ml(275):8751-8771
+                                    (after driver/makedepend.ml(275):8751-8771
+                                      (apply process 0a lexbuf))))
+                               with (9)
+                                (before driver/makedepend.ml(273):8697-8712
+                                  (after driver/makedepend.ml(273):8697-8712
+                                    (apply skip_one lexbuf))))))))
+                     skip_one
+                       (function lexbuf
+                         (funct-body driver/makedepend.ml(276)<ghost>:8789-8949
+                           (before driver/makedepend.ml(277):8804-8949
+                             (let
+                               (*match* =
+                                  (after driver/makedepend.ml(277):8810-8828
+                                    (apply (field 1 (global Lexer!)) lexbuf)))
+                               (catch
+                                 (if (isint *match*)
+                                   (let (switcher =a (-80+ *match*))
+                                     (if (not (isout 15 switcher))
+                                       (let (switcher =a (-1+ switcher))
+                                         (if (isout 13 switcher)
+                                           (before driver/makedepend.ml(278):8875-8890
+                                             (after driver/makedepend.ml(278):8875-8890
+                                               (apply skip_one lexbuf)))
+                                           (exit 12)))
+                                       (if (!= switcher -5) (exit 12)
+                                         (before driver/makedepend.ml(279):8913-8915
+                                           0a))))
+                                   (exit 12))
+                                with (12)
+                                 (before driver/makedepend.ml(280):8929-8949
+                                   (after driver/makedepend.ml(280):8929-8949
+                                     (apply process 0a lexbuf)))))))))
+                   (before driver/makedepend.ml(283):8962-8982
+                     (after driver/makedepend.ml(283):8962-8982
+                       (apply process 0a lexbuf))))
+                with exn
+                 (let (tag =a (field 0 exn))
+                   (if (== tag (field 3 (global Lexer!)))
+                     (before driver/makedepend.ml(284):9007-9035
+                       (after driver/makedepend.ml(284):9007-9035
+                         (apply lexical_approximation lexbuf)))
+                     (reraise exn))))))))
+      (let
+        (read_and_approximate =
+           (function inputfile
+             (funct-body driver/makedepend.ml(286)<ghost>:9062-9469
+               (before driver/makedepend.ml(287):9076-9469
+                 (seq
+                   (setfield_ptr 0 (field 3 (global Depend!))
+                     (field 0 (field 38 (field 3 (field 11 (global Misc!))))))
+                   (before driver/makedepend.ml(288):9127-9469
+                     (let
+                       (ic =
+                          (after driver/makedepend.ml(288):9136-9157
+                            (apply (field 79 (global Stdlib!)) inputfile)))
+                       (before driver/makedepend.ml(289):9163-9469
+                         (try
+                           (seq
+                             (after driver/makedepend.ml(290):9171-9183
+                               (apply (field 89 (global Stdlib!)) ic 0))
+                             (before driver/makedepend.ml(291):9189-9385
+                               (seq
+                                 (setfield_ptr 0
+                                   (field 11 (global Location!)) inputfile)
+                                 (before driver/makedepend.ml(292):9227-9385
+                                   (let
+                                     (lexbuf =
+                                        (after driver/makedepend.ml(292):9240-9262
+                                          (apply
+                                            (field 1
+                                              (global Stdlib__lexing!))
+                                            0a ic)))
+                                     (before driver/makedepend.ml(293):9270-9385
+                                       (seq
+                                         (after driver/makedepend.ml(293):9270-9300
+                                           (apply
+                                             (field 2 (global Location!))
+                                             lexbuf inputfile))
+                                         (before driver/makedepend.ml(294):9306-9385
+                                           (seq
+                                             (after driver/makedepend.ml(294):9306-9334
+                                               (apply lexical_approximation
+                                                 lexbuf))
+                                             (before driver/makedepend.ml(295):9340-9385
+                                               (seq
+                                                 (after driver/makedepend.ml(295):9340-9351
+                                                   (apply
+                                                     (field 92
+                                                       (global Stdlib!))
+                                                     ic))
+                                                 (before driver/makedepend.ml(296):9357-9385
+                                                   (field 0
+                                                     (field 3
+                                                       (global Depend!)))))))))))))))
+                          with exn
+                           (before driver/makedepend.ml(298):9404-9469
+                             (seq
+                               (after driver/makedepend.ml(298):9404-9415
+                                 (apply (field 92 (global Stdlib!)) ic))
+                               (before driver/makedepend.ml(299):9421-9469
+                                 (seq
+                                   (after driver/makedepend.ml(299):9421-9435
+                                     (apply report_err exn))
+                                   (before driver/makedepend.ml(300):9441-9469
+                                     (field 0 (field 3 (global Depend!))))))))))))))))
+         read_parse_and_extract =
+           (function parse_function extract_function def ast_kind source_file
+             (funct-body driver/makedepend.ml(302)<ghost>:9498-10423
+               (before driver/makedepend.ml(304):9563-10423
+                 (seq (setfield_ptr 0 (field 4 (global Depend!)) 0a)
+                   (before driver/makedepend.ml(305):9587-10423
+                     (seq
+                       (setfield_ptr 0 (field 3 (global Depend!))
+                         (field 0
+                           (field 38 (field 3 (field 11 (global Misc!))))))
+                       (before driver/makedepend.ml(306):9638-10423
+                         (try
+                           (let
+                             (input_file =
+                                (after driver/makedepend.ml(307):9663-9692
+                                  (apply (field 1 (global Pparse!))
+                                    source_file)))
+                             (before driver/makedepend.ml(308):9700-10215
+                               (try
+                                 (let
+                                   (ast =
+                                      (after driver/makedepend.ml(309):9726-9783
+                                        (apply (field 5 (global Pparse!))
+                                          tool_name input_file parse_function
+                                          ast_kind)))
+                                   (before driver/makedepend.ml(310):9793-10134
+                                     (let
+                                       (bound_vars =
+                                          (after driver/makedepend.ml(311):9818-9991
+                                            (apply
+                                              (field 20
+                                                (global Stdlib__list!))
+                                              (function bv modname
+                                                (funct-body driver/makedepend.ml(312):9843-9922
+                                                  (before driver/makedepend.ml(313):9874-9921
+                                                    (after driver/makedepend.ml(313):9874-9921
+                                                      (apply
+                                                        (field 5
+                                                          (global Depend!))
+                                                        bv
+                                                        (after driver/makedepend.ml(313):9896-9921
+                                                          (apply
+                                                            (field 3
+                                                              (global Longident!))
+                                                            modname)))))))
+                                              (field 0 module_map)
+                                              (after driver/makedepend.ml(314):9945-9991
+                                                (apply
+                                                  (field 8
+                                                    (global Stdlib__list!))
+                                                  (field 0
+                                                    (field 30
+                                                      (global Clflags!))))))))
+                                       (before driver/makedepend.ml(316):10007-10134
+                                         (let
+                                           (r =
+                                              (after driver/makedepend.ml(316):10015-10046
+                                                (apply extract_function
+                                                  bound_vars ast)))
+                                           (before driver/makedepend.ml(317):10056-10134
+                                             (seq
+                                               (after driver/makedepend.ml(317):10056-10093
+                                                 (apply
+                                                   (field 2 (global Pparse!))
+                                                   input_file))
+                                               (before driver/makedepend.ml(318):10101-10134
+                                                 (makeblock 0
+                                                   (field 0
+                                                     (field 3
+                                                       (global Depend!)))
+                                                   r)))))))))
+                                with x
+                                 (before driver/makedepend.ml(320):10155-10207
+                                   (seq
+                                     (after driver/makedepend.ml(320):10155-10192
+                                       (apply (field 2 (global Pparse!))
+                                         input_file))
+                                     (before driver/makedepend.ml(321):10200-10207
+                                       (reraise
+                                         (after driver/makedepend.ml(321):10206-10207
+                                           x))))))))
+                          with x
+                           (before driver/makedepend.ml(323):10228-10423
+                             (seq
+                               (after driver/makedepend.ml(324):10238-10255
+                                 (apply print_exception x))
+                               (before driver/makedepend.ml(325):10261-10417
+                                 (if (not (field 0 allow_approximation))
+                                   (before driver/makedepend.ml(325):10294-10366
+                                     (seq
+                                       (after driver/makedepend.ml(326):10306-10327
+                                         (apply (field 0 Error_occurred) 0a))
+                                       (before driver/makedepend.ml(327):10335-10358
+                                         (makeblock 0
+                                           (field 0
+                                             (field 38
+                                               (field 3
+                                                 (field 11 (global Misc!)))))
+                                           def))))
+                                   (before driver/makedepend.ml(329):10378-10417
+                                     (makeblock 0
+                                       (after driver/makedepend.ml(329):10379-10411
+                                         (apply read_and_approximate
+                                           source_file))
+                                       def))))))))))))))
+         print_ml_dependencies =
+           (function source_file extracted_deps pp_deps
+             (funct-body driver/makedepend.ml(332)<ghost>:10451-11613
+               (before driver/makedepend.ml(333):10490-11613
+                 (let
+                   (basename =
+                      (after driver/makedepend.ml(333):10505-10540
+                        (apply (field 11 (global Stdlib__filename!))
+                          source_file)))
+                   (before driver/makedepend.ml(334):10546-11613
+                     (let
+                       (byte_targets =
+                          (makeblock 0
+                            (after driver/makedepend.ml(334):10567-10584
+                              (apply (field 27 (global Stdlib!)) basename
+                                ".cmo"))
+                            0a))
+                       (before driver/makedepend.ml(335):10592-11613
+                         (let
+                           (native_targets =
+                              (if (field 0 all_dependencies)
+                                (before driver/makedepend.ml(337):10647-10685
+                                  (makeblock 0
+                                    (after driver/makedepend.ml(337):10649-10666
+                                      (apply (field 27 (global Stdlib!))
+                                        basename ".cmx"))
+                                    (makeblock 0
+                                      (after driver/makedepend.ml(337):10668-10683
+                                        (apply (field 27 (global Stdlib!))
+                                          basename ".o"))
+                                      0a)))
+                                (before driver/makedepend.ml(338):10695-10716
+                                  (makeblock 0
+                                    (after driver/makedepend.ml(338):10697-10714
+                                      (apply (field 27 (global Stdlib!))
+                                        basename ".cmx"))
+                                    0a))))
+                           (before driver/makedepend.ml(339):10722-11613
+                             (let
+                               (shared_targets =
+                                  (makeblock 0
+                                    (after driver/makedepend.ml(339):10745-10763
+                                      (apply (field 27 (global Stdlib!))
+                                        basename ".cmxs"))
+                                    0a))
+                               (before driver/makedepend.ml(340):10771-11613
+                                 (let
+                                   (init_deps =
+                                      (if (field 0 all_dependencies)
+                                        (before driver/makedepend.ml(340):10813-10826
+                                          (makeblock 0 source_file 0a))
+                                        (before driver/makedepend.ml(340):10832-10834
+                                          0a)))
+                                   (before driver/makedepend.ml(341):10840-11613
+                                     (let
+                                       (cmi_name =
+                                          (after driver/makedepend.ml(341):10855-10872
+                                            (apply
+                                              (field 27 (global Stdlib!))
+                                              basename ".cmi")))
+                                       (before driver/makedepend.ml(342):10878-11613
+                                         (catch
+                                           (if
+                                             (after driver/makedepend.ml(343):10916-10995
+                                               (apply
+                                                 (field 28
+                                                   (global Stdlib__list!))
+                                                 (function ext
+                                                   (funct-body driver/makedepend.ml(343):10928-10973
+                                                     (before driver/makedepend.ml(343):10940-10972
+                                                       (after driver/makedepend.ml(343):10940-10972
+                                                         (caml_sys_file_exists
+                                                           (after driver/makedepend.ml(343):10956-10972
+                                                             (apply
+                                                               (field 27
+                                                                 (global Stdlib!))
+                                                               basename ext)))))))
+                                                 (field 0 mli_synonyms)))
+                                             (before driver/makedepend.ml(345):11005-11055
+                                               (let
+                                                 (extra_targets = 0a
+                                                  init_deps =
+                                                    (makeblock 0
+                                                      (makeblock 0 cmi_name
+                                                        init_deps)
+                                                      (makeblock 0 cmi_name
+                                                        init_deps)))
+                                                 (exit 19 extra_targets
+                                                   init_deps)))
+                                             (before driver/makedepend.ml(346):11065-11144
+                                               (let
+                                                 (extra_targets =
+                                                    (if
+                                                      (field 0
+                                                        all_dependencies)
+                                                      (before driver/makedepend.ml(347):11125-11135
+                                                        (makeblock 0 cmi_name
+                                                          0a))
+                                                      (before driver/makedepend.ml(347):11141-11143
+                                                        0a))
+                                                  init_deps =
+                                                    (makeblock 0 init_deps
+                                                      init_deps))
+                                                 (exit 19 extra_targets
+                                                   init_deps))))
+                                          with (19 extra_targets init_deps)
+                                           (before driver/makedepend.ml(349):11152-11613
+                                             (let
+                                               (*match* =
+                                                  (after driver/makedepend.ml(350):11186-11253
+                                                    (apply
+                                                      (field 15
+                                                        (field 38
+                                                          (field 3
+                                                            (field 11
+                                                              (global Misc!)))))
+                                                      (after driver/makedepend.ml(350):11202-11222
+                                                        (apply
+                                                          find_dependency 0a))
+                                                      extracted_deps
+                                                      init_deps))
+                                                native_deps =a
+                                                  (field 1 *match*)
+                                                byt_deps =a (field 0 *match*))
+                                               (before driver/makedepend.ml(352):11259-11613
+                                                 (seq
+                                                   (if
+                                                     (not
+                                                       (field 0 native_only))
+                                                     (before driver/makedepend.ml(353):11288-11358
+                                                       (after driver/makedepend.ml(353):11288-11358
+                                                         (apply
+                                                           print_dependencies
+                                                           (after driver/makedepend.ml(353):11307-11337
+                                                             (apply
+                                                               (field 36
+                                                                 (global Stdlib!))
+                                                               byte_targets
+                                                               extra_targets))
+                                                           (after driver/makedepend.ml(353):11338-11358
+                                                             (apply
+                                                               (field 36
+                                                                 (global Stdlib!))
+                                                               byt_deps
+                                                               pp_deps)))))
+                                                     0a)
+                                                   (before driver/makedepend.ml(354):11362-11613
+                                                     (if
+                                                       (not
+                                                         (field 0
+                                                           bytecode_only))
+                                                       (before driver/makedepend.ml(355):11393-11613
+                                                         (seq
+                                                           (after driver/makedepend.ml(356):11405-11488
+                                                             (apply
+                                                               print_dependencies
+                                                               (after driver/makedepend.ml(356):11424-11456
+                                                                 (apply
+                                                                   (field 36
+                                                                    (global Stdlib!))
+                                                                   native_targets
+                                                                   extra_targets))
+                                                               (after driver/makedepend.ml(357):11465-11488
+                                                                 (apply
+                                                                   (field 36
+                                                                    (global Stdlib!))
+                                                                   native_deps
+                                                                   pp_deps))))
+                                                           (before driver/makedepend.ml(358):11496-11605
+                                                             (if
+                                                               (field 0
+                                                                 shared)
+                                                               (before driver/makedepend.ml(359):11520-11605
+                                                                 (after driver/makedepend.ml(359):11520-11605
+                                                                   (apply
+                                                                    print_dependencies
+                                                                    (after driver/makedepend.ml(359):11539-11571
+                                                                    (apply
+                                                                    (field 36
+                                                                    (global Stdlib!))
+                                                                    shared_targets
+                                                                    extra_targets))
+                                                                    (after driver/makedepend.ml(360):11582-11605
+                                                                    (apply
+                                                                    (field 36
+                                                                    (global Stdlib!))
+                                                                    native_deps
+                                                                    pp_deps)))))
+                                                               0a))))
+                                                       0a))))))))))))))))))))))
+         print_mli_dependencies =
+           (function source_file extracted_deps pp_deps
+             (funct-body driver/makedepend.ml(363)<ghost>:11642-11901
+               (before driver/makedepend.ml(364):11681-11901
+                 (let
+                   (basename =
+                      (after driver/makedepend.ml(364):11696-11731
+                        (apply (field 11 (global Stdlib__filename!))
+                          source_file)))
+                   (before driver/makedepend.ml(365):11737-11901
+                     (let
+                       (*match* =
+                          (after driver/makedepend.ml(366):11769-11836
+                            (apply
+                              (field 15
+                                (field 38
+                                  (field 3 (field 11 (global Misc!)))))
+                              (after driver/makedepend.ml(366):11785-11806
+                                (apply find_dependency 1a))
+                              extracted_deps [0: 0a 0a]))
+                        byt_deps =a (field 0 *match*))
+                       (before driver/makedepend.ml(368):11842-11901
+                         (after driver/makedepend.ml(368):11842-11901
+                           (apply print_dependencies
+                             (makeblock 0
+                               (after driver/makedepend.ml(368):11862-11879
+                                 (apply (field 27 (global Stdlib!)) basename
+                                   ".cmi"))
+                               0a)
+                             (after driver/makedepend.ml(368):11881-11901
+                               (apply (field 36 (global Stdlib!)) byt_deps
+                                 pp_deps)))))))))))
+         print_file_dependencies =
+           (function param
+             (funct-body driver/makedepend.ml(370)<ghost>:11931-12236
+               (let
+                 (pp_deps =a (field 3 param)
+                  extracted_deps =a (field 2 param)
+                  kind =a (field 1 param)
+                  source_file =a (field 0 param))
+                 (before driver/makedepend.ml(371):11980-12236
+                   (if (field 0 raw_dependencies)
+                     (before driver/makedepend.ml(371):12006-12071
+                       (after driver/makedepend.ml(371):12006-12071
+                         (apply print_raw_dependencies source_file
+                           extracted_deps)))
+                     (before driver/makedepend.ml(374):12081-12236
+                       (if kind
+                         (before driver/makedepend.ml(376):12179-12236
+                           (after driver/makedepend.ml(376):12179-12236
+                             (apply print_mli_dependencies source_file
+                               extracted_deps pp_deps)))
+                         (before driver/makedepend.ml(375):12109-12165
+                           (after driver/makedepend.ml(375):12109-12165
+                             (apply print_ml_dependencies source_file
+                               extracted_deps pp_deps))))))))))
+         ml_file_dependencies =
+           (function source_file
+             (funct-body driver/makedepend.ml(379)<ghost>:12264-12704
+               (before driver/makedepend.ml(380):12280-12704
+                 (let
+                   (parse_use_file_as_impl =
+                      (function lexbuf
+                        (funct-body driver/makedepend.ml(380)<ghost>:12307-12458
+                          (before driver/makedepend.ml(381):12320-12458
+                            (let
+                              (f =
+                                 (function x
+                                   (funct-body driver/makedepend.ml(381)<ghost>:12326-12397
+                                     (before driver/makedepend.ml(382):12336-12397
+                                       (switch* x
+                                        case tag 0:
+                                         (let (s =a (field 0 x))
+                                           (before driver/makedepend.ml(383):12371-12372
+                                             s))
+                                        case tag 1:
+                                         (before driver/makedepend.ml(384):12395-12397
+                                           0a))))))
+                              (before driver/makedepend.ml(386):12409-12458
+                                (after driver/makedepend.ml(386):12409-12458
+                                  (apply (field 13 (global Stdlib__list!))
+                                    (after driver/makedepend.ml(386):12422-12458
+                                      (apply
+                                        (field 16 (global Stdlib__list!)) f
+                                        (after driver/makedepend.ml(386):12434-12457
+                                          (apply (field 3 (global Parse!))
+                                            lexbuf))))))))))))
+                   (before driver/makedepend.ml(388):12466-12704
+                     (let
+                       (*match* =
+                          (after driver/makedepend.ml(389):12497-12627
+                            (apply read_parse_and_extract
+                              parse_use_file_as_impl
+                              (field 8 (global Depend!)) 0a 0a source_file))
+                        extracted_deps =a (field 0 *match*))
+                       (before driver/makedepend.ml(392):12635-12704
+                         (setfield_ptr 0 files
+                           (makeblock 0
+                             (makeblock 0 source_file 0a extracted_deps
+                               (field 0 (field 4 (global Depend!))))
+                             (field 0 files))))))))))
+         mli_file_dependencies =
+           (function source_file
+             (funct-body driver/makedepend.ml(394)<ghost>:12732-12975
+               (before driver/makedepend.ml(395):12748-12975
+                 (let
+                   (*match* =
+                      (after driver/makedepend.ml(396):12779-12897
+                        (apply read_parse_and_extract
+                          (field 1 (global Parse!))
+                          (field 7 (global Depend!)) 0a 1a source_file))
+                    extracted_deps =a (field 0 *match*))
+                   (before driver/makedepend.ml(399):12905-12975
+                     (setfield_ptr 0 files
+                       (makeblock 0
+                         (makeblock 0 source_file 1a extracted_deps
+                           (field 0 (field 4 (global Depend!))))
+                         (field 0 files))))))))
+         process_file_as =
+           (function process_fun def source_file
+             (funct-body driver/makedepend.ml(401)<ghost>:12997-13387
+               (before driver/makedepend.ml(402):13029-13387
+                 (seq
+                   (after driver/makedepend.ml(402):13029-13077
+                     (apply (field 15 (global Compenv!)) ppf
+                       (makeblock 0 source_file)))
+                   (before driver/makedepend.ml(403):13081-13387
+                     (seq (setfield_ptr 0 load_path 0a)
+                       (before driver/makedepend.ml(404):13100-13387
+                         (seq
+                           (after driver/makedepend.ml(404):13100-13239
+                             (apply (field 14 (global Stdlib__list!))
+                               add_to_load_path
+                               (after driver/makedepend.ml(404):13127-13239
+                                 (apply (field 36 (global Stdlib!))
+                                   (field 0 (field 11 (global Compenv!)))
+                                   (after driver/makedepend.ml(406):13172-13230
+                                     (apply (field 36 (global Stdlib!))
+                                       (field 0 (field 12 (global Clflags!)))
+                                       (field 0 (field 10 (global Compenv!)))))))))
+                           (before driver/makedepend.ml(409):13243-13387
+                             (seq
+                               (setfield_ptr 0 (field 11 (global Location!))
+                                 source_file)
+                               (before driver/makedepend.ml(410):13281-13387
+                                 (try
+                                   (if
+                                     (after driver/makedepend.ml(411):13292-13319
+                                       (caml_sys_file_exists source_file))
+                                     (before driver/makedepend.ml(411):13325-13348
+                                       (after driver/makedepend.ml(411):13325-13348
+                                         (apply process_fun source_file)))
+                                     (before driver/makedepend.ml(411):13354-13357
+                                       def))
+                                  with x
+                                   (before driver/makedepend.ml(412):13370-13387
+                                     (seq
+                                       (after driver/makedepend.ml(412):13370-13382
+                                         (apply report_err x))
+                                       (before driver/makedepend.ml(412):13384-13387
+                                         def)))))))))))))))
+         process_file =
+           (function source_file ml_file mli_file def
+             (funct-body driver/makedepend.ml(414)<ghost>:13406-13691
+               (before driver/makedepend.ml(415):13446-13691
+                 (if
+                   (after driver/makedepend.ml(415):13449-13509
+                     (apply (field 28 (global Stdlib__list!))
+                       (after driver/makedepend.ml(415):13461-13496
+                         (apply (field 6 (global Stdlib__filename!))
+                           source_file))
+                       (field 0 ml_synonyms)))
+                   (before driver/makedepend.ml(416):13519-13558
+                     (after driver/makedepend.ml(416):13519-13558
+                       (apply process_file_as ml_file def source_file)))
+                   (before driver/makedepend.ml(417):13566-13691
+                     (if
+                       (after driver/makedepend.ml(417):13569-13630
+                         (apply (field 28 (global Stdlib__list!))
+                           (after driver/makedepend.ml(417):13581-13616
+                             (apply (field 6 (global Stdlib__filename!))
+                               source_file))
+                           (field 0 mli_synonyms)))
+                       (before driver/makedepend.ml(418):13640-13680
+                         (after driver/makedepend.ml(418):13640-13680
+                           (apply process_file_as mli_file def source_file)))
+                       (before driver/makedepend.ml(419):13688-13691 def)))))))
+         file_dependencies =
+           (function source_file
+             (funct-body driver/makedepend.ml(421)<ghost>:13715-13833
+               (before driver/makedepend.ml(422):13731-13833
+                 (after driver/makedepend.ml(422):13731-13833
+                   (apply process_file source_file ml_file_dependencies
+                     mli_file_dependencies 0a)))))
+         file_dependencies_as =
+           (function kind
+             (funct-body driver/makedepend.ml(426)<ghost>:13860-13986
+               (before driver/makedepend.ml(427):13869-13986
+                 (if kind
+                   (before driver/makedepend.ml(429):13946-13986
+                     (after driver/makedepend.ml(429):13946-13986
+                       (apply process_file_as mli_file_dependencies 0a)))
+                   (before driver/makedepend.ml(428):13895-13934
+                     (after driver/makedepend.ml(428):13895-13934
+                       (apply process_file_as ml_file_dependencies 0a)))))))
+         sort_files_by_dependencies =
+           (function files
+             (funct-body driver/makedepend.ml(431)<ghost>:14019-16792
+               (before driver/makedepend.ml(432):14029-16792
+                 (let
+                   (h =
+                      (after driver/makedepend.ml(432):14037-14054
+                        (apply (field 0 (global Stdlib__hashtbl!)) 0a 31)))
+                   (before driver/makedepend.ml(433):14060-16792
+                     (let (worklist = (makemutable 0 0a))
+                       (before driver/makedepend.ml(436):14132-16792
+                         (let
+                           (files =
+                              (after driver/makedepend.ml(436):14144-14500
+                                (apply (field 16 (global Stdlib__list!))
+                                  (function param
+                                    (funct-body driver/makedepend.ml(436):14153-14494
+                                      (let
+                                        (pp_deps =a (field 3 param)
+                                         deps =a (field 2 param)
+                                         file_kind =a (field 1 param)
+                                         file =a (field 0 param))
+                                        (before driver/makedepend.ml(437):14198-14490
+                                          (let
+                                            (modname =
+                                               (after driver/makedepend.ml(438):14218-14292
+                                                 (apply
+                                                   (field 30
+                                                     (field 3
+                                                       (field 11
+                                                         (global Misc!))))
+                                                   (after driver/makedepend.ml(438):14242-14292
+                                                     (apply
+                                                       (field 11
+                                                         (global Stdlib__filename!))
+                                                       (after driver/makedepend.ml(438):14267-14291
+                                                         (apply
+                                                           (field 12
+                                                             (global Stdlib__filename!))
+                                                           file)))))))
+                                            (before driver/makedepend.ml(440):14304-14490
+                                              (let
+                                                (key =
+                                                   (makeblock 0 modname
+                                                     file_kind))
+                                                (before driver/makedepend.ml(441):14342-14490
+                                                  (let
+                                                    (new_deps =
+                                                       (makemutable 0 0a))
+                                                    (before driver/makedepend.ml(442):14371-14490
+                                                      (seq
+                                                        (after driver/makedepend.ml(442):14371-14405
+                                                          (apply
+                                                            (field 4
+                                                              (global Stdlib__hashtbl!))
+                                                            h key
+                                                            (makeblock 0 file
+                                                              new_deps)))
+                                                        (before driver/makedepend.ml(443):14411-14490
+                                                          (seq
+                                                            (setfield_ptr 0
+                                                              worklist
+                                                              (makeblock 0
+                                                                key
+                                                                (field 0
+                                                                  worklist)))
+                                                            (before driver/makedepend.ml(444):14445-14490
+                                                              (makeblock 0
+                                                                modname
+                                                                file_kind
+                                                                deps new_deps
+                                                                pp_deps)))))))))))))))
+                                  files)))
+                           (before driver/makedepend.ml(448):14555-16792
+                             (seq
+                               (after driver/makedepend.ml(448):14555-15306
+                                 (apply (field 14 (global Stdlib__list!))
+                                   (function param
+                                     (funct-body driver/makedepend.ml(448):14565-15300
+                                       (let
+                                         (new_deps =a (field 3 param)
+                                          deps =a (field 2 param)
+                                          file_kind =a (field 1 param)
+                                          modname =a (field 0 param))
+                                         (before driver/makedepend.ml(449):14624-15296
+                                           (let
+                                             (add_dep =
+                                                (function modname kind
+                                                  (funct-body driver/makedepend.ml(449)<ghost>:14636-14698
+                                                    (before driver/makedepend.ml(450):14657-14697
+                                                      (setfield_ptr 0
+                                                        new_deps
+                                                        (makeblock 0
+                                                          (makeblock 0
+                                                            modname kind)
+                                                          (field 0 new_deps)))))))
+                                             (before driver/makedepend.ml(452):14710-15296
+                                               (seq
+                                                 (after driver/makedepend.ml(452):14710-15174
+                                                   (apply
+                                                     (field 13
+                                                       (field 38
+                                                         (field 3
+                                                           (field 11
+                                                             (global Misc!)))))
+                                                     (function modname
+                                                       (funct-body driver/makedepend.ml(452):14726-15169
+                                                         (before driver/makedepend.ml(453):14748-15163
+                                                           (if file_kind
+                                                             (before driver/makedepend.ml(458):15037-15163
+                                                               (if
+                                                                 (after driver/makedepend.ml(458):15040-15068
+                                                                   (apply
+                                                                    (field 8
+                                                                    (global Stdlib__hashtbl!))
+                                                                    h
+                                                                    (makeblock 0
+                                                                    modname
+                                                                    1a)))
+                                                                 (before driver/makedepend.ml(458):15074-15093
+                                                                   (after driver/makedepend.ml(458):15074-15093
+                                                                    (apply
+                                                                    add_dep
+                                                                    modname
+                                                                    1a)))
+                                                                 (before driver/makedepend.ml(459):15109-15163
+                                                                   (if
+                                                                    (after driver/makedepend.ml(459):15112-15139
+                                                                    (apply
+                                                                    (field 8
+                                                                    (global Stdlib__hashtbl!))
+                                                                    h
+                                                                    (makeblock 0
+                                                                    modname
+                                                                    0a)))
+                                                                    (before driver/makedepend.ml(459):15145-15163
+                                                                    (after driver/makedepend.ml(459):15145-15163
+                                                                    (apply
+                                                                    add_dep
+                                                                    modname
+                                                                    0a))) 0a))))
+                                                             (before driver/makedepend.ml(455):14833-14957
+                                                               (seq
+                                                                 (if
+                                                                   (after driver/makedepend.ml(455):14836-14864
+                                                                    (apply
+                                                                    (field 8
+                                                                    (global Stdlib__hashtbl!))
+                                                                    h
+                                                                    (makeblock 0
+                                                                    modname
+                                                                    1a)))
+                                                                   (before driver/makedepend.ml(455):14870-14889
+                                                                    (after driver/makedepend.ml(455):14870-14889
+                                                                    (apply
+                                                                    add_dep
+                                                                    modname
+                                                                    1a)))
+                                                                   0a)
+                                                                 (before driver/makedepend.ml(456):14903-14957
+                                                                   (if
+                                                                    (after driver/makedepend.ml(456):14906-14933
+                                                                    (apply
+                                                                    (field 8
+                                                                    (global Stdlib__hashtbl!))
+                                                                    h
+                                                                    (makeblock 0
+                                                                    modname
+                                                                    0a)))
+                                                                    (before driver/makedepend.ml(456):14939-14957
+                                                                    (after driver/makedepend.ml(456):14939-14957
+                                                                    (apply
+                                                                    add_dep
+                                                                    modname
+                                                                    0a))) 0a))))))))
+                                                     deps))
+                                                 (before driver/makedepend.ml(461):15180-15296
+                                                   (if (== file_kind 0a)
+                                                     (before driver/makedepend.ml(462):15240-15296
+                                                       (if
+                                                         (after driver/makedepend.ml(462):15243-15271
+                                                           (apply
+                                                             (field 8
+                                                               (global Stdlib__hashtbl!))
+                                                             h
+                                                             (makeblock 0
+                                                               modname 1a)))
+                                                         (before driver/makedepend.ml(462):15277-15296
+                                                           (after driver/makedepend.ml(462):15277-15296
+                                                             (apply add_dep
+                                                               modname 1a)))
+                                                         0a))
+                                                     0a)))))))))
+                                   files))
+                               (before driver/makedepend.ml(468):15488-16792
+                                 (let (printed = (makemutable 0 1a))
+                                   (before driver/makedepend.ml(469):15516-16792
+                                     (seq
+                                       (while
+                                         (&& (field 0 printed)
+                                           (!= (field 0 worklist) 0a))
+                                         (before driver/makedepend.ml(470):15557-16019
+                                           (let (files = (field 0 worklist))
+                                             (before driver/makedepend.ml(471):15586-16019
+                                               (seq
+                                                 (setfield_ptr 0 worklist 0a)
+                                                 (before driver/makedepend.ml(472):15606-16019
+                                                   (seq
+                                                     (setfield_imm 0 printed
+                                                       0a)
+                                                     (before driver/makedepend.ml(473):15628-16019
+                                                       (after driver/makedepend.ml(473):15628-16019
+                                                         (apply
+                                                           (field 14
+                                                             (global Stdlib__list!))
+                                                           (function key
+                                                             (funct-body driver/makedepend.ml(473):15638-16013
+                                                               (before driver/makedepend.ml(474):15656-16007
+                                                                 (let
+                                                                   (*match* =
+                                                                    (after driver/makedepend.ml(474):15675-15693
+                                                                    (apply
+                                                                    (field 5
+                                                                    (global Stdlib__hashtbl!))
+                                                                    h key))
+                                                                    deps =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    file =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                   (before driver/makedepend.ml(475):15703-16007
+                                                                    (let
+                                                                    (set =
+                                                                    (field 0
+                                                                    deps))
+                                                                    (before driver/makedepend.ml(476):15728-16007
+                                                                    (seq
+                                                                    (setfield_ptr 0
+                                                                    deps 0a)
+                                                                    (before driver/makedepend.ml(477):15746-16007
+                                                                    (seq
+                                                                    (after driver/makedepend.ml(477):15746-15834
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    key
+                                                                    (funct-body driver/makedepend.ml(477):15756-15830
+                                                                    (before driver/makedepend.ml(478):15776-15822
+                                                                    (if
+                                                                    (after driver/makedepend.ml(478):15779-15796
+                                                                    (apply
+                                                                    (field 8
+                                                                    (global Stdlib__hashtbl!))
+                                                                    h key))
+                                                                    (before driver/makedepend.ml(478):15802-15822
+                                                                    (setfield_ptr 0
+                                                                    deps
+                                                                    (makeblock 0
+                                                                    key
+                                                                    (field 0
+                                                                    deps))))
+                                                                    0a))))
+                                                                    set))
+                                                                    (before driver/makedepend.ml(480):15842-16007
+                                                                    (if
+                                                                    (==
+                                                                    (field 0
+                                                                    deps) 0a)
+                                                                    (before driver/makedepend.ml(480):15861-15965
+                                                                    (seq
+                                                                    (setfield_imm 0
+                                                                    printed
+                                                                    1a)
+                                                                    (before driver/makedepend.ml(482):15900-15955
+                                                                    (seq
+                                                                    (after driver/makedepend.ml(482):15900-15924
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Stdlib__printf!))
+                                                                    [0:
+                                                                    [2:
+                                                                    0a
+                                                                    [12:
+                                                                    ' ' 0a]]
+                                                                    "%s "]
+                                                                    file))
+                                                                    (before driver/makedepend.ml(483):15934-15954
+                                                                    (after driver/makedepend.ml(483):15934-15954
+                                                                    (apply
+                                                                    (field 9
+                                                                    (global Stdlib__hashtbl!))
+                                                                    h key)))))))
+                                                                    (before driver/makedepend.ml(485):15979-16007
+                                                                    (setfield_ptr 0
+                                                                    worklist
+                                                                    (makeblock 0
+                                                                    key
+                                                                    (field 0
+                                                                    worklist))))))))))))))))
+                                                           files))))))))))
+                                       (before driver/makedepend.ml(489):16031-16792
+                                         (seq
+                                           (if (!= (field 0 worklist) 0a)
+                                             (before driver/makedepend.ml(489):16055-16762
+                                               (seq
+                                                 (after driver/makedepend.ml(490):16065-16181
+                                                   (apply
+                                                     (field 26
+                                                       (global Location!))
+                                                     (field 105
+                                                       (global Stdlib__format!))
+                                                     (after driver/makedepend.ml(490):16065-16131
+                                                       (apply
+                                                         (field 42
+                                                           (global Location!))
+                                                         0a 0a
+                                                         "cycle in dependencies. End of list is not sorted."))))
+                                                 (before driver/makedepend.ml(492):16187-16756
+                                                   (let
+                                                     (sorted_deps =
+                                                        (let
+                                                          (li =
+                                                             (makemutable 0
+                                                               0a))
+                                                          (before driver/makedepend.ml(494):16236-16373
+                                                            (seq
+                                                              (after driver/makedepend.ml(494):16236-16294
+                                                                (apply
+                                                                  (field 11
+                                                                    (global Stdlib__hashtbl!))
+                                                                  (function
+                                                                    param
+                                                                    file_deps
+                                                                    (funct-body driver/makedepend.ml(494):16249-16292
+                                                                    (before driver/makedepend.ml(494):16269-16291
+                                                                    (setfield_ptr 0
+                                                                    li
+                                                                    (makeblock 0
+                                                                    file_deps
+                                                                    (field 0
+                                                                    li))))))
+                                                                  h))
+                                                              (before driver/makedepend.ml(495):16302-16373
+                                                                (after driver/makedepend.ml(495):16302-16373
+                                                                  (apply
+                                                                    (field 48
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    param
+                                                                    param
+                                                                    : int
+                                                                    (funct-body driver/makedepend.ml(495):16312-16369
+                                                                    (let
+                                                                    (file2 =a
+                                                                    (field 0
+                                                                    param)
+                                                                    file1 =a
+                                                                    (field 0
+                                                                    param))
+                                                                    (before driver/makedepend.ml(495):16342-16368
+                                                                    (after driver/makedepend.ml(495):16342-16368
+                                                                    (apply
+                                                                    (field 32
+                                                                    (field 3
+                                                                    (field 11
+                                                                    (global Misc!))))
+                                                                    file1
+                                                                    file2))))))
+                                                                    (field 0
+                                                                    li))))))))
+                                                     (before driver/makedepend.ml(497):16385-16756
+                                                       (seq
+                                                         (after driver/makedepend.ml(497):16385-16729
+                                                           (apply
+                                                             (field 14
+                                                               (global Stdlib__list!))
+                                                             (function param
+                                                               (funct-body driver/makedepend.ml(497):16395-16717
+                                                                 (let
+                                                                   (deps =a
+                                                                    (field 1
+                                                                    param)
+                                                                    file =a
+                                                                    (field 0
+                                                                    param))
+                                                                   (before driver/makedepend.ml(498):16422-16716
+                                                                    (seq
+                                                                    (after driver/makedepend.ml(498):16422-16473
+                                                                    (apply
+                                                                    (field 122
+                                                                    (global Stdlib__format!))
+                                                                    (field 105
+                                                                    (global Stdlib__format!))
+                                                                    [0:
+                                                                    [12:
+                                                                    '\t'
+                                                                    [18:
+                                                                    [1:
+                                                                    [0:
+                                                                    0a ""]]
+                                                                    [2:
+                                                                    0a
+                                                                    [11:
+                                                                    ": " 0a]]]]
+                                                                    "\t@[%s: "]
+                                                                    file))
+                                                                    (before driver/makedepend.ml(499):16481-16716
+                                                                    (seq
+                                                                    (after driver/makedepend.ml(499):16481-16634
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    param
+                                                                    (funct-body driver/makedepend.ml(499):16491-16628
+                                                                    (let
+                                                                    (kind =a
+                                                                    (field 1
+                                                                    param)
+                                                                    modname =a
+                                                                    (field 0
+                                                                    param))
+                                                                    (before driver/makedepend.ml(500):16523-16619
+                                                                    (after driver/makedepend.ml(500):16523-16619
+                                                                    (apply
+                                                                    (field 122
+                                                                    (global Stdlib__format!))
+                                                                    (field 105
+                                                                    (global Stdlib__format!))
+                                                                    [0:
+                                                                    [2:
+                                                                    0a
+                                                                    [12:
+                                                                    '.'
+                                                                    [2:
+                                                                    0a
+                                                                    [12:
+                                                                    ' ' 0a]]]]
+                                                                    "%s.%s "]
+                                                                    modname
+                                                                    (if
+                                                                    (== kind
+                                                                    0a)
+                                                                    (before driver/makedepend.ml(501):16603-16607
+                                                                    "ml")
+                                                                    (before driver/makedepend.ml(501):16613-16618
+                                                                    "mli"))))))))
+                                                                    (field 0
+                                                                    deps)))
+                                                                    (before driver/makedepend.ml(503):16642-16716
+                                                                    (seq
+                                                                    (after driver/makedepend.ml(503):16642-16684
+                                                                    (apply
+                                                                    (field 122
+                                                                    (global Stdlib__format!))
+                                                                    (field 105
+                                                                    (global Stdlib__format!))
+                                                                    [0:
+                                                                    [17:
+                                                                    0a
+                                                                    [17:
+                                                                    4a 0a]]
+                                                                    "@]@."]))
+                                                                    (before driver/makedepend.ml(504):16692-16716
+                                                                    (after driver/makedepend.ml(504):16692-16716
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Stdlib__printf!))
+                                                                    [0:
+                                                                    [2:
+                                                                    0a
+                                                                    [12:
+                                                                    ' ' 0a]]
+                                                                    "%s "]
+                                                                    file))))))))))))
+                                                             sorted_deps))
+                                                         (before driver/makedepend.ml(505):16735-16756
+                                                           (after driver/makedepend.ml(505):16735-16756
+                                                             (apply
+                                                               (field 0
+                                                                 Error_occurred)
+                                                               0a)))))))))
+                                             0a)
+                                           (before driver/makedepend.ml(507):16766-16792
+                                             (seq
+                                               (after driver/makedepend.ml(507):16766-16786
+                                                 (apply
+                                                   (field 1
+                                                     (global Stdlib__printf!))
+                                                   [0:
+                                                    [12: '\n' [10: 0a]]
+                                                    "\n%!"]))
+                                               (before driver/makedepend.ml(508):16790-16792
+                                                 0a))))))))))))))))))))
+        (letrec
+          (dump_map
+             (function s0 ppf m
+               (funct-body driver/makedepend.ml(512)<ghost>:16822-17188
+                 (before driver/makedepend.ml(513):16835-17188
+                   (after driver/makedepend.ml(514):16856-17188
+                     (apply
+                       (field 11
+                         (field 39 (field 3 (field 11 (global Misc!)))))
+                       (function key param
+                         (funct-body driver/makedepend.ml(515):16876-17182
+                           (let (m' =a (field 1 param) s1 =a (field 0 param))
+                             (before driver/makedepend.ml(516):16908-17181
+                               (let
+                                 (s =
+                                    (after driver/makedepend.ml(516):16916-16937
+                                      (apply
+                                        (field 9
+                                          (field 38
+                                            (field 3
+                                              (field 11 (global Misc!)))))
+                                        s1 s0)))
+                                 (before driver/makedepend.ml(517):16947-17181
+                                   (if
+                                     (after driver/makedepend.ml(517):16950-16971
+                                       (apply
+                                         (field 1
+                                           (field 38
+                                             (field 3
+                                               (field 11 (global Misc!)))))
+                                         s))
+                                     (before driver/makedepend.ml(518):16985-17098
+                                       (after driver/makedepend.ml(518):16985-17098
+                                         (apply
+                                           (field 122
+                                             (global Stdlib__format!))
+                                           ppf
+                                           [0:
+                                            [17:
+                                             [0: "@ " 1 0]
+                                             [18:
+                                              [1:
+                                               [0: [11: "<hv2>" 0a] "<hv2>"]]
+                                              [11:
+                                               "module "
+                                               [2:
+                                                0a
+                                                [11:
+                                                 " : sig"
+                                                 [15:
+                                                  [17:
+                                                   [0: "@;<1 -2>" 1 -2]
+                                                   [11: "end" [17: 0a 0a]]]]]]]]]
+                                            "@ @[<hv2>module %s : sig%a@;<1 -2>end@]"]
+                                           key
+                                           (after driver/makedepend.ml(519):17060-17095
+                                             (apply dump_map
+                                               (after driver/makedepend.ml(519):17070-17094
+                                                 (apply
+                                                   (field 6
+                                                     (field 38
+                                                       (field 3
+                                                         (field 11
+                                                           (global Misc!)))))
+                                                   s1 s0))))
+                                           m')))
+                                     (before driver/makedepend.ml(521):17118-17181
+                                       (after driver/makedepend.ml(521):17118-17181
+                                         (apply
+                                           (field 122
+                                             (global Stdlib__format!))
+                                           ppf
+                                           [0:
+                                            [17:
+                                             [0: "@ " 1 0]
+                                             [11:
+                                              "module "
+                                              [2: 0a [11: " = " [2: 0a 0a]]]]]
+                                            "@ module %s = %s"]
+                                           key
+                                           (after driver/makedepend.ml(521):17160-17181
+                                             (apply
+                                               (field 26
+                                                 (field 38
+                                                   (field 3
+                                                     (field 11
+                                                       (global Misc!)))))
+                                               s))))))))))))
+                       m))))))
+          (let
+            (process_ml_map =
+               (after driver/makedepend.ml(525):17213-17349
+                 (apply read_parse_and_extract (field 0 (global Parse!))
+                   (field 9 (global Depend!))
+                   (field 0 (field 39 (field 3 (field 11 (global Misc!)))))
+                   0a))
+             process_mli_map =
+               (after driver/makedepend.ml(529):17375-17501
+                 (apply read_parse_and_extract (field 1 (global Parse!))
+                   (field 10 (global Depend!))
+                   (field 0 (field 39 (field 3 (field 11 (global Misc!)))))
+                   1a))
+             parse_map =
+               (function fname
+                 (funct-body driver/makedepend.ml(532)<ghost>:17517-18416
+                   (before driver/makedepend.ml(533):17527-18416
+                     (seq
+                       (setfield_ptr 0 map_files
+                         (makeblock 0 fname (field 0 map_files)))
+                       (before driver/makedepend.ml(534):17564-18416
+                         (let
+                           (old_transp =
+                              (field 0 (field 61 (global Clflags!))))
+                           (before driver/makedepend.ml(535):17615-18416
+                             (seq
+                               (setfield_imm 0 (field 61 (global Clflags!))
+                                 1a)
+                               (before driver/makedepend.ml(536):17654-18416
+                                 (let
+                                   (*match* =
+                                      (after driver/makedepend.ml(537):17674-17796
+                                        (apply process_file fname
+                                          process_ml_map process_mli_map
+                                          (makeblock 0
+                                            (field 0
+                                              (field 38
+                                                (field 3
+                                                  (field 11 (global Misc!)))))
+                                            (field 0
+                                              (field 39
+                                                (field 3
+                                                  (field 11 (global Misc!))))))))
+                                    m =a (field 1 *match*)
+                                    deps =a (field 0 *match*))
+                                   (before driver/makedepend.ml(541):17804-18416
+                                     (seq
+                                       (setfield_imm 0
+                                         (field 61 (global Clflags!))
+                                         old_transp)
+                                       (before driver/makedepend.ml(542):17849-18416
+                                         (let
+                                           (modname =
+                                              (after driver/makedepend.ml(543):17867-17948
+                                                (apply
+                                                  (field 30
+                                                    (field 3
+                                                      (field 11
+                                                        (global Misc!))))
+                                                  (after driver/makedepend.ml(544):17897-17948
+                                                    (apply
+                                                      (field 12
+                                                        (global Stdlib__filename!))
+                                                      (after driver/makedepend.ml(544):17916-17947
+                                                        (apply
+                                                          (field 11
+                                                            (global Stdlib__filename!))
+                                                          fname)))))))
+                                           (before driver/makedepend.ml(545):17954-18416
+                                             (seq
+                                               (if
+                                                 (after driver/makedepend.ml(545):17957-17978
+                                                   (apply
+                                                     (field 1
+                                                       (field 39
+                                                         (field 3
+                                                           (field 11
+                                                             (global Misc!)))))
+                                                     m))
+                                                 (before driver/makedepend.ml(546):17988-18053
+                                                   (after driver/makedepend.ml(546):17988-18053
+                                                     (apply report_err
+                                                       (makeblock 0
+                                                         (field 6
+                                                           (global Stdlib!))
+                                                         (after driver/makedepend.ml(546):18008-18052
+                                                           (apply
+                                                             (field 27
+                                                               (global Stdlib!))
+                                                             fname
+                                                             " : empty map file or parse error"))))))
+                                                 0a)
+                                               (before driver/makedepend.ml(547):18057-18416
+                                                 (let
+                                                   (mm =
+                                                      (after driver/makedepend.ml(547):18066-18084
+                                                        (apply
+                                                          (field 1
+                                                            (global Depend!))
+                                                          m)))
+                                                   (before driver/makedepend.ml(548):18090-18416
+                                                     (seq
+                                                       (if (field 0 debug)
+                                                         (before driver/makedepend.ml(548):18105-18293
+                                                           (after driver/makedepend.ml(548):18105-18293
+                                                             (apply
+                                                               (field 123
+                                                                 (global Stdlib__format!))
+                                                               [0:
+                                                                [18:
+                                                                 [1:
+                                                                  [0:
+                                                                   [11:
+                                                                    "<v>" 0a]
+                                                                   "<v>"]]
+                                                                 [2:
+                                                                  0a
+                                                                  [12:
+                                                                   ':'
+                                                                   [16:
+                                                                    [15:
+                                                                    [17:
+                                                                    0a
+                                                                    [17:
+                                                                    4a 0a]]]]]]]
+                                                                "@[<v>%s:%t%a@]@."]
+                                                               fname
+                                                               (function ppf
+                                                                 (funct-body driver/makedepend.ml(550):18160-18220
+                                                                   (before driver/makedepend.ml(550):18172-18219
+                                                                    (after driver/makedepend.ml(550):18172-18219
+                                                                    (apply
+                                                                    (field 13
+                                                                    (field 38
+                                                                    (field 3
+                                                                    (field 11
+                                                                    (global Misc!)))))
+                                                                    (after driver/makedepend.ml(550):18188-18214
+                                                                    (apply
+                                                                    (field 122
+                                                                    (global Stdlib__format!))
+                                                                    ppf
+                                                                    [0:
+                                                                    [12:
+                                                                    ' '
+                                                                    [2:
+                                                                    0a 0a]]
+                                                                    " %s"]))
+                                                                    deps)))))
+                                                               (after driver/makedepend.ml(551):18227-18242
+                                                                 (apply
+                                                                   dump_map
+                                                                   deps))
+                                                               (after driver/makedepend.ml(551):18243-18287
+                                                                 (apply
+                                                                   (field 3
+                                                                    (field 39
+                                                                    (field 3
+                                                                    (field 11
+                                                                    (global Misc!)))))
+                                                                   modname mm
+                                                                   (field 0
+                                                                    (field 39
+                                                                    (field 3
+                                                                    (field 11
+                                                                    (global Misc!))))))))))
+                                                         0a)
+                                                       (before driver/makedepend.ml(553):18297-18416
+                                                         (let
+                                                           (mm =
+                                                              (after driver/makedepend.ml(553):18314-18358
+                                                                (apply
+                                                                  (field 2
+                                                                    (global Depend!))
+                                                                  (after driver/makedepend.ml(553):18325-18355
+                                                                    (apply
+                                                                    (field 4
+                                                                    (field 38
+                                                                    (field 3
+                                                                    (field 11
+                                                                    (global Misc!)))))
+                                                                    modname))
+                                                                  mm)))
+                                                           (before driver/makedepend.ml(554):18365-18416
+                                                             (setfield_ptr 0
+                                                               module_map
+                                                               (after driver/makedepend.ml(554):18379-18416
+                                                                 (apply
+                                                                   (field 3
+                                                                    (field 39
+                                                                    (field 3
+                                                                    (field 11
+                                                                    (global Misc!)))))
+                                                                   modname mm
+                                                                   (field 0
+                                                                    module_map)))))))))))))))))))))))))))
+             print_version =
+               (function param
+                 (funct-body driver/makedepend.ml(560)<ghost>:18459-18533
+                   (before driver/makedepend.ml(561):18466-18533
+                     (seq
+                       (after driver/makedepend.ml(561):18466-18522
+                         (apply (field 123 (global Stdlib__format!))
+                           [0:
+                            [11: "ocamldep, version " [2: 0a [17: 4a 0a]]]
+                            "ocamldep, version %s@."]
+                           (field 45 (global Stdlib__sys!))))
+                       (before driver/makedepend.ml(562):18526-18532
+                         (after driver/makedepend.ml(562):18526-18532
+                           (apply (field 98 (global Stdlib!)) 0)))))))
+             print_version_num =
+               (function param
+                 (funct-body driver/makedepend.ml(565)<ghost>:18560-18616
+                   (before driver/makedepend.ml(566):18567-18616
+                     (seq
+                       (after driver/makedepend.ml(566):18567-18605
+                         (apply (field 123 (global Stdlib__format!))
+                           [0: [2: 0a [17: 4a 0a]] "%s@."]
+                           (field 45 (global Stdlib__sys!))))
+                       (before driver/makedepend.ml(567):18609-18615
+                         (after driver/makedepend.ml(567):18609-18615
+                           (apply (field 98 (global Stdlib!)) 0)))))))
+             main =
+               (function param
+                 (funct-body driver/makedepend.ml(570)<ghost>:18630-22242
+                   (before driver/makedepend.ml(571):18637-22242
+                     (seq (setfield_imm 0 (field 27 (global Clflags!)) 0a)
+                       (before driver/makedepend.ml(572):18665-22242
+                         (seq
+                           (after driver/makedepend.ml(572):18665-18721
+                             (apply add_to_list (field 10 (global Compenv!))
+                               (field 0 (global Stdlib__filename!))))
+                           (before driver/makedepend.ml(573):18725-22242
+                             (seq
+                               (after driver/makedepend.ml(573):18725-18756
+                                 (apply (field 15 (global Compenv!)) ppf 0a))
+                               (before driver/makedepend.ml(574):18760-22242
+                                 (seq
+                                   (after driver/makedepend.ml(574):18760-18786
+                                     (apply (field 165 (global Clflags!)) 0a))
+                                   (before driver/makedepend.ml(575):18833-22242
+                                     (seq
+                                       (after driver/makedepend.ml(575):18833-21841
+                                         (apply (field 162 (global Clflags!))
+                                           #"File \"driver/makedepend.ml\", line 575, characters 24-31"
+                                           (makeblock 0
+                                             (makeblock 0 "-absname"
+                                               (makeblock 2
+                                                 (field 33 (global Clflags!)))
+                                               " Show absolute filenames in error messages")
+                                             (makeblock 0
+                                               (makeblock 0 "-all"
+                                                 (makeblock 2
+                                                   all_dependencies)
+                                                 " Generate dependencies on all files")
+                                               (makeblock 0
+                                                 (makeblock 0 "-allow-approx"
+                                                   (makeblock 2
+                                                     allow_approximation)
+                                                   " Fallback to a lexer-based approximation on unparsable files")
+                                                 (makeblock 0
+                                                   (makeblock 0 "-as-map"
+                                                     (makeblock 2
+                                                       (field 61
+                                                         (global Clflags!)))
+                                                     " Omit delayed dependencies for module aliases (-no-alias-deps -w -49)")
+                                                   (makeblock 0
+                                                     (makeblock 0
+                                                       "-debug-map"
+                                                       (makeblock 2 debug)
+                                                       " Dump the delayed dependency map for each map file")
+                                                     (makeblock 0
+                                                       (makeblock 0 "-I"
+                                                         (makeblock 4
+                                                           (after driver/makedepend.ml(587):19490-19524
+                                                             (apply
+                                                               add_to_list
+                                                               (field 12
+                                                                 (global Clflags!)))))
+                                                         "<dir>  Add <dir> to the list of include directories")
+                                                       (makeblock 0
+                                                         (makeblock 0 "-impl"
+                                                           (makeblock 4
+                                                             (after driver/makedepend.ml(589):19614-19639
+                                                               (apply
+                                                                 file_dependencies_as
+                                                                 0a)))
+                                                           "<f>  Process <f> as a .ml file")
+                                                         (makeblock 0
+                                                           (makeblock 0
+                                                             "-intf"
+                                                             (makeblock 4
+                                                               (after driver/makedepend.ml(591):19708-19734
+                                                                 (apply
+                                                                   file_dependencies_as
+                                                                   1a)))
+                                                             "<f>  Process <f> as a .mli file")
+                                                           (makeblock 0
+                                                             (makeblock 0
+                                                               "-map"
+                                                               (makeblock 4
+                                                                 parse_map)
+                                                               "<f>  Read <f> and propagate delayed dependencies to following files")
+                                                             (makeblock 0
+                                                               (makeblock 0
+                                                                 "-ml-synonym"
+                                                                 (makeblock 4
+                                                                   (after driver/makedepend.ml(595):19923-19956
+                                                                    (apply
+                                                                    add_to_synonym_list
+                                                                    ml_synonyms)))
+                                                                 "<e>  Consider <e> as a synonym of the .ml extension")
+                                                               (makeblock 0
+                                                                 (makeblock 0
+                                                                   "-mli-synonym"
+                                                                   (makeblock 4
+                                                                    (after driver/makedepend.ml(597):20052-20086
+                                                                    (apply
+                                                                    add_to_synonym_list
+                                                                    mli_synonyms)))
+                                                                   "<e>  Consider <e> as a synonym of the .mli extension")
+                                                                 (makeblock 0
+                                                                   (makeblock 0
+                                                                    "-modules"
+                                                                    (makeblock 2
+                                                                    raw_dependencies)
+                                                                    " Print module dependencies in raw form (not suitable for make)")
+                                                                   (makeblock 0
+                                                                    (makeblock 0
+                                                                    "-native"
+                                                                    (makeblock 2
+                                                                    native_only)
+                                                                    " Generate dependencies for native-code only (no .cmo files)")
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "-bytecode"
+                                                                    (makeblock 2
+                                                                    bytecode_only)
+                                                                    " Generate dependencies for bytecode-code only (no .cmx files)")
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "-one-line"
+                                                                    (makeblock 2
+                                                                    one_line)
+                                                                    " Output one line per file, regardless of the length")
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "-open"
+                                                                    (makeblock 4
+                                                                    (after driver/makedepend.ml(607):20615-20649
+                                                                    (apply
+                                                                    add_to_list
+                                                                    (field 30
+                                                                    (global Clflags!)))))
+                                                                    "<module>  Opens the module <module> before typing")
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "-plugin"
+                                                                    (makeblock 4
+                                                                    (function
+                                                                    _p
+                                                                    (funct-body driver/makedepend.ml(609):20738-20772
+                                                                    (before driver/makedepend.ml(609):20749-20771
+                                                                    (setfield_imm 0
+                                                                    (field 46
+                                                                    (global Clflags!))
+                                                                    1a)))))
+                                                                    "<plugin>  (no longer supported)")
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "-pp"
+                                                                    (makeblock 4
+                                                                    (function
+                                                                    s
+                                                                    (funct-body driver/makedepend.ml(611):20840-20881
+                                                                    (before driver/makedepend.ml(611):20850-20880
+                                                                    (setfield_ptr 0
+                                                                    (field 31
+                                                                    (global Clflags!))
+                                                                    (makeblock 0
+                                                                    s))))))
+                                                                    "<cmd>  Pipe sources through preprocessor <cmd>")
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "-ppx"
+                                                                    (makeblock 4
+                                                                    (after driver/makedepend.ml(613):20966-20989
+                                                                    (apply
+                                                                    add_to_list
+                                                                    (field 9
+                                                                    (global Compenv!)))))
+                                                                    "<cmd>  Pipe abstract syntax trees through preprocessor <cmd>")
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "-shared"
+                                                                    (makeblock 2
+                                                                    shared)
+                                                                    " Generate dependencies for native plugin files (.cmxs targets)")
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "-slash"
+                                                                    (makeblock 2
+                                                                    (field 127
+                                                                    (global Clflags!)))
+                                                                    " (Windows) Use forward slash / instead of backslash \\ in file paths")
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "-sort"
+                                                                    (makeblock 2
+                                                                    sort_files)
+                                                                    " Sort files according to their dependencies")
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "-version"
+                                                                    (makeblock 0
+                                                                    print_version)
+                                                                    " Print version and exit")
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "-vnum"
+                                                                    (makeblock 0
+                                                                    print_version_num)
+                                                                    " Print version number and exit")
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "-args"
+                                                                    (makeblock 13
+                                                                    (field 12
+                                                                    (global Stdlib__arg!)))
+                                                                    "<file> Read additional newline separated command line arguments \n      from <file>")
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "-args0"
+                                                                    (makeblock 13
+                                                                    (field 13
+                                                                    (global Stdlib__arg!)))
+                                                                    "<file> Read additional NUL separated command line arguments from \n      <file>")
+                                                                    0a))))))))))))))))))))))))))))
+                                       (before driver/makedepend.ml(632):21845-22242
+                                         (let
+                                           (usage =
+                                              (after driver/makedepend.ml(633):21861-21978
+                                                (apply
+                                                  (field 3
+                                                    (global Stdlib__printf!))
+                                                  [0:
+                                                   [11:
+                                                    "Usage: "
+                                                    [2:
+                                                     0a
+                                                     [11:
+                                                      " [options] <source files>\nOptions are:"
+                                                      0a]]]
+                                                   "Usage: %s [options] <source files>\nOptions are:"]
+                                                  (after driver/makedepend.ml(634):21946-21978
+                                                    (apply
+                                                      (field 12
+                                                        (global Stdlib__filename!))
+                                                      (after driver/makedepend.ml(634):21965-21977
+                                                        (array.get[addr]
+                                                          (caml_sys_argv 0a)
+                                                          0)))))))
+                                           (before driver/makedepend.ml(636):21986-22242
+                                             (seq
+                                               (after driver/makedepend.ml(636):21986-22033
+                                                 (apply
+                                                   (field 163
+                                                     (global Clflags!))
+                                                   file_dependencies usage))
+                                               (before driver/makedepend.ml(637):22037-22242
+                                                 (seq
+                                                   (after driver/makedepend.ml(637):22037-22068
+                                                     (apply
+                                                       (field 15
+                                                         (global Compenv!))
+                                                       ppf 1a))
+                                                   (before driver/makedepend.ml(638):22072-22242
+                                                     (seq
+                                                       (if
+                                                         (field 0 sort_files)
+                                                         (before driver/makedepend.ml(638):22092-22125
+                                                           (after driver/makedepend.ml(638):22092-22125
+                                                             (apply
+                                                               sort_files_by_dependencies
+                                                               (field 0
+                                                                 files))))
+                                                         (before driver/makedepend.ml(639):22133-22193
+                                                           (after driver/makedepend.ml(639):22133-22193
+                                                             (apply
+                                                               (field 14
+                                                                 (global Stdlib__list!))
+                                                               print_file_dependencies
+                                                               (after driver/makedepend.ml(639):22167-22193
+                                                                 (apply
+                                                                   (field 48
+                                                                    (global Stdlib__list!))
+                                                                   (function
+                                                                    prim prim
+                                                                    stub
+                                                                    (caml_compare
+                                                                    prim
+                                                                    prim))
+                                                                   (field 0
+                                                                    files)))))))
+                                                       (before driver/makedepend.ml(640):22197-22242
+                                                         (after driver/makedepend.ml(640):22197-22242
+                                                           (apply
+                                                             (field 98
+                                                               (global Stdlib!))
+                                                             (if
+                                                               (after driver/makedepend.ml(640):22206-22227
+                                                                 (apply
+                                                                   (field 1
+                                                                    Error_occurred)
+                                                                   0a))
+                                                               (before driver/makedepend.ml(640):22233-22234
+                                                                 2)
+                                                               (before driver/makedepend.ml(640):22240-22241
+                                                                 0)))))))))))))))))))))))))
+             main_from_option =
+               (function param
+                 (funct-body driver/makedepend.ml(642)<ghost>:22265-22542
+                   (before driver/makedepend.ml(643):22272-22542
+                     (seq
+                       (if
+                         (after driver/makedepend.ml(643):22275-22300
+                           (caml_string_notequal
+                             (after driver/makedepend.ml(643):22275-22287
+                               (array.get[addr] (caml_sys_argv 0a) 1))
+                             "-depend"))
+                         (before driver/makedepend.ml(643):22306-22423
+                           (seq
+                             (after driver/makedepend.ml(644):22316-22404
+                               (apply (field 2 (global Stdlib__printf!))
+                                 [0:
+                                  [11:
+                                   "Fatal error: argument -depend must be used as first argument.\n"
+                                   [10: 0a]]
+                                  "Fatal error: argument -depend must be used as first argument.\n%!"]))
+                             (before driver/makedepend.ml(646):22410-22416
+                               (after driver/makedepend.ml(646):22410-22416
+                                 (apply (field 98 (global Stdlib!)) 2)))))
+                         0a)
+                       (before driver/makedepend.ml(648):22427-22542
+                         (seq (+:=1 (field 11 (global Stdlib__arg!)))
+                           (before driver/makedepend.ml(649):22447-22542
+                             (seq
+                               (after driver/makedepend.ml(649):22447-22488
+                                 (array.set[addr] (caml_sys_argv 0a) 0
+                                   (after driver/makedepend.ml(649):22463-22488
+                                     (apply (field 27 (global Stdlib!))
+                                       (after driver/makedepend.ml(649):22463-22475
+                                         (array.get[addr] (caml_sys_argv 0a)
+                                           0))
+                                       " -depend"))))
+                               (before driver/makedepend.ml(650):22492-22542
+                                 (seq
+                                   (after driver/makedepend.ml(650):22492-22531
+                                     (array.set[addr] (caml_sys_argv 0a)
+                                       (field 0
+                                         (field 11 (global Stdlib__arg!)))
+                                       (after driver/makedepend.ml(650):22519-22531
+                                         (array.get[addr] (caml_sys_argv 0a)
+                                           0))))
+                                   (before driver/makedepend.ml(651):22535-22542
+                                     (after driver/makedepend.ml(651):22535-22542
+                                       (apply main 0a))))))))))))))
+            (pseudo _none_(0)<ghost>:-1--1
+              (makeblock 0 main main_from_option))))))))

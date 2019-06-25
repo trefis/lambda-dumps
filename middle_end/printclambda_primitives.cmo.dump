@@ -1,0 +1,783 @@
+(setglobal Printclambda_primitives!
+  (let
+    (boxed_integer_name =
+       (function param
+         (funct-body middle_end/printclambda_primitives.ml(20):1132-1235
+           (switch* param
+            case int 0:
+             (before middle_end/printclambda_primitives.ml(21):1166-1177
+               "nativeint")
+            case int 1:
+             (before middle_end/printclambda_primitives.ml(22):1199-1206
+               "int32")
+            case int 2:
+             (before middle_end/printclambda_primitives.ml(23):1228-1235
+               "int64"))))
+     boxed_integer_mark =
+       (function name param
+         (funct-body middle_end/printclambda_primitives.ml(25)<ghost>:1260-1439
+           (switch* param
+            case int 0:
+             (before middle_end/printclambda_primitives.ml(26):1301-1335
+               (after middle_end/printclambda_primitives.ml(26):1301-1335
+                 (apply (field 3 (global Stdlib__printf!))
+                   [0: [11: "Nativeint." [2: 0a 0a]] "Nativeint.%s"] name)))
+            case int 1:
+             (before middle_end/printclambda_primitives.ml(27):1357-1387
+               (after middle_end/printclambda_primitives.ml(27):1357-1387
+                 (apply (field 3 (global Stdlib__printf!))
+                   [0: [11: "Int32." [2: 0a 0a]] "Int32.%s"] name)))
+            case int 2:
+             (before middle_end/printclambda_primitives.ml(28):1409-1439
+               (after middle_end/printclambda_primitives.ml(28):1409-1439
+                 (apply (field 3 (global Stdlib__printf!))
+                   [0: [11: "Int64." [2: 0a 0a]] "Int64.%s"] name))))))
+     print_boxed_integer =
+       (function name ppf bi
+         (funct-body middle_end/printclambda_primitives.ml(30)<ghost>:1465-1526
+           (before middle_end/printclambda_primitives.ml(31):1481-1526
+             (after middle_end/printclambda_primitives.ml(31):1481-1526
+               (apply (field 122 (global Stdlib__format!)) ppf
+                 [0: [2: 0a 0a] "%s"]
+                 (after middle_end/printclambda_primitives.ml(31):1498-1526
+                   (apply boxed_integer_mark name bi)))))))
+     array_kind =
+       (function array_kind
+         (funct-body middle_end/printclambda_primitives.ml(33)<ghost>:1545-1700
+           (before middle_end/printclambda_primitives.ml(34):1560-1700
+             (switch* array_kind
+              case int 0:
+               (before middle_end/printclambda_primitives.ml(36):1620-1625
+                 "gen")
+              case int 1:
+               (before middle_end/printclambda_primitives.ml(37):1644-1650
+                 "addr")
+              case int 2:
+               (before middle_end/printclambda_primitives.ml(38):1668-1673
+                 "int")
+              case int 3:
+               (before middle_end/printclambda_primitives.ml(39):1693-1700
+                 "float")))))
+     access_size =
+       (function size
+         (funct-body middle_end/printclambda_primitives.ml(41)<ghost>:1718-1841
+           (before middle_end/printclambda_primitives.ml(42):1727-1841
+             (switch* size
+              case int 0:
+               (before middle_end/printclambda_primitives.ml(44):1791-1795
+                 "16")
+              case int 1:
+               (before middle_end/printclambda_primitives.ml(45):1814-1818
+                 "32")
+              case int 2:
+               (before middle_end/printclambda_primitives.ml(46):1837-1841
+                 "64")))))
+     access_safety =
+       (function safety
+         (funct-body middle_end/printclambda_primitives.ml(48)<ghost>:1861-1949
+           (before middle_end/printclambda_primitives.ml(49):1872-1949
+             (if safety
+               (before middle_end/printclambda_primitives.ml(52):1940-1949
+                 "unsafe_")
+               (before middle_end/printclambda_primitives.ml(51):1923-1925
+                 "")))))
+     primitive =
+       (function ppf prim
+         (funct-body middle_end/printclambda_primitives.ml(54)<ghost>:1965-8325
+           (before middle_end/printclambda_primitives.ml(55):2009-8325
+             (switch* prim
+              case int 0:
+               (before middle_end/printclambda_primitives.ml(65):2426-2454
+                 (after middle_end/printclambda_primitives.ml(65):2426-2454
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "field_computed" 0a] "field_computed"])))
+              case int 1:
+               (before middle_end/printclambda_primitives.ml(105):3706-3722
+                 (after middle_end/printclambda_primitives.ml(105):3706-3722
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "&&" 0a] "&&"])))
+              case int 2:
+               (before middle_end/printclambda_primitives.ml(106):3738-3754
+                 (after middle_end/printclambda_primitives.ml(106):3738-3754
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "||" 0a] "||"])))
+              case int 3:
+               (before middle_end/printclambda_primitives.ml(107):3767-3784
+                 (after middle_end/printclambda_primitives.ml(107):3767-3784
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "not" 0a] "not"])))
+              case int 4:
+               (before middle_end/printclambda_primitives.ml(108):3800-3815
+                 (after middle_end/printclambda_primitives.ml(108):3800-3815
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [12: '~' 0a] "~"])))
+              case int 5:
+               (before middle_end/printclambda_primitives.ml(109):3831-3846
+                 (after middle_end/printclambda_primitives.ml(109):3831-3846
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [12: '+' 0a] "+"])))
+              case int 6:
+               (before middle_end/printclambda_primitives.ml(110):3862-3877
+                 (after middle_end/printclambda_primitives.ml(110):3862-3877
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [12: '-' 0a] "-"])))
+              case int 7:
+               (before middle_end/printclambda_primitives.ml(111):3893-3908
+                 (after middle_end/printclambda_primitives.ml(111):3893-3908
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [12: '*' 0a] "*"])))
+              case int 8:
+               (before middle_end/printclambda_primitives.ml(116):4084-4101
+                 (after middle_end/printclambda_primitives.ml(116):4084-4101
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "and" 0a] "and"])))
+              case int 9:
+               (before middle_end/printclambda_primitives.ml(117):4116-4132
+                 (after middle_end/printclambda_primitives.ml(117):4116-4132
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "or" 0a] "or"])))
+              case int 10:
+               (before middle_end/printclambda_primitives.ml(118):4148-4165
+                 (after middle_end/printclambda_primitives.ml(118):4148-4165
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "xor" 0a] "xor"])))
+              case int 11:
+               (before middle_end/printclambda_primitives.ml(119):4181-4198
+                 (after middle_end/printclambda_primitives.ml(119):4181-4198
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "lsl" 0a] "lsl"])))
+              case int 12:
+               (before middle_end/printclambda_primitives.ml(120):4214-4231
+                 (after middle_end/printclambda_primitives.ml(120):4214-4231
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "lsr" 0a] "lsr"])))
+              case int 13:
+               (before middle_end/printclambda_primitives.ml(121):4247-4264
+                 (after middle_end/printclambda_primitives.ml(121):4247-4264
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "asr" 0a] "asr"])))
+              case int 14:
+               (before middle_end/printclambda_primitives.ml(125):4425-4451
+                 (after middle_end/printclambda_primitives.ml(125):4425-4451
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "int_of_float" 0a] "int_of_float"])))
+              case int 15:
+               (before middle_end/printclambda_primitives.ml(126):4471-4497
+                 (after middle_end/printclambda_primitives.ml(126):4471-4497
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "float_of_int" 0a] "float_of_int"])))
+              case int 16:
+               (before middle_end/printclambda_primitives.ml(127):4515-4531
+                 (after middle_end/printclambda_primitives.ml(127):4515-4531
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "~." 0a] "~."])))
+              case int 17:
+               (before middle_end/printclambda_primitives.ml(128):4549-4567
+                 (after middle_end/printclambda_primitives.ml(128):4549-4567
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "abs." 0a] "abs."])))
+              case int 18:
+               (before middle_end/printclambda_primitives.ml(129):4585-4601
+                 (after middle_end/printclambda_primitives.ml(129):4585-4601
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "+." 0a] "+."])))
+              case int 19:
+               (before middle_end/printclambda_primitives.ml(130):4619-4635
+                 (after middle_end/printclambda_primitives.ml(130):4619-4635
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "-." 0a] "-."])))
+              case int 20:
+               (before middle_end/printclambda_primitives.ml(131):4653-4669
+                 (after middle_end/printclambda_primitives.ml(131):4653-4669
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "*." 0a] "*."])))
+              case int 21:
+               (before middle_end/printclambda_primitives.ml(132):4687-4703
+                 (after middle_end/printclambda_primitives.ml(132):4687-4703
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "/." 0a] "/."])))
+              case int 22:
+               (before middle_end/printclambda_primitives.ml(134):4785-4812
+                 (after middle_end/printclambda_primitives.ml(134):4785-4812
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "string.length" 0a] "string.length"])))
+              case int 23:
+               (before middle_end/printclambda_primitives.ml(135):4832-4863
+                 (after middle_end/printclambda_primitives.ml(135):4832-4863
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "string.unsafe_get" 0a] "string.unsafe_get"])))
+              case int 24:
+               (before middle_end/printclambda_primitives.ml(136):4883-4907
+                 (after middle_end/printclambda_primitives.ml(136):4883-4907
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "string.get" 0a] "string.get"])))
+              case int 25:
+               (before middle_end/printclambda_primitives.ml(137):4928-4954
+                 (after middle_end/printclambda_primitives.ml(137):4928-4954
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "bytes.length" 0a] "bytes.length"])))
+              case int 26:
+               (before middle_end/printclambda_primitives.ml(138):4973-5003
+                 (after middle_end/printclambda_primitives.ml(138):4973-5003
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "bytes.unsafe_get" 0a] "bytes.unsafe_get"])))
+              case int 27:
+               (before middle_end/printclambda_primitives.ml(139):5022-5052
+                 (after middle_end/printclambda_primitives.ml(139):5022-5052
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "bytes.unsafe_set" 0a] "bytes.unsafe_set"])))
+              case int 28:
+               (before middle_end/printclambda_primitives.ml(140):5071-5094
+                 (after middle_end/printclambda_primitives.ml(140):5071-5094
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "bytes.get" 0a] "bytes.get"])))
+              case int 29:
+               (before middle_end/printclambda_primitives.ml(141):5113-5136
+                 (after middle_end/printclambda_primitives.ml(141):5113-5136
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "bytes.set" 0a] "bytes.set"])))
+              case int 30:
+               (before middle_end/printclambda_primitives.ml(152):5790-5809
+                 (after middle_end/printclambda_primitives.ml(152):5790-5809
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "isint" 0a] "isint"])))
+              case int 31:
+               (before middle_end/printclambda_primitives.ml(153):5824-5843
+                 (after middle_end/printclambda_primitives.ml(153):5824-5843
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "isout" 0a] "isout"])))
+              case int 32:
+               (before middle_end/printclambda_primitives.ml(199):8162-8183
+                 (after middle_end/printclambda_primitives.ml(199):8162-8183
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "bswap16" 0a] "bswap16"])))
+              case int 33:
+               (before middle_end/printclambda_primitives.ml(201):8261-8289
+                 (after middle_end/printclambda_primitives.ml(201):8261-8289
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "int_as_pointer" 0a] "int_as_pointer"])))
+              case int 34:
+               (before middle_end/printclambda_primitives.ml(202):8305-8325
+                 (after middle_end/printclambda_primitives.ml(202):8305-8325
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "opaque" 0a] "opaque"])))
+              case tag 0:
+               (let (sym =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(59):2109-2141
+                   (after middle_end/printclambda_primitives.ml(59):2109-2141
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [11: "read_symbol " [2: 0a 0a]] "read_symbol %s"]
+                       sym))))
+              case tag 1:
+               (let (*match* =a (field 1 prim) tag =a (field 0 prim))
+                 (if *match*
+                   (let (tag =a[int] tag shape =a (field 2 prim))
+                     (before middle_end/printclambda_primitives.ml(63):2297-2361
+                       (after middle_end/printclambda_primitives.ml(63):2297-2361
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [11: "makemutable " [4: 3a 0a 0a [15: 0a]]]
+                            "makemutable %i%a"]
+                           tag (field 8 (global Printlambda!)) shape))))
+                   (let (shape =a (field 2 prim))
+                     (before middle_end/printclambda_primitives.ml(61):2189-2251
+                       (after middle_end/printclambda_primitives.ml(61):2189-2251
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [11: "makeblock " [4: 3a 0a 0a [15: 0a]]]
+                            "makeblock %i%a"]
+                           tag (field 8 (global Printlambda!)) shape))))))
+              case tag 2:
+               (let (n =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(64):2378-2402
+                   (after middle_end/printclambda_primitives.ml(64):2378-2402
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [11: "field " [4: 3a 0a 0a 0a]] "field %i"] n))))
+              case tag 3:
+               (let
+                 (init =a (field 2 prim)
+                  ptr =a (field 1 prim)
+                  n =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(67):2492-2812
+                   (let
+                     (instr =
+                        (if ptr
+                          (before middle_end/printclambda_primitives.ml(69):2548-2553
+                            "ptr")
+                          (before middle_end/printclambda_primitives.ml(70):2577-2582
+                            "imm")))
+                     (before middle_end/printclambda_primitives.ml(72):2598-2812
+                       (let
+                         (init =
+                            (switch* init
+                             case int 0:
+                              (before middle_end/printclambda_primitives.ml(76):2751-2753
+                                "")
+                             case int 1:
+                              (before middle_end/printclambda_primitives.ml(74):2666-2679
+                                "(heap-init)")
+                             case int 2:
+                              (before middle_end/printclambda_primitives.ml(75):2713-2726
+                                "(root-init)")))
+                         (before middle_end/printclambda_primitives.ml(78):2769-2812
+                           (after middle_end/printclambda_primitives.ml(78):2769-2812
+                             (apply (field 122 (global Stdlib__format!)) ppf
+                               [0:
+                                [11:
+                                 "setfield_"
+                                 [2: 0a [2: 0a [12: ' ' [4: 3a 0a 0a 0a]]]]]
+                                "setfield_%s%s %i"]
+                               instr init n))))))))
+              case tag 4:
+               (let (init =a (field 1 prim) ptr =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(80):2857-3181
+                   (let
+                     (instr =
+                        (if ptr
+                          (before middle_end/printclambda_primitives.ml(82):2913-2918
+                            "ptr")
+                          (before middle_end/printclambda_primitives.ml(83):2942-2947
+                            "imm")))
+                     (before middle_end/printclambda_primitives.ml(85):2963-3181
+                       (let
+                         (init =
+                            (switch* init
+                             case int 0:
+                              (before middle_end/printclambda_primitives.ml(89):3116-3118
+                                "")
+                             case int 1:
+                              (before middle_end/printclambda_primitives.ml(87):3031-3044
+                                "(heap-init)")
+                             case int 2:
+                              (before middle_end/printclambda_primitives.ml(88):3078-3091
+                                "(root-init)")))
+                         (before middle_end/printclambda_primitives.ml(91):3134-3181
+                           (after middle_end/printclambda_primitives.ml(91):3134-3181
+                             (apply (field 122 (global Stdlib__format!)) ppf
+                               [0:
+                                [11:
+                                 "setfield_"
+                                 [2: 0a [2: 0a [11: "_computed" 0a]]]]
+                                "setfield_%s%s_computed"]
+                               instr init))))))))
+              case tag 5:
+               (let (n =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(92):3203-3232
+                   (after middle_end/printclambda_primitives.ml(92):3203-3232
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [11: "floatfield " [4: 3a 0a 0a 0a]] "floatfield %i"]
+                       n))))
+              case tag 6:
+               (let (init =a (field 1 prim) n =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(94):3271-3481
+                   (let
+                     (init =
+                        (switch* init
+                         case int 0:
+                          (before middle_end/printclambda_primitives.ml(98):3424-3426
+                            "")
+                         case int 1:
+                          (before middle_end/printclambda_primitives.ml(96):3339-3352
+                            "(heap-init)")
+                         case int 2:
+                          (before middle_end/printclambda_primitives.ml(97):3386-3399
+                            "(root-init)")))
+                     (before middle_end/printclambda_primitives.ml(100):3442-3481
+                       (after middle_end/printclambda_primitives.ml(100):3442-3481
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [11:
+                             "setfloatfield"
+                             [2: 0a [12: ' ' [4: 3a 0a 0a 0a]]]]
+                            "setfloatfield%s %i"]
+                           init n))))))
+              case tag 7:
+               (let (size =a (field 1 prim) rep =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(102):3518-3579
+                   (after middle_end/printclambda_primitives.ml(102):3518-3579
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [11: "duprecord " [15: [12: ' ' [4: 3a 0a 0a 0a]]]]
+                        "duprecord %a %i"]
+                       (field 9 (global Printlambda!)) rep size))))
+              case tag 8:
+               (let (p =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(103):3596-3634
+                   (after middle_end/printclambda_primitives.ml(103):3596-3634
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [2: 0a 0a] "%s"] (field 0 p)))))
+              case tag 9:
+               (let (k =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(104):3651-3689
+                   (after middle_end/printclambda_primitives.ml(104):3651-3689
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [2: 0a 0a] "%s"]
+                       (after middle_end/printclambda_primitives.ml(104):3668-3689
+                         (apply (field 37 (global Lambda!)) k))))))
+              case tag 10:
+               (let (*match* =a (field 0 prim))
+                 (if *match*
+                   (before middle_end/printclambda_primitives.ml(113):3967-3983
+                     (after middle_end/printclambda_primitives.ml(113):3967-3983
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [11: "/u" 0a] "/u"])))
+                   (before middle_end/printclambda_primitives.ml(112):3929-3944
+                     (after middle_end/printclambda_primitives.ml(112):3929-3944
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [12: '/' 0a] "/"])))))
+              case tag 11:
+               (let (*match* =a (field 0 prim))
+                 (if *match*
+                   (before middle_end/printclambda_primitives.ml(115):4044-4068
+                     (after middle_end/printclambda_primitives.ml(115):4044-4068
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [11: "mod_unsafe" 0a] "mod_unsafe"])))
+                   (before middle_end/printclambda_primitives.ml(114):4004-4021
+                     (after middle_end/printclambda_primitives.ml(114):4004-4021
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [11: "mod" 0a] "mod"])))))
+              case tag 12:
+               (let (cmp =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(122):4286-4324
+                   (after middle_end/printclambda_primitives.ml(122):4286-4324
+                     (apply (field 0 (global Printlambda!)) ppf cmp))))
+              case tag 13:
+               (let (n =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(123):4345-4364
+                   (after middle_end/printclambda_primitives.ml(123):4345-4364
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [4: 3a 0a 0a [12: '+' 0a]] "%i+"] n))))
+              case tag 14:
+               (let (n =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(124):4385-4405
+                   (after middle_end/printclambda_primitives.ml(124):4385-4405
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [11: "+:=" [4: 3a 0a 0a 0a]] "+:=%i"] n))))
+              case tag 15:
+               (let (cmp =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(133):4727-4763
+                   (after middle_end/printclambda_primitives.ml(133):4727-4763
+                     (apply (field 1 (global Printlambda!)) ppf cmp))))
+              case tag 16:
+               (let (*match* =a (field 1 prim) k =a (field 0 prim))
+                 (if *match*
+                   (before middle_end/printclambda_primitives.ml(144):5237-5279
+                     (after middle_end/printclambda_primitives.ml(144):5237-5279
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [11: "makearray[" [2: 0a [12: ']' 0a]]]
+                          "makearray[%s]"]
+                         (after middle_end/printclambda_primitives.ml(144):5265-5279
+                           (apply array_kind k)))))
+                   (let (k =a k)
+                     (before middle_end/printclambda_primitives.ml(145):5313-5359
+                       (after middle_end/printclambda_primitives.ml(145):5313-5359
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [11: "makearray_imm[" [2: 0a [12: ']' 0a]]]
+                            "makearray_imm[%s]"]
+                           (after middle_end/printclambda_primitives.ml(145):5345-5359
+                             (apply array_kind k))))))))
+              case tag 17:
+               (let (*match* =a (field 1 prim) k =a (field 0 prim))
+                 (if *match*
+                   (before middle_end/printclambda_primitives.ml(146):5390-5431
+                     (after middle_end/printclambda_primitives.ml(146):5390-5431
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [11: "duparray[" [2: 0a [12: ']' 0a]]]
+                          "duparray[%s]"]
+                         (after middle_end/printclambda_primitives.ml(146):5417-5431
+                           (apply array_kind k)))))
+                   (let (k =a k)
+                     (before middle_end/printclambda_primitives.ml(147):5464-5509
+                       (after middle_end/printclambda_primitives.ml(147):5464-5509
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [11: "duparray_imm[" [2: 0a [12: ']' 0a]]]
+                            "duparray_imm[%s]"]
+                           (after middle_end/printclambda_primitives.ml(147):5495-5509
+                             (apply array_kind k))))))))
+              case tag 18:
+               (let (k =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(143):5160-5205
+                   (after middle_end/printclambda_primitives.ml(143):5160-5205
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [11: "array.length[" [2: 0a [12: ']' 0a]]]
+                        "array.length[%s]"]
+                       (after middle_end/printclambda_primitives.ml(143):5191-5205
+                         (apply array_kind k))))))
+              case tag 19:
+               (let (k =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(148):5530-5579
+                   (after middle_end/printclambda_primitives.ml(148):5530-5579
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [11: "array.unsafe_get[" [2: 0a [12: ']' 0a]]]
+                        "array.unsafe_get[%s]"]
+                       (after middle_end/printclambda_primitives.ml(148):5565-5579
+                         (apply array_kind k))))))
+              case tag 20:
+               (let (k =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(149):5600-5649
+                   (after middle_end/printclambda_primitives.ml(149):5600-5649
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [11: "array.unsafe_set[" [2: 0a [12: ']' 0a]]]
+                        "array.unsafe_set[%s]"]
+                       (after middle_end/printclambda_primitives.ml(149):5635-5649
+                         (apply array_kind k))))))
+              case tag 21:
+               (let (k =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(150):5670-5712
+                   (after middle_end/printclambda_primitives.ml(150):5670-5712
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [11: "array.get[" [2: 0a [12: ']' 0a]]]
+                        "array.get[%s]"]
+                       (after middle_end/printclambda_primitives.ml(150):5698-5712
+                         (apply array_kind k))))))
+              case tag 22:
+               (let (k =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(151):5733-5775
+                   (after middle_end/printclambda_primitives.ml(151):5733-5775
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [11: "array.set[" [2: 0a [12: ']' 0a]]]
+                        "array.set[%s]"]
+                       (after middle_end/printclambda_primitives.ml(151):5761-5775
+                         (apply array_kind k))))))
+              case tag 23:
+               (let (bi =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(154):5865-5900
+                   (after middle_end/printclambda_primitives.ml(154):5865-5900
+                     (apply print_boxed_integer "of_int" ppf bi))))
+              case tag 24:
+               (let (bi =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(155):5922-5957
+                   (after middle_end/printclambda_primitives.ml(155):5922-5957
+                     (apply print_boxed_integer "to_int" ppf bi))))
+              case tag 25:
+               (let (bi2 =a (field 1 prim) bi1 =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(157):5991-6063
+                   (after middle_end/printclambda_primitives.ml(157):5991-6063
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [2: 0a [11: "_of_" [2: 0a 0a]]] "%s_of_%s"]
+                       (after middle_end/printclambda_primitives.ml(157):6014-6038
+                         (apply boxed_integer_name bi2))
+                       (after middle_end/printclambda_primitives.ml(157):6039-6063
+                         (apply boxed_integer_name bi1))))))
+              case tag 26:
+               (let (bi =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(158):6083-6115
+                   (after middle_end/printclambda_primitives.ml(158):6083-6115
+                     (apply print_boxed_integer "neg" ppf bi))))
+              case tag 27:
+               (let (bi =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(159):6135-6167
+                   (after middle_end/printclambda_primitives.ml(159):6135-6167
+                     (apply print_boxed_integer "add" ppf bi))))
+              case tag 28:
+               (let (bi =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(160):6187-6219
+                   (after middle_end/printclambda_primitives.ml(160):6187-6219
+                     (apply print_boxed_integer "sub" ppf bi))))
+              case tag 29:
+               (let (bi =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(161):6239-6271
+                   (after middle_end/printclambda_primitives.ml(161):6239-6271
+                     (apply print_boxed_integer "mul" ppf bi))))
+              case tag 30:
+               (let (*match* =a (field 1 prim) bi =a (field 0 prim))
+                 (if *match*
+                   (let (bi =a bi)
+                     (before middle_end/printclambda_primitives.ml(165):6411-6450
+                       (after middle_end/printclambda_primitives.ml(165):6411-6450
+                         (apply print_boxed_integer "div_unsafe" ppf bi))))
+                   (before middle_end/printclambda_primitives.ml(163):6324-6356
+                     (after middle_end/printclambda_primitives.ml(163):6324-6356
+                       (apply print_boxed_integer "div" ppf bi)))))
+              case tag 31:
+               (let (*match* =a (field 1 prim) bi =a (field 0 prim))
+                 (if *match*
+                   (let (bi =a bi)
+                     (before middle_end/printclambda_primitives.ml(169):6590-6629
+                       (after middle_end/printclambda_primitives.ml(169):6590-6629
+                         (apply print_boxed_integer "mod_unsafe" ppf bi))))
+                   (before middle_end/printclambda_primitives.ml(167):6503-6535
+                     (after middle_end/printclambda_primitives.ml(167):6503-6535
+                       (apply print_boxed_integer "mod" ppf bi)))))
+              case tag 32:
+               (let (bi =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(170):6649-6681
+                   (after middle_end/printclambda_primitives.ml(170):6649-6681
+                     (apply print_boxed_integer "and" ppf bi))))
+              case tag 33:
+               (let (bi =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(171):6700-6731
+                   (after middle_end/printclambda_primitives.ml(171):6700-6731
+                     (apply print_boxed_integer "or" ppf bi))))
+              case tag 34:
+               (let (bi =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(172):6751-6783
+                   (after middle_end/printclambda_primitives.ml(172):6751-6783
+                     (apply print_boxed_integer "xor" ppf bi))))
+              case tag 35:
+               (let (bi =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(173):6803-6835
+                   (after middle_end/printclambda_primitives.ml(173):6803-6835
+                     (apply print_boxed_integer "lsl" ppf bi))))
+              case tag 36:
+               (let (bi =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(174):6855-6887
+                   (after middle_end/printclambda_primitives.ml(174):6855-6887
+                     (apply print_boxed_integer "lsr" ppf bi))))
+              case tag 37:
+               (let (bi =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(175):6907-6939
+                   (after middle_end/printclambda_primitives.ml(175):6907-6939
+                     (apply print_boxed_integer "asr" ppf bi))))
+              case tag 38:
+               (let (*match* =a (field 1 prim) bi =a (field 0 prim))
+                 (switch* *match*
+                  case int 0:
+                   (before middle_end/printclambda_primitives.ml(176):6966-6997
+                     (after middle_end/printclambda_primitives.ml(176):6966-6997
+                       (apply print_boxed_integer "==" ppf bi)))
+                  case int 1:
+                   (let (bi =a bi)
+                     (before middle_end/printclambda_primitives.ml(177):7024-7055
+                       (after middle_end/printclambda_primitives.ml(177):7024-7055
+                         (apply print_boxed_integer "!=" ppf bi))))
+                  case int 2:
+                   (let (bi =a bi)
+                     (before middle_end/printclambda_primitives.ml(178):7082-7112
+                       (after middle_end/printclambda_primitives.ml(178):7082-7112
+                         (apply print_boxed_integer "<" ppf bi))))
+                  case int 3:
+                   (let (bi =a bi)
+                     (before middle_end/printclambda_primitives.ml(179):7139-7169
+                       (after middle_end/printclambda_primitives.ml(179):7139-7169
+                         (apply print_boxed_integer ">" ppf bi))))
+                  case int 4:
+                   (let (bi =a bi)
+                     (before middle_end/printclambda_primitives.ml(180):7196-7227
+                       (after middle_end/printclambda_primitives.ml(180):7196-7227
+                         (apply print_boxed_integer "<=" ppf bi))))
+                  case int 5:
+                   (let (bi =a bi)
+                     (before middle_end/printclambda_primitives.ml(181):7254-7285
+                       (after middle_end/printclambda_primitives.ml(181):7254-7285
+                         (apply print_boxed_integer ">=" ppf bi))))))
+              case tag 39:
+               (let
+                 (layout =a (field 3 prim)
+                  kind =a (field 2 prim)
+                  unsafe =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(183):7338-7393
+                   (after middle_end/printclambda_primitives.ml(183):7338-7393
+                     (apply (field 10 (global Printlambda!)) "get" unsafe
+                       kind ppf layout))))
+              case tag 40:
+               (let
+                 (layout =a (field 3 prim)
+                  kind =a (field 2 prim)
+                  unsafe =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(185):7446-7501
+                   (after middle_end/printclambda_primitives.ml(185):7446-7501
+                     (apply (field 10 (global Printlambda!)) "set" unsafe
+                       kind ppf layout))))
+              case tag 41:
+               (let (n =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(186):7525-7556
+                   (after middle_end/printclambda_primitives.ml(186):7525-7556
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [11: "Bigarray.dim_" [4: 3a 0a 0a 0a]]
+                        "Bigarray.dim_%i"]
+                       n))))
+              case tag 42:
+               (let
+                 (*match* =a (field 0 prim)
+                  safety =a (field 1 *match*)
+                  size =a (field 0 *match*))
+                 (before middle_end/printclambda_primitives.ml(188):7597-7667
+                   (after middle_end/printclambda_primitives.ml(188):7597-7667
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [11: "string." [2: 0a [11: "get" [2: 0a 0a]]]]
+                        "string.%sget%s"]
+                       (after middle_end/printclambda_primitives.ml(188):7626-7648
+                         (apply access_safety safety))
+                       (after middle_end/printclambda_primitives.ml(188):7649-7667
+                         (apply access_size size))))))
+              case tag 43:
+               (let
+                 (*match* =a (field 0 prim)
+                  safety =a (field 1 *match*)
+                  size =a (field 0 *match*))
+                 (before middle_end/printclambda_primitives.ml(190):7707-7776
+                   (after middle_end/printclambda_primitives.ml(190):7707-7776
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [11: "bytes." [2: 0a [11: "get" [2: 0a 0a]]]]
+                        "bytes.%sget%s"]
+                       (after middle_end/printclambda_primitives.ml(190):7735-7757
+                         (apply access_safety safety))
+                       (after middle_end/printclambda_primitives.ml(190):7758-7776
+                         (apply access_size size))))))
+              case tag 44:
+               (let
+                 (*match* =a (field 0 prim)
+                  safety =a (field 1 *match*)
+                  size =a (field 0 *match*))
+                 (before middle_end/printclambda_primitives.ml(192):7815-7884
+                   (after middle_end/printclambda_primitives.ml(192):7815-7884
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [11: "bytes." [2: 0a [11: "set" [2: 0a 0a]]]]
+                        "bytes.%sset%s"]
+                       (after middle_end/printclambda_primitives.ml(192):7843-7865
+                         (apply access_safety safety))
+                       (after middle_end/printclambda_primitives.ml(192):7866-7884
+                         (apply access_size size))))))
+              case tag 45:
+               (let
+                 (*match* =a (field 0 prim)
+                  safety =a (field 1 *match*)
+                  size =a (field 0 *match*))
+                 (before middle_end/printclambda_primitives.ml(194):7928-8015
+                   (after middle_end/printclambda_primitives.ml(194):7928-8015
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [11:
+                         "bigarray.array1." [2: 0a [11: "get" [2: 0a 0a]]]]
+                        "bigarray.array1.%sget%s"]
+                       (after middle_end/printclambda_primitives.ml(195):7974-7996
+                         (apply access_safety safety))
+                       (after middle_end/printclambda_primitives.ml(195):7997-8015
+                         (apply access_size size))))))
+              case tag 46:
+               (let
+                 (*match* =a (field 0 prim)
+                  safety =a (field 1 *match*)
+                  size =a (field 0 *match*))
+                 (before middle_end/printclambda_primitives.ml(197):8058-8145
+                   (after middle_end/printclambda_primitives.ml(197):8058-8145
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [11:
+                         "bigarray.array1." [2: 0a [11: "set" [2: 0a 0a]]]]
+                        "bigarray.array1.%sset%s"]
+                       (after middle_end/printclambda_primitives.ml(198):8104-8126
+                         (apply access_safety safety))
+                       (after middle_end/printclambda_primitives.ml(198):8127-8145
+                         (apply access_size size))))))
+              case tag 47:
+               (let (bi =a (field 0 prim))
+                 (before middle_end/printclambda_primitives.ml(200):8203-8237
+                   (after middle_end/printclambda_primitives.ml(200):8203-8237
+                     (apply print_boxed_integer "bswap" ppf bi)))))))))
+    (pseudo _none_(0)<ghost>:-1--1 (makeblock 0 primitive))))

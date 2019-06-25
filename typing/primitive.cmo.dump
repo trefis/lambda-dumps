@@ -1,0 +1,590 @@
+(setglobal Primitive!
+  (let
+    (Error = (makeblock 248 "Primitive.Error" (caml_fresh_oo_id 0))
+     is_ocaml_repr =
+       (function param
+         (funct-body typing/primitive.ml(44):1898-2003
+           (catch
+             (if (isint param)
+               (if param (exit 1)
+                 (before typing/primitive.ml(45):1933-1937 1a))
+               (exit 1))
+            with (1) (before typing/primitive.ml(48):1998-2003 0a))))
+     is_unboxed =
+       (function param
+         (funct-body typing/primitive.ml(50):2022-2127
+           (catch
+             (if (isint param)
+               (if (!= param 1) (before typing/primitive.ml(52):2074-2079 0a)
+                 (exit 3))
+               (exit 3))
+            with (3) (before typing/primitive.ml(54):2123-2127 1a))))
+     is_untagged =
+       (function param
+         (funct-body typing/primitive.ml(56):2147-2252
+           (catch
+             (if (isint param)
+               (if (>= param 2) (before typing/primitive.ml(57):2176-2180 1a)
+                 (exit 4))
+               (exit 4))
+            with (4) (before typing/primitive.ml(60):2247-2252 0a)))))
+    (letrec
+      (make_native_repr_args
+         (function arity[int] x
+           (funct-body typing/primitive.ml(62)<ghost>:2284-2372
+             (before typing/primitive.ml(63):2296-2372
+               (if (== arity 0) (before typing/primitive.ml(64):2318-2320 0a)
+                 (before typing/primitive.ml(66):2332-2372
+                   (makeblock 0 x
+                     (after typing/primitive.ml(66):2337-2372
+                       (apply make_native_repr_args (- arity 1) x)))))))))
+      (let
+        (simple =
+           (function name arity[int] alloc
+             (funct-body typing/primitive.ml(68)<ghost>:2385-2620
+               (before typing/primitive.ml(69):2409-2620
+                 (makeblock 0 (*,int,*,*,*,*) name arity alloc ""
+                   (after typing/primitive.ml(73):2527-2573
+                     (apply make_native_repr_args arity 0a))
+                   0a))))
+         make =
+           (function name alloc native_name native_repr_args native_repr_res
+             (funct-body typing/primitive.ml(76)<ghost>:2631-2906
+               (before typing/primitive.ml(77):2696-2906
+                 (makeblock 0 (*,int,*,*,*,*) name
+                   (after typing/primitive.ml(78):2731-2759
+                     (apply (field 0 (global Stdlib__list!))
+                       native_repr_args))
+                   alloc native_name native_repr_args native_repr_res))))
+         parse_declaration =
+           (function valdecl native_repr_args native_repr_res
+             (funct-body typing/primitive.ml(84)<ghost>:2930-5178
+               (before typing/primitive.ml(85):2977-5178
+                 (let
+                   (arity =[int]
+                      (after typing/primitive.ml(85):2989-3017
+                        (apply (field 0 (global Stdlib__list!))
+                          native_repr_args)))
+                   (before typing/primitive.ml(86):3023-5178
+                     (catch
+                       (let (*match* = (field 2 valdecl))
+                         (if *match*
+                           (let
+                             (*match* =a (field 1 *match*)
+                              name =a (field 0 *match*))
+                             (if *match*
+                               (let (name2 =a (field 0 *match*))
+                                 (catch
+                                   (let
+                                     (*match* =
+                                        (stringswitch name2
+                                         case "noalloc":
+                                          (let (*match* =a (field 1 *match*))
+                                            (if *match*
+                                              (let
+                                                (*match* =a (field 1 *match*)
+                                                 name2 =a (field 0 *match*))
+                                                (catch
+                                                  (if *match*
+                                                    (let
+                                                      (*match* =a
+                                                         (field 0 *match*))
+                                                      (stringswitch *match*
+                                                       case "float":
+                                                        (before typing/primitive.ml(88):3168-3193
+                                                          (makeblock 0 name
+                                                            name2 1a 1a))
+                                                       default: (exit 14)))
+                                                    (exit 14))
+                                                 with (14)
+                                                  (let
+                                                    (name2 =a name2
+                                                     name =a name)
+                                                    (before typing/primitive.ml(89):3235-3261
+                                                      (makeblock 0 name name2
+                                                        1a 0a)))))
+                                              (exit 12)))
+                                         default:
+                                          (let (*match* =a (field 1 *match*))
+                                            (if *match*
+                                              (let
+                                                (*match* =a (field 0 *match*)
+                                                 *match* =
+                                                   (stringswitch *match*
+                                                    case "float":
+                                                     (let (name =a name)
+                                                       (before typing/primitive.ml(90):3301-3327
+                                                         (makeblock 0 name
+                                                           name2 0a 1a)))
+                                                    default: (exit 12))
+                                                 old_style_float =a
+                                                   (field 3 *match*)
+                                                 old_style_noalloc =a
+                                                   (field 2 *match*)
+                                                 native_name =a
+                                                   (field 1 *match*)
+                                                 name =a (field 0 *match*))
+                                                (exit 15 old_style_float
+                                                  old_style_noalloc
+                                                  native_name name))
+                                              (exit 12))))
+                                      old_style_float =a (field 3 *match*)
+                                      old_style_noalloc =a (field 2 *match*)
+                                      native_name =a (field 1 *match*)
+                                      name =a (field 0 *match*))
+                                     (exit 15 old_style_float
+                                       old_style_noalloc native_name name))
+                                  with (12)
+                                   (let
+                                     (*match* =
+                                        (stringswitch name2
+                                         case "noalloc":
+                                          (let (name =a name)
+                                            (before typing/primitive.ml(91):3360-3383
+                                              (makeblock 0 name "" 1a 0a)))
+                                         default:
+                                          (let (name2 =a name2 name =a name)
+                                            (before typing/primitive.ml(92):3412-3439
+                                              (let
+                                                (old_style_float = 0a
+                                                 old_style_noalloc = 0a
+                                                 native_name =a name2
+                                                 name =a name)
+                                                (exit 15 old_style_float
+                                                  old_style_noalloc
+                                                  native_name name)))))
+                                      old_style_float =a (field 3 *match*)
+                                      old_style_noalloc =a (field 2 *match*)
+                                      native_name =a (field 1 *match*)
+                                      name =a (field 0 *match*))
+                                     (exit 15 old_style_float
+                                       old_style_noalloc native_name name))))
+                               (let (name =a name)
+                                 (before typing/primitive.ml(93):3459-3483
+                                   (let
+                                     (old_style_float = 0a
+                                      old_style_noalloc = 0a
+                                      native_name = ""
+                                      name =a name)
+                                     (exit 15 old_style_float
+                                       old_style_noalloc native_name name))))))
+                           (before typing/primitive.ml(95):3504-3545
+                             (after typing/primitive.ml(95):3504-3545
+                               (let
+                                 (*match* =
+                                    (apply (field 0 (global Misc!))
+                                      "Primitive.parse_declaration")
+                                  old_style_float =a (field 3 *match*)
+                                  old_style_noalloc =a (field 2 *match*)
+                                  native_name =a (field 1 *match*)
+                                  name =a (field 0 *match*))
+                                 (exit 15 old_style_float old_style_noalloc
+                                   native_name name))))))
+                      with (15 old_style_float old_style_noalloc native_name name)
+                       (before typing/primitive.ml(97):3553-5178
+                         (let
+                           (noalloc_attribute =
+                              (after typing/primitive.ml(98):3581-3676
+                                (apply (field 1 (global Attr_helper!))
+                                  [0: "noalloc" [0: "ocaml.noalloc" 0a]]
+                                  (field 3 valdecl))))
+                           (before typing/primitive.ml(101):3684-5178
+                             (seq
+                               (if
+                                 (&& old_style_float
+                                   (not
+                                     (&&
+                                       (after typing/primitive.ml(102):3716-3759
+                                         (apply
+                                           (field 27 (global Stdlib__list!))
+                                           is_ocaml_repr native_repr_args))
+                                       (after typing/primitive.ml(103):3773-3802
+                                         (apply is_ocaml_repr
+                                           native_repr_res)))))
+                                 (before typing/primitive.ml(104):3813-3907
+                                   (raise
+                                     (after typing/primitive.ml(104):3819-3907
+                                       (makeblock 0 Error (field 4 valdecl)
+                                         0a))))
+                                 0a)
+                               (before typing/primitive.ml(106):3911-5178
+                                 (seq
+                                   (if
+                                     (&& old_style_noalloc noalloc_attribute)
+                                     (before typing/primitive.ml(107):3962-4054
+                                       (raise
+                                         (after typing/primitive.ml(107):3968-4054
+                                           (makeblock 0 Error
+                                             (field 4 valdecl) 1a))))
+                                     0a)
+                                   (before typing/primitive.ml(111):4165-5178
+                                     (let
+                                       (old_style_noalloc =
+                                          (|| old_style_noalloc
+                                            old_style_float))
+                                       (before typing/primitive.ml(112):4231-5178
+                                         (seq
+                                           (if old_style_float
+                                             (before typing/primitive.ml(113):4259-4375
+                                               (after typing/primitive.ml(113):4259-4375
+                                                 (apply
+                                                   (field 40
+                                                     (global Location!))
+                                                   0a 0a (field 4 valdecl)
+                                                   "[@@unboxed] + [@@noalloc] should be used\ninstead of \"float\"")))
+                                             (before typing/primitive.ml(116):4383-4507
+                                               (if old_style_noalloc
+                                                 (before typing/primitive.ml(117):4413-4507
+                                                   (after typing/primitive.ml(117):4413-4507
+                                                     (apply
+                                                       (field 40
+                                                         (global Location!))
+                                                       0a 0a
+                                                       (field 4 valdecl)
+                                                       "[@@noalloc] should be used instead of \"noalloc\"")))
+                                                 0a)))
+                                           (before typing/primitive.ml(119):4511-5178
+                                             (seq
+                                               (if
+                                                 (&&
+                                                   (after typing/primitive.ml(119):4514-4530
+                                                     (caml_string_equal
+                                                       native_name ""))
+                                                   (not
+                                                     (&&
+                                                       (after typing/primitive.ml(120):4544-4587
+                                                         (apply
+                                                           (field 27
+                                                             (global Stdlib__list!))
+                                                           is_ocaml_repr
+                                                           native_repr_args))
+                                                       (after typing/primitive.ml(121):4601-4630
+                                                         (apply is_ocaml_repr
+                                                           native_repr_res)))))
+                                                 (before typing/primitive.ml(122):4641-4732
+                                                   (raise
+                                                     (after typing/primitive.ml(122):4647-4732
+                                                       (makeblock 0 Error
+                                                         (field 4 valdecl)
+                                                         2a))))
+                                                 0a)
+                                               (before typing/primitive.ml(124):4736-5178
+                                                 (let
+                                                   (noalloc =
+                                                      (|| old_style_noalloc
+                                                        noalloc_attribute))
+                                                   (before typing/primitive.ml(125):4794-5178
+                                                     (catch
+                                                       (if old_style_float
+                                                         (before typing/primitive.ml(127):4868-4926
+                                                           (let
+                                                             (native_repr_res =
+                                                                1a
+                                                              native_repr_args =
+                                                                (after typing/primitive.ml(127):4869-4910
+                                                                  (apply
+                                                                    make_native_repr_args
+                                                                    arity 1a)))
+                                                             (exit 5
+                                                               native_repr_res
+                                                               native_repr_args)))
+                                                         (before typing/primitive.ml(129):4942-4977
+                                                           (let
+                                                             (native_repr_res =a
+                                                                native_repr_res
+                                                              native_repr_args =a
+                                                                native_repr_args)
+                                                             (exit 5
+                                                               native_repr_res
+                                                               native_repr_args))))
+                                                      with (5 native_repr_res native_repr_args)
+                                                       (before typing/primitive.ml(131):4985-5178
+                                                         (makeblock 0 (*,int,*,*,*,*)
+                                                           name arity
+                                                           (not noalloc)
+                                                           native_name
+                                                           native_repr_args
+                                                           native_repr_res)))))))))))))))))))))))))
+        (letrec
+          (add_native_repr_attributes
+             (function ty attrs
+               (funct-body typing/primitive.ml(140)<ghost>:5233-5620
+                 (before typing/primitive.ml(141):5246-5620
+                   (let (*match* = ty *match* = attrs)
+                     (catch
+                       (catch
+                         (switch *match*
+                          case tag 1:
+                           (if *match*
+                             (let
+                               (rest =a (field 1 *match*)
+                                attr_opt =a (field 0 *match*)
+                                b =a (field 2 *match*)
+                                a =a (field 1 *match*)
+                                label =a (field 0 *match*))
+                               (before typing/primitive.ml(143):5321-5503
+                                 (let
+                                   (b =
+                                      (after typing/primitive.ml(143):5329-5362
+                                        (apply add_native_repr_attributes b
+                                          rest)))
+                                   (before typing/primitive.ml(144):5370-5503
+                                     (let
+                                       (a =
+                                          (if attr_opt
+                                            (let (attr =a (field 0 attr_opt))
+                                              (before typing/primitive.ml(147):5443-5467
+                                                (makeblock 14 a attr)))
+                                            (before typing/primitive.ml(146):5420-5421
+                                              a)))
+                                       (before typing/primitive.ml(149):5479-5503
+                                         (makeblock 1 label a b)))))))
+                             (exit 28))
+                          default: (exit 29))
+                        with (29)
+                         (if *match*
+                           (let (*match* =a (field 0 *match*))
+                             (if *match*
+                               (let (*match* =a (field 1 *match*))
+                                 (if *match* (exit 28)
+                                   (let (attr =a (field 0 *match*))
+                                     (before typing/primitive.ml(150):5526-5551
+                                       (makeblock 14 ty attr)))))
+                               (exit 28)))
+                           (exit 28)))
+                      with (28)
+                       (before typing/primitive.ml(152):5565-5620
+                         (seq
+                           (if
+                             (after typing/primitive.ml(152):5572-5612
+                               (apply (field 27 (global Stdlib__list!))
+                                 (function x
+                                   (funct-body typing/primitive.ml(152):5586-5605
+                                     (before typing/primitive.ml(152):5596-5604
+                                       (== x 0a))))
+                                 attrs))
+                             0a
+                             (raise
+                               (after typing/primitive.ml(152):5565-5612
+                                 (makeblock 0 (global Assert_failure!)
+                                   [0: "typing/primitive.ml" 152 4]))))
+                           (before typing/primitive.ml(153):5618-5620 ty)))))))))
+          (let
+            (oattr_unboxed = [0: "unboxed"]
+             oattr_untagged = [0: "untagged"]
+             oattr_noalloc = [0: "noalloc"]
+             print =
+               (function p osig_val_decl
+                 (funct-body typing/primitive.ml(159)<ghost>:5776-6845
+                   (before typing/primitive.ml(160):5796-6845
+                     (let
+                       (prims =
+                          (if
+                            (after typing/primitive.ml(161):5815-5839
+                              (caml_string_notequal (field 3 p) ""))
+                            (before typing/primitive.ml(162):5851-5884
+                              (makeblock 0 (field 0 p)
+                                (makeblock 0 (field 3 p) 0a)))
+                            (before typing/primitive.ml(164):5900-5913
+                              (makeblock 0 (field 0 p) 0a))))
+                       (before typing/primitive.ml(166):5921-6845
+                         (let
+                           (for_all =
+                              (function f
+                                (funct-body typing/primitive.ml(166)<ghost>:5933-6007
+                                  (before typing/primitive.ml(167):5941-6007
+                                    (&&
+                                      (after typing/primitive.ml(167):5941-5979
+                                        (apply
+                                          (field 27 (global Stdlib__list!)) f
+                                          (field 4 p)))
+                                      (after typing/primitive.ml(167):5983-6007
+                                        (apply f (field 5 p))))))))
+                           (before typing/primitive.ml(169):6015-6845
+                             (let
+                               (all_unboxed =
+                                  (after typing/primitive.ml(169):6033-6051
+                                    (apply for_all is_unboxed)))
+                               (before typing/primitive.ml(170):6057-6845
+                                 (let
+                                   (all_untagged =
+                                      (after typing/primitive.ml(170):6076-6095
+                                        (apply for_all is_untagged)))
+                                   (before typing/primitive.ml(171):6101-6845
+                                     (let
+                                       (attrs =
+                                          (if (field 2 p)
+                                            (before typing/primitive.ml(171):6134-6136
+                                              0a)
+                                            (before typing/primitive.ml(171):6142-6157
+                                              (makeblock 0 oattr_noalloc 0a))))
+                                       (before typing/primitive.ml(172):6163-6845
+                                         (let
+                                           (attrs =
+                                              (if all_unboxed
+                                                (before typing/primitive.ml(174):6205-6227
+                                                  (makeblock 0 oattr_unboxed
+                                                    attrs))
+                                                (before typing/primitive.ml(175):6237-6308
+                                                  (if all_untagged
+                                                    (before typing/primitive.ml(176):6264-6287
+                                                      (makeblock 0
+                                                        oattr_untagged attrs))
+                                                    (before typing/primitive.ml(178):6303-6308
+                                                      attrs)))))
+                                           (before typing/primitive.ml(180):6316-6845
+                                             (let
+                                               (attr_of_native_repr =
+                                                  (function param
+                                                    (funct-body typing/primitive.ml(180):6342-6552
+                                                      (catch
+                                                        (if (isint param)
+                                                          (switch* param
+                                                           case int 0:
+                                                            (before typing/primitive.ml(181):6379-6383
+                                                              0a)
+                                                           case int 1:
+                                                            (exit 30)
+                                                           case int 2:
+                                                            (before typing/primitive.ml(184):6502-6552
+                                                              (if
+                                                                all_untagged
+                                                                (before typing/primitive.ml(184):6523-6527
+                                                                  0a)
+                                                                (before typing/primitive.ml(184):6533-6552
+                                                                  (makeblock 0
+                                                                    oattr_untagged)))))
+                                                          (exit 30))
+                                                       with (30)
+                                                        (before typing/primitive.ml(183):6431-6479
+                                                          (if all_unboxed
+                                                            (before typing/primitive.ml(183):6451-6455
+                                                              0a)
+                                                            (before typing/primitive.ml(183):6461-6479
+                                                              (makeblock 0
+                                                                oattr_unboxed))))))))
+                                               (before typing/primitive.ml(186):6560-6845
+                                                 (let
+                                                   (type_attrs =
+                                                      (after typing/primitive.ml(187):6581-6684
+                                                        (apply
+                                                          (field 36
+                                                            (global Stdlib!))
+                                                          (after typing/primitive.ml(187):6581-6633
+                                                            (apply
+                                                              (field 16
+                                                                (global Stdlib__list!))
+                                                              attr_of_native_repr
+                                                              (field 4 p)))
+                                                          (makeblock 0
+                                                            (after typing/primitive.ml(188):6641-6683
+                                                              (apply
+                                                                attr_of_native_repr
+                                                                (field 5 p)))
+                                                            0a))))
+                                                   (before typing/primitive.ml(190):6692-6845
+                                                     (let
+                                                       (init = osig_val_decl)
+                                                       (makeblock 0
+                                                         (field 0 init)
+                                                         (after typing/primitive.ml(192):6753-6814
+                                                           (apply
+                                                             add_native_repr_attributes
+                                                             (field 1
+                                                               osig_val_decl)
+                                                             type_attrs))
+                                                         prims attrs)))))))))))))))))))))
+             native_name =
+               (function p
+                 (funct-body typing/primitive.ml(195)<ghost>:6863-6941
+                   (before typing/primitive.ml(196):6869-6941
+                     (if
+                       (after typing/primitive.ml(196):6872-6896
+                         (caml_string_notequal (field 3 p) ""))
+                       (before typing/primitive.ml(197):6904-6922
+                         (field 3 p))
+                       (before typing/primitive.ml(198):6930-6941
+                         (field 0 p))))))
+             byte_name =
+               (function p
+                 (funct-body typing/primitive.ml(200)<ghost>:6957-6974
+                   (before typing/primitive.ml(201):6963-6974 (field 0 p))))
+             native_name_is_external =
+               (function p
+                 (funct-body typing/primitive.ml(203)<ghost>:7004-7067
+                   (before typing/primitive.ml(204):7010-7067
+                     (&&
+                       (after typing/primitive.ml(204):7010-7034
+                         (caml_string_notequal (field 3 p) ""))
+                       (!=
+                         (after typing/primitive.ml(204):7038-7060
+                           (string.get (field 3 p) 0))
+                         '%')))))
+             report_error =
+               (function ppf err
+                 (funct-body typing/primitive.ml(206)<ghost>:7086-7640
+                   (before typing/primitive.ml(207):7098-7640
+                     (switch* err
+                      case int 0:
+                       (before typing/primitive.ml(209):7167-7280
+                         (after typing/primitive.ml(209):7167-7280
+                           (apply (field 122 (global Stdlib__format!)) ppf
+                             [0:
+                              [11:
+                               "Cannot use \"float\" in conjunction with ["
+                               [12:
+                                '@'
+                                [11:
+                                 "unboxed]/[" [12: '@' [11: "untagged]." 0a]]]]]
+                              "Cannot use \"float\" in conjunction with [%@unboxed]/[%@untagged]."])))
+                      case int 1:
+                       (before typing/primitive.ml(212):7333-7437
+                         (after typing/primitive.ml(212):7333-7437
+                           (apply (field 122 (global Stdlib__format!)) ppf
+                             [0:
+                              [11:
+                               "Cannot use \"noalloc\" in conjunction with ["
+                               [12: '@' [12: '@' [11: "noalloc]." 0a]]]]
+                              "Cannot use \"noalloc\" in conjunction with [%@%@noalloc]."])))
+                      case int 2:
+                       (before typing/primitive.ml(215):7489-7640
+                         (after typing/primitive.ml(215):7489-7640
+                           (apply (field 122 (global Stdlib__format!)) ppf
+                             [0:
+                              [12:
+                               '['
+                               [17:
+                                [2: 'T']
+                                [11:
+                                 "he native code version of the primitive is mandatory"
+                                 [17:
+                                  [0: "@ " 1 0]
+                                  [11:
+                                   "when attributes ["
+                                   [12:
+                                    '@'
+                                    [11:
+                                     "untagged] or ["
+                                     [12:
+                                      '@'
+                                      [11:
+                                       "unboxed] are present." [17: 0a 0a]]]]]]]]]]
+                              "[@The native code version of the primitive is mandatory@ when attributes [%@untagged] or [%@unboxed] are present.@]"])))))))
+             *match* =
+               (after typing/primitive.ml(220):7653-7820
+                 (apply (field 46 (global Location!))
+                   (function param
+                     (funct-body typing/primitive.ml(221):7688-7820
+                       (let (tag =a (field 0 param))
+                         (if (== tag Error)
+                           (let
+                             (err =a (field 2 param) loc =a (field 1 param))
+                             (before typing/primitive.ml(223):7734-7788
+                               (makeblock 0
+                                 (after typing/primitive.ml(223):7739-7788
+                                   (apply (field 44 (global Location!))
+                                     (makeblock 0 loc) 0a report_error err)))))
+                           (before typing/primitive.ml(225):7810-7814 0a))))))))
+            (pseudo _none_(0)<ghost>:-1--1
+              (makeblock 0 simple make parse_declaration print native_name
+                byte_name native_name_is_external Error))))))))

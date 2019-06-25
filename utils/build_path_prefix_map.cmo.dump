@@ -1,0 +1,432 @@
+(setglobal Build_path_prefix_map!
+  (let
+    (errorf =
+       (function fmt
+         (funct-body utils/build_path_prefix_map.ml(20)<ghost>:1164-1211
+           (before utils/build_path_prefix_map.ml(20):1170-1211
+             (after utils/build_path_prefix_map.ml(20):1170-1211
+               (apply (field 10 (global Stdlib__printf!))
+                 (function err
+                   (funct-body utils/build_path_prefix_map.ml(20):1185-1207
+                     (before utils/build_path_prefix_map.ml(20):1197-1206
+                       (makeblock 1 err))))
+                 fmt)))))
+     encode_prefix =
+       (function str
+         (funct-body utils/build_path_prefix_map.ml(22)<ghost>:1231-1521
+           (before utils/build_path_prefix_map.ml(23):1239-1521
+             (let
+               (buf =
+                  (after utils/build_path_prefix_map.ml(23):1249-1282
+                    (apply (field 0 (global Stdlib__buffer!))
+                      (string.length str))))
+               (before utils/build_path_prefix_map.ml(24):1288-1521
+                 (let
+                   (push_char =
+                      (function c[int]
+                        (funct-body utils/build_path_prefix_map.ml(24):1304-1465
+                          (if (!= c 37)
+                            (if (!= c 58)
+                              (if (!= c 61)
+                                (before utils/build_path_prefix_map.ml(28):1444-1465
+                                  (after utils/build_path_prefix_map.ml(28):1444-1465
+                                    (apply (field 9 (global Stdlib__buffer!))
+                                      buf c)))
+                                (before utils/build_path_prefix_map.ml(26):1366-1392
+                                  (after utils/build_path_prefix_map.ml(26):1366-1392
+                                    (apply
+                                      (field 13 (global Stdlib__buffer!)) buf
+                                      "%+"))))
+                              (before utils/build_path_prefix_map.ml(27):1406-1432
+                                (after utils/build_path_prefix_map.ml(27):1406-1432
+                                  (apply (field 13 (global Stdlib__buffer!))
+                                    buf "%."))))
+                            (before utils/build_path_prefix_map.ml(25):1326-1352
+                              (after utils/build_path_prefix_map.ml(25):1326-1352
+                                (apply (field 13 (global Stdlib__buffer!))
+                                  buf "%#")))))))
+                   (before utils/build_path_prefix_map.ml(30):1473-1521
+                     (seq
+                       (after utils/build_path_prefix_map.ml(30):1473-1498
+                         (apply (field 7 (global Stdlib__string!)) push_char
+                           str))
+                       (before utils/build_path_prefix_map.ml(31):1502-1521
+                         (after utils/build_path_prefix_map.ml(31):1502-1521
+                           (apply (field 1 (global Stdlib__buffer!)) buf)))))))))))
+     decode_prefix =
+       (function str
+         (funct-body utils/build_path_prefix_map.ml(33)<ghost>:1541-2259
+           (before utils/build_path_prefix_map.ml(34):1549-2259
+             (let
+               (buf =
+                  (after utils/build_path_prefix_map.ml(34):1559-1592
+                    (apply (field 0 (global Stdlib__buffer!))
+                      (string.length str))))
+               (before utils/build_path_prefix_map.ml(35):1598-2259
+                 (letrec
+                   (loop
+                      (function i[int]
+                        (funct-body utils/build_path_prefix_map.ml(35)<ghost>:1611-2247
+                          (before utils/build_path_prefix_map.ml(36):1619-2247
+                            (if (>= i (string.length str))
+                              (before utils/build_path_prefix_map.ml(37):1654-1678
+                                (makeblock 0
+                                  (after utils/build_path_prefix_map.ml(37):1657-1678
+                                    (apply (field 1 (global Stdlib__buffer!))
+                                      buf))))
+                              (before utils/build_path_prefix_map.ml(38):1688-2247
+                                (let
+                                  (c =
+                                     (after utils/build_path_prefix_map.ml(38):1694-1701
+                                       (string.get str i)))
+                                  (catch
+                                    (let (switcher =a (-58+ c))
+                                      (if (not (isout 3 switcher))
+                                        (let (switcher =a (-1+ switcher))
+                                          (if (isout 1 switcher)
+                                            (before utils/build_path_prefix_map.ml(40):1743-1792
+                                              (after utils/build_path_prefix_map.ml(40):1743-1792
+                                                (apply errorf
+                                                  [0:
+                                                   [11:
+                                                    "invalid character '"
+                                                    [0:
+                                                     [11:
+                                                      "' in key or value" 0a]]]
+                                                   "invalid character '%c' in key or value"]
+                                                  c)))
+                                            (exit 4)))
+                                        (if (!= switcher -21) (exit 4)
+                                          (before utils/build_path_prefix_map.ml(42):1816-2182
+                                            (let
+                                              (push =
+                                                 (function c[int]
+                                                   (funct-body utils/build_path_prefix_map.ml(42)<ghost>:1825-1864
+                                                     (before utils/build_path_prefix_map.ml(42):1829-1864
+                                                       (seq
+                                                         (after utils/build_path_prefix_map.ml(42):1829-1850
+                                                           (apply
+                                                             (field 9
+                                                               (global Stdlib__buffer!))
+                                                             buf c))
+                                                         (before utils/build_path_prefix_map.ml(42):1852-1864
+                                                           (after utils/build_path_prefix_map.ml(42):1852-1864
+                                                             (apply loop
+                                                               (+ i 2)))))))))
+                                              (before utils/build_path_prefix_map.ml(43):1876-2182
+                                                (if
+                                                  (== (+ i 1)
+                                                    (string.length str))
+                                                  (before utils/build_path_prefix_map.ml(44):1920-1974
+                                                    (after utils/build_path_prefix_map.ml(44):1920-1974
+                                                      (apply errorf
+                                                        [0:
+                                                         [11:
+                                                          "invalid encoded string "
+                                                          [3:
+                                                           0a
+                                                           [11:
+                                                            " (trailing '"
+                                                            [12:
+                                                             '%'
+                                                             [11: "')" 0a]]]]]
+                                                         "invalid encoded string %S (trailing '%%')"]
+                                                        str)))
+                                                  (before utils/build_path_prefix_map.ml(45):1988-2182
+                                                    (let
+                                                      (c =
+                                                         (after utils/build_path_prefix_map.ml(45):2000-2011
+                                                           (string.get str
+                                                             (+ i 1))))
+                                                      (catch
+                                                        (let
+                                                          (switcher =a
+                                                             (-35+ c))
+                                                          (if
+                                                            (isout 11
+                                                              switcher)
+                                                            (exit 2)
+                                                            (switch* switcher
+                                                             case int 0:
+                                                              (before utils/build_path_prefix_map.ml(46):2038-2046
+                                                                (after utils/build_path_prefix_map.ml(46):2038-2046
+                                                                  (apply push
+                                                                    '%')))
+                                                             case int 1:
+                                                              (exit 2)
+                                                             case int 2:
+                                                              (exit 2)
+                                                             case int 3:
+                                                              (exit 2)
+                                                             case int 4:
+                                                              (exit 2)
+                                                             case int 5:
+                                                              (exit 2)
+                                                             case int 6:
+                                                              (exit 2)
+                                                             case int 7:
+                                                              (exit 2)
+                                                             case int 8:
+                                                              (before utils/build_path_prefix_map.ml(47):2068-2076
+                                                                (after utils/build_path_prefix_map.ml(47):2068-2076
+                                                                  (apply push
+                                                                    '=')))
+                                                             case int 9:
+                                                              (exit 2)
+                                                             case int 10:
+                                                              (exit 2)
+                                                             case int 11:
+                                                              (before utils/build_path_prefix_map.ml(48):2098-2106
+                                                                (after utils/build_path_prefix_map.ml(48):2098-2106
+                                                                  (apply push
+                                                                    ':'))))))
+                                                       with (2)
+                                                        (before utils/build_path_prefix_map.ml(49):2126-2170
+                                                          (after utils/build_path_prefix_map.ml(49):2126-2170
+                                                            (apply errorf
+                                                              [0:
+                                                               [11:
+                                                                "invalid "
+                                                                [12:
+                                                                 '%'
+                                                                 [11:
+                                                                  "-escaped character '"
+                                                                  [0:
+                                                                   [12:
+                                                                    '\'' 0a]]]]]
+                                                               "invalid %%-escaped character '%c'"]
+                                                              c)))))))))))))
+                                   with (4)
+                                    (let (c =a[int] c)
+                                      (before utils/build_path_prefix_map.ml(52):2204-2247
+                                        (seq
+                                          (after utils/build_path_prefix_map.ml(52):2204-2225
+                                            (apply
+                                              (field 9
+                                                (global Stdlib__buffer!))
+                                              buf c))
+                                          (before utils/build_path_prefix_map.ml(53):2235-2247
+                                            (after utils/build_path_prefix_map.ml(53):2235-2247
+                                              (apply loop (+ i 1)))))))))))))))
+                   (before utils/build_path_prefix_map.ml(54):2253-2259
+                     (after utils/build_path_prefix_map.ml(54):2253-2259
+                       (apply loop 0)))))))))
+     encode_pair =
+       (function param
+         (funct-body utils/build_path_prefix_map.ml(58)<ghost>:2336-2421
+           (let (source =a (field 1 param) target =a (field 0 param))
+             (before utils/build_path_prefix_map.ml(59):2359-2421
+               (after utils/build_path_prefix_map.ml(59):2359-2421
+                 (apply (field 6 (global Stdlib__string!)) "="
+                   (makeblock 0
+                     (after utils/build_path_prefix_map.ml(59):2378-2398
+                       (apply encode_prefix target))
+                     (makeblock 0
+                       (after utils/build_path_prefix_map.ml(59):2400-2420
+                         (apply encode_prefix source))
+                       0a))))))))
+     decode_pair =
+       (function str
+         (funct-body utils/build_path_prefix_map.ml(61)<ghost>:2439-2924
+           (before utils/build_path_prefix_map.ml(62):2447-2924
+             (catch
+               (try
+                 (exit 7
+                   (after utils/build_path_prefix_map.ml(62):2453-2473
+                     (apply (field 13 (global Stdlib__string!)) str '=')))
+                with exn
+                 (if (== exn (field 7 (global Stdlib!)))
+                   (before utils/build_path_prefix_map.ml(64):2510-2566
+                     (after utils/build_path_prefix_map.ml(64):2510-2566
+                       (apply errorf
+                         [0:
+                          [11:
+                           "invalid key/value pair "
+                           [3: 0a [11: ", no '=' separator" 0a]]]
+                          "invalid key/value pair %S, no '=' separator"]
+                         str)))
+                   (reraise exn)))
+              with (7 equal_pos[int])
+               (before utils/build_path_prefix_map.ml(66):2588-2924
+                 (let
+                   (encoded_target =
+                      (after utils/build_path_prefix_map.ml(66):2609-2635
+                        (apply (field 3 (global Stdlib__string!)) str 0
+                          equal_pos)))
+                   (before utils/build_path_prefix_map.ml(67):2643-2924
+                     (let
+                       (encoded_source =
+                          (after utils/build_path_prefix_map.ml(68):2670-2736
+                            (apply (field 3 (global Stdlib__string!)) str
+                              (+ equal_pos 1)
+                              (- (- (string.length str) equal_pos) 1))))
+                       (before utils/build_path_prefix_map.ml(69):2744-2924
+                         (let
+                           (*match* =
+                              (after utils/build_path_prefix_map.ml(69):2750-2778
+                                (apply decode_prefix encoded_target))
+                            *match* =
+                              (after utils/build_path_prefix_map.ml(69):2780-2808
+                                (apply decode_prefix encoded_source))
+                            *match* = *match*
+                            *match* = *match*)
+                           (catch
+                             (switch* *match*
+                              case tag 0:
+                               (let (target =a (field 0 *match*))
+                                 (switch* *match*
+                                  case tag 0:
+                                   (let (source =a (field 0 *match*))
+                                     (before utils/build_path_prefix_map.ml(70):2844-2865
+                                       (makeblock 0
+                                         (makeblock 0 target source))))
+                                  case tag 1:
+                                   (let (err =a *match*) (exit 5 err))))
+                              case tag 1: (let (err =a *match*) (exit 5 err)))
+                            with (5 err)
+                             (before utils/build_path_prefix_map.ml(71):2921-2924
+                               err))))))))))))
+     encode_map =
+       (function map
+         (funct-body utils/build_path_prefix_map.ml(75)<ghost>:2970-3112
+           (before utils/build_path_prefix_map.ml(76):2978-3112
+             (let
+               (encode_elem =
+                  (function param
+                    (funct-body utils/build_path_prefix_map.ml(76):2996-3057
+                      (if param
+                        (let (pair =a (field 0 param))
+                          (before utils/build_path_prefix_map.ml(78):3041-3057
+                            (after utils/build_path_prefix_map.ml(78):3041-3057
+                              (apply encode_pair pair))))
+                        (before utils/build_path_prefix_map.ml(77):3019-3021
+                          "")))))
+               (before utils/build_path_prefix_map.ml(80):3065-3112
+                 (after utils/build_path_prefix_map.ml(80):3065-3112
+                   (apply (field 6 (global Stdlib__string!)) ":"
+                     (after utils/build_path_prefix_map.ml(80):3065-3089
+                       (apply (field 16 (global Stdlib__list!)) encode_elem
+                         map)))))))))
+     decode_map =
+       (function str
+         (funct-body utils/build_path_prefix_map.ml(83)<ghost>:3129-3521
+           (before utils/build_path_prefix_map.ml(84):3137-3521
+             (let
+               (Shortcut = (makeblock 248 "Shortcut" (caml_fresh_oo_id 0))
+                decode_or_empty =
+                  (function pair
+                    (funct-body utils/build_path_prefix_map.ml(85):3204-3366
+                      (stringswitch pair
+                       case "":
+                        (before utils/build_path_prefix_map.ml(86):3225-3229
+                          0a)
+                       default:
+                        (before utils/build_path_prefix_map.ml(88):3250-3366
+                          (let
+                            (*match* =
+                               (after utils/build_path_prefix_map.ml(88):3262-3278
+                                 (apply decode_pair pair)))
+                            (switch* *match*
+                             case tag 0:
+                              (let (str =a (field 0 *match*))
+                                (before utils/build_path_prefix_map.ml(89):3304-3312
+                                  (makeblock 0 str)))
+                             case tag 1:
+                              (let (err =a (field 0 *match*))
+                                (before utils/build_path_prefix_map.ml(90):3336-3356
+                                  (raise
+                                    (after utils/build_path_prefix_map.ml(90):3342-3356
+                                      (makeblock 0 Shortcut err))))))))))))
+               (before utils/build_path_prefix_map.ml(93):3374-3521
+                 (let
+                   (pairs =
+                      (after utils/build_path_prefix_map.ml(93):3386-3414
+                        (apply (field 34 (global Stdlib__string!)) ':' str)))
+                   (before utils/build_path_prefix_map.ml(94):3420-3521
+                     (catch
+                       (try
+                         (exit 9
+                           (after utils/build_path_prefix_map.ml(94):3426-3456
+                             (apply (field 16 (global Stdlib__list!))
+                               decode_or_empty pairs)))
+                        with exn
+                         (let (tag =a (field 0 exn))
+                           (if (== tag Shortcut)
+                             (let (err =a (field 1 exn))
+                               (before utils/build_path_prefix_map.ml(95):3494-3503
+                                 (makeblock 1 err)))
+                             (reraise exn))))
+                      with (9 map)
+                       (before utils/build_path_prefix_map.ml(96):3515-3521
+                         (makeblock 0 map))))))))))
+     rewrite_opt =
+       (function prefix_map path
+         (funct-body utils/build_path_prefix_map.ml(98)<ghost>:3539-4116
+           (before utils/build_path_prefix_map.ml(99):3559-4116
+             (let
+               (is_prefix =
+                  (function param
+                    (funct-body utils/build_path_prefix_map.ml(99):3575-3761
+                      (if param
+                        (let
+                          (*match* =a (field 0 param)
+                           source =a (field 1 *match*))
+                          (before utils/build_path_prefix_map.ml(102):3647-3761
+                            (&&
+                              (<= (string.length source)
+                                (string.length path))
+                              (after utils/build_path_prefix_map.ml(103):3699-3761
+                                (apply (field 33 (global Stdlib__string!))
+                                  source
+                                  (after utils/build_path_prefix_map.ml(103):3719-3761
+                                    (apply (field 3 (global Stdlib__string!))
+                                      path 0 (string.length source))))))))
+                        (before utils/build_path_prefix_map.ml(100):3598-3603
+                          0a)))))
+               (before utils/build_path_prefix_map.ml(105):3769-4116
+                 (catch
+                   (try
+                     (exit 12
+                       (after utils/build_path_prefix_map.ml(106):3779-3899
+                         (apply (field 33 (global Stdlib__list!)) is_prefix
+                           (after utils/build_path_prefix_map.ml(108):3878-3899
+                             (apply (field 8 (global Stdlib__list!))
+                               prefix_map)))))
+                    with exn
+                     (if (== exn (field 7 (global Stdlib!)))
+                       (before utils/build_path_prefix_map.ml(110):3934-3938
+                         0a)
+                       (reraise exn)))
+                  with (12 val)
+                   (if val
+                     (let
+                       (*match* =a (field 0 val)
+                        source =a (field 1 *match*)
+                        target =a (field 0 *match*))
+                       (before utils/build_path_prefix_map.ml(113):3993-4116
+                         (makeblock 0
+                           (after utils/build_path_prefix_map.ml(113):3998-4116
+                             (apply (field 27 (global Stdlib!)) target
+                               (after utils/build_path_prefix_map.ml(113):4008-4115
+                                 (apply (field 3 (global Stdlib__string!))
+                                   path (string.length source)
+                                   (- (string.length path)
+                                     (string.length source)))))))))
+                     (before utils/build_path_prefix_map.ml(111):3951-3955
+                       0a))))))))
+     rewrite =
+       (function prefix_map path
+         (funct-body utils/build_path_prefix_map.ml(116)<ghost>:4130-4227
+           (before utils/build_path_prefix_map.ml(117):4150-4227
+             (let
+               (*match* =
+                  (after utils/build_path_prefix_map.ml(117):4156-4183
+                    (apply rewrite_opt prefix_map path)))
+               (if *match*
+                 (let (path =a (field 0 *match*))
+                   (before utils/build_path_prefix_map.ml(119):4223-4227
+                     path))
+                 (before utils/build_path_prefix_map.ml(118):4201-4205 path)))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 encode_prefix decode_prefix encode_pair decode_pair
+        encode_map decode_map rewrite_opt rewrite))))

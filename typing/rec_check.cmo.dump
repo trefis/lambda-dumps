@@ -1,0 +1,2059 @@
+(setglobal Rec_check!
+  (let
+    (Illegal_expr =
+       (makeblock 248 "Rec_check.Illegal_expr" (caml_fresh_oo_id 0))
+     is_ref =
+       (function param
+         (funct-body typing/rec_check.ml(111):4603-4773
+           (let (*match* =a (field 1 param))
+             (catch
+               (switch *match*
+                case tag 0:
+                 (let
+                   (*match* =a (field 0 *match*)
+                    *match* =a (field 0 *match*))
+                   (stringswitch *match*
+                    case "%makemutable":
+                     (let (*match* =a (field 1 *match*))
+                       (if (!= *match* 1) (exit 1)
+                         (before typing/rec_check.ml(115):4754-4758 1a)))
+                    default: (exit 1)))
+                default: (exit 1))
+              with (1) (before typing/rec_check.ml(116):4768-4773 0a)))))
+     is_abstracted_arg =
+       (function param
+         (funct-body typing/rec_check.ml(120):4932-4987
+           (let (*match* =a (field 1 param))
+             (if *match* (before typing/rec_check.ml(122):4982-4987 0a)
+               (before typing/rec_check.ml(121):4958-4962 1a)))))
+     classify_expression =
+       (letrec
+         (classify_expression
+            (function env e
+              (funct-body typing/rec_check.ml(145)<ghost>:5705-7233
+                (before typing/rec_check.ml(145):5713-7233
+                  (let (*match* = (field 0 e))
+                    (catch
+                      (catch
+                        (catch
+                          (catch
+                            (switch *match*
+                             case tag 0:
+                              (let (path =a (field 0 *match*))
+                                (before typing/rec_check.ml(151):5944-5966
+                                  (after typing/rec_check.ml(151):5944-5966
+                                    (apply classify_path env path))))
+                             case tag 2:
+                              (let
+                                (e =a (field 2 *match*)
+                                 vb =a (field 1 *match*)
+                                 rec_flag =a (field 0 *match*))
+                                (before typing/rec_check.ml(148):5816-5902
+                                  (let
+                                    (env =
+                                       (after typing/rec_check.ml(148):5826-5865
+                                         (apply classify_value_bindings
+                                           rec_flag env vb)))
+                                    (before typing/rec_check.ml(149):5877-5902
+                                      (after typing/rec_check.ml(149):5877-5902
+                                        (apply classify_expression env e))))))
+                             case tag 4:
+                              (let
+                                (*match* =a (field 0 *match*)
+                                 *match* =a (field 0 *match*))
+                                (catch
+                                  (switch *match*
+                                   case tag 0:
+                                    (let (vd =a (field 2 *match*))
+                                      (before typing/rec_check.ml(172):6544-6553
+                                        (if
+                                          (after typing/rec_check.ml(172):6544-6553
+                                            (apply is_ref vd))
+                                          (before typing/rec_check.ml(173):6565-6571
+                                            0a)
+                                          (exit 8))))
+                                   default: (exit 8))
+                                 with (8)
+                                  (let (args =a (field 1 *match*))
+                                    (before typing/rec_check.ml(175):6609-6643
+                                      (if
+                                        (after typing/rec_check.ml(175):6609-6643
+                                          (apply
+                                            (field 28 (global Stdlib__list!))
+                                            is_abstracted_arg args))
+                                        (before typing/rec_check.ml(176):6655-6661
+                                          0a)
+                                        (before typing/rec_check.ml(178):6692-6699
+                                          1a))))))
+                             case tag 5: (exit 4)
+                             case tag 6: (exit 4)
+                             case tag 8:
+                              (let
+                                (*match* =a (field 1 *match*)
+                                 *match* =a (field 5 *match*))
+                                (catch
+                                  (if (isint *match*)
+                                    (let (*match* =a (field 2 *match*))
+                                      (if *match*
+                                        (let (*match* =a (field 1 *match*))
+                                          (if *match* (exit 5)
+                                            (let (e =a (field 0 *match*))
+                                              (before typing/rec_check.ml(161):6220-6245
+                                                (after typing/rec_check.ml(161):6220-6245
+                                                  (apply classify_expression
+                                                    env e))))))
+                                        (exit 5)))
+                                    (exit 5))
+                                 with (5)
+                                  (before typing/rec_check.ml(163):6280-6286
+                                    0a)))
+                             case tag 10:
+                              (let (*match* =a (field 0 *match*))
+                                (catch
+                                  (let (len =a (array.length[addr] *match*))
+                                    (if (!= len 1) (exit 6)
+                                      (let
+                                        (*match* =o
+                                           (array.unsafe_get[addr] *match* 0)
+                                         *match* =a (field 1 *match*))
+                                        (switch* *match*
+                                         case tag 0: (exit 6)
+                                         case tag 1:
+                                          (let (*match* =a (field 1 *match*))
+                                            (switch *match*
+                                             case tag 0:
+                                              (let (e =a (field 1 *match*))
+                                                (before typing/rec_check.ml(167):6411-6436
+                                                  (after typing/rec_check.ml(167):6411-6436
+                                                    (apply
+                                                      classify_expression env
+                                                      e))))
+                                             default: (exit 6)))))))
+                                 with (6)
+                                  (before typing/rec_check.ml(169):6468-6474
+                                    0a)))
+                             case tag 11: (exit 4)
+                             case tag 14: (exit 4)
+                             case tag 15: (exit 9)
+                             case tag 18: (exit 4)
+                             case tag 22: (exit 4)
+                             case tag 23:
+                              (let (e =a (field 4 *match*)) (exit 2 e))
+                             case tag 24: (exit 9)
+                             case tag 25: (exit 4)
+                             case tag 29: (exit 4)
+                             case tag 31: (exit 9)
+                             default: (exit 3))
+                           with (9)
+                            (let (e =a (field 1 *match*)) (exit 2 e)))
+                         with (2 e)
+                          (before typing/rec_check.ml(158):6125-6150
+                            (after typing/rec_check.ml(158):6125-6150
+                              (apply classify_expression env e))))
+                       with (3)
+                        (before typing/rec_check.ml(196):7049-7055 0a))
+                     with (4) (before typing/rec_check.ml(206):7226-7233 1a))))))
+           classify_value_bindings
+             (function rec_flag env bindings
+               (funct-body typing/rec_check.ml(207)<ghost>:7264-8095
+                 (before typing/rec_check.ml(219):7697-8095
+                   (seq (ignore rec_flag)
+                     (before typing/rec_check.ml(220):7718-8095
+                       (let (old_env = env)
+                         (before typing/rec_check.ml(221):7743-8095
+                           (let
+                             (add_value_binding =
+                                (function env vb
+                                  (funct-body typing/rec_check.ml(221)<ghost>:7765-8038
+                                    (before typing/rec_check.ml(222):7780-8038
+                                      (let (*match* = (field 0 (field 0 vb)))
+                                        (catch
+                                          (switch *match*
+                                           case tag 0:
+                                            (let (id =a (field 0 *match*))
+                                              (before typing/rec_check.ml(224):7851-7935
+                                                (let
+                                                  (size =
+                                                     (after typing/rec_check.ml(224):7862-7900
+                                                       (apply
+                                                         classify_expression
+                                                         old_env
+                                                         (field 1 vb))))
+                                                  (before typing/rec_check.ml(225):7914-7935
+                                                    (after typing/rec_check.ml(225):7914-7935
+                                                      (apply
+                                                        (field 27
+                                                          (global Ident!))
+                                                        id size env))))))
+                                           default: (exit 10))
+                                         with (10)
+                                          (before typing/rec_check.ml(228):8035-8038
+                                            env)))))))
+                             (before typing/rec_check.ml(230):8050-8095
+                               (after typing/rec_check.ml(230):8050-8095
+                                 (apply (field 20 (global Stdlib__list!))
+                                   add_value_binding env bindings)))))))))))
+           classify_path
+             (function env param
+               (funct-body typing/rec_check.ml(231)<ghost>:8116-9248
+                 (catch
+                   (switch* param
+                    case tag 0:
+                     (let (x =a (field 0 param))
+                       (before typing/rec_check.ml(233):8162-9023
+                         (try
+                           (after typing/rec_check.ml(234):8182-8203
+                             (apply (field 28 (global Ident!)) x env))
+                          with exn
+                           (if (== exn (field 7 (global Stdlib!)))
+                             (before typing/rec_check.ml(250):9004-9011 1a)
+                             (reraise exn)))))
+                    case tag 1: (exit 12)
+                    case tag 2: (exit 12))
+                  with (12) (before typing/rec_check.ml(256):9241-9248 1a)))))
+         (before typing/rec_check.ml(257):9254-9285
+           (after typing/rec_check.ml(257):9254-9285
+             (apply classify_expression (field 26 (global Ident!))))))
+     Mode =
+       (module-defn(Mode) typing/rec_check.ml(262):9329-12606
+         (let
+           (equal = (function prim prim stub (== prim prim))
+            rank =
+              (function param : int
+                (funct-body typing/rec_check.ml(312):11605-11706
+                  (switch* param
+                   case int 0:
+                    (before typing/rec_check.ml(313):11630-11631 0)
+                   case int 1:
+                    (before typing/rec_check.ml(314):11647-11648 1)
+                   case int 2:
+                    (before typing/rec_check.ml(315):11664-11665 2)
+                   case int 3:
+                    (before typing/rec_check.ml(316):11682-11683 3)
+                   case int 4:
+                    (before typing/rec_check.ml(317):11705-11706 4))))
+            join =
+              (function m m'
+                (funct-body typing/rec_check.ml(324)<ghost>:11863-11909
+                  (before typing/rec_check.ml(325):11874-11909
+                    (if
+                      (>=
+                        (after typing/rec_check.ml(325):11877-11883
+                          (apply rank m))
+                        (after typing/rec_check.ml(325):11887-11894
+                          (apply rank m')))
+                      (before typing/rec_check.ml(325):11900-11901 m)
+                      (before typing/rec_check.ml(325):11907-11909 m')))))
+            compose =
+              (function m' m
+                (funct-body typing/rec_check.ml(335)<ghost>:12310-12602
+                  (before typing/rec_check.ml(335):12317-12602
+                    (let (*match* = m' *match* = m)
+                      (catch
+                        (catch
+                          (switch* *match*
+                           case int 0: (exit 13)
+                           case int 1: (exit 15)
+                           case int 2:
+                            (if (!= *match* 3)
+                              (if *match*
+                                (let (m =a *match*)
+                                  (before typing/rec_check.ml(340):12514-12515
+                                    m))
+                                (exit 15))
+                              (before typing/rec_check.ml(339):12455-12460
+                                2a))
+                           case int 3:
+                            (if (!= *match* 3)
+                              (if *match*
+                                (let (m =a *match*)
+                                  (before typing/rec_check.ml(342):12601-12602
+                                    m))
+                                (exit 15))
+                              (before typing/rec_check.ml(341):12540-12546
+                                3a))
+                           case int 4: (exit 15))
+                         with (15)
+                          (if *match*
+                            (if (>= *match* 4)
+                              (before typing/rec_check.ml(337):12396-12407
+                                4a)
+                              (before typing/rec_check.ml(338):12426-12431
+                                1a))
+                            (exit 13)))
+                       with (13)
+                        (before typing/rec_check.ml(336):12365-12371 0a)))))))
+           (pseudo typing/rec_check.ml(262):9343-12606
+             (makeblock 0 equal rank join compose))))
+     Env =
+       (module-defn(Env) typing/rec_check.ml(347):12676-14905
+         (let
+           (M =
+              (module-defn(M) typing/rec_check.ml(389):13969-13995
+                (apply
+                  (let (let = (field 0 (global Stdlib__map!)))
+                    (field 0 (global Stdlib__map!)))
+                  (let (let = (global Ident!)) (makeblock 0 (field 19 let)))))
+            equal =
+              (after typing/rec_check.ml(394):14098-14116
+                (apply (field 10 M) (field 0 Mode)))
+            find =
+              (function id tbl
+                (funct-body typing/rec_check.ml(396)<ghost>:14129-14200
+                  (before typing/rec_check.ml(397):14158-14200
+                    (try
+                      (after typing/rec_check.ml(397):14162-14175
+                        (apply (field 26 M) id tbl))
+                     with exn
+                      (if (== exn (field 7 (global Stdlib!)))
+                        (before typing/rec_check.ml(397):14194-14200 0a)
+                        (reraise exn))))))
+            empty = (field 0 M)
+            join =
+              (function x y
+                (funct-body typing/rec_check.ml(401)<ghost>:14236-14394
+                  (before typing/rec_check.ml(402):14256-14394
+                    (after typing/rec_check.ml(402):14256-14394
+                      (apply (field 12 M)
+                        (function id v tbl
+                          (funct-body typing/rec_check.ml(403):14269-14384
+                            (before typing/rec_check.ml(404):14321-14383
+                              (let
+                                (v' =
+                                   (after typing/rec_check.ml(404):14330-14341
+                                     (apply find id tbl)))
+                                (before typing/rec_check.ml(405):14354-14383
+                                  (after typing/rec_check.ml(405):14354-14383
+                                    (apply (field 3 M) id
+                                      (after typing/rec_check.ml(405):14363-14379
+                                        (apply (field 2 Mode) v v'))
+                                      tbl)))))))
+                        x y)))))
+            join_list =
+              (function li
+                (funct-body typing/rec_check.ml(408)<ghost>:14412-14445
+                  (before typing/rec_check.ml(408):14417-14445
+                    (after typing/rec_check.ml(408):14417-14445
+                      (apply (field 20 (global Stdlib__list!)) join empty li)))))
+            compose =
+              (function m env
+                (funct-body typing/rec_check.ml(410)<ghost>:14461-14499
+                  (before typing/rec_check.ml(411):14473-14499
+                    (after typing/rec_check.ml(411):14473-14499
+                      (apply (field 32 M)
+                        (after typing/rec_check.ml(411):14479-14495
+                          (apply (field 3 Mode) m))
+                        env)))))
+            single =
+              (function id mode
+                (funct-body typing/rec_check.ml(413)<ghost>:14514-14543
+                  (before typing/rec_check.ml(413):14524-14543
+                    (after typing/rec_check.ml(413):14524-14543
+                      (apply (field 3 M) id mode empty)))))
+            unguarded =
+              (function env li
+                (funct-body typing/rec_check.ml(415)<ghost>:14561-14642
+                  (before typing/rec_check.ml(416):14574-14642
+                    (after typing/rec_check.ml(416):14574-14642
+                      (apply (field 35 (global Stdlib__list!))
+                        (function id
+                          (funct-body typing/rec_check.ml(416):14586-14639
+                            (before typing/rec_check.ml(416):14597-14638
+                              (>
+                                (after typing/rec_check.ml(416):14597-14620
+                                  (apply (field 1 Mode)
+                                    (after typing/rec_check.ml(416):14607-14620
+                                      (apply find id env))))
+                                (after typing/rec_check.ml(416):14623-14638
+                                  (apply (field 1 Mode) 2a))))))
+                        li)))))
+            dependent =
+              (function env li
+                (funct-body typing/rec_check.ml(418)<ghost>:14660-14742
+                  (before typing/rec_check.ml(419):14673-14742
+                    (after typing/rec_check.ml(419):14673-14742
+                      (apply (field 35 (global Stdlib__list!))
+                        (function id
+                          (funct-body typing/rec_check.ml(419):14685-14739
+                            (before typing/rec_check.ml(419):14696-14738
+                              (>
+                                (after typing/rec_check.ml(419):14696-14719
+                                  (apply (field 1 Mode)
+                                    (after typing/rec_check.ml(419):14706-14719
+                                      (apply find id env))))
+                                (after typing/rec_check.ml(419):14722-14738
+                                  (apply (field 1 Mode) 0a))))))
+                        li)))))
+            remove = (field 6 M)
+            take =
+              (function id env
+                (funct-body typing/rec_check.ml(423)<ghost>:14780-14817
+                  (before typing/rec_check.ml(423):14789-14817
+                    (makeblock 0
+                      (after typing/rec_check.ml(423):14790-14801
+                        (apply find id env))
+                      (after typing/rec_check.ml(423):14803-14816
+                        (apply remove id env))))))
+            remove_list =
+              (function l env
+                (funct-body typing/rec_check.ml(425)<ghost>:14837-14901
+                  (before typing/rec_check.ml(426):14849-14901
+                    (after typing/rec_check.ml(426):14849-14901
+                      (apply (field 20 (global Stdlib__list!))
+                        (function env id
+                          (funct-body typing/rec_check.ml(426):14864-14895
+                            (before typing/rec_check.ml(426):14879-14894
+                              (after typing/rec_check.ml(426):14879-14894
+                                (apply (field 6 M) id env)))))
+                        env l))))))
+           (pseudo typing/rec_check.ml(388):13960-14905
+             (makeblock 0 single empty find unguarded dependent join
+               join_list compose remove take remove_list equal))))
+     remove_pat =
+       (function pat env
+         (funct-body typing/rec_check.ml(429)<ghost>:14922-14976
+           (before typing/rec_check.ml(430):14934-14976
+             (after typing/rec_check.ml(430):14934-14976
+               (apply (field 10 Env)
+                 (after typing/rec_check.ml(430):14950-14972
+                   (apply (field 8 (global Typedtree!)) pat))
+                 env)))))
+     remove_patlist =
+       (function pats env
+         (funct-body typing/rec_check.ml(432)<ghost>:14997-15045
+           (before typing/rec_check.ml(433):15010-15045
+             (after typing/rec_check.ml(433):15010-15045
+               (apply (field 21 (global Stdlib__list!)) remove_pat pats env)))))
+     option =
+       (function f o m
+         (funct-body typing/rec_check.ml(478):16559-16630
+           (before typing/rec_check.ml(478):16572-16630
+             (if o
+               (let (v =a (field 0 o))
+                 (before typing/rec_check.ml(480):16625-16630
+                   (after typing/rec_check.ml(480):16625-16630 (apply f v m))))
+               (before typing/rec_check.ml(479):16599-16608 (field 1 Env))))))
+     list =
+       (function f li m
+         (funct-body typing/rec_check.ml(482):16692-16779
+           (before typing/rec_check.ml(483):16710-16779
+             (after typing/rec_check.ml(483):16710-16779
+               (apply (field 20 (global Stdlib__list!))
+                 (function env item
+                   (funct-body typing/rec_check.ml(483):16725-16766
+                     (before typing/rec_check.ml(483):16742-16765
+                       (after typing/rec_check.ml(483):16742-16765
+                         (apply (field 5 Env) env
+                           (after typing/rec_check.ml(483):16755-16765
+                             (apply f item m)))))))
+                 (field 1 Env) li)))))
+     array =
+       (function f ar m
+         (funct-body typing/rec_check.ml(485):16843-16931
+           (before typing/rec_check.ml(486):16861-16931
+             (after typing/rec_check.ml(486):16861-16931
+               (apply (field 16 (global Stdlib__array!))
+                 (function env item
+                   (funct-body typing/rec_check.ml(486):16877-16918
+                     (before typing/rec_check.ml(486):16894-16917
+                       (after typing/rec_check.ml(486):16894-16917
+                         (apply (field 5 Env) env
+                           (after typing/rec_check.ml(486):16907-16917
+                             (apply f item m)))))))
+                 (field 1 Env) ar)))))
+     single = (field 0 Env)
+     remove_id =
+       (function id f m
+         (funct-body typing/rec_check.ml(490):17034-17067
+           (before typing/rec_check.ml(490):17048-17067
+             (after typing/rec_check.ml(490):17048-17067
+               (apply (field 8 Env) id
+                 (after typing/rec_check.ml(490):17062-17067 (apply f m)))))))
+     remove_ids =
+       (function ids f m
+         (funct-body typing/rec_check.ml(492):17128-17168
+           (before typing/rec_check.ml(492):17143-17168
+             (after typing/rec_check.ml(492):17143-17168
+               (apply (field 10 Env) ids
+                 (after typing/rec_check.ml(492):17163-17168 (apply f m)))))))
+     join =
+       (function li m
+         (funct-body typing/rec_check.ml(495):17213-17267
+           (before typing/rec_check.ml(495):17225-17267
+             (after typing/rec_check.ml(495):17225-17267
+               (apply (field 6 Env)
+                 (after typing/rec_check.ml(495):17239-17267
+                   (apply (field 16 (global Stdlib__list!))
+                     (function f
+                       (funct-body typing/rec_check.ml(495):17249-17263
+                         (before typing/rec_check.ml(495):17259-17262
+                           (after typing/rec_check.ml(495):17259-17262
+                             (apply f m)))))
+                     li)))))))
+     empty =
+       (function param
+         (funct-body typing/rec_check.ml(497):17281-17299
+           (before typing/rec_check.ml(497):17290-17299 (field 1 Env))))
+     << =
+       (function f inner_mode outer_mode
+         (funct-body typing/rec_check.ml(503):17556-17632
+           (before typing/rec_check.ml(503):17594-17632
+             (after typing/rec_check.ml(503):17594-17632
+               (apply f
+                 (after typing/rec_check.ml(503):17596-17632
+                   (apply (field 3 Mode) outer_mode inner_mode)))))))
+     >> =
+       (function binder term mode
+         (funct-body typing/rec_check.ml(510):17910-17957
+           (before typing/rec_check.ml(510):17934-17957
+             (after typing/rec_check.ml(510):17934-17957
+               (apply binder mode
+                 (after typing/rec_check.ml(510):17946-17957
+                   (apply term mode))))))))
+    (letrec
+      (expression
+         (function exp
+           (funct-body typing/rec_check.ml(518):18177-27473
+             (before typing/rec_check.ml(518):18188-27473
+               (let (*match* = (field 0 exp))
+                 (switch* *match*
+                  case int 0:
+                   (before typing/rec_check.ml(816):27321-27326 empty)
+                  case tag 0:
+                   (let (pth =a (field 0 *match*))
+                     (before typing/rec_check.ml(520):18250-18258
+                       (after typing/rec_check.ml(520):18250-18258
+                         (apply path pth))))
+                  case tag 1:
+                   (before typing/rec_check.ml(557):19479-19484 empty)
+                  case tag 2:
+                   (let
+                     (body =a (field 2 *match*)
+                      bindings =a (field 1 *match*)
+                      rec_flag =a (field 0 *match*))
+                     (before typing/rec_check.ml(528):18470-18521
+                       (after typing/rec_check.ml(528):18470-18521
+                         (apply >>
+                           (after typing/rec_check.ml(528):18470-18502
+                             (apply value_bindings rec_flag bindings))
+                           (after typing/rec_check.ml(528):18506-18521
+                             (apply expression body))))))
+                  case tag 3:
+                   (let (cases =a (field 2 *match*))
+                     (before typing/rec_check.ml(788):26543-26614
+                       (let
+                         (case_env =
+                            (function c m
+                              (funct-body typing/rec_check.ml(788)<ghost>:26556-26576
+                                (before typing/rec_check.ml(788):26562-26576
+                                  (field 0
+                                    (after typing/rec_check.ml(788):26566-26576
+                                      (apply case c m)))))))
+                         (before typing/rec_check.ml(789):26586-26614
+                           (after typing/rec_check.ml(789):26586-26614
+                             (apply <<
+                               (after typing/rec_check.ml(789):26586-26605
+                                 (apply list case_env cases))
+                               1a))))))
+                  case tag 4:
+                   (let (e =a (field 0 *match*) *match* =a (field 0 e))
+                     (catch
+                       (switch *match*
+                        case tag 0:
+                         (let (*match* =a (field 1 *match*))
+                           (if *match*
+                             (let
+                               (*match* =a (field 0 *match*)
+                                *match* =a (field 1 *match*))
+                               (if *match*
+                                 (let (*match* =a (field 1 *match*))
+                                   (if *match* (exit 31)
+                                     (let
+                                       (arg =a (field 0 *match*)
+                                        vd =a (field 2 *match*))
+                                       (before typing/rec_check.ml(568):19833-19842
+                                         (if
+                                           (after typing/rec_check.ml(568):19833-19842
+                                             (apply is_ref vd))
+                                           (before typing/rec_check.ml(574):19944-19967
+                                             (after typing/rec_check.ml(574):19944-19967
+                                               (apply <<
+                                                 (after typing/rec_check.ml(574):19944-19958
+                                                   (apply expression arg))
+                                                 2a)))
+                                           (exit 31))))))
+                                 (exit 31)))
+                             (exit 31)))
+                        default: (exit 31))
+                      with (31)
+                       (let (args =a (field 1 *match*))
+                         (before typing/rec_check.ml(576):20007-20419
+                           (let
+                             (arg =
+                                (function param
+                                  (funct-body typing/rec_check.ml(576)<ghost>:20015-20045
+                                    (let (eo =a (field 1 param))
+                                      (before typing/rec_check.ml(576):20025-20045
+                                        (after typing/rec_check.ml(576):20025-20045
+                                          (apply option expression eo)))))))
+                             (before typing/rec_check.ml(577):20057-20419
+                               (let
+                                 (app_mode =
+                                    (if
+                                      (after typing/rec_check.ml(577):20075-20109
+                                        (apply
+                                          (field 28 (global Stdlib__list!))
+                                          is_abstracted_arg args))
+                                      (before typing/rec_check.ml(581):20321-20326
+                                        2a)
+                                      (before typing/rec_check.ml(582):20342-20353
+                                        4a)))
+                                 (before typing/rec_check.ml(584):20373-20419
+                                   (after typing/rec_check.ml(584):20373-20419
+                                     (apply <<
+                                       (after typing/rec_check.ml(584):20373-20407
+                                         (apply join
+                                           (makeblock 0
+                                             (after typing/rec_check.ml(584):20379-20391
+                                               (apply expression e))
+                                             (makeblock 0
+                                               (after typing/rec_check.ml(584):20393-20406
+                                                 (apply list arg args))
+                                               0a))))
+                                       app_mode))))))))))
+                  case tag 5:
+                   (let (cases =a (field 1 *match*) e =a (field 0 *match*))
+                     (before typing/rec_check.ml(538):18847-19080
+                       (function mode
+                         (funct-body typing/rec_check.ml(538):18847-19080
+                           (before typing/rec_check.ml(539):18868-19079
+                             (let
+                               (*match* =
+                                  (after typing/rec_check.ml(540):18904-18954
+                                    (apply (field 46 (global Stdlib__list!))
+                                      (after typing/rec_check.ml(540):18915-18954
+                                        (apply
+                                          (field 16 (global Stdlib__list!))
+                                          (function c
+                                            (funct-body typing/rec_check.ml(540):18925-18947
+                                              (before typing/rec_check.ml(540):18935-18946
+                                                (after typing/rec_check.ml(540):18935-18946
+                                                  (apply case c mode)))))
+                                          cases))))
+                                pat_modes =a (field 1 *match*)
+                                pat_envs =a (field 0 *match*))
+                               (before typing/rec_check.ml(541):18966-19079
+                                 (let
+                                   (env_e =
+                                      (after typing/rec_check.ml(541):18978-19034
+                                        (apply expression e
+                                          (after typing/rec_check.ml(541):18991-19034
+                                            (apply
+                                              (field 20
+                                                (global Stdlib__list!))
+                                              (field 2 Mode) 0a pat_modes)))))
+                                   (before typing/rec_check.ml(542):19046-19079
+                                     (after typing/rec_check.ml(542):19046-19079
+                                       (apply (field 6 Env)
+                                         (makeblock 0 env_e pat_envs))))))))))))
+                  case tag 6:
+                   (let (cases =a (field 1 *match*) e =a (field 0 *match*))
+                     (before typing/rec_check.ml(757):25407-25515
+                       (let
+                         (case_env =
+                            (function c m
+                              (funct-body typing/rec_check.ml(757)<ghost>:25420-25440
+                                (before typing/rec_check.ml(757):25426-25440
+                                  (field 0
+                                    (after typing/rec_check.ml(757):25430-25440
+                                      (apply case c m)))))))
+                         (before typing/rec_check.ml(758):25450-25515
+                           (after typing/rec_check.ml(758):25450-25515
+                             (apply join
+                               (makeblock 0
+                                 (after typing/rec_check.ml(759):25465-25477
+                                   (apply expression e))
+                                 (makeblock 0
+                                   (after typing/rec_check.ml(760):25487-25506
+                                     (apply list case_env cases))
+                                   0a))))))))
+                  case tag 7:
+                   (let (exprs =a (field 0 *match*))
+                     (before typing/rec_check.ml(586):20452-20482
+                       (after typing/rec_check.ml(586):20452-20482
+                         (apply <<
+                           (after typing/rec_check.ml(586):20452-20473
+                             (apply list expression exprs))
+                           2a))))
+                  case tag 8:
+                   (let
+                     (exprs =a (field 2 *match*) desc =a (field 1 *match*))
+                     (before typing/rec_check.ml(602):21123-21537
+                       (let
+                         (access_constructor =
+                            (let (*match* = (field 5 desc))
+                              (catch
+                                (switch *match*
+                                 case tag 2:
+                                  (let (pth =a (field 0 *match*))
+                                    (before typing/rec_check.ml(605):21228-21251
+                                      (after typing/rec_check.ml(605):21228-21251
+                                        (apply <<
+                                          (after typing/rec_check.ml(605):21228-21236
+                                            (apply path pth))
+                                          4a))))
+                                 default: (exit 27))
+                               with (27)
+                                (before typing/rec_check.ml(606):21267-21272
+                                  empty))))
+                         (before typing/rec_check.ml(608):21288-21537
+                           (let
+                             (m' =
+                                (let (*match* = (field 5 desc))
+                                  (if (isint *match*)
+                                    (before typing/rec_check.ml(610):21358-21364
+                                      3a)
+                                    (before typing/rec_check.ml(612):21438-21443
+                                      2a))))
+                             (before typing/rec_check.ml(614):21459-21537
+                               (after typing/rec_check.ml(614):21459-21537
+                                 (apply join
+                                   (makeblock 0 access_constructor
+                                     (makeblock 0
+                                       (after typing/rec_check.ml(616):21502-21529
+                                         (apply <<
+                                           (after typing/rec_check.ml(616):21502-21523
+                                             (apply list expression exprs))
+                                           m'))
+                                       0a))))))))))
+                  case tag 9:
+                   (let (eo =a (field 1 *match*))
+                     (before typing/rec_check.ml(624):21699-21728
+                       (after typing/rec_check.ml(624):21699-21728
+                         (apply <<
+                           (after typing/rec_check.ml(624):21699-21719
+                             (apply option expression eo))
+                           2a))))
+                  case tag 10:
+                   (let
+                     (eo =a (field 2 *match*)
+                      rep =a (field 1 *match*)
+                      es =a (field 0 *match*))
+                     (before typing/rec_check.ml(627):21842-22306
+                       (let
+                         (field_mode =
+                            (catch
+                              (switch rep
+                               case int 1:
+                                (before typing/rec_check.ml(628):21902-21913
+                                  4a)
+                               case tag 0:
+                                (before typing/rec_check.ml(629):21946-21952
+                                  3a)
+                               default: (exit 28))
+                             with (28)
+                              (before typing/rec_check.ml(631):22033-22038
+                                2a)))
+                         (before typing/rec_check.ml(633):22058-22306
+                           (let
+                             (field =
+                                (function param
+                                  (funct-body typing/rec_check.ml(633)<ghost>:22068-22184
+                                    (let (field_def =a (field 1 param))
+                                      (before typing/rec_check.ml(633):22090-22184
+                                        (switch* field_def
+                                         case tag 0:
+                                          (before typing/rec_check.ml(634):22133-22138
+                                            empty)
+                                         case tag 1:
+                                          (let (e =a (field 1 field_def))
+                                            (before typing/rec_check.ml(635):22172-22184
+                                              (after typing/rec_check.ml(635):22172-22184
+                                                (apply expression e))))))))))
+                             (before typing/rec_check.ml(637):22204-22306
+                               (after typing/rec_check.ml(637):22204-22306
+                                 (apply join
+                                   (makeblock 0
+                                     (after typing/rec_check.ml(638):22221-22249
+                                       (apply <<
+                                         (after typing/rec_check.ml(638):22221-22235
+                                           (apply array field es))
+                                         field_mode))
+                                     (makeblock 0
+                                       (after typing/rec_check.ml(639):22261-22296
+                                         (apply <<
+                                           (after typing/rec_check.ml(639):22261-22281
+                                             (apply option expression eo))
+                                           4a))
+                                       0a))))))))))
+                  case tag 11:
+                   (let (e =a (field 0 *match*))
+                     (before typing/rec_check.ml(712):24187-24214
+                       (after typing/rec_check.ml(712):24187-24214
+                         (apply <<
+                           (after typing/rec_check.ml(712):24187-24199
+                             (apply expression e))
+                           4a))))
+                  case tag 12:
+                   (let (e2 =a (field 3 *match*) e1 =a (field 0 *match*))
+                     (before typing/rec_check.ml(668):23097-23187
+                       (after typing/rec_check.ml(668):23097-23187
+                         (apply join
+                           (makeblock 0
+                             (after typing/rec_check.ml(669):23112-23140
+                               (apply <<
+                                 (after typing/rec_check.ml(669):23112-23125
+                                   (apply expression e1))
+                                 4a))
+                             (makeblock 0
+                               (after typing/rec_check.ml(670):23150-23178
+                                 (apply <<
+                                   (after typing/rec_check.ml(670):23150-23163
+                                     (apply expression e2))
+                                   4a))
+                               0a))))))
+                  case tag 13:
+                   (let (exprs =a (field 0 *match*))
+                     (before typing/rec_check.ml(588):20515-21075
+                       (let
+                         (array_mode =
+                            (let
+                              (*match* =
+                                 (after typing/rec_check.ml(588):20538-20560
+                                   (apply (field 5 (global Typeopt!)) exp)))
+                              (if *match*
+                                (if (>= *match* 3)
+                                  (before typing/rec_check.ml(591):20669-20680
+                                    4a)
+                                  (before typing/rec_check.ml(598):21019-21024
+                                    2a))
+                                (before typing/rec_check.ml(595):20877-20888
+                                  4a))))
+                         (before typing/rec_check.ml(600):21040-21075
+                           (after typing/rec_check.ml(600):21040-21075
+                             (apply <<
+                               (after typing/rec_check.ml(600):21040-21061
+                                 (apply list expression exprs))
+                               array_mode))))))
+                  case tag 14:
+                   (let
+                     (ifnot =a (field 2 *match*)
+                      ifso =a (field 1 *match*)
+                      cond =a (field 0 *match*))
+                     (before typing/rec_check.ml(652):22620-22732
+                       (after typing/rec_check.ml(652):22620-22732
+                         (apply join
+                           (makeblock 0
+                             (after typing/rec_check.ml(653):22635-22665
+                               (apply <<
+                                 (after typing/rec_check.ml(653):22635-22650
+                                   (apply expression cond))
+                                 4a))
+                             (makeblock 0
+                               (after typing/rec_check.ml(654):22675-22690
+                                 (apply expression ifso))
+                               (makeblock 0
+                                 (after typing/rec_check.ml(655):22700-22723
+                                   (apply option expression ifnot))
+                                 0a)))))))
+                  case tag 15:
+                   (let (e2 =a (field 1 *match*) e1 =a (field 0 *match*))
+                     (before typing/rec_check.ml(681):23422-23491
+                       (after typing/rec_check.ml(681):23422-23491
+                         (apply join
+                           (makeblock 0
+                             (after typing/rec_check.ml(682):23437-23459
+                               (apply <<
+                                 (after typing/rec_check.ml(682):23437-23450
+                                   (apply expression e1))
+                                 2a))
+                             (makeblock 0
+                               (after typing/rec_check.ml(683):23469-23482
+                                 (apply expression e2))
+                               0a))))))
+                  case tag 16:
+                   (let (body =a (field 1 *match*) cond =a (field 0 *match*))
+                     (before typing/rec_check.ml(692):23701-23789
+                       (after typing/rec_check.ml(692):23701-23789
+                         (apply join
+                           (makeblock 0
+                             (after typing/rec_check.ml(693):23716-23746
+                               (apply <<
+                                 (after typing/rec_check.ml(693):23716-23731
+                                   (apply expression cond))
+                                 4a))
+                             (makeblock 0
+                               (after typing/rec_check.ml(694):23756-23780
+                                 (apply <<
+                                   (after typing/rec_check.ml(694):23756-23771
+                                     (apply expression body))
+                                   2a))
+                               0a))))))
+                  case tag 17:
+                   (let
+                     (body =a (field 5 *match*)
+                      high =a (field 3 *match*)
+                      low =a (field 2 *match*))
+                     (before typing/rec_check.ml(551):19320-19447
+                       (after typing/rec_check.ml(551):19320-19447
+                         (apply join
+                           (makeblock 0
+                             (after typing/rec_check.ml(552):19335-19364
+                               (apply <<
+                                 (after typing/rec_check.ml(552):19335-19349
+                                   (apply expression low))
+                                 4a))
+                             (makeblock 0
+                               (after typing/rec_check.ml(553):19374-19404
+                                 (apply <<
+                                   (after typing/rec_check.ml(553):19374-19389
+                                     (apply expression high))
+                                   4a))
+                               (makeblock 0
+                                 (after typing/rec_check.ml(554):19414-19438
+                                   (apply <<
+                                     (after typing/rec_check.ml(554):19414-19429
+                                       (apply expression body))
+                                     2a))
+                                 0a)))))))
+                  case tag 18:
+                   (let (eo =a (field 2 *match*) e1 =a (field 0 *match*))
+                     (before typing/rec_check.ml(702):23952-24049
+                       (after typing/rec_check.ml(702):23952-24049
+                         (apply join
+                           (makeblock 0
+                             (after typing/rec_check.ml(703):23967-23995
+                               (apply <<
+                                 (after typing/rec_check.ml(703):23967-23980
+                                   (apply expression e1))
+                                 4a))
+                             (makeblock 0
+                               (after typing/rec_check.ml(704):24005-24040
+                                 (apply <<
+                                   (after typing/rec_check.ml(704):24005-24025
+                                     (apply option expression eo))
+                                   4a))
+                               0a))))))
+                  case tag 19:
+                   (let (pth =a (field 0 *match*))
+                     (before typing/rec_check.ml(564):19624-19647
+                       (after typing/rec_check.ml(564):19624-19647
+                         (apply <<
+                           (after typing/rec_check.ml(564):19624-19632
+                             (apply path pth))
+                           4a))))
+                  case tag 20:
+                   (let
+                     (pth =a (field 1 *match*)
+                      self_path =a (field 0 *match*))
+                     (before typing/rec_check.ml(566):19706-19752
+                       (after typing/rec_check.ml(566):19706-19752
+                         (apply join
+                           (makeblock 0
+                             (after typing/rec_check.ml(566):19712-19741
+                               (apply <<
+                                 (after typing/rec_check.ml(566):19712-19726
+                                   (apply path self_path))
+                                 4a))
+                             (makeblock 0
+                               (after typing/rec_check.ml(566):19743-19751
+                                 (apply path pth))
+                               0a))))))
+                  case tag 21:
+                   (let (e =a (field 3 *match*) pth =a (field 0 *match*))
+                     (before typing/rec_check.ml(719):24361-24445
+                       (after typing/rec_check.ml(719):24361-24445
+                         (apply join
+                           (makeblock 0
+                             (after typing/rec_check.ml(720):24376-24399
+                               (apply <<
+                                 (after typing/rec_check.ml(720):24376-24384
+                                   (apply path pth))
+                                 4a))
+                             (makeblock 0
+                               (after typing/rec_check.ml(721):24409-24436
+                                 (apply <<
+                                   (after typing/rec_check.ml(721):24409-24421
+                                     (apply expression e))
+                                   4a))
+                               0a))))))
+                  case tag 22:
+                   (let
+                     (fields =a (field 1 *match*) pth =a (field 0 *match*))
+                     (before typing/rec_check.ml(773):26048-26185
+                       (let
+                         (field =
+                            (function param
+                              (funct-body typing/rec_check.ml(773)<ghost>:26058-26086
+                                (let (arg =a (field 2 param))
+                                  (before typing/rec_check.ml(773):26072-26086
+                                    (after typing/rec_check.ml(773):26072-26086
+                                      (apply expression arg)))))))
+                         (before typing/rec_check.ml(774):26096-26185
+                           (after typing/rec_check.ml(774):26096-26185
+                             (apply join
+                               (makeblock 0
+                                 (after typing/rec_check.ml(775):26111-26134
+                                   (apply <<
+                                     (after typing/rec_check.ml(775):26111-26119
+                                       (apply path pth))
+                                     4a))
+                                 (makeblock 0
+                                   (after typing/rec_check.ml(776):26144-26176
+                                     (apply <<
+                                       (after typing/rec_check.ml(776):26144-26161
+                                         (apply list field fields))
+                                       4a))
+                                   0a))))))))
+                  case tag 23:
+                   (let
+                     (e =a (field 4 *match*)
+                      mexp =a (field 3 *match*)
+                      x =a (field 0 *match*))
+                     (before typing/rec_check.ml(530):18571-18611
+                       (after typing/rec_check.ml(530):18571-18611
+                         (apply >>
+                           (after typing/rec_check.ml(530):18571-18595
+                             (apply module_binding (makeblock 0 x mexp)))
+                           (after typing/rec_check.ml(530):18599-18611
+                             (apply expression e))))))
+                  case tag 24:
+                   (let
+                     (e =a (field 1 *match*)
+                      *match* =a (field 0 *match*)
+                      ext_id =a (field 0 *match*))
+                     (before typing/rec_check.ml(728):24597-24628
+                       (after typing/rec_check.ml(728):24597-24628
+                         (apply remove_id ext_id
+                           (after typing/rec_check.ml(728):24614-24628
+                             (apply expression e))))))
+                  case tag 25:
+                   (let (e =a (field 0 *match*))
+                     (before typing/rec_check.ml(737):24837-24864
+                       (after typing/rec_check.ml(737):24837-24864
+                         (apply <<
+                           (after typing/rec_check.ml(737):24837-24849
+                             (apply expression e))
+                           4a))))
+                  case tag 26:
+                   (let (e =a (field 0 *match*))
+                     (before typing/rec_check.ml(796):26778-27031
+                       (let
+                         (lazy_mode =
+                            (let
+                              (*match* =
+                                 (after typing/rec_check.ml(796):26800-26832
+                                   (apply (field 10 (global Typeopt!)) e)))
+                              (catch
+                                (if (isint *match*)
+                                  (if (>= *match* -236722567) (exit 29)
+                                    (before typing/rec_check.ml(802):26985-26990
+                                      1a))
+                                  (exit 29))
+                               with (29)
+                                (before typing/rec_check.ml(800):26948-26954
+                                  3a))))
+                         (before typing/rec_check.ml(804):27006-27031
+                           (after typing/rec_check.ml(804):27006-27031
+                             (apply <<
+                               (after typing/rec_check.ml(804):27006-27018
+                                 (apply expression e))
+                               lazy_mode))))))
+                  case tag 27:
+                   (let (clsstrct =a (field 0 *match*))
+                     (before typing/rec_check.ml(746):25034-25058
+                       (after typing/rec_check.ml(746):25034-25058
+                         (apply class_structure clsstrct))))
+                  case tag 28:
+                   (let (mexp =a (field 0 *match*))
+                     (before typing/rec_check.ml(744):24981-24992
+                       (after typing/rec_check.ml(744):24981-24992
+                         (apply modexp mexp))))
+                  case tag 29:
+                   (let
+                     (body =a (field 3 *match*)
+                      ands =a (field 1 *match*)
+                      let_ =a (field 0 *match*))
+                     (before typing/rec_check.ml(806):27081-27232
+                       (let
+                         (case_env =
+                            (function c m
+                              (funct-body typing/rec_check.ml(806)<ghost>:27094-27114
+                                (before typing/rec_check.ml(806):27100-27114
+                                  (field 0
+                                    (after typing/rec_check.ml(806):27104-27114
+                                      (apply case c m)))))))
+                         (before typing/rec_check.ml(807):27126-27232
+                           (after typing/rec_check.ml(807):27126-27232
+                             (apply join
+                               (makeblock 0
+                                 (after typing/rec_check.ml(808):27143-27188
+                                   (apply <<
+                                     (after typing/rec_check.ml(808):27143-27173
+                                       (apply list binding_op
+                                         (makeblock 0 let_ ands)))
+                                     4a))
+                                 (makeblock 0
+                                   (after typing/rec_check.ml(809):27200-27222
+                                     (apply <<
+                                       (after typing/rec_check.ml(809):27200-27213
+                                         (apply case_env body))
+                                       1a))
+                                   0a))))))))
+                  case tag 30:
+                   (let (pth =a (field 1 *match*))
+                     (before typing/rec_check.ml(818):27381-27404
+                       (after typing/rec_check.ml(818):27381-27404
+                         (apply <<
+                           (after typing/rec_check.ml(818):27381-27389
+                             (apply path pth))
+                           4a))))
+                  case tag 31:
+                   (let (e =a (field 1 *match*) od =a (field 0 *match*))
+                     (before typing/rec_check.ml(820):27438-27473
+                       (after typing/rec_check.ml(820):27438-27473
+                         (apply >>
+                           (after typing/rec_check.ml(820):27438-27457
+                             (apply open_declaration od))
+                           (after typing/rec_check.ml(820):27461-27473
+                             (apply expression e)))))))))))
+        binding_op
+          (function bop
+            (funct-body typing/rec_check.ml(823):27530-27596
+              (before typing/rec_check.ml(824):27545-27596
+                (after typing/rec_check.ml(824):27545-27596
+                  (apply join
+                    (makeblock 0
+                      (after typing/rec_check.ml(824):27551-27571
+                        (apply path (field 0 bop)))
+                      (makeblock 0
+                        (after typing/rec_check.ml(824):27573-27595
+                          (apply expression (field 4 bop)))
+                        0a)))))))
+        class_structure
+          (function cs
+            (funct-body typing/rec_check.ml(827):27663-27704
+              (before typing/rec_check.ml(827):27673-27704
+                (after typing/rec_check.ml(827):27673-27704
+                  (apply list class_field (field 1 cs))))))
+        class_field
+          (function cf
+            (funct-body typing/rec_check.ml(830):27763-28152
+              (before typing/rec_check.ml(830):27773-28152
+                (let (*match* = (field 0 cf))
+                  (switch* *match*
+                   case tag 0:
+                    (let (ce =a (field 1 *match*))
+                      (before typing/rec_check.ml(832):27861-27889
+                        (after typing/rec_check.ml(832):27861-27889
+                          (apply <<
+                            (after typing/rec_check.ml(832):27861-27874
+                              (apply class_expr ce))
+                            4a))))
+                   case tag 1:
+                    (let (cfk =a (field 3 *match*))
+                      (before typing/rec_check.ml(834):27937-27957
+                        (after typing/rec_check.ml(834):27937-27957
+                          (apply class_field_kind cfk))))
+                   case tag 2:
+                    (let (cfk =a (field 2 *match*))
+                      (before typing/rec_check.ml(836):27996-28016
+                        (after typing/rec_check.ml(836):27996-28016
+                          (apply class_field_kind cfk))))
+                   case tag 3:
+                    (before typing/rec_check.ml(838):28049-28054 empty)
+                   case tag 4:
+                    (let (e =a (field 0 *match*))
+                      (before typing/rec_check.ml(840):28088-28115
+                        (after typing/rec_check.ml(840):28088-28115
+                          (apply <<
+                            (after typing/rec_check.ml(840):28088-28100
+                              (apply expression e))
+                            4a))))
+                   case tag 5:
+                    (before typing/rec_check.ml(842):28147-28152 empty))))))
+        class_field_kind
+          (function cfk
+            (funct-body typing/rec_check.ml(845):28221-28346
+              (before typing/rec_check.ml(845):28232-28346
+                (switch* cfk
+                 case tag 0:
+                  (before typing/rec_check.ml(847):28277-28282 empty)
+                 case tag 1:
+                  (let (e =a (field 1 cfk))
+                    (before typing/rec_check.ml(849):28319-28346
+                      (after typing/rec_check.ml(849):28319-28346
+                        (apply <<
+                          (after typing/rec_check.ml(849):28319-28331
+                            (apply expression e))
+                          4a))))))))
+        modexp
+          (function mexp
+            (funct-body typing/rec_check.ml(852):28400-29610
+              (before typing/rec_check.ml(852):28412-29610
+                (let (*match* = (field 0 mexp))
+                  (switch* *match*
+                   case tag 0:
+                    (let (pth =a (field 0 *match*))
+                      (before typing/rec_check.ml(854):28472-28480
+                        (after typing/rec_check.ml(854):28472-28480
+                          (apply path pth))))
+                   case tag 1:
+                    (let (s =a (field 0 *match*))
+                      (before typing/rec_check.ml(856):28513-28524
+                        (after typing/rec_check.ml(856):28513-28524
+                          (apply structure s))))
+                   case tag 2:
+                    (let (e =a (field 3 *match*))
+                      (before typing/rec_check.ml(858):28566-28583
+                        (after typing/rec_check.ml(858):28566-28583
+                          (apply <<
+                            (after typing/rec_check.ml(858):28566-28574
+                              (apply modexp e))
+                            1a))))
+                   case tag 3:
+                    (let (p =a (field 1 *match*) f =a (field 0 *match*))
+                      (before typing/rec_check.ml(860):28620-28700
+                        (after typing/rec_check.ml(860):28620-28700
+                          (apply join
+                            (makeblock 0
+                              (after typing/rec_check.ml(861):28635-28658
+                                (apply <<
+                                  (after typing/rec_check.ml(861):28635-28643
+                                    (apply modexp f))
+                                  4a))
+                              (makeblock 0
+                                (after typing/rec_check.ml(862):28668-28691
+                                  (apply <<
+                                    (after typing/rec_check.ml(862):28668-28676
+                                      (apply modexp p))
+                                    4a))
+                                0a))))))
+                   case tag 4:
+                    (let (coe =a (field 3 *match*) mexp =a (field 0 *match*))
+                      (before typing/rec_check.ml(865):28750-29563
+                        (letrec
+                          (coercion
+                             (function coe k
+                               (funct-body typing/rec_check.ml(865)<ghost>:28767-29507
+                                 (before typing/rec_check.ml(865):28775-29507
+                                   (catch
+                                     (switch* coe
+                                      case int 0:
+                                       (before typing/rec_check.ml(867):28826-28834
+                                         (after typing/rec_check.ml(867):28826-28834
+                                           (apply k 3a)))
+                                      case tag 0: (exit 32)
+                                      case tag 1: (exit 32)
+                                      case tag 2:
+                                       (before typing/rec_check.ml(877):29274-29282
+                                         (after typing/rec_check.ml(877):29274-29282
+                                           (apply k 0a)))
+                                      case tag 3:
+                                       (let
+                                         (coe =a (field 2 coe)
+                                          pth =a (field 1 coe))
+                                         (before typing/rec_check.ml(881):29470-29507
+                                           (after typing/rec_check.ml(881):29470-29507
+                                             (apply coercion coe
+                                               (function m
+                                                 (funct-body typing/rec_check.ml(881):29483-29507
+                                                   (before typing/rec_check.ml(881):29493-29506
+                                                     (after typing/rec_check.ml(881):29493-29506
+                                                       (apply <<
+                                                         (after typing/rec_check.ml(881):29493-29501
+                                                           (apply path pth))
+                                                         m))))))))))
+                                    with (32)
+                                     (before typing/rec_check.ml(873):29105-29118
+                                       (after typing/rec_check.ml(873):29105-29118
+                                         (apply k 4a))))))))
+                          (before typing/rec_check.ml(883):29523-29563
+                            (after typing/rec_check.ml(883):29523-29563
+                              (apply coercion coe
+                                (function m
+                                  (funct-body typing/rec_check.ml(883):29536-29563
+                                    (before typing/rec_check.ml(883):29546-29562
+                                      (after typing/rec_check.ml(883):29546-29562
+                                        (apply <<
+                                          (after typing/rec_check.ml(883):29546-29557
+                                            (apply modexp mexp))
+                                          m)))))))))))
+                   case tag 5:
+                    (let (e =a (field 0 *match*))
+                      (before typing/rec_check.ml(885):29598-29610
+                        (after typing/rec_check.ml(885):29598-29610
+                          (apply expression e)))))))))
+        path
+          (function pth
+            (funct-body typing/rec_check.ml(903):29918-30158
+              (before typing/rec_check.ml(903):29929-30158
+                (switch* pth
+                 case tag 0:
+                  (let (x =a (field 0 pth))
+                    (before typing/rec_check.ml(905):29975-29983
+                      (after typing/rec_check.ml(905):29975-29983
+                        (apply single x))))
+                 case tag 1:
+                  (let (t =a (field 0 pth))
+                    (before typing/rec_check.ml(907):30018-30039
+                      (after typing/rec_check.ml(907):30018-30039
+                        (apply <<
+                          (after typing/rec_check.ml(907):30018-30024
+                            (apply path t))
+                          4a))))
+                 case tag 2:
+                  (let (p =a (field 1 pth) f =a (field 0 pth))
+                    (before typing/rec_check.ml(909):30076-30158
+                      (after typing/rec_check.ml(909):30076-30158
+                        (apply join
+                          (makeblock 0
+                            (after typing/rec_check.ml(910):30093-30114
+                              (apply <<
+                                (after typing/rec_check.ml(910):30093-30099
+                                  (apply path f))
+                                4a))
+                            (makeblock 0
+                              (after typing/rec_check.ml(911):30126-30147
+                                (apply <<
+                                  (after typing/rec_check.ml(911):30126-30132
+                                    (apply path p))
+                                  4a))
+                              0a))))))))))
+        structure
+          (function s m
+            (funct-body typing/rec_check.ml(924):30492-30590
+              (before typing/rec_check.ml(925):30507-30590
+                (after typing/rec_check.ml(925):30507-30590
+                  (apply (field 21 (global Stdlib__list!))
+                    (function it env
+                      (funct-body typing/rec_check.ml(925):30523-30562
+                        (before typing/rec_check.ml(925):30538-30561
+                          (after typing/rec_check.ml(925):30538-30561
+                            (apply structure_item it m env)))))
+                    (field 0 s) (field 1 Env))))))
+        structure_item
+          (function s m env
+            (funct-body typing/rec_check.ml(931):30738-32611
+              (before typing/rec_check.ml(931):30753-32611
+                (let (*match* = (field 0 s))
+                  (switch *match*
+                   case tag 0:
+                    (let (e =a (field 0 *match*))
+                      (before typing/rec_check.ml(941):31028-31095
+                        (let
+                          (judg_e =
+                             (after typing/rec_check.ml(941):31041-31062
+                               (apply <<
+                                 (after typing/rec_check.ml(941):31041-31053
+                                   (apply expression e))
+                                 2a)))
+                          (before typing/rec_check.ml(942):31072-31095
+                            (after typing/rec_check.ml(942):31072-31095
+                              (apply (field 5 Env)
+                                (after typing/rec_check.ml(942):31081-31091
+                                  (apply judg_e m))
+                                env))))))
+                   case tag 1:
+                    (let
+                      (bindings =a (field 1 *match*)
+                       rec_flag =a (field 0 *match*))
+                      (before typing/rec_check.ml(944):31143-31181
+                        (after typing/rec_check.ml(944):31143-31181
+                          (apply value_bindings rec_flag bindings m env))))
+                   case tag 2:
+                    (before typing/rec_check.ml(951):31451-31454 env)
+                   case tag 3:
+                    (before typing/rec_check.ml(957):31556-31559 env)
+                   case tag 4:
+                    (let
+                      (*match* =a (field 0 *match*)
+                       exts =a (field 3 *match*))
+                      (before typing/rec_check.ml(959):31618-31774
+                        (let
+                          (ext_ids =
+                             (after typing/rec_check.ml(959):31632-31674
+                               (apply (field 16 (global Stdlib__list!))
+                                 (function param
+                                   (funct-body typing/rec_check.ml(959):31641-31669
+                                     (let (id =a (field 0 param))
+                                       (before typing/rec_check.ml(959):31666-31668
+                                         id))))
+                                 exts)))
+                          (before typing/rec_check.ml(960):31684-31774
+                            (after typing/rec_check.ml(960):31684-31774
+                              (apply (field 5 Env)
+                                (after typing/rec_check.ml(961):31701-31736
+                                  (apply list extension_constructor exts m))
+                                (after typing/rec_check.ml(962):31745-31774
+                                  (apply (field 10 Env) ext_ids env))))))))
+                   case tag 5:
+                    (let
+                      (*match* =a (field 0 *match*) ext =a (field 0 *match*))
+                      (before typing/rec_check.ml(964):31834-31916
+                        (after typing/rec_check.ml(964):31834-31916
+                          (apply (field 5 Env)
+                            (after typing/rec_check.ml(965):31851-31880
+                              (apply extension_constructor ext m))
+                            (after typing/rec_check.ml(966):31889-31916
+                              (apply (field 8 Env) (field 0 ext) env))))))
+                   case tag 6:
+                    (let
+                      (*match* =a (field 0 *match*)
+                       mb_expr =a (field 3 *match*)
+                       mb_id =a (field 0 *match*))
+                      (before typing/rec_check.ml(946):31226-31263
+                        (after typing/rec_check.ml(946):31226-31263
+                          (apply module_binding (makeblock 0 mb_id mb_expr) m
+                            env))))
+                   case tag 7:
+                    (let (mbs =a (field 0 *match*))
+                      (before typing/rec_check.ml(948):31298-31418
+                        (let
+                          (bindings =
+                             (after typing/rec_check.ml(948):31313-31368
+                               (apply (field 16 (global Stdlib__list!))
+                                 (function param
+                                   (funct-body typing/rec_check.ml(948):31322-31364
+                                     (let
+                                       (mb_expr =a (field 3 param)
+                                        mb_id =a (field 0 param))
+                                       (before typing/rec_check.ml(948):31347-31363
+                                         (makeblock 0 mb_id mb_expr)))))
+                                 mbs)))
+                          (before typing/rec_check.ml(949):31378-31418
+                            (after typing/rec_check.ml(949):31378-31418
+                              (apply recursive_module_bindings bindings m
+                                env))))))
+                   case tag 9:
+                    (let (od =a (field 0 *match*))
+                      (before typing/rec_check.ml(972):32026-32051
+                        (after typing/rec_check.ml(972):32026-32051
+                          (apply open_declaration od m env))))
+                   case tag 10:
+                    (let (classes =a (field 0 *match*))
+                      (before typing/rec_check.ml(974):32088-32418
+                        (let
+                          (class_ids =
+                             (let
+                               (class_id =
+                                  (function param
+                                    (funct-body typing/rec_check.ml(975)<ghost>:32127-32158
+                                      (let
+                                        (*match* =a (field 0 param)
+                                         id =a (field 3 *match*))
+                                        (before typing/rec_check.ml(975):32156-32158
+                                          id)))))
+                               (before typing/rec_check.ml(976):32172-32197
+                                 (after typing/rec_check.ml(976):32172-32197
+                                   (apply (field 16 (global Stdlib__list!))
+                                     class_id classes)))))
+                          (before typing/rec_check.ml(977):32209-32418
+                            (let
+                              (class_declaration =
+                                 (function param m
+                                   (funct-body typing/rec_check.ml(977)<ghost>:32231-32311
+                                     (let
+                                       (*match* =a (field 0 param)
+                                        ci_expr =a (field 7 *match*))
+                                       (before typing/rec_check.ml(978):32263-32311
+                                         (after typing/rec_check.ml(978):32263-32311
+                                           (apply (field 10 Env) class_ids
+                                             (after typing/rec_check.ml(978):32289-32311
+                                               (apply class_expr ci_expr m)))))))))
+                              (before typing/rec_check.ml(979):32323-32418
+                                (after typing/rec_check.ml(979):32323-32418
+                                  (apply (field 5 Env)
+                                    (after typing/rec_check.ml(980):32342-32376
+                                      (apply list class_declaration classes
+                                        m))
+                                    (after typing/rec_check.ml(981):32387-32418
+                                      (apply (field 10 Env) class_ids env))))))))))
+                   case tag 12:
+                    (let
+                      (*match* =a (field 0 *match*)
+                       mty =a (field 1 *match*)
+                       mexp =a (field 0 *match*))
+                      (before typing/rec_check.ml(983):32487-32611
+                        (let
+                          (included_ids =
+                             (after typing/rec_check.ml(983):32506-32542
+                               (apply (field 16 (global Stdlib__list!))
+                                 (field 12 (global Types!)) mty)))
+                          (before typing/rec_check.ml(984):32552-32611
+                            (after typing/rec_check.ml(984):32552-32611
+                              (apply (field 5 Env)
+                                (after typing/rec_check.ml(984):32561-32576
+                                  (apply modexp mexp m))
+                                (after typing/rec_check.ml(984):32577-32611
+                                  (apply (field 10 Env) included_ids env))))))))
+                   default: (before typing/rec_check.ml(970):31994-31997 env))))))
+        module_binding
+          (function param m env
+            (funct-body typing/rec_check.ml(988):32718-33009
+              (let (mexp =a (field 1 param) id =a (field 0 param))
+                (before typing/rec_check.ml(994):32889-33009
+                  (let
+                    (*match* =
+                       (after typing/rec_check.ml(994):32903-32918
+                         (apply (field 9 Env) id env))
+                     env =a (field 1 *match*)
+                     mM =a (field 0 *match*))
+                    (before typing/rec_check.ml(995):32928-33009
+                      (let
+                        (judg_E =
+                           (after typing/rec_check.ml(995):32941-32976
+                             (apply <<
+                               (after typing/rec_check.ml(995):32941-32952
+                                 (apply modexp mexp))
+                               (after typing/rec_check.ml(995):32956-32976
+                                 (apply (field 2 Mode) mM 2a)))))
+                        (before typing/rec_check.ml(996):32986-33009
+                          (after typing/rec_check.ml(996):32986-33009
+                            (apply (field 5 Env)
+                              (after typing/rec_check.ml(996):32995-33005
+                                (apply judg_E m))
+                              env))))))))))
+        open_declaration
+          (function param m env
+            (funct-body typing/rec_check.ml(999):33078-33290
+              (let (sg =a (field 1 param) mexp =a (field 0 param))
+                (before typing/rec_check.ml(1000):33144-33290
+                  (let
+                    (judg_E =
+                       (after typing/rec_check.ml(1000):33157-33168
+                         (apply modexp mexp)))
+                    (before typing/rec_check.ml(1001):33178-33290
+                      (let
+                        (bound_ids =
+                           (after typing/rec_check.ml(1001):33194-33229
+                             (apply (field 16 (global Stdlib__list!))
+                               (field 12 (global Types!)) sg)))
+                        (before typing/rec_check.ml(1002):33239-33290
+                          (after typing/rec_check.ml(1002):33239-33290
+                            (apply (field 5 Env)
+                              (after typing/rec_check.ml(1002):33248-33258
+                                (apply judg_E m))
+                              (after typing/rec_check.ml(1002):33259-33290
+                                (apply (field 10 Env) bound_ids env))))))))))))
+        recursive_module_bindings
+          (function m_bindings m env
+            (funct-body typing/rec_check.ml(1006):33382-33663
+              (before typing/rec_check.ml(1007):33410-33663
+                (let
+                  (mids =
+                     (after typing/rec_check.ml(1007):33421-33444
+                       (apply (field 16 (global Stdlib__list!))
+                         (function prim stub (field 0 prim)) m_bindings)))
+                  (before typing/rec_check.ml(1008):33452-33663
+                    (let
+                      (binding =
+                         (function param m
+                           (funct-body typing/rec_check.ml(1008)<ghost>:33464-33588
+                             (let
+                               (mexp =a (field 1 param)
+                                mid =a (field 0 param))
+                               (before typing/rec_check.ml(1009):33486-33588
+                                 (let
+                                   (mM =
+                                      (after typing/rec_check.ml(1009):33495-33511
+                                        (apply (field 2 Env) mid env)))
+                                   (before typing/rec_check.ml(1010):33521-33588
+                                     (after typing/rec_check.ml(1010):33521-33588
+                                       (apply (field 10 Env) mids
+                                         (after typing/rec_check.ml(1010):33542-33588
+                                           (apply modexp mexp
+                                             (after typing/rec_check.ml(1010):33561-33586
+                                               (apply (field 3 Mode) m
+                                                 (after typing/rec_check.ml(1010):33571-33586
+                                                   (apply (field 2 Mode) mM
+                                                     2a)))))))))))))))
+                      (before typing/rec_check.ml(1012):33600-33663
+                        (after typing/rec_check.ml(1012):33600-33663
+                          (apply (field 5 Env)
+                            (after typing/rec_check.ml(1012):33609-33636
+                              (apply list binding m_bindings m))
+                            (after typing/rec_check.ml(1012):33637-33663
+                              (apply (field 10 Env) mids env)))))))))))
+        class_expr
+          (function ce
+            (funct-body typing/rec_check.ml(1015):33720-34393
+              (before typing/rec_check.ml(1015):33730-34393
+                (let (*match* = (field 0 ce))
+                  (switch* *match*
+                   case tag 0:
+                    (let (pth =a (field 0 *match*))
+                      (before typing/rec_check.ml(1017):33791-33814
+                        (after typing/rec_check.ml(1017):33791-33814
+                          (apply <<
+                            (after typing/rec_check.ml(1017):33791-33799
+                              (apply path pth))
+                            4a))))
+                   case tag 1:
+                    (let (cs =a (field 0 *match*))
+                      (before typing/rec_check.ml(1019):33849-33867
+                        (after typing/rec_check.ml(1019):33849-33867
+                          (apply class_structure cs))))
+                   case tag 2:
+                    (let (ce =a (field 3 *match*) args =a (field 2 *match*))
+                      (before typing/rec_check.ml(1021):33913-33991
+                        (let
+                          (ids =
+                             (after typing/rec_check.ml(1021):33923-33940
+                               (apply (field 16 (global Stdlib__list!))
+                                 (function prim stub (field 0 prim)) args)))
+                          (before typing/rec_check.ml(1022):33952-33991
+                            (after typing/rec_check.ml(1022):33952-33991
+                              (apply remove_ids ids
+                                (after typing/rec_check.ml(1022):33967-33991
+                                  (apply <<
+                                    (after typing/rec_check.ml(1022):33968-33981
+                                      (apply class_expr ce))
+                                    1a))))))))
+                   case tag 3:
+                    (let (args =a (field 1 *match*) ce =a (field 0 *match*))
+                      (before typing/rec_check.ml(1024):34030-34181
+                        (let
+                          (arg =
+                             (function param
+                               (funct-body typing/rec_check.ml(1024)<ghost>:34038-34073
+                                 (let (eo =a (field 1 param))
+                                   (before typing/rec_check.ml(1024):34053-34073
+                                     (after typing/rec_check.ml(1024):34053-34073
+                                       (apply option expression eo)))))))
+                          (before typing/rec_check.ml(1025):34085-34181
+                            (after typing/rec_check.ml(1025):34085-34181
+                              (apply join
+                                (makeblock 0
+                                  (after typing/rec_check.ml(1026):34102-34130
+                                    (apply <<
+                                      (after typing/rec_check.ml(1026):34102-34115
+                                        (apply class_expr ce))
+                                      4a))
+                                  (makeblock 0
+                                    (after typing/rec_check.ml(1027):34142-34170
+                                      (apply <<
+                                        (after typing/rec_check.ml(1027):34142-34155
+                                          (apply list arg args))
+                                        4a))
+                                    0a))))))))
+                   case tag 4:
+                    (let
+                      (ce =a (field 3 *match*)
+                       bindings =a (field 1 *match*)
+                       rec_flag =a (field 0 *match*))
+                      (before typing/rec_check.ml(1030):34233-34282
+                        (after typing/rec_check.ml(1030):34233-34282
+                          (apply >>
+                            (after typing/rec_check.ml(1030):34233-34265
+                              (apply value_bindings rec_flag bindings))
+                            (after typing/rec_check.ml(1030):34269-34282
+                              (apply class_expr ce))))))
+                   case tag 5:
+                    (let (ce =a (field 0 *match*))
+                      (before typing/rec_check.ml(1032):34332-34345
+                        (after typing/rec_check.ml(1032):34332-34345
+                          (apply class_expr ce))))
+                   case tag 6:
+                    (let (ce =a (field 1 *match*))
+                      (before typing/rec_check.ml(1034):34380-34393
+                        (after typing/rec_check.ml(1034):34380-34393
+                          (apply class_expr ce)))))))))
+        extension_constructor
+          (function ec
+            (funct-body typing/rec_check.ml(1037):34472-34585
+              (before typing/rec_check.ml(1037):34482-34585
+                (let (*match* = (field 3 ec))
+                  (switch* *match*
+                   case tag 0:
+                    (before typing/rec_check.ml(1039):34532-34537 empty)
+                   case tag 1:
+                    (let (pth =a (field 0 *match*))
+                      (before typing/rec_check.ml(1041):34577-34585
+                        (after typing/rec_check.ml(1041):34577-34585
+                          (apply path pth)))))))))
+        value_bindings
+          (function rec_flag bindings mode bound_env
+            (funct-body typing/rec_check.ml(1045):34710-38376
+              (before typing/rec_check.ml(1046):34754-38376
+                (let
+                  (all_bound_pats =
+                     (after typing/rec_check.ml(1046):34775-34814
+                       (apply (field 16 (global Stdlib__list!))
+                         (function vb
+                           (funct-body typing/rec_check.ml(1046):34784-34805
+                             (before typing/rec_check.ml(1046):34795-34804
+                               (field 0 vb))))
+                         bindings)))
+                  (before typing/rec_check.ml(1047):34822-38376
+                    (let
+                      (outer_env =
+                         (after typing/rec_check.ml(1047):34838-34877
+                           (apply remove_patlist all_bound_pats bound_env)))
+                      (before typing/rec_check.ml(1048):34885-38376
+                        (let
+                          (bindings_env =
+                             (if rec_flag
+                               (before typing/rec_check.ml(1101):37171-38337
+                                 (let
+                                   (binding_env =
+                                      (function param
+                                        (funct-body typing/rec_check.ml(1101)<ghost>:37187-37734
+                                          (let
+                                            (e_i =a (field 1 param)
+                                             x_i =a (field 0 param))
+                                            (before typing/rec_check.ml(1102):37234-37734
+                                              (let
+                                                (mbody_i =
+                                                   (after typing/rec_check.ml(1102):37248-37269
+                                                     (apply pattern x_i
+                                                       bound_env)))
+                                                (before typing/rec_check.ml(1104):37324-37734
+                                                  (let
+                                                    (rhs_env_i =
+                                                       (after typing/rec_check.ml(1104):37340-37382
+                                                         (apply expression
+                                                           e_i
+                                                           (after typing/rec_check.ml(1104):37355-37382
+                                                             (apply
+                                                               (field 3 Mode)
+                                                               mode mbody_i)))))
+                                                    (before typing/rec_check.ml(1106):37444-37734
+                                                      (let
+                                                        (mutual_modes =
+                                                           (let
+                                                             (mdef_ij =
+                                                                (function
+                                                                  param
+                                                                  (funct-body typing/rec_check.ml(1107)<ghost>:37489-37530
+                                                                    (let
+                                                                    (x_j =a
+                                                                    (field 0
+                                                                    param))
+                                                                    (before typing/rec_check.ml(1107):37509-37530
+                                                                    (after typing/rec_check.ml(1107):37509-37530
+                                                                    (apply
+                                                                    pattern
+                                                                    x_j
+                                                                    rhs_env_i)))))))
+                                                             (before typing/rec_check.ml(1108):37548-37573
+                                                               (after typing/rec_check.ml(1108):37548-37573
+                                                                 (apply
+                                                                   (field 16
+                                                                    (global Stdlib__list!))
+                                                                   mdef_ij
+                                                                   bindings)))))
+                                                        (before typing/rec_check.ml(1110):37610-37734
+                                                          (let
+                                                            (env_i =
+                                                               (after typing/rec_check.ml(1110):37622-37661
+                                                                 (apply
+                                                                   remove_patlist
+                                                                   all_bound_pats
+                                                                   rhs_env_i)))
+                                                            (before typing/rec_check.ml(1112):37713-37734
+                                                              (makeblock 0
+                                                                env_i
+                                                                mutual_modes))))))))))))))
+                                   (before typing/rec_check.ml(1113):37748-38337
+                                     (let
+                                       (*match* =
+                                          (after typing/rec_check.ml(1114):37776-37818
+                                            (apply
+                                              (field 46
+                                                (global Stdlib__list!))
+                                              (after typing/rec_check.ml(1114):37787-37818
+                                                (apply
+                                                  (field 16
+                                                    (global Stdlib__list!))
+                                                  binding_env bindings))))
+                                        mdef =a (field 1 *match*)
+                                        env =a (field 0 *match*))
+                                       (before typing/rec_check.ml(1115):37832-38337
+                                         (letrec
+                                           (transitive_closure
+                                              (function env
+                                                (funct-body typing/rec_check.ml(1115)<ghost>:37859-38244
+                                                  (before typing/rec_check.ml(1116):37877-38244
+                                                    (let
+                                                      (transitive_deps =
+                                                         (function env_i
+                                                           mdef_i
+                                                           (funct-body typing/rec_check.ml(1116)<ghost>:37897-38069
+                                                             (before typing/rec_check.ml(1118):37988-38069
+                                                               (after typing/rec_check.ml(1118):37988-38069
+                                                                 (apply
+                                                                   (field 5
+                                                                    Env)
+                                                                   env_i
+                                                                   (after typing/rec_check.ml(1119):38019-38069
+                                                                    (apply
+                                                                    (field 6
+                                                                    Env)
+                                                                    (after typing/rec_check.ml(1119):38034-38068
+                                                                    (apply
+                                                                    (field 23
+                                                                    (global Stdlib__list!))
+                                                                    (field 7
+                                                                    Env)
+                                                                    mdef_i
+                                                                    env))))))))))
+                                                      (before typing/rec_check.ml(1120):38085-38244
+                                                        (let
+                                                          (env' =
+                                                             (after typing/rec_check.ml(1120):38096-38130
+                                                               (apply
+                                                                 (field 23
+                                                                   (global Stdlib__list!))
+                                                                 transitive_deps
+                                                                 env mdef)))
+                                                          (before typing/rec_check.ml(1121):38146-38244
+                                                            (if
+                                                              (after typing/rec_check.ml(1121):38149-38181
+                                                                (apply
+                                                                  (field 29
+                                                                    (global Stdlib__list!))
+                                                                  (field 11
+                                                                    Env)
+                                                                  env env'))
+                                                              (before typing/rec_check.ml(1122):38199-38203
+                                                                env')
+                                                              (before typing/rec_check.ml(1123):38221-38244
+                                                                (after typing/rec_check.ml(1123):38221-38244
+                                                                  (apply
+                                                                    transitive_closure
+                                                                    env'))))))))))))
+                                           (before typing/rec_check.ml(1125):38268-38337
+                                             (let
+                                               (env'_i =
+                                                  (after typing/rec_check.ml(1125):38281-38303
+                                                    (apply transitive_closure
+                                                      env)))
+                                               (before typing/rec_check.ml(1126):38317-38337
+                                                 (after typing/rec_check.ml(1126):38317-38337
+                                                   (apply (field 6 Env)
+                                                     env'_i)))))))))))
+                               (before typing/rec_check.ml(1056):35185-35389
+                                 (let
+                                   (binding_env =
+                                      (function param m
+                                        (funct-body typing/rec_check.ml(1056)<ghost>:35201-35345
+                                          (let
+                                            (vb_expr =a (field 1 param)
+                                             vb_pat =a (field 0 param))
+                                            (before typing/rec_check.ml(1057):35238-35345
+                                              (let
+                                                (m' =
+                                                   (after typing/rec_check.ml(1057):35247-35288
+                                                     (apply (field 3 Mode) m
+                                                       (after typing/rec_check.ml(1057):35262-35288
+                                                         (apply pattern
+                                                           vb_pat bound_env)))))
+                                                (before typing/rec_check.ml(1058):35304-35345
+                                                  (after typing/rec_check.ml(1058):35304-35345
+                                                    (apply remove_pat vb_pat
+                                                      (after typing/rec_check.ml(1058):35322-35345
+                                                        (apply expression
+                                                          vb_expr m')))))))))))
+                                   (before typing/rec_check.ml(1059):35359-35389
+                                     (after typing/rec_check.ml(1059):35359-35389
+                                       (apply list binding_env bindings mode)))))))
+                          (before typing/rec_check.ml(1127):38345-38376
+                            (after typing/rec_check.ml(1127):38345-38376
+                              (apply (field 5 Env) bindings_env outer_env)))))))))))
+        case
+          (function param
+            (funct-body typing/rec_check.ml(1136):38588-39036
+              (let
+                (c_rhs =a (field 2 param)
+                 c_guard =a (field 1 param)
+                 c_lhs =a (field 0 param))
+                (before typing/rec_check.ml(1143):38824-39036
+                  (let
+                    (judg =
+                       (after typing/rec_check.ml(1143):38835-38925
+                         (apply join
+                           (makeblock 0
+                             (after typing/rec_check.ml(1144):38850-38890
+                               (apply <<
+                                 (after typing/rec_check.ml(1144):38850-38875
+                                   (apply option expression c_guard))
+                                 4a))
+                             (makeblock 0
+                               (after typing/rec_check.ml(1145):38900-38916
+                                 (apply expression c_rhs))
+                               0a)))))
+                    (before typing/rec_check.ml(1147):38933-39036
+                      (function m
+                        (funct-body typing/rec_check.ml(1147):38933-39036
+                          (before typing/rec_check.ml(1148):38950-39035
+                            (let
+                              (env =
+                                 (after typing/rec_check.ml(1148):38960-38966
+                                   (apply judg m)))
+                              (before typing/rec_check.ml(1149):38977-39035
+                                (makeblock 0
+                                  (after typing/rec_check.ml(1149):38977-38999
+                                    (apply remove_pat c_lhs env))
+                                  (after typing/rec_check.ml(1149):39001-39035
+                                    (apply (field 3 Mode) m
+                                      (after typing/rec_check.ml(1149):39016-39035
+                                        (apply pattern c_lhs env))))))))))))))))
+        pattern
+          (function pat env
+            (funct-body typing/rec_check.ml(1156):39185-39653
+              (before typing/rec_check.ml(1164):39398-39653
+                (let
+                  (m_pat =
+                     (if
+                       (after typing/rec_check.ml(1164):39413-39441
+                         (apply is_destructuring_pattern pat))
+                       (before typing/rec_check.ml(1165):39461-39472 4a)
+                       (before typing/rec_check.ml(1166):39492-39497 2a)))
+                  (before typing/rec_check.ml(1168):39505-39653
+                    (let
+                      (m_env =
+                         (after typing/rec_check.ml(1169):39521-39624
+                           (apply (field 20 (global Stdlib__list!))
+                             (field 2 Mode) 0a
+                             (after typing/rec_check.ml(1169):39521-39585
+                               (apply (field 16 (global Stdlib__list!))
+                                 (function id
+                                   (funct-body typing/rec_check.ml(1170):39558-39585
+                                     (before typing/rec_check.ml(1170):39569-39584
+                                       (after typing/rec_check.ml(1170):39569-39584
+                                         (apply (field 2 Env) id env)))))
+                                 (after typing/rec_check.ml(1169):39521-39541
+                                   (apply (field 8 (global Typedtree!)) pat)))))))
+                      (before typing/rec_check.ml(1173):39632-39653
+                        (after typing/rec_check.ml(1173):39632-39653
+                          (apply (field 2 Mode) m_pat m_env)))))))))
+        is_destructuring_pattern
+          (function pat
+            (funct-body typing/rec_check.ml(1176):39716-40199
+              (before typing/rec_check.ml(1176):39727-40199
+                (let (*match* = (field 0 pat))
+                  (switch* *match*
+                   case int 0:
+                    (before typing/rec_check.ml(1177):39769-39774 0a)
+                   case tag 0:
+                    (before typing/rec_check.ml(1178):39800-39805 0a)
+                   case tag 1:
+                    (let (pat =a (field 0 *match*))
+                      (before typing/rec_check.ml(1179):39838-39866
+                        (after typing/rec_check.ml(1179):39838-39866
+                          (apply is_destructuring_pattern pat))))
+                   case tag 2:
+                    (before typing/rec_check.ml(1180):39892-39896 1a)
+                   case tag 3:
+                    (before typing/rec_check.ml(1181):39919-39923 1a)
+                   case tag 4:
+                    (before typing/rec_check.ml(1182):39958-39962 1a)
+                   case tag 5:
+                    (before typing/rec_check.ml(1183):39987-39991 1a)
+                   case tag 6:
+                    (before typing/rec_check.ml(1184):40020-40024 1a)
+                   case tag 7:
+                    (before typing/rec_check.ml(1185):40047-40051 1a)
+                   case tag 8:
+                    (let (r =a (field 1 *match*) l =a (field 0 *match*))
+                      (before typing/rec_check.ml(1187):40085-40141
+                        (||
+                          (after typing/rec_check.ml(1187):40085-40111
+                            (apply is_destructuring_pattern l))
+                          (after typing/rec_check.ml(1187):40115-40141
+                            (apply is_destructuring_pattern r)))))
+                   case tag 9:
+                    (before typing/rec_check.ml(1188):40163-40167 1a)
+                   case tag 10:
+                    (before typing/rec_check.ml(1189):40194-40199 0a)))))))
+      (let
+        (is_valid_recursive_expression =
+           (function idlist expr
+             (funct-body typing/rec_check.ml(1191)<ghost>:40235-40789
+               (before typing/rec_check.ml(1192):40251-40789
+                 (let
+                   (ty =
+                      (after typing/rec_check.ml(1192):40260-40282
+                        (apply expression expr 3a)))
+                   (before typing/rec_check.ml(1193):40288-40789
+                     (let
+                       (*match* =
+                          (after typing/rec_check.ml(1193):40294-40317
+                            (apply (field 3 Env) ty idlist))
+                        *match* =
+                          (after typing/rec_check.ml(1193):40319-40342
+                            (apply (field 4 Env) ty idlist))
+                        *match* =
+                          (after typing/rec_check.ml(1194):40352-40376
+                            (apply classify_expression expr))
+                        *match* = *match*
+                        *match* = *match*
+                        *match* = *match*)
+                       (catch
+                         (catch
+                           (if *match* (exit 40)
+                             (if *match* (if *match* (exit 40) (exit 41))
+                               (if *match* (exit 41) (exit 41))))
+                          with (40)
+                           (before typing/rec_check.ml(1198):40588-40593 0a))
+                        with (41)
+                         (before typing/rec_check.ml(1202):40785-40789 1a))))))))
+         is_valid_class_expr =
+           (function idlist ce
+             (funct-body typing/rec_check.ml(1214)<ghost>:41290-42170
+               (before typing/rec_check.ml(1215):41304-42170
+                 (letrec
+                   (class_expr
+                      (function mode ce
+                        (funct-body typing/rec_check.ml(1216):41369-42073
+                          (before typing/rec_check.ml(1216):41384-42073
+                            (let (*match* = (field 0 ce))
+                              (switch* *match*
+                               case tag 0:
+                                (before typing/rec_check.ml(1222):41509-41518
+                                  (field 1 Env))
+                               case tag 1:
+                                (before typing/rec_check.ml(1228):41644-41653
+                                  (field 1 Env))
+                               case tag 2:
+                                (before typing/rec_check.ml(1229):41689-41698
+                                  (field 1 Env))
+                               case tag 3:
+                                (before typing/rec_check.ml(1234):41825-41834
+                                  (field 1 Env))
+                               case tag 4:
+                                (let
+                                  (ce =a (field 3 *match*)
+                                   bindings =a (field 1 *match*)
+                                   rec_flag =a (field 0 *match*))
+                                  (before typing/rec_check.ml(1236):41890-41948
+                                    (after typing/rec_check.ml(1236):41890-41948
+                                      (apply value_bindings rec_flag bindings
+                                        mode
+                                        (after typing/rec_check.ml(1236):41928-41948
+                                          (apply class_expr mode ce))))))
+                               case tag 5:
+                                (let (ce =a (field 0 *match*))
+                                  (before typing/rec_check.ml(1238):42000-42018
+                                    (after typing/rec_check.ml(1238):42000-42018
+                                      (apply class_expr mode ce))))
+                               case tag 6:
+                                (let (ce =a (field 1 *match*))
+                                  (before typing/rec_check.ml(1240):42055-42073
+                                    (after typing/rec_check.ml(1240):42055-42073
+                                      (apply class_expr mode ce))))))))))
+                   (before typing/rec_check.ml(1242):42081-42170
+                     (let
+                       (*match* =
+                          (after typing/rec_check.ml(1242):42087-42130
+                            (apply (field 3 Env)
+                              (after typing/rec_check.ml(1242):42101-42123
+                                (apply class_expr 3a ce))
+                              idlist)))
+                       (if *match*
+                         (before typing/rec_check.ml(1244):42165-42170 0a)
+                         (before typing/rec_check.ml(1243):42146-42150 1a)))))))))
+        (pseudo _none_(0)<ghost>:-1--1
+          (makeblock 0 Illegal_expr is_valid_recursive_expression
+            is_valid_class_expr))))))

@@ -1,0 +1,561 @@
+(setglobal X86_proc!
+  (let
+    (system =
+       (let (*match* = (field 37 (global Config!)))
+         (catch
+           (stringswitch *match*
+            case "beos": (before asmcomp/x86_proc.ml(46):1534-1540 7a)
+            case "bsd_elf": (before asmcomp/x86_proc.ml(45):1510-1519 6a)
+            case "cygwin": (before asmcomp/x86_proc.ml(48):1576-1584 2a)
+            case "gnu": (before asmcomp/x86_proc.ml(47):1554-1559 1a)
+            case "linux": (before asmcomp/x86_proc.ml(52):1673-1680 10a)
+            case "linux_elf": (before asmcomp/x86_proc.ml(44):1481-1492 5a)
+            case "macosx": (before asmcomp/x86_proc.ml(41):1403-1411 0a)
+            case "mingw": (before asmcomp/x86_proc.ml(49):1600-1607 8a)
+            case "mingw64": (before asmcomp/x86_proc.ml(50):1625-1634 11a)
+            case "solaris": (before asmcomp/x86_proc.ml(42):1429-1438 3a)
+            case "win32": (before asmcomp/x86_proc.ml(43):1454-1461 4a)
+            case "win64": (before asmcomp/x86_proc.ml(51):1650-1657 9a)
+            default: (exit 1))
+          with (1) (before asmcomp/x86_proc.ml(54):1691-1700 12a)))
+     windows =
+       (catch
+         (catch
+           (if (>= system 2)
+             (let (switcher =a (-2+ system))
+               (switch* switcher
+                case int 0: (exit 2)
+                case int 1: (exit 3)
+                case int 2: (exit 3)
+                case int 3: (exit 3)
+                case int 4: (exit 3)
+                case int 5: (exit 3)
+                case int 6: (exit 3)
+                case int 7: (exit 2)
+                case int 8: (exit 3)
+                case int 9: (exit 2)
+                case int 10: (exit 3)))
+             (exit 3))
+          with (3) (before asmcomp/x86_proc.ml(59):1788-1793 0a))
+        with (2) (before asmcomp/x86_proc.ml(58):1774-1778 1a))
+     string_of_string_literal =
+       (function s
+         (funct-body asmcomp/x86_proc.ml(61)<ghost>:1824-2378
+           (before asmcomp/x86_proc.ml(62):1830-2378
+             (let
+               (b =
+                  (after asmcomp/x86_proc.ml(62):1838-1873
+                    (apply (field 0 (global Stdlib__buffer!))
+                      (+ (string.length s) 2))))
+               (before asmcomp/x86_proc.ml(63):1879-2378
+                 (let (last_was_escape = (makemutable 0 0a))
+                   (before asmcomp/x86_proc.ml(64):1916-2378
+                     (seq
+                       (for i 0 to (- (string.length s) 1)
+                         (before asmcomp/x86_proc.ml(65):1956-2350
+                           (let
+                             (c =[int]
+                                (after asmcomp/x86_proc.ml(65):1964-1969
+                                  (string.get s i)))
+                             (before asmcomp/x86_proc.ml(66):1977-2350
+                               (if (&& (>= c '0') (<= c '9'))
+                                 (before asmcomp/x86_proc.ml(67):2012-2111
+                                   (if (field 0 last_was_escape)
+                                     (before asmcomp/x86_proc.ml(68):2043-2080
+                                       (after asmcomp/x86_proc.ml(68):2043-2080
+                                         (apply
+                                           (field 4 (global Stdlib__printf!))
+                                           b
+                                           [0:
+                                            [12: '\\' [4: 10a 0a 0a 0a]]
+                                            "\\%o"]
+                                           c)))
+                                     (before asmcomp/x86_proc.ml(69):2092-2111
+                                       (after asmcomp/x86_proc.ml(69):2092-2111
+                                         (apply
+                                           (field 9 (global Stdlib__buffer!))
+                                           b c)))))
+                                 (before asmcomp/x86_proc.ml(70):2121-2350
+                                   (if
+                                     (&& (>= c ' ')
+                                       (&& (<= c '~')
+                                         (&& (!= c '"') (!= c '\\'))))
+                                     (before asmcomp/x86_proc.ml(70):2185-2256
+                                       (seq
+                                         (after asmcomp/x86_proc.ml(71):2197-2216
+                                           (apply
+                                             (field 9
+                                               (global Stdlib__buffer!))
+                                             b c))
+                                         (before asmcomp/x86_proc.ml(72):2224-2248
+                                           (setfield_imm 0 last_was_escape
+                                             0a))))
+                                     (before asmcomp/x86_proc.ml(73):2262-2350
+                                       (seq
+                                         (after asmcomp/x86_proc.ml(74):2274-2311
+                                           (apply
+                                             (field 4
+                                               (global Stdlib__printf!))
+                                             b
+                                             [0:
+                                              [12: '\\' [4: 10a 0a 0a 0a]]
+                                              "\\%o"]
+                                             c))
+                                         (before asmcomp/x86_proc.ml(75):2319-2342
+                                           (setfield_imm 0 last_was_escape
+                                             1a)))))))))))
+                       (before asmcomp/x86_proc.ml(78):2361-2378
+                         (after asmcomp/x86_proc.ml(78):2361-2378
+                           (apply (field 1 (global Stdlib__buffer!)) b)))))))))))
+     string_of_symbol =
+       (function prefix s
+         (funct-body asmcomp/x86_proc.ml(80)<ghost>:2401-2945
+           (before asmcomp/x86_proc.ml(81):2414-2945
+             (let (spec = (makemutable 0 0a))
+               (before asmcomp/x86_proc.ml(82):2440-2945
+                 (seq
+                   (for i 0 to (- (string.length s) 1)
+                     (before asmcomp/x86_proc.ml(83):2480-2586
+                       (let (*match* = (string.unsafe_get s i))
+                         (catch
+                           (catch
+                             (if (>= *match* 91)
+                               (if (>= *match* 97)
+                                 (if (>= *match* 123) (exit 7) (exit 6))
+                                 (if (!= *match* 95) (exit 7) (exit 6)))
+                               (if (>= *match* 58)
+                                 (if (>= *match* 65) (exit 6) (exit 7))
+                                 (if (>= *match* 48) (exit 6) (exit 7))))
+                            with (7)
+                             (before asmcomp/x86_proc.ml(85):2573-2585
+                               (setfield_imm 0 spec 1a)))
+                          with (6)
+                           (before asmcomp/x86_proc.ml(84):2559-2561 0a)))))
+                   (before asmcomp/x86_proc.ml(87):2597-2945
+                     (if (not (field 0 spec))
+                       (before asmcomp/x86_proc.ml(87):2615-2652
+                         (if
+                           (after asmcomp/x86_proc.ml(87):2618-2629
+                             (caml_string_equal prefix ""))
+                           (before asmcomp/x86_proc.ml(87):2635-2636 s)
+                           (before asmcomp/x86_proc.ml(87):2642-2652
+                             (after asmcomp/x86_proc.ml(87):2642-2652
+                               (apply (field 27 (global Stdlib!)) prefix s)))))
+                       (before asmcomp/x86_proc.ml(89):2664-2945
+                         (let
+                           (b =
+                              (after asmcomp/x86_proc.ml(89):2672-2708
+                                (apply (field 0 (global Stdlib__buffer!))
+                                  (+ (string.length s) 10))))
+                           (before asmcomp/x86_proc.ml(90):2716-2945
+                             (seq
+                               (after asmcomp/x86_proc.ml(90):2716-2742
+                                 (apply (field 13 (global Stdlib__buffer!)) b
+                                   prefix))
+                               (before asmcomp/x86_proc.ml(91):2748-2945
+                                 (seq
+                                   (after asmcomp/x86_proc.ml(91):2748-2922
+                                     (apply
+                                       (field 7 (global Stdlib__string!))
+                                       (function c[int]
+                                         (funct-body asmcomp/x86_proc.ml(92):2766-2914
+                                           (catch
+                                             (catch
+                                               (if (>= c 91)
+                                                 (if (>= c 97)
+                                                   (if (>= c 123) (exit 5)
+                                                     (exit 4))
+                                                   (if (!= c 95) (exit 5)
+                                                     (exit 4)))
+                                                 (if (>= c 58)
+                                                   (if (>= c 65) (exit 4)
+                                                     (exit 5))
+                                                   (if (>= c 48) (exit 4)
+                                                     (exit 5))))
+                                              with (5)
+                                               (let (c =a[int] c)
+                                                 (before asmcomp/x86_proc.ml(94):2868-2906
+                                                   (after asmcomp/x86_proc.ml(94):2868-2906
+                                                     (apply
+                                                       (field 4
+                                                         (global Stdlib__printf!))
+                                                       b
+                                                       [0:
+                                                        [12:
+                                                         '$'
+                                                         [4:
+                                                          6a [0: 2a 2] 0a 0a]]
+                                                        "$%02x"]
+                                                       c)))))
+                                            with (4)
+                                             (before asmcomp/x86_proc.ml(93):2833-2852
+                                               (after asmcomp/x86_proc.ml(93):2833-2852
+                                                 (apply
+                                                   (field 9
+                                                     (global Stdlib__buffer!))
+                                                   b c))))))
+                                       s))
+                                   (before asmcomp/x86_proc.ml(97):2928-2945
+                                     (after asmcomp/x86_proc.ml(97):2928-2945
+                                       (apply
+                                         (field 1 (global Stdlib__buffer!))
+                                         b)))))))))))))))))
+     buf_bytes_directive =
+       (function b directive s
+         (funct-body asmcomp/x86_proc.ml(99)<ghost>:2971-3365
+           (before asmcomp/x86_proc.ml(100):2989-3365
+             (let (pos = (makemutable 0 (int) 0))
+               (before asmcomp/x86_proc.ml(101):3010-3365
+                 (for i 0 to (- (string.length s) 1)
+                   (before asmcomp/x86_proc.ml(102):3050-3358
+                     (seq
+                       (if (== (field 0 pos) 0)
+                         (before asmcomp/x86_proc.ml(103):3071-3225
+                           (seq
+                             (if (> i 0)
+                               (before asmcomp/x86_proc.ml(104):3097-3119
+                                 (after asmcomp/x86_proc.ml(104):3097-3119
+                                   (apply (field 9 (global Stdlib__buffer!))
+                                     b '\n')))
+                               0a)
+                             (before asmcomp/x86_proc.ml(105):3127-3217
+                               (seq
+                                 (after asmcomp/x86_proc.ml(105):3127-3149
+                                   (apply (field 9 (global Stdlib__buffer!))
+                                     b '\t'))
+                                 (before asmcomp/x86_proc.ml(106):3157-3217
+                                   (seq
+                                     (after asmcomp/x86_proc.ml(106):3157-3186
+                                       (apply
+                                         (field 13 (global Stdlib__buffer!))
+                                         b directive))
+                                     (before asmcomp/x86_proc.ml(107):3194-3216
+                                       (after asmcomp/x86_proc.ml(107):3194-3216
+                                         (apply
+                                           (field 9 (global Stdlib__buffer!))
+                                           b '\t')))))))))
+                         (before asmcomp/x86_proc.ml(109):3235-3256
+                           (after asmcomp/x86_proc.ml(109):3235-3256
+                             (apply (field 9 (global Stdlib__buffer!)) b ','))))
+                       (before asmcomp/x86_proc.ml(110):3262-3358
+                         (seq
+                           (after asmcomp/x86_proc.ml(110):3262-3301
+                             (apply (field 4 (global Stdlib__printf!)) b
+                               [0: [4: 0a 0a 0a 0a] "%d"]
+                               (after asmcomp/x86_proc.ml(110):3295-3300
+                                 (string.get s i))))
+                           (before asmcomp/x86_proc.ml(111):3307-3358
+                             (seq (+:=1 pos)
+                               (before asmcomp/x86_proc.ml(112):3321-3358
+                                 (if (>= (field 0 pos) 16)
+                                   (before asmcomp/x86_proc.ml(112):3340-3358
+                                     (setfield_imm 0 pos 0))
+                                   0a))))))))))))))
+     string_of_reg64 =
+       (function param
+         (funct-body asmcomp/x86_proc.ml(115):3389-3667
+           (switch* param
+            case int 0: (before asmcomp/x86_proc.ml(116):3409-3414 "rax")
+            case int 1: (before asmcomp/x86_proc.ml(117):3426-3431 "rbx")
+            case int 2: (before asmcomp/x86_proc.ml(121):3494-3499 "rcx")
+            case int 3: (before asmcomp/x86_proc.ml(120):3477-3482 "rdx")
+            case int 4: (before asmcomp/x86_proc.ml(123):3528-3533 "rsp")
+            case int 5: (before asmcomp/x86_proc.ml(122):3511-3516 "rbp")
+            case int 6: (before asmcomp/x86_proc.ml(119):3460-3465 "rsi")
+            case int 7: (before asmcomp/x86_proc.ml(118):3443-3448 "rdi")
+            case int 8: (before asmcomp/x86_proc.ml(124):3545-3549 "r8")
+            case int 9: (before asmcomp/x86_proc.ml(125):3561-3565 "r9")
+            case int 10: (before asmcomp/x86_proc.ml(126):3577-3582 "r10")
+            case int 11: (before asmcomp/x86_proc.ml(127):3594-3599 "r11")
+            case int 12: (before asmcomp/x86_proc.ml(128):3611-3616 "r12")
+            case int 13: (before asmcomp/x86_proc.ml(129):3628-3633 "r13")
+            case int 14: (before asmcomp/x86_proc.ml(130):3645-3650 "r14")
+            case int 15: (before asmcomp/x86_proc.ml(131):3662-3667 "r15"))))
+     string_of_reg8l =
+       (function param
+         (funct-body asmcomp/x86_proc.ml(133):3691-3973
+           (switch* param
+            case int 0: (before asmcomp/x86_proc.ml(134):3711-3715 "al")
+            case int 1: (before asmcomp/x86_proc.ml(135):3727-3731 "bl")
+            case int 2: (before asmcomp/x86_proc.ml(136):3743-3747 "cl")
+            case int 3: (before asmcomp/x86_proc.ml(137):3759-3763 "dl")
+            case int 4: (before asmcomp/x86_proc.ml(138):3775-3780 "spl")
+            case int 5: (before asmcomp/x86_proc.ml(139):3792-3797 "bpl")
+            case int 6: (before asmcomp/x86_proc.ml(140):3809-3814 "sil")
+            case int 7: (before asmcomp/x86_proc.ml(141):3826-3831 "dil")
+            case int 8: (before asmcomp/x86_proc.ml(142):3843-3848 "r8b")
+            case int 9: (before asmcomp/x86_proc.ml(143):3860-3865 "r9b")
+            case int 10: (before asmcomp/x86_proc.ml(144):3877-3883 "r10b")
+            case int 11: (before asmcomp/x86_proc.ml(145):3895-3901 "r11b")
+            case int 12: (before asmcomp/x86_proc.ml(146):3913-3919 "r12b")
+            case int 13: (before asmcomp/x86_proc.ml(147):3931-3937 "r13b")
+            case int 14: (before asmcomp/x86_proc.ml(148):3949-3955 "r14b")
+            case int 15: (before asmcomp/x86_proc.ml(149):3967-3973 "r15b"))))
+     string_of_reg8h =
+       (function param
+         (funct-body asmcomp/x86_proc.ml(151):3997-4065
+           (switch* param
+            case int 0: (before asmcomp/x86_proc.ml(152):4016-4020 "ah")
+            case int 1: (before asmcomp/x86_proc.ml(153):4031-4035 "bh")
+            case int 2: (before asmcomp/x86_proc.ml(154):4046-4050 "ch")
+            case int 3: (before asmcomp/x86_proc.ml(155):4061-4065 "dh"))))
+     string_of_reg16 =
+       (function param
+         (funct-body asmcomp/x86_proc.ml(157):4089-4367
+           (switch* param
+            case int 0: (before asmcomp/x86_proc.ml(158):4109-4113 "ax")
+            case int 1: (before asmcomp/x86_proc.ml(159):4125-4129 "bx")
+            case int 2: (before asmcomp/x86_proc.ml(160):4141-4145 "cx")
+            case int 3: (before asmcomp/x86_proc.ml(161):4157-4161 "dx")
+            case int 4: (before asmcomp/x86_proc.ml(162):4173-4177 "sp")
+            case int 5: (before asmcomp/x86_proc.ml(163):4189-4193 "bp")
+            case int 6: (before asmcomp/x86_proc.ml(164):4205-4209 "si")
+            case int 7: (before asmcomp/x86_proc.ml(165):4221-4225 "di")
+            case int 8: (before asmcomp/x86_proc.ml(166):4237-4242 "r8w")
+            case int 9: (before asmcomp/x86_proc.ml(167):4254-4259 "r9w")
+            case int 10: (before asmcomp/x86_proc.ml(168):4271-4277 "r10w")
+            case int 11: (before asmcomp/x86_proc.ml(169):4289-4295 "r11w")
+            case int 12: (before asmcomp/x86_proc.ml(170):4307-4313 "r12w")
+            case int 13: (before asmcomp/x86_proc.ml(171):4325-4331 "r13w")
+            case int 14: (before asmcomp/x86_proc.ml(172):4343-4349 "r14w")
+            case int 15: (before asmcomp/x86_proc.ml(173):4361-4367 "r15w"))))
+     string_of_reg32 =
+       (function param
+         (funct-body asmcomp/x86_proc.ml(175):4391-4677
+           (switch* param
+            case int 0: (before asmcomp/x86_proc.ml(176):4411-4416 "eax")
+            case int 1: (before asmcomp/x86_proc.ml(177):4428-4433 "ebx")
+            case int 2: (before asmcomp/x86_proc.ml(178):4445-4450 "ecx")
+            case int 3: (before asmcomp/x86_proc.ml(179):4462-4467 "edx")
+            case int 4: (before asmcomp/x86_proc.ml(180):4479-4484 "esp")
+            case int 5: (before asmcomp/x86_proc.ml(181):4496-4501 "ebp")
+            case int 6: (before asmcomp/x86_proc.ml(182):4513-4518 "esi")
+            case int 7: (before asmcomp/x86_proc.ml(183):4530-4535 "edi")
+            case int 8: (before asmcomp/x86_proc.ml(184):4547-4552 "r8d")
+            case int 9: (before asmcomp/x86_proc.ml(185):4564-4569 "r9d")
+            case int 10: (before asmcomp/x86_proc.ml(186):4581-4587 "r10d")
+            case int 11: (before asmcomp/x86_proc.ml(187):4599-4605 "r11d")
+            case int 12: (before asmcomp/x86_proc.ml(188):4617-4623 "r12d")
+            case int 13: (before asmcomp/x86_proc.ml(189):4635-4641 "r13d")
+            case int 14: (before asmcomp/x86_proc.ml(190):4653-4659 "r14d")
+            case int 15: (before asmcomp/x86_proc.ml(191):4671-4677 "r15d"))))
+     string_of_registerf =
+       (function param
+         (funct-body asmcomp/x86_proc.ml(193):4705-4821
+           (switch* param
+            case int 0:
+             (before asmcomp/x86_proc.ml(195):4763-4783
+               (after asmcomp/x86_proc.ml(195):4763-4783
+                 (apply (field 3 (global Stdlib__printf!))
+                   [0: [11: "tos" 0a] "tos"])))
+            case tag 0:
+             (let (n =a (field 0 param))
+               (before asmcomp/x86_proc.ml(194):4727-4751
+                 (after asmcomp/x86_proc.ml(194):4727-4751
+                   (apply (field 3 (global Stdlib__printf!))
+                     [0: [11: "xmm" [4: 0a 0a 0a 0a]] "xmm%d"] n))))
+            case tag 1:
+             (let (n =a (field 0 param))
+               (before asmcomp/x86_proc.ml(196):4796-4821
+                 (after asmcomp/x86_proc.ml(196):4796-4821
+                   (apply (field 3 (global Stdlib__printf!))
+                     [0: [11: "st(" [4: 0a 0a 0a [12: ')' 0a]]] "st(%d)"] n)))))))
+     string_of_condition =
+       (function param
+         (funct-body asmcomp/x86_proc.ml(198):4849-5081
+           (switch* param
+            case int 0: (before asmcomp/x86_proc.ml(207):4979-4982 "l")
+            case int 1: (before asmcomp/x86_proc.ml(202):4909-4913 "ge")
+            case int 2: (before asmcomp/x86_proc.ml(208):4993-4997 "le")
+            case int 3: (before asmcomp/x86_proc.ml(203):4923-4926 "g")
+            case int 4: (before asmcomp/x86_proc.ml(205):4951-4954 "b")
+            case int 5: (before asmcomp/x86_proc.ml(200):4881-4885 "ae")
+            case int 6: (before asmcomp/x86_proc.ml(206):4965-4969 "be")
+            case int 7: (before asmcomp/x86_proc.ml(201):4895-4898 "a")
+            case int 8: (before asmcomp/x86_proc.ml(199):4867-4870 "e")
+            case int 9: (before asmcomp/x86_proc.ml(204):4937-4941 "ne")
+            case int 10: (before asmcomp/x86_proc.ml(214):5078-5081 "o")
+            case int 11: (before asmcomp/x86_proc.ml(213):5064-5068 "no")
+            case int 12: (before asmcomp/x86_proc.ml(212):5050-5053 "s")
+            case int 13: (before asmcomp/x86_proc.ml(211):5036-5040 "ns")
+            case int 14: (before asmcomp/x86_proc.ml(210):5022-5025 "p")
+            case int 15: (before asmcomp/x86_proc.ml(209):5008-5012 "np"))))
+     string_of_rounding =
+       (function param
+         (funct-body asmcomp/x86_proc.ml(216):5108-5248
+           (switch* param
+            case int 0:
+             (before asmcomp/x86_proc.ml(218):5164-5176 "roundsd.up")
+            case int 1:
+             (before asmcomp/x86_proc.ml(217):5134-5148 "roundsd.down")
+            case int 2:
+             (before asmcomp/x86_proc.ml(220):5234-5248 "roundsd.near")
+            case int 3:
+             (before asmcomp/x86_proc.ml(219):5198-5213 "roundsd.trunc"))))
+     internal_assembler = (makemutable 0 0a)
+     register_internal_assembler =
+       (function f
+         (funct-body asmcomp/x86_proc.ml(223)<ghost>:5316-5348
+           (before asmcomp/x86_proc.ml(223):5320-5348
+             (setfield_ptr 0 internal_assembler (makeblock 0 f)))))
+     masm =
+       (catch
+         (if (!= system 4)
+           (if (!= system 9) (before asmcomp/x86_proc.ml(229):5455-5460 0a)
+             (exit 8))
+           (exit 8))
+        with (8) (before asmcomp/x86_proc.ml(228):5441-5445 1a))
+     use_plt =
+       (catch
+         (catch
+           (switch* system
+            case int 0: (exit 10)
+            case int 1: (exit 11)
+            case int 2: (exit 10)
+            case int 3: (exit 11)
+            case int 4: (exit 11)
+            case int 5: (exit 11)
+            case int 6: (exit 11)
+            case int 7: (exit 11)
+            case int 8: (exit 11)
+            case int 9: (exit 10)
+            case int 10: (exit 11)
+            case int 11: (exit 10)
+            case int 12: (exit 11))
+          with (11)
+           (before asmcomp/x86_proc.ml(234):5560-5575
+             (field 0 (field 123 (global Clflags!)))))
+        with (10) (before asmcomp/x86_proc.ml(233):5545-5550 0a))
+     binary_content = (makemutable 0 0a)
+     compile =
+       (function infile outfile : int
+         (funct-body asmcomp/x86_proc.ml(242)<ghost>:5789-6208
+           (before asmcomp/x86_proc.ml(243):5808-6208
+             (if masm
+               (before asmcomp/x86_proc.ml(244):5825-5988
+                 (after asmcomp/x86_proc.ml(244):5825-5988
+                   (apply (field 0 (global Ccomp!))
+                     (after asmcomp/x86_proc.ml(244):5839-5988
+                       (apply (field 27 (global Stdlib!))
+                         (field 38 (global Config!))
+                         (after asmcomp/x86_proc.ml(245):5872-5987
+                           (apply (field 27 (global Stdlib!))
+                             (after asmcomp/x86_proc.ml(245):5872-5894
+                               (apply (field 19 (global Stdlib__filename!))
+                                 outfile))
+                             (after asmcomp/x86_proc.ml(245):5897-5987
+                               (apply (field 27 (global Stdlib!)) " "
+                                 (after asmcomp/x86_proc.ml(245):5903-5987
+                                   (apply (field 27 (global Stdlib!))
+                                     (after asmcomp/x86_proc.ml(245):5903-5924
+                                       (apply
+                                         (field 19
+                                           (global Stdlib__filename!))
+                                         infile))
+                                     (if
+                                       (field 0 (field 38 (global Clflags!)))
+                                       (before asmcomp/x86_proc.ml(246):5972-5974
+                                         "")
+                                       (before asmcomp/x86_proc.ml(246):5980-5986
+                                         ">NUL")))))))))))))
+               (before asmcomp/x86_proc.ml(248):6000-6208
+                 (after asmcomp/x86_proc.ml(248):6000-6208
+                   (apply (field 0 (global Ccomp!))
+                     (after asmcomp/x86_proc.ml(248):6014-6208
+                       (apply (field 27 (global Stdlib!))
+                         (field 38 (global Config!))
+                         (after asmcomp/x86_proc.ml(248):6028-6207
+                           (apply (field 27 (global Stdlib!)) " "
+                             (after asmcomp/x86_proc.ml(249):6053-6207
+                               (apply (field 27 (global Stdlib!))
+                                 (after asmcomp/x86_proc.ml(249):6053-6105
+                                   (apply (field 6 (global Stdlib__string!))
+                                     " "
+                                     (after asmcomp/x86_proc.ml(249):6072-6104
+                                       (apply (field 57 (global Misc!)) 0a))))
+                                 (after asmcomp/x86_proc.ml(250):6127-6207
+                                   (apply (field 27 (global Stdlib!)) " -o "
+                                     (after asmcomp/x86_proc.ml(250):6136-6207
+                                       (apply (field 27 (global Stdlib!))
+                                         (after asmcomp/x86_proc.ml(250):6136-6158
+                                           (apply
+                                             (field 19
+                                               (global Stdlib__filename!))
+                                             outfile))
+                                         (after asmcomp/x86_proc.ml(250):6161-6207
+                                           (apply (field 27 (global Stdlib!))
+                                             " "
+                                             (after asmcomp/x86_proc.ml(251):6186-6207
+                                               (apply
+                                                 (field 19
+                                                   (global Stdlib__filename!))
+                                                 infile)))))))))))))))))))))
+     assemble_file =
+       (function infile outfile : int
+         (funct-body asmcomp/x86_proc.ml(253)<ghost>:6228-6371
+           (before asmcomp/x86_proc.ml(254):6247-6371
+             (let (*match* = (field 0 binary_content))
+               (if *match*
+                 (let (content =a (field 0 *match*))
+                   (before asmcomp/x86_proc.ml(256):6329-6371
+                     (seq
+                       (after asmcomp/x86_proc.ml(256):6329-6344
+                         (apply content outfile))
+                       (before asmcomp/x86_proc.ml(256):6346-6371
+                         (seq (setfield_ptr 0 binary_content 0a)
+                           (before asmcomp/x86_proc.ml(256):6370-6371 0))))))
+                 (before asmcomp/x86_proc.ml(255):6286-6308
+                   (after asmcomp/x86_proc.ml(255):6286-6308
+                     (apply compile infile outfile))))))))
+     asm_code = (makemutable 0 0a)
+     directive =
+       (function dir
+         (funct-body asmcomp/x86_proc.ml(260)<ghost>:6410-6444
+           (before asmcomp/x86_proc.ml(260):6416-6444
+             (setfield_ptr 0 asm_code (makeblock 0 dir (field 0 asm_code))))))
+     emit =
+       (function ins
+         (funct-body asmcomp/x86_proc.ml(261)<ghost>:6454-6479
+           (before asmcomp/x86_proc.ml(261):6460-6479
+             (after asmcomp/x86_proc.ml(261):6460-6479
+               (apply directive (makeblock 0 ins))))))
+     reset_asm_code =
+       (function param
+         (funct-body asmcomp/x86_proc.ml(263)<ghost>:6500-6519
+           (before asmcomp/x86_proc.ml(263):6505-6519
+             (setfield_ptr 0 asm_code 0a))))
+     generate_code =
+       (function asm
+         (funct-body asmcomp/x86_proc.ml(265)<ghost>:6539-6777
+           (before asmcomp/x86_proc.ml(266):6547-6777
+             (let
+               (instrs =
+                  (after asmcomp/x86_proc.ml(266):6560-6578
+                    (apply (field 8 (global Stdlib__list!))
+                      (field 0 asm_code))))
+               (before asmcomp/x86_proc.ml(267):6584-6777
+                 (seq
+                   (if asm
+                     (let (f =a (field 0 asm))
+                       (before asmcomp/x86_proc.ml(268):6619-6627
+                         (after asmcomp/x86_proc.ml(268):6619-6627
+                           (apply f instrs))))
+                     (before asmcomp/x86_proc.ml(269):6640-6642 0a))
+                   (before asmcomp/x86_proc.ml(271):6652-6777
+                     (let (*match* = (field 0 internal_assembler))
+                       (if *match*
+                         (let (f =a (field 0 *match*))
+                           (before asmcomp/x86_proc.ml(272):6703-6736
+                             (setfield_ptr 0 binary_content
+                               (makeblock 0
+                                 (after asmcomp/x86_proc.ml(272):6726-6736
+                                   (apply f instrs))))))
+                         (before asmcomp/x86_proc.ml(273):6749-6771
+                           (setfield_ptr 0 binary_content 0a))))))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 string_of_reg8l string_of_reg8h string_of_reg16
+        string_of_reg32 string_of_reg64 string_of_registerf
+        string_of_string_literal string_of_condition string_of_symbol
+        string_of_rounding buf_bytes_directive emit directive reset_asm_code
+        generate_code assemble_file system masm windows use_plt
+        register_internal_assembler))))

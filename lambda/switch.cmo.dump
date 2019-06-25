@@ -1,0 +1,2715 @@
+(setglobal Switch!
+  (let
+    (Not_simple = (makeblock 248 "Switch.Not_simple" (caml_fresh_oo_id 0))
+     CtxStore =
+       (module-defn(CtxStore) lambda/switch.ml(40):1562-3099
+         (function A is_a_functor
+           (let
+             (A =a A
+              AMap =
+                (module-defn(AMap) lambda/switch.ml(41):1602-1683
+                  (apply
+                    (let (let = (field 0 (global Stdlib__map!)))
+                      (field 0 (global Stdlib__map!)))
+                    (let (compare = (field 0 A))
+                      (pseudo lambda/switch.ml(42):1629-1682
+                        (makeblock 0 compare)))))
+              mk_store =
+                (function param
+                  (funct-body lambda/switch.ml(49)<ghost>:1829-3095
+                    (before lambda/switch.ml(50):1838-3095
+                      (let
+                        (st = (makemutable 0 (*,int,*) (field 0 AMap) 0 0a))
+                        (before lambda/switch.ml(55):1923-3095
+                          (let
+                            (add =
+                               (function mustshare act : int
+                                 (funct-body lambda/switch.ml(55)<ghost>:1931-2048
+                                   (before lambda/switch.ml(56):1953-2048
+                                     (let (i =[int] (field 1 st))
+                                       (before lambda/switch.ml(57):1978-2048
+                                         (seq
+                                           (setfield_ptr 2 st
+                                             (makeblock 0
+                                               (makeblock 0 mustshare act)
+                                               (field 2 st)))
+                                           (before lambda/switch.ml(58):2024-2048
+                                             (seq (setfield_imm 1 st (+ i 1))
+                                               (before lambda/switch.ml(59):2047-2048
+                                                 i))))))))))
+                            (before lambda/switch.ml(61):2057-3095
+                              (let
+                                (store =
+                                   (function mustshare ctx act : int
+                                     (funct-body lambda/switch.ml(61)<ghost>:2067-2494
+                                       (before lambda/switch.ml(61):2087-2494
+                                         (let
+                                           (*match* =
+                                              (after lambda/switch.ml(61):2093-2111
+                                                (apply (field 1 A) ctx act)))
+                                           (if *match*
+                                             (let (key =a (field 0 *match*))
+                                               (before lambda/switch.ml(63):2147-2450
+                                                 (try
+                                                   (let
+                                                     (*match* =
+                                                        (after lambda/switch.ml(64):2186-2206
+                                                          (apply
+                                                            (field 26 AMap)
+                                                            key (field 0 st)))
+                                                      i =a (field 1 *match*)
+                                                      shared =a
+                                                        (field 0 *match*))
+                                                     (before lambda/switch.ml(65):2222-2295
+                                                       (seq
+                                                         (if (not shared)
+                                                           (before lambda/switch.ml(65):2241-2279
+                                                             (setfield_ptr 0
+                                                               st
+                                                               (after lambda/switch.ml(65):2251-2279
+                                                                 (apply
+                                                                   (field 3
+                                                                    AMap)
+                                                                   key
+                                                                   (makeblock 0 (*,int)
+                                                                    1a i)
+                                                                   (field 0
+                                                                    st)))))
+                                                           0a)
+                                                         (before lambda/switch.ml(66):2294-2295
+                                                           i))))
+                                                  with exn
+                                                   (if
+                                                     (== exn
+                                                       (field 7
+                                                         (global Stdlib!)))
+                                                     (before lambda/switch.ml(68):2336-2436
+                                                       (let
+                                                         (i =[int]
+                                                            (after lambda/switch.ml(68):2344-2361
+                                                              (apply add
+                                                                mustshare
+                                                                act)))
+                                                         (before lambda/switch.ml(69):2377-2436
+                                                           (seq
+                                                             (setfield_ptr 0
+                                                               st
+                                                               (after lambda/switch.ml(69):2387-2420
+                                                                 (apply
+                                                                   (field 3
+                                                                    AMap)
+                                                                   key
+                                                                   (makeblock 0 (*,int)
+                                                                    mustshare
+                                                                    i)
+                                                                   (field 0
+                                                                    st))))
+                                                             (before lambda/switch.ml(70):2435-2436
+                                                               i)))))
+                                                     (reraise exn)))))
+                                             (before lambda/switch.ml(73):2477-2494
+                                               (after lambda/switch.ml(73):2477-2494
+                                                 (apply add mustshare act))))))))
+                                 get =
+                                   (function param
+                                     (funct-body lambda/switch.ml(75)<ghost>:2508-2570
+                                       (before lambda/switch.ml(75):2513-2570
+                                         (after lambda/switch.ml(75):2513-2570
+                                           (apply
+                                             (field 11
+                                               (global Stdlib__array!))
+                                             (after lambda/switch.ml(75):2527-2570
+                                               (apply
+                                                 (field 18
+                                                   (global Stdlib__list!))
+                                                 (function param
+                                                   (funct-body lambda/switch.ml(75):2541-2561
+                                                     (let
+                                                       (act =a
+                                                          (field 1 param))
+                                                       (before lambda/switch.ml(75):2557-2560
+                                                         act))))
+                                                 (field 2 st))))))))
+                                 get_shared =
+                                   (function param
+                                     (funct-body lambda/switch.ml(77)<ghost>:2591-2978
+                                       (before lambda/switch.ml(78):2602-2978
+                                         (let
+                                           (acts =
+                                              (after lambda/switch.ml(79):2621-2773
+                                                (apply
+                                                  (field 11
+                                                    (global Stdlib__array!))
+                                                  (after lambda/switch.ml(80):2645-2773
+                                                    (apply
+                                                      (field 18
+                                                        (global Stdlib__list!))
+                                                      (function param
+                                                        (funct-body lambda/switch.ml(81):2672-2751
+                                                          (let
+                                                            (act =a
+                                                               (field 1
+                                                                 param)
+                                                             shared =a
+                                                               (field 0
+                                                                 param))
+                                                            (before lambda/switch.ml(82):2709-2750
+                                                              (if shared
+                                                                (before lambda/switch.ml(82):2724-2734
+                                                                  (makeblock 0
+                                                                    act))
+                                                                (before lambda/switch.ml(82):2740-2750
+                                                                  (makeblock 1
+                                                                    act)))))))
+                                                      (field 2 st))))))
+                                           (before lambda/switch.ml(84):2783-2978
+                                             (seq
+                                               (after lambda/switch.ml(84):2783-2965
+                                                 (apply (field 11 AMap)
+                                                   (function param param
+                                                     (funct-body lambda/switch.ml(85):2801-2950
+                                                       (let
+                                                         (i =a
+                                                            (field 1 param)
+                                                          shared =a
+                                                            (field 0 param))
+                                                         (before lambda/switch.ml(86):2833-2949
+                                                           (if shared
+                                                             (before lambda/switch.ml(86):2848-2949
+                                                               (let
+                                                                 (*match* =
+                                                                    (after lambda/switch.ml(86):2854-2862
+                                                                    (array.get[addr]
+                                                                    acts i)))
+                                                                 (switch* *match*
+                                                                  case tag 0:
+                                                                   (before lambda/switch.ml(88):2947-2949
+                                                                    0a)
+                                                                  case tag 1:
+                                                                   (let
+                                                                    (act =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before lambda/switch.ml(87):2897-2919
+                                                                    (after lambda/switch.ml(87):2897-2919
+                                                                    (array.set[addr]
+                                                                    acts i
+                                                                    (makeblock 0
+                                                                    act))))))))
+                                                             0a)))))
+                                                   (field 0 st)))
+                                               (before lambda/switch.ml(90):2974-2978
+                                                 acts))))))))
+                                (before lambda/switch.ml(91):2986-3095
+                                  (makeblock 0 get get_shared
+                                    (after lambda/switch.ml(91):2999-3010
+                                      (apply store 0a))
+                                    (after lambda/switch.ml(91):3032-3042
+                                      (apply store 1a)))))))))))))
+             (pseudo lambda/switch.ml(40):1593-3099
+               (makeblock 0 AMap mk_store)))))
+     Store =
+       (module-defn(Store) lambda/switch.ml(95):3101-3301
+         (function A is_a_functor
+           (let
+             (A =a A
+              Me =
+                (module-defn(Me) lambda/switch.ml(96):3135-3267
+                  (apply CtxStore
+                    (let
+                      (include =a A
+                       compare_key =a (field 0 include)
+                       make_key =
+                         (function param
+                           (funct-body lambda/switch.ml(101)<ghost>:3241-3256
+                             (before lambda/switch.ml(101):3246-3256
+                               (field 1 A)))))
+                      (pseudo lambda/switch.ml(98):3167-3266
+                        (makeblock 0 compare_key make_key)))))
+              mk_store = (field 1 Me))
+             (pseudo lambda/switch.ml(95):3126-3301
+               (makeblock 0 Me mk_store)))))
+     Make =
+       (module-defn(Make) lambda/switch.ml(152):4619-24681
+         (function Arg is_a_functor
+           (let
+             (Arg =a Arg
+              cut = (makemutable 0 (int) 8)
+              more_cut = (makemutable 0 (int) 16)
+              get_act =
+                (function cases i[int]
+                  (funct-body lambda/switch.ml(183)<ghost>:5292-5336
+                    (before lambda/switch.ml(184):5306-5336
+                      (let
+                        (*match* =
+                           (after lambda/switch.ml(184):5318-5327
+                             (array.get[addr] cases i))
+                         r =a (field 2 *match*))
+                        (before lambda/switch.ml(185):5335-5336 r)))))
+              get_low =
+                (function cases i[int]
+                  (funct-body lambda/switch.ml(186)<ghost>:5351-5395
+                    (before lambda/switch.ml(187):5365-5395
+                      (let
+                        (*match* =
+                           (after lambda/switch.ml(187):5377-5386
+                             (array.get[addr] cases i))
+                         r =a (field 0 *match*))
+                        (before lambda/switch.ml(188):5394-5395 r)))))
+              too_much =
+                (makemutable 0 (int,int) (field 18 (global Stdlib!))
+                  (field 18 (global Stdlib!)))
+              less_tests =
+                (function c1 c2
+                  (funct-body lambda/switch.ml(207)<ghost>:5717-5885
+                    (before lambda/switch.ml(208):5729-5885
+                      (if (< (field 0 c1) (field 0 c2))
+                        (before lambda/switch.ml(209):5755-5759 1a)
+                        (before lambda/switch.ml(210):5769-5885
+                          (if (== (field 0 c1) (field 0 c2))
+                            (before lambda/switch.ml(210):5789-5868
+                              (if (< (field 1 c1) (field 1 c2))
+                                (before lambda/switch.ml(212):5831-5835 1a)
+                                (before lambda/switch.ml(214):5855-5860 0a)))
+                            (before lambda/switch.ml(216):5880-5885 0a)))))))
+              eq_tests =
+                (function c1 c2
+                  (funct-body lambda/switch.ml(218)<ghost>:5902-5936
+                    (before lambda/switch.ml(218):5910-5936
+                      (&& (== (field 0 c1) (field 0 c2))
+                        (== (field 1 c1) (field 1 c2))))))
+              less2tests =
+                (function param param
+                  (funct-body lambda/switch.ml(220)<ghost>:5955-6054
+                    (let
+                      (d2 =a (field 1 param)
+                       c2 =a (field 0 param)
+                       d1 =a (field 1 param)
+                       c1 =a (field 0 param))
+                      (before lambda/switch.ml(221):5977-6054
+                        (if
+                          (after lambda/switch.ml(221):5980-5994
+                            (apply eq_tests c1 c2))
+                          (before lambda/switch.ml(222):6006-6022
+                            (after lambda/switch.ml(222):6006-6022
+                              (apply less_tests d1 d2)))
+                          (before lambda/switch.ml(224):6038-6054
+                            (after lambda/switch.ml(224):6038-6054
+                              (apply less_tests c1 c2))))))))
+              add_test =
+                (function t1 t2
+                  (funct-body lambda/switch.ml(226)<ghost>:6071-6133
+                    (before lambda/switch.ml(227):6083-6133
+                      (seq (setfield_imm 0 t1 (+ (field 0 t1) (field 0 t2)))
+                        (before lambda/switch.ml(228):6109-6131
+                          (setfield_imm 1 t1 (+ (field 1 t1) (field 1 t2))))))))
+              coupe =
+                (function cases i[int]
+                  (funct-body lambda/switch.ml(239)<ghost>:6368-6483
+                    (before lambda/switch.ml(240):6382-6483
+                      (let
+                        (*match* =
+                           (after lambda/switch.ml(240):6394-6403
+                             (array.get[addr] cases i))
+                         l =a (field 0 *match*))
+                        (before lambda/switch.ml(241):6411-6483
+                          (makeblock 0 l
+                            (after lambda/switch.ml(242):6418-6437
+                              (apply (field 6 (global Stdlib__array!)) cases
+                                0 i))
+                            (after lambda/switch.ml(243):6443-6483
+                              (apply (field 6 (global Stdlib__array!)) cases
+                                i (- (array.length[addr] cases) i)))))))))
+              case_append =
+                (function c1 c2
+                  (funct-body lambda/switch.ml(246)<ghost>:6504-8092
+                    (before lambda/switch.ml(247):6516-8092
+                      (let
+                        (len1 =[int] (array.length[addr] c1)
+                         len2 =[int] (array.length[addr] c2))
+                        (before lambda/switch.ml(249):6581-8092
+                          (let (*match* = len1 *match* = len2)
+                            (if (!= *match* 0)
+                              (if (!= *match* 0)
+                                (before lambda/switch.ml(253):6655-8092
+                                  (let
+                                    (*match* =
+                                       (after lambda/switch.ml(253):6672-6694
+                                         (array.get[addr] c1
+                                           (- (array.length[addr] c1) 1)))
+                                     act1 =a (field 2 *match*)
+                                     h1 =a (field 1 *match*)
+                                     l1 =a (field 0 *match*)
+                                     *match* =
+                                       (after lambda/switch.ml(254):6720-6726
+                                         (array.get[addr] c2 0))
+                                     act2 =a (field 2 *match*)
+                                     h2 =a (field 1 *match*)
+                                     l2 =a (field 0 *match*))
+                                    (before lambda/switch.ml(255):6738-8092
+                                      (if
+                                        (after lambda/switch.ml(255):6741-6752
+                                          (caml_equal act1 act2))
+                                        (before lambda/switch.ml(256):6768-7466
+                                          (let
+                                            (r =
+                                               (after lambda/switch.ml(256):6776-6807
+                                                 (caml_make_vect
+                                                   (- (+ len1 len2) 1)
+                                                   (after lambda/switch.ml(256):6801-6807
+                                                     (array.get[addr] c1 0)))))
+                                            (before lambda/switch.ml(257):6821-7466
+                                              (seq
+                                                (for i 0 to (- len1 2)
+                                                  (before lambda/switch.ml(258):6856-6871
+                                                    (after lambda/switch.ml(258):6856-6871
+                                                      (array.set[addr] r i
+                                                        (after lambda/switch.ml(258):6865-6871
+                                                          (array.get[addr] c1
+                                                            i))))))
+                                                (before lambda/switch.ml(261):6900-7466
+                                                  (let
+                                                    (l =[int]
+                                                       (if (>= (- len1 2) 0)
+                                                         (before lambda/switch.ml(262):6940-7090
+                                                           (let
+                                                             (*match* =
+                                                                (after lambda/switch.ml(263):6972-6982
+                                                                  (array.get[addr]
+                                                                    r
+                                                                    (- len1
+                                                                    2)))
+                                                              h =a
+                                                                (field 1
+                                                                  *match*))
+                                                             (before lambda/switch.ml(264):7000-7074
+                                                               (if
+                                                                 (< (+ h 1)
+                                                                   l1)
+                                                                 (before lambda/switch.ml(265):7033-7036
+                                                                   (+ h 1))
+                                                                 (before lambda/switch.ml(267):7072-7074
+                                                                   l1)))))
+                                                         (before lambda/switch.ml(269):7110-7112
+                                                           l1))
+                                                     h =[int]
+                                                       (if (< 1 (- len2 1))
+                                                         (before lambda/switch.ml(271):7162-7308
+                                                           (let
+                                                             (*match* =
+                                                                (after lambda/switch.ml(272):7194-7200
+                                                                  (array.get[addr]
+                                                                    c2 1))
+                                                              l =a
+                                                                (field 0
+                                                                  *match*))
+                                                             (before lambda/switch.ml(273):7218-7292
+                                                               (if
+                                                                 (< (+ h2 1)
+                                                                   l)
+                                                                 (before lambda/switch.ml(274):7251-7254
+                                                                   (- l 1))
+                                                                 (before lambda/switch.ml(276):7290-7292
+                                                                   h2)))))
+                                                         (before lambda/switch.ml(278):7328-7330
+                                                           h2)))
+                                                    (before lambda/switch.ml(279):7344-7466
+                                                      (seq
+                                                        (after lambda/switch.ml(279):7344-7368
+                                                          (array.set[addr] r
+                                                            (- len1 1)
+                                                            (makeblock 0 (int,int,*)
+                                                              l h act1)))
+                                                        (before lambda/switch.ml(280):7381-7466
+                                                          (seq
+                                                            (for i 1 to
+                                                              (- len2 1)
+                                                              (before lambda/switch.ml(281):7415-7437
+                                                                (after lambda/switch.ml(281):7415-7437
+                                                                  (array.set[addr]
+                                                                    r
+                                                                    (+
+                                                                    (- len1
+                                                                    1) i)
+                                                                    (after lambda/switch.ml(281):7431-7437
+                                                                    (array.get[addr]
+                                                                    c2 i))))))
+                                                            (before lambda/switch.ml(283):7465-7466
+                                                              r)))))))))))
+                                        (before lambda/switch.ml(284):7480-8092
+                                          (if (> h1 l1)
+                                            (before lambda/switch.ml(285):7506-7759
+                                              (let
+                                                (r =
+                                                   (after lambda/switch.ml(285):7514-7543
+                                                     (caml_make_vect
+                                                       (+ len1 len2)
+                                                       (after lambda/switch.ml(285):7537-7543
+                                                         (array.get[addr] c1
+                                                           0)))))
+                                                (before lambda/switch.ml(286):7557-7759
+                                                  (seq
+                                                    (for i 0 to (- len1 2)
+                                                      (before lambda/switch.ml(287):7592-7607
+                                                        (after lambda/switch.ml(287):7592-7607
+                                                          (array.set[addr] r
+                                                            i
+                                                            (after lambda/switch.ml(287):7601-7607
+                                                              (array.get[addr]
+                                                                c1 i))))))
+                                                    (before lambda/switch.ml(289):7635-7759
+                                                      (seq
+                                                        (after lambda/switch.ml(289):7635-7663
+                                                          (array.set[addr] r
+                                                            (- len1 1)
+                                                            (makeblock 0 (int,int,*)
+                                                              l1 (- l2 1)
+                                                              act1)))
+                                                        (before lambda/switch.ml(290):7676-7759
+                                                          (seq
+                                                            (for i 0 to
+                                                              (- len2 1)
+                                                              (before lambda/switch.ml(291):7710-7730
+                                                                (after lambda/switch.ml(291):7710-7730
+                                                                  (array.set[addr]
+                                                                    r
+                                                                    (+ len1
+                                                                    i)
+                                                                    (after lambda/switch.ml(291):7724-7730
+                                                                    (array.get[addr]
+                                                                    c2 i))))))
+                                                            (before lambda/switch.ml(293):7758-7759
+                                                              r)))))))))
+                                            (before lambda/switch.ml(294):7773-8092
+                                              (if (> h2 l2)
+                                                (before lambda/switch.ml(295):7799-8050
+                                                  (let
+                                                    (r =
+                                                       (after lambda/switch.ml(295):7807-7836
+                                                         (caml_make_vect
+                                                           (+ len1 len2)
+                                                           (after lambda/switch.ml(295):7830-7836
+                                                             (array.get[addr]
+                                                               c1 0)))))
+                                                    (before lambda/switch.ml(296):7850-8050
+                                                      (seq
+                                                        (for i 0 to
+                                                          (- len1 1)
+                                                          (before lambda/switch.ml(297):7885-7900
+                                                            (after lambda/switch.ml(297):7885-7900
+                                                              (array.set[addr]
+                                                                r i
+                                                                (after lambda/switch.ml(297):7894-7900
+                                                                  (array.get[addr]
+                                                                    c1 i))))))
+                                                        (before lambda/switch.ml(299):7928-8050
+                                                          (seq
+                                                            (after lambda/switch.ml(299):7928-7954
+                                                              (array.set[addr]
+                                                                r len1
+                                                                (makeblock 0 (int,int,*)
+                                                                  (+ h1 1) h2
+                                                                  act2)))
+                                                            (before lambda/switch.ml(300):7967-8050
+                                                              (seq
+                                                                (for i 1 to
+                                                                  (- len2 1)
+                                                                  (before lambda/switch.ml(301):8001-8021
+                                                                    (after lambda/switch.ml(301):8001-8021
+                                                                    (array.set[addr]
+                                                                    r
+                                                                    (+ len1
+                                                                    i)
+                                                                    (after lambda/switch.ml(301):8015-8021
+                                                                    (array.get[addr]
+                                                                    c2 i))))))
+                                                                (before lambda/switch.ml(303):8049-8050
+                                                                  r)))))))))
+                                                (before lambda/switch.ml(305):8074-8092
+                                                  (after lambda/switch.ml(305):8074-8092
+                                                    (apply
+                                                      (field 4
+                                                        (global Stdlib__array!))
+                                                      c1 c2)))))))))))
+                                (before lambda/switch.ml(251):6631-6633 c1))
+                              (before lambda/switch.ml(250):6615-6617 c2))))))))
+              coupe_inter =
+                (function i[int] j[int] cases
+                  (funct-body lambda/switch.ml(308)<ghost>:8113-8345
+                    (before lambda/switch.ml(309):8129-8345
+                      (let (lcases =[int] (array.length[addr] cases))
+                        (before lambda/switch.ml(310):8168-8345
+                          (let
+                            (*match* =
+                               (after lambda/switch.ml(310):8182-8191
+                                 (array.get[addr] cases i))
+                             low =a (field 0 *match*)
+                             *match* =
+                               (after lambda/switch.ml(311):8211-8220
+                                 (array.get[addr] cases j))
+                             high =a (field 1 *match*))
+                            (before lambda/switch.ml(312):8228-8345
+                              (makeblock 0 (int,int,*,*) low high
+                                (after lambda/switch.ml(313):8242-8267
+                                  (apply (field 6 (global Stdlib__array!))
+                                    cases i (+ (- j i) 1)))
+                                (after lambda/switch.ml(314):8273-8345
+                                  (apply case_append
+                                    (after lambda/switch.ml(314):8285-8306
+                                      (apply
+                                        (field 6 (global Stdlib__array!))
+                                        cases 0 i))
+                                    (after lambda/switch.ml(314):8307-8345
+                                      (apply
+                                        (field 6 (global Stdlib__array!))
+                                        cases (+ j 1) (- lcases (+ j 1))))))))))))))
+              t =
+                (after lambda/switch.ml(331):8702-8719
+                  (apply (field 0 (global Stdlib__hashtbl!)) 0a 17))
+              make_key =
+                (function cases
+                  (funct-body lambda/switch.ml(333)<ghost>:8737-9546
+                    (before lambda/switch.ml(334):8749-9546
+                      (let
+                        (seen = (makemutable 0 0a)
+                         count = (makemutable 0 (int) 0))
+                        (before lambda/switch.ml(336):8796-9546
+                          (letrec
+                            (got_it
+                               (function act param : int
+                                 (funct-body lambda/switch.ml(336)<ghost>:8811-9063
+                                   (if param
+                                     (let
+                                       (rem =a (field 1 param)
+                                        *match* =a (field 0 param)
+                                        index =a (field 1 *match*)
+                                        act0 =a (field 0 *match*))
+                                       (before lambda/switch.ml(343):8985-9063
+                                         (if
+                                           (after lambda/switch.ml(343):8988-8998
+                                             (caml_equal act0 act))
+                                           (before lambda/switch.ml(344):9016-9021
+                                             index)
+                                           (before lambda/switch.ml(346):9049-9063
+                                             (after lambda/switch.ml(346):9049-9063
+                                               (apply got_it act rem))))))
+                                     (before lambda/switch.ml(338):8850-8943
+                                       (seq
+                                         (setfield_ptr 0 seen
+                                           (makeblock 0
+                                             (makeblock 0 (*,int) act
+                                               (field 0 count))
+                                             (field 0 seen)))
+                                         (before lambda/switch.ml(339):8891-8943
+                                           (let (r =[int] (field 0 count))
+                                             (before lambda/switch.ml(340):8919-8943
+                                               (seq (+:=1 count)
+                                                 (before lambda/switch.ml(341):8942-8943
+                                                   r)))))))))))
+                            (before lambda/switch.ml(348):9072-9546
+                              (let
+                                (make_one =
+                                   (function l h act
+                                     (funct-body lambda/switch.ml(348)<ghost>:9085-9191
+                                       (before lambda/switch.ml(349):9101-9191
+                                         (if
+                                           (after lambda/switch.ml(349):9104-9107
+                                             (caml_equal l h))
+                                           (before lambda/switch.ml(350):9121-9146
+                                             (makeblock 0 (int)
+                                               (after lambda/switch.ml(350):9128-9146
+                                                 (apply got_it act
+                                                   (field 0 seen)))))
+                                           (before lambda/switch.ml(352):9166-9191
+                                             (makeblock 1 (int)
+                                               (after lambda/switch.ml(352):9173-9191
+                                                 (apply got_it act
+                                                   (field 0 seen))))))))))
+                                (before lambda/switch.ml(354):9200-9546
+                                  (letrec
+                                    (make_rec
+                                       (function i[int] pl[int]
+                                         (funct-body lambda/switch.ml(354)<ghost>:9217-9436
+                                           (before lambda/switch.ml(355):9230-9436
+                                             (if (< i 0)
+                                               (before lambda/switch.ml(356):9252-9254
+                                                 0a)
+                                               (before lambda/switch.ml(358):9274-9436
+                                                 (let
+                                                   (*match* =
+                                                      (after lambda/switch.ml(358):9288-9297
+                                                        (array.get[addr]
+                                                          cases i))
+                                                    act =a (field 2 *match*)
+                                                    h =a (field 1 *match*)
+                                                    l =a (field 0 *match*))
+                                                   (before lambda/switch.ml(359):9309-9436
+                                                     (if (== pl (+ h 1))
+                                                       (before lambda/switch.ml(360):9336-9370
+                                                         (makeblock 0
+                                                           (after lambda/switch.ml(360):9336-9352
+                                                             (apply make_one
+                                                               l h act))
+                                                           (after lambda/switch.ml(360):9354-9370
+                                                             (apply make_rec
+                                                               (- i 1) l))))
+                                                       (before lambda/switch.ml(362):9394-9436
+                                                         (makeblock 0 0a
+                                                           (makeblock 0
+                                                             (after lambda/switch.ml(362):9402-9418
+                                                               (apply
+                                                                 make_one l h
+                                                                 act))
+                                                             (after lambda/switch.ml(362):9420-9436
+                                                               (apply
+                                                                 make_rec
+                                                                 (- i 1) l))))))))))))))
+                                    (before lambda/switch.ml(364):9445-9546
+                                      (let
+                                        (*match* =
+                                           (after lambda/switch.ml(364):9459-9487
+                                             (array.get[addr] cases
+                                               (- (array.length[addr] cases)
+                                                 1)))
+                                         act =a (field 2 *match*)
+                                         h =a (field 1 *match*)
+                                         l =a (field 0 *match*))
+                                        (before lambda/switch.ml(365):9495-9546
+                                          (makeblock 0
+                                            (after lambda/switch.ml(365):9495-9511
+                                              (apply make_one l h act))
+                                            (after lambda/switch.ml(365):9513-9546
+                                              (apply make_rec
+                                                (- (array.length[addr] cases)
+                                                  2)
+                                                l))))))))))))))))
+              same_act =
+                (function t
+                  (funct-body lambda/switch.ml(368)<ghost>:9564-9772
+                    (before lambda/switch.ml(369):9572-9772
+                      (let (len =[int] (array.length[addr] t))
+                        (before lambda/switch.ml(370):9604-9772
+                          (let
+                            (a =
+                               (after lambda/switch.ml(370):9612-9629
+                                 (apply get_act t (- len 1))))
+                            (before lambda/switch.ml(371):9637-9772
+                              (letrec
+                                (do_rec
+                                   (function i[int]
+                                     (funct-body lambda/switch.ml(371)<ghost>:9652-9750
+                                       (before lambda/switch.ml(372):9662-9750
+                                         (if (< i 0)
+                                           (before lambda/switch.ml(372):9676-9680
+                                             1a)
+                                           (before lambda/switch.ml(374):9700-9750
+                                             (let
+                                               (b =
+                                                  (after lambda/switch.ml(374):9708-9719
+                                                    (apply get_act t i)))
+                                               (before lambda/switch.ml(375):9731-9750
+                                                 (&&
+                                                   (after lambda/switch.ml(375):9731-9734
+                                                     (caml_equal b a))
+                                                   (after lambda/switch.ml(375):9738-9750
+                                                     (apply do_rec (- i 1))))))))))))
+                                (before lambda/switch.ml(376):9758-9772
+                                  (after lambda/switch.ml(376):9758-9772
+                                    (apply do_rec (- len 2))))))))))))
+              inter_limit =[int] (lsl 1 16)
+              ok_inter = (makemutable 0 0a))
+             (letrec
+               (opt_count
+                  (function top cases
+                    (funct-body lambda/switch.ml(397)<ghost>:10294-10837
+                      (before lambda/switch.ml(398):10310-10837
+                        (let
+                          (key =
+                             (after lambda/switch.ml(398):10320-10334
+                               (apply make_key cases)))
+                          (before lambda/switch.ml(399):10342-10837
+                            (try
+                              (after lambda/switch.ml(400):10352-10370
+                                (apply (field 5 (global Stdlib__hashtbl!)) t
+                                  key))
+                             with exn
+                              (if (== exn (field 7 (global Stdlib!)))
+                                (before lambda/switch.ml(403):10407-10837
+                                  (let
+                                    (r =
+                                       (let
+                                         (lcases =[int]
+                                            (array.length[addr] cases))
+                                         (before lambda/switch.ml(405):10470-10794
+                                           (if (!= lcases 0)
+                                             (before lambda/switch.ml(407):10537-10551
+                                               (if
+                                                 (after lambda/switch.ml(407):10537-10551
+                                                   (apply same_act cases))
+                                                 (before lambda/switch.ml(407):10555-10584
+                                                   (makeblock 0 0a
+                                                     (makeblock 0
+                                                       (makemutable 0 (int,int)
+                                                         0 0)
+                                                       (makemutable 0 (int,int)
+                                                         0 0))))
+                                                 (before lambda/switch.ml(409):10616-10794
+                                                   (if
+                                                     (< lcases (field 0 cut))
+                                                     (before lambda/switch.ml(410):10654-10668
+                                                       (after lambda/switch.ml(410):10654-10668
+                                                         (apply enum top
+                                                           cases)))
+                                                     (before lambda/switch.ml(411):10688-10794
+                                                       (if
+                                                         (< lcases
+                                                           (field 0 more_cut))
+                                                         (before lambda/switch.ml(412):10731-10746
+                                                           (after lambda/switch.ml(412):10731-10746
+                                                             (apply heuristic
+                                                               cases)))
+                                                         (before lambda/switch.ml(414):10782-10794
+                                                           (after lambda/switch.ml(414):10782-10794
+                                                             (apply divide
+                                                               cases)))))))))
+                                             (before lambda/switch.ml(406):10505-10517
+                                               (raise
+                                                 (after lambda/switch.ml(406):10505-10517
+                                                   (makeblock 0
+                                                     (global Assert_failure!)
+                                                     [0:
+                                                      "lambda/switch.ml" 406
+                                                      17]))))))))
+                                    (before lambda/switch.ml(415):10806-10837
+                                      (seq
+                                        (after lambda/switch.ml(415):10806-10825
+                                          (apply
+                                            (field 4
+                                              (global Stdlib__hashtbl!))
+                                            t key r))
+                                        (before lambda/switch.ml(416):10836-10837
+                                          r)))))
+                                (reraise exn))))))))
+                 divide
+                   (function cases
+                     (funct-body lambda/switch.ml(418)<ghost>:10852-11263
+                       (before lambda/switch.ml(419):10864-11263
+                         (let (lcases =[int] (array.length[addr] cases))
+                           (before lambda/switch.ml(420):10903-11263
+                             (let (m =[int] (/ lcases 2))
+                               (before lambda/switch.ml(421):10927-11263
+                                 (let
+                                   (*match* =
+                                      (after lambda/switch.ml(421):10946-10959
+                                        (apply coupe cases m))
+                                    right =a (field 2 *match*)
+                                    left =a (field 1 *match*))
+                                   (before lambda/switch.ml(422):10967-11263
+                                     (let
+                                       (ci = (makemutable 0 (int,int) 1 0)
+                                        cm = (makemutable 0 (int,int) 1 0)
+                                        *match* =
+                                          (after lambda/switch.ml(424):11039-11059
+                                            (apply opt_count 0a left))
+                                        *match* =a (field 1 *match*)
+                                        cleft =a (field 1 *match*)
+                                        cml =a (field 0 *match*)
+                                        *match* =
+                                          (after lambda/switch.ml(425):11085-11106
+                                            (apply opt_count 0a right))
+                                        *match* =a (field 1 *match*)
+                                        cright =a (field 1 *match*)
+                                        cmr =a (field 0 *match*))
+                                       (before lambda/switch.ml(426):11114-11263
+                                         (seq
+                                           (after lambda/switch.ml(426):11114-11131
+                                             (apply add_test ci cleft))
+                                           (before lambda/switch.ml(427):11138-11263
+                                             (seq
+                                               (after lambda/switch.ml(427):11138-11156
+                                                 (apply add_test ci cright))
+                                               (before lambda/switch.ml(428):11163-11263
+                                                 (seq
+                                                   (if
+                                                     (after lambda/switch.ml(428):11166-11184
+                                                       (apply less_tests cml
+                                                         cmr))
+                                                     (before lambda/switch.ml(429):11196-11211
+                                                       (after lambda/switch.ml(429):11196-11211
+                                                         (apply add_test cm
+                                                           cmr)))
+                                                     (before lambda/switch.ml(431):11227-11242
+                                                       (after lambda/switch.ml(431):11227-11242
+                                                         (apply add_test cm
+                                                           cml))))
+                                                   (before lambda/switch.ml(432):11249-11263
+                                                     (makeblock 0
+                                                       (makeblock 1 (int) m)
+                                                       (makeblock 0 cm ci)))))))))))))))))))
+                 heuristic
+                   (function cases
+                     (funct-body lambda/switch.ml(434)<ghost>:11281-12257
+                       (before lambda/switch.ml(435):11293-12257
+                         (let (lcases =[int] (array.length[addr] cases))
+                           (before lambda/switch.ml(437):11333-12257
+                             (let
+                               (*match* =
+                                  (after lambda/switch.ml(437):11348-11360
+                                    (apply divide cases))
+                                csep =a (field 1 *match*)
+                                sep =a (field 0 *match*))
+                               (catch
+                                 (if (field 0 ok_inter)
+                                   (before lambda/switch.ml(440):11409-12128
+                                     (let
+                                       (*match* =
+                                          (after lambda/switch.ml(441):11438-11447
+                                            (array.get[addr] cases 0))
+                                        act0 =a (field 2 *match*)
+                                        *match* =
+                                          (after lambda/switch.ml(442):11471-11487
+                                            (array.get[addr] cases
+                                              (- lcases 1)))
+                                        act1 =a (field 2 *match*))
+                                       (before lambda/switch.ml(443):11499-12118
+                                         (if
+                                           (after lambda/switch.ml(443):11502-11513
+                                             (caml_equal act0 act1))
+                                           (before lambda/switch.ml(443):11519-12068
+                                             (let
+                                               (*match* =
+                                                  (after lambda/switch.ml(444):11568-11598
+                                                    (apply coupe_inter 1
+                                                      (- lcases 2) cases))
+                                                outside =a (field 3 *match*)
+                                                inside =a (field 2 *match*)
+                                                high =a (field 1 *match*)
+                                                low =a (field 0 *match*))
+                                               (before lambda/switch.ml(445):11612-12056
+                                                 (let
+                                                   (*match* =
+                                                      (after lambda/switch.ml(445):11634-11656
+                                                        (apply opt_count 0a
+                                                          inside))
+                                                    *match* =a
+                                                      (field 1 *match*)
+                                                    cinside =a
+                                                      (field 1 *match*)
+                                                    cmi =a (field 0 *match*)
+                                                    *match* =
+                                                      (after lambda/switch.ml(446):11690-11713
+                                                        (apply opt_count 0a
+                                                          outside))
+                                                    *match* =a
+                                                      (field 1 *match*)
+                                                    coutside =a
+                                                      (field 1 *match*)
+                                                    cmo =a (field 0 *match*)
+                                                    cmij =
+                                                      (makemutable 0 (int,int)
+                                                        1
+                                                        (if (== low high)
+                                                          (before lambda/switch.ml(447):11763-11764
+                                                            0)
+                                                          (before lambda/switch.ml(447):11770-11771
+                                                            1)))
+                                                    cij =
+                                                      (makemutable 0 (int,int)
+                                                        1
+                                                        (if (== low high)
+                                                          (before lambda/switch.ml(448):11822-11823
+                                                            0)
+                                                          (before lambda/switch.ml(448):11829-11830
+                                                            1))))
+                                                   (before lambda/switch.ml(449):11846-12056
+                                                     (seq
+                                                       (after lambda/switch.ml(449):11846-11866
+                                                         (apply add_test cij
+                                                           cinside))
+                                                       (before lambda/switch.ml(450):11879-12056
+                                                         (seq
+                                                           (after lambda/switch.ml(450):11879-11900
+                                                             (apply add_test
+                                                               cij coutside))
+                                                           (before lambda/switch.ml(451):11913-12056
+                                                             (seq
+                                                               (if
+                                                                 (after lambda/switch.ml(451):11916-11934
+                                                                   (apply
+                                                                    less_tests
+                                                                    cmi cmo))
+                                                                 (before lambda/switch.ml(452):11952-11969
+                                                                   (after lambda/switch.ml(452):11952-11969
+                                                                    (apply
+                                                                    add_test
+                                                                    cmij cmo)))
+                                                                 (before lambda/switch.ml(454):11997-12014
+                                                                   (after lambda/switch.ml(454):11997-12014
+                                                                    (apply
+                                                                    add_test
+                                                                    cmij cmi))))
+                                                               (before lambda/switch.ml(455):12027-12056
+                                                                 (let
+                                                                   (cinter =
+                                                                    (makeblock 0
+                                                                    cmij cij)
+                                                                    inter =
+                                                                    (makeblock 0 (int,int)
+                                                                    1
+                                                                    (- lcases
+                                                                    2)))
+                                                                   (exit 67
+                                                                    cinter
+                                                                    inter)))))))))))))
+                                           (before lambda/switch.ml(457):12084-12118
+                                             (let
+                                               (cinter =
+                                                  (makeblock 0 too_much
+                                                    too_much)
+                                                inter = [0: -1 -1])
+                                               (exit 67 cinter inter)))))))
+                                   (before lambda/switch.ml(459):12142-12176
+                                     (let
+                                       (cinter =
+                                          (makeblock 0 too_much too_much)
+                                        inter = [0: -1 -1])
+                                       (exit 67 cinter inter))))
+                                with (67 cinter inter)
+                                 (before lambda/switch.ml(460):12184-12257
+                                   (if
+                                     (after lambda/switch.ml(460):12187-12209
+                                       (apply less2tests csep cinter))
+                                     (before lambda/switch.ml(461):12221-12229
+                                       (makeblock 0 sep csep))
+                                     (before lambda/switch.ml(463):12245-12257
+                                       (makeblock 0 inter cinter)))))))))))
+                 enum
+                   (function top cases
+                     (funct-body lambda/switch.ml(466)<ghost>:12271-15047
+                       (before lambda/switch.ml(467):12287-15047
+                         (let (lcases =[int] (array.length[addr] cases))
+                           (before lambda/switch.ml(468):12326-15047
+                             (let
+                               (best = (makemutable 0 (int) -1)
+                                best_cost =
+                                  (makemutable 0
+                                    (makeblock 0 too_much too_much)))
+                               (before lambda/switch.ml(471):12422-13062
+                                 (seq
+                                   (for i 1 to (- lcases 1)
+                                     (before lambda/switch.ml(472):12457-13025
+                                       (let
+                                         (*match* =
+                                            (after lambda/switch.ml(472):12476-12489
+                                              (apply coupe cases i))
+                                          right =a (field 2 *match*)
+                                          left =a (field 1 *match*))
+                                         (before lambda/switch.ml(473):12501-13025
+                                           (let
+                                             (ci =
+                                                (makemutable 0 (int,int) 1 0)
+                                              cm =
+                                                (makemutable 0 (int,int) 1 0)
+                                              *match* =
+                                                (after lambda/switch.ml(475):12581-12601
+                                                  (apply opt_count 0a left))
+                                              *match* =a (field 1 *match*)
+                                              cleft =a (field 1 *match*)
+                                              cml =a (field 0 *match*)
+                                              *match* =
+                                                (after lambda/switch.ml(476):12631-12652
+                                                  (apply opt_count 0a right))
+                                              *match* =a (field 1 *match*)
+                                              cright =a (field 1 *match*)
+                                              cmr =a (field 0 *match*))
+                                             (before lambda/switch.ml(477):12664-13025
+                                               (seq
+                                                 (after lambda/switch.ml(477):12664-12681
+                                                   (apply add_test ci cleft))
+                                                 (before lambda/switch.ml(478):12692-13025
+                                                   (seq
+                                                     (after lambda/switch.ml(478):12692-12710
+                                                       (apply add_test ci
+                                                         cright))
+                                                     (before lambda/switch.ml(479):12721-13025
+                                                       (seq
+                                                         (if
+                                                           (after lambda/switch.ml(479):12724-12742
+                                                             (apply
+                                                               less_tests cml
+                                                               cmr))
+                                                           (before lambda/switch.ml(480):12758-12773
+                                                             (after lambda/switch.ml(480):12758-12773
+                                                               (apply
+                                                                 add_test cm
+                                                                 cmr)))
+                                                           (before lambda/switch.ml(482):12797-12812
+                                                             (after lambda/switch.ml(482):12797-12812
+                                                               (apply
+                                                                 add_test cm
+                                                                 cml))))
+                                                         (before lambda/switch.ml(484):12824-13025
+                                                           (if
+                                                             (after lambda/switch.ml(485):12837-12866
+                                                               (apply
+                                                                 less2tests
+                                                                 (makeblock 0
+                                                                   cm ci)
+                                                                 (field 0
+                                                                   best_cost)))
+                                                             (before lambda/switch.ml(486):12880-13025
+                                                               (seq
+                                                                 (if top
+                                                                   (before lambda/switch.ml(488):12920-12958
+                                                                    (after lambda/switch.ml(488):12920-12958
+                                                                    (apply
+                                                                    (field 0
+                                                                    (global Stdlib__printf!))
+                                                                    (field 39
+                                                                    (global Stdlib!))
+                                                                    [0:
+                                                                    [11:
+                                                                    "Get it: "
+                                                                    [4:
+                                                                    0a 0a 0a
+                                                                    [12:
+                                                                    '\n' 0a]]]
+                                                                    "Get it: %d\n"]
+                                                                    i)))
+                                                                   0a)
+                                                                 (before lambda/switch.ml(489):12971-13013
+                                                                   (seq
+                                                                    (setfield_imm 0
+                                                                    best i)
+                                                                    (before lambda/switch.ml(490):12993-13013
+                                                                    (setfield_ptr 0
+                                                                    best_cost
+                                                                    (makeblock 0
+                                                                    cm ci)))))))
+                                                             0a)))))))))))))
+                                   (before lambda/switch.ml(493):13045-13062
+                                     (let
+                                       (with_sep = (field 0 best_cost)
+                                        lim = (field 0 best)
+                                        with_sep = with_sep
+                                        lim =[int] lim)
+                                       (before lambda/switch.ml(495):13071-15047
+                                         (catch
+                                           (if (not (field 0 ok_inter))
+                                             (before lambda/switch.ml(497):13137-13971
+                                               (let
+                                                 (rlow =
+                                                    (makemutable 0 (int) -1)
+                                                  rhigh =
+                                                    (makemutable 0 (int) -1)
+                                                  best_cost =
+                                                    (makemutable 0
+                                                      (makeblock 0 too_much
+                                                        too_much)))
+                                                 (before lambda/switch.ml(499):13236-13971
+                                                   (seq
+                                                     (for i 1 to (- lcases 2)
+                                                       (before lambda/switch.ml(500):13269-13922
+                                                         (let
+                                                           (*match* =
+                                                              (after lambda/switch.ml(500):13302-13323
+                                                                (apply
+                                                                  coupe_inter
+                                                                  i i cases))
+                                                            outside =a
+                                                              (field 3
+                                                                *match*)
+                                                            inside =a
+                                                              (field 2
+                                                                *match*)
+                                                            high =a
+                                                              (field 1
+                                                                *match*)
+                                                            low =a
+                                                              (field 0
+                                                                *match*))
+                                                           (before lambda/switch.ml(501):13337-13922
+                                                             (if
+                                                               (== low high)
+                                                               (before lambda/switch.ml(501):13354-13922
+                                                                 (let
+                                                                   (*match* =
+                                                                    (after lambda/switch.ml(502):13394-13416
+                                                                    (apply
+                                                                    opt_count
+                                                                    0a
+                                                                    inside))
+                                                                    *match* =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    cinside =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    cmi =a
+                                                                    (field 0
+                                                                    *match*)
+                                                                    *match* =
+                                                                    (after lambda/switch.ml(503):13452-13475
+                                                                    (apply
+                                                                    opt_count
+                                                                    0a
+                                                                    outside))
+                                                                    *match* =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    coutside =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    cmo =a
+                                                                    (field 0
+                                                                    *match*)
+                                                                    cmij =
+                                                                    (makemutable 0 (int,int)
+                                                                    1 0)
+                                                                    cij =
+                                                                    (makemutable 0 (int,int)
+                                                                    1 0))
+                                                                   (before lambda/switch.ml(506):13562-13908
+                                                                    (seq
+                                                                    (after lambda/switch.ml(506):13562-13582
+                                                                    (apply
+                                                                    add_test
+                                                                    cij
+                                                                    cinside))
+                                                                    (before lambda/switch.ml(507):13597-13908
+                                                                    (seq
+                                                                    (after lambda/switch.ml(507):13597-13618
+                                                                    (apply
+                                                                    add_test
+                                                                    cij
+                                                                    coutside))
+                                                                    (before lambda/switch.ml(508):13633-13908
+                                                                    (seq
+                                                                    (if
+                                                                    (after lambda/switch.ml(508):13636-13654
+                                                                    (apply
+                                                                    less_tests
+                                                                    cmi cmo))
+                                                                    (before lambda/switch.ml(509):13674-13691
+                                                                    (after lambda/switch.ml(509):13674-13691
+                                                                    (apply
+                                                                    add_test
+                                                                    cmij cmo)))
+                                                                    (before lambda/switch.ml(511):13723-13740
+                                                                    (after lambda/switch.ml(511):13723-13740
+                                                                    (apply
+                                                                    add_test
+                                                                    cmij cmi))))
+                                                                    (before lambda/switch.ml(512):13755-13908
+                                                                    (if
+                                                                    (after lambda/switch.ml(512):13758-13790
+                                                                    (apply
+                                                                    less2tests
+                                                                    (makeblock 0
+                                                                    cmij cij)
+                                                                    (field 0
+                                                                    best_cost)))
+                                                                    (before lambda/switch.ml(512):13796-13908
+                                                                    (seq
+                                                                    (setfield_imm 0
+                                                                    rlow i)
+                                                                    (before lambda/switch.ml(514):13842-13892
+                                                                    (seq
+                                                                    (setfield_imm 0
+                                                                    rhigh i)
+                                                                    (before lambda/switch.ml(515):13869-13892
+                                                                    (setfield_ptr 0
+                                                                    best_cost
+                                                                    (makeblock 0
+                                                                    cmij cij)))))))
+                                                                    0a))))))))))
+                                                               0a)))))
+                                                     (before lambda/switch.ml(519):13946-13971
+                                                       (let
+                                                         (with_inter =
+                                                            (field 0
+                                                              best_cost)
+                                                          ihigh =
+                                                            (field 0 rhigh)
+                                                          ilow =
+                                                            (field 0 rlow))
+                                                         (exit 95 with_inter
+                                                           ihigh ilow)))))))
+                                             (before lambda/switch.ml(521):13991-14880
+                                               (let
+                                                 (rlow =
+                                                    (makemutable 0 (int) -1)
+                                                  rhigh =
+                                                    (makemutable 0 (int) -1)
+                                                  best_cost =
+                                                    (makemutable 0
+                                                      (makeblock 0 too_much
+                                                        too_much)))
+                                                 (before lambda/switch.ml(523):14090-14880
+                                                   (seq
+                                                     (for i 1 to (- lcases 2)
+                                                       (before lambda/switch.ml(524):14123-14831
+                                                         (for j i to
+                                                           (- lcases 2)
+                                                           (before lambda/switch.ml(525):14158-14816
+                                                             (let
+                                                               (*match* =
+                                                                  (after lambda/switch.ml(525):14191-14212
+                                                                    (apply
+                                                                    coupe_inter
+                                                                    i j
+                                                                    cases))
+                                                                outside =a
+                                                                  (field 3
+                                                                    *match*)
+                                                                inside =a
+                                                                  (field 2
+                                                                    *match*)
+                                                                high =a
+                                                                  (field 1
+                                                                    *match*)
+                                                                low =a
+                                                                  (field 0
+                                                                    *match*))
+                                                               (before lambda/switch.ml(526):14228-14816
+                                                                 (let
+                                                                   (*match* =
+                                                                    (after lambda/switch.ml(526):14250-14272
+                                                                    (apply
+                                                                    opt_count
+                                                                    0a
+                                                                    inside))
+                                                                    *match* =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    cinside =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    cmi =a
+                                                                    (field 0
+                                                                    *match*)
+                                                                    *match* =
+                                                                    (after lambda/switch.ml(527):14308-14331
+                                                                    (apply
+                                                                    opt_count
+                                                                    0a
+                                                                    outside))
+                                                                    *match* =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    coutside =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    cmo =a
+                                                                    (field 0
+                                                                    *match*)
+                                                                    cmij =
+                                                                    (makemutable 0 (int,int)
+                                                                    1
+                                                                    (if
+                                                                    (== low
+                                                                    high)
+                                                                    (before lambda/switch.ml(528):14383-14384
+                                                                    0)
+                                                                    (before lambda/switch.ml(528):14390-14391
+                                                                    1)))
+                                                                    cij =
+                                                                    (makemutable 0 (int,int)
+                                                                    1
+                                                                    (if
+                                                                    (== low
+                                                                    high)
+                                                                    (before lambda/switch.ml(529):14444-14445
+                                                                    0)
+                                                                    (before lambda/switch.ml(529):14451-14452
+                                                                    1))))
+                                                                   (before lambda/switch.ml(530):14470-14816
+                                                                    (seq
+                                                                    (after lambda/switch.ml(530):14470-14490
+                                                                    (apply
+                                                                    add_test
+                                                                    cij
+                                                                    cinside))
+                                                                    (before lambda/switch.ml(531):14505-14816
+                                                                    (seq
+                                                                    (after lambda/switch.ml(531):14505-14526
+                                                                    (apply
+                                                                    add_test
+                                                                    cij
+                                                                    coutside))
+                                                                    (before lambda/switch.ml(532):14541-14816
+                                                                    (seq
+                                                                    (if
+                                                                    (after lambda/switch.ml(532):14544-14562
+                                                                    (apply
+                                                                    less_tests
+                                                                    cmi cmo))
+                                                                    (before lambda/switch.ml(533):14582-14599
+                                                                    (after lambda/switch.ml(533):14582-14599
+                                                                    (apply
+                                                                    add_test
+                                                                    cmij cmo)))
+                                                                    (before lambda/switch.ml(535):14631-14648
+                                                                    (after lambda/switch.ml(535):14631-14648
+                                                                    (apply
+                                                                    add_test
+                                                                    cmij cmi))))
+                                                                    (before lambda/switch.ml(536):14663-14816
+                                                                    (if
+                                                                    (after lambda/switch.ml(536):14666-14698
+                                                                    (apply
+                                                                    less2tests
+                                                                    (makeblock 0
+                                                                    cmij cij)
+                                                                    (field 0
+                                                                    best_cost)))
+                                                                    (before lambda/switch.ml(536):14704-14816
+                                                                    (seq
+                                                                    (setfield_imm 0
+                                                                    rlow i)
+                                                                    (before lambda/switch.ml(538):14750-14800
+                                                                    (seq
+                                                                    (setfield_imm 0
+                                                                    rhigh j)
+                                                                    (before lambda/switch.ml(539):14777-14800
+                                                                    (setfield_ptr 0
+                                                                    best_cost
+                                                                    (makeblock 0
+                                                                    cmij cij)))))))
+                                                                    0a)))))))))))))))
+                                                     (before lambda/switch.ml(543):14855-14880
+                                                       (let
+                                                         (with_inter =
+                                                            (field 0
+                                                              best_cost)
+                                                          ihigh =
+                                                            (field 0 rhigh)
+                                                          ilow =
+                                                            (field 0 rlow))
+                                                         (exit 95 with_inter
+                                                           ihigh ilow))))))))
+                                          with (95 with_inter ihigh[int] ilow[int])
+                                           (before lambda/switch.ml(544):14888-15047
+                                             (let
+                                               (r =
+                                                  (makemutable 0
+                                                    (makeblock 0 (int,int)
+                                                      ilow ihigh))
+                                                rc =
+                                                  (makemutable 0 with_inter))
+                                               (before lambda/switch.ml(545):14952-15047
+                                                 (seq
+                                                   (if
+                                                     (after lambda/switch.ml(545):14955-14978
+                                                       (apply less2tests
+                                                         with_sep
+                                                         (field 0 rc)))
+                                                     (before lambda/switch.ml(545):14984-15033
+                                                       (seq
+                                                         (setfield_ptr 0 r
+                                                           (makeblock 1 (int)
+                                                             lim))
+                                                         (before lambda/switch.ml(546):15011-15025
+                                                           (setfield_ptr 0 rc
+                                                             with_sep))))
+                                                     0a)
+                                                   (before lambda/switch.ml(548):15040-15047
+                                                     (makeblock 0 (field 0 r)
+                                                       (field 0 rc))))))))))))))))))))
+               (let
+                 (make_if_test =
+                    (function test arg i[int] ifso ifnot
+                      (funct-body lambda/switch.ml(550)<ghost>:15068-15176
+                        (before lambda/switch.ml(551):15096-15176
+                          (after lambda/switch.ml(551):15096-15176
+                            (apply (field 12 Arg)
+                              (after lambda/switch.ml(552):15114-15159
+                                (apply (field 9 Arg) test
+                                  (makeblock 0 arg
+                                    (makeblock 0
+                                      (after lambda/switch.ml(552):15141-15157
+                                        (apply (field 7 Arg) i))
+                                      0a))))
+                              ifso ifnot)))))
+                  make_if_lt =
+                    (function arg i[int] ifso ifnot
+                      (funct-body lambda/switch.ml(555)<ghost>:15195-15345
+                        (before lambda/switch.ml(555):15215-15345
+                          (if (!= i 1)
+                            (before lambda/switch.ml(559):15306-15345
+                              (after lambda/switch.ml(559):15306-15345
+                                (apply make_if_test (field 3 Arg) arg i ifso
+                                  ifnot)))
+                            (before lambda/switch.ml(557):15247-15286
+                              (after lambda/switch.ml(557):15247-15286
+                                (apply make_if_test (field 2 Arg) arg 0 ifso
+                                  ifnot)))))))
+                  make_if_ge =
+                    (function arg i[int] ifso ifnot
+                      (funct-body lambda/switch.ml(561)<ghost>:15364-15514
+                        (before lambda/switch.ml(561):15384-15514
+                          (if (!= i 1)
+                            (before lambda/switch.ml(565):15475-15514
+                              (after lambda/switch.ml(565):15475-15514
+                                (apply make_if_test (field 4 Arg) arg i ifso
+                                  ifnot)))
+                            (before lambda/switch.ml(563):15416-15455
+                              (after lambda/switch.ml(563):15416-15455
+                                (apply make_if_test (field 5 Arg) arg 0 ifso
+                                  ifnot)))))))
+                  make_if_eq =
+                    (function arg i[int] ifso ifnot
+                      (funct-body lambda/switch.ml(567)<ghost>:15534-15596
+                        (before lambda/switch.ml(568):15557-15596
+                          (after lambda/switch.ml(568):15557-15596
+                            (apply make_if_test (field 0 Arg) arg i ifso
+                              ifnot)))))
+                  make_if_ne =
+                    (function arg i[int] ifso ifnot
+                      (funct-body lambda/switch.ml(570)<ghost>:15616-15678
+                        (before lambda/switch.ml(571):15639-15678
+                          (after lambda/switch.ml(571):15639-15678
+                            (apply make_if_test (field 1 Arg) arg i ifso
+                              ifnot)))))
+                  do_make_if_out =
+                    (function h arg ifso ifno
+                      (funct-body lambda/switch.ml(573)<ghost>:15701-15767
+                        (before lambda/switch.ml(574):15723-15767
+                          (after lambda/switch.ml(574):15723-15767
+                            (apply (field 12 Arg)
+                              (after lambda/switch.ml(574):15735-15757
+                                (apply (field 10 Arg) h arg))
+                              ifso ifno)))))
+                  make_if_out =
+                    (function ctx l[int] d[int] mk_ifso mk_ifno
+                      (funct-body lambda/switch.ml(576)<ghost>:15787-16166
+                        (before lambda/switch.ml(576):15813-16166
+                          (if (!= l 0)
+                            (before lambda/switch.ml(581):15944-16166
+                              (after lambda/switch.ml(581):15944-16166
+                                (apply (field 6 Arg)
+                                  (after lambda/switch.ml(582):15963-15993
+                                    (apply (field 8 Arg) (field 1 ctx) (~ l)))
+                                  (function arg
+                                    (funct-body lambda/switch.ml(583):16004-16166
+                                      (before lambda/switch.ml(584):16029-16165
+                                        (let
+                                          (ctx =
+                                             (makeblock 0 (int,*)
+                                               (+ (~ l) (field 0 ctx)) arg))
+                                          (before lambda/switch.ml(585):16085-16165
+                                            (after lambda/switch.ml(585):16085-16165
+                                              (apply do_make_if_out
+                                                (after lambda/switch.ml(586):16115-16133
+                                                  (apply (field 7 Arg) d))
+                                                arg
+                                                (after lambda/switch.ml(586):16138-16151
+                                                  (apply mk_ifso ctx))
+                                                (after lambda/switch.ml(586):16152-16165
+                                                  (apply mk_ifno ctx))))))))))))
+                            (before lambda/switch.ml(578):15845-15924
+                              (after lambda/switch.ml(578):15845-15924
+                                (apply do_make_if_out
+                                  (after lambda/switch.ml(579):15870-15888
+                                    (apply (field 7 Arg) d))
+                                  (field 1 ctx)
+                                  (after lambda/switch.ml(579):15897-15910
+                                    (apply mk_ifso ctx))
+                                  (after lambda/switch.ml(579):15911-15924
+                                    (apply mk_ifno ctx)))))))))
+                  do_make_if_in =
+                    (function h arg ifso ifno
+                      (funct-body lambda/switch.ml(588)<ghost>:16188-16253
+                        (before lambda/switch.ml(589):16210-16253
+                          (after lambda/switch.ml(589):16210-16253
+                            (apply (field 12 Arg)
+                              (after lambda/switch.ml(589):16222-16243
+                                (apply (field 11 Arg) h arg))
+                              ifso ifno)))))
+                  make_if_in =
+                    (function ctx l[int] d[int] mk_ifso mk_ifno
+                      (funct-body lambda/switch.ml(591)<ghost>:16272-16649
+                        (before lambda/switch.ml(591):16298-16649
+                          (if (!= l 0)
+                            (before lambda/switch.ml(596):16428-16649
+                              (after lambda/switch.ml(596):16428-16649
+                                (apply (field 6 Arg)
+                                  (after lambda/switch.ml(597):16447-16477
+                                    (apply (field 8 Arg) (field 1 ctx) (~ l)))
+                                  (function arg
+                                    (funct-body lambda/switch.ml(598):16488-16649
+                                      (before lambda/switch.ml(599):16513-16648
+                                        (let
+                                          (ctx =
+                                             (makeblock 0 (int,*)
+                                               (+ (~ l) (field 0 ctx)) arg))
+                                          (before lambda/switch.ml(600):16569-16648
+                                            (after lambda/switch.ml(600):16569-16648
+                                              (apply do_make_if_in
+                                                (after lambda/switch.ml(601):16598-16616
+                                                  (apply (field 7 Arg) d))
+                                                arg
+                                                (after lambda/switch.ml(601):16621-16634
+                                                  (apply mk_ifso ctx))
+                                                (after lambda/switch.ml(601):16635-16648
+                                                  (apply mk_ifno ctx))))))))))))
+                            (before lambda/switch.ml(593):16330-16408
+                              (after lambda/switch.ml(593):16330-16408
+                                (apply do_make_if_in
+                                  (after lambda/switch.ml(594):16354-16372
+                                    (apply (field 7 Arg) d))
+                                  (field 1 ctx)
+                                  (after lambda/switch.ml(594):16381-16394
+                                    (apply mk_ifso ctx))
+                                  (after lambda/switch.ml(594):16395-16408
+                                    (apply mk_ifno ctx))))))))))
+                 (letrec
+                   (c_test
+                      (function ctx s
+                        (funct-body lambda/switch.ml(603)<ghost>:16668-19123
+                          (let (actions =a (field 1 s) cases =a (field 0 s))
+                            (before lambda/switch.ml(604):16717-19123
+                              (let (lcases =[int] (array.length[addr] cases))
+                                (before lambda/switch.ml(605):16756-19123
+                                  (seq
+                                    (if (> lcases 0) 0a
+                                      (raise
+                                        (after lambda/switch.ml(605):16756-16774
+                                          (makeblock 0
+                                            (global Assert_failure!)
+                                            [0: "lambda/switch.ml" 605 4]))))
+                                    (before lambda/switch.ml(606):16781-19123
+                                      (if (== lcases 1)
+                                        (before lambda/switch.ml(607):16806-16835
+                                          (after lambda/switch.ml(607):16806-16835
+                                            (apply
+                                              (after lambda/switch.ml(607):16806-16831
+                                                (array.get[addr] actions
+                                                  (after lambda/switch.ml(607):16815-16830
+                                                    (apply get_act cases 0))))
+                                              ctx)))
+                                        (before lambda/switch.ml(609):16846-19123
+                                          (let
+                                            (*match* =
+                                               (after lambda/switch.ml(611):16870-16891
+                                                 (apply opt_count 0a cases))
+                                             w =a (field 0 *match*))
+                                            (before lambda/switch.ml(617):16995-19114
+                                              (switch* w
+                                               case int 0:
+                                                (before lambda/switch.ml(618):17022-17051
+                                                  (after lambda/switch.ml(618):17022-17051
+                                                    (apply
+                                                      (after lambda/switch.ml(618):17022-17047
+                                                        (array.get[addr]
+                                                          actions
+                                                          (after lambda/switch.ml(618):17031-17046
+                                                            (apply get_act
+                                                              cases 0))))
+                                                      ctx)))
+                                               case tag 0:
+                                                (let
+                                                  (j =a (field 1 w)
+                                                   i =a (field 0 w))
+                                                  (before lambda/switch.ml(620):17085-18409
+                                                    (let
+                                                      (*match* =
+                                                         (after lambda/switch.ml(620):17116-17137
+                                                           (apply coupe_inter
+                                                             i j cases))
+                                                       outside =a
+                                                         (field 3 *match*)
+                                                       inside =a
+                                                         (field 2 *match*)
+                                                       high =a
+                                                         (field 1 *match*)
+                                                       low =a
+                                                         (field 0 *match*))
+                                                      (before lambda/switch.ml(621):17151-18409
+                                                        (let
+                                                          (*match* =
+                                                             (after lambda/switch.ml(621):17171-17193
+                                                               (apply
+                                                                 opt_count 0a
+                                                                 inside))
+                                                           *match* =a
+                                                             (field 1
+                                                               *match*)
+                                                           cinside =a
+                                                             (field 0
+                                                               *match*)
+                                                           *match* =
+                                                             (after lambda/switch.ml(622):17225-17248
+                                                               (apply
+                                                                 opt_count 0a
+                                                                 outside))
+                                                           *match* =a
+                                                             (field 1
+                                                               *match*)
+                                                           coutside =a
+                                                             (field 0
+                                                               *match*))
+                                                          (before lambda/switch.ml(625):17399-18409
+                                                            (if (== low high)
+                                                              (before lambda/switch.ml(625):17416-17864
+                                                                (if
+                                                                  (after lambda/switch.ml(626):17437-17464
+                                                                    (apply
+                                                                    less_tests
+                                                                    coutside
+                                                                    cinside))
+                                                                  (before lambda/switch.ml(627):17484-17651
+                                                                    (after lambda/switch.ml(627):17484-17651
+                                                                    (apply
+                                                                    make_if_eq
+                                                                    (field 1
+                                                                    ctx)
+                                                                    (+ low
+                                                                    (field 0
+                                                                    ctx))
+                                                                    (after lambda/switch.ml(630):17565-17599
+                                                                    (apply
+                                                                    c_test
+                                                                    ctx
+                                                                    (let
+                                                                    (init = s)
+                                                                    (makeblock 0
+                                                                    inside
+                                                                    (field 1
+                                                                    init)))))
+                                                                    (after lambda/switch.ml(631):17616-17651
+                                                                    (apply
+                                                                    c_test
+                                                                    ctx
+                                                                    (let
+                                                                    (init = s)
+                                                                    (makeblock 0
+                                                                    outside
+                                                                    (field 1
+                                                                    init))))))))
+                                                                  (before lambda/switch.ml(633):17683-17850
+                                                                    (after lambda/switch.ml(633):17683-17850
+                                                                    (apply
+                                                                    make_if_ne
+                                                                    (field 1
+                                                                    ctx)
+                                                                    (+ low
+                                                                    (field 0
+                                                                    ctx))
+                                                                    (after lambda/switch.ml(636):17764-17799
+                                                                    (apply
+                                                                    c_test
+                                                                    ctx
+                                                                    (let
+                                                                    (init = s)
+                                                                    (makeblock 0
+                                                                    outside
+                                                                    (field 1
+                                                                    init)))))
+                                                                    (after lambda/switch.ml(637):17816-17850
+                                                                    (apply
+                                                                    c_test
+                                                                    ctx
+                                                                    (let
+                                                                    (init = s)
+                                                                    (makeblock 0
+                                                                    inside
+                                                                    (field 1
+                                                                    init))))))))))
+                                                              (before lambda/switch.ml(638):17870-18409
+                                                                (if
+                                                                  (after lambda/switch.ml(639):17891-17918
+                                                                    (apply
+                                                                    less_tests
+                                                                    coutside
+                                                                    cinside))
+                                                                  (before lambda/switch.ml(640):17938-18150
+                                                                    (after lambda/switch.ml(640):17938-18150
+                                                                    (apply
+                                                                    make_if_in
+                                                                    ctx
+                                                                    (+ low
+                                                                    (field 0
+                                                                    ctx))
+                                                                    (- high
+                                                                    low)
+                                                                    (function
+                                                                    ctx
+                                                                    (funct-body lambda/switch.ml(644):18042-18087
+                                                                    (before lambda/switch.ml(644):18054-18086
+                                                                    (after lambda/switch.ml(644):18054-18086
+                                                                    (apply
+                                                                    c_test
+                                                                    ctx
+                                                                    (let
+                                                                    (init = s)
+                                                                    (makeblock 0
+                                                                    inside
+                                                                    (field 1
+                                                                    init))))))))
+                                                                    (function
+                                                                    ctx
+                                                                    (funct-body lambda/switch.ml(645):18104-18150
+                                                                    (before lambda/switch.ml(645):18116-18149
+                                                                    (after lambda/switch.ml(645):18116-18149
+                                                                    (apply
+                                                                    c_test
+                                                                    ctx
+                                                                    (let
+                                                                    (init = s)
+                                                                    (makeblock 0
+                                                                    outside
+                                                                    (field 1
+                                                                    init)))))))))))
+                                                                  (before lambda/switch.ml(647):18182-18395
+                                                                    (after lambda/switch.ml(647):18182-18395
+                                                                    (apply
+                                                                    make_if_out
+                                                                    ctx
+                                                                    (+ low
+                                                                    (field 0
+                                                                    ctx))
+                                                                    (- high
+                                                                    low)
+                                                                    (function
+                                                                    ctx
+                                                                    (funct-body lambda/switch.ml(651):18287-18333
+                                                                    (before lambda/switch.ml(651):18299-18332
+                                                                    (after lambda/switch.ml(651):18299-18332
+                                                                    (apply
+                                                                    c_test
+                                                                    ctx
+                                                                    (let
+                                                                    (init = s)
+                                                                    (makeblock 0
+                                                                    outside
+                                                                    (field 1
+                                                                    init))))))))
+                                                                    (function
+                                                                    ctx
+                                                                    (funct-body lambda/switch.ml(652):18350-18395
+                                                                    (before lambda/switch.ml(652):18362-18394
+                                                                    (after lambda/switch.ml(652):18362-18394
+                                                                    (apply
+                                                                    c_test
+                                                                    ctx
+                                                                    (let
+                                                                    (init = s)
+                                                                    (makeblock 0
+                                                                    inside
+                                                                    (field 1
+                                                                    init))))))))))))))))))))
+                                               case tag 1:
+                                                (let (i =a (field 0 w))
+                                                  (before lambda/switch.ml(655):18437-19114
+                                                    (let
+                                                      (*match* =
+                                                         (after lambda/switch.ml(655):18458-18471
+                                                           (apply coupe cases
+                                                             i))
+                                                       right =a
+                                                         (field 2 *match*)
+                                                       left =a
+                                                         (field 1 *match*)
+                                                       lim =a
+                                                         (field 0 *match*))
+                                                      (before lambda/switch.ml(656):18485-19114
+                                                        (let
+                                                          (*match* =
+                                                             (after lambda/switch.ml(656):18503-18523
+                                                               (apply
+                                                                 opt_count 0a
+                                                                 left))
+                                                           *match* =a
+                                                             (field 1
+                                                               *match*)
+                                                           cleft =a
+                                                             (field 0
+                                                               *match*)
+                                                           *match* =
+                                                             (after lambda/switch.ml(657):18553-18574
+                                                               (apply
+                                                                 opt_count 0a
+                                                                 right))
+                                                           *match* =a
+                                                             (field 1
+                                                               *match*)
+                                                           cright =a
+                                                             (field 0
+                                                               *match*))
+                                                          (before lambda/switch.ml(658):18588-19114
+                                                            (let
+                                                              (left =
+                                                                 (let
+                                                                   (init = s)
+                                                                   (makeblock 0
+                                                                    left
+                                                                    (field 1
+                                                                    init)))
+                                                               right =
+                                                                 (let
+                                                                   (init = s)
+                                                                   (makeblock 0
+                                                                    right
+                                                                    (field 1
+                                                                    init))))
+                                                              (before lambda/switch.ml(661):18676-19114
+                                                                (if
+                                                                  (&&
+                                                                    (== i 1)
+                                                                    (&&
+                                                                    (==
+                                                                    (+ lim
+                                                                    (field 0
+                                                                    ctx)) 1)
+                                                                    (==
+                                                                    (+
+                                                                    (after lambda/switch.ml(661):18705-18720
+                                                                    (apply
+                                                                    get_low
+                                                                    cases 0))
+                                                                    (field 0
+                                                                    ctx)) 0)))
+                                                                  (before lambda/switch.ml(662):18748-18832
+                                                                    (after lambda/switch.ml(662):18748-18832
+                                                                    (apply
+                                                                    (field 12
+                                                                    Arg)
+                                                                    (field 1
+                                                                    ctx)
+                                                                    (after lambda/switch.ml(664):18796-18814
+                                                                    (apply
+                                                                    c_test
+                                                                    ctx
+                                                                    right))
+                                                                    (after lambda/switch.ml(664):18815-18832
+                                                                    (apply
+                                                                    c_test
+                                                                    ctx left)))))
+                                                                  (before lambda/switch.ml(665):18848-19114
+                                                                    (if
+                                                                    (after lambda/switch.ml(665):18851-18874
+                                                                    (apply
+                                                                    less_tests
+                                                                    cright
+                                                                    cleft))
+                                                                    (before lambda/switch.ml(666):18892-18989
+                                                                    (after lambda/switch.ml(666):18892-18989
+                                                                    (apply
+                                                                    make_if_lt
+                                                                    (field 1
+                                                                    ctx)
+                                                                    (+ lim
+                                                                    (field 0
+                                                                    ctx))
+                                                                    (after lambda/switch.ml(668):18953-18970
+                                                                    (apply
+                                                                    c_test
+                                                                    ctx left))
+                                                                    (after lambda/switch.ml(668):18971-18989
+                                                                    (apply
+                                                                    c_test
+                                                                    ctx
+                                                                    right)))))
+                                                                    (before lambda/switch.ml(670):19017-19114
+                                                                    (after lambda/switch.ml(670):19017-19114
+                                                                    (apply
+                                                                    make_if_ge
+                                                                    (field 1
+                                                                    ctx)
+                                                                    (+ lim
+                                                                    (field 0
+                                                                    ctx))
+                                                                    (after lambda/switch.ml(672):19078-19096
+                                                                    (apply
+                                                                    c_test
+                                                                    ctx
+                                                                    right))
+                                                                    (after lambda/switch.ml(672):19097-19114
+                                                                    (apply
+                                                                    c_test
+                                                                    ctx left))))))))))))))))))))))))))))))
+                   (let
+                     (theta = (makemutable 0 (float) 0.33333)
+                      switch_min = (makemutable 0 (int) 3)
+                      particular_case =
+                        (function cases i[int] j[int]
+                          (funct-body lambda/switch.ml(684)<ghost>:19318-19507
+                            (before lambda/switch.ml(685):19334-19507
+                              (&& (== (- j i) 2)
+                                (let
+                                  (*match* =
+                                     (after lambda/switch.ml(686):19368-19377
+                                       (array.get[addr] cases i))
+                                   act1 =a (field 2 *match*)
+                                   l1 =a (field 0 *match*)
+                                   *match* =
+                                     (after lambda/switch.ml(687):19403-19414
+                                       (array.get[addr] cases (+ i 1)))
+                                   l2 =a (field 0 *match*)
+                                   *match* =
+                                     (after lambda/switch.ml(688):19438-19449
+                                       (array.get[addr] cases (+ i 2)))
+                                   act3 =a (field 2 *match*)
+                                   h3 =a (field 1 *match*)
+                                   l3 =a (field 0 *match*))
+                                  (before lambda/switch.ml(689):19458-19506
+                                    (&& (== (+ l1 1) l2)
+                                      (&& (== (+ l2 1) l3)
+                                        (&& (== l3 h3)
+                                          (after lambda/switch.ml(690):19494-19506
+                                            (caml_notequal act1 act3)))))))))))
+                      approx_count =
+                        (function cases i[int] j[int] : int
+                          (funct-body lambda/switch.ml(692)<ghost>:19528-19683
+                            (before lambda/switch.ml(693):19544-19683
+                              (let (l =[int] (+ (- j i) 1))
+                                (before lambda/switch.ml(694):19565-19683
+                                  (if (< l (field 0 cut))
+                                    (before lambda/switch.ml(695):19588-19664
+                                      (let
+                                        (*match* =
+                                           (after lambda/switch.ml(695):19611-19648
+                                             (apply opt_count 0a
+                                               (after lambda/switch.ml(695):19627-19648
+                                                 (apply
+                                                   (field 6
+                                                     (global Stdlib__array!))
+                                                   cases i l))))
+                                         *match* =a (field 1 *match*)
+                                         *match* =a (field 1 *match*)
+                                         ntests =o (field 0 *match*))
+                                        (before lambda/switch.ml(696):19658-19664
+                                          ntests)))
+                                    (before lambda/switch.ml(698):19680-19683
+                                      (- l 1))))))))
+                      dense =
+                        (function param i[int] j[int]
+                          (funct-body lambda/switch.ml(702)<ghost>:19771-20121
+                            (let (cases =a (field 0 param))
+                              (before lambda/switch.ml(703):19789-20121
+                                (if (== i j)
+                                  (before lambda/switch.ml(703):19801-19805
+                                    1a)
+                                  (before lambda/switch.ml(705):19821-20121
+                                    (let
+                                      (*match* =
+                                         (after lambda/switch.ml(705):19833-19842
+                                           (array.get[addr] cases i))
+                                       l =a (field 0 *match*)
+                                       *match* =
+                                         (after lambda/switch.ml(706):19861-19870
+                                           (array.get[addr] cases j))
+                                       h =a (field 1 *match*))
+                                      (before lambda/switch.ml(707):19880-20121
+                                        (let
+                                          (ntests =[int]
+                                             (after lambda/switch.ml(707):19894-19916
+                                               (apply approx_count cases i j)))
+                                          (before lambda/switch.ml(711):19964-20121
+                                            (||
+                                              (after lambda/switch.ml(711):19964-19989
+                                                (apply particular_case cases
+                                                  i j))
+                                              (&&
+                                                (>= ntests
+                                                  (field 0 switch_min))
+                                                (>=.
+                                                  (+. (float_of_int ntests)
+                                                    1.0)
+                                                  (*. (field 0 theta)
+                                                    (+.
+                                                      (-. (float_of_int h)
+                                                        (float_of_int l))
+                                                      1.0)))))))))))))))
+                      comp_clusters =
+                        (function s
+                          (funct-body lambda/switch.ml(723)<ghost>:20411-20878
+                            (before lambda/switch.ml(724):20419-20878
+                              (let
+                                (len =[int] (array.length[addr] (field 0 s)))
+                                (before lambda/switch.ml(725):20457-20878
+                                  (let
+                                    (min_clusters =
+                                       (after lambda/switch.ml(725):20476-20498
+                                         (caml_make_vect len
+                                           (field 18 (global Stdlib!))))
+                                     k =
+                                       (after lambda/switch.ml(726):20511-20527
+                                         (caml_make_vect len 0)))
+                                    (before lambda/switch.ml(727):20535-20878
+                                      (let
+                                        (get_min =
+                                           (function i[int] : int
+                                             (funct-body lambda/switch.ml(727)<ghost>:20547-20588
+                                               (before lambda/switch.ml(727):20551-20588
+                                                 (if (< i 0)
+                                                   (before lambda/switch.ml(727):20565-20566
+                                                     0)
+                                                   (before lambda/switch.ml(727):20572-20588
+                                                     (after lambda/switch.ml(727):20572-20588
+                                                       (array.get[int]
+                                                         min_clusters i))))))))
+                                        (before lambda/switch.ml(729):20597-20878
+                                          (seq
+                                            (for i 0 to (- len 1)
+                                              (before lambda/switch.ml(730):20625-20838
+                                                (for j 0 to i
+                                                  (before lambda/switch.ml(731):20651-20827
+                                                    (if
+                                                      (&&
+                                                        (after lambda/switch.ml(732):20664-20675
+                                                          (apply dense s j i))
+                                                        (<
+                                                          (+
+                                                            (after lambda/switch.ml(733):20689-20702
+                                                              (apply get_min
+                                                                (- j 1)))
+                                                            1)
+                                                          (after lambda/switch.ml(733):20709-20725
+                                                            (array.get[int]
+                                                              min_clusters i))))
+                                                      (before lambda/switch.ml(734):20739-20827
+                                                        (seq
+                                                          (after lambda/switch.ml(735):20755-20765
+                                                            (array.set[int] k
+                                                              i j))
+                                                          (before lambda/switch.ml(736):20778-20815
+                                                            (after lambda/switch.ml(736):20778-20815
+                                                              (array.set[int]
+                                                                min_clusters
+                                                                i
+                                                                (+
+                                                                  (after lambda/switch.ml(736):20798-20811
+                                                                    (apply
+                                                                    get_min
+                                                                    (- j 1)))
+                                                                  1))))))
+                                                      0a)))))
+                                            (before lambda/switch.ml(740):20856-20878
+                                              (makeblock 0 (int,*)
+                                                (after lambda/switch.ml(740):20856-20876
+                                                  (array.get[int]
+                                                    min_clusters (- len 1)))
+                                                k))))))))))))
+                      make_switch =
+                        (function loc param i[int] j[int]
+                          (funct-body lambda/switch.ml(743)<ghost>:20919-21832
+                            (let
+                              (actions =a (field 1 param)
+                               cases =a (field 0 param))
+                              (before lambda/switch.ml(744):20965-21832
+                                (let
+                                  (*match* =
+                                     (after lambda/switch.ml(744):20978-20987
+                                       (array.get[addr] cases i))
+                                   ll =a (field 0 *match*)
+                                   *match* =
+                                     (after lambda/switch.ml(745):21005-21014
+                                       (array.get[addr] cases j))
+                                   hh =a (field 1 *match*))
+                                  (before lambda/switch.ml(746):21022-21832
+                                    (let
+                                      (tbl =
+                                         (after lambda/switch.ml(746):21032-21054
+                                           (caml_make_vect (+ (- hh ll) 1) 0))
+                                       t =
+                                         (after lambda/switch.ml(747):21067-21084
+                                           (apply
+                                             (field 0
+                                               (global Stdlib__hashtbl!))
+                                             0a 17))
+                                       index = (makemutable 0 (int) 0))
+                                      (before lambda/switch.ml(749):21114-21832
+                                        (let
+                                          (get_index =
+                                             (function act[int] : int
+                                               (funct-body lambda/switch.ml(749)<ghost>:21128-21297
+                                                 (before lambda/switch.ml(750):21140-21297
+                                                   (try
+                                                     (after lambda/switch.ml(751):21152-21170
+                                                       (apply
+                                                         (field 5
+                                                           (global Stdlib__hashtbl!))
+                                                         t act))
+                                                    with exn
+                                                     (if
+                                                       (== exn
+                                                         (field 7
+                                                           (global Stdlib!)))
+                                                       (before lambda/switch.ml(754):21213-21297
+                                                         (let
+                                                           (i =[int]
+                                                              (field 0 index))
+                                                           (before lambda/switch.ml(755):21241-21297
+                                                             (seq
+                                                               (+:=1 index)
+                                                               (before lambda/switch.ml(756):21264-21297
+                                                                 (seq
+                                                                   (after lambda/switch.ml(756):21264-21283
+                                                                    (apply
+                                                                    (field 4
+                                                                    (global Stdlib__hashtbl!))
+                                                                    t act i))
+                                                                   (before lambda/switch.ml(757):21296-21297
+                                                                    i)))))))
+                                                       (reraise exn)))))))
+                                          (before lambda/switch.ml(759):21306-21832
+                                            (seq
+                                              (for k i to j
+                                                (before lambda/switch.ml(760):21328-21455
+                                                  (let
+                                                    (*match* =
+                                                       (after lambda/switch.ml(760):21342-21351
+                                                         (array.get[addr]
+                                                           cases k))
+                                                     act =a (field 2 *match*)
+                                                     h =a (field 1 *match*)
+                                                     l =a (field 0 *match*))
+                                                    (before lambda/switch.ml(761):21361-21455
+                                                      (let
+                                                        (index =[int]
+                                                           (after lambda/switch.ml(761):21373-21386
+                                                             (apply get_index
+                                                               act)))
+                                                        (before lambda/switch.ml(762):21396-21455
+                                                          (for kk (- l ll) to
+                                                            (- h ll)
+                                                            (before lambda/switch.ml(763):21427-21444
+                                                              (after lambda/switch.ml(763):21427-21444
+                                                                (array.set[int]
+                                                                  tbl kk
+                                                                  index))))))))))
+                                              (before lambda/switch.ml(766):21471-21832
+                                                (let
+                                                  (acts =
+                                                     (after lambda/switch.ml(766):21482-21511
+                                                       (caml_make_vect
+                                                         (field 0 index)
+                                                         (after lambda/switch.ml(766):21500-21511
+                                                           (array.get[gen]
+                                                             actions 0)))))
+                                                  (before lambda/switch.ml(767):21519-21832
+                                                    (seq
+                                                      (after lambda/switch.ml(767):21519-21586
+                                                        (apply
+                                                          (field 11
+                                                            (global Stdlib__hashtbl!))
+                                                          (function act[int]
+                                                            i[int]
+                                                            (funct-body lambda/switch.ml(768):21538-21578
+                                                              (before lambda/switch.ml(768):21552-21577
+                                                                (after lambda/switch.ml(768):21552-21577
+                                                                  (array.set[gen]
+                                                                    acts i
+                                                                    (after lambda/switch.ml(768):21564-21577
+                                                                    (array.get[gen]
+                                                                    actions
+                                                                    act)))))))
+                                                          t))
+                                                      (before lambda/switch.ml(770):21593-21832
+                                                        (function ctx
+                                                          (funct-body lambda/switch.ml(770):21593-21832
+                                                            (before lambda/switch.ml(771):21612-21831
+                                                              (let
+                                                                (*match* =
+                                                                   (- 
+                                                                    (~ ll)
+                                                                    (field 0
+                                                                    ctx)))
+                                                                (if
+                                                                  (!= *match*
+                                                                    0)
+                                                                  (before lambda/switch.ml(774):21711-21831
+                                                                    (after lambda/switch.ml(774):21711-21831
+                                                                    (apply
+                                                                    (field 6
+                                                                    Arg)
+                                                                    (after lambda/switch.ml(775):21733-21772
+                                                                    (apply
+                                                                    (field 8
+                                                                    Arg)
+                                                                    (field 1
+                                                                    ctx)
+                                                                    (- 
+                                                                    (~ ll)
+                                                                    (field 0
+                                                                    ctx))))
+                                                                    (function
+                                                                    arg
+                                                                    (funct-body lambda/switch.ml(776):21786-21831
+                                                                    (before lambda/switch.ml(776):21798-21830
+                                                                    (after lambda/switch.ml(776):21798-21830
+                                                                    (apply
+                                                                    (field 13
+                                                                    Arg) loc
+                                                                    arg tbl
+                                                                    acts))))))))
+                                                                  (before lambda/switch.ml(772):21649-21685
+                                                                    (after lambda/switch.ml(772):21649-21685
+                                                                    (apply
+                                                                    (field 13
+                                                                    Arg) loc
+                                                                    (field 1
+                                                                    ctx) tbl
+                                                                    acts))))))))))))))))))))))))
+                      make_clusters =
+                        (function loc s n_clusters[int] k
+                          (funct-body lambda/switch.ml(779)<ghost>:21855-23029
+                            (let
+                              (actions =a (field 1 s) cases =a (field 0 s))
+                              (before lambda/switch.ml(780):21917-23029
+                                (let (len =[int] (array.length[addr] cases))
+                                  (before lambda/switch.ml(781):21953-23029
+                                    (let
+                                      (r =
+                                         (after lambda/switch.ml(781):21961-21990
+                                           (caml_make_vect n_clusters
+                                             [0: 0 0 0]))
+                                       t =
+                                         (after lambda/switch.ml(782):22003-22020
+                                           (apply
+                                             (field 0
+                                               (global Stdlib__hashtbl!))
+                                             0a 17))
+                                       index = (makemutable 0 (int) 0)
+                                       bidon =
+                                         (makemutable 0 (int)
+                                           (array.length[gen] actions)))
+                                      (before lambda/switch.ml(785):22093-23029
+                                        (let
+                                          (get_index =
+                                             (function act[int] : int
+                                               (funct-body lambda/switch.ml(785)<ghost>:22107-22350
+                                                 (before lambda/switch.ml(786):22119-22350
+                                                   (try
+                                                     (let
+                                                       (*match* =
+                                                          (after lambda/switch.ml(787):22141-22159
+                                                            (apply
+                                                              (field 5
+                                                                (global Stdlib__hashtbl!))
+                                                              t act))
+                                                        i =a
+                                                          (field 0 *match*))
+                                                       (before lambda/switch.ml(788):22171-22172
+                                                         i))
+                                                    with exn
+                                                     (if
+                                                       (== exn
+                                                         (field 7
+                                                           (global Stdlib!)))
+                                                       (before lambda/switch.ml(791):22215-22350
+                                                         (let
+                                                           (i =[int]
+                                                              (field 0 index))
+                                                           (before lambda/switch.ml(792):22243-22350
+                                                             (seq
+                                                               (+:=1 index)
+                                                               (before lambda/switch.ml(793):22266-22350
+                                                                 (seq
+                                                                   (after lambda/switch.ml(793):22266-22336
+                                                                    (apply
+                                                                    (field 4
+                                                                    (global Stdlib__hashtbl!))
+                                                                    t act
+                                                                    (makeblock 0 (int,*)
+                                                                    i
+                                                                    (function
+                                                                    param
+                                                                    (funct-body lambda/switch.ml(795):22311-22335
+                                                                    (before lambda/switch.ml(795):22321-22334
+                                                                    (after lambda/switch.ml(795):22321-22334
+                                                                    (array.get[gen]
+                                                                    actions
+                                                                    act))))))))
+                                                                   (before lambda/switch.ml(796):22349-22350
+                                                                    i)))))))
+                                                       (reraise exn))))))
+                                           add_index =
+                                             (function act : int
+                                               (funct-body lambda/switch.ml(797)<ghost>:22369-22481
+                                                 (before lambda/switch.ml(798):22381-22481
+                                                   (let
+                                                     (i =[int]
+                                                        (field 0 index))
+                                                     (before lambda/switch.ml(799):22405-22481
+                                                       (seq (+:=1 index)
+                                                         (before lambda/switch.ml(800):22424-22481
+                                                           (seq (+:=1 bidon)
+                                                             (before lambda/switch.ml(801):22443-22481
+                                                               (seq
+                                                                 (after lambda/switch.ml(801):22443-22471
+                                                                   (apply
+                                                                    (field 4
+                                                                    (global Stdlib__hashtbl!))
+                                                                    t
+                                                                    (field 0
+                                                                    bidon)
+                                                                    (makeblock 0 (int,*)
+                                                                    i act)))
+                                                                 (before lambda/switch.ml(802):22480-22481
+                                                                   i))))))))))))
+                                          (before lambda/switch.ml(804):22490-23029
+                                            (letrec
+                                              (zyva
+                                                 (function j[int] ir[int]
+                                                   (funct-body lambda/switch.ml(804)<ghost>:22503-22842
+                                                     (before lambda/switch.ml(805):22516-22842
+                                                       (let
+                                                         (i =[int]
+                                                            (after lambda/switch.ml(805):22524-22529
+                                                              (array.get[int]
+                                                                k j)))
+                                                         (before lambda/switch.ml(806):22539-22842
+                                                           (seq
+                                                             (if (== i j)
+                                                               (before lambda/switch.ml(807):22567-22633
+                                                                 (let
+                                                                   (*match* =
+                                                                    (after lambda/switch.ml(807):22581-22590
+                                                                    (array.get[addr]
+                                                                    cases i))
+                                                                    act =a
+                                                                    (field 2
+                                                                    *match*)
+                                                                    h =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    l =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                   (before lambda/switch.ml(808):22604-22633
+                                                                    (after lambda/switch.ml(808):22604-22633
+                                                                    (array.set[addr]
+                                                                    r ir
+                                                                    (makeblock 0 (int,int,int)
+                                                                    l h
+                                                                    (after lambda/switch.ml(808):22619-22632
+                                                                    (apply
+                                                                    get_index
+                                                                    act))))))))
+                                                               (before lambda/switch.ml(810):22676-22792
+                                                                 (let
+                                                                   (*match* =
+                                                                    (after lambda/switch.ml(810):22688-22697
+                                                                    (array.get[addr]
+                                                                    cases i))
+                                                                    l =a
+                                                                    (field 0
+                                                                    *match*)
+                                                                    *match* =
+                                                                    (after lambda/switch.ml(811):22720-22729
+                                                                    (array.get[addr]
+                                                                    cases j))
+                                                                    h =a
+                                                                    (field 1
+                                                                    *match*))
+                                                                   (before lambda/switch.ml(812):22743-22792
+                                                                    (after lambda/switch.ml(812):22743-22792
+                                                                    (array.set[addr]
+                                                                    r ir
+                                                                    (makeblock 0 (int,int,int)
+                                                                    l h
+                                                                    (after lambda/switch.ml(812):22758-22791
+                                                                    (apply
+                                                                    add_index
+                                                                    (after lambda/switch.ml(812):22768-22791
+                                                                    (apply
+                                                                    make_switch
+                                                                    loc s i
+                                                                    j)))))))))))
+                                                             (before lambda/switch.ml(814):22811-22842
+                                                               (if (> i 0)
+                                                                 (before lambda/switch.ml(814):22825-22842
+                                                                   (after lambda/switch.ml(814):22825-22842
+                                                                    (apply
+                                                                    zyva
+                                                                    (- i 1)
+                                                                    (- ir 1))))
+                                                                 0a)))))))))
+                                              (before lambda/switch.ml(816):22851-23029
+                                                (seq
+                                                  (after lambda/switch.ml(816):22851-22878
+                                                    (apply zyva (- len 1)
+                                                      (- n_clusters 1)))
+                                                  (before lambda/switch.ml(817):22885-23029
+                                                    (let
+                                                      (acts =
+                                                         (after lambda/switch.ml(817):22896-22937
+                                                           (caml_make_vect
+                                                             (field 0 index)
+                                                             (function param
+                                                               (funct-body lambda/switch.ml(817):22914-22937
+                                                                 (before lambda/switch.ml(817):22924-22936
+                                                                   (raise
+                                                                    (after lambda/switch.ml(817):22924-22936
+                                                                    (makeblock 0
+                                                                    (global Assert_failure!)
+                                                                    [0:
+                                                                    "lambda/switch.ml"
+                                                                    817 43])))))))))
+                                                      (before lambda/switch.ml(818):22945-23029
+                                                        (seq
+                                                          (after lambda/switch.ml(818):22945-22994
+                                                            (apply
+                                                              (field 11
+                                                                (global Stdlib__hashtbl!))
+                                                              (function
+                                                                param[int]
+                                                                param
+                                                                (funct-body lambda/switch.ml(818):22958-22992
+                                                                  (let
+                                                                    (act =a
+                                                                    (field 1
+                                                                    param)
+                                                                    i =a
+                                                                    (field 0
+                                                                    param))
+                                                                    (before lambda/switch.ml(818):22976-22991
+                                                                    (after lambda/switch.ml(818):22976-22991
+                                                                    (array.set[addr]
+                                                                    acts i
+                                                                    act))))))
+                                                              t))
+                                                          (before lambda/switch.ml(819):23001-23029
+                                                            (makeblock 0 r
+                                                              acts)))))))))))))))))))
+                      do_zyva =
+                        (function loc param arg cases actions
+                          (funct-body lambda/switch.ml(823)<ghost>:23051-23538
+                            (let
+                              (high =a (field 1 param)
+                               low =a (field 0 param))
+                              (before lambda/switch.ml(824):23090-23538
+                                (let (old_ok = (field 0 ok_inter))
+                                  (before lambda/switch.ml(825):23120-23538
+                                    (seq
+                                      (setfield_imm 0 ok_inter
+                                        (&&
+                                          (<=
+                                            (after lambda/switch.ml(825):23133-23140
+                                              (apply
+                                                (field 17 (global Stdlib!))
+                                                low))
+                                            inter_limit)
+                                          (<=
+                                            (after lambda/switch.ml(825):23159-23167
+                                              (apply
+                                                (field 17 (global Stdlib!))
+                                                high))
+                                            inter_limit)))
+                                      (before lambda/switch.ml(826):23190-23538
+                                        (seq
+                                          (if (!= (field 0 ok_inter) old_ok)
+                                            (before lambda/switch.ml(826):23218-23233
+                                              (after lambda/switch.ml(826):23218-23233
+                                                (apply
+                                                  (field 1
+                                                    (global Stdlib__hashtbl!))
+                                                  t)))
+                                            0a)
+                                          (before lambda/switch.ml(828):23241-23538
+                                            (let
+                                              (s =
+                                                 (makeblock 0 cases actions))
+                                              (before lambda/switch.ml(835):23408-23538
+                                                (let
+                                                  (*match* =
+                                                     (after lambda/switch.ml(835):23427-23442
+                                                       (apply comp_clusters
+                                                         s))
+                                                   k =a (field 1 *match*)
+                                                   n_clusters =a
+                                                     (field 0 *match*))
+                                                  (before lambda/switch.ml(836):23450-23538
+                                                    (let
+                                                      (clusters =
+                                                         (after lambda/switch.ml(836):23465-23497
+                                                           (apply
+                                                             make_clusters
+                                                             loc s n_clusters
+                                                             k)))
+                                                      (before lambda/switch.ml(837):23505-23538
+                                                        (after lambda/switch.ml(837):23505-23538
+                                                          (apply c_test
+                                                            (makeblock 0 (int,*)
+                                                              0 arg)
+                                                            clusters))))))))))))))))))
+                      abstract_shared =
+                        (function actions
+                          (funct-body lambda/switch.ml(839)<ghost>:23562-23948
+                            (before lambda/switch.ml(840):23576-23948
+                              (let
+                                (handlers =
+                                   (makemutable 0
+                                     (function x
+                                       (funct-body lambda/switch.ml(840):23595-23607
+                                         (before lambda/switch.ml(840):23605-23606
+                                           x)))))
+                                (before lambda/switch.ml(841):23615-23948
+                                  (let
+                                    (actions =
+                                       (after lambda/switch.ml(842):23635-23923
+                                         (apply
+                                           (field 14 (global Stdlib__array!))
+                                           (function act
+                                             (funct-body lambda/switch.ml(843):23653-23907
+                                               (before lambda/switch.ml(843):23665-23906
+                                                 (switch* act
+                                                  case tag 0:
+                                                   (let
+                                                     (act =a (field 0 act))
+                                                     (before lambda/switch.ml(846):23754-23906
+                                                       (let
+                                                         (*match* =
+                                                            (after lambda/switch.ml(846):23764-23782
+                                                              (apply
+                                                                (field 14
+                                                                  Arg)
+                                                                act))
+                                                          h =a
+                                                            (field 1 *match*)
+                                                          i =a
+                                                            (field 0 *match*))
+                                                         (before lambda/switch.ml(847):23801-23906
+                                                           (let
+                                                             (oh =
+                                                                (field 0
+                                                                  handlers))
+                                                             (before lambda/switch.ml(848):23838-23906
+                                                               (seq
+                                                                 (setfield_ptr 0
+                                                                   handlers
+                                                                   (function
+                                                                    act
+                                                                    (funct-body lambda/switch.ml(848):23850-23873
+                                                                    (before lambda/switch.ml(848):23862-23872
+                                                                    (after lambda/switch.ml(848):23862-23872
+                                                                    (apply h
+                                                                    (after lambda/switch.ml(848):23864-23872
+                                                                    (apply oh
+                                                                    act))))))))
+                                                                 (before lambda/switch.ml(849):23891-23906
+                                                                   (after lambda/switch.ml(849):23891-23906
+                                                                    (apply
+                                                                    (field 15
+                                                                    Arg) i))))))))))
+                                                  case tag 1:
+                                                   (let
+                                                     (act =a (field 0 act))
+                                                     (before lambda/switch.ml(844):23708-23711
+                                                       act))))))
+                                           actions)))
+                                    (before lambda/switch.ml(851):23931-23948
+                                      (makeblock 0 (field 0 handlers)
+                                        actions))))))))
+                      zyva =
+                        (function loc lh arg cases actions
+                          (funct-body lambda/switch.ml(853)<ghost>:23961-24162
+                            (before lambda/switch.ml(854):23992-24162
+                              (seq
+                                (if (> (array.length[addr] cases) 0) 0a
+                                  (raise
+                                    (after lambda/switch.ml(854):23992-24023
+                                      (makeblock 0 (global Assert_failure!)
+                                        [0: "lambda/switch.ml" 854 4]))))
+                                (before lambda/switch.ml(855):24030-24162
+                                  (let
+                                    (actions =
+                                       (after lambda/switch.ml(855):24044-24069
+                                         (apply (field 1 actions) 0a)))
+                                    (before lambda/switch.ml(856):24077-24162
+                                      (let
+                                        (*match* =
+                                           (after lambda/switch.ml(856):24094-24117
+                                             (apply abstract_shared actions))
+                                         actions =a (field 1 *match*)
+                                         hs =a (field 0 *match*))
+                                        (before lambda/switch.ml(857):24125-24162
+                                          (after lambda/switch.ml(857):24125-24162
+                                            (apply hs
+                                              (after lambda/switch.ml(857):24128-24162
+                                                (apply do_zyva loc lh arg
+                                                  cases actions)))))))))))))
+                      test_sequence =
+                        (function arg cases actions
+                          (funct-body lambda/switch.ml(859)<ghost>:24184-24671
+                            (before lambda/switch.ml(860):24208-24671
+                              (seq
+                                (if (> (array.length[addr] cases) 0) 0a
+                                  (raise
+                                    (after lambda/switch.ml(860):24208-24239
+                                      (makeblock 0 (global Assert_failure!)
+                                        [0: "lambda/switch.ml" 860 4]))))
+                                (before lambda/switch.ml(861):24246-24671
+                                  (let
+                                    (actions =
+                                       (after lambda/switch.ml(861):24260-24285
+                                         (apply (field 1 actions) 0a)))
+                                    (before lambda/switch.ml(862):24293-24671
+                                      (let
+                                        (*match* =
+                                           (after lambda/switch.ml(862):24310-24333
+                                             (apply abstract_shared actions))
+                                         actions =a (field 1 *match*)
+                                         hs =a (field 0 *match*))
+                                        (before lambda/switch.ml(863):24341-24671
+                                          (let (old_ok = (field 0 ok_inter))
+                                            (before lambda/switch.ml(864):24371-24671
+                                              (seq
+                                                (setfield_imm 0 ok_inter 0a)
+                                                (before lambda/switch.ml(865):24395-24671
+                                                  (seq
+                                                    (if
+                                                      (!= (field 0 ok_inter)
+                                                        old_ok)
+                                                      (before lambda/switch.ml(865):24423-24438
+                                                        (after lambda/switch.ml(865):24423-24438
+                                                          (apply
+                                                            (field 1
+                                                              (global Stdlib__hashtbl!))
+                                                            t)))
+                                                      0a)
+                                                    (before lambda/switch.ml(866):24445-24671
+                                                      (let
+                                                        (s =
+                                                           (makeblock 0 cases
+                                                             (after lambda/switch.ml(868):24489-24534
+                                                               (apply
+                                                                 (field 14
+                                                                   (global Stdlib__array!))
+                                                                 (function
+                                                                   act param
+                                                                   (funct-body lambda/switch.ml(868):24499-24526
+                                                                    (before lambda/switch.ml(868):24521-24524
+                                                                    act)))
+                                                                 actions))))
+                                                        (before lambda/switch.ml(874):24640-24671
+                                                          (after lambda/switch.ml(874):24640-24671
+                                                            (apply hs
+                                                              (after lambda/switch.ml(874):24643-24671
+                                                                (apply c_test
+                                                                  (makeblock 0 (int,*)
+                                                                    0 arg)
+                                                                  s))))))))))))))))))))))
+                     (pseudo lambda/switch.ml(153):4643-24681
+                       (makeblock 0 cut more_cut get_act get_low too_much
+                         less_tests eq_tests less2tests add_test coupe
+                         case_append coupe_inter t make_key same_act
+                         inter_limit ok_inter opt_count divide heuristic enum
+                         make_if_test make_if_lt make_if_ge make_if_eq
+                         make_if_ne do_make_if_out make_if_out do_make_if_in
+                         make_if_in c_test theta switch_min particular_case
+                         approx_count dense comp_clusters make_switch
+                         make_clusters do_zyva abstract_shared zyva
+                         test_sequence))))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 Not_simple
+        (function funarg is_a_functor stub
+          (let (let = (apply CtxStore funarg)) (makeblock 0 (field 1 let))))
+        (function funarg is_a_functor stub
+          (let (let = (apply Store funarg)) (makeblock 0 (field 1 let))))
+        (function funarg is_a_functor stub
+          (let (let = (apply Make funarg))
+            (makeblock 0 (field 41 let) (field 42 let))))))))

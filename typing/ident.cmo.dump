@@ -1,0 +1,1050 @@
+(setglobal Ident!
+  (let
+    (lowest_scope =[int] 0
+     highest_scope =[int] 100000000
+     currentstamp = (makemutable 0 (int) 0)
+     predefstamp = (makemutable 0 (int) 0)
+     create_scoped =
+       (function scope[int] s
+         (funct-body typing/ident.ml(32)<ghost>:1545-1628
+           (before typing/ident.ml(33):1558-1628
+             (seq (+:=1 currentstamp)
+               (before typing/ident.ml(34):1579-1628
+                 (makeblock 1 (*,int,int) s (field 0 currentstamp) scope))))))
+     create_local =
+       (function s
+         (funct-body typing/ident.ml(36)<ghost>:1647-1715
+           (before typing/ident.ml(37):1653-1715
+             (seq (+:=1 currentstamp)
+               (before typing/ident.ml(38):1674-1715
+                 (makeblock 0 (*,int) s (field 0 currentstamp)))))))
+     create_predef =
+       (function s
+         (funct-body typing/ident.ml(40)<ghost>:1735-1802
+           (before typing/ident.ml(41):1741-1802
+             (seq (+:=1 predefstamp)
+               (before typing/ident.ml(42):1761-1802
+                 (makeblock 3 (*,int) s (field 0 predefstamp)))))))
+     create_persistent =
+       (function s
+         (funct-body typing/ident.ml(44)<ghost>:1826-1840
+           (before typing/ident.ml(45):1832-1840 (makeblock 2 s))))
+     name =
+       (function param
+         (funct-body typing/ident.ml(47):1853-1953
+           (let (name =a (field 0 param))
+             (before typing/ident.ml(51):1949-1953 name))))
+     rename =
+       (function id
+         (funct-body typing/ident.ml(53):1968-2182
+           (catch
+             (catch
+               (switch* id
+                case tag 0: (exit 4)
+                case tag 1: (exit 4)
+                case tag 2: (exit 3)
+                case tag 3: (exit 3))
+              with (4)
+               (let (name =a (field 0 id) name = name)
+                 (before typing/ident.ml(56):2058-2120
+                   (seq (+:=1 currentstamp)
+                     (before typing/ident.ml(57):2083-2120
+                       (makeblock 0 (*,int) name (field 0 currentstamp)))))))
+            with (3)
+             (before typing/ident.ml(59):2137-2182
+               (after typing/ident.ml(59):2137-2182
+                 (apply (field 1 (global Misc!))
+                   [0: [11: "Ident.rename " [2: 0a 0a]] "Ident.rename %s"]
+                   (after typing/ident.ml(59):2173-2182 (apply name id))))))))
+     unique_name =
+       (function param
+         (funct-body typing/ident.ml(61):2202-2726
+           (catch
+             (switch* param
+              case tag 0: (exit 6)
+              case tag 1: (exit 6)
+              case tag 2:
+               (let (name =a (field 0 param))
+                 (before typing/ident.ml(68):2546-2557
+                   (after typing/ident.ml(68):2546-2557
+                     (apply (field 27 (global Stdlib!)) name "_0"))))
+              case tag 3:
+               (let (name =a (field 0 param))
+                 (before typing/ident.ml(72):2722-2726 name)))
+            with (6)
+             (let
+               (stamp =a (field 1 param)
+                name =a (field 0 param)
+                stamp =[int] stamp
+                name = name)
+               (before typing/ident.ml(63):2267-2299
+                 (after typing/ident.ml(63):2267-2299
+                   (apply (field 27 (global Stdlib!)) name
+                     (after typing/ident.ml(63):2274-2299
+                       (apply (field 27 (global Stdlib!)) "_"
+                         (after typing/ident.ml(63):2280-2299
+                           (apply (field 9 (global Stdlib__int!)) stamp)))))))))))
+     unique_toplevel_name =
+       (function param
+         (funct-body typing/ident.ml(74):2755-2899
+           (catch
+             (catch
+               (switch* param
+                case tag 0: (exit 9)
+                case tag 1: (exit 9)
+                case tag 2: (exit 10)
+                case tag 3: (exit 10))
+              with (9)
+               (let
+                 (stamp =a (field 1 param)
+                  name =a (field 0 param)
+                  stamp =[int] stamp
+                  name = name)
+                 (before typing/ident.ml(76):2820-2852
+                   (after typing/ident.ml(76):2820-2852
+                     (apply (field 27 (global Stdlib!)) name
+                       (after typing/ident.ml(76):2827-2852
+                         (apply (field 27 (global Stdlib!)) "/"
+                           (after typing/ident.ml(76):2833-2852
+                             (apply (field 9 (global Stdlib__int!)) stamp)))))))))
+            with (10)
+             (let (name =a (field 0 param) name = name)
+               (before typing/ident.ml(78):2895-2899 name)))))
+     persistent =
+       (function param
+         (funct-body typing/ident.ml(80):2918-2962
+           (switch param
+            case tag 2: (before typing/ident.ml(81):2943-2947 1a)
+            default: (before typing/ident.ml(82):2957-2962 0a))))
+     equal =
+       (function i1 i2
+         (funct-body typing/ident.ml(84)<ghost>:2974-3338
+           (before typing/ident.ml(85):2984-3338
+             (let (*match* = i1 *match* = i2)
+               (catch
+                 (catch
+                   (switch* *match*
+                    case tag 0:
+                     (switch *match*
+                      case tag 0:
+                       (let
+                         (name2 =a (field 0 *match*)
+                          name1 =a (field 0 *match*))
+                         (exit 12 name2 name1))
+                      default: (exit 13))
+                    case tag 1:
+                     (switch *match*
+                      case tag 1:
+                       (let
+                         (name2 =a (field 0 *match*)
+                          name1 =a (field 0 *match*))
+                         (exit 12 name2 name1))
+                      default: (exit 13))
+                    case tag 2:
+                     (switch *match*
+                      case tag 2:
+                       (let
+                         (name2 =a (field 0 *match*)
+                          name1 =a (field 0 *match*))
+                         (exit 12 name2 name1))
+                      default: (exit 13))
+                    case tag 3:
+                     (switch *match*
+                      case tag 3:
+                       (let (s2 =a (field 1 *match*) s1 =a (field 1 *match*))
+                         (before typing/ident.ml(92):3310-3317 (== s1 s2)))
+                      default: (exit 13)))
+                  with (13) (before typing/ident.ml(94):3333-3338 0a))
+                with (12 name2 name1)
+                 (before typing/ident.ml(89):3158-3171
+                   (after typing/ident.ml(89):3158-3171
+                     (caml_string_equal name1 name2))))))))
+     same =
+       (function i1 i2
+         (funct-body typing/ident.ml(96)<ghost>:3349-3364
+           (before typing/ident.ml(96):3357-3364
+             (after typing/ident.ml(96):3357-3364 (caml_equal i1 i2)))))
+     compare =
+       (function i1 i2 : int
+         (funct-body typing/ident.ml(102)<ghost>:3554-3582
+           (before typing/ident.ml(102):3562-3582
+             (after typing/ident.ml(102):3562-3582 (caml_compare i1 i2)))))
+     stamp =
+       (function param : int
+         (funct-body typing/ident.ml(104):3596-3671
+           (catch
+             (catch
+               (switch* param
+                case tag 0: (exit 16)
+                case tag 1: (exit 16)
+                case tag 2: (exit 15)
+                case tag 3: (exit 15))
+              with (16)
+               (let (stamp =a (field 1 param) stamp =[int] stamp)
+                 (before typing/ident.ml(106):3655-3660 stamp)))
+            with (15) (before typing/ident.ml(107):3670-3671 0))))
+     scope =
+       (function param : int
+         (funct-body typing/ident.ml(109):3685-3795
+           (catch
+             (switch* param
+              case tag 0:
+               (before typing/ident.ml(111):3742-3755 highest_scope)
+              case tag 1:
+               (let (scope =a (field 2 param))
+                 (before typing/ident.ml(110):3721-3726 scope))
+              case tag 2: (exit 17)
+              case tag 3: (exit 17))
+            with (17) (before typing/ident.ml(112):3783-3795 lowest_scope))))
+     reinit_level = (makemutable 0 (int) -1)
+     reinit =
+       (function param
+         (funct-body typing/ident.ml(116)<ghost>:3837-3938
+           (before typing/ident.ml(117):3844-3938
+             (if (< (field 0 reinit_level) 0)
+               (before typing/ident.ml(118):3872-3901
+                 (setfield_imm 0 reinit_level (field 0 currentstamp)))
+               (before typing/ident.ml(119):3909-3938
+                 (setfield_imm 0 currentstamp (field 0 reinit_level)))))))
+     global =
+       (function param
+         (funct-body typing/ident.ml(121):3953-4029
+           (catch
+             (catch
+               (switch* param
+                case tag 0: (exit 18)
+                case tag 1: (exit 18)
+                case tag 2: (exit 19)
+                case tag 3: (exit 19))
+              with (18) (before typing/ident.ml(123):3990-3995 0a))
+            with (19) (before typing/ident.ml(125):4025-4029 1a))))
+     is_predef =
+       (function param
+         (funct-body typing/ident.ml(127):4047-4091
+           (switch param
+            case tag 3: (before typing/ident.ml(128):4072-4076 1a)
+            default: (before typing/ident.ml(129):4086-4091 0a))))
+     print =
+       (function with_scope ppf
+         (funct-body typing/ident.ml(131)<ghost>:4103-4639
+           (before typing/ident.ml(132):4123-4639
+             (function param
+               (funct-body typing/ident.ml(133):4144-4639
+                 (switch* param
+                  case tag 0:
+                   (let (n =a (field 1 param) name =a (field 0 param))
+                     (before typing/ident.ml(139):4361-4446
+                       (after typing/ident.ml(139):4361-4446
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0: [2: 0a [2: 0a 0a]] "%s%s"] name
+                           (if (field 0 (field 62 (global Clflags!)))
+                             (before typing/ident.ml(140):4422-4437
+                               (after typing/ident.ml(140):4422-4437
+                                 (apply (field 125 (global Stdlib__format!))
+                                   [0: [12: '/' [4: 3a 0a 0a 0a]] "/%i"] n)))
+                             (before typing/ident.ml(140):4443-4445 ""))))))
+                  case tag 1:
+                   (let
+                     (scope =a (field 2 param)
+                      n =a (field 1 param)
+                      name =a (field 0 param))
+                     (before typing/ident.ml(142):4494-4639
+                       (after typing/ident.ml(142):4494-4639
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0: [2: 0a [2: 0a [2: 0a 0a]]] "%s%s%s"] name
+                           (if (field 0 (field 62 (global Clflags!)))
+                             (before typing/ident.ml(143):4557-4572
+                               (after typing/ident.ml(143):4557-4572
+                                 (apply (field 125 (global Stdlib__format!))
+                                   [0: [12: '/' [4: 3a 0a 0a 0a]] "/%i"] n)))
+                             (before typing/ident.ml(143):4578-4580 ""))
+                           (if with_scope
+                             (before typing/ident.ml(144):4610-4630
+                               (after typing/ident.ml(144):4610-4630
+                                 (apply (field 125 (global Stdlib__format!))
+                                   [0:
+                                    [12: '[' [4: 3a 0a 0a [12: ']' 0a]]]
+                                    "[%i]"]
+                                   scope)))
+                             (before typing/ident.ml(144):4636-4638 ""))))))
+                  case tag 2:
+                   (let (name =a (field 0 param))
+                     (before typing/ident.ml(134):4172-4194
+                       (after typing/ident.ml(134):4172-4194
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0: [2: 0a [12: '!' 0a]] "%s!"] name))))
+                  case tag 3:
+                   (let (n =a (field 1 param) name =a (field 0 param))
+                     (before typing/ident.ml(136):4235-4321
+                       (after typing/ident.ml(136):4235-4321
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0: [2: 0a [2: 0a [12: '!' 0a]]] "%s%s!"] name
+                           (if (field 0 (field 62 (global Clflags!)))
+                             (before typing/ident.ml(137):4297-4312
+                               (after typing/ident.ml(137):4297-4312
+                                 (apply (field 125 (global Stdlib__format!))
+                                   [0: [12: '/' [4: 3a 0a 0a 0a]] "/%i"] n)))
+                             (before typing/ident.ml(137):4318-4320 ""))))))))))))
+     print_with_scope =
+       (function ppf id
+         (funct-body typing/ident.ml(146)<ghost>:4662-4700
+           (before typing/ident.ml(146):4671-4700
+             (after typing/ident.ml(146):4671-4700 (apply print 1a ppf id)))))
+     print =
+       (function ppf id
+         (funct-body typing/ident.ml(148)<ghost>:4712-4751
+           (before typing/ident.ml(148):4721-4751
+             (after typing/ident.ml(148):4721-4751 (apply print 0a ppf id)))))
+     empty = 0a
+     mknode =
+       (function l d r
+         (funct-body typing/ident.ml(167)<ghost>:5047-5224
+           (before typing/ident.ml(168):5057-5224
+             (let
+               (hl =[int]
+                  (if l
+                    (let (h =a (field 3 l))
+                      (before typing/ident.ml(168):5109-5110 h))
+                    (before typing/ident.ml(168):5088-5089 0))
+                hr =[int]
+                  (if r
+                    (let (h =a (field 3 r))
+                      (before typing/ident.ml(169):5165-5166 h))
+                    (before typing/ident.ml(169):5144-5145 0)))
+               (before typing/ident.ml(170):5172-5224
+                 (makeblock 0 (*,*,*,int) l d r
+                   (if (>= hl hr)
+                     (before typing/ident.ml(170):5204-5210 (+ hl 1))
+                     (before typing/ident.ml(170):5216-5222 (+ hr 1)))))))))
+     balance =
+       (function l d r
+         (funct-body typing/ident.ml(172)<ghost>:5238-6102
+           (before typing/ident.ml(173):5248-6102
+             (let
+               (hl =[int]
+                  (if l
+                    (let (h =a (field 3 l))
+                      (before typing/ident.ml(173):5300-5301 h))
+                    (before typing/ident.ml(173):5279-5280 0))
+                hr =[int]
+                  (if r
+                    (let (h =a (field 3 r))
+                      (before typing/ident.ml(174):5356-5357 h))
+                    (before typing/ident.ml(174):5335-5336 0)))
+               (before typing/ident.ml(175):5363-6102
+                 (if (> hl (+ hr 1))
+                   (before typing/ident.ml(176):5387-5716
+                     (catch
+                       (if l
+                         (let
+                           (lr =a (field 2 l)
+                            ld =a (field 1 l)
+                            ll =a (field 0 l))
+                           (before typing/ident.ml(178):5438-5547
+                             (if
+                               (>=
+                                 (if ll
+                                   (let (h =a (field 3 ll))
+                                     (before typing/ident.ml(178):5483-5484
+                                       h))
+                                   (before typing/ident.ml(178):5462-5463 0))
+                                 (if lr
+                                   (let (h =a (field 3 lr))
+                                     (before typing/ident.ml(179):5545-5546
+                                       h))
+                                   (before typing/ident.ml(179):5524-5525 0)))
+                               (before typing/ident.ml(180):5559-5587
+                                 (after typing/ident.ml(180):5559-5587
+                                   (apply mknode ll ld
+                                     (after typing/ident.ml(180):5572-5587
+                                       (apply mknode lr d r)))))
+                               (if lr
+                                 (let
+                                   (ld =a ld
+                                    ll =a ll
+                                    lrr =a (field 2 lr)
+                                    lrd =a (field 1 lr)
+                                    lrl =a (field 0 lr))
+                                   (before typing/ident.ml(182):5646-5692
+                                     (after typing/ident.ml(182):5646-5692
+                                       (apply mknode
+                                         (after typing/ident.ml(182):5653-5671
+                                           (apply mknode ll ld lrl))
+                                         lrd
+                                         (after typing/ident.ml(182):5676-5692
+                                           (apply mknode lrr d r))))))
+                                 (exit 23)))))
+                         (exit 23))
+                      with (23)
+                       (before typing/ident.ml(183):5704-5716
+                         (raise
+                           (after typing/ident.ml(183):5704-5716
+                             (makeblock 0 (global Assert_failure!)
+                               [0: "typing/ident.ml" 183 11]))))))
+                   (before typing/ident.ml(184):5724-6102
+                     (if (> hr (+ hl 1))
+                       (before typing/ident.ml(185):5748-6078
+                         (catch
+                           (if r
+                             (let
+                               (rl =a (field 0 r)
+                                rr =a (field 2 r)
+                                rd =a (field 1 r))
+                               (before typing/ident.ml(187):5799-5908
+                                 (if
+                                   (>=
+                                     (if rr
+                                       (let (h =a (field 3 rr))
+                                         (before typing/ident.ml(187):5844-5845
+                                           h))
+                                       (before typing/ident.ml(187):5823-5824
+                                         0))
+                                     (if rl
+                                       (let (h =a (field 3 rl))
+                                         (before typing/ident.ml(188):5906-5907
+                                           h))
+                                       (before typing/ident.ml(188):5885-5886
+                                         0)))
+                                   (before typing/ident.ml(189):5920-5948
+                                     (after typing/ident.ml(189):5920-5948
+                                       (apply mknode
+                                         (after typing/ident.ml(189):5927-5942
+                                           (apply mknode l d rl))
+                                         rd rr)))
+                                   (if rl
+                                     (let
+                                       (rr =a (field 2 r)
+                                        rd =a (field 1 r)
+                                        rlr =a (field 2 rl)
+                                        rld =a (field 1 rl)
+                                        rll =a (field 0 rl))
+                                       (before typing/ident.ml(191):6008-6054
+                                         (after typing/ident.ml(191):6008-6054
+                                           (apply mknode
+                                             (after typing/ident.ml(191):6015-6031
+                                               (apply mknode l d rll))
+                                             rld
+                                             (after typing/ident.ml(191):6036-6054
+                                               (apply mknode rlr rd rr))))))
+                                     (exit 21)))))
+                             (exit 21))
+                          with (21)
+                           (before typing/ident.ml(192):6066-6078
+                             (raise
+                               (after typing/ident.ml(192):6066-6078
+                                 (makeblock 0 (global Assert_failure!)
+                                   [0: "typing/ident.ml" 192 11]))))))
+                       (before typing/ident.ml(194):6090-6102
+                         (after typing/ident.ml(194):6090-6102
+                           (apply mknode l d r))))))))))))
+    (letrec
+      (add
+         (function id data param
+           (funct-body typing/ident.ml(196)<ghost>:6116-6489
+             (if param
+               (let
+                 (h =a (field 3 param)
+                  r =a (field 2 param)
+                  k =a (field 1 param)
+                  l =a (field 0 param))
+                 (before typing/ident.ml(200):6250-6489
+                   (let
+                     (c =[int]
+                        (after typing/ident.ml(200):6258-6290
+                          (apply compare
+                            (after typing/ident.ml(200):6266-6275
+                              (apply name id))
+                            (after typing/ident.ml(200):6276-6290
+                              (apply name (field 0 k))))))
+                     (before typing/ident.ml(201):6300-6489
+                       (if (== c 0)
+                         (before typing/ident.ml(202):6322-6381
+                           (makeblock 0 (*,*,*,int) l
+                             (makeblock 0 id data (makeblock 0 k)) r h))
+                         (before typing/ident.ml(203):6393-6489
+                           (if (< c 0)
+                             (before typing/ident.ml(204):6415-6442
+                               (after typing/ident.ml(204):6415-6442
+                                 (apply balance
+                                   (after typing/ident.ml(204):6423-6438
+                                     (apply add id data l))
+                                   k r)))
+                             (before typing/ident.ml(206):6462-6489
+                               (after typing/ident.ml(206):6462-6489
+                                 (apply balance l k
+                                   (after typing/ident.ml(206):6474-6489
+                                     (apply add id data r))))))))))))
+               (before typing/ident.ml(198):6154-6219
+                 (makeblock 0 (*,*,*,int) 0a (makeblock 0 id data 0a) 0a 1))))))
+      (letrec
+        (min_binding
+           (function param
+             (funct-body typing/ident.ml(208):6513-6620
+               (if param
+                 (let (l =a (field 0 param))
+                   (if l
+                     (before typing/ident.ml(211):6607-6620
+                       (after typing/ident.ml(211):6607-6620
+                         (apply min_binding l)))
+                     (let (d =a (field 1 param))
+                       (before typing/ident.ml(210):6580-6581 d))))
+                 (before typing/ident.ml(209):6535-6550
+                   (raise
+                     (after typing/ident.ml(209):6541-6550
+                       (field 7 (global Stdlib!)))))))))
+        (letrec
+          (remove_min_binding
+             (function param
+               (funct-body typing/ident.ml(213):6651-6796
+                 (if param
+                   (let (l =a (field 0 param))
+                     (if l
+                       (let (r =a (field 2 param) d =a (field 1 param))
+                         (before typing/ident.ml(216):6762-6796
+                           (after typing/ident.ml(216):6762-6796
+                             (apply balance
+                               (after typing/ident.ml(216):6770-6792
+                                 (apply remove_min_binding l))
+                               d r))))
+                       (let (r =a (field 2 param))
+                         (before typing/ident.ml(215):6735-6736 r))))
+                   (before typing/ident.ml(214):6673-6705
+                     (after typing/ident.ml(214):6673-6705
+                       (apply (field 0 (global Stdlib!))
+                         "Map.remove_min_elt")))))))
+          (let
+            (merge =
+               (function t1 t2
+                 (funct-body typing/ident.ml(218)<ghost>:6808-6966
+                   (before typing/ident.ml(219):6818-6966
+                     (let (*match* = t1 *match* = t2)
+                       (if *match*
+                         (if *match*
+                           (before typing/ident.ml(223):6898-6966
+                             (let
+                               (d =
+                                  (after typing/ident.ml(223):6906-6920
+                                    (apply min_binding t2)))
+                               (before typing/ident.ml(224):6930-6966
+                                 (after typing/ident.ml(224):6930-6966
+                                   (apply balance t1 d
+                                     (after typing/ident.ml(224):6943-6966
+                                       (apply remove_min_binding t2)))))))
+                           (let (t =a *match*)
+                             (before typing/ident.ml(221):6876-6877 t)))
+                         (let (t =a *match*)
+                           (before typing/ident.ml(220):6856-6857 t))))))))
+            (letrec
+              (remove
+                 (function id m
+                   (funct-body typing/ident.ml(226)<ghost>:6983-7395
+                     (if m
+                       (let
+                         (h =a (field 3 m)
+                          r =a (field 2 m)
+                          k =a (field 1 m)
+                          l =a (field 0 m))
+                         (before typing/ident.ml(230):7060-7395
+                           (let
+                             (c =[int]
+                                (after typing/ident.ml(230):7068-7100
+                                  (apply compare
+                                    (after typing/ident.ml(230):7076-7085
+                                      (apply name id))
+                                    (after typing/ident.ml(230):7086-7100
+                                      (apply name (field 0 k))))))
+                             (before typing/ident.ml(231):7110-7395
+                               (if (== c 0)
+                                 (before typing/ident.ml(232):7132-7219
+                                   (let (*match* = (field 2 k))
+                                     (if *match*
+                                       (let (k =a (field 0 *match*))
+                                         (before typing/ident.ml(234):7202-7219
+                                           (makeblock 0 (*,*,*,int) l k r h)))
+                                       (before typing/ident.ml(233):7172-7181
+                                         (after typing/ident.ml(233):7172-7181
+                                           (apply merge l r))))))
+                                 (before typing/ident.ml(235):7231-7395
+                                   (if (< c 0)
+                                     (before typing/ident.ml(236):7253-7314
+                                       (let
+                                         (ll =
+                                            (after typing/ident.ml(236):7262-7273
+                                              (apply remove id l)))
+                                         (before typing/ident.ml(236):7277-7314
+                                           (if (== l ll)
+                                             (before typing/ident.ml(236):7293-7294
+                                               m)
+                                             (before typing/ident.ml(236):7300-7314
+                                               (after typing/ident.ml(236):7300-7314
+                                                 (apply balance ll k r)))))))
+                                     (before typing/ident.ml(238):7334-7395
+                                       (let
+                                         (rr =
+                                            (after typing/ident.ml(238):7343-7354
+                                              (apply remove id r)))
+                                         (before typing/ident.ml(238):7358-7395
+                                           (if (== r rr)
+                                             (before typing/ident.ml(238):7374-7375
+                                               m)
+                                             (before typing/ident.ml(238):7381-7395
+                                               (after typing/ident.ml(238):7381-7395
+                                                 (apply balance l k rr))))))))))))))
+                       (before typing/ident.ml(228):7016-7021 0a)))))
+              (letrec
+                (find_previous
+                   (function id param
+                     (funct-body typing/ident.ml(240)<ghost>:7419-7550
+                       (if param
+                         (let (k =a (field 0 param))
+                           (before typing/ident.ml(244):7487-7550
+                             (if
+                               (after typing/ident.ml(244):7490-7505
+                                 (apply same id (field 0 k)))
+                               (before typing/ident.ml(244):7511-7517
+                                 (field 1 k))
+                               (before typing/ident.ml(244):7523-7550
+                                 (after typing/ident.ml(244):7523-7550
+                                   (apply find_previous id (field 2 k)))))))
+                         (before typing/ident.ml(242):7451-7466
+                           (raise
+                             (after typing/ident.ml(242):7457-7466
+                               (field 7 (global Stdlib!)))))))))
+                (letrec
+                  (find_same
+                     (function id param
+                       (funct-body typing/ident.ml(246)<ghost>:7570-7857
+                         (if param
+                           (let
+                             (r =a (field 2 param)
+                              k =a (field 1 param)
+                              l =a (field 0 param))
+                             (before typing/ident.ml(250):7649-7857
+                               (let
+                                 (c =[int]
+                                    (after typing/ident.ml(250):7657-7689
+                                      (apply compare
+                                        (after typing/ident.ml(250):7665-7674
+                                          (apply name id))
+                                        (after typing/ident.ml(250):7675-7689
+                                          (apply name (field 0 k))))))
+                                 (before typing/ident.ml(251):7699-7857
+                                   (if (== c 0)
+                                     (before typing/ident.ml(252):7721-7800
+                                       (if
+                                         (after typing/ident.ml(252):7724-7739
+                                           (apply same id (field 0 k)))
+                                         (before typing/ident.ml(253):7753-7759
+                                           (field 1 k))
+                                         (before typing/ident.ml(254):7773-7800
+                                           (after typing/ident.ml(254):7773-7800
+                                             (apply find_previous id
+                                               (field 2 k))))))
+                                     (before typing/ident.ml(256):7820-7857
+                                       (after typing/ident.ml(256):7820-7857
+                                         (apply find_same id
+                                           (if (< c 0)
+                                             (before typing/ident.ml(256):7848-7849
+                                               l)
+                                             (before typing/ident.ml(256):7855-7856
+                                               r))))))))))
+                           (before typing/ident.ml(248):7603-7618
+                             (raise
+                               (after typing/ident.ml(248):7609-7618
+                                 (field 7 (global Stdlib!)))))))))
+                  (letrec
+                    (find_name
+                       (function n param
+                         (funct-body typing/ident.ml(258)<ghost>:7877-8090
+                           (if param
+                             (let
+                               (r =a (field 2 param)
+                                k =a (field 1 param)
+                                l =a (field 0 param))
+                               (before typing/ident.ml(262):7955-8090
+                                 (let
+                                   (c =[int]
+                                      (after typing/ident.ml(262):7963-7987
+                                        (apply compare n
+                                          (after typing/ident.ml(262):7973-7987
+                                            (apply name (field 0 k))))))
+                                   (before typing/ident.ml(263):7997-8090
+                                     (if (== c 0)
+                                       (before typing/ident.ml(264):8019-8034
+                                         (makeblock 0 (field 0 k)
+                                           (field 1 k)))
+                                       (before typing/ident.ml(266):8054-8090
+                                         (after typing/ident.ml(266):8054-8090
+                                           (apply find_name n
+                                             (if (< c 0)
+                                               (before typing/ident.ml(266):8081-8082
+                                                 l)
+                                               (before typing/ident.ml(266):8088-8089
+                                                 r))))))))))
+                             (before typing/ident.ml(260):7909-7924
+                               (raise
+                                 (after typing/ident.ml(260):7915-7924
+                                   (field 7 (global Stdlib!)))))))))
+                    (letrec
+                      (get_all
+                         (function param
+                           (funct-body typing/ident.ml(268):8110-8187
+                             (if param
+                               (let (k =a (field 0 param))
+                                 (before typing/ident.ml(270):8148-8187
+                                   (makeblock 0
+                                     (makeblock 0 (field 0 k) (field 1 k))
+                                     (after typing/ident.ml(270):8169-8187
+                                       (apply get_all (field 2 k))))))
+                               (before typing/ident.ml(269):8131-8133 0a)))))
+                      (letrec
+                        (find_all
+                           (function n param
+                             (funct-body typing/ident.ml(272)<ghost>:8206-8429
+                               (if param
+                                 (let
+                                   (r =a (field 2 param)
+                                    k =a (field 1 param)
+                                    l =a (field 0 param))
+                                   (before typing/ident.ml(276):8271-8429
+                                     (let
+                                       (c =[int]
+                                          (after typing/ident.ml(276):8279-8303
+                                            (apply compare n
+                                              (after typing/ident.ml(276):8289-8303
+                                                (apply name (field 0 k))))))
+                                       (before typing/ident.ml(277):8313-8429
+                                         (if (== c 0)
+                                           (before typing/ident.ml(278):8335-8374
+                                             (makeblock 0
+                                               (makeblock 0 (field 0 k)
+                                                 (field 1 k))
+                                               (after typing/ident.ml(278):8356-8374
+                                                 (apply get_all (field 2 k)))))
+                                           (before typing/ident.ml(280):8394-8429
+                                             (after typing/ident.ml(280):8394-8429
+                                               (apply find_all n
+                                                 (if (< c 0)
+                                                   (before typing/ident.ml(280):8420-8421
+                                                     l)
+                                                   (before typing/ident.ml(280):8427-8428
+                                                     r))))))))))
+                                 (before typing/ident.ml(274):8238-8240 0a)))))
+                        (letrec
+                          (fold_aux
+                             (function f stack accu param
+                               (funct-body typing/ident.ml(282)<ghost>:8448-8647
+                                 (if param
+                                   (let
+                                     (r =a (field 2 param)
+                                      k =a (field 1 param)
+                                      l =a (field 0 param))
+                                     (before typing/ident.ml(289):8611-8647
+                                       (after typing/ident.ml(289):8611-8647
+                                         (apply fold_aux f
+                                           (makeblock 0 l stack)
+                                           (after typing/ident.ml(289):8635-8645
+                                             (apply f k accu))
+                                           r))))
+                                   (before typing/ident.ml(284):8491-8580
+                                     (if stack
+                                       (let
+                                         (l =a (field 1 stack)
+                                          a =a (field 0 stack))
+                                         (before typing/ident.ml(286):8551-8570
+                                           (after typing/ident.ml(286):8551-8570
+                                             (apply fold_aux f l accu a))))
+                                       (before typing/ident.ml(285):8528-8532
+                                         accu)))))))
+                          (let
+                            (fold_name =
+                               (function f tbl accu
+                                 (funct-body typing/ident.ml(291)<ghost>:8663-8724
+                                   (before typing/ident.ml(291):8676-8724
+                                     (after typing/ident.ml(291):8676-8724
+                                       (apply fold_aux
+                                         (function k
+                                           (funct-body typing/ident.ml(291):8685-8712
+                                             (before typing/ident.ml(291):8695-8711
+                                               (after typing/ident.ml(291):8695-8711
+                                                 (apply f (field 0 k)
+                                                   (field 1 k))))))
+                                         0a accu tbl))))))
+                            (letrec
+                              (fold_data
+                                 (function f d accu
+                                   (funct-body typing/ident.ml(293)<ghost>:8744-8847
+                                     (before typing/ident.ml(294):8757-8847
+                                       (if d
+                                         (let (k =a (field 0 d))
+                                           (before typing/ident.ml(296):8801-8847
+                                             (after typing/ident.ml(296):8801-8847
+                                               (apply f (field 0 k)
+                                                 (field 1 k)
+                                                 (after typing/ident.ml(296):8818-8847
+                                                   (apply fold_data f
+                                                     (field 2 k) accu))))))
+                                         (before typing/ident.ml(295):8782-8786
+                                           accu))))))
+                              (let
+                                (fold_all =
+                                   (function f tbl accu
+                                     (funct-body typing/ident.ml(298)<ghost>:8862-8929
+                                       (before typing/ident.ml(299):8877-8929
+                                         (after typing/ident.ml(299):8877-8929
+                                           (apply fold_aux
+                                             (function k
+                                               (funct-body typing/ident.ml(299):8886-8917
+                                                 (before typing/ident.ml(299):8896-8916
+                                                   (after typing/ident.ml(299):8896-8916
+                                                     (apply fold_data f
+                                                       (makeblock 0 k))))))
+                                             0a accu tbl))))))
+                                (letrec
+                                  (iter
+                                     (function f param
+                                       (funct-body typing/ident.ml(303)<ghost>:9009-9104
+                                         (if param
+                                           (let
+                                             (r =a (field 2 param)
+                                              k =a (field 1 param)
+                                              l =a (field 0 param))
+                                             (before typing/ident.ml(306):9068-9104
+                                               (seq
+                                                 (after typing/ident.ml(306):9068-9076
+                                                   (apply iter f l))
+                                                 (before typing/ident.ml(306):9078-9104
+                                                   (seq
+                                                     (after typing/ident.ml(306):9078-9094
+                                                       (apply f (field 0 k)
+                                                         (field 1 k)))
+                                                     (before typing/ident.ml(306):9096-9104
+                                                       (after typing/ident.ml(306):9096-9104
+                                                         (apply iter f r))))))))
+                                           (before typing/ident.ml(304):9035-9037
+                                             0a)))))
+                                  (let
+                                    (key_name = ""
+                                     make_key_generator =
+                                       (function param
+                                         (funct-body typing/ident.ml(313)<ghost>:9231-9470
+                                           (before typing/ident.ml(314):9238-9470
+                                             (let
+                                               (c = (makemutable 0 (int) 1))
+                                               (before typing/ident.ml(315):9257-9470
+                                                 (function global_id
+                                                   (funct-body typing/ident.ml(315):9257-9470
+                                                     (catch
+                                                       (catch
+                                                         (switch* global_id
+                                                          case tag 0:
+                                                           (exit 29)
+                                                          case tag 1:
+                                                           (exit 29)
+                                                          case tag 2:
+                                                           (exit 30)
+                                                          case tag 3:
+                                                           (exit 30))
+                                                        with (30)
+                                                         (before typing/ident.ml(322):9403-9470
+                                                           (after typing/ident.ml(322):9403-9470
+                                                             (apply
+                                                               (field 1
+                                                                 (global Misc!))
+                                                               [0:
+                                                                [11:
+                                                                 "Ident.make_key_generator () "
+                                                                 [2: 0a 0a]]
+                                                                "Ident.make_key_generator () %s"]
+                                                               (after typing/ident.ml(322):9454-9470
+                                                                 (apply name
+                                                                   global_id))))))
+                                                      with (29)
+                                                       (before typing/ident.ml(318):9300-9379
+                                                         (let
+                                                           (stamp =[int]
+                                                              (field 0 c))
+                                                           (before typing/ident.ml(319):9324-9379
+                                                             (seq (+:=-1 c)
+                                                               (before typing/ident.ml(320):9339-9379
+                                                                 (makeblock 0 (*,int)
+                                                                   key_name
+                                                                   stamp))))))))))))))
+                                     compare =
+                                       (function x y : int
+                                         (funct-body typing/ident.ml(324)<ghost>:9484-9982
+                                           (before typing/ident.ml(325):9492-9982
+                                             (let (*match* = x *match* = y)
+                                               (catch
+                                                 (catch
+                                                   (catch
+                                                     (switch* *match*
+                                                      case tag 0:
+                                                       (switch *match*
+                                                        case tag 0:
+                                                         (let
+                                                           (y =a *match*
+                                                            x =a *match*)
+                                                           (before typing/ident.ml(327):9538-9622
+                                                             (let
+                                                               (c =[int]
+                                                                  (-
+                                                                    (field 1
+                                                                    x)
+                                                                    (field 1
+                                                                    y)))
+                                                               (before typing/ident.ml(328):9573-9622
+                                                                 (if 
+                                                                   (!= c 0)
+                                                                   (before typing/ident.ml(328):9588-9589
+                                                                    c)
+                                                                   (before typing/ident.ml(329):9601-9622
+                                                                    (after typing/ident.ml(329):9601-9622
+                                                                    (apply
+                                                                    compare
+                                                                    (field 0
+                                                                    x)
+                                                                    (field 0
+                                                                    y)))))))))
+                                                        default:
+                                                         (before typing/ident.ml(330):9641-9642
+                                                           1))
+                                                      case tag 1:
+                                                       (switch* *match*
+                                                        case tag 0: (exit 35)
+                                                        case tag 1:
+                                                         (let
+                                                           (y =a *match*
+                                                            x =a *match*)
+                                                           (before typing/ident.ml(333):9698-9782
+                                                             (let
+                                                               (c =[int]
+                                                                  (-
+                                                                    (field 1
+                                                                    x)
+                                                                    (field 1
+                                                                    y)))
+                                                               (before typing/ident.ml(334):9733-9782
+                                                                 (if 
+                                                                   (!= c 0)
+                                                                   (before typing/ident.ml(334):9748-9749
+                                                                    c)
+                                                                   (before typing/ident.ml(335):9761-9782
+                                                                    (after typing/ident.ml(335):9761-9782
+                                                                    (apply
+                                                                    compare
+                                                                    (field 0
+                                                                    x)
+                                                                    (field 0
+                                                                    y)))))))))
+                                                        case tag 2: (exit 34)
+                                                        case tag 3: (exit 34))
+                                                      case tag 2:
+                                                       (let
+                                                         (x =a
+                                                            (field 0 *match*))
+                                                         (switch* *match*
+                                                          case tag 0:
+                                                           (exit 35)
+                                                          case tag 1:
+                                                           (exit 33)
+                                                          case tag 2:
+                                                           (let
+                                                             (y =a
+                                                                (field 0
+                                                                  *match*))
+                                                             (before typing/ident.ml(338):9854-9865
+                                                               (after typing/ident.ml(338):9854-9865
+                                                                 (apply
+                                                                   compare x
+                                                                   y))))
+                                                          case tag 3:
+                                                           (before typing/ident.ml(339):9885-9886
+                                                             1)))
+                                                      case tag 3:
+                                                       (let
+                                                         (s1 =a
+                                                            (field 1 *match*))
+                                                         (switch* *match*
+                                                          case tag 0:
+                                                           (exit 35)
+                                                          case tag 1:
+                                                           (exit 33)
+                                                          case tag 2:
+                                                           (before typing/ident.ml(340):9906-9910
+                                                             -1)
+                                                          case tag 3:
+                                                           (let
+                                                             (s2 =a
+                                                                (field 1
+                                                                  *match*))
+                                                             (before typing/ident.ml(341):9969-9982
+                                                               (after typing/ident.ml(341):9969-9982
+                                                                 (apply
+                                                                   compare s1
+                                                                   s2)))))))
+                                                    with (35)
+                                                     (before typing/ident.ml(331):9661-9665
+                                                       -1))
+                                                  with (34)
+                                                   (before typing/ident.ml(336):9802-9803
+                                                     1))
+                                                with (33)
+                                                 (before typing/ident.ml(337):9823-9827
+                                                   -1))))))
+                                     output =
+                                       (function oc id
+                                         (funct-body typing/ident.ml(343)<ghost>:9995-10036
+                                           (before typing/ident.ml(343):10003-10036
+                                             (after typing/ident.ml(343):10003-10036
+                                               (apply
+                                                 (field 65 (global Stdlib!))
+                                                 oc
+                                                 (after typing/ident.ml(343):10020-10036
+                                                   (apply unique_name id)))))))
+                                     hash =
+                                       (function i : int
+                                         (funct-body typing/ident.ml(344)<ghost>:10046-10089
+                                           (before typing/ident.ml(344):10050-10089
+                                             (xor
+                                               (after typing/ident.ml(344):10061-10073
+                                                 (string.get
+                                                   (after typing/ident.ml(344):10061-10069
+                                                     (apply name i))
+                                                   0))
+                                               (after typing/ident.ml(344):10080-10089
+                                                 (apply stamp i))))))
+                                     original_equal = equal
+                                     include =
+                                       (apply
+                                         (field 1 (global Identifiable!))
+                                         (let
+                                           (compare = compare
+                                            output = output
+                                            print = print
+                                            hash = hash
+                                            equal = same)
+                                           (pseudo typing/ident.ml(347):10145-10278
+                                             (makeblock 0 equal hash compare
+                                               output print))))
+                                     T =a (field 0 include)
+                                     hash =a (field 2 include)
+                                     compare =a (field 3 include)
+                                     output =a (field 4 include)
+                                     print =a (field 5 include)
+                                     Set =a (field 6 include)
+                                     Map =a (field 7 include)
+                                     Tbl =a (field 8 include)
+                                     equal = original_equal)
+                                    (pseudo _none_(0)<ghost>:-1--1
+                                      (makeblock 0 T equal hash output print
+                                        Set Map Tbl print_with_scope
+                                        create_scoped create_local
+                                        create_persistent create_predef
+                                        rename name unique_name
+                                        unique_toplevel_name persistent same
+                                        compare global is_predef scope
+                                        lowest_scope highest_scope reinit
+                                        empty add find_same find_name
+                                        find_all fold_name fold_all iter
+                                        remove make_key_generator))))))))))))))))))))

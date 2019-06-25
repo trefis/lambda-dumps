@@ -1,0 +1,1219 @@
+(setglobal Compute_ranges!
+  (let
+    (Make =
+       (module-defn(Make) asmcomp/debug/compute_ranges.ml(21):1102-19420
+         (function S is_a_functor
+           (let
+             (S =a S
+              Subrange_state =a
+                (module-defn(Subrange_state) asmcomp/debug/compute_ranges.ml(22):1161-1201
+                  (field 3 S))
+              Subrange_info =a
+                (module-defn(Subrange_info) asmcomp/debug/compute_ranges.ml(23):1204-1242
+                  (field 4 S))
+              Range_info =a
+                (module-defn(Range_info) asmcomp/debug/compute_ranges.ml(24):1245-1277
+                  (field 2 S))
+              rewrite_label =
+                (function env label[int] : int
+                  (funct-body asmcomp/debug/compute_ranges.ml(26)<ghost>:1299-1412
+                    (before asmcomp/debug/compute_ranges.ml(27):1315-1412
+                      (catch
+                        (try
+                          (exit 1
+                            (after asmcomp/debug/compute_ranges.ml(27):1321-1351
+                              (apply
+                                (field 26
+                                  (field 7 (field 0 (global Numbers!))))
+                                label env)))
+                         with exn
+                          (if (== exn (field 7 (global Stdlib!)))
+                            (before asmcomp/debug/compute_ranges.ml(28):1386-1391
+                              label)
+                            (reraise exn)))
+                       with (1 label[int])
+                        (before asmcomp/debug/compute_ranges.ml(29):1407-1412
+                          label)))))
+              Subrange =
+                (module-defn(Subrange) asmcomp/debug/compute_ranges.ml(31):1416-2742
+                  (let
+                    (create =
+                       (function start_insn start_pos[int]
+                         start_pos_offset[int] end_pos[int]
+                         end_pos_offset[int] subrange_info
+                         (funct-body asmcomp/debug/compute_ranges.ml(42)<ghost>:1765-2203
+                           (before asmcomp/debug/compute_ranges.ml(46):1910-2203
+                             (let (*match* = (field 0 start_insn))
+                               (catch
+                                 (switch *match*
+                                  case tag 1:
+                                   (before asmcomp/debug/compute_ranges.ml(48):1965-2085
+                                     (makeblock 0 (int,int,int,int,*)
+                                       start_pos start_pos_offset end_pos
+                                       end_pos_offset subrange_info))
+                                  default: (exit 3))
+                                with (3)
+                                 (before asmcomp/debug/compute_ranges.ml(55):2107-2203
+                                   (after asmcomp/debug/compute_ranges.ml(55):2107-2203
+                                     (apply (field 1 (global Misc!))
+                                       [0:
+                                        [11:
+                                         "Subrange.create: bad [start_insn]: "
+                                         [15: 0a]]
+                                        "Subrange.create: bad [start_insn]: %a"]
+                                       (field 0 (global Printlinear!))
+                                       start_insn))))))))
+                     start_pos =
+                       (function t : int
+                         (funct-body asmcomp/debug/compute_ranges.ml(58)<ghost>:2223-2238
+                           (before asmcomp/debug/compute_ranges.ml(58):2227-2238
+                             (field 0 t))))
+                     start_pos_offset =
+                       (function t : int
+                         (funct-body asmcomp/debug/compute_ranges.ml(59)<ghost>:2264-2286
+                           (before asmcomp/debug/compute_ranges.ml(59):2268-2286
+                             (field 1 t))))
+                     end_pos =
+                       (function t : int
+                         (funct-body asmcomp/debug/compute_ranges.ml(60)<ghost>:2303-2316
+                           (before asmcomp/debug/compute_ranges.ml(60):2307-2316
+                             (field 2 t))))
+                     end_pos_offset =
+                       (function t : int
+                         (funct-body asmcomp/debug/compute_ranges.ml(61)<ghost>:2340-2360
+                           (before asmcomp/debug/compute_ranges.ml(61):2344-2360
+                             (field 3 t))))
+                     info =
+                       (function t
+                         (funct-body asmcomp/debug/compute_ranges.ml(62)<ghost>:2374-2393
+                           (before asmcomp/debug/compute_ranges.ml(62):2378-2393
+                             (field 4 t))))
+                     rewrite_labels =
+                       (function t env
+                         (funct-body asmcomp/debug/compute_ranges.ml(64)<ghost>:2418-2736
+                           (before asmcomp/debug/compute_ranges.ml(65):2433-2736
+                             (let
+                               (start_pos =[int]
+                                  (after asmcomp/debug/compute_ranges.ml(65):2449-2478
+                                    (apply rewrite_label env (field 0 t))))
+                               (before asmcomp/debug/compute_ranges.ml(66):2488-2736
+                                 (let
+                                   (end_pos =[int]
+                                      (after asmcomp/debug/compute_ranges.ml(66):2502-2529
+                                        (apply rewrite_label env (field 2 t))))
+                                   (before asmcomp/debug/compute_ranges.ml(67):2539-2736
+                                     (if
+                                       (&&
+                                         (after asmcomp/debug/compute_ranges.ml(67):2542-2561
+                                           (apply
+                                             (field 0
+                                               (global Int_replace_polymorphic_compare!))
+                                             start_pos end_pos))
+                                         (&&
+                                           (after asmcomp/debug/compute_ranges.ml(68):2573-2595
+                                             (apply
+                                               (field 0
+                                                 (global Int_replace_polymorphic_compare!))
+                                               (field 1 t) 0))
+                                           (after asmcomp/debug/compute_ranges.ml(69):2607-2627
+                                             (apply
+                                               (field 0
+                                                 (global Int_replace_polymorphic_compare!))
+                                               (field 3 t) 0))))
+                                       (before asmcomp/debug/compute_ranges.ml(70):2639-2643
+                                         0a)
+                                       (before asmcomp/debug/compute_ranges.ml(72):2663-2736
+                                         (makeblock 0
+                                           (let (init = t)
+                                             (makeblock 0 (int,int,int,int,*)
+                                               start_pos (field 1 init)
+                                               end_pos (field 3 init)
+                                               (field 4 init))))))))))))))
+                    (pseudo asmcomp/debug/compute_ranges.ml(31):1434-2742
+                      (makeblock 0 create start_pos start_pos_offset end_pos
+                        end_pos_offset info rewrite_labels))))
+              Range =
+                (module-defn(Range) asmcomp/debug/compute_ranges.ml(79):2746-5111
+                  (let
+                    (create =
+                       (function range_info
+                         (funct-body asmcomp/debug/compute_ranges.ml(86)<ghost>:2940-3039
+                           (before asmcomp/debug/compute_ranges.ml(87):2959-3039
+                             (makemutable 0 0a 0a range_info))))
+                     info =
+                       (function t
+                         (funct-body asmcomp/debug/compute_ranges.ml(92)<ghost>:3054-3070
+                           (before asmcomp/debug/compute_ranges.ml(92):3058-3070
+                             (field 2 t))))
+                     add_subrange =
+                       (function t subrange
+                         (funct-body asmcomp/debug/compute_ranges.ml(94)<ghost>:3093-4220
+                           (before asmcomp/debug/compute_ranges.ml(95):3113-4220
+                             (let
+                               (start_pos =[int]
+                                  (after asmcomp/debug/compute_ranges.ml(95):3129-3156
+                                    (apply (field 1 Subrange) subrange)))
+                               (before asmcomp/debug/compute_ranges.ml(96):3166-4220
+                                 (let
+                                   (start_pos_offset =[int]
+                                      (after asmcomp/debug/compute_ranges.ml(96):3189-3223
+                                        (apply (field 2 Subrange) subrange)))
+                                   (before asmcomp/debug/compute_ranges.ml(97):3233-4220
+                                     (seq
+                                       (let (*match* = (field 1 t))
+                                         (if *match*
+                                           (let
+                                             (*match* =a (field 0 *match*)
+                                              min_pos_offset =a
+                                                (field 1 *match*)
+                                              min_pos =a (field 0 *match*))
+                                             (before asmcomp/debug/compute_ranges.ml(108):3955-4166
+                                               (let
+                                                 (c =[int]
+                                                    (after asmcomp/debug/compute_ranges.ml(108):3963-3988
+                                                      (apply
+                                                        (field 6
+                                                          (global Int_replace_polymorphic_compare!))
+                                                        start_pos min_pos)))
+                                                 (before asmcomp/debug/compute_ranges.ml(109):4000-4166
+                                                   (if
+                                                     (||
+                                                       (after asmcomp/debug/compute_ranges.ml(109):4003-4008
+                                                         (apply
+                                                           (field 2
+                                                             (global Int_replace_polymorphic_compare!))
+                                                           c 0))
+                                                       (&&
+                                                         (after asmcomp/debug/compute_ranges.ml(110):4023-4028
+                                                           (apply
+                                                             (field 0
+                                                               (global Int_replace_polymorphic_compare!))
+                                                             c 0))
+                                                         (after asmcomp/debug/compute_ranges.ml(110):4032-4065
+                                                           (apply
+                                                             (field 2
+                                                               (global Int_replace_polymorphic_compare!))
+                                                             start_pos_offset
+                                                             min_pos_offset))))
+                                                     (before asmcomp/debug/compute_ranges.ml(111):4080-4166
+                                                       (setfield_ptr 1 t
+                                                         (makeblock 0
+                                                           (makeblock 0 (int,int)
+                                                             start_pos
+                                                             start_pos_offset))))
+                                                     0a)))))
+                                           (before asmcomp/debug/compute_ranges.ml(98):3287-3345
+                                             (setfield_ptr 1 t
+                                               (makeblock 0
+                                                 (makeblock 0 (int,int)
+                                                   start_pos
+                                                   start_pos_offset))))))
+                                       (before asmcomp/debug/compute_ranges.ml(115):4184-4220
+                                         (setfield_ptr 0 t
+                                           (makeblock 0 subrange (field 0 t))))))))))))
+                     estimate_lowest_address =
+                       (function t
+                         (funct-body asmcomp/debug/compute_ranges.ml(117)<ghost>:4254-4348
+                           (before asmcomp/debug/compute_ranges.ml(119):4328-4348
+                             (field 1 t))))
+                     fold =
+                       (function t init f
+                         (funct-body asmcomp/debug/compute_ranges.ml(121)<ghost>:4363-4415
+                           (before asmcomp/debug/compute_ranges.ml(122):4382-4415
+                             (after asmcomp/debug/compute_ranges.ml(122):4382-4415
+                               (apply (field 20 (global Stdlib__list!)) f
+                                 init (field 0 t))))))
+                     no_subranges =
+                       (function t
+                         (funct-body asmcomp/debug/compute_ranges.ml(124)<ghost>:4438-4508
+                           (before asmcomp/debug/compute_ranges.ml(125):4448-4508
+                             (let (*match* = (field 0 t))
+                               (if *match*
+                                 (before asmcomp/debug/compute_ranges.ml(127):4503-4508
+                                   0a)
+                                 (before asmcomp/debug/compute_ranges.ml(126):4485-4489
+                                   1a))))))
+                     rewrite_labels_and_remove_empty_subranges =
+                       (function t env
+                         (funct-body asmcomp/debug/compute_ranges.ml(129)<ghost>:4560-5105
+                           (before asmcomp/debug/compute_ranges.ml(130):4575-5105
+                             (let
+                               (subranges =
+                                  (after asmcomp/debug/compute_ranges.ml(131):4599-4704
+                                    (apply (field 19 (global Stdlib__list!))
+                                      (function subrange
+                                        (funct-body asmcomp/debug/compute_ranges.ml(131):4615-4682
+                                          (before asmcomp/debug/compute_ranges.ml(132):4644-4681
+                                            (after asmcomp/debug/compute_ranges.ml(132):4644-4681
+                                              (apply (field 6 Subrange)
+                                                subrange env)))))
+                                      (field 0 t))))
+                               (before asmcomp/debug/compute_ranges.ml(135):4720-5105
+                                 (if subranges
+                                   (let (subranges =a subranges)
+                                     (before asmcomp/debug/compute_ranges.ml(142):4869-5105
+                                       (let
+                                         (min_pos_and_offset =
+                                            (after asmcomp/debug/compute_ranges.ml(143):4904-5016
+                                              (apply
+                                                (field 6
+                                                  (global Stdlib__option!))
+                                                (function param
+                                                  (funct-body asmcomp/debug/compute_ranges.ml(144):4927-4983
+                                                    (let
+                                                      (offset =a
+                                                         (field 1 param)
+                                                       label =a
+                                                         (field 0 param))
+                                                      (before asmcomp/debug/compute_ranges.ml(144):4951-4982
+                                                        (makeblock 0 (int,int)
+                                                          (after asmcomp/debug/compute_ranges.ml(144):4951-4974
+                                                            (apply
+                                                              rewrite_label
+                                                              env label))
+                                                          offset)))))
+                                                (field 1 t))))
+                                         (before asmcomp/debug/compute_ranges.ml(147):5036-5105
+                                           (let (init = t)
+                                             (makemutable 0 subranges
+                                               min_pos_and_offset
+                                               (field 2 init)))))))
+                                   (before asmcomp/debug/compute_ranges.ml(137):4763-4839
+                                     (let (init = t)
+                                       (makemutable 0 subranges 0a
+                                         (field 2 init)))))))))))
+                    (pseudo asmcomp/debug/compute_ranges.ml(79):2761-5111
+                      (makeblock 0 create info add_subrange
+                        estimate_lowest_address fold no_subranges
+                        rewrite_labels_and_remove_empty_subranges))))
+              KM =a
+                (module-defn(KM) asmcomp/debug/compute_ranges.ml(157):5169-5190
+                  (field 1 (field 1 S)))
+              KS =a
+                (module-defn(KS) asmcomp/debug/compute_ranges.ml(158):5193-5214
+                  (field 0 (field 1 S)))
+              check_invariants = (makemutable 0 1a)
+              actions_at_instruction =
+                (function insn prev_insn
+                  (funct-body asmcomp/debug/compute_ranges.ml(235)<ghost>:8927-11846
+                    (before asmcomp/debug/compute_ranges.ml(237):9001-11846
+                      (let
+                        (available_before =
+                           (after asmcomp/debug/compute_ranges.ml(237):9024-9047
+                             (apply (field 5 S) insn)))
+                        (before asmcomp/debug/compute_ranges.ml(238):9055-11846
+                          (let
+                            (available_across =
+                               (after asmcomp/debug/compute_ranges.ml(238):9078-9101
+                                 (apply (field 6 S) insn)))
+                            (before asmcomp/debug/compute_ranges.ml(239):9109-11846
+                              (let
+                                (opt_available_across_prev_insn =
+                                   (if prev_insn
+                                     (let (prev_insn =a (field 0 prev_insn))
+                                       (before asmcomp/debug/compute_ranges.ml(242):9224-9252
+                                         (after asmcomp/debug/compute_ranges.ml(242):9224-9252
+                                           (apply (field 6 S) prev_insn))))
+                                     (before asmcomp/debug/compute_ranges.ml(241):9189-9197
+                                       (field 0 KS))))
+                                (before asmcomp/debug/compute_ranges.ml(244):9264-11846
+                                  (let
+                                    (case_1b =
+                                       (after asmcomp/debug/compute_ranges.ml(245):9284-9375
+                                         (apply (field 9 KS) available_across
+                                           (after asmcomp/debug/compute_ranges.ml(246):9317-9375
+                                             (apply (field 6 KS)
+                                               opt_available_across_prev_insn
+                                               available_before)))))
+                                    (before asmcomp/debug/compute_ranges.ml(248):9387-11846
+                                      (let
+                                        (case_1c =
+                                           (after asmcomp/debug/compute_ranges.ml(249):9407-9498
+                                             (apply (field 9 KS)
+                                               available_before
+                                               (after asmcomp/debug/compute_ranges.ml(250):9440-9498
+                                                 (apply (field 6 KS)
+                                                   opt_available_across_prev_insn
+                                                   available_across)))))
+                                        (before asmcomp/debug/compute_ranges.ml(252):9510-11846
+                                          (let
+                                            (case_1d =
+                                               (after asmcomp/debug/compute_ranges.ml(253):9530-9621
+                                                 (apply (field 9 KS)
+                                                   (after asmcomp/debug/compute_ranges.ml(253):9538-9582
+                                                     (apply (field 7 KS)
+                                                       available_before
+                                                       available_across))
+                                                   opt_available_across_prev_insn)))
+                                            (before asmcomp/debug/compute_ranges.ml(256):9633-11846
+                                              (let
+                                                (case_2a =
+                                                   (after asmcomp/debug/compute_ranges.ml(257):9653-9744
+                                                     (apply (field 9 KS)
+                                                       opt_available_across_prev_insn
+                                                       (after asmcomp/debug/compute_ranges.ml(258):9700-9744
+                                                         (apply (field 6 KS)
+                                                           available_before
+                                                           available_across)))))
+                                                (before asmcomp/debug/compute_ranges.ml(260):9756-11846
+                                                  (let
+                                                    (case_2b =
+                                                       (after asmcomp/debug/compute_ranges.ml(261):9776-9867
+                                                         (apply (field 7 KS)
+                                                           opt_available_across_prev_insn
+                                                           (after asmcomp/debug/compute_ranges.ml(262):9824-9867
+                                                             (apply
+                                                               (field 9 KS)
+                                                               available_across
+                                                               available_before)))))
+                                                    (before asmcomp/debug/compute_ranges.ml(264):9879-11846
+                                                      (let
+                                                        (case_2c =
+                                                           (after asmcomp/debug/compute_ranges.ml(265):9899-9998
+                                                             (apply
+                                                               (field 9 KS)
+                                                               (after asmcomp/debug/compute_ranges.ml(266):9915-9973
+                                                                 (apply
+                                                                   (field 7
+                                                                    KS)
+                                                                   opt_available_across_prev_insn
+                                                                   available_before))
+                                                               available_across)))
+                                                        (before asmcomp/debug/compute_ranges.ml(269):10010-11846
+                                                          (let
+                                                            (handle =
+                                                               (function case
+                                                                 action
+                                                                 result
+                                                                 (funct-body asmcomp/debug/compute_ranges.ml(269)<ghost>:10021-10811
+                                                                   (before asmcomp/debug/compute_ranges.ml(278):10609-10811
+                                                                    (after asmcomp/debug/compute_ranges.ml(278):10609-10811
+                                                                    (apply
+                                                                    (field 15
+                                                                    KS)
+                                                                    (function
+                                                                    key
+                                                                    result
+                                                                    (funct-body asmcomp/debug/compute_ranges.ml(278):10617-10783
+                                                                    (before asmcomp/debug/compute_ranges.ml(279):10646-10782
+                                                                    (after asmcomp/debug/compute_ranges.ml(279):10646-10782
+                                                                    (apply
+                                                                    (field 20
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    result
+                                                                    key
+                                                                    (funct-body asmcomp/debug/compute_ranges.ml(279):10661-10718
+                                                                    (before asmcomp/debug/compute_ranges.ml(280):10694-10717
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    key
+                                                                    action)
+                                                                    result))))
+                                                                    result
+                                                                    (makeblock 0
+                                                                    key
+                                                                    (after asmcomp/debug/compute_ranges.ml(282):10758-10781
+                                                                    (apply
+                                                                    (field 3
+                                                                    (field 1
+                                                                    S)) key))))))))
+                                                                    case
+                                                                    result))))))
+                                                            (before asmcomp/debug/compute_ranges.ml(286):10823-11846
+                                                              (let
+                                                                (actions =
+                                                                   (after asmcomp/debug/compute_ranges.ml(292):11220-11545
+                                                                    (apply
+                                                                    handle
+                                                                    case_2c
+                                                                    4a
+                                                                    (after asmcomp/debug/compute_ranges.ml(292):11220-11491
+                                                                    (apply
+                                                                    handle
+                                                                    case_2b
+                                                                    3a
+                                                                    (after asmcomp/debug/compute_ranges.ml(292):11220-11452
+                                                                    (apply
+                                                                    handle
+                                                                    case_2b
+                                                                    2a
+                                                                    (after asmcomp/debug/compute_ranges.ml(292):11220-11399
+                                                                    (apply
+                                                                    handle
+                                                                    case_2a
+                                                                    3a
+                                                                    (after asmcomp/debug/compute_ranges.ml(292):11220-11360
+                                                                    (apply
+                                                                    handle
+                                                                    case_1d
+                                                                    1a
+                                                                    (after asmcomp/debug/compute_ranges.ml(292):11220-11322
+                                                                    (apply
+                                                                    handle
+                                                                    case_1c
+                                                                    0a
+                                                                    (after asmcomp/debug/compute_ranges.ml(292):11220-11275
+                                                                    (apply
+                                                                    handle
+                                                                    case_1b
+                                                                    2a 0a)))))))))))))))
+                                                                (before asmcomp/debug/compute_ranges.ml(301):11557-11846
+                                                                  (let
+                                                                    (must_restart =
+                                                                    (if
+                                                                    (&&
+                                                                    (after asmcomp/debug/compute_ranges.ml(302):11585-11625
+                                                                    (apply
+                                                                    (field 7
+                                                                    S) 0a))
+                                                                    (if
+                                                                    actions
+                                                                    (before asmcomp/debug/compute_ranges.ml(305):11705-11709
+                                                                    1a)
+                                                                    (before asmcomp/debug/compute_ranges.ml(304):11677-11682
+                                                                    0a)))
+                                                                    (before asmcomp/debug/compute_ranges.ml(307):11729-11785
+                                                                    (after asmcomp/debug/compute_ranges.ml(307):11729-11785
+                                                                    (apply
+                                                                    (field 7
+                                                                    KS)
+                                                                    opt_available_across_prev_insn
+                                                                    available_before)))
+                                                                    (before asmcomp/debug/compute_ranges.ml(309):11805-11813
+                                                                    (field 0
+                                                                    KS))))
+                                                                    (before asmcomp/debug/compute_ranges.ml(311):11825-11846
+                                                                    (makeblock 0
+                                                                    actions
+                                                                    must_restart)))))))))))))))))))))))))))))
+             (letrec
+               (process_instruction
+                  (function t fundecl first_insn insn prev_insn
+                    currently_open_subranges subrange_state
+                    (funct-body asmcomp/debug/compute_ranges.ml(313)<ghost>:11878-18069
+                      (before asmcomp/debug/compute_ranges.ml(317):12064-18069
+                        (let (used_label = (makemutable 0 0a))
+                          (before asmcomp/debug/compute_ranges.ml(318):12097-18069
+                            (let
+                              (get_label =
+                                 (function param
+                                   (funct-body asmcomp/debug/compute_ranges.ml(318)<ghost>:12111-12685
+                                     (before asmcomp/debug/compute_ranges.ml(319):12122-12685
+                                       (let (*match* = (field 0 used_label))
+                                         (if *match*
+                                           (let
+                                             (label_and_insn =a
+                                                (field 0 *match*))
+                                             (before asmcomp/debug/compute_ranges.ml(320):12176-12190
+                                               label_and_insn))
+                                           (before asmcomp/debug/compute_ranges.ml(324):12350-12685
+                                             (let
+                                               (label =[int]
+                                                  (after asmcomp/debug/compute_ranges.ml(324):12362-12378
+                                                    (apply
+                                                      (field 11
+                                                        (global Cmm!))
+                                                      0a)))
+                                               (before asmcomp/debug/compute_ranges.ml(325):12390-12685
+                                                 (let
+                                                   (label_insn =
+                                                      (makemutable 0
+                                                        (makeblock 1 (int)
+                                                          label)
+                                                        insn
+                                                        (makearray[addr])
+                                                        (makearray[addr])
+                                                        (field 4 insn)
+                                                        (field 5 insn)))
+                                                   (before asmcomp/debug/compute_ranges.ml(334):12620-12685
+                                                     (seq
+                                                       (setfield_ptr 0
+                                                         used_label
+                                                         (makeblock 0
+                                                           (makeblock 0 (int,*)
+                                                             label
+                                                             label_insn)))
+                                                       (before asmcomp/debug/compute_ranges.ml(335):12668-12685
+                                                         (makeblock 0 (int,*)
+                                                           label label_insn))))))))))))))
+                              (before asmcomp/debug/compute_ranges.ml(337):12697-18069
+                                (let
+                                  (open_subrange =
+                                     (function key start_pos_offset
+                                       currently_open_subranges
+                                       (funct-body asmcomp/debug/compute_ranges.ml(337)<ghost>:12715-13045
+                                         (before asmcomp/debug/compute_ranges.ml(340):12926-13045
+                                           (let
+                                             (*match* =
+                                                (after asmcomp/debug/compute_ranges.ml(340):12950-12962
+                                                  (apply get_label 0a))
+                                              label_insn =a (field 1 *match*)
+                                              label =a (field 0 *match*))
+                                             (before asmcomp/debug/compute_ranges.ml(341):12972-13045
+                                               (after asmcomp/debug/compute_ranges.ml(341):12972-13045
+                                                 (apply (field 3 KM) key
+                                                   (makeblock 0 (int,*,*)
+                                                     label start_pos_offset
+                                                     label_insn)
+                                                   currently_open_subranges))))))))
+                                  (before asmcomp/debug/compute_ranges.ml(343):13057-18069
+                                    (let
+                                      (close_subrange =
+                                         (function key end_pos_offset[int]
+                                           currently_open_subranges
+                                           (funct-body asmcomp/debug/compute_ranges.ml(343)<ghost>:13076-14248
+                                             (before asmcomp/debug/compute_ranges.ml(344):13130-14248
+                                               (catch
+                                                 (try
+                                                   (exit 16
+                                                     (after asmcomp/debug/compute_ranges.ml(344):13136-13172
+                                                       (apply (field 26 KM)
+                                                         key
+                                                         currently_open_subranges)))
+                                                  with exn
+                                                   (if
+                                                     (== exn
+                                                       (field 7
+                                                         (global Stdlib!)))
+                                                     (before asmcomp/debug/compute_ranges.ml(346):13217-13293
+                                                       (after asmcomp/debug/compute_ranges.ml(346):13217-13293
+                                                         (apply
+                                                           (field 1
+                                                             (global Misc!))
+                                                           [0:
+                                                            [11:
+                                                             "No subrange is open for key "
+                                                             [15: 0a]]
+                                                            "No subrange is open for key %a"]
+                                                           (field 2
+                                                             (field 1 S))
+                                                           key)))
+                                                     (reraise exn)))
+                                                with (16 val)
+                                                 (let
+                                                   (start_insn =a
+                                                      (field 2 val)
+                                                    start_pos_offset =a
+                                                      (field 1 val)
+                                                    start_pos =a
+                                                      (field 0 val))
+                                                   (before asmcomp/debug/compute_ranges.ml(349):13353-14248
+                                                     (let
+                                                       (currently_open_subranges =
+                                                          (after asmcomp/debug/compute_ranges.ml(349):13384-13422
+                                                            (apply
+                                                              (field 6 KM)
+                                                              key
+                                                              currently_open_subranges)))
+                                                       (before asmcomp/debug/compute_ranges.ml(350):13434-14248
+                                                         (let
+                                                           (*match* =
+                                                              (after asmcomp/debug/compute_ranges.ml(350):13440-13481
+                                                                (apply
+                                                                  (field 0
+                                                                    Range_info)
+                                                                  fundecl key
+                                                                  start_insn)))
+                                                           (if *match*
+                                                             (let
+                                                               (*match* =a
+                                                                  (field 0
+                                                                    *match*)
+                                                                range_info =a
+                                                                  (field 1
+                                                                    *match*)
+                                                                index =a
+                                                                  (field 0
+                                                                    *match*))
+                                                               (before asmcomp/debug/compute_ranges.ml(353):13578-14248
+                                                                 (let
+                                                                   (range =
+                                                                    (catch
+                                                                    (try
+                                                                    (exit 14
+                                                                    (after asmcomp/debug/compute_ranges.ml(354):13608-13639
+                                                                    (apply
+                                                                    (field 6
+                                                                    (field 8
+                                                                    (field 0
+                                                                    S)))
+                                                                    (field 0
+                                                                    t) index)))
+                                                                    with exn
+                                                                    (if
+                                                                    (== exn
+                                                                    (field 7
+                                                                    (global Stdlib!)))
+                                                                    (before asmcomp/debug/compute_ranges.ml(357):13725-13835
+                                                                    (let
+                                                                    (range =
+                                                                    (after asmcomp/debug/compute_ranges.ml(357):13737-13760
+                                                                    (apply
+                                                                    (field 0
+                                                                    Range)
+                                                                    range_info)))
+                                                                    (before asmcomp/debug/compute_ranges.ml(358):13778-13835
+                                                                    (seq
+                                                                    (after asmcomp/debug/compute_ranges.ml(358):13778-13814
+                                                                    (apply
+                                                                    (field 4
+                                                                    (field 8
+                                                                    (field 0
+                                                                    S)))
+                                                                    (field 0
+                                                                    t) index
+                                                                    range))
+                                                                    (before asmcomp/debug/compute_ranges.ml(359):13830-13835
+                                                                    range)))))
+                                                                    (reraise
+                                                                    exn)))
+                                                                    with (14 range)
+                                                                    (before asmcomp/debug/compute_ranges.ml(355):13668-13673
+                                                                    range)))
+                                                                   (before asmcomp/debug/compute_ranges.ml(361):13859-14248
+                                                                    (let
+                                                                    (*match* =
+                                                                    (after asmcomp/debug/compute_ranges.ml(361):13884-13896
+                                                                    (apply
+                                                                    get_label
+                                                                    0a))
+                                                                    label =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/debug/compute_ranges.ml(362):13910-14248
+                                                                    (let
+                                                                    (subrange_info =
+                                                                    (after asmcomp/debug/compute_ranges.ml(362):13930-13969
+                                                                    (apply
+                                                                    (field 0
+                                                                    Subrange_info)
+                                                                    key
+                                                                    subrange_state)))
+                                                                    (before asmcomp/debug/compute_ranges.ml(363):13983-14248
+                                                                    (let
+                                                                    (subrange =
+                                                                    (after asmcomp/debug/compute_ranges.ml(364):14010-14154
+                                                                    (apply
+                                                                    (field 0
+                                                                    Subrange)
+                                                                    start_insn
+                                                                    start_pos
+                                                                    start_pos_offset
+                                                                    label
+                                                                    end_pos_offset
+                                                                    subrange_info)))
+                                                                    (before asmcomp/debug/compute_ranges.ml(369):14178-14248
+                                                                    (seq
+                                                                    (after asmcomp/debug/compute_ranges.ml(369):14178-14212
+                                                                    (apply
+                                                                    (field 2
+                                                                    Range)
+                                                                    range
+                                                                    subrange))
+                                                                    (before asmcomp/debug/compute_ranges.ml(370):14224-14248
+                                                                    currently_open_subranges))))))))))))
+                                                             (before asmcomp/debug/compute_ranges.ml(351):13505-13529
+                                                               currently_open_subranges))))))))))))
+                                      (before asmcomp/debug/compute_ranges.ml(372):14260-18069
+                                        (let
+                                          (*match* =
+                                             (after asmcomp/debug/compute_ranges.ml(372):14288-14327
+                                               (apply actions_at_instruction
+                                                 insn prev_insn))
+                                           must_restart =a (field 1 *match*)
+                                           actions =a (field 0 *match*))
+                                          (before asmcomp/debug/compute_ranges.ml(374):14370-18069
+                                            (let
+                                              (currently_open_subranges =
+                                                 (after asmcomp/debug/compute_ranges.ml(375):14407-14709
+                                                   (apply (field 15 KS)
+                                                     (function key
+                                                       currently_open_subranges
+                                                       (funct-body asmcomp/debug/compute_ranges.ml(375):14415-14655
+                                                         (before asmcomp/debug/compute_ranges.ml(376):14462-14654
+                                                           (let
+                                                             (currently_open_subranges =
+                                                                (after asmcomp/debug/compute_ranges.ml(377):14505-14567
+                                                                  (apply
+                                                                    close_subrange
+                                                                    key 0
+                                                                    currently_open_subranges)))
+                                                             (before asmcomp/debug/compute_ranges.ml(379):14591-14654
+                                                               (after asmcomp/debug/compute_ranges.ml(379):14591-14654
+                                                                 (apply
+                                                                   open_subrange
+                                                                   key 0
+                                                                   currently_open_subranges)))))))
+                                                     must_restart
+                                                     currently_open_subranges)))
+                                              (before asmcomp/debug/compute_ranges.ml(384):14745-18069
+                                                (let
+                                                  (currently_open_subranges =
+                                                     (after asmcomp/debug/compute_ranges.ml(385):14782-15631
+                                                       (apply
+                                                         (field 20
+                                                           (global Stdlib__list!))
+                                                         (function
+                                                           currently_open_subranges
+                                                           param
+                                                           (funct-body asmcomp/debug/compute_ranges.ml(385):14797-15582
+                                                             (let
+                                                               (action =a
+                                                                  (field 1
+                                                                    param)
+                                                                key =a
+                                                                  (field 0
+                                                                    param))
+                                                               (before asmcomp/debug/compute_ranges.ml(386):14865-15581
+                                                                 (switch* action
+                                                                  case int 0:
+                                                                   (before asmcomp/debug/compute_ranges.ml(388):14933-15131
+                                                                    (let
+                                                                    (currently_open_subranges =
+                                                                    (after asmcomp/debug/compute_ranges.ml(389):14978-15041
+                                                                    (apply
+                                                                    open_subrange
+                                                                    key 0
+                                                                    currently_open_subranges)))
+                                                                    (before asmcomp/debug/compute_ranges.ml(391):15069-15131
+                                                                    (after asmcomp/debug/compute_ranges.ml(391):15069-15131
+                                                                    (apply
+                                                                    close_subrange
+                                                                    key 1
+                                                                    currently_open_subranges)))))
+                                                                  case int 1:
+                                                                   (before asmcomp/debug/compute_ranges.ml(393):15173-15236
+                                                                    (after asmcomp/debug/compute_ranges.ml(393):15173-15236
+                                                                    (apply
+                                                                    open_subrange
+                                                                    key 0
+                                                                    currently_open_subranges)))
+                                                                  case int 2:
+                                                                   (before asmcomp/debug/compute_ranges.ml(395):15293-15356
+                                                                    (after asmcomp/debug/compute_ranges.ml(395):15293-15356
+                                                                    (apply
+                                                                    open_subrange
+                                                                    key 1
+                                                                    currently_open_subranges)))
+                                                                  case int 3:
+                                                                   (before asmcomp/debug/compute_ranges.ml(397):15399-15461
+                                                                    (after asmcomp/debug/compute_ranges.ml(397):15399-15461
+                                                                    (apply
+                                                                    close_subrange
+                                                                    key 0
+                                                                    currently_open_subranges)))
+                                                                  case int 4:
+                                                                   (before asmcomp/debug/compute_ranges.ml(399):15519-15581
+                                                                    (after asmcomp/debug/compute_ranges.ml(399):15519-15581
+                                                                    (apply
+                                                                    close_subrange
+                                                                    key 1
+                                                                    currently_open_subranges))))))))
+                                                         currently_open_subranges
+                                                         actions)))
+                                                  (before asmcomp/debug/compute_ranges.ml(404):15696-18069
+                                                    (let
+                                                      (currently_open_subranges =
+                                                         (let
+                                                           (*match* =
+                                                              (field 0 insn))
+                                                           (catch
+                                                             (if
+                                                               (isint
+                                                                 *match*)
+                                                               (if
+                                                                 (!= *match*
+                                                                   1)
+                                                                 (exit 7)
+                                                                 (before asmcomp/debug/compute_ranges.ml(407):15778-16116
+                                                                   (let
+                                                                    (currently_open_subranges =
+                                                                    (after asmcomp/debug/compute_ranges.ml(408):15819-16017
+                                                                    (apply
+                                                                    (field 12
+                                                                    KM)
+                                                                    (function
+                                                                    key param
+                                                                    currently_open_subranges
+                                                                    (funct-body asmcomp/debug/compute_ranges.ml(408):15827-15943
+                                                                    (before asmcomp/debug/compute_ranges.ml(409):15880-15942
+                                                                    (after asmcomp/debug/compute_ranges.ml(409):15880-15942
+                                                                    (apply
+                                                                    close_subrange
+                                                                    key 0
+                                                                    currently_open_subranges)))))
+                                                                    currently_open_subranges
+                                                                    currently_open_subranges)))
+                                                                    (before asmcomp/debug/compute_ranges.ml(413):16037-16116
+                                                                    (seq
+                                                                    (if
+                                                                    (after asmcomp/debug/compute_ranges.ml(413):16044-16082
+                                                                    (apply
+                                                                    (field 1
+                                                                    KM)
+                                                                    currently_open_subranges))
+                                                                    0a
+                                                                    (raise
+                                                                    (after asmcomp/debug/compute_ranges.ml(413):16037-16082
+                                                                    (makeblock 0
+                                                                    (global Assert_failure!)
+                                                                    [0:
+                                                                    "asmcomp/debug/compute_ranges.ml"
+                                                                    413 8]))))
+                                                                    (before asmcomp/debug/compute_ranges.ml(414):16092-16116
+                                                                    currently_open_subranges))))))
+                                                               (exit 7))
+                                                            with (7)
+                                                             (before asmcomp/debug/compute_ranges.ml(415):16130-16154
+                                                               currently_open_subranges))))
+                                                      (before asmcomp/debug/compute_ranges.ml(417):16166-18069
+                                                        (let
+                                                          (first_insn =
+                                                             (let
+                                                               (*match* =
+                                                                  (field 0
+                                                                    used_label))
+                                                               (if *match*
+                                                                 (let
+                                                                   (*match* =a
+                                                                    (field 0
+                                                                    *match*)
+                                                                    label_insn =a
+                                                                    (field 1
+                                                                    *match*))
+                                                                   (before asmcomp/debug/compute_ranges.ml(421):16284-16741
+                                                                    (seq
+                                                                    (if
+                                                                    (==
+                                                                    (field 1
+                                                                    label_insn)
+                                                                    insn) 0a
+                                                                    (raise
+                                                                    (after asmcomp/debug/compute_ranges.ml(421):16284-16318
+                                                                    (makeblock 0
+                                                                    (global Assert_failure!)
+                                                                    [0:
+                                                                    "asmcomp/debug/compute_ranges.ml"
+                                                                    421 8]))))
+                                                                    (before asmcomp/debug/compute_ranges.ml(424):16469-16741
+                                                                    (if
+                                                                    prev_insn
+                                                                    (let
+                                                                    (prev_insn =a
+                                                                    (field 0
+                                                                    prev_insn))
+                                                                    (before asmcomp/debug/compute_ranges.ml(429):16634-16729
+                                                                    (seq
+                                                                    (if
+                                                                    (==
+                                                                    (field 1
+                                                                    prev_insn)
+                                                                    insn) 0a
+                                                                    (raise
+                                                                    (after asmcomp/debug/compute_ranges.ml(429):16634-16667
+                                                                    (makeblock 0
+                                                                    (global Assert_failure!)
+                                                                    [0:
+                                                                    "asmcomp/debug/compute_ranges.ml"
+                                                                    429 10]))))
+                                                                    (before asmcomp/debug/compute_ranges.ml(430):16679-16729
+                                                                    (seq
+                                                                    (setfield_ptr 1
+                                                                    prev_insn
+                                                                    label_insn)
+                                                                    (before asmcomp/debug/compute_ranges.ml(431):16719-16729
+                                                                    first_insn))))))
+                                                                    (before asmcomp/debug/compute_ranges.ml(427):16585-16595
+                                                                    label_insn))))))
+                                                                 (before asmcomp/debug/compute_ranges.ml(419):16228-16238
+                                                                   first_insn))))
+                                                          (before asmcomp/debug/compute_ranges.ml(434):16753-18069
+                                                            (seq
+                                                              (if
+                                                                (field 0
+                                                                  check_invariants)
+                                                                (before asmcomp/debug/compute_ranges.ml(434):16779-17571
+                                                                  (let
+                                                                    (currently_open_subranges =
+                                                                    (after asmcomp/debug/compute_ranges.ml(436):16830-16940
+                                                                    (apply
+                                                                    (field 35
+                                                                    KS)
+                                                                    (after asmcomp/debug/compute_ranges.ml(436):16841-16940
+                                                                    (apply
+                                                                    (field 16
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    param
+                                                                    (funct-body asmcomp/debug/compute_ranges.ml(437):16862-16888
+                                                                    (let
+                                                                    (key =a
+                                                                    (field 0
+                                                                    param))
+                                                                    (before asmcomp/debug/compute_ranges.ml(437):16884-16887
+                                                                    key))))
+                                                                    (after asmcomp/debug/compute_ranges.ml(438):16901-16939
+                                                                    (apply
+                                                                    (field 18
+                                                                    KM)
+                                                                    currently_open_subranges)))))))
+                                                                    (before asmcomp/debug/compute_ranges.ml(440):16956-17563
+                                                                    (let
+                                                                    (should_be_open =
+                                                                    (after asmcomp/debug/compute_ranges.ml(440):16977-17000
+                                                                    (apply
+                                                                    (field 6
+                                                                    S) insn)))
+                                                                    (before asmcomp/debug/compute_ranges.ml(441):17010-17563
+                                                                    (let
+                                                                    (not_open_but_should_be =
+                                                                    (after asmcomp/debug/compute_ranges.ml(442):17047-17094
+                                                                    (apply
+                                                                    (field 9
+                                                                    KS)
+                                                                    should_be_open
+                                                                    currently_open_subranges)))
+                                                                    (before asmcomp/debug/compute_ranges.ml(444):17110-17563
+                                                                    (if
+                                                                    (not
+                                                                    (after asmcomp/debug/compute_ranges.ml(444):17117-17153
+                                                                    (apply
+                                                                    (field 1
+                                                                    KS)
+                                                                    not_open_but_should_be)))
+                                                                    (before asmcomp/debug/compute_ranges.ml(444):17159-17563
+                                                                    (after asmcomp/debug/compute_ranges.ml(444):17159-17563
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Misc!))
+                                                                    [0:
+                                                                    [2:
+                                                                    0a
+                                                                    [11:
+                                                                    ": ranges for "
+                                                                    [15:
+                                                                    [11:
+                                                                    " are not open across the following instruction:\n"
+                                                                    [15:
+                                                                    [11:
+                                                                    "\navailable_across:"
+                                                                    [17:
+                                                                    [0:
+                                                                    "@ " 1 0]
+                                                                    [15:
+                                                                    [11:
+                                                                    "\ncurrently_open_subranges: "
+                                                                    [15: 0a]]]]]]]]]]
+                                                                    "%s: ranges for %a are not open across the following instruction:\n%a\navailable_across:@ %a\ncurrently_open_subranges: %a"]
+                                                                    (field 0
+                                                                    fundecl)
+                                                                    (field 40
+                                                                    KS)
+                                                                    not_open_but_should_be
+                                                                    (field 0
+                                                                    (global Printlinear!))
+                                                                    (let
+                                                                    (init =
+                                                                    insn)
+                                                                    (makemutable 0
+                                                                    (field 0
+                                                                    init)
+                                                                    (field 1
+                                                                    (global Linearize!))
+                                                                    (field 2
+                                                                    init)
+                                                                    (field 3
+                                                                    init)
+                                                                    (field 4
+                                                                    init)
+                                                                    (field 5
+                                                                    init)))
+                                                                    (field 40
+                                                                    KS)
+                                                                    should_be_open
+                                                                    (field 40
+                                                                    KS)
+                                                                    currently_open_subranges)))
+                                                                    0a))))))))
+                                                                0a)
+                                                              (before asmcomp/debug/compute_ranges.ml(455):17577-18069
+                                                                (let
+                                                                  (*match* =
+                                                                    (field 0
+                                                                    insn))
+                                                                  (catch
+                                                                    (if
+                                                                    (isint
+                                                                    *match*)
+                                                                    (if
+                                                                    (!=
+                                                                    *match*
+                                                                    1)
+                                                                    (exit 6)
+                                                                    (before asmcomp/debug/compute_ranges.ml(456):17612-17622
+                                                                    first_insn))
+                                                                    (exit 6))
+                                                                   with (6)
+                                                                    (before asmcomp/debug/compute_ranges.ml(461):17835-18069
+                                                                    (let
+                                                                    (subrange_state =
+                                                                    (after asmcomp/debug/compute_ranges.ml(462):17864-17923
+                                                                    (apply
+                                                                    (field 1
+                                                                    Subrange_state)
+                                                                    subrange_state
+                                                                    insn)))
+                                                                    (before asmcomp/debug/compute_ranges.ml(464):17939-18069
+                                                                    (after asmcomp/debug/compute_ranges.ml(464):17939-18069
+                                                                    (apply
+                                                                    process_instruction
+                                                                    t fundecl
+                                                                    first_insn
+                                                                    (field 1
+                                                                    insn)
+                                                                    (makeblock 0
+                                                                    insn)
+                                                                    currently_open_subranges
+                                                                    subrange_state)))))))))))))))))))))))))))))))
+               (let
+                 (process_instructions =
+                    (function t fundecl first_insn
+                      (funct-body asmcomp/debug/compute_ranges.ml(467)<ghost>:18098-18310
+                        (before asmcomp/debug/compute_ranges.ml(468):18126-18310
+                          (let
+                            (subrange_state =
+                               (after asmcomp/debug/compute_ranges.ml(468):18147-18171
+                                 (apply (field 0 Subrange_state) 0a)))
+                            (before asmcomp/debug/compute_ranges.ml(469):18179-18310
+                              (after asmcomp/debug/compute_ranges.ml(469):18179-18310
+                                (apply process_instruction t fundecl
+                                  first_insn first_insn 0a (field 0 KM)
+                                  subrange_state)))))))
+                  all_indexes =
+                    (function t
+                      (funct-body asmcomp/debug/compute_ranges.ml(472)<ghost>:18330-18403
+                        (before asmcomp/debug/compute_ranges.ml(473):18338-18403
+                          (after asmcomp/debug/compute_ranges.ml(473):18338-18403
+                            (apply (field 41 (field 6 (field 0 S)))
+                              (after asmcomp/debug/compute_ranges.ml(473):18358-18403
+                                (apply (field 16 (global Stdlib__list!))
+                                  (function prim stub (field 0 prim))
+                                  (after asmcomp/debug/compute_ranges.ml(473):18372-18402
+                                    (apply (field 22 (field 8 (field 0 S)))
+                                      (field 0 t))))))))))
+                  empty =
+                    (makeblock 0
+                      (after asmcomp/debug/compute_ranges.ml(476):18434-18454
+                        (apply (field 0 (field 8 (field 0 S))) 1)))
+                  create =
+                    (function fundecl
+                      (funct-body asmcomp/debug/compute_ranges.ml(479)<ghost>:18476-18758
+                        (before asmcomp/debug/compute_ranges.ml(480):18504-18758
+                          (let
+                            (t =
+                               (makeblock 0
+                                 (after asmcomp/debug/compute_ranges.ml(481):18529-18550
+                                   (apply (field 0 (field 8 (field 0 S))) 42))))
+                            (before asmcomp/debug/compute_ranges.ml(484):18571-18758
+                              (let
+                                (first_insn =
+                                   (after asmcomp/debug/compute_ranges.ml(485):18594-18653
+                                     (apply process_instructions t fundecl
+                                       (field 1 fundecl))))
+                                (before asmcomp/debug/compute_ranges.ml(487):18665-18758
+                                  (let
+                                    (fundecl =
+                                       (let (init = fundecl)
+                                         (makeblock 0 (*,*,*,*,*,int)
+                                           (field 0 init) first_insn
+                                           (field 2 init) (field 3 init)
+                                           (field 4 init) (field 5 init))))
+                                    (before asmcomp/debug/compute_ranges.ml(490):18748-18758
+                                      (makeblock 0 t fundecl))))))))))
+                  iter =
+                    (function t f
+                      (funct-body asmcomp/debug/compute_ranges.ml(492)<ghost>:18771-18848
+                        (before asmcomp/debug/compute_ranges.ml(493):18782-18848
+                          (after asmcomp/debug/compute_ranges.ml(493):18782-18848
+                            (apply (field 11 (field 8 (field 0 S)))
+                              (function index range
+                                (funct-body asmcomp/debug/compute_ranges.ml(493):18799-18833
+                                  (before asmcomp/debug/compute_ranges.ml(493):18819-18832
+                                    (after asmcomp/debug/compute_ranges.ml(493):18819-18832
+                                      (apply f index range)))))
+                              (field 0 t))))))
+                  fold =
+                    (function t init f
+                      (funct-body asmcomp/debug/compute_ranges.ml(496)<ghost>:18861-18963
+                        (before asmcomp/debug/compute_ranges.ml(497):18878-18963
+                          (after asmcomp/debug/compute_ranges.ml(497):18878-18963
+                            (apply (field 13 (field 8 (field 0 S)))
+                              (function index range acc
+                                (funct-body asmcomp/debug/compute_ranges.ml(497):18895-18937
+                                  (before asmcomp/debug/compute_ranges.ml(497):18919-18936
+                                    (after asmcomp/debug/compute_ranges.ml(497):18919-18936
+                                      (apply f acc index range)))))
+                              (field 0 t) init)))))
+                  find =
+                    (function t index
+                      (funct-body asmcomp/debug/compute_ranges.ml(501)<ghost>:18976-19017
+                        (before asmcomp/debug/compute_ranges.ml(501):18986-19017
+                          (after asmcomp/debug/compute_ranges.ml(501):18986-19017
+                            (apply (field 6 (field 8 (field 0 S)))
+                              (field 0 t) index)))))
+                  rewrite_labels_and_remove_empty_subranges_and_ranges =
+                    (function t env
+                      (funct-body asmcomp/debug/compute_ranges.ml(503)<ghost>:19078-19416
+                        (before asmcomp/debug/compute_ranges.ml(504):19091-19416
+                          (let
+                            (ranges =
+                               (after asmcomp/debug/compute_ranges.ml(504):19104-19125
+                                 (apply (field 0 (field 8 (field 0 S))) 42)))
+                            (before asmcomp/debug/compute_ranges.ml(505):19133-19416
+                              (seq
+                                (after asmcomp/debug/compute_ranges.ml(505):19133-19395
+                                  (apply (field 11 (field 8 (field 0 S)))
+                                    (function index range
+                                      (funct-body asmcomp/debug/compute_ranges.ml(505):19150-19380
+                                        (before asmcomp/debug/compute_ranges.ml(506):19178-19379
+                                          (let
+                                            (range =
+                                               (after asmcomp/debug/compute_ranges.ml(507):19200-19258
+                                                 (apply (field 6 Range) range
+                                                   env)))
+                                            (before asmcomp/debug/compute_ranges.ml(509):19278-19379
+                                              (if
+                                                (not
+                                                  (after asmcomp/debug/compute_ranges.ml(509):19285-19311
+                                                    (apply (field 5 Range)
+                                                      range)))
+                                                (before asmcomp/debug/compute_ranges.ml(509):19317-19379
+                                                  (after asmcomp/debug/compute_ranges.ml(509):19317-19379
+                                                    (apply
+                                                      (field 4
+                                                        (field 8 (field 0 S)))
+                                                      ranges index range)))
+                                                0a))))))
+                                    (field 0 t)))
+                                (before asmcomp/debug/compute_ranges.ml(513):19401-19416
+                                  (makeblock 0 ranges)))))))))
+                 (pseudo asmcomp/debug/compute_ranges.ml(21):1152-19420
+                   (makeblock 0 Subrange_state Subrange_info Range_info
+                     rewrite_label Subrange Range KM KS check_invariants
+                     actions_at_instruction process_instruction
+                     process_instructions all_indexes empty create iter fold
+                     find
+                     rewrite_labels_and_remove_empty_subranges_and_ranges))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0
+        (function funarg is_a_functor stub
+          (let (let = (apply Make funarg))
+            (makeblock 0
+              (let (let =a (field 4 let))
+                (makeblock 0 (field 5 let) (field 1 let) (field 2 let)
+                  (field 3 let) (field 4 let)))
+              (let (let =a (field 5 let))
+                (makeblock 0 (field 1 let) (field 3 let) (field 4 let)))
+              (field 13 let) (field 14 let) (field 15 let) (field 16 let)
+              (field 17 let) (field 12 let) (field 18 let))))))))

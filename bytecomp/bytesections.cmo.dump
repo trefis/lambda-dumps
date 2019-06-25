@@ -1,0 +1,242 @@
+(setglobal Bytesections!
+  (let
+    (section_table = (makemutable 0 0a)
+     section_beginning = (makemutable 0 (int) 0)
+     init_record =
+       (function outchan
+         (funct-body bytecomp/bytesections.ml(26)<ghost>:1307-1378
+           (before bytecomp/bytesections.ml(27):1319-1378
+             (seq
+               (setfield_imm 0 section_beginning
+                 (after bytecomp/bytesections.ml(27):1340-1355
+                   (apply (field 73 (global Stdlib!)) outchan)))
+               (before bytecomp/bytesections.ml(28):1359-1378
+                 (setfield_ptr 0 section_table 0a))))))
+     record =
+       (function outchan name
+         (funct-body bytecomp/bytesections.ml(30)<ghost>:1391-1534
+           (before bytecomp/bytesections.ml(31):1408-1534
+             (let
+               (pos =[int]
+                  (after bytecomp/bytesections.ml(31):1418-1433
+                    (apply (field 73 (global Stdlib!)) outchan)))
+               (before bytecomp/bytesections.ml(32):1439-1534
+                 (seq
+                   (setfield_ptr 0 section_table
+                     (makeblock 0
+                       (makeblock 0 (*,int) name
+                         (- pos (field 0 section_beginning)))
+                       (field 0 section_table)))
+                   (before bytecomp/bytesections.ml(33):1510-1534
+                     (setfield_imm 0 section_beginning pos))))))))
+     write_toc_and_trailer =
+       (function outchan
+         (funct-body bytecomp/bytesections.ml(35)<ghost>:1562-1834
+           (before bytecomp/bytesections.ml(36):1574-1834
+             (seq
+               (after bytecomp/bytesections.ml(36):1574-1702
+                 (apply (field 14 (global Stdlib__list!))
+                   (function param
+                     (funct-body bytecomp/bytesections.ml(37):1588-1672
+                       (let (len =a (field 1 param) name =a (field 0 param))
+                         (before bytecomp/bytesections.ml(38):1614-1671
+                           (seq
+                             (after bytecomp/bytesections.ml(38):1614-1640
+                               (apply (field 65 (global Stdlib!)) outchan
+                                 name))
+                             (before bytecomp/bytesections.ml(38):1642-1671
+                               (after bytecomp/bytesections.ml(38):1642-1671
+                                 (apply (field 70 (global Stdlib!)) outchan
+                                   len))))))))
+                   (after bytecomp/bytesections.ml(39):1677-1702
+                     (apply (field 8 (global Stdlib__list!))
+                       (field 0 section_table)))))
+               (before bytecomp/bytesections.ml(40):1706-1834
+                 (seq
+                   (after bytecomp/bytesections.ml(40):1706-1760
+                     (apply (field 70 (global Stdlib!)) outchan
+                       (after bytecomp/bytesections.ml(40):1732-1760
+                         (apply (field 0 (global Stdlib__list!))
+                           (field 0 section_table)))))
+                   (before bytecomp/bytesections.ml(41):1764-1834
+                     (seq
+                       (after bytecomp/bytesections.ml(41):1764-1810
+                         (apply (field 65 (global Stdlib!)) outchan
+                           (field 20 (global Config!))))
+                       (before bytecomp/bytesections.ml(42):1814-1833
+                         (setfield_ptr 0 section_table 0a))))))))))
+     Bad_magic_number =
+       (makeblock 248 "Bytesections.Bad_magic_number" (caml_fresh_oo_id 0))
+     read_toc =
+       (function ic
+         (funct-body bytecomp/bytesections.ml(48)<ghost>:1938-2458
+           (before bytecomp/bytesections.ml(49):1945-2458
+             (let
+               (pos_trailer =[int]
+                  (-
+                    (after bytecomp/bytesections.ml(49):1963-1983
+                      (apply (field 91 (global Stdlib!)) ic))
+                    16))
+               (before bytecomp/bytesections.ml(50):1994-2458
+                 (seq
+                   (after bytecomp/bytesections.ml(50):1994-2016
+                     (apply (field 89 (global Stdlib!)) ic pos_trailer))
+                   (before bytecomp/bytesections.ml(51):2020-2458
+                     (let
+                       (num_sections =[int]
+                          (after bytecomp/bytesections.ml(51):2039-2058
+                            (apply (field 87 (global Stdlib!)) ic)))
+                       (before bytecomp/bytesections.ml(52):2064-2458
+                         (let
+                           (header =
+                              (after bytecomp/bytesections.ml(53):2081-2144
+                                (apply (field 85 (global Stdlib!)) ic
+                                  (string.length (field 20 (global Config!))))))
+                           (before bytecomp/bytesections.ml(55):2152-2458
+                             (seq
+                               (if
+                                 (after bytecomp/bytesections.ml(55):2155-2189
+                                   (caml_string_notequal header
+                                     (field 20 (global Config!))))
+                                 (before bytecomp/bytesections.ml(55):2195-2217
+                                   (raise
+                                     (after bytecomp/bytesections.ml(55):2201-2217
+                                       Bad_magic_number)))
+                                 0a)
+                               (before bytecomp/bytesections.ml(56):2221-2458
+                                 (seq
+                                   (after bytecomp/bytesections.ml(56):2221-2264
+                                     (apply (field 89 (global Stdlib!)) ic
+                                       (- pos_trailer (* 8 num_sections))))
+                                   (before bytecomp/bytesections.ml(57):2268-2458
+                                     (seq (setfield_ptr 0 section_table 0a)
+                                       (before bytecomp/bytesections.ml(58):2291-2458
+                                         (for _i 1 to num_sections
+                                           (before bytecomp/bytesections.ml(59):2325-2451
+                                             (let
+                                               (name =
+                                                  (after bytecomp/bytesections.ml(59):2336-2360
+                                                    (apply
+                                                      (field 85
+                                                        (global Stdlib!))
+                                                      ic 4)))
+                                               (before bytecomp/bytesections.ml(60):2368-2451
+                                                 (let
+                                                   (len =[int]
+                                                      (after bytecomp/bytesections.ml(60):2378-2397
+                                                        (apply
+                                                          (field 87
+                                                            (global Stdlib!))
+                                                          ic)))
+                                                   (before bytecomp/bytesections.ml(61):2405-2451
+                                                     (setfield_ptr 0
+                                                       section_table
+                                                       (makeblock 0
+                                                         (makeblock 0 (*,int)
+                                                           name len)
+                                                         (field 0
+                                                           section_table))))))))))))))))))))))))))
+     toc =
+       (function param
+         (funct-body bytecomp/bytesections.ml(66)<ghost>:2512-2540
+           (before bytecomp/bytesections.ml(66):2517-2540
+             (after bytecomp/bytesections.ml(66):2517-2540
+               (apply (field 8 (global Stdlib__list!))
+                 (field 0 section_table))))))
+     seek_section =
+       (function ic name : int
+         (funct-body bytecomp/bytesections.ml(72)<ghost>:2713-3024
+           (before bytecomp/bytesections.ml(73):2725-3024
+             (letrec
+               (seek_sec
+                  (function curr_ofs[int] param : int
+                    (funct-body bytecomp/bytesections.ml(73)<ghost>:2742-2923
+                      (if param
+                        (let
+                          (rem =a (field 1 param)
+                           *match* =a (field 0 param)
+                           len =a (field 1 *match*)
+                           n =a (field 0 *match*))
+                          (before bytecomp/bytesections.ml(76):2817-2923
+                            (if
+                              (after bytecomp/bytesections.ml(76):2820-2828
+                                (caml_string_equal n name))
+                              (before bytecomp/bytesections.ml(77):2840-2882
+                                (seq
+                                  (after bytecomp/bytesections.ml(77):2846-2873
+                                    (apply (field 89 (global Stdlib!)) ic
+                                      (- curr_ofs len)))
+                                  (before bytecomp/bytesections.ml(77):2875-2878
+                                    len)))
+                              (before bytecomp/bytesections.ml(78):2894-2923
+                                (after bytecomp/bytesections.ml(78):2894-2923
+                                  (apply seek_sec (- curr_ofs len) rem))))))
+                        (before bytecomp/bytesections.ml(74):2772-2787
+                          (raise
+                            (after bytecomp/bytesections.ml(74):2778-2787
+                              (field 7 (global Stdlib!)))))))))
+               (before bytecomp/bytesections.ml(79):2929-3024
+                 (after bytecomp/bytesections.ml(79):2929-3024
+                   (apply seek_sec
+                     (-
+                       (-
+                         (after bytecomp/bytesections.ml(79):2939-2959
+                           (apply (field 91 (global Stdlib!)) ic))
+                         16)
+                       (* 8
+                         (after bytecomp/bytesections.ml(79):2971-2997
+                           (apply (field 0 (global Stdlib__list!))
+                             (field 0 section_table)))))
+                     (field 0 section_table))))))))
+     read_section_string =
+       (function ic name
+         (funct-body bytecomp/bytesections.ml(84)<ghost>:3103-3160
+           (before bytecomp/bytesections.ml(85):3115-3160
+             (after bytecomp/bytesections.ml(85):3115-3160
+               (apply (field 85 (global Stdlib!)) ic
+                 (after bytecomp/bytesections.ml(85):3138-3160
+                   (apply seek_section ic name)))))))
+     read_section_struct =
+       (function ic name
+         (funct-body bytecomp/bytesections.ml(89)<ghost>:3246-3305
+           (before bytecomp/bytesections.ml(90):3258-3305
+             (seq
+               (ignore
+                 (after bytecomp/bytesections.ml(90):3265-3287
+                   (apply seek_section ic name)))
+               (before bytecomp/bytesections.ml(91):3291-3305
+                 (after bytecomp/bytesections.ml(91):3291-3305
+                   (apply (field 88 (global Stdlib!)) ic)))))))
+     pos_first_section =
+       (function ic : int
+         (funct-body bytecomp/bytesections.ml(95)<ghost>:3394-3535
+           (before bytecomp/bytesections.ml(96):3401-3535
+             (-
+               (-
+                 (-
+                   (after bytecomp/bytesections.ml(96):3401-3421
+                     (apply (field 91 (global Stdlib!)) ic))
+                   16)
+                 (* 8
+                   (after bytecomp/bytesections.ml(96):3433-3459
+                     (apply (field 0 (global Stdlib__list!))
+                       (field 0 section_table)))))
+               (after bytecomp/bytesections.ml(97):3464-3535
+                 (apply (field 20 (global Stdlib__list!))
+                   (function total[int] param : int
+                     (funct-body bytecomp/bytesections.ml(97):3479-3518
+                       (let (len =a (field 1 param))
+                         (before bytecomp/bytesections.ml(97):3506-3517
+                           (+ total len)))))
+                   0 (field 0 section_table)))))))
+     reset =
+       (function param
+         (funct-body bytecomp/bytesections.ml(99)<ghost>:3547-3599
+           (before bytecomp/bytesections.ml(100):3554-3599
+             (seq (setfield_ptr 0 section_table 0a)
+               (before bytecomp/bytesections.ml(101):3577-3599
+                 (setfield_imm 0 section_beginning 0)))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 init_record record write_toc_and_trailer read_toc
+        Bad_magic_number toc seek_section read_section_string
+        read_section_struct pos_first_section reset))))

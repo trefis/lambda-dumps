@@ -1,0 +1,1078 @@
+(setglobal Schedgen!
+  (let
+    (shared =a
+       [0:
+        #"schedule_fundecl" #"reschedule" #"reload_retaddr_latency"
+        #"reload_retaddr_issue_cycles" #"ready_instruction" #"oper_latency"
+        #"oper_issue_cycles" #"oper_in_basic_block" #"is_store" #"is_load"
+        #"is_checkbound" #"instr_latency" #"instr_issue_cycles"
+        #"instr_is_store" #"instr_is_load" #"instr_is_checkbound"
+        #"instr_in_basic_block" #"destroyed_by_instr" #"add_instruction"]
+     shared =a [0: #"trywith_nesting"]
+     dummy_node =
+       (makemutable 0 (*,int,*,int,int,int,int) (field 1 (global Linearize!))
+         0 0a 0 -1 0 0)
+     code_results =
+       (after asmcomp/schedgen.ml(47):2358-2375
+         (apply (field 0 (global Stdlib__hashtbl!)) 0a 31))
+     code_uses =
+       (after asmcomp/schedgen.ml(48):2432-2449
+         (apply (field 0 (global Stdlib__hashtbl!)) 0a 31))
+     code_stores = (makemutable 0 0a)
+     code_loads = (makemutable 0 0a)
+     code_checkbounds = (makemutable 0 0a)
+     clear_code_dag =
+       (function param
+         (funct-body asmcomp/schedgen.ml(53)<ghost>:2657-2784
+           (before asmcomp/schedgen.ml(54):2664-2784
+             (seq
+               (after asmcomp/schedgen.ml(54):2664-2690
+                 (apply (field 1 (global Stdlib__hashtbl!)) code_results))
+               (before asmcomp/schedgen.ml(55):2694-2784
+                 (seq
+                   (after asmcomp/schedgen.ml(55):2694-2717
+                     (apply (field 1 (global Stdlib__hashtbl!)) code_uses))
+                   (before asmcomp/schedgen.ml(56):2721-2784
+                     (seq (setfield_ptr 0 code_stores 0a)
+                       (before asmcomp/schedgen.ml(57):2742-2784
+                         (seq (setfield_ptr 0 code_loads 0a)
+                           (before asmcomp/schedgen.ml(58):2762-2784
+                             (setfield_ptr 0 code_checkbounds 0a))))))))))))
+     add_edge =
+       (function ancestor son delay[int]
+         (funct-body asmcomp/schedgen.ml(62)<ghost>:2834-2941
+           (before asmcomp/schedgen.ml(63):2857-2941
+             (seq
+               (setfield_ptr 2 ancestor
+                 (makeblock 0 (makeblock 0 (*,int) son delay)
+                   (field 2 ancestor)))
+               (before asmcomp/schedgen.ml(64):2907-2941
+                 (setfield_imm 5 son (+ (field 5 son) 1)))))))
+     add_edge_after =
+       (function son ancestor
+         (funct-body asmcomp/schedgen.ml(66)<ghost>:2962-3000
+           (before asmcomp/schedgen.ml(66):2977-3000
+             (after asmcomp/schedgen.ml(66):2977-3000
+               (apply add_edge ancestor son 0)))))
+     add_RAW_dependencies =
+       (function node arg
+         (funct-body asmcomp/schedgen.ml(71)<ghost>:3160-3301
+           (before asmcomp/schedgen.ml(72):3173-3301
+             (try
+               (let
+                 (ancestor =
+                    (after asmcomp/schedgen.ml(73):3196-3229
+                      (apply (field 5 (global Stdlib__hashtbl!)) code_results
+                        (field 3 arg))))
+                 (before asmcomp/schedgen.ml(74):3237-3274
+                   (after asmcomp/schedgen.ml(74):3237-3274
+                     (apply add_edge ancestor node (field 1 ancestor)))))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before asmcomp/schedgen.ml(76):3299-3301 0a) (reraise exn))))))
+     add_WAR_dependencies =
+       (function node res
+         (funct-body asmcomp/schedgen.ml(81)<ghost>:3453-3563
+           (before asmcomp/schedgen.ml(82):3466-3563
+             (let
+               (ancestors =
+                  (after asmcomp/schedgen.ml(82):3482-3516
+                    (apply (field 7 (global Stdlib__hashtbl!)) code_uses
+                      (field 3 res))))
+               (before asmcomp/schedgen.ml(83):3522-3563
+                 (after asmcomp/schedgen.ml(83):3522-3563
+                   (apply (field 14 (global Stdlib__list!))
+                     (after asmcomp/schedgen.ml(83):3532-3553
+                       (apply add_edge_after node))
+                     ancestors)))))))
+     add_WAW_dependencies =
+       (function node res
+         (funct-body asmcomp/schedgen.ml(88)<ghost>:3732-3860
+           (before asmcomp/schedgen.ml(89):3745-3860
+             (try
+               (let
+                 (ancestor =
+                    (after asmcomp/schedgen.ml(90):3768-3801
+                      (apply (field 5 (global Stdlib__hashtbl!)) code_results
+                        (field 3 res))))
+                 (before asmcomp/schedgen.ml(91):3809-3833
+                   (after asmcomp/schedgen.ml(91):3809-3833
+                     (apply add_edge ancestor node 0))))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before asmcomp/schedgen.ml(93):3858-3860 0a) (reraise exn))))))
+     is_critical =
+       (function critical_outputs results
+         (funct-body asmcomp/schedgen.ml(99)<ghost>:4070-4347
+           (before asmcomp/schedgen.ml(100):4099-4347
+             (try
+               (seq
+                 (for i 0 to (- (array.length[addr] results) 1)
+                   (before asmcomp/schedgen.ml(102):4154-4303
+                     (let
+                       (r =
+                          (field 3
+                            (after asmcomp/schedgen.ml(102):4162-4173
+                              (array.get[addr] results i))))
+                       (before asmcomp/schedgen.ml(103):4187-4303
+                         (for j 0 to
+                           (- (array.length[addr] critical_outputs) 1)
+                           (before asmcomp/schedgen.ml(104):4245-4292
+                             (if
+                               (after asmcomp/schedgen.ml(104):4248-4276
+                                 (caml_equal
+                                   (field 3
+                                     (after asmcomp/schedgen.ml(104):4248-4268
+                                       (array.get[addr] critical_outputs j)))
+                                   r))
+                               (before asmcomp/schedgen.ml(104):4282-4292
+                                 (raise
+                                   (after asmcomp/schedgen.ml(104):4288-4292
+                                     (field 2 (global Stdlib!)))))
+                               0a)))))))
+                 (before asmcomp/schedgen.ml(107):4318-4323 0a))
+              with exn
+               (if (== exn (field 2 (global Stdlib!)))
+                 (before asmcomp/schedgen.ml(109):4343-4347 1a)
+                 (reraise exn)))))))
+    (letrec
+      (longest_path
+         (function critical_outputs node : int
+           (funct-body asmcomp/schedgen.ml(111)<ghost>:4370-4859
+             (before asmcomp/schedgen.ml(112):4396-4859
+               (seq
+                 (if (< (field 4 node) 0)
+                   (before asmcomp/schedgen.ml(112):4420-4844
+                     (let (sons = (field 2 node))
+                       (if sons
+                         (before asmcomp/schedgen.ml(121):4676-4838
+                           (setfield_imm 4 node
+                             (after asmcomp/schedgen.ml(122):4701-4838
+                               (apply (field 20 (global Stdlib__list!))
+                                 (function len[int] param : int
+                                   (funct-body asmcomp/schedgen.ml(123):4728-4819
+                                     (let
+                                       (delay =a (field 1 param)
+                                        son =a (field 0 param))
+                                       (before asmcomp/schedgen.ml(124):4767-4818
+                                         (after asmcomp/schedgen.ml(124):4767-4818
+                                           (apply (field 16 (global Stdlib!))
+                                             len
+                                             (+
+                                               (after asmcomp/schedgen.ml(124):4776-4809
+                                                 (apply longest_path
+                                                   critical_outputs son))
+                                               delay)))))))
+                                 0 sons))))
+                         (before asmcomp/schedgen.ml(115):4471-4653
+                           (setfield_imm 4 node
+                             (if
+                               (||
+                                 (after asmcomp/schedgen.ml(116):4499-4542
+                                   (apply is_critical critical_outputs
+                                     (field 3 (field 0 node))))
+                                 (== (field 0 (field 0 node)) 2a))
+                               (before asmcomp/schedgen.ml(118):4626-4636
+                                 (field 1 node))
+                               (before asmcomp/schedgen.ml(119):4652-4653 0)))))))
+                   0a)
+                 (before asmcomp/schedgen.ml(127):4848-4859 (field 4 node)))))))
+      (letrec
+        (remove_instr
+           (function node param
+             (funct-body asmcomp/schedgen.ml(131)<ghost>:4932-5048
+               (if param
+                 (let (rem =a (field 1 param) instr =a (field 0 param))
+                   (before asmcomp/schedgen.ml(134):4987-5048
+                     (if (== instr node)
+                       (before asmcomp/schedgen.ml(134):5009-5012 rem)
+                       (before asmcomp/schedgen.ml(134):5018-5048
+                         (makeblock 0 instr
+                           (after asmcomp/schedgen.ml(134):5027-5048
+                             (apply remove_instr node rem)))))))
+                 (before asmcomp/schedgen.ml(132):4958-4960 0a)))))
+        (let (some_load = (makeblock 9 6a (field 8 (global Arch!))))
+          (letrec
+            (scheduler_generic
+               (makeblock 0 0a
+                 (function class
+                   (let
+                     (ids =
+                        (apply (field 3 (global CamlinternalOO!)) class
+                          shared shared)
+                      schedule_fundecl =o (field 0 ids)
+                      reschedule =o (field 1 ids)
+                      reload_retaddr_latency =o (field 2 ids)
+                      reload_retaddr_issue_cycles =o (field 3 ids)
+                      ready_instruction =o (field 4 ids)
+                      oper_latency =o (field 5 ids)
+                      oper_issue_cycles =o (field 6 ids)
+                      oper_in_basic_block =o (field 7 ids)
+                      is_store =o (field 8 ids)
+                      is_load =o (field 9 ids)
+                      is_checkbound =o (field 10 ids)
+                      instr_latency =o (field 11 ids)
+                      instr_issue_cycles =o (field 12 ids)
+                      instr_is_store =o (field 13 ids)
+                      instr_is_load =o (field 14 ids)
+                      instr_is_checkbound =o (field 15 ids)
+                      instr_in_basic_block =o (field 16 ids)
+                      destroyed_by_instr =o (field 17 ids)
+                      add_instruction =o (field 18 ids)
+                      trywith_nesting =o (field 19 ids))
+                     (seq
+                       (apply (field 10 (global CamlinternalOO!)) class
+                         (makeblock 0 oper_in_basic_block
+                           (function self-1 param
+                             (funct-body asmcomp/schedgen.ml(150)<ghost>:5478-5682
+                               (catch
+                                 (switch param
+                                  case tag 3:
+                                   (before asmcomp/schedgen.ml(151):5506-5511
+                                     0a)
+                                  case tag 4:
+                                   (before asmcomp/schedgen.ml(152):5531-5536
+                                     0a)
+                                  case tag 5:
+                                   (before asmcomp/schedgen.ml(153):5560-5565
+                                     0a)
+                                  case tag 6:
+                                   (before asmcomp/schedgen.ml(154):5589-5594
+                                     0a)
+                                  case tag 7:
+                                   (before asmcomp/schedgen.ml(155):5613-5618
+                                     0a)
+                                  case tag 8:
+                                   (before asmcomp/schedgen.ml(156):5641-5646
+                                     0a)
+                                  case tag 11:
+                                   (before asmcomp/schedgen.ml(157):5663-5668
+                                     0a)
+                                  default: (exit 19))
+                                with (19)
+                                 (before asmcomp/schedgen.ml(158):5678-5682
+                                   1a))))
+                           instr_in_basic_block
+                           (function self-1 instr try_nesting[int]
+                             (funct-body asmcomp/schedgen.ml(167)<ghost>:6009-6198
+                               (before asmcomp/schedgen.ml(168):6031-6198
+                                 (let (*match* = (field 0 instr))
+                                   (catch
+                                     (switch *match*
+                                      case int 2:
+                                       (before asmcomp/schedgen.ml(172):6179-6183
+                                         1a)
+                                      case tag 0:
+                                       (let (op =a (field 0 *match*))
+                                         (before asmcomp/schedgen.ml(170):6073-6156
+                                           (&&
+                                             (after asmcomp/schedgen.ml(170):6073-6100
+                                               (sendself self-1
+                                                 oper_in_basic_block op))
+                                             (not
+                                               (&& (> try_nesting 0)
+                                                 (after asmcomp/schedgen.ml(171):6134-6155
+                                                   (sendself self-1
+                                                     is_checkbound op)))))))
+                                      default: (exit 18))
+                                    with (18)
+                                     (before asmcomp/schedgen.ml(173):6193-6198
+                                       0a))))))
+                           is_store
+                           (function self-1 param
+                             (funct-body asmcomp/schedgen.ml(179)<ghost>:6402-6453
+                               (catch
+                                 (switch param
+                                  case tag 10:
+                                   (before asmcomp/schedgen.ml(180):6434-6438
+                                     1a)
+                                  default: (exit 17))
+                                with (17)
+                                 (before asmcomp/schedgen.ml(181):6448-6453
+                                   0a))))
+                           is_load
+                           (function self-1 param
+                             (funct-body asmcomp/schedgen.ml(183)<ghost>:6472-6519
+                               (catch
+                                 (switch param
+                                  case tag 9:
+                                   (before asmcomp/schedgen.ml(184):6500-6504
+                                     1a)
+                                  default: (exit 16))
+                                with (16)
+                                 (before asmcomp/schedgen.ml(185):6514-6519
+                                   0a))))
+                           is_checkbound
+                           (function self-1 param
+                             (funct-body asmcomp/schedgen.ml(187)<ghost>:6544-6643
+                               (catch
+                                 (switch param
+                                  case tag 12:
+                                   (let (*match* =a (field 0 param))
+                                     (switch *match*
+                                      case tag 1:
+                                       (before asmcomp/schedgen.ml(188):6583-6587
+                                         1a)
+                                      default: (exit 15)))
+                                  case tag 13:
+                                   (let (*match* =a (field 0 param))
+                                     (switch *match*
+                                      case tag 1:
+                                       (before asmcomp/schedgen.ml(189):6624-6628
+                                         1a)
+                                      default: (exit 15)))
+                                  default: (exit 15))
+                                with (15)
+                                 (before asmcomp/schedgen.ml(190):6638-6643
+                                   0a))))
+                           instr_is_store
+                           (function self-1 instr
+                             (funct-body asmcomp/schedgen.ml(192)<ghost>:6675-6752
+                               (before asmcomp/schedgen.ml(193):6685-6752
+                                 (let (*match* = (field 0 instr))
+                                   (catch
+                                     (switch *match*
+                                      case tag 0:
+                                       (let (op =a (field 0 *match*))
+                                         (before asmcomp/schedgen.ml(194):6721-6737
+                                           (after asmcomp/schedgen.ml(194):6721-6737
+                                             (sendself self-1 is_store op))))
+                                      default: (exit 14))
+                                    with (14)
+                                     (before asmcomp/schedgen.ml(195):6747-6752
+                                       0a))))))
+                           instr_is_load
+                           (function self-1 instr
+                             (funct-body asmcomp/schedgen.ml(197)<ghost>:6783-6859
+                               (before asmcomp/schedgen.ml(198):6793-6859
+                                 (let (*match* = (field 0 instr))
+                                   (catch
+                                     (switch *match*
+                                      case tag 0:
+                                       (let (op =a (field 0 *match*))
+                                         (before asmcomp/schedgen.ml(199):6829-6844
+                                           (after asmcomp/schedgen.ml(199):6829-6844
+                                             (sendself self-1 is_load op))))
+                                      default: (exit 13))
+                                    with (13)
+                                     (before asmcomp/schedgen.ml(200):6854-6859
+                                       0a))))))
+                           instr_is_checkbound
+                           (function self-1 instr
+                             (funct-body asmcomp/schedgen.ml(202)<ghost>:6896-6978
+                               (before asmcomp/schedgen.ml(203):6906-6978
+                                 (let (*match* = (field 0 instr))
+                                   (catch
+                                     (switch *match*
+                                      case tag 0:
+                                       (let (op =a (field 0 *match*))
+                                         (before asmcomp/schedgen.ml(204):6942-6963
+                                           (after asmcomp/schedgen.ml(204):6942-6963
+                                             (sendself self-1 is_checkbound
+                                               op))))
+                                      default: (exit 12))
+                                    with (12)
+                                     (before asmcomp/schedgen.ml(205):6973-6978
+                                       0a))))))
+                           reload_retaddr_latency
+                           (function self-1
+                             (funct-body asmcomp/schedgen.ml(213)<ghost>:7169-7196
+                               (before asmcomp/schedgen.ml(213):7169-7196
+                                 (after asmcomp/schedgen.ml(213):7169-7196
+                                   (sendself self-1 oper_latency some_load)))))
+                           instr_latency
+                           (function self-1 instr
+                             (funct-body asmcomp/schedgen.ml(217)<ghost>:7287-7425
+                               (before asmcomp/schedgen.ml(218):7297-7425
+                                 (let (*match* = (field 0 instr))
+                                   (catch
+                                     (switch *match*
+                                      case int 2:
+                                       (before asmcomp/schedgen.ml(220):7376-7403
+                                         (after asmcomp/schedgen.ml(220):7376-7403
+                                           (sendself self-1
+                                             reload_retaddr_latency)))
+                                      case tag 0:
+                                       (let (op =a (field 0 *match*))
+                                         (before asmcomp/schedgen.ml(219):7333-7353
+                                           (after asmcomp/schedgen.ml(219):7333-7353
+                                             (sendself self-1 oper_latency
+                                               op))))
+                                      default: (exit 11))
+                                    with (11)
+                                     (before asmcomp/schedgen.ml(221):7413-7425
+                                       (raise
+                                         (after asmcomp/schedgen.ml(221):7413-7425
+                                           (makeblock 0
+                                             (global Assert_failure!)
+                                             [0: "asmcomp/schedgen.ml" 221 9])))))))))
+                           reload_retaddr_issue_cycles
+                           (function self-1
+                             (funct-body asmcomp/schedgen.ml(229)<ghost>:7670-7702
+                               (before asmcomp/schedgen.ml(229):7670-7702
+                                 (after asmcomp/schedgen.ml(229):7670-7702
+                                   (sendself self-1 oper_issue_cycles
+                                     some_load)))))
+                           instr_issue_cycles
+                           (function self-1 instr
+                             (funct-body asmcomp/schedgen.ml(233)<ghost>:7812-7960
+                               (before asmcomp/schedgen.ml(234):7822-7960
+                                 (let (*match* = (field 0 instr))
+                                   (catch
+                                     (switch *match*
+                                      case int 2:
+                                       (before asmcomp/schedgen.ml(236):7906-7938
+                                         (after asmcomp/schedgen.ml(236):7906-7938
+                                           (sendself self-1
+                                             reload_retaddr_issue_cycles)))
+                                      case tag 0:
+                                       (let (op =a (field 0 *match*))
+                                         (before asmcomp/schedgen.ml(235):7858-7883
+                                           (after asmcomp/schedgen.ml(235):7858-7883
+                                             (sendself self-1
+                                               oper_issue_cycles op))))
+                                      default: (exit 10))
+                                    with (10)
+                                     (before asmcomp/schedgen.ml(237):7948-7960
+                                       (raise
+                                         (after asmcomp/schedgen.ml(237):7948-7960
+                                           (makeblock 0
+                                             (global Assert_failure!)
+                                             [0: "asmcomp/schedgen.ml" 237 9])))))))))
+                           destroyed_by_instr
+                           (function self-1 instr
+                             (funct-body asmcomp/schedgen.ml(241)<ghost>:8047-8173
+                               (before asmcomp/schedgen.ml(242):8057-8173
+                                 (let (*match* = (field 0 instr))
+                                   (catch
+                                     (switch *match*
+                                      case int 2:
+                                       (before asmcomp/schedgen.ml(244):8147-8151
+                                         (makearray[addr]))
+                                      case tag 0:
+                                       (let (op =a (field 0 *match*))
+                                         (before asmcomp/schedgen.ml(243):8093-8124
+                                           (after asmcomp/schedgen.ml(243):8093-8124
+                                             (apply (field 18 (global Proc!))
+                                               (makeblock 0 op)))))
+                                      default: (exit 9))
+                                    with (9)
+                                     (before asmcomp/schedgen.ml(245):8161-8173
+                                       (raise
+                                         (after asmcomp/schedgen.ml(245):8161-8173
+                                           (makeblock 0
+                                             (global Assert_failure!)
+                                             [0: "asmcomp/schedgen.ml" 245 9])))))))))
+                           add_instruction
+                           (function self-1 ready_queue instr
+                             (funct-body asmcomp/schedgen.ml(249)<ghost>:8248-10847
+                               (before asmcomp/schedgen.ml(250):8270-10847
+                                 (let
+                                   (delay =[int]
+                                      (after asmcomp/schedgen.ml(250):8282-8306
+                                        (sendself self-1 instr_latency instr)))
+                                   (before asmcomp/schedgen.ml(251):8312-10847
+                                     (let
+                                       (destroyed =
+                                          (after asmcomp/schedgen.ml(251):8328-8357
+                                            (sendself self-1
+                                              destroyed_by_instr instr)))
+                                       (before asmcomp/schedgen.ml(252):8363-10847
+                                         (let
+                                           (node =
+                                              (makemutable 0 (*,int,*,int,int,int,int)
+                                                instr delay 0a 0 -1 0 0))
+                                           (before asmcomp/schedgen.ml(262):8626-10847
+                                             (seq
+                                               (after asmcomp/schedgen.ml(262):8626-8674
+                                                 (apply
+                                                   (field 12
+                                                     (global Stdlib__array!))
+                                                   (after asmcomp/schedgen.ml(262):8637-8664
+                                                     (apply
+                                                       add_RAW_dependencies
+                                                       node))
+                                                   (field 2 instr)))
+                                               (before asmcomp/schedgen.ml(266):8845-10847
+                                                 (seq
+                                                   (after asmcomp/schedgen.ml(266):8845-8893
+                                                     (apply
+                                                       (field 12
+                                                         (global Stdlib__array!))
+                                                       (after asmcomp/schedgen.ml(266):8856-8883
+                                                         (apply
+                                                           add_WAR_dependencies
+                                                           node))
+                                                       (field 3 instr)))
+                                                   (before asmcomp/schedgen.ml(267):8897-10847
+                                                     (seq
+                                                       (after asmcomp/schedgen.ml(267):8897-8945
+                                                         (apply
+                                                           (field 12
+                                                             (global Stdlib__array!))
+                                                           (after asmcomp/schedgen.ml(267):8908-8935
+                                                             (apply
+                                                               add_WAR_dependencies
+                                                               node))
+                                                           destroyed))
+                                                       (before asmcomp/schedgen.ml(271):9145-10847
+                                                         (seq
+                                                           (after asmcomp/schedgen.ml(271):9145-9193
+                                                             (apply
+                                                               (field 12
+                                                                 (global Stdlib__array!))
+                                                               (after asmcomp/schedgen.ml(271):9156-9183
+                                                                 (apply
+                                                                   add_WAW_dependencies
+                                                                   node))
+                                                               (field 3
+                                                                 instr)))
+                                                           (before asmcomp/schedgen.ml(272):9197-10847
+                                                             (seq
+                                                               (after asmcomp/schedgen.ml(272):9197-9245
+                                                                 (apply
+                                                                   (field 12
+                                                                    (global Stdlib__array!))
+                                                                   (after asmcomp/schedgen.ml(272):9208-9235
+                                                                    (apply
+                                                                    add_WAW_dependencies
+                                                                    node))
+                                                                   destroyed))
+                                                               (before asmcomp/schedgen.ml(276):9461-10847
+                                                                 (seq
+                                                                   (if
+                                                                    (after asmcomp/schedgen.ml(276):9464-9488
+                                                                    (sendself
+                                                                    self-1
+                                                                    instr_is_load
+                                                                    instr))
+                                                                    (before asmcomp/schedgen.ml(276):9494-9676
+                                                                    (seq
+                                                                    (after asmcomp/schedgen.ml(277):9504-9548
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    (after asmcomp/schedgen.ml(277):9514-9535
+                                                                    (apply
+                                                                    add_edge_after
+                                                                    node))
+                                                                    (field 0
+                                                                    code_stores)))
+                                                                    (before asmcomp/schedgen.ml(278):9554-9670
+                                                                    (seq
+                                                                    (setfield_ptr 0
+                                                                    code_loads
+                                                                    (makeblock 0
+                                                                    node
+                                                                    (field 0
+                                                                    code_loads)))
+                                                                    (before asmcomp/schedgen.ml(279):9593-9670
+                                                                    (seq
+                                                                    (after asmcomp/schedgen.ml(279):9593-9642
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    (after asmcomp/schedgen.ml(279):9603-9624
+                                                                    (apply
+                                                                    add_edge_after
+                                                                    node))
+                                                                    (field 0
+                                                                    code_checkbounds)))
+                                                                    (before asmcomp/schedgen.ml(280):9648-9670
+                                                                    (setfield_ptr 0
+                                                                    code_checkbounds
+                                                                    0a))))))))
+                                                                    (before asmcomp/schedgen.ml(286):9917-10281
+                                                                    (if
+                                                                    (after asmcomp/schedgen.ml(286):9920-9945
+                                                                    (sendself
+                                                                    self-1
+                                                                    instr_is_store
+                                                                    instr))
+                                                                    (before asmcomp/schedgen.ml(286):9951-10192
+                                                                    (seq
+                                                                    (after asmcomp/schedgen.ml(287):9961-10005
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    (after asmcomp/schedgen.ml(287):9971-9992
+                                                                    (apply
+                                                                    add_edge_after
+                                                                    node))
+                                                                    (field 0
+                                                                    code_stores)))
+                                                                    (before asmcomp/schedgen.ml(288):10011-10186
+                                                                    (seq
+                                                                    (after asmcomp/schedgen.ml(288):10011-10054
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    (after asmcomp/schedgen.ml(288):10021-10042
+                                                                    (apply
+                                                                    add_edge_after
+                                                                    node))
+                                                                    (field 0
+                                                                    code_loads)))
+                                                                    (before asmcomp/schedgen.ml(289):10060-10186
+                                                                    (seq
+                                                                    (after asmcomp/schedgen.ml(289):10060-10109
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    (after asmcomp/schedgen.ml(289):10070-10091
+                                                                    (apply
+                                                                    add_edge_after
+                                                                    node))
+                                                                    (field 0
+                                                                    code_checkbounds)))
+                                                                    (before asmcomp/schedgen.ml(290):10115-10186
+                                                                    (seq
+                                                                    (setfield_ptr 0
+                                                                    code_stores
+                                                                    (makeblock 0
+                                                                    node 0a))
+                                                                    (before asmcomp/schedgen.ml(291):10142-10186
+                                                                    (seq
+                                                                    (setfield_ptr 0
+                                                                    code_loads
+                                                                    0a)
+                                                                    (before asmcomp/schedgen.ml(292):10164-10186
+                                                                    (setfield_ptr 0
+                                                                    code_checkbounds
+                                                                    0a))))))))))))
+                                                                    (before asmcomp/schedgen.ml(294):10200-10281
+                                                                    (if
+                                                                    (after asmcomp/schedgen.ml(294):10203-10233
+                                                                    (sendself
+                                                                    self-1
+                                                                    instr_is_checkbound
+                                                                    instr))
+                                                                    (before asmcomp/schedgen.ml(294):10239-10281
+                                                                    (setfield_ptr 0
+                                                                    code_checkbounds
+                                                                    (makeblock 0
+                                                                    node 0a)))
+                                                                    0a)))))
+                                                                   (before asmcomp/schedgen.ml(298):10354-10847
+                                                                    (seq
+                                                                    (for i 0
+                                                                    to
+                                                                    (-
+                                                                    (array.length[addr]
+                                                                    (field 3
+                                                                    instr))
+                                                                    1)
+                                                                    (before asmcomp/schedgen.ml(299):10401-10448
+                                                                    (after asmcomp/schedgen.ml(299):10401-10448
+                                                                    (apply
+                                                                    (field 4
+                                                                    (global Stdlib__hashtbl!))
+                                                                    code_results
+                                                                    (field 3
+                                                                    (after asmcomp/schedgen.ml(299):10426-10439
+                                                                    (array.get[addr]
+                                                                    (field 3
+                                                                    instr) i)))
+                                                                    node))))
+                                                                    (before asmcomp/schedgen.ml(301):10459-10847
+                                                                    (seq
+                                                                    (for i 0
+                                                                    to
+                                                                    (-
+                                                                    (array.length[addr]
+                                                                    destroyed)
+                                                                    1)
+                                                                    (before asmcomp/schedgen.ml(302):10506-10553
+                                                                    (after asmcomp/schedgen.ml(302):10506-10553
+                                                                    (apply
+                                                                    (field 4
+                                                                    (global Stdlib__hashtbl!))
+                                                                    code_results
+                                                                    (field 3
+                                                                    (after asmcomp/schedgen.ml(302):10531-10544
+                                                                    (array.get[addr]
+                                                                    destroyed
+                                                                    i)))
+                                                                    node))))
+                                                                    (before asmcomp/schedgen.ml(304):10579-10847
+                                                                    (seq
+                                                                    (for i 0
+                                                                    to
+                                                                    (-
+                                                                    (array.length[addr]
+                                                                    (field 2
+                                                                    instr))
+                                                                    1)
+                                                                    (before asmcomp/schedgen.ml(305):10626-10670
+                                                                    (after asmcomp/schedgen.ml(305):10626-10670
+                                                                    (apply
+                                                                    (field 4
+                                                                    (global Stdlib__hashtbl!))
+                                                                    code_uses
+                                                                    (field 3
+                                                                    (after asmcomp/schedgen.ml(305):10648-10661
+                                                                    (array.get[addr]
+                                                                    (field 2
+                                                                    instr) i)))
+                                                                    node))))
+                                                                    (before asmcomp/schedgen.ml(309):10784-10847
+                                                                    (if
+                                                                    (==
+                                                                    (field 5
+                                                                    node) 0)
+                                                                    (before asmcomp/schedgen.ml(309):10811-10830
+                                                                    (makeblock 0
+                                                                    node
+                                                                    ready_queue))
+                                                                    (before asmcomp/schedgen.ml(309):10836-10847
+                                                                    ready_queue)))))))))))))))))))))))))))))
+                           ready_instruction
+                           (function self-1 date[int] queue
+                             (funct-body asmcomp/schedgen.ml(317)<ghost>:11204-11503
+                               (before asmcomp/schedgen.ml(318):11219-11503
+                                 (letrec
+                                   (extract
+                                      (function best param
+                                        (funct-body asmcomp/schedgen.ml(318)<ghost>:11235-11473
+                                          (if param
+                                            (let
+                                              (rem =a (field 1 param)
+                                               instr =a (field 0 param))
+                                              (before asmcomp/schedgen.ml(322):11340-11473
+                                                (let
+                                                  (new_best =
+                                                     (if
+                                                       (&&
+                                                         (<= (field 3 instr)
+                                                           date)
+                                                         (> (field 4 instr)
+                                                           (field 4 best)))
+                                                       (before asmcomp/schedgen.ml(324):11428-11433
+                                                         instr)
+                                                       (before asmcomp/schedgen.ml(324):11439-11443
+                                                         best)))
+                                                  (before asmcomp/schedgen.ml(325):11453-11473
+                                                    (after asmcomp/schedgen.ml(325):11453-11473
+                                                      (apply extract new_best
+                                                        rem))))))
+                                            (before asmcomp/schedgen.ml(320):11267-11313
+                                              (if (== best dummy_node)
+                                                (before asmcomp/schedgen.ml(320):11294-11298
+                                                  0a)
+                                                (before asmcomp/schedgen.ml(320):11304-11313
+                                                  (makeblock 0 best))))))))
+                                   (before asmcomp/schedgen.ml(326):11479-11503
+                                     (after asmcomp/schedgen.ml(326):11479-11503
+                                       (apply extract dummy_node queue)))))))
+                           reschedule
+                           (function self-1 ready_queue date[int] cont
+                             (funct-body asmcomp/schedgen.ml(331)<ghost>:11632-12660
+                               (before asmcomp/schedgen.ml(332):11658-12660
+                                 (if (== ready_queue 0a)
+                                   (before asmcomp/schedgen.ml(332):11683-11687
+                                     cont)
+                                   (before asmcomp/schedgen.ml(332):11693-12660
+                                     (let
+                                       (*match* =
+                                          (after asmcomp/schedgen.ml(333):11709-11748
+                                            (sendself self-1
+                                              ready_instruction date
+                                              ready_queue)))
+                                       (if *match*
+                                         (let (node =a (field 0 *match*))
+                                           (before asmcomp/schedgen.ml(338):11884-12654
+                                             (let
+                                               (new_queue =
+                                                  (makemutable 0
+                                                    (after asmcomp/schedgen.ml(338):11904-11935
+                                                      (apply remove_instr
+                                                        node ready_queue))))
+                                               (before asmcomp/schedgen.ml(342):12114-12654
+                                                 (let
+                                                   (issue_cycles =[int]
+                                                      (after asmcomp/schedgen.ml(342):12133-12167
+                                                        (sendself self-1
+                                                          instr_issue_cycles
+                                                          (field 0 node))))
+                                                   (before asmcomp/schedgen.ml(343):12179-12654
+                                                     (seq
+                                                       (after asmcomp/schedgen.ml(343):12179-12552
+                                                         (apply
+                                                           (field 14
+                                                             (global Stdlib__list!))
+                                                           (function param
+                                                             (funct-body asmcomp/schedgen.ml(344):12199-12532
+                                                               (let
+                                                                 (delay =a
+                                                                    (field 1
+                                                                    param)
+                                                                  son =a
+                                                                    (field 0
+                                                                    param))
+                                                                 (before asmcomp/schedgen.ml(345):12232-12531
+                                                                   (let
+                                                                    (completion_date =[int]
+                                                                    (-
+                                                                    (+
+                                                                    (+ date
+                                                                    issue_cycles)
+                                                                    delay) 1))
+                                                                    (before asmcomp/schedgen.ml(346):12301-12531
+                                                                    (seq
+                                                                    (if
+                                                                    (<
+                                                                    (field 3
+                                                                    son)
+                                                                    completion_date)
+                                                                    (before asmcomp/schedgen.ml(346):12336-12363
+                                                                    (setfield_imm 3
+                                                                    son
+                                                                    completion_date))
+                                                                    0a)
+                                                                    (before asmcomp/schedgen.ml(347):12377-12531
+                                                                    (seq
+                                                                    (setfield_imm 6
+                                                                    son
+                                                                    (+
+                                                                    (field 6
+                                                                    son) 1))
+                                                                    (before asmcomp/schedgen.ml(348):12441-12531
+                                                                    (if
+                                                                    (==
+                                                                    (field 6
+                                                                    son)
+                                                                    (field 5
+                                                                    son))
+                                                                    (before asmcomp/schedgen.ml(349):12501-12531
+                                                                    (setfield_ptr 0
+                                                                    new_queue
+                                                                    (makeblock 0
+                                                                    son
+                                                                    (field 0
+                                                                    new_queue))))
+                                                                    0a)))))))))))
+                                                           (field 2 node)))
+                                                       (before asmcomp/schedgen.ml(351):12562-12654
+                                                         (let
+                                                           (init =
+                                                              (field 0 node))
+                                                           (makemutable 0
+                                                             (field 0 init)
+                                                             (after asmcomp/schedgen.ml(352):12599-12652
+                                                               (sendself
+                                                                 self-1
+                                                                 reschedule
+                                                                 (field 0
+                                                                   new_queue)
+                                                                 (+ date
+                                                                   issue_cycles)
+                                                                 cont))
+                                                             (field 2 init)
+                                                             (field 3 init)
+                                                             (field 4 init)
+                                                             (field 5 init)))))))))))
+                                         (before asmcomp/schedgen.ml(335):11776-11819
+                                           (after asmcomp/schedgen.ml(335):11776-11819
+                                             (sendself self-1 reschedule
+                                               ready_queue (+ date 1) cont))))))))))
+                           schedule_fundecl
+                           (function self-1 f
+                             (funct-body asmcomp/schedgen.ml(358)<ghost>:12774-14192
+                               (before asmcomp/schedgen.ml(360):12781-14192
+                                 (letrec
+                                   (schedule
+                                      (function i try_nesting[int]
+                                        (funct-body asmcomp/schedgen.ml(360)<ghost>:12798-13235
+                                          (before asmcomp/schedgen.ml(361):12818-13235
+                                            (let (*match* = (field 0 i))
+                                              (catch
+                                                (switch *match*
+                                                 case int 1:
+                                                  (before asmcomp/schedgen.ml(362):12850-12851
+                                                    i)
+                                                 case int 5:
+                                                  (before asmcomp/schedgen.ml(365):12968-13019
+                                                    (let (init = i)
+                                                      (makemutable 0
+                                                        (field 0 init)
+                                                        (after asmcomp/schedgen.ml(365):12984-13017
+                                                          (apply schedule
+                                                            (field 1 i)
+                                                            (- try_nesting 1)))
+                                                        (field 2 init)
+                                                        (field 3 init)
+                                                        (field 4 init)
+                                                        (field 5 init))))
+                                                 case tag 7:
+                                                  (before asmcomp/schedgen.ml(364):12898-12949
+                                                    (let (init = i)
+                                                      (makemutable 0
+                                                        (field 0 init)
+                                                        (after asmcomp/schedgen.ml(364):12914-12947
+                                                          (apply schedule
+                                                            (field 1 i)
+                                                            (+ try_nesting 1)))
+                                                        (field 2 init)
+                                                        (field 3 init)
+                                                        (field 4 init)
+                                                        (field 5 init))))
+                                                 default: (exit 5))
+                                               with (5)
+                                                (before asmcomp/schedgen.ml(367):13039-13235
+                                                  (if
+                                                    (after asmcomp/schedgen.ml(367):13042-13081
+                                                      (sendself self-1
+                                                        instr_in_basic_block
+                                                        i try_nesting))
+                                                    (before asmcomp/schedgen.ml(367):13087-13174
+                                                      (seq
+                                                        (after asmcomp/schedgen.ml(368):13103-13119
+                                                          (apply
+                                                            clear_code_dag
+                                                            0a))
+                                                        (before asmcomp/schedgen.ml(369):13131-13162
+                                                          (after asmcomp/schedgen.ml(369):13131-13162
+                                                            (apply
+                                                              schedule_block
+                                                              0a i
+                                                              try_nesting)))))
+                                                    (before asmcomp/schedgen.ml(371):13190-13235
+                                                      (let (init = i)
+                                                        (makemutable 0
+                                                          (field 0 init)
+                                                          (after asmcomp/schedgen.ml(371):13206-13233
+                                                            (apply schedule
+                                                              (field 1 i)
+                                                              try_nesting))
+                                                          (field 2 init)
+                                                          (field 3 init)
+                                                          (field 4 init)
+                                                          (field 5 init)))))))))))
+                                     schedule_block
+                                       (function ready_queue i
+                                         try_nesting[int]
+                                         (funct-body asmcomp/schedgen.ml(373)<ghost>:13258-13814
+                                           (before asmcomp/schedgen.ml(374):13290-13814
+                                             (if
+                                               (after asmcomp/schedgen.ml(374):13293-13332
+                                                 (sendself self-1
+                                                   instr_in_basic_block i
+                                                   try_nesting))
+                                               (before asmcomp/schedgen.ml(375):13344-13414
+                                                 (after asmcomp/schedgen.ml(375):13344-13414
+                                                   (apply schedule_block
+                                                     (after asmcomp/schedgen.ml(375):13359-13395
+                                                       (sendself self-1
+                                                         add_instruction
+                                                         ready_queue i))
+                                                     (field 1 i) try_nesting)))
+                                               (before asmcomp/schedgen.ml(376):13424-13814
+                                                 (let
+                                                   (critical_outputs =
+                                                      (let
+                                                        (*match* =
+                                                           (field 0 i))
+                                                        (catch
+                                                          (switch *match*
+                                                           case int 3:
+                                                            (before asmcomp/schedgen.ml(381):13636-13640
+                                                              (makearray[addr]))
+                                                           case tag 0:
+                                                            (let
+                                                              (*match* =a
+                                                                 (field 0
+                                                                   *match*))
+                                                              (catch
+                                                                (catch
+                                                                  (switch *match*
+                                                                   case tag 3:
+                                                                    (exit 7)
+                                                                   case tag 4:
+                                                                    (exit 8)
+                                                                   case tag 5:
+                                                                    (exit 7)
+                                                                   case tag 6:
+                                                                    (exit 8)
+                                                                   case tag 7:
+                                                                    (exit 8)
+                                                                   default:
+                                                                    (exit 6))
+                                                                 with (7)
+                                                                  (before asmcomp/schedgen.ml(379):13533-13548
+                                                                    (makearray[addr]
+                                                                    (after asmcomp/schedgen.ml(379):13536-13545
+                                                                    (array.get[addr]
+                                                                    (field 2
+                                                                    i) 0)))))
+                                                               with (8)
+                                                                (before asmcomp/schedgen.ml(380):13610-13614
+                                                                  (makearray[addr]))))
+                                                           default: (exit 6))
+                                                         with (6)
+                                                          (before asmcomp/schedgen.ml(382):13656-13661
+                                                            (field 2 i)))))
+                                                   (before asmcomp/schedgen.ml(383):13671-13806
+                                                     (seq
+                                                       (after asmcomp/schedgen.ml(383):13671-13744
+                                                         (apply
+                                                           (field 14
+                                                             (global Stdlib__list!))
+                                                           (function x
+                                                             (funct-body asmcomp/schedgen.ml(383):13681-13732
+                                                               (before asmcomp/schedgen.ml(383):13691-13731
+                                                                 (ignore
+                                                                   (after asmcomp/schedgen.ml(383):13698-13731
+                                                                    (apply
+                                                                    longest_path
+                                                                    critical_outputs
+                                                                    x))))))
+                                                           ready_queue))
+                                                       (before asmcomp/schedgen.ml(384):13752-13806
+                                                         (after asmcomp/schedgen.ml(384):13752-13806
+                                                           (sendself self-1
+                                                             reschedule
+                                                             ready_queue 0
+                                                             (after asmcomp/schedgen.ml(384):13782-13806
+                                                               (apply
+                                                                 schedule i
+                                                                 try_nesting))))))))))))))
+                                   (before asmcomp/schedgen.ml(387):13821-14192
+                                     (if
+                                       (&& (field 2 f)
+                                         (field 0
+                                           (field 156 (global Clflags!))))
+                                       (before asmcomp/schedgen.ml(387):13863-14181
+                                         (let
+                                           (new_body =
+                                              (after asmcomp/schedgen.ml(388):13888-13909
+                                                (apply schedule (field 1 f)
+                                                  0)))
+                                           (before asmcomp/schedgen.ml(389):13917-14175
+                                             (seq
+                                               (after asmcomp/schedgen.ml(389):13917-13933
+                                                 (apply clear_code_dag 0a))
+                                               (before asmcomp/schedgen.ml(390):13939-14175
+                                                 (makeblock 0 (*,*,*,*,*,int)
+                                                   (field 0 f) new_body
+                                                   (field 2 f) (field 3 f)
+                                                   (field 4 f) (field 5 f)))))))
+                                       (before asmcomp/schedgen.ml(398):14191-14192
+                                         f)))))))))
+                       (function env self
+                         (let
+                           (self =
+                              (apply (field 23 (global CamlinternalOO!)) self
+                                class))
+                           (seq
+                             (setfield_imm_computed self trywith_nesting 0)
+                             self))))))
+                 0a 0a))
+            (let
+              (reset =
+                 (function param
+                   (funct-body asmcomp/schedgen.ml(402)<ghost>:14209-14231
+                     (before asmcomp/schedgen.ml(402):14214-14231
+                       (after asmcomp/schedgen.ml(402):14214-14231
+                         (apply clear_code_dag 0a))))))
+              (pseudo _none_(0)<ghost>:-1--1
+                (makeblock 0 scheduler_generic reset)))))))))

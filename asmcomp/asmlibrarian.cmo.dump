@@ -1,0 +1,197 @@
+(setglobal Asmlibrarian!
+  (let
+    (Error = (makeblock 248 "Asmlibrarian.Error" (caml_fresh_oo_id 0))
+     default_ui_export_info =
+       (if (field 50 (global Config!))
+         (before asmcomp/asmlibrarian.ml(30):1311-1347
+           (makeblock 1 (field 0 (global Export_info!))))
+         (before asmcomp/asmlibrarian.ml(32):1359-1399 [0: 0a]))
+     read_info =
+       (function name
+         (funct-body asmcomp/asmlibrarian.ml(34)<ghost>:1415-2015
+           (before asmcomp/asmlibrarian.ml(35):1424-2015
+             (let
+               (filename =
+                  (try
+                    (after asmcomp/asmlibrarian.ml(37):1453-1472
+                      (apply (field 5 (global Load_path!)) name))
+                   with exn
+                    (if (== exn (field 7 (global Stdlib!)))
+                      (before asmcomp/asmlibrarian.ml(39):1501-1534
+                        (raise
+                          (after asmcomp/asmlibrarian.ml(39):1506-1534
+                            (makeblock 0 Error (makeblock 0 name)))))
+                      (reraise exn))))
+               (before asmcomp/asmlibrarian.ml(40):1540-2015
+                 (let
+                   (*match* =
+                      (after asmcomp/asmlibrarian.ml(40):1558-1591
+                        (apply (field 32 (global Compilenv!)) filename))
+                    crc =a (field 1 *match*)
+                    info =a (field 0 *match*))
+                   (before asmcomp/asmlibrarian.ml(41):1597-2015
+                     (seq
+                       (setfield_imm 9 info
+                         (|| (field 9 info)
+                           (field 0 (field 20 (global Clflags!)))))
+                       (before asmcomp/asmlibrarian.ml(46):1905-2015
+                         (seq (setfield_ptr 8 info default_ui_export_info)
+                           (before asmcomp/asmlibrarian.ml(47):1954-2015
+                             (makeblock 0
+                               (after asmcomp/asmlibrarian.ml(47):1955-2001
+                                 (apply (field 27 (global Stdlib!))
+                                   (after asmcomp/asmlibrarian.ml(47):1955-1991
+                                     (apply
+                                       (field 7 (global Stdlib__filename!))
+                                       filename ".cmx"))
+                                   (field 41 (global Config!))))
+                               (makeblock 0 info crc)))))))))))))
+     create_archive =
+       (function file_list lib_name
+         (funct-body asmcomp/asmlibrarian.ml(49)<ghost>:2036-2910
+           (before asmcomp/asmlibrarian.ml(50):2059-2910
+             (let
+               (archive_name =
+                  (after asmcomp/asmlibrarian.ml(50):2078-2122
+                    (apply (field 27 (global Stdlib!))
+                      (after asmcomp/asmlibrarian.ml(50):2078-2112
+                        (apply (field 10 (global Stdlib__filename!))
+                          lib_name))
+                      (field 43 (global Config!)))))
+               (before asmcomp/asmlibrarian.ml(51):2128-2910
+                 (let
+                   (outchan =
+                      (after asmcomp/asmlibrarian.ml(51):2142-2163
+                        (apply (field 60 (global Stdlib!)) lib_name)))
+                   (before asmcomp/asmlibrarian.ml(52):2169-2910
+                     (after asmcomp/asmlibrarian.ml(52):2169-2910
+                       (apply (field 3 (global Misc!))
+                         (makeblock 0
+                           (function param
+                             (funct-body asmcomp/asmlibrarian.ml(53):2198-2227
+                               (before asmcomp/asmlibrarian.ml(53):2209-2226
+                                 (after asmcomp/asmlibrarian.ml(53):2209-2226
+                                   (apply (field 75 (global Stdlib!))
+                                     outchan))))))
+                         (makeblock 0
+                           (function param
+                             (funct-body asmcomp/asmlibrarian.ml(54):2247-2305
+                               (before asmcomp/asmlibrarian.ml(54):2258-2304
+                                 (seq
+                                   (after asmcomp/asmlibrarian.ml(54):2258-2278
+                                     (apply (field 15 (global Misc!))
+                                       lib_name))
+                                   (before asmcomp/asmlibrarian.ml(54):2280-2304
+                                     (after asmcomp/asmlibrarian.ml(54):2280-2304
+                                       (apply (field 15 (global Misc!))
+                                         archive_name))))))))
+                         (function param
+                           (funct-body asmcomp/asmlibrarian.ml(55):2310-2910
+                             (before asmcomp/asmlibrarian.ml(56):2328-2904
+                               (seq
+                                 (after asmcomp/asmlibrarian.ml(56):2328-2367
+                                   (apply (field 65 (global Stdlib!)) outchan
+                                     (field 25 (global Config!))))
+                                 (before asmcomp/asmlibrarian.ml(57):2376-2904
+                                   (let
+                                     (*match* =
+                                        (after asmcomp/asmlibrarian.ml(58):2418-2459
+                                          (apply
+                                            (field 46 (global Stdlib__list!))
+                                            (after asmcomp/asmlibrarian.ml(58):2429-2459
+                                              (apply
+                                                (field 16
+                                                  (global Stdlib__list!))
+                                                read_info file_list))))
+                                      descr_list =a (field 1 *match*)
+                                      objfile_list =a (field 0 *match*))
+                                     (before asmcomp/asmlibrarian.ml(59):2470-2904
+                                       (seq
+                                         (after asmcomp/asmlibrarian.ml(59):2470-2607
+                                           (apply
+                                             (field 22
+                                               (global Stdlib__list!))
+                                             (function file_name param
+                                               (funct-body asmcomp/asmlibrarian.ml(60):2490-2577
+                                                 (let
+                                                   (crc =a (field 1 param)
+                                                    unit =a (field 0 param))
+                                                   (before asmcomp/asmlibrarian.ml(61):2532-2576
+                                                     (after asmcomp/asmlibrarian.ml(61):2532-2576
+                                                       (apply
+                                                         (field 4
+                                                           (global Asmlink!))
+                                                         file_name unit crc))))))
+                                             file_list descr_list))
+                                         (before asmcomp/asmlibrarian.ml(63):2616-2904
+                                           (let
+                                             (infos =
+                                                (makeblock 0 descr_list
+                                                  (field 0
+                                                    (field 8
+                                                      (global Clflags!)))
+                                                  (field 0
+                                                    (field 26
+                                                      (global Clflags!)))))
+                                             (before asmcomp/asmlibrarian.ml(67):2760-2904
+                                               (seq
+                                                 (after asmcomp/asmlibrarian.ml(67):2760-2786
+                                                   (apply
+                                                     (field 71
+                                                       (global Stdlib!))
+                                                     outchan infos))
+                                                 (before asmcomp/asmlibrarian.ml(68):2795-2903
+                                                   (if
+                                                     (!=
+                                                       (after asmcomp/asmlibrarian.ml(68):2798-2844
+                                                         (apply
+                                                           (field 3
+                                                             (global Ccomp!))
+                                                           archive_name
+                                                           objfile_list))
+                                                       0)
+                                                     (before asmcomp/asmlibrarian.ml(69):2862-2903
+                                                       (raise
+                                                         (after asmcomp/asmlibrarian.ml(69):2867-2903
+                                                           (makeblock 0 Error
+                                                             (makeblock 1
+                                                               archive_name)))))
+                                                     0a)))))))))))))))))))))))
+     report_error =
+       (function ppf param
+         (funct-body asmcomp/asmlibrarian.ml(74)<ghost>:2942-3116
+           (switch* param
+            case tag 0:
+             (let (name =a (field 0 param))
+               (before asmcomp/asmlibrarian.ml(76):2990-3028
+                 (after asmcomp/asmlibrarian.ml(76):2990-3028
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11: "Cannot find file " [2: 0a 0a]]
+                      "Cannot find file %s"]
+                     name))))
+            case tag 1:
+             (let (name =a (field 0 param))
+               (before asmcomp/asmlibrarian.ml(78):3062-3116
+                 (after asmcomp/asmlibrarian.ml(78):3062-3116
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11: "Error while creating the library " [2: 0a 0a]]
+                      "Error while creating the library %s"]
+                     name)))))))
+     *match* =
+       (after asmcomp/asmlibrarian.ml(81):3129-3273
+         (apply (field 46 (global Location!))
+           (function param
+             (funct-body asmcomp/asmlibrarian.ml(82):3164-3273
+               (let (tag =a (field 0 param))
+                 (if (== tag Error)
+                   (let (err =a (field 1 param))
+                     (before asmcomp/asmlibrarian.ml(83):3195-3249
+                       (makeblock 0
+                         (after asmcomp/asmlibrarian.ml(83):3200-3249
+                           (apply (field 45 (global Location!)) report_error
+                             err)))))
+                   (before asmcomp/asmlibrarian.ml(84):3263-3267 0a))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 create_archive Error report_error))))

@@ -1,0 +1,495 @@
+(setglobal Path!
+  (letrec
+    (same
+       (function p1 p2
+         (funct-body typing/path.ml(21)<ghost>:1167-1427
+           (before typing/path.ml(22):1177-1427
+             (|| (== p1 p2)
+               (let (*match* = p1 *match* = p2)
+                 (catch
+                   (switch* *match*
+                    case tag 0:
+                     (let (id1 =a (field 0 *match*))
+                       (switch* *match*
+                        case tag 0:
+                         (let (id2 =a (field 0 *match*))
+                           (before typing/path.ml(24):1243-1261
+                             (after typing/path.ml(24):1243-1261
+                               (apply (field 18 (global Ident!)) id1 id2))))
+                        case tag 1: (exit 1)
+                        case tag 2: (exit 1)))
+                    case tag 1:
+                     (let (s1 =a (field 1 *match*) p1 =a (field 0 *match*))
+                       (switch* *match*
+                        case tag 0: (exit 1)
+                        case tag 1:
+                         (let
+                           (s2 =a (field 1 *match*) p2 =a (field 0 *match*))
+                           (before typing/path.ml(25):1298-1319
+                             (&&
+                               (after typing/path.ml(25):1298-1305
+                                 (caml_string_equal s1 s2))
+                               (after typing/path.ml(25):1309-1319
+                                 (apply same p1 p2)))))
+                        case tag 2: (exit 1)))
+                    case tag 2:
+                     (let
+                       (arg1 =a (field 1 *match*) fun1 =a (field 0 *match*))
+                       (switch* *match*
+                        case tag 0: (exit 1)
+                        case tag 1: (exit 1)
+                        case tag 2:
+                         (let
+                           (arg2 =a (field 1 *match*)
+                            fun2 =a (field 0 *match*))
+                           (before typing/path.ml(27):1375-1407
+                             (&&
+                               (after typing/path.ml(27):1375-1389
+                                 (apply same fun1 fun2))
+                               (after typing/path.ml(27):1393-1407
+                                 (apply same arg1 arg2))))))))
+                  with (1) (before typing/path.ml(28):1422-1427 0a))))))))
+    (letrec
+      (compare
+         (function p1 p2 : int
+           (funct-body typing/path.ml(30)<ghost>:1445-1904
+             (before typing/path.ml(31):1455-1904
+               (if (== p1 p2) (before typing/path.ml(31):1472-1473 0)
+                 (before typing/path.ml(32):1481-1904
+                   (let (*match* = p1 *match* = p2)
+                     (catch
+                       (catch
+                         (switch* *match*
+                          case tag 0:
+                           (let (id1 =a (field 0 *match*))
+                             (switch* *match*
+                              case tag 0:
+                               (let (id2 =a (field 0 *match*))
+                                 (before typing/path.ml(33):1533-1554
+                                   (after typing/path.ml(33):1533-1554
+                                     (apply (field 19 (global Ident!)) id1
+                                       id2))))
+                              case tag 1: (exit 4)
+                              case tag 2: (exit 4)))
+                          case tag 1:
+                           (let
+                             (s1 =a (field 1 *match*)
+                              p1 =a (field 0 *match*))
+                             (switch* *match*
+                              case tag 0: (exit 4)
+                              case tag 1:
+                               (let
+                                 (s2 =a (field 1 *match*)
+                                  p2 =a (field 0 *match*))
+                                 (before typing/path.ml(35):1597-1670
+                                   (let
+                                     (h =[int]
+                                        (after typing/path.ml(35):1605-1618
+                                          (apply compare p1 p2)))
+                                     (before typing/path.ml(36):1628-1670
+                                       (if (!= h 0)
+                                         (before typing/path.ml(36):1643-1644
+                                           h)
+                                         (before typing/path.ml(36):1650-1670
+                                           (after typing/path.ml(36):1650-1670
+                                             (apply
+                                               (field 32
+                                                 (global Stdlib__string!))
+                                               s1 s2))))))))
+                              case tag 2: (exit 4)))
+                          case tag 2:
+                           (let
+                             (arg1 =a (field 1 *match*)
+                              fun1 =a (field 0 *match*))
+                             (switch* *match*
+                              case tag 0: (exit 3)
+                              case tag 1: (exit 3)
+                              case tag 2:
+                               (let
+                                 (arg2 =a (field 1 *match*)
+                                  fun2 =a (field 0 *match*))
+                                 (before typing/path.ml(38):1725-1799
+                                   (let
+                                     (h =[int]
+                                        (after typing/path.ml(38):1733-1750
+                                          (apply compare fun1 fun2)))
+                                     (before typing/path.ml(39):1760-1799
+                                       (if (!= h 0)
+                                         (before typing/path.ml(39):1775-1776
+                                           h)
+                                         (before typing/path.ml(39):1782-1799
+                                           (after typing/path.ml(39):1782-1799
+                                             (apply compare arg1 arg2)))))))))))
+                        with (4)
+                         (catch
+                           (switch* *match*
+                            case tag 0: (exit 3)
+                            case tag 1: (exit 7)
+                            case tag 2: (exit 7))
+                          with (7) (before typing/path.ml(40):1850-1852 -1)))
+                      with (3) (before typing/path.ml(41):1903-1904 1)))))))))
+      (letrec
+        (find_free_opt
+           (function ids param
+             (funct-body typing/path.ml(43)<ghost>:1928-2158
+               (switch* param
+                case tag 0:
+                 (let (id =a (field 0 param))
+                   (before typing/path.ml(44):1960-1993
+                     (after typing/path.ml(44):1960-1993
+                       (apply (field 34 (global Stdlib__list!))
+                         (after typing/path.ml(44):1974-1989
+                           (apply (field 18 (global Ident!)) id))
+                         ids))))
+                case tag 1:
+                 (let (p =a (field 0 param))
+                   (before typing/path.ml(45):2013-2032
+                     (after typing/path.ml(45):2013-2032
+                       (apply find_free_opt ids p))))
+                case tag 2:
+                 (let (p2 =a (field 1 param) p1 =a (field 0 param))
+                   (before typing/path.ml(47):2061-2158
+                     (let
+                       (res =
+                          (after typing/path.ml(47):2067-2087
+                            (apply find_free_opt ids p1)))
+                       (if res (before typing/path.ml(49):2155-2158 res)
+                         (before typing/path.ml(48):2109-2129
+                           (after typing/path.ml(48):2109-2129
+                             (apply find_free_opt ids p2)))))))))))
+        (let
+          (exists_free =
+             (function ids p
+               (funct-body typing/path.ml(51)<ghost>:2176-2248
+                 (before typing/path.ml(52):2186-2248
+                   (let
+                     (*match* =
+                        (after typing/path.ml(52):2192-2211
+                          (apply find_free_opt ids p)))
+                     (if *match* (before typing/path.ml(54):2244-2248 1a)
+                       (before typing/path.ml(53):2229-2234 0a)))))))
+          (letrec
+            (scope
+               (function param : int
+                 (funct-body typing/path.ml(56):2266-2381
+                   (switch* param
+                    case tag 0:
+                     (let (id =a (field 0 param))
+                       (before typing/path.ml(57):2292-2306
+                         (after typing/path.ml(57):2292-2306
+                           (apply (field 22 (global Ident!)) id))))
+                    case tag 1:
+                     (let (p =a (field 0 param))
+                       (before typing/path.ml(58):2326-2333
+                         (after typing/path.ml(58):2326-2333 (apply scope p))))
+                    case tag 2:
+                     (let (p2 =a (field 1 param) p1 =a (field 0 param))
+                       (before typing/path.ml(59):2356-2381
+                         (after typing/path.ml(59):2356-2381
+                           (apply (field 16 (global Stdlib!))
+                             (after typing/path.ml(59):2360-2370
+                               (apply scope p1))
+                             (after typing/path.ml(59):2371-2381
+                               (apply scope p2))))))))))
+            (let
+              (kfalse =
+                 (function param
+                   (funct-body typing/path.ml(61)<ghost>:2394-2403
+                     (before typing/path.ml(61):2398-2403 0a))))
+              (letrec
+                (name
+                   (function *opt* param
+                     (funct-body typing/path.ml(63)<ghost>:2418-2627
+                       (let (param =a param)
+                         (before typing/path.ml(63):2436-2627
+                           (let
+                             (paren =
+                                (if *opt*
+                                  (let (*sth* =a (field 0 *opt*))
+                                    (before typing/path.ml(63):2426-2432
+                                      *sth*))
+                                  (before typing/path.ml(63):2426-2432
+                                    kfalse)))
+                             (before typing/path.ml(63):2436-2627
+                               (switch* param
+                                case tag 0:
+                                 (let (id =a (field 0 param))
+                                   (before typing/path.ml(64):2462-2475
+                                     (after typing/path.ml(64):2462-2475
+                                       (apply (field 14 (global Ident!)) id))))
+                                case tag 1:
+                                 (let
+                                   (s =a (field 1 param)
+                                    p =a (field 0 param))
+                                   (before typing/path.ml(66):2500-2561
+                                     (after typing/path.ml(66):2500-2561
+                                       (apply (field 27 (global Stdlib!))
+                                         (after typing/path.ml(66):2500-2513
+                                           (apply name (makeblock 0 paren) p))
+                                         (if
+                                           (after typing/path.ml(66):2519-2526
+                                             (apply paren s))
+                                           (before typing/path.ml(66):2532-2548
+                                             (after typing/path.ml(66):2532-2548
+                                               (apply
+                                                 (field 27 (global Stdlib!))
+                                                 ".( "
+                                                 (after typing/path.ml(66):2540-2548
+                                                   (apply
+                                                     (field 27
+                                                       (global Stdlib!))
+                                                     s " )")))))
+                                           (before typing/path.ml(66):2554-2561
+                                             (after typing/path.ml(66):2554-2561
+                                               (apply
+                                                 (field 27 (global Stdlib!))
+                                                 "." s))))))))
+                                case tag 2:
+                                 (let
+                                   (p2 =a (field 1 param)
+                                    p1 =a (field 0 param))
+                                   (before typing/path.ml(67):2584-2627
+                                     (after typing/path.ml(67):2584-2627
+                                       (apply (field 27 (global Stdlib!))
+                                         (after typing/path.ml(67):2584-2598
+                                           (apply name (makeblock 0 paren)
+                                             p1))
+                                         (after typing/path.ml(67):2601-2627
+                                           (apply (field 27 (global Stdlib!))
+                                             "("
+                                             (after typing/path.ml(67):2607-2627
+                                               (apply
+                                                 (field 27 (global Stdlib!))
+                                                 (after typing/path.ml(67):2607-2621
+                                                   (apply name
+                                                     (makeblock 0 paren) p2))
+                                                 ")"))))))))))))))))
+                (letrec
+                  (print
+                     (function ppf param
+                       (funct-body typing/path.ml(69)<ghost>:2643-2827
+                         (switch* param
+                          case tag 0:
+                           (let (id =a (field 0 param))
+                             (before typing/path.ml(70):2675-2704
+                               (after typing/path.ml(70):2675-2704
+                                 (apply (field 8 (global Ident!)) ppf id))))
+                          case tag 1:
+                           (let (s =a (field 1 param) p =a (field 0 param))
+                             (before typing/path.ml(71):2723-2759
+                               (after typing/path.ml(71):2723-2759
+                                 (apply (field 122 (global Stdlib__format!))
+                                   ppf
+                                   [0: [15: [12: '.' [2: 0a 0a]]] "%a.%s"]
+                                   print p s))))
+                          case tag 2:
+                           (let (p2 =a (field 1 param) p1 =a (field 0 param))
+                             (before typing/path.ml(72):2782-2827
+                               (after typing/path.ml(72):2782-2827
+                                 (apply (field 122 (global Stdlib__format!))
+                                   ppf
+                                   [0:
+                                    [15: [12: '(' [15: [12: ')' 0a]]]]
+                                    "%a(%a)"]
+                                   print p1 print p2))))))))
+                  (letrec
+                    (head
+                       (function param
+                         (funct-body typing/path.ml(74):2844-2927
+                           (switch* param
+                            case tag 0:
+                             (let (id =a (field 0 param))
+                               (before typing/path.ml(75):2870-2872 id))
+                            case tag 1:
+                             (let (p =a (field 0 param))
+                               (before typing/path.ml(76):2892-2898
+                                 (after typing/path.ml(76):2892-2898
+                                   (apply head p))))
+                            case tag 2:
+                             (before typing/path.ml(77):2915-2927
+                               (raise
+                                 (after typing/path.ml(77):2915-2927
+                                   (makeblock 0 (global Assert_failure!)
+                                     [0: "typing/path.ml" 77 16]))))))))
+                    (let
+                      (flatten =
+                         (letrec
+                           (flatten
+                              (function acc param
+                                (funct-body typing/path.ml(80)<ghost>:2961-3084
+                                  (switch* param
+                                   case tag 0:
+                                    (let (id =a (field 0 param))
+                                      (before typing/path.ml(81):2995-3008
+                                        (makeblock 0 17724
+                                          (makeblock 0 id acc))))
+                                   case tag 1:
+                                    (let
+                                      (s =a (field 1 param)
+                                       p =a (field 0 param))
+                                      (before typing/path.ml(82):3030-3050
+                                        (after typing/path.ml(82):3030-3050
+                                          (apply flatten (makeblock 0 s acc)
+                                            p))))
+                                   case tag 2:
+                                    (before typing/path.ml(83):3069-3084
+                                      437034030a)))))
+                           (before typing/path.ml(85):3092-3113
+                             (function t
+                               (funct-body typing/path.ml(85):3092-3113
+                                 (before typing/path.ml(85):3101-3113
+                                   (after typing/path.ml(85):3101-3113
+                                     (apply flatten 0a t)))))))
+                       heads =
+                         (function p
+                           (funct-body typing/path.ml(87)<ghost>:3125-3300
+                             (before typing/path.ml(88):3131-3300
+                               (letrec
+                                 (heads
+                                    (function p acc
+                                      (funct-body typing/path.ml(88)<ghost>:3145-3284
+                                        (before typing/path.ml(88):3153-3284
+                                          (switch* p
+                                           case tag 0:
+                                            (let (id =a (field 0 p))
+                                              (before typing/path.ml(89):3185-3194
+                                                (makeblock 0 id acc)))
+                                           case tag 1:
+                                            (let (p =a (field 0 p))
+                                              (before typing/path.ml(90):3217-3228
+                                                (after typing/path.ml(90):3217-3228
+                                                  (apply heads p acc))))
+                                           case tag 2:
+                                            (let
+                                              (p2 =a (field 1 p)
+                                               p1 =a (field 0 p))
+                                              (before typing/path.ml(92):3261-3284
+                                                (after typing/path.ml(92):3261-3284
+                                                  (apply heads p1
+                                                    (after typing/path.ml(92):3270-3284
+                                                      (apply heads p2 acc)))))))))))
+                                 (before typing/path.ml(93):3290-3300
+                                   (after typing/path.ml(93):3290-3300
+                                     (apply heads p 0a))))))))
+                      (letrec
+                        (last
+                           (function param
+                             (funct-body typing/path.ml(95):3317-3403
+                               (switch* param
+                                case tag 0:
+                                 (let (id =a (field 0 param))
+                                   (before typing/path.ml(96):3343-3356
+                                     (after typing/path.ml(96):3343-3356
+                                       (apply (field 14 (global Ident!)) id))))
+                                case tag 1:
+                                 (let (s =a (field 1 param))
+                                   (before typing/path.ml(97):3375-3376 s))
+                                case tag 2:
+                                 (let (p =a (field 1 param))
+                                   (before typing/path.ml(98):3397-3403
+                                     (after typing/path.ml(98):3397-3403
+                                       (apply last p))))))))
+                        (let
+                          (is_uident =
+                             (function s
+                               (funct-body typing/path.ml(100)<ghost>:3419-3497
+                                 (before typing/path.ml(101):3425-3497
+                                   (seq
+                                     (if
+                                       (after typing/path.ml(101):3432-3441
+                                         (caml_string_notequal s ""))
+                                       0a
+                                       (raise
+                                         (after typing/path.ml(101):3425-3441
+                                           (makeblock 0
+                                             (global Assert_failure!)
+                                             [0: "typing/path.ml" 101 2]))))
+                                     (before typing/path.ml(102):3445-3497
+                                       (let
+                                         (*match* =
+                                            (after typing/path.ml(102):3451-3456
+                                              (string.get s 0))
+                                          switcher =a (-65+ *match*))
+                                         (if (isout 25 switcher)
+                                           (before typing/path.ml(104):3492-3497
+                                             0a)
+                                           (before typing/path.ml(103):3478-3482
+                                             1a))))))))
+                           constructor_typath =
+                             (function p
+                               (funct-body typing/path.ml(112):3625-3838
+                                 (catch
+                                   (switch* p
+                                    case tag 0:
+                                     (let (id =a (field 0 p))
+                                       (before typing/path.ml(113):3653-3678
+                                         (if
+                                           (after typing/path.ml(113):3653-3678
+                                             (apply is_uident
+                                               (after typing/path.ml(113):3663-3678
+                                                 (apply
+                                                   (field 14 (global Ident!))
+                                                   id))))
+                                           (before typing/path.ml(113):3682-3693
+                                             (makeblock 2 id))
+                                           (exit 12))))
+                                    case tag 1:
+                                     (let
+                                       (s =a (field 1 p)
+                                        ty_path =a (field 0 p))
+                                       (before typing/path.ml(114):3720-3731
+                                         (if
+                                           (after typing/path.ml(114):3720-3731
+                                             (apply is_uident s))
+                                           (before typing/path.ml(115):3741-3819
+                                             (if
+                                               (after typing/path.ml(115):3744-3768
+                                                 (apply is_uident
+                                                   (after typing/path.ml(115):3754-3768
+                                                     (apply last ty_path))))
+                                               (before typing/path.ml(115):3774-3790
+                                                 (makeblock 1 ty_path s))
+                                               (before typing/path.ml(116):3802-3819
+                                                 (makeblock 3 ty_path s))))
+                                           (exit 12))))
+                                    case tag 2: (exit 12))
+                                  with (12)
+                                   (before typing/path.ml(117):3829-3838
+                                     (makeblock 0 p)))))
+                           is_constructor_typath =
+                             (function p
+                               (funct-body typing/path.ml(119)<ghost>:3866-3940
+                                 (before typing/path.ml(120):3872-3940
+                                   (let
+                                     (*match* =
+                                        (after typing/path.ml(120):3878-3898
+                                          (apply constructor_typath p)))
+                                     (switch *match*
+                                      case tag 0:
+                                       (before typing/path.ml(121):3921-3926
+                                         0a)
+                                      default:
+                                       (before typing/path.ml(122):3936-3940
+                                         1a))))))
+                           T =
+                             (module-defn(T) typing/path.ml(124):3942-4007
+                               (let (compare = compare)
+                                 (pseudo typing/path.ml(124):3953-4007
+                                   (makeblock 0 compare))))
+                           Set =
+                             (module-defn(Set) typing/path.ml(128):4008-4032
+                               (apply
+                                 (let (let = (field 0 (global Stdlib__set!)))
+                                   (field 0 (global Stdlib__set!)))
+                                 T))
+                           Map =
+                             (module-defn(Map) typing/path.ml(129):4033-4057
+                               (apply
+                                 (let (let = (field 0 (global Stdlib__map!)))
+                                   (field 0 (global Stdlib__map!)))
+                                 T)))
+                          (pseudo _none_(0)<ghost>:-1--1
+                            (makeblock 0 same compare find_free_opt
+                              exists_free scope flatten name head print heads
+                              last constructor_typath is_constructor_typath
+                              Map Set)))))))))))))))

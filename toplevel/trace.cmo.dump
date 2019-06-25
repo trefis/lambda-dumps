@@ -1,0 +1,551 @@
+(setglobal Trace!
+  (let
+    (traced_functions = (makemutable 0 0a)
+     is_traced =
+       (function clos
+         (funct-body toplevel/trace.ml(37)<ghost>:1678-1843
+           (before toplevel/trace.ml(38):1687-1843
+             (letrec
+               (is_traced
+                  (function param
+                    (funct-body toplevel/trace.ml(38):1707-1810
+                      (if param
+                        (let (rem =a (field 1 param) tf =a (field 0 param))
+                          (before toplevel/trace.ml(40):1752-1810
+                            (if (== (field 1 tf) clos)
+                              (before toplevel/trace.ml(40):1779-1791
+                                (makeblock 0 (field 0 tf)))
+                              (before toplevel/trace.ml(40):1797-1810
+                                (after toplevel/trace.ml(40):1797-1810
+                                  (apply is_traced rem))))))
+                        (before toplevel/trace.ml(39):1728-1732 0a)))))
+               (before toplevel/trace.ml(41):1816-1843
+                 (after toplevel/trace.ml(41):1816-1843
+                   (apply is_traced (field 0 traced_functions))))))))
+     get_code_pointer =
+       (function cls
+         (funct-body toplevel/trace.ml(45)<ghost>:1920-1941
+           (before toplevel/trace.ml(45):1926-1941
+             (array.unsafe_get[gen] cls 0))))
+     set_code_pointer =
+       (function cls ptr
+         (funct-body toplevel/trace.ml(47)<ghost>:1964-1997
+           (before toplevel/trace.ml(47):1974-1997
+             (array.unsafe_set[gen] cls 0 ptr))))
+     invoke_traced_function =
+       (function codeptr env arg
+         (funct-body toplevel/trace.ml(55)<ghost>:2320-2383
+           (before toplevel/trace.ml(56):2340-2383
+             (after toplevel/trace.ml(56):2340-2383
+               (caml_invoke_traced_function codeptr env arg)))))
+     print_label =
+       (function ppf l
+         (funct-body toplevel/trace.ml(58)<ghost>:2401-2487
+           (before toplevel/trace.ml(59):2411-2487
+             (if (!= l 0a)
+               (before toplevel/trace.ml(59):2441-2487
+                 (after toplevel/trace.ml(59):2441-2487
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [2: 0a [12: ':' 0a]] "%s:"]
+                     (after toplevel/trace.ml(59):2459-2487
+                       (apply (field 8 (global Printtyp!)) l)))))
+               0a)))))
+    (letrec
+      (instrument_result
+         (function env name ppf clos_typ
+           (funct-body toplevel/trace.ml(63)<ghost>:2590-4027
+             (before toplevel/trace.ml(64):2616-4027
+               (let
+                 (*match* =
+                    (field 0
+                      (after toplevel/trace.ml(64):2622-2666
+                        (apply (field 24 (global Ctype!))
+                          (after toplevel/trace.ml(64):2633-2665
+                            (apply (field 60 (global Ctype!)) env clos_typ))))))
+                 (catch
+                   (switch *match*
+                    case tag 1:
+                     (let
+                       (t2 =a (field 2 *match*)
+                        t1 =a (field 1 *match*)
+                        l =a (field 0 *match*))
+                       (before toplevel/trace.ml(66):2711-4005
+                         (let
+                           (starred_name =
+                              (switch* name
+                               case tag 0:
+                                (let (s =a (field 0 name))
+                                  (before toplevel/trace.ml(68):2776-2791
+                                    (makeblock 0
+                                      (after toplevel/trace.ml(68):2782-2791
+                                        (apply (field 27 (global Stdlib!)) s
+                                          "*")))))
+                               case tag 1:
+                                (let
+                                  (s =a (field 1 name) lid =a (field 0 name))
+                                  (before toplevel/trace.ml(69):2818-2836
+                                    (makeblock 1 lid
+                                      (after toplevel/trace.ml(69):2828-2835
+                                        (apply (field 27 (global Stdlib!)) s
+                                          "*")))))
+                               case tag 2:
+                                (before toplevel/trace.ml(70):2859-2896
+                                  (after toplevel/trace.ml(70):2859-2896
+                                    (apply (field 0 (global Misc!))
+                                      "Trace.instrument_result")))))
+                           (before toplevel/trace.ml(71):2906-4005
+                             (let
+                               (trace_res =
+                                  (after toplevel/trace.ml(71):2922-2963
+                                    (apply instrument_result env starred_name
+                                      ppf t2)))
+                               (before toplevel/trace.ml(72):2973-4005
+                                 (function clos_val
+                                   (funct-body toplevel/trace.ml(72):2973-4005
+                                     (before toplevel/trace.ml(73):2998-4004
+                                       (function arg
+                                         (funct-body toplevel/trace.ml(73):3007-4004
+                                           (before toplevel/trace.ml(74):3029-4003
+                                             (if
+                                               (not
+                                                 (field 0
+                                                   (field 49
+                                                     (global Toploop!))))
+                                               (before toplevel/trace.ml(75):3064-3105
+                                                 (after toplevel/trace.ml(75):3064-3105
+                                                   (apply clos_val arg)))
+                                               (before toplevel/trace.ml(76):3121-4003
+                                                 (seq
+                                                   (setfield_imm 0
+                                                     (field 49
+                                                       (global Toploop!))
+                                                     0a)
+                                                   (before toplevel/trace.ml(78):3171-3989
+                                                     (try
+                                                       (seq
+                                                         (after toplevel/trace.ml(79):3189-3353
+                                                           (apply
+                                                             (field 122
+                                                               (global Stdlib__format!))
+                                                             ppf
+                                                             [0:
+                                                              [18:
+                                                               [1:
+                                                                [0:
+                                                                 [11:
+                                                                  "<2>" 0a]
+                                                                 "<2>"]]
+                                                               [15:
+                                                                [11:
+                                                                 " <--"
+                                                                 [17:
+                                                                  [0:
+                                                                   "@ " 1 0]
+                                                                  [15:
+                                                                   [15:
+                                                                    [17:
+                                                                    0a
+                                                                    [17:
+                                                                    4a 0a]]]]]]]]
+                                                              "@[<2>%a <--@ %a%a@]@."]
+                                                             (field 0
+                                                               (global Printtyp!))
+                                                             starred_name
+                                                             print_label l
+                                                             (after toplevel/trace.ml(82):3319-3350
+                                                               (apply
+                                                                 (field 21
+                                                                   (global Toploop!))
+                                                                 (field 0
+                                                                   (field 8
+                                                                    (global Toploop!)))
+                                                                 arg))
+                                                             t1))
+                                                         (before toplevel/trace.ml(83):3369-3699
+                                                           (seq
+                                                             (setfield_imm 0
+                                                               (field 49
+                                                                 (global Toploop!))
+                                                               1a)
+                                                             (before toplevel/trace.ml(84):3402-3699
+                                                               (let
+                                                                 (res =
+                                                                    (after toplevel/trace.ml(84):3412-3453
+                                                                    (apply
+                                                                    clos_val
+                                                                    arg)))
+                                                                 (before toplevel/trace.ml(85):3471-3699
+                                                                   (seq
+                                                                    (setfield_imm 0
+                                                                    (field 49
+                                                                    (global Toploop!))
+                                                                    0a)
+                                                                    (before toplevel/trace.ml(86):3505-3699
+                                                                    (seq
+                                                                    (after toplevel/trace.ml(86):3505-3637
+                                                                    (apply
+                                                                    (field 122
+                                                                    (global Stdlib__format!))
+                                                                    ppf
+                                                                    [0:
+                                                                    [18:
+                                                                    [1:
+                                                                    [0:
+                                                                    [11:
+                                                                    "<2>" 0a]
+                                                                    "<2>"]]
+                                                                    [15:
+                                                                    [11:
+                                                                    " -->"
+                                                                    [17:
+                                                                    [0:
+                                                                    "@ " 1 0]
+                                                                    [15:
+                                                                    [17:
+                                                                    0a
+                                                                    [17:
+                                                                    4a 0a]]]]]]]
+                                                                    "@[<2>%a -->@ %a@]@."]
+                                                                    (field 0
+                                                                    (global Printtyp!))
+                                                                    starred_name
+                                                                    (after toplevel/trace.ml(88):3603-3634
+                                                                    (apply
+                                                                    (field 21
+                                                                    (global Toploop!))
+                                                                    (field 0
+                                                                    (field 8
+                                                                    (global Toploop!)))
+                                                                    res)) t2))
+                                                                    (before toplevel/trace.ml(89):3653-3699
+                                                                    (seq
+                                                                    (setfield_imm 0
+                                                                    (field 49
+                                                                    (global Toploop!))
+                                                                    1a)
+                                                                    (before toplevel/trace.ml(90):3686-3699
+                                                                    (after toplevel/trace.ml(90):3686-3699
+                                                                    (apply
+                                                                    trace_res
+                                                                    res))))))))))))))
+                                                      with exn
+                                                       (before toplevel/trace.ml(92):3738-3989
+                                                         (seq
+                                                           (setfield_imm 0
+                                                             (field 49
+                                                               (global Toploop!))
+                                                             0a)
+                                                           (before toplevel/trace.ml(93):3772-3989
+                                                             (seq
+                                                               (after toplevel/trace.ml(93):3772-3931
+                                                                 (apply
+                                                                   (field 122
+                                                                    (global Stdlib__format!))
+                                                                   ppf
+                                                                   [0:
+                                                                    [18:
+                                                                    [1:
+                                                                    [0:
+                                                                    [11:
+                                                                    "<2>" 0a]
+                                                                    "<2>"]]
+                                                                    [15:
+                                                                    [11:
+                                                                    " raises"
+                                                                    [17:
+                                                                    [0:
+                                                                    "@ " 1 0]
+                                                                    [15:
+                                                                    [17:
+                                                                    0a
+                                                                    [17:
+                                                                    4a 0a]]]]]]]
+                                                                    "@[<2>%a raises@ %a@]@."]
+                                                                   (field 0
+                                                                    (global Printtyp!))
+                                                                   starred_name
+                                                                   (after toplevel/trace.ml(95):3873-3915
+                                                                    (apply
+                                                                    (field 21
+                                                                    (global Toploop!))
+                                                                    (field 0
+                                                                    (field 8
+                                                                    (global Toploop!)))
+                                                                    exn))
+                                                                   (field 7
+                                                                    (global Predef!))))
+                                                               (before toplevel/trace.ml(96):3947-3989
+                                                                 (seq
+                                                                   (setfield_imm 0
+                                                                    (field 49
+                                                                    (global Toploop!))
+                                                                    1a)
+                                                                   (before toplevel/trace.ml(97):3980-3989
+                                                                    (reraise
+                                                                    (after toplevel/trace.ml(97):3986-3989
+                                                                    exn))))))))))))))))))))))))))
+                    default: (exit 2))
+                  with (2)
+                   (before toplevel/trace.ml(99):4015-4027
+                     (function v
+                       (funct-body toplevel/trace.ml(99):4015-4027
+                         (before toplevel/trace.ml(99):4025-4026 v))))))))))
+      (let (Dummy = (makeblock 248 "Trace.Dummy" (caml_fresh_oo_id 0)))
+        (seq Dummy
+          (let
+            (instrument_closure =
+               (function env name ppf clos_typ
+                 (funct-body toplevel/trace.ml(106)<ghost>:4164-5446
+                   (before toplevel/trace.ml(107):4190-5446
+                     (let
+                       (*match* =
+                          (field 0
+                            (after toplevel/trace.ml(107):4196-4240
+                              (apply (field 24 (global Ctype!))
+                                (after toplevel/trace.ml(107):4207-4239
+                                  (apply (field 60 (global Ctype!)) env
+                                    clos_typ))))))
+                       (catch
+                         (switch *match*
+                          case tag 1:
+                           (let
+                             (t2 =a (field 2 *match*)
+                              t1 =a (field 1 *match*)
+                              l =a (field 0 *match*))
+                             (before toplevel/trace.ml(109):4285-5424
+                               (let
+                                 (trace_res =
+                                    (after toplevel/trace.ml(109):4301-4334
+                                      (apply instrument_result env name ppf
+                                        t2)))
+                                 (before toplevel/trace.ml(110):4344-5424
+                                   (function actual_code closure arg
+                                     (funct-body toplevel/trace.ml(110):4344-5424
+                                       (before toplevel/trace.ml(111):4384-5423
+                                         (if
+                                           (not
+                                             (field 0
+                                               (field 49 (global Toploop!))))
+                                           (before toplevel/trace.ml(111):4407-4598
+                                             (try
+                                               (after toplevel/trace.ml(112):4427-4473
+                                                 (apply
+                                                   invoke_traced_function
+                                                   actual_code closure arg))
+                                              with exn
+                                               (if (== exn Dummy)
+                                                 (before toplevel/trace.ml(113):4498-4510
+                                                   (raise
+                                                     (after toplevel/trace.ml(113):4498-4510
+                                                       (makeblock 0
+                                                         (global Assert_failure!)
+                                                         [0:
+                                                          "toplevel/trace.ml"
+                                                          113 24]))))
+                                                 (reraise exn))))
+                                           (before toplevel/trace.ml(115):4604-5423
+                                             (seq
+                                               (setfield_imm 0
+                                                 (field 49 (global Toploop!))
+                                                 0a)
+                                               (before toplevel/trace.ml(117):4650-5411
+                                                 (try
+                                                   (seq
+                                                     (after toplevel/trace.ml(118):4666-4816
+                                                       (apply
+                                                         (field 122
+                                                           (global Stdlib__format!))
+                                                         ppf
+                                                         [0:
+                                                          [18:
+                                                           [1:
+                                                            [0:
+                                                             [11: "<2>" 0a]
+                                                             "<2>"]]
+                                                           [15:
+                                                            [11:
+                                                             " <--"
+                                                             [17:
+                                                              [0: "@ " 1 0]
+                                                              [15:
+                                                               [15:
+                                                                [17:
+                                                                 0a
+                                                                 [17: 4a 0a]]]]]]]]
+                                                          "@[<2>%a <--@ %a%a@]@."]
+                                                         (field 0
+                                                           (global Printtyp!))
+                                                         name print_label l
+                                                         (after toplevel/trace.ml(121):4782-4813
+                                                           (apply
+                                                             (field 21
+                                                               (global Toploop!))
+                                                             (field 0
+                                                               (field 8
+                                                                 (global Toploop!)))
+                                                             arg))
+                                                         t1))
+                                                     (before toplevel/trace.ml(122):4830-5143
+                                                       (seq
+                                                         (setfield_imm 0
+                                                           (field 49
+                                                             (global Toploop!))
+                                                           1a)
+                                                         (before toplevel/trace.ml(123):4861-5143
+                                                           (let
+                                                             (res =
+                                                                (after toplevel/trace.ml(123):4871-4917
+                                                                  (apply
+                                                                    invoke_traced_function
+                                                                    actual_code
+                                                                    closure
+                                                                    arg)))
+                                                             (before toplevel/trace.ml(124):4933-5143
+                                                               (seq
+                                                                 (setfield_imm 0
+                                                                   (field 49
+                                                                    (global Toploop!))
+                                                                   0a)
+                                                                 (before toplevel/trace.ml(125):4965-5143
+                                                                   (seq
+                                                                    (after toplevel/trace.ml(125):4965-5085
+                                                                    (apply
+                                                                    (field 122
+                                                                    (global Stdlib__format!))
+                                                                    ppf
+                                                                    [0:
+                                                                    [18:
+                                                                    [1:
+                                                                    [0:
+                                                                    [11:
+                                                                    "<2>" 0a]
+                                                                    "<2>"]]
+                                                                    [15:
+                                                                    [11:
+                                                                    " -->"
+                                                                    [17:
+                                                                    [0:
+                                                                    "@ " 1 0]
+                                                                    [15:
+                                                                    [17:
+                                                                    0a
+                                                                    [17:
+                                                                    4a 0a]]]]]]]
+                                                                    "@[<2>%a -->@ %a@]@."]
+                                                                    (field 0
+                                                                    (global Printtyp!))
+                                                                    name
+                                                                    (after toplevel/trace.ml(127):5051-5082
+                                                                    (apply
+                                                                    (field 21
+                                                                    (global Toploop!))
+                                                                    (field 0
+                                                                    (field 8
+                                                                    (global Toploop!)))
+                                                                    res)) t2))
+                                                                    (before toplevel/trace.ml(128):5099-5143
+                                                                    (seq
+                                                                    (setfield_imm 0
+                                                                    (field 49
+                                                                    (global Toploop!))
+                                                                    1a)
+                                                                    (before toplevel/trace.ml(129):5130-5143
+                                                                    (after toplevel/trace.ml(129):5130-5143
+                                                                    (apply
+                                                                    trace_res
+                                                                    res))))))))))))))
+                                                  with exn
+                                                   (before toplevel/trace.ml(131):5178-5411
+                                                     (seq
+                                                       (setfield_imm 0
+                                                         (field 49
+                                                           (global Toploop!))
+                                                         0a)
+                                                       (before toplevel/trace.ml(132):5210-5411
+                                                         (seq
+                                                           (after toplevel/trace.ml(132):5210-5357
+                                                             (apply
+                                                               (field 122
+                                                                 (global Stdlib__format!))
+                                                               ppf
+                                                               [0:
+                                                                [18:
+                                                                 [1:
+                                                                  [0:
+                                                                   [11:
+                                                                    "<2>" 0a]
+                                                                   "<2>"]]
+                                                                 [15:
+                                                                  [11:
+                                                                   " raises"
+                                                                   [17:
+                                                                    [0:
+                                                                    "@ " 1 0]
+                                                                    [15:
+                                                                    [17:
+                                                                    0a
+                                                                    [17:
+                                                                    4a 0a]]]]]]]
+                                                                "@[<2>%a raises@ %a@]@."]
+                                                               (field 0
+                                                                 (global Printtyp!))
+                                                               name
+                                                               (after toplevel/trace.ml(134):5299-5341
+                                                                 (apply
+                                                                   (field 21
+                                                                    (global Toploop!))
+                                                                   (field 0
+                                                                    (field 8
+                                                                    (global Toploop!)))
+                                                                   exn))
+                                                               (field 7
+                                                                 (global Predef!))))
+                                                           (before toplevel/trace.ml(135):5371-5411
+                                                             (seq
+                                                               (setfield_imm 0
+                                                                 (field 49
+                                                                   (global Toploop!))
+                                                                 1a)
+                                                               (before toplevel/trace.ml(136):5402-5411
+                                                                 (reraise
+                                                                   (after toplevel/trace.ml(136):5408-5411
+                                                                    exn)))))))))))))))))))))
+                          default: (exit 5))
+                        with (5)
+                         (before toplevel/trace.ml(138):5434-5446
+                           (raise
+                             (after toplevel/trace.ml(138):5434-5446
+                               (makeblock 0 (global Assert_failure!)
+                                 [0: "toplevel/trace.ml" 138 9]))))))))))
+            (letrec
+              (find_traced_closure
+                 (function clos param
+                   (funct-body toplevel/trace.ml(142)<ghost>:5537-5680
+                     (if param
+                       (let (rem =a (field 1 param) f =a (field 0 param))
+                         (before toplevel/trace.ml(144):5619-5680
+                           (if (== (field 1 f) clos)
+                             (before toplevel/trace.ml(144):5645-5646 f)
+                             (before toplevel/trace.ml(144):5652-5680
+                               (after toplevel/trace.ml(144):5652-5680
+                                 (apply find_traced_closure clos rem))))))
+                       (before toplevel/trace.ml(143):5563-5602
+                         (after toplevel/trace.ml(143):5563-5602
+                           (apply (field 0 (global Misc!))
+                             "Trace.find_traced_closure")))))))
+              (let
+                (print_trace =
+                   (function clos arg
+                     (funct-body toplevel/trace.ml(148)<ghost>:5771-5881
+                       (before toplevel/trace.ml(149):5784-5881
+                         (let
+                           (f =
+                              (after toplevel/trace.ml(149):5792-5834
+                                (apply find_traced_closure clos
+                                  (field 0 traced_functions))))
+                           (before toplevel/trace.ml(150):5840-5881
+                             (after toplevel/trace.ml(150):5840-5881
+                               (apply (field 3 f) (field 2 f) clos arg))))))))
+                (pseudo _none_(0)<ghost>:-1--1
+                  (makeblock 0 traced_functions is_traced get_code_pointer
+                    set_code_pointer instrument_closure print_trace))))))))))

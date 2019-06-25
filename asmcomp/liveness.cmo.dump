@@ -1,0 +1,519 @@
+(setglobal Liveness!
+  (let
+    (live_at_exit = (makemutable 0 0a)
+     find_live_at_exit =
+       (function k[int]
+         (funct-body asmcomp/liveness.ml(23)<ghost>:1228-1338
+           (before asmcomp/liveness.ml(24):1234-1338
+             (try
+               (after asmcomp/liveness.ml(25):1242-1268
+                 (apply (field 38 (global Stdlib__list!)) k
+                   (field 0 live_at_exit)))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before asmcomp/liveness.ml(27):1293-1338
+                   (after asmcomp/liveness.ml(27):1293-1338
+                     (apply (field 0 (global Misc!))
+                       "Liveness.find_live_at_exit")))
+                 (reraise exn))))))
+     live_at_raise = (makemutable 0 (field 0 (field 9 (global Reg!)))))
+    (letrec
+      (live
+         (function i finally
+           (funct-body asmcomp/liveness.ml(31)<ghost>:1392-6102
+             (before asmcomp/liveness.ml(38):1699-6102
+               (let
+                 (arg =
+                    (if
+                      (&& (field 52 (global Config!))
+                        (after asmcomp/liveness.ml(40):1742-1791
+                          (apply (field 5 (global Mach!)) i)))
+                      (before asmcomp/liveness.ml(41):1801-1854
+                        (after asmcomp/liveness.ml(41):1801-1854
+                          (apply (field 4 (global Stdlib__array!))
+                            (field 2 i)
+                            (makearray[addr] (field 14 (global Proc!))))))
+                      (before asmcomp/liveness.ml(42):1864-1869 (field 2 i))))
+                 (before asmcomp/liveness.ml(44):1877-6102
+                   (let (*match* = (field 0 i))
+                     (catch
+                       (switch* *match*
+                        case int 0:
+                         (before asmcomp/liveness.ml(46):1913-1945
+                           (seq (setfield_ptr 5 i finally)
+                             (before asmcomp/liveness.ml(47):1938-1945
+                               finally)))
+                        case int 1: (exit 4)
+                        case tag 0:
+                         (let (op =a (field 0 *match*))
+                           (catch
+                             (switch op
+                              case tag 5: (exit 4)
+                              case tag 6: (exit 4)
+                              default: (exit 5))
+                            with (5)
+                             (before asmcomp/liveness.ml(52):2115-3438
+                               (let
+                                 (after =
+                                    (after asmcomp/liveness.ml(52):2127-2146
+                                      (apply live (field 1 i) finally)))
+                                 (before asmcomp/liveness.ml(53):2156-3438
+                                   (if
+                                     (&&
+                                       (after asmcomp/liveness.ml(53):2159-2177
+                                         (apply (field 22 (global Proc!)) op))
+                                       (&&
+                                         (after asmcomp/liveness.ml(54):2228-2262
+                                           (apply (field 14 (global Reg!))
+                                             after (field 3 i)))
+                                         (&&
+                                           (not
+                                             (after asmcomp/liveness.ml(55):2312-2340
+                                               (apply
+                                                 (field 21 (global Proc!))
+                                                 arg)))
+                                           (not
+                                             (after asmcomp/liveness.ml(56):2388-2418
+                                               (apply
+                                                 (field 21 (global Proc!))
+                                                 (field 3 i)))))))
+                                     (before asmcomp/liveness.ml(57):2462-2582
+                                       (seq (setfield_ptr 5 i after)
+                                         (before asmcomp/liveness.ml(60):2567-2572
+                                           after)))
+                                     (before asmcomp/liveness.ml(61):2588-3438
+                                       (let
+                                         (across_after =
+                                            (after asmcomp/liveness.ml(62):2621-2651
+                                              (apply (field 12 (global Reg!))
+                                                after (field 3 i))))
+                                         (before asmcomp/liveness.ml(63):2663-3428
+                                           (let
+                                             (across =
+                                                (catch
+                                                  (catch
+                                                    (switch op
+                                                     case tag 3: (exit 2)
+                                                     case tag 4: (exit 2)
+                                                     case tag 7: (exit 2)
+                                                     case tag 11: (exit 2)
+                                                     case tag 12:
+                                                      (let
+                                                        (*match* =a
+                                                           (field 0 op))
+                                                        (switch *match*
+                                                         case tag 1: (exit 2)
+                                                         default: (exit 3)))
+                                                     case tag 13:
+                                                      (let
+                                                        (*match* =a
+                                                           (field 0 op))
+                                                        (switch *match*
+                                                         case tag 1: (exit 2)
+                                                         default: (exit 3)))
+                                                     default: (exit 3))
+                                                   with (3)
+                                                    (before asmcomp/liveness.ml(75):3350-3362
+                                                      across_after))
+                                                 with (2)
+                                                  (before asmcomp/liveness.ml(73):3275-3316
+                                                    (after asmcomp/liveness.ml(73):3275-3316
+                                                      (apply
+                                                        (field 6
+                                                          (field 9
+                                                            (global Reg!)))
+                                                        across_after
+                                                        (field 0
+                                                          live_at_raise))))))
+                                             (before asmcomp/liveness.ml(76):3374-3428
+                                               (seq (setfield_ptr 5 i across)
+                                                 (before asmcomp/liveness.ml(77):3400-3428
+                                                   (after asmcomp/liveness.ml(77):3400-3428
+                                                     (apply
+                                                       (field 11
+                                                         (global Reg!))
+                                                       across arg)))))))))))))))
+                        case tag 1:
+                         (let
+                           (ifnot =a (field 2 *match*)
+                            ifso =a (field 1 *match*))
+                           (before asmcomp/liveness.ml(80):3484-3659
+                             (let
+                               (at_join =
+                                  (after asmcomp/liveness.ml(80):3498-3517
+                                    (apply live (field 1 i) finally)))
+                               (before asmcomp/liveness.ml(81):3527-3659
+                                 (let
+                                   (at_fork =
+                                      (after asmcomp/liveness.ml(81):3541-3595
+                                        (apply
+                                          (field 6 (field 9 (global Reg!)))
+                                          (after asmcomp/liveness.ml(81):3555-3574
+                                            (apply live ifso at_join))
+                                          (after asmcomp/liveness.ml(81):3575-3595
+                                            (apply live ifnot at_join)))))
+                                   (before asmcomp/liveness.ml(82):3605-3659
+                                     (seq (setfield_ptr 5 i at_fork)
+                                       (before asmcomp/liveness.ml(83):3630-3659
+                                         (after asmcomp/liveness.ml(83):3630-3659
+                                           (apply (field 11 (global Reg!))
+                                             at_fork arg))))))))))
+                        case tag 2:
+                         (let (cases =a (field 1 *match*))
+                           (before asmcomp/liveness.ml(85):3696-3960
+                             (let
+                               (at_join =
+                                  (after asmcomp/liveness.ml(85):3710-3729
+                                    (apply live (field 1 i) finally)))
+                               (before asmcomp/liveness.ml(86):3739-3960
+                                 (let
+                                   (at_fork =
+                                      (makemutable 0
+                                        (field 0 (field 9 (global Reg!)))))
+                                   (before asmcomp/liveness.ml(87):3780-3960
+                                     (seq
+                                       (for i 0 to
+                                         (- (array.length[addr] cases) 1)
+                                         (before asmcomp/liveness.ml(88):3827-3885
+                                           (setfield_ptr 0 at_fork
+                                             (after asmcomp/liveness.ml(88):3838-3885
+                                               (apply
+                                                 (field 6
+                                                   (field 9 (global Reg!)))
+                                                 (field 0 at_fork)
+                                                 (after asmcomp/liveness.ml(88):3861-3885
+                                                   (apply live
+                                                     (after asmcomp/liveness.ml(88):3867-3876
+                                                       (array.get[addr] cases
+                                                         i))
+                                                     at_join)))))))
+                                       (before asmcomp/liveness.ml(90):3904-3960
+                                         (seq
+                                           (setfield_ptr 5 i
+                                             (field 0 at_fork))
+                                           (before asmcomp/liveness.ml(91):3930-3960
+                                             (after asmcomp/liveness.ml(91):3930-3960
+                                               (apply
+                                                 (field 11 (global Reg!))
+                                                 (field 0 at_fork) arg))))))))))))
+                        case tag 3:
+                         (let
+                           (body =a (field 2 *match*)
+                            handlers =a (field 1 *match*)
+                            rec_flag =a (field 0 *match*))
+                           (before asmcomp/liveness.ml(93):4007-5514
+                             (let
+                               (at_join =
+                                  (after asmcomp/liveness.ml(93):4021-4040
+                                    (apply live (field 1 i) finally)))
+                               (before asmcomp/liveness.ml(94):4050-5514
+                                 (let
+                                   (aux =
+                                      (function param param
+                                        (funct-body asmcomp/liveness.ml(94)<ghost>:4058-4246
+                                          (let
+                                            (before_handler =a
+                                               (field 1 param)
+                                             nfail' =a (field 0 param)
+                                             handler =a (field 1 param)
+                                             nfail =a (field 0 param))
+                                            (before asmcomp/liveness.ml(95):4109-4246
+                                              (seq
+                                                (if
+                                                  (after asmcomp/liveness.ml(95):4115-4131
+                                                    (caml_equal nfail nfail'))
+                                                  0a
+                                                  (raise
+                                                    (after asmcomp/liveness.ml(95):4109-4131
+                                                      (makeblock 0
+                                                        (global Assert_failure!)
+                                                        [0:
+                                                         "asmcomp/liveness.ml"
+                                                         95 8]))))
+                                                (before asmcomp/liveness.ml(96):4141-4246
+                                                  (let
+                                                    (before_handler' =
+                                                       (after asmcomp/liveness.ml(96):4163-4183
+                                                         (apply live handler
+                                                           at_join)))
+                                                    (before asmcomp/liveness.ml(97):4195-4246
+                                                      (makeblock 0 nfail
+                                                        (after asmcomp/liveness.ml(97):4202-4246
+                                                          (apply
+                                                            (field 6
+                                                              (field 9
+                                                                (global Reg!)))
+                                                            before_handler
+                                                            before_handler'))))))))))))
+                                   (before asmcomp/liveness.ml(99):4262-5514
+                                     (let
+                                       (aux_equal =
+                                          (function param param
+                                            (funct-body asmcomp/liveness.ml(99)<ghost>:4276-4412
+                                              (let
+                                                (before_handler' =a
+                                                   (field 1 param)
+                                                 nfail' =a (field 0 param)
+                                                 before_handler =a
+                                                   (field 1 param)
+                                                 nfail =a (field 0 param))
+                                                (before asmcomp/liveness.ml(100):4336-4412
+                                                  (seq
+                                                    (if
+                                                      (after asmcomp/liveness.ml(100):4342-4358
+                                                        (caml_equal nfail
+                                                          nfail'))
+                                                      0a
+                                                      (raise
+                                                        (after asmcomp/liveness.ml(100):4336-4358
+                                                          (makeblock 0
+                                                            (global Assert_failure!)
+                                                            [0:
+                                                             "asmcomp/liveness.ml"
+                                                             100 8]))))
+                                                    (before asmcomp/liveness.ml(101):4368-4412
+                                                      (after asmcomp/liveness.ml(101):4368-4412
+                                                        (apply
+                                                          (field 11
+                                                            (field 9
+                                                              (global Reg!)))
+                                                          before_handler
+                                                          before_handler')))))))))
+                                       (before asmcomp/liveness.ml(103):4428-5514
+                                         (let
+                                           (live_at_exit_before =
+                                              (field 0 live_at_exit))
+                                           (before asmcomp/liveness.ml(104):4477-5514
+                                             (letrec
+                                               (fixpoint
+                                                  (function before_handlers
+                                                    (funct-body asmcomp/liveness.ml(104)<ghost>:4494-4949
+                                                      (before asmcomp/liveness.ml(105):4520-4949
+                                                        (seq
+                                                          (setfield_ptr 0
+                                                            live_at_exit
+                                                            (after asmcomp/liveness.ml(105):4536-4567
+                                                              (apply
+                                                                (field 36
+                                                                  (global Stdlib!))
+                                                                before_handlers
+                                                                (field 0
+                                                                  live_at_exit))))
+                                                          (before asmcomp/liveness.ml(106):4577-4949
+                                                            (let
+                                                              (before_handlers' =
+                                                                 (after asmcomp/liveness.ml(106):4600-4638
+                                                                   (apply
+                                                                    (field 23
+                                                                    (global Stdlib__list!))
+                                                                    aux
+                                                                    handlers
+                                                                    before_handlers)))
+                                                              (before asmcomp/liveness.ml(107):4650-4949
+                                                                (seq
+                                                                  (setfield_ptr 0
+                                                                    live_at_exit
+                                                                    live_at_exit_before)
+                                                                  (before asmcomp/liveness.ml(108):4695-4949
+                                                                    (if
+                                                                    rec_flag
+                                                                    (before asmcomp/liveness.ml(112):4813-4949
+                                                                    (if
+                                                                    (after asmcomp/liveness.ml(112):4816-4872
+                                                                    (apply
+                                                                    (field 29
+                                                                    (global Stdlib__list!))
+                                                                    aux_equal
+                                                                    before_handlers
+                                                                    before_handlers'))
+                                                                    (before asmcomp/liveness.ml(113):4890-4906
+                                                                    before_handlers')
+                                                                    (before asmcomp/liveness.ml(114):4924-4949
+                                                                    (after asmcomp/liveness.ml(114):4924-4949
+                                                                    (apply
+                                                                    fixpoint
+                                                                    before_handlers')))))
+                                                                    (before asmcomp/liveness.ml(110):4757-4773
+                                                                    before_handlers'))))))))))))
+                                               (before asmcomp/liveness.ml(116):4965-5514
+                                                 (let
+                                                   (init_state =
+                                                      (after asmcomp/liveness.ml(117):4990-5055
+                                                        (apply
+                                                          (field 16
+                                                            (global Stdlib__list!))
+                                                          (function param
+                                                            (funct-body asmcomp/liveness.ml(117):4999-5046
+                                                              (let
+                                                                (nfail =a
+                                                                   (field 0
+                                                                    param))
+                                                                (before asmcomp/liveness.ml(117):5025-5045
+                                                                  (makeblock 0 (int,*)
+                                                                    nfail
+                                                                    (field 0
+                                                                    (field 9
+                                                                    (global Reg!))))))))
+                                                          handlers)))
+                                                   (before asmcomp/liveness.ml(119):5071-5514
+                                                     (let
+                                                       (before_handler =
+                                                          (after asmcomp/liveness.ml(119):5092-5111
+                                                            (apply fixpoint
+                                                              init_state)))
+                                                       (before asmcomp/liveness.ml(123):5332-5514
+                                                         (seq
+                                                           (setfield_ptr 0
+                                                             live_at_exit
+                                                             (after asmcomp/liveness.ml(123):5348-5378
+                                                               (apply
+                                                                 (field 36
+                                                                   (global Stdlib!))
+                                                                 before_handler
+                                                                 (field 0
+                                                                   live_at_exit))))
+                                                           (before asmcomp/liveness.ml(124):5386-5514
+                                                             (let
+                                                               (before_body =
+                                                                  (after asmcomp/liveness.ml(124):5404-5421
+                                                                    (apply
+                                                                    live body
+                                                                    at_join)))
+                                                               (before asmcomp/liveness.ml(125):5431-5514
+                                                                 (seq
+                                                                   (setfield_ptr 0
+                                                                    live_at_exit
+                                                                    live_at_exit_before)
+                                                                   (before asmcomp/liveness.ml(126):5474-5514
+                                                                    (seq
+                                                                    (setfield_ptr 5
+                                                                    i
+                                                                    before_body)
+                                                                    (before asmcomp/liveness.ml(127):5503-5514
+                                                                    before_body))))))))))))))))))))))))
+                        case tag 4:
+                         (let (nfail =a (field 0 *match*))
+                           (before asmcomp/liveness.ml(129):5540-5626
+                             (let
+                               (this_live =
+                                  (after asmcomp/liveness.ml(129):5556-5579
+                                    (apply find_live_at_exit nfail)))
+                               (before asmcomp/liveness.ml(130):5589-5626
+                                 (seq (setfield_ptr 5 i this_live)
+                                   (before asmcomp/liveness.ml(131):5617-5626
+                                     this_live))))))
+                        case tag 5:
+                         (let
+                           (handler =a (field 1 *match*)
+                            body =a (field 0 *match*))
+                           (before asmcomp/liveness.ml(133):5664-6011
+                             (let
+                               (at_join =
+                                  (after asmcomp/liveness.ml(133):5678-5697
+                                    (apply live (field 1 i) finally)))
+                               (before asmcomp/liveness.ml(134):5707-6011
+                                 (let
+                                   (before_handler =
+                                      (after asmcomp/liveness.ml(134):5728-5748
+                                        (apply live handler at_join)))
+                                   (before asmcomp/liveness.ml(135):5758-6011
+                                     (let
+                                       (saved_live_at_raise =
+                                          (field 0 live_at_raise))
+                                       (before asmcomp/liveness.ml(136):5808-6011
+                                         (seq
+                                           (setfield_ptr 0 live_at_raise
+                                             (after asmcomp/liveness.ml(136):5825-5874
+                                               (apply
+                                                 (field 5
+                                                   (field 9 (global Reg!)))
+                                                 (field 13 (global Proc!))
+                                                 before_handler)))
+                                           (before asmcomp/liveness.ml(137):5882-6011
+                                             (let
+                                               (before_body =
+                                                  (after asmcomp/liveness.ml(137):5900-5917
+                                                    (apply live body at_join)))
+                                               (before asmcomp/liveness.ml(138):5927-6011
+                                                 (seq
+                                                   (setfield_ptr 0
+                                                     live_at_raise
+                                                     saved_live_at_raise)
+                                                   (before asmcomp/liveness.ml(139):5971-6011
+                                                     (seq
+                                                       (setfield_ptr 5 i
+                                                         before_body)
+                                                       (before asmcomp/liveness.ml(140):6000-6011
+                                                         before_body))))))))))))))))
+                        case tag 6:
+                         (before asmcomp/liveness.ml(142):6034-6102
+                           (seq (setfield_ptr 5 i (field 0 live_at_raise))
+                             (before asmcomp/liveness.ml(143):6066-6102
+                               (after asmcomp/liveness.ml(143):6066-6102
+                                 (apply (field 11 (global Reg!))
+                                   (field 0 live_at_raise) arg))))))
+                      with (4)
+                       (before asmcomp/liveness.ml(49):2013-2094
+                         (seq
+                           (setfield_ptr 5 i
+                             (field 0 (field 9 (global Reg!))))
+                           (before asmcomp/liveness.ml(50):2074-2094
+                             (after asmcomp/liveness.ml(50):2074-2094
+                               (apply (field 15 (global Reg!)) arg)))))))))))))
+      (let
+        (reset =
+           (function param
+             (funct-body asmcomp/liveness.ml(145)<ghost>:6114-6173
+               (before asmcomp/liveness.ml(146):6121-6173
+                 (seq
+                   (setfield_ptr 0 live_at_raise
+                     (field 0 (field 9 (global Reg!))))
+                   (before asmcomp/liveness.ml(147):6155-6173
+                     (setfield_ptr 0 live_at_exit 0a))))))
+         fundecl =
+           (function f
+             (funct-body asmcomp/liveness.ml(149)<ghost>:6187-6730
+               (before asmcomp/liveness.ml(150):6193-6730
+                 (let
+                   (initially_live =
+                      (after asmcomp/liveness.ml(150):6214-6243
+                        (apply live (field 2 f)
+                          (field 0 (field 9 (global Reg!))))))
+                   (before asmcomp/liveness.ml(153):6380-6730
+                     (let
+                       (wrong_live =
+                          (after asmcomp/liveness.ml(153):6397-6454
+                            (apply (field 9 (field 9 (global Reg!)))
+                              initially_live
+                              (after asmcomp/liveness.ml(153):6425-6454
+                                (apply (field 15 (global Reg!)) (field 1 f))))))
+                       (before asmcomp/liveness.ml(154):6460-6730
+                         (let
+                           (wrong_live =
+                              (if (not (field 52 (global Config!)))
+                                (before asmcomp/liveness.ml(155):6510-6520
+                                  wrong_live)
+                                (before asmcomp/liveness.ml(156):6530-6584
+                                  (after asmcomp/liveness.ml(156):6530-6584
+                                    (apply (field 5 (field 9 (global Reg!)))
+                                      (field 14 (global Proc!)) wrong_live)))))
+                           (before asmcomp/liveness.ml(158):6592-6730
+                             (if
+                               (not
+                                 (after asmcomp/liveness.ml(158):6599-6628
+                                   (apply (field 1 (field 9 (global Reg!)))
+                                     wrong_live)))
+                               (before asmcomp/liveness.ml(158):6634-6730
+                                 (after asmcomp/liveness.ml(158):6634-6730
+                                   (apply (field 1 (global Misc!))
+                                     [0:
+                                      [18:
+                                       [1: [0: 0a ""]]
+                                       [11:
+                                        "Liveness.fundecl:"
+                                        [17: 3a [15: [17: 0a 0a]]]]]
+                                      "@[Liveness.fundecl:@\n%a@]"]
+                                     (field 2 (global Printmach!))
+                                     wrong_live)))
+                               0a)))))))))))
+        (pseudo _none_(0)<ghost>:-1--1 (makeblock 0 reset fundecl))))))

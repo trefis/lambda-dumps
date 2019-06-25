@@ -1,0 +1,1138 @@
+(setglobal Compilenv!
+  (let
+    (Error = (makeblock 248 "Compilenv.Error" (caml_fresh_oo_id 0))
+     global_infos_table =
+       (after middle_end/compilenv.ml(35):1689-1706
+         (apply (field 0 (global Stdlib__hashtbl!)) 0a 17))
+     export_infos_table =
+       (after middle_end/compilenv.ml(37):1776-1793
+         (apply (field 0 (global Stdlib__hashtbl!)) 0a 10))
+     imported_sets_of_closures_table =
+       (after middle_end/compilenv.ml(40):1873-1905
+         (apply (field 0 (field 8 (global Set_of_closures_id!))) 10))
+     CstMap =
+       (module-defn(CstMap) middle_end/compilenv.ml(44):1994-2259
+         (apply
+           (let (let = (field 0 (global Stdlib__map!)))
+             (field 0 (global Stdlib__map!)))
+           (let (compare = (field 0 (global Clambda!)))
+             (pseudo middle_end/compilenv.ml(45):2021-2258
+               (makeblock 0 compare)))))
+     structured_constants_empty = (makeblock 0 (field 0 CstMap) 0a)
+     structured_constants = (makemutable 0 structured_constants_empty)
+     exported_constants =
+       (after middle_end/compilenv.ml(67):2579-2596
+         (apply (field 0 (global Stdlib__hashtbl!)) 0a 17))
+     merged_environment = (makemutable 0 (field 0 (global Export_info!)))
+     default_ui_export_info =
+       (if (field 50 (global Config!))
+         (before middle_end/compilenv.ml(73):2704-2740
+           (makeblock 1 (field 0 (global Export_info!))))
+         (before middle_end/compilenv.ml(75):2752-2784 [0: 0a]))
+     current_unit =
+       (makemutable 0 "" "" 0a 0a 0a 0a 0a 0a default_ui_export_info 0a)
+     symbolname_for_pack =
+       (function pack name
+         (funct-body middle_end/compilenv.ml(89)<ghost>:3080-3420
+           (before middle_end/compilenv.ml(90):3094-3420
+             (if pack
+               (let (p =a (field 0 pack))
+                 (before middle_end/compilenv.ml(93):3147-3420
+                   (let
+                     (b =
+                        (after middle_end/compilenv.ml(93):3155-3171
+                          (apply (field 0 (global Stdlib__buffer!)) 64)))
+                     (before middle_end/compilenv.ml(94):3181-3420
+                       (seq
+                         (for i 0 to (- (string.length p) 1)
+                           (before middle_end/compilenv.ml(95):3225-3320
+                             (let
+                               (c =
+                                  (after middle_end/compilenv.ml(95):3231-3236
+                                    (string.get p i)))
+                               (if (!= c 46)
+                                 (before middle_end/compilenv.ml(97):3301-3320
+                                   (after middle_end/compilenv.ml(97):3301-3320
+                                     (apply
+                                       (field 9 (global Stdlib__buffer!)) b
+                                       c)))
+                                 (before middle_end/compilenv.ml(96):3259-3283
+                                   (after middle_end/compilenv.ml(96):3259-3283
+                                     (apply
+                                       (field 13 (global Stdlib__buffer!)) b
+                                       "__")))))))
+                         (before middle_end/compilenv.ml(99):3339-3420
+                           (seq
+                             (after middle_end/compilenv.ml(99):3339-3363
+                               (apply (field 13 (global Stdlib__buffer!)) b
+                                 "__"))
+                             (before middle_end/compilenv.ml(100):3371-3420
+                               (seq
+                                 (after middle_end/compilenv.ml(100):3371-3395
+                                   (apply (field 13 (global Stdlib__buffer!))
+                                     b name))
+                                 (before middle_end/compilenv.ml(101):3403-3420
+                                   (after middle_end/compilenv.ml(101):3403-3420
+                                     (apply
+                                       (field 1 (global Stdlib__buffer!)) b))))))))))))
+               (before middle_end/compilenv.ml(91):3122-3126 name)))))
+     unit_id_from_name =
+       (function name
+         (funct-body middle_end/compilenv.ml(103)<ghost>:3444-3479
+           (before middle_end/compilenv.ml(103):3451-3479
+             (after middle_end/compilenv.ml(103):3451-3479
+               (apply (field 11 (global Ident!)) name)))))
+     concat_symbol =
+       (function unitname id
+         (funct-body middle_end/compilenv.ml(105)<ghost>:3499-3535
+           (before middle_end/compilenv.ml(106):3515-3535
+             (after middle_end/compilenv.ml(106):3515-3535
+               (apply (field 27 (global Stdlib!)) unitname
+                 (after middle_end/compilenv.ml(106):3526-3535
+                   (apply (field 27 (global Stdlib!)) "__" id)))))))
+     make_symbol =
+       (function *opt* idopt
+         (funct-body middle_end/compilenv.ml(108)<ghost>:3553-3710
+           (before middle_end/compilenv.ml(109):3600-3710
+             (let
+               (unitname =
+                  (if *opt*
+                    (let (*sth* =a (field 0 *opt*))
+                      (before middle_end/compilenv.ml(108):3566-3588 *sth*))
+                    (before middle_end/compilenv.ml(108):3566-3588
+                      (field 1 current_unit))))
+               (before middle_end/compilenv.ml(109):3600-3710
+                 (let
+                   (prefix =
+                      (after middle_end/compilenv.ml(109):3613-3630
+                        (apply (field 27 (global Stdlib!)) "caml" unitname)))
+                   (before middle_end/compilenv.ml(110):3636-3710
+                     (if idopt
+                       (let (id =a (field 0 idopt))
+                         (before middle_end/compilenv.ml(112):3687-3710
+                           (after middle_end/compilenv.ml(112):3687-3710
+                             (apply concat_symbol prefix id))))
+                       (before middle_end/compilenv.ml(111):3665-3671 prefix)))))))))
+     current_unit_linkage_name =
+       (function param
+         (funct-body middle_end/compilenv.ml(114)<ghost>:3742-3820
+           (before middle_end/compilenv.ml(115):3749-3820
+             (after middle_end/compilenv.ml(115):3749-3820
+               (apply (field 9 (global Linkage_name!))
+                 (after middle_end/compilenv.ml(115):3769-3820
+                   (apply make_symbol (makeblock 0 (field 1 current_unit))
+                     0a)))))))
+     reset =
+       (function packname name
+         (funct-body middle_end/compilenv.ml(117)<ghost>:3832-4749
+           (before middle_end/compilenv.ml(118):3851-4749
+             (seq
+               (after middle_end/compilenv.ml(118):3851-3883
+                 (apply (field 1 (global Stdlib__hashtbl!))
+                   global_infos_table))
+               (before middle_end/compilenv.ml(119):3887-4749
+                 (seq
+                   (after middle_end/compilenv.ml(119):3887-3947
+                     (apply (field 1 (field 8 (global Set_of_closures_id!)))
+                       imported_sets_of_closures_table))
+                   (before middle_end/compilenv.ml(120):3951-4749
+                     (let
+                       (symbol =
+                          (after middle_end/compilenv.ml(120):3964-3997
+                            (apply symbolname_for_pack packname name)))
+                       (before middle_end/compilenv.ml(121):4003-4749
+                         (seq (setfield_ptr 0 current_unit name)
+                           (before middle_end/compilenv.ml(122):4035-4749
+                             (seq (setfield_ptr 1 current_unit symbol)
+                               (before middle_end/compilenv.ml(123):4071-4749
+                                 (seq
+                                   (setfield_ptr 2 current_unit
+                                     (makeblock 0 symbol 0a))
+                                   (before middle_end/compilenv.ml(124):4110-4749
+                                     (seq (setfield_ptr 3 current_unit 0a)
+                                       (before middle_end/compilenv.ml(125):4147-4749
+                                         (seq
+                                           (setfield_ptr 4 current_unit 0a)
+                                           (before middle_end/compilenv.ml(126):4184-4749
+                                             (seq
+                                               (setfield_ptr 5 current_unit
+                                                 0a)
+                                               (before middle_end/compilenv.ml(127):4219-4749
+                                                 (seq
+                                                   (setfield_ptr 6
+                                                     current_unit 0a)
+                                                   (before middle_end/compilenv.ml(128):4254-4749
+                                                     (seq
+                                                       (setfield_ptr 7
+                                                         current_unit 0a)
+                                                       (before middle_end/compilenv.ml(129):4288-4749
+                                                         (seq
+                                                           (setfield_imm 9
+                                                             current_unit
+                                                             (field 0
+                                                               (field 20
+                                                                 (global Clflags!))))
+                                                           (before middle_end/compilenv.ml(130):4346-4749
+                                                             (seq
+                                                               (after middle_end/compilenv.ml(130):4346-4378
+                                                                 (apply
+                                                                   (field 1
+                                                                    (global Stdlib__hashtbl!))
+                                                                   exported_constants))
+                                                               (before middle_end/compilenv.ml(131):4382-4749
+                                                                 (seq
+                                                                   (setfield_ptr 0
+                                                                    structured_constants
+                                                                    structured_constants_empty)
+                                                                   (before middle_end/compilenv.ml(132):4436-4749
+                                                                    (seq
+                                                                    (setfield_ptr 8
+                                                                    current_unit
+                                                                    default_ui_export_info)
+                                                                    (before middle_end/compilenv.ml(133):4493-4749
+                                                                    (seq
+                                                                    (setfield_ptr 0
+                                                                    merged_environment
+                                                                    (field 0
+                                                                    (global Export_info!)))
+                                                                    (before middle_end/compilenv.ml(134):4536-4749
+                                                                    (seq
+                                                                    (after middle_end/compilenv.ml(134):4536-4568
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Stdlib__hashtbl!))
+                                                                    export_infos_table))
+                                                                    (before middle_end/compilenv.ml(135):4572-4749
+                                                                    (let
+                                                                    (compilation_unit =
+                                                                    (after middle_end/compilenv.ml(136):4599-4696
+                                                                    (apply
+                                                                    (field 9
+                                                                    (global Compilation_unit!))
+                                                                    (after middle_end/compilenv.ml(137):4629-4659
+                                                                    (apply
+                                                                    (field 11
+                                                                    (global Ident!))
+                                                                    name))
+                                                                    (after middle_end/compilenv.ml(138):4666-4696
+                                                                    (apply
+                                                                    current_unit_linkage_name
+                                                                    0a)))))
+                                                                    (before middle_end/compilenv.ml(140):4704-4749
+                                                                    (after middle_end/compilenv.ml(140):4704-4749
+                                                                    (apply
+                                                                    (field 13
+                                                                    (global Compilation_unit!))
+                                                                    compilation_unit)))))))))))))))))))))))))))))))))))))))))
+     current_unit_infos =
+       (function param
+         (funct-body middle_end/compilenv.ml(142)<ghost>:4774-4793
+           (before middle_end/compilenv.ml(143):4781-4793 current_unit)))
+     current_unit_name =
+       (function param
+         (funct-body middle_end/compilenv.ml(145)<ghost>:4817-4844
+           (before middle_end/compilenv.ml(146):4824-4844
+             (field 0 current_unit))))
+     symbol_in_current_unit =
+       (function name
+         (funct-body middle_end/compilenv.ml(148)<ghost>:4873-5101
+           (before middle_end/compilenv.ml(149):4882-5101
+             (let
+               (prefix =
+                  (after middle_end/compilenv.ml(149):4895-4926
+                    (apply (field 27 (global Stdlib!)) "caml"
+                      (field 1 current_unit))))
+               (before middle_end/compilenv.ml(150):4932-5101
+                 (||
+                   (after middle_end/compilenv.ml(150):4932-4945
+                     (caml_string_equal name prefix))
+                   (let (lp =[int] (string.length prefix))
+                     (before middle_end/compilenv.ml(152):4988-5100
+                       (&& (>= (string.length name) (+ 2 lp))
+                         (&&
+                           (after middle_end/compilenv.ml(153):5023-5052
+                             (caml_string_equal
+                               (after middle_end/compilenv.ml(153):5023-5043
+                                 (apply (field 3 (global Stdlib__string!))
+                                   name 0 lp))
+                               prefix))
+                           (&&
+                             (==
+                               (after middle_end/compilenv.ml(154):5059-5068
+                                 (string.get name lp))
+                               '_')
+                             (==
+                               (after middle_end/compilenv.ml(155):5081-5094
+                                 (string.get name (+ lp 1)))
+                               '_'))))))))))))
+     read_unit_info =
+       (function filename
+         (funct-body middle_end/compilenv.ml(157)<ghost>:5122-5576
+           (before middle_end/compilenv.ml(158):5135-5576
+             (let
+               (ic =
+                  (after middle_end/compilenv.ml(158):5144-5164
+                    (apply (field 79 (global Stdlib!)) filename)))
+               (before middle_end/compilenv.ml(159):5170-5576
+                 (try
+                   (let
+                     (buffer =
+                        (after middle_end/compilenv.ml(160):5191-5246
+                          (apply (field 85 (global Stdlib!)) ic
+                            (string.length (field 24 (global Config!))))))
+                     (before middle_end/compilenv.ml(161):5254-5477
+                       (seq
+                         (if
+                           (after middle_end/compilenv.ml(161):5257-5283
+                             (caml_string_notequal buffer
+                               (field 24 (global Config!))))
+                           (before middle_end/compilenv.ml(161):5289-5366
+                             (seq
+                               (after middle_end/compilenv.ml(162):5301-5312
+                                 (apply (field 92 (global Stdlib!)) ic))
+                               (before middle_end/compilenv.ml(163):5320-5358
+                                 (raise
+                                   (after middle_end/compilenv.ml(163):5325-5358
+                                     (makeblock 0 Error
+                                       (makeblock 0 filename)))))))
+                           0a)
+                         (before middle_end/compilenv.ml(165):5372-5477
+                           (let
+                             (ui =
+                                (after middle_end/compilenv.ml(165):5382-5396
+                                  (apply (field 88 (global Stdlib!)) ic)))
+                             (before middle_end/compilenv.ml(166):5418-5477
+                               (let
+                                 (crc =
+                                    (after middle_end/compilenv.ml(166):5428-5443
+                                      (apply
+                                        (field 8 (global Stdlib__digest!))
+                                        ic)))
+                                 (before middle_end/compilenv.ml(167):5451-5477
+                                   (seq
+                                     (after middle_end/compilenv.ml(167):5451-5462
+                                       (apply (field 92 (global Stdlib!)) ic))
+                                     (before middle_end/compilenv.ml(168):5468-5477
+                                       (makeblock 0 ui crc)))))))))))
+                  with exn
+                   (catch
+                     (if (== exn (field 11 (global Stdlib!))) (exit 3)
+                       (let (tag =a (field 0 exn))
+                         (if (== tag (field 6 (global Stdlib!))) (exit 3)
+                           (reraise exn))))
+                    with (3)
+                     (before middle_end/compilenv.ml(170):5516-5576
+                       (seq
+                         (after middle_end/compilenv.ml(170):5516-5527
+                           (apply (field 92 (global Stdlib!)) ic))
+                         (before middle_end/compilenv.ml(171):5533-5576
+                           (raise
+                             (after middle_end/compilenv.ml(171):5538-5576
+                               (makeblock 0 Error (makeblock 1 filename))))))))))))))
+     read_library_info =
+       (function filename
+         (funct-body middle_end/compilenv.ml(173)<ghost>:5600-5875
+           (before middle_end/compilenv.ml(174):5613-5875
+             (let
+               (ic =
+                  (after middle_end/compilenv.ml(174):5622-5642
+                    (apply (field 79 (global Stdlib!)) filename)))
+               (before middle_end/compilenv.ml(175):5648-5875
+                 (let
+                   (buffer =
+                      (after middle_end/compilenv.ml(175):5661-5717
+                        (apply (field 85 (global Stdlib!)) ic
+                          (string.length (field 25 (global Config!))))))
+                   (before middle_end/compilenv.ml(176):5723-5875
+                     (seq
+                       (if
+                         (after middle_end/compilenv.ml(176):5726-5753
+                           (caml_string_notequal buffer
+                             (field 25 (global Config!))))
+                         (before middle_end/compilenv.ml(177):5763-5801
+                           (raise
+                             (after middle_end/compilenv.ml(177):5768-5801
+                               (makeblock 0 Error (makeblock 0 filename)))))
+                         0a)
+                       (before middle_end/compilenv.ml(178):5805-5875
+                         (let
+                           (infos =
+                              (after middle_end/compilenv.ml(178):5818-5832
+                                (apply (field 88 (global Stdlib!)) ic)))
+                           (before middle_end/compilenv.ml(179):5855-5875
+                             (seq
+                               (after middle_end/compilenv.ml(179):5855-5866
+                                 (apply (field 92 (global Stdlib!)) ic))
+                               (before middle_end/compilenv.ml(180):5870-5875
+                                 infos)))))))))))))
+     get_global_info =
+       (function global_ident
+         (funct-body middle_end/compilenv.ml(185)<ghost>:5947-6920
+           (before middle_end/compilenv.ml(185):5962-6920
+             (let
+               (modname =
+                  (after middle_end/compilenv.ml(186):5980-6003
+                    (apply (field 14 (global Ident!)) global_ident)))
+               (before middle_end/compilenv.ml(187):6009-6918
+                 (if
+                   (after middle_end/compilenv.ml(187):6012-6042
+                     (caml_string_equal modname (field 0 current_unit)))
+                   (before middle_end/compilenv.ml(188):6052-6069
+                     (makeblock 0 current_unit))
+                   (before middle_end/compilenv.ml(189):6077-6918
+                     (try
+                       (after middle_end/compilenv.ml(191):6097-6136
+                         (apply (field 5 (global Stdlib__hashtbl!))
+                           global_infos_table modname))
+                      with exn
+                       (if (== exn (field 7 (global Stdlib!)))
+                         (before middle_end/compilenv.ml(193):6165-6912
+                           (catch
+                             (if
+                               (after middle_end/compilenv.ml(194):6195-6225
+                                 (apply (field 82 (global Env!)) modname))
+                               (before middle_end/compilenv.ml(194):6231-6243
+                                 (let (crc = 0a infos = 0a)
+                                   (exit 15 crc infos)))
+                               (before middle_end/compilenv.ml(195):6257-6747
+                                 (try
+                                   (let
+                                     (filename =
+                                        (after middle_end/compilenv.ml(198):6318-6357
+                                          (apply
+                                            (field 6 (global Load_path!))
+                                            (after middle_end/compilenv.ml(198):6339-6357
+                                              (apply
+                                                (field 27 (global Stdlib!))
+                                                modname ".cmx")))))
+                                     (before middle_end/compilenv.ml(199):6373-6566
+                                       (let
+                                         (*match* =
+                                            (after middle_end/compilenv.ml(199):6389-6412
+                                              (apply read_unit_info filename))
+                                          crc =a (field 1 *match*)
+                                          ui =a (field 0 *match*))
+                                         (before middle_end/compilenv.ml(200):6428-6566
+                                           (seq
+                                             (if
+                                               (after middle_end/compilenv.ml(200):6431-6452
+                                                 (caml_string_notequal
+                                                   (field 0 ui) modname))
+                                               (before middle_end/compilenv.ml(201):6472-6533
+                                                 (raise
+                                                   (after middle_end/compilenv.ml(201):6477-6533
+                                                     (makeblock 0 Error
+                                                       (makeblock 2 modname
+                                                         (field 0 ui)
+                                                         filename)))))
+                                               0a)
+                                             (before middle_end/compilenv.ml(202):6547-6566
+                                               (let
+                                                 (crc = (makeblock 0 crc)
+                                                  infos = (makeblock 0 ui))
+                                                 (exit 15 crc infos))))))))
+                                  with exn
+                                   (if (== exn (field 7 (global Stdlib!)))
+                                     (before middle_end/compilenv.ml(204):6607-6733
+                                       (let (warn = (makeblock 38 modname))
+                                         (before middle_end/compilenv.ml(205):6664-6733
+                                           (seq
+                                             (after middle_end/compilenv.ml(205):6664-6705
+                                               (apply
+                                                 (field 34
+                                                   (global Location!))
+                                                 (field 0 (global Location!))
+                                                 warn))
+                                             (before middle_end/compilenv.ml(206):6721-6733
+                                               (let (crc = 0a infos = 0a)
+                                                 (exit 15 crc infos)))))))
+                                     (reraise exn)))))
+                            with (15 crc infos)
+                             (before middle_end/compilenv.ml(209):6763-6912
+                               (seq
+                                 (setfield_ptr 4 current_unit
+                                   (makeblock 0 (makeblock 0 modname crc)
+                                     (field 4 current_unit)))
+                                 (before middle_end/compilenv.ml(211):6855-6912
+                                   (seq
+                                     (after middle_end/compilenv.ml(211):6855-6899
+                                       (apply
+                                         (field 4 (global Stdlib__hashtbl!))
+                                         global_infos_table modname infos))
+                                     (before middle_end/compilenv.ml(212):6907-6912
+                                       infos)))))))
+                         (reraise exn))))))))))
+     cache_unit_info =
+       (function ui
+         (funct-body middle_end/compilenv.ml(216)<ghost>:6942-7000
+           (before middle_end/compilenv.ml(217):6949-7000
+             (after middle_end/compilenv.ml(217):6949-7000
+               (apply (field 4 (global Stdlib__hashtbl!)) global_infos_table
+                 (field 0 ui) (makeblock 0 ui))))))
+     get_clambda_approx =
+       (function ui
+         (funct-body middle_end/compilenv.ml(221)<ghost>:7080-7204
+           (before middle_end/compilenv.ml(222):7087-7204
+             (seq
+               (if (not (field 50 (global Config!))) 0a
+                 (raise
+                   (after middle_end/compilenv.ml(222):7087-7113
+                     (makeblock 0 (global Assert_failure!)
+                       [0: "middle_end/compilenv.ml" 222 2]))))
+               (before middle_end/compilenv.ml(223):7117-7204
+                 (let (*match* = (field 8 ui))
+                   (switch* *match*
+                    case tag 0:
+                     (let (approx =a (field 0 *match*))
+                       (before middle_end/compilenv.ml(225):7198-7204 approx))
+                    case tag 1:
+                     (before middle_end/compilenv.ml(224):7163-7175
+                       (raise
+                         (after middle_end/compilenv.ml(224):7163-7175
+                           (makeblock 0 (global Assert_failure!)
+                             [0: "middle_end/compilenv.ml" 224 17])))))))))))
+     toplevel_approx =
+       (after middle_end/compilenv.ml(228):7280-7297
+         (apply (field 0 (global Stdlib__hashtbl!)) 0a 16))
+     record_global_approx_toplevel =
+       (function param
+         (funct-body middle_end/compilenv.ml(230)<ghost>:7333-7426
+           (before middle_end/compilenv.ml(231):7340-7426
+             (after middle_end/compilenv.ml(231):7340-7426
+               (apply (field 4 (global Stdlib__hashtbl!)) toplevel_approx
+                 (field 0 current_unit)
+                 (after middle_end/compilenv.ml(232):7393-7426
+                   (apply get_clambda_approx current_unit)))))))
+     global_approx =
+       (function id
+         (funct-body middle_end/compilenv.ml(234)<ghost>:7446-7690
+           (before middle_end/compilenv.ml(235):7453-7690
+             (if
+               (after middle_end/compilenv.ml(235):7456-7474
+                 (apply (field 21 (global Ident!)) id))
+               (before middle_end/compilenv.ml(235):7480-7501 0a)
+               (before middle_end/compilenv.ml(236):7509-7690
+                 (try
+                   (after middle_end/compilenv.ml(236):7513-7557
+                     (apply (field 5 (global Stdlib__hashtbl!))
+                       toplevel_approx
+                       (after middle_end/compilenv.ml(236):7542-7557
+                         (apply (field 14 (global Ident!)) id))))
+                  with exn
+                   (if (== exn (field 7 (global Stdlib!)))
+                     (before middle_end/compilenv.ml(238):7582-7690
+                       (let
+                         (*match* =
+                            (after middle_end/compilenv.ml(238):7588-7606
+                              (apply get_global_info id)))
+                         (if *match*
+                           (let (ui =a (field 0 *match*))
+                             (before middle_end/compilenv.ml(240):7669-7690
+                               (after middle_end/compilenv.ml(240):7669-7690
+                                 (apply get_clambda_approx ui))))
+                           (before middle_end/compilenv.ml(239):7628-7649 0a))))
+                     (reraise exn))))))))
+     symbol_for_global =
+       (function id
+         (funct-body middle_end/compilenv.ml(244)<ghost>:7776-8135
+           (before middle_end/compilenv.ml(245):7783-8135
+             (if
+               (after middle_end/compilenv.ml(245):7786-7804
+                 (apply (field 21 (global Ident!)) id))
+               (before middle_end/compilenv.ml(246):7814-7841
+                 (after middle_end/compilenv.ml(246):7814-7841
+                   (apply (field 27 (global Stdlib!)) "caml_exn_"
+                     (after middle_end/compilenv.ml(246):7828-7841
+                       (apply (field 14 (global Ident!)) id)))))
+               (before middle_end/compilenv.ml(247):7849-8135
+                 (let
+                   (unitname =
+                      (after middle_end/compilenv.ml(248):7874-7887
+                        (apply (field 14 (global Ident!)) id)))
+                   (before middle_end/compilenv.ml(249):7895-8129
+                     (let
+                       (*match* =
+                          (try
+                            (seq
+                              (ignore
+                                (after middle_end/compilenv.ml(250):7918-7957
+                                  (apply (field 5 (global Stdlib__hashtbl!))
+                                    toplevel_approx unitname)))
+                              (before middle_end/compilenv.ml(250):7959-7963
+                                0a))
+                           with exn
+                            (if (== exn (field 7 (global Stdlib!)))
+                              (before middle_end/compilenv.ml(251):7988-8006
+                                (after middle_end/compilenv.ml(251):7988-8006
+                                  (apply get_global_info id)))
+                              (reraise exn))))
+                       (if *match*
+                         (let (ui =a (field 0 *match*))
+                           (before middle_end/compilenv.ml(254):8090-8129
+                             (after middle_end/compilenv.ml(254):8090-8129
+                               (apply make_symbol (makeblock 0 (field 1 ui))
+                                 0a))))
+                         (before middle_end/compilenv.ml(253):8030-8072
+                           (after middle_end/compilenv.ml(253):8030-8072
+                             (apply make_symbol
+                               (makeblock 0
+                                 (after middle_end/compilenv.ml(253):8052-8067
+                                   (apply (field 14 (global Ident!)) id)))
+                               0a))))))))))))
+     unit_for_global =
+       (function id
+         (funct-body middle_end/compilenv.ml(259)<ghost>:8220-8327
+           (before middle_end/compilenv.ml(260):8227-8327
+             (let
+               (sym_label =
+                  (after middle_end/compilenv.ml(260):8243-8285
+                    (apply (field 9 (global Linkage_name!))
+                      (after middle_end/compilenv.ml(260):8263-8285
+                        (apply symbol_for_global id)))))
+               (before middle_end/compilenv.ml(261):8291-8327
+                 (after middle_end/compilenv.ml(261):8291-8327
+                   (apply (field 9 (global Compilation_unit!)) id sym_label)))))))
+     predefined_exception_compilation_unit =
+       (after middle_end/compilenv.ml(264):8375-8474
+         (apply (field 9 (global Compilation_unit!))
+           (after middle_end/compilenv.ml(264):8399-8436
+             (apply (field 11 (global Ident!)) "__dummy__"))
+           (after middle_end/compilenv.ml(265):8441-8474
+             (apply (field 9 (global Linkage_name!)) "__dummy__"))))
+     is_predefined_exception =
+       (function sym
+         (funct-body middle_end/compilenv.ml(267)<ghost>:8504-8610
+           (before middle_end/compilenv.ml(268):8512-8610
+             (after middle_end/compilenv.ml(268):8512-8610
+               (apply (field 1 (global Compilation_unit!))
+                 predefined_exception_compilation_unit
+                 (after middle_end/compilenv.ml(270):8581-8610
+                   (apply (field 12 (global Symbol!)) sym)))))))
+     symbol_for_global' =
+       (function id
+         (funct-body middle_end/compilenv.ml(272)<ghost>:8635-8876
+           (before middle_end/compilenv.ml(273):8642-8876
+             (let
+               (sym_label =
+                  (after middle_end/compilenv.ml(273):8658-8700
+                    (apply (field 9 (global Linkage_name!))
+                      (after middle_end/compilenv.ml(273):8678-8700
+                        (apply symbol_for_global id)))))
+               (before middle_end/compilenv.ml(274):8706-8876
+                 (if
+                   (after middle_end/compilenv.ml(274):8709-8727
+                     (apply (field 21 (global Ident!)) id))
+                   (before middle_end/compilenv.ml(275):8737-8809
+                     (after middle_end/compilenv.ml(275):8737-8809
+                       (apply (field 10 (global Symbol!))
+                         predefined_exception_compilation_unit sym_label)))
+                   (before middle_end/compilenv.ml(277):8821-8876
+                     (after middle_end/compilenv.ml(277):8821-8876
+                       (apply (field 10 (global Symbol!))
+                         (after middle_end/compilenv.ml(277):8846-8866
+                           (apply unit_for_global id))
+                         sym_label)))))))))
+     set_global_approx =
+       (function approx
+         (funct-body middle_end/compilenv.ml(279)<ghost>:8900-8986
+           (before middle_end/compilenv.ml(280):8911-8986
+             (seq
+               (if (not (field 50 (global Config!))) 0a
+                 (raise
+                   (after middle_end/compilenv.ml(280):8911-8937
+                     (makeblock 0 (global Assert_failure!)
+                       [0: "middle_end/compilenv.ml" 280 2]))))
+               (before middle_end/compilenv.ml(281):8941-8986
+                 (setfield_ptr 8 current_unit (makeblock 0 approx)))))))
+     get_flambda_export_info =
+       (function ui
+         (funct-body middle_end/compilenv.ml(285)<ghost>:9072-9184
+           (before middle_end/compilenv.ml(286):9079-9184
+             (seq
+               (if (field 50 (global Config!)) 0a
+                 (raise
+                   (after middle_end/compilenv.ml(286):9079-9101
+                     (makeblock 0 (global Assert_failure!)
+                       [0: "middle_end/compilenv.ml" 286 2]))))
+               (before middle_end/compilenv.ml(287):9105-9184
+                 (let (*match* = (field 8 ui))
+                   (switch* *match*
+                    case tag 0:
+                     (before middle_end/compilenv.ml(288):9151-9163
+                       (raise
+                         (after middle_end/compilenv.ml(288):9151-9163
+                           (makeblock 0 (global Assert_failure!)
+                             [0: "middle_end/compilenv.ml" 288 17]))))
+                    case tag 1:
+                     (let (ei =a (field 0 *match*))
+                       (before middle_end/compilenv.ml(289):9182-9184 ei)))))))))
+     set_export_info =
+       (function export_info
+         (funct-body middle_end/compilenv.ml(291)<ghost>:9206-9298
+           (before middle_end/compilenv.ml(292):9222-9298
+             (seq
+               (if (field 50 (global Config!)) 0a
+                 (raise
+                   (after middle_end/compilenv.ml(292):9222-9244
+                     (makeblock 0 (global Assert_failure!)
+                       [0: "middle_end/compilenv.ml" 292 2]))))
+               (before middle_end/compilenv.ml(293):9248-9298
+                 (setfield_ptr 8 current_unit (makeblock 1 export_info)))))))
+     approx_for_global =
+       (function comp_unit
+         (funct-body middle_end/compilenv.ml(295)<ghost>:9322-10035
+           (before middle_end/compilenv.ml(296):9336-10035
+             (let
+               (id =
+                  (after middle_end/compilenv.ml(296):9345-9392
+                    (apply (field 10 (global Compilation_unit!)) comp_unit)))
+               (before middle_end/compilenv.ml(297):9398-10035
+                 (seq
+                   (if
+                     (||
+                       (after middle_end/compilenv.ml(297):9401-9485
+                         (apply (field 1 (global Compilation_unit!))
+                           predefined_exception_compilation_unit comp_unit))
+                       (||
+                         (after middle_end/compilenv.ml(300):9494-9512
+                           (apply (field 21 (global Ident!)) id))
+                         (not
+                           (after middle_end/compilenv.ml(301):9525-9542
+                             (apply (field 20 (global Ident!)) id)))))
+                     (before middle_end/compilenv.ml(302):9550-9617
+                       (after middle_end/compilenv.ml(302):9550-9617
+                         (apply (field 0 (global Stdlib!))
+                           (after middle_end/compilenv.ml(302):9562-9617
+                             (apply (field 126 (global Stdlib__format!))
+                               [0:
+                                [11: "approx_for_global " [15: 0a]]
+                                "approx_for_global %a"]
+                               (field 4 (global Ident!)) id)))))
+                     0a)
+                   (before middle_end/compilenv.ml(303):9621-10035
+                     (let
+                       (modname =
+                          (after middle_end/compilenv.ml(303):9635-9648
+                            (apply (field 14 (global Ident!)) id)))
+                       (before middle_end/compilenv.ml(304):9654-10035
+                         (catch
+                           (try
+                             (exit 25
+                               (after middle_end/compilenv.ml(304):9660-9699
+                                 (apply (field 5 (global Stdlib__hashtbl!))
+                                   export_infos_table modname)))
+                            with exn
+                             (if (== exn (field 7 (global Stdlib!)))
+                               (before middle_end/compilenv.ml(307):9768-10035
+                                 (let
+                                   (*match* =
+                                      (after middle_end/compilenv.ml(307):9774-9792
+                                        (apply get_global_info id)))
+                                   (if *match*
+                                     (let (ui =a (field 0 *match*))
+                                       (before middle_end/compilenv.ml(310):9840-10035
+                                         (let
+                                           (exported =
+                                              (after middle_end/compilenv.ml(310):9855-9881
+                                                (apply
+                                                  get_flambda_export_info ui)))
+                                           (before middle_end/compilenv.ml(311):9891-10035
+                                             (seq
+                                               (after middle_end/compilenv.ml(311):9891-9938
+                                                 (apply
+                                                   (field 4
+                                                     (global Stdlib__hashtbl!))
+                                                   export_infos_table modname
+                                                   exported))
+                                               (before middle_end/compilenv.ml(312):9946-10035
+                                                 (seq
+                                                   (setfield_ptr 0
+                                                     merged_environment
+                                                     (after middle_end/compilenv.ml(312):9968-10014
+                                                       (apply
+                                                         (field 5
+                                                           (global Export_info!))
+                                                         (field 0
+                                                           merged_environment)
+                                                         exported)))
+                                                   (before middle_end/compilenv.ml(313):10022-10035
+                                                     (makeblock 0 exported)))))))))
+                                     (before middle_end/compilenv.ml(308):9812-9816
+                                       0a))))
+                               (reraise exn)))
+                          with (25 otherwise)
+                           (before middle_end/compilenv.ml(305):9722-9736
+                             (makeblock 0 otherwise))))))))))))
+     approx_env =
+       (function param
+         (funct-body middle_end/compilenv.ml(315)<ghost>:10052-10076
+           (before middle_end/compilenv.ml(315):10057-10076
+             (field 0 merged_environment))))
+     need_curry_fun =
+       (function n[int]
+         (funct-body middle_end/compilenv.ml(319)<ghost>:10170-10290
+           (before middle_end/compilenv.ml(320):10176-10290
+             (if
+               (not
+                 (after middle_end/compilenv.ml(320):10183-10221
+                   (apply (field 31 (global Stdlib__list!)) n
+                     (field 5 current_unit))))
+               (before middle_end/compilenv.ml(321):10231-10290
+                 (setfield_ptr 5 current_unit
+                   (makeblock 0 (int,*) n (field 5 current_unit))))
+               0a))))
+     need_apply_fun =
+       (function n[int]
+         (funct-body middle_end/compilenv.ml(323)<ghost>:10311-10448
+           (before middle_end/compilenv.ml(324):10317-10448
+             (seq
+               (if (> n 0) 0a
+                 (raise
+                   (after middle_end/compilenv.ml(324):10317-10330
+                     (makeblock 0 (global Assert_failure!)
+                       [0: "middle_end/compilenv.ml" 324 2]))))
+               (before middle_end/compilenv.ml(325):10334-10448
+                 (if
+                   (not
+                     (after middle_end/compilenv.ml(325):10341-10379
+                       (apply (field 31 (global Stdlib__list!)) n
+                         (field 6 current_unit))))
+                   (before middle_end/compilenv.ml(326):10389-10448
+                     (setfield_ptr 6 current_unit
+                       (makeblock 0 (int,*) n (field 6 current_unit))))
+                   0a))))))
+     need_send_fun =
+       (function n[int]
+         (funct-body middle_end/compilenv.ml(328)<ghost>:10468-10585
+           (before middle_end/compilenv.ml(329):10474-10585
+             (if
+               (not
+                 (after middle_end/compilenv.ml(329):10481-10518
+                   (apply (field 31 (global Stdlib__list!)) n
+                     (field 7 current_unit))))
+               (before middle_end/compilenv.ml(330):10528-10585
+                 (setfield_ptr 7 current_unit
+                   (makeblock 0 (int,*) n (field 7 current_unit))))
+               0a))))
+     write_unit_info =
+       (function info filename
+         (funct-body middle_end/compilenv.ml(334)<ghost>:10656-10855
+           (before middle_end/compilenv.ml(335):10674-10855
+             (let
+               (oc =
+                  (after middle_end/compilenv.ml(335):10683-10704
+                    (apply (field 60 (global Stdlib!)) filename)))
+               (before middle_end/compilenv.ml(336):10710-10855
+                 (seq
+                   (after middle_end/compilenv.ml(336):10710-10743
+                     (apply (field 65 (global Stdlib!)) oc
+                       (field 24 (global Config!))))
+                   (before middle_end/compilenv.ml(337):10747-10855
+                     (seq
+                       (after middle_end/compilenv.ml(337):10747-10767
+                         (apply (field 71 (global Stdlib!)) oc info))
+                       (before middle_end/compilenv.ml(338):10771-10855
+                         (seq
+                           (after middle_end/compilenv.ml(338):10771-10779
+                             (apply (field 62 (global Stdlib!)) oc))
+                           (before middle_end/compilenv.ml(339):10783-10855
+                             (let
+                               (crc =
+                                  (after middle_end/compilenv.ml(339):10793-10813
+                                    (apply (field 6 (global Stdlib__digest!))
+                                      filename)))
+                               (before middle_end/compilenv.ml(340):10819-10855
+                                 (seq
+                                   (after middle_end/compilenv.ml(340):10819-10839
+                                     (apply
+                                       (field 7 (global Stdlib__digest!)) oc
+                                       crc))
+                                   (before middle_end/compilenv.ml(341):10843-10855
+                                     (after middle_end/compilenv.ml(341):10843-10855
+                                       (apply (field 75 (global Stdlib!)) oc)))))))))))))))))
+     save_unit_info =
+       (function filename
+         (funct-body middle_end/compilenv.ml(343)<ghost>:10876-10974
+           (before middle_end/compilenv.ml(344):10889-10974
+             (seq
+               (setfield_ptr 3 current_unit
+                 (after middle_end/compilenv.ml(344):10920-10933
+                   (apply (field 80 (global Env!)) 0a)))
+               (before middle_end/compilenv.ml(345):10937-10974
+                 (after middle_end/compilenv.ml(345):10937-10974
+                   (apply write_unit_info current_unit filename)))))))
+     current_unit =
+       (function param
+         (funct-body middle_end/compilenv.ml(347)<ghost>:10993-11134
+           (before middle_end/compilenv.ml(348):11000-11134
+             (let
+               (*match* =
+                  (after middle_end/compilenv.ml(348):11006-11037
+                    (apply (field 14 (global Compilation_unit!)) 0a)))
+               (if *match*
+                 (let (current_unit =a (field 0 *match*))
+                   (before middle_end/compilenv.ml(349):11068-11080
+                     current_unit))
+                 (before middle_end/compilenv.ml(350):11093-11134
+                   (after middle_end/compilenv.ml(350):11093-11134
+                     (apply (field 0 (global Misc!))
+                       "Compilenv.current_unit"))))))))
+     current_unit_symbol =
+       (function param
+         (funct-body middle_end/compilenv.ml(352)<ghost>:11160-11240
+           (before middle_end/compilenv.ml(353):11167-11240
+             (after middle_end/compilenv.ml(353):11167-11240
+               (apply (field 10 (global Symbol!))
+                 (after middle_end/compilenv.ml(353):11192-11209
+                   (apply current_unit 0a))
+                 (after middle_end/compilenv.ml(353):11210-11240
+                   (apply current_unit_linkage_name 0a)))))))
+     const_label = (makemutable 0 (int) 0)
+     new_const_symbol =
+       (function param
+         (funct-body middle_end/compilenv.ml(357)<ghost>:11288-11362
+           (before middle_end/compilenv.ml(358):11295-11362
+             (seq (+:=1 const_label)
+               (before middle_end/compilenv.ml(359):11315-11362
+                 (after middle_end/compilenv.ml(359):11315-11362
+                   (apply make_symbol 0a
+                     (makeblock 0
+                       (after middle_end/compilenv.ml(359):11333-11361
+                         (apply (field 9 (global Stdlib__int!))
+                           (field 0 const_label)))))))))))
+     snapshot =
+       (function param
+         (funct-body middle_end/compilenv.ml(361)<ghost>:11377-11403
+           (before middle_end/compilenv.ml(361):11382-11403
+             (field 0 structured_constants))))
+     backtrack =
+       (function s
+         (funct-body middle_end/compilenv.ml(362)<ghost>:11418-11447
+           (before middle_end/compilenv.ml(362):11422-11447
+             (setfield_ptr 0 structured_constants s))))
+     new_structured_constant =
+       (function cst shared
+         (funct-body middle_end/compilenv.ml(364)<ghost>:11477-12008
+           (before middle_end/compilenv.ml(365):11493-12008
+             (let
+               (*match* = (field 0 structured_constants)
+                strcst_all =a (field 1 *match*)
+                strcst_shared =a (field 0 *match*))
+               (before middle_end/compilenv.ml(366):11554-12008
+                 (if shared
+                   (before middle_end/compilenv.ml(367):11573-11842
+                     (try
+                       (after middle_end/compilenv.ml(368):11583-11612
+                         (apply (field 26 CstMap) cst strcst_shared))
+                      with exn
+                       (if (== exn (field 7 (global Stdlib!)))
+                         (before middle_end/compilenv.ml(370):11641-11842
+                           (let
+                             (lbl =
+                                (after middle_end/compilenv.ml(370):11651-11669
+                                  (apply new_const_symbol 0a)))
+                             (before middle_end/compilenv.ml(371):11679-11842
+                               (seq
+                                 (setfield_ptr 0 structured_constants
+                                   (makeblock 0
+                                     (after middle_end/compilenv.ml(373):11739-11771
+                                       (apply (field 3 CstMap) cst lbl
+                                         strcst_shared))
+                                     (makeblock 0 (makeblock 0 lbl cst)
+                                       strcst_all)))
+                                 (before middle_end/compilenv.ml(376):11839-11842
+                                   lbl)))))
+                         (reraise exn))))
+                   (before middle_end/compilenv.ml(378):11854-12008
+                     (let
+                       (lbl =
+                          (after middle_end/compilenv.ml(378):11864-11882
+                            (apply new_const_symbol 0a)))
+                       (before middle_end/compilenv.ml(379):11890-12008
+                         (seq
+                           (setfield_ptr 0 structured_constants
+                             (makeblock 0 strcst_shared
+                               (makeblock 0 (makeblock 0 lbl cst) strcst_all)))
+                           (before middle_end/compilenv.ml(384):12005-12008
+                             lbl)))))))))))
+     add_exported_constant =
+       (function s
+         (funct-body middle_end/compilenv.ml(386)<ghost>:12036-12081
+           (before middle_end/compilenv.ml(387):12042-12081
+             (after middle_end/compilenv.ml(387):12042-12081
+               (apply (field 10 (global Stdlib__hashtbl!)) exported_constants
+                 s 0a)))))
+     clear_structured_constants =
+       (function param
+         (funct-body middle_end/compilenv.ml(389)<ghost>:12114-12171
+           (before middle_end/compilenv.ml(390):12121-12171
+             (setfield_ptr 0 structured_constants structured_constants_empty))))
+     structured_constants =
+       (function param
+         (funct-body middle_end/compilenv.ml(392)<ghost>:12198-12625
+           (before middle_end/compilenv.ml(393):12205-12625
+             (let
+               (provenance =
+                  (makeblock 0 0a
+                    (makeblock 0
+                      (after middle_end/compilenv.ml(396):12319-12367
+                        (apply (field 11 (global Ident!))
+                          (after middle_end/compilenv.ml(396):12344-12366
+                            (apply current_unit_name 0a)))))))
+               (before middle_end/compilenv.ml(399):12382-12625
+                 (after middle_end/compilenv.ml(399):12382-12625
+                   (apply (field 16 (global Stdlib__list!))
+                     (function param
+                       (funct-body middle_end/compilenv.ml(400):12395-12586
+                         (let
+                           (definition =a (field 1 param)
+                            symbol =a (field 0 param))
+                           (before middle_end/compilenv.ml(401):12431-12585
+                             (makeblock 0 symbol
+                               (after middle_end/compilenv.ml(403):12478-12515
+                                 (apply (field 8 (global Stdlib__hashtbl!))
+                                   exported_constants symbol))
+                               definition (makeblock 0 provenance))))))
+                     (field 1 (field 0 structured_constants)))))))))
+     closure_symbol =
+       (function fv
+         (funct-body middle_end/compilenv.ml(409)<ghost>:12646-12990
+           (before middle_end/compilenv.ml(410):12653-12990
+             (let
+               (compilation_unit =
+                  (after middle_end/compilenv.ml(410):12676-12710
+                    (apply (field 14 (global Closure_id!)) fv)))
+               (before middle_end/compilenv.ml(411):12716-12990
+                 (let
+                   (unitname =
+                      (after middle_end/compilenv.ml(412):12735-12810
+                        (apply (field 10 (global Linkage_name!))
+                          (after middle_end/compilenv.ml(412):12758-12810
+                            (apply (field 11 (global Compilation_unit!))
+                              compilation_unit)))))
+                   (before middle_end/compilenv.ml(414):12818-12990
+                     (let
+                       (linkage_name =
+                          (after middle_end/compilenv.ml(415):12841-12906
+                            (apply concat_symbol unitname
+                              (after middle_end/compilenv.ml(415):12864-12906
+                                (apply (field 27 (global Stdlib!))
+                                  (after middle_end/compilenv.ml(415):12865-12892
+                                    (apply (field 15 (global Closure_id!))
+                                      fv))
+                                  "_closure")))))
+                       (before middle_end/compilenv.ml(417):12914-12990
+                         (after middle_end/compilenv.ml(417):12914-12990
+                           (apply (field 10 (global Symbol!))
+                             compilation_unit
+                             (after middle_end/compilenv.ml(417):12956-12990
+                               (apply (field 9 (global Linkage_name!))
+                                 linkage_name)))))))))))))
+     function_label =
+       (function fv
+         (funct-body middle_end/compilenv.ml(419)<ghost>:13011-13241
+           (before middle_end/compilenv.ml(420):13018-13241
+             (let
+               (compilation_unit =
+                  (after middle_end/compilenv.ml(420):13041-13075
+                    (apply (field 14 (global Closure_id!)) fv)))
+               (before middle_end/compilenv.ml(421):13081-13241
+                 (let
+                   (unitname =
+                      (after middle_end/compilenv.ml(422):13100-13181
+                        (apply (field 10 (global Linkage_name!))
+                          (after middle_end/compilenv.ml(423):13129-13181
+                            (apply (field 11 (global Compilation_unit!))
+                              compilation_unit)))))
+                   (before middle_end/compilenv.ml(425):13189-13241
+                     (after middle_end/compilenv.ml(425):13189-13241
+                       (apply concat_symbol unitname
+                         (after middle_end/compilenv.ml(425):13213-13240
+                           (apply (field 15 (global Closure_id!)) fv)))))))))))
+     require_global =
+       (function global_ident
+         (funct-body middle_end/compilenv.ml(427)<ghost>:13262-13394
+           (before middle_end/compilenv.ml(428):13279-13394
+             (if
+               (not
+                 (after middle_end/compilenv.ml(428):13286-13316
+                   (apply (field 21 (global Ident!)) global_ident)))
+               (before middle_end/compilenv.ml(429):13326-13394
+                 (ignore
+                   (after middle_end/compilenv.ml(429):13334-13362
+                     (apply get_global_info global_ident))))
+               0a))))
+     report_error =
+       (function ppf param
+         (funct-body middle_end/compilenv.ml(435)<ghost>:13446-13943
+           (switch* param
+            case tag 0:
+             (let (filename =a (field 0 param))
+               (before middle_end/compilenv.ml(437):13499-13596
+                 (after middle_end/compilenv.ml(437):13499-13596
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [15:
+                       [17:
+                        [0: "@ " 1 0]
+                        [11: "is not a compilation unit description." 0a]]]
+                      "%a@ is not a compilation unit description."]
+                     (field 18 (global Location!)) filename))))
+            case tag 1:
+             (let (filename =a (field 0 param))
+               (before middle_end/compilenv.ml(440):13639-13736
+                 (after middle_end/compilenv.ml(440):13639-13736
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11:
+                       "Corrupted compilation unit description"
+                       [17: [0: "@ " 1 0] [15: 0a]]]
+                      "Corrupted compilation unit description@ %a"]
+                     (field 18 (global Location!)) filename))))
+            case tag 2:
+             (let
+               (filename =a (field 2 param)
+                modname =a (field 1 param)
+                name =a (field 0 param))
+               (before middle_end/compilenv.ml(443):13792-13943
+                 (after middle_end/compilenv.ml(443):13792-13943
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [15:
+                       [17:
+                        [0: "@ " 1 0]
+                        [11:
+                         "contains the description for unit"
+                         [17:
+                          [0: "@ " 1 0]
+                          [2:
+                           0a [11: " when " [2: 0a [11: " was expected" 0a]]]]]]]]
+                      "%a@ contains the description for unit@ %s when %s was expected"]
+                     (field 18 (global Location!)) filename name modname)))))))
+     *match* =
+       (after middle_end/compilenv.ml(448):13956-14100
+         (apply (field 46 (global Location!))
+           (function param
+             (funct-body middle_end/compilenv.ml(449):13991-14100
+               (let (tag =a (field 0 param))
+                 (if (== tag Error)
+                   (let (err =a (field 1 param))
+                     (before middle_end/compilenv.ml(450):14022-14076
+                       (makeblock 0
+                         (after middle_end/compilenv.ml(450):14027-14076
+                           (apply (field 45 (global Location!)) report_error
+                             err)))))
+                   (before middle_end/compilenv.ml(451):14090-14094 0a))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 imported_sets_of_closures_table reset unit_id_from_name
+        current_unit_infos current_unit_name current_unit_linkage_name
+        current_unit current_unit_symbol make_symbol symbol_in_current_unit
+        is_predefined_exception unit_for_global symbol_for_global
+        symbol_for_global' global_approx set_global_approx
+        record_global_approx_toplevel set_export_info approx_env
+        approx_for_global need_curry_fun need_apply_fun need_send_fun
+        new_const_symbol closure_symbol function_label
+        new_structured_constant structured_constants
+        clear_structured_constants add_exported_constant snapshot backtrack
+        read_unit_info write_unit_info save_unit_info cache_unit_info
+        require_global read_library_info Error report_error))))

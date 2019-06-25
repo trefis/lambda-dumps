@@ -1,0 +1,552 @@
+(setglobal Config!
+  (let
+    (version = (field 45 (global Stdlib__sys!))
+     standard_library_default = "/usr/local/lib/ocaml"
+     standard_library =
+       (try
+         (after utils/config.mlp(24):1282-1303 (caml_sys_getenv "OCAMLLIB"))
+        with exn
+         (if (== exn (field 7 (global Stdlib!)))
+           (before utils/config.mlp(26):1326-1403
+             (try
+               (after utils/config.mlp(27):1334-1354
+                 (caml_sys_getenv "CAMLLIB"))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before utils/config.mlp(29):1379-1403
+                   standard_library_default)
+                 (reraise exn))))
+           (reraise exn)))
+     ccomp_type = "cc"
+     c_compiler = "gcc"
+     c_output_obj = "-o "
+     c_has_debug_prefix_map = 1a
+     as_has_debug_prefix_map = 1a
+     ocamlc_cflags =
+       "-std=gnu99 -O2 -fno-strict-aliasing -fwrapv -fno-builtin-memcmp -fPIC"
+     ocamlc_cppflags = "-D_FILE_OFFSET_BITS=64 -D_REENTRANT"
+     ocamlopt_cflags =
+       "-std=gnu99 -O2 -fno-strict-aliasing -fwrapv -fno-builtin-memcmp"
+     ocamlopt_cppflags = "-D_FILE_OFFSET_BITS=64 -D_REENTRANT"
+     bytecomp_c_libraries = "-lm -ldl  -lpthread "
+     bytecomp_c_compiler =
+       (after utils/config.mlp(48):2255-2311
+         (apply (field 27 (global Stdlib!)) c_compiler
+           (after utils/config.mlp(48):2268-2311
+             (apply (field 27 (global Stdlib!)) " "
+               (after utils/config.mlp(48):2274-2311
+                 (apply (field 27 (global Stdlib!)) ocamlc_cflags
+                   (after utils/config.mlp(48):2290-2311
+                     (apply (field 27 (global Stdlib!)) " " ocamlc_cppflags))))))))
+     native_c_compiler =
+       (after utils/config.mlp(50):2338-2398
+         (apply (field 27 (global Stdlib!)) c_compiler
+           (after utils/config.mlp(50):2351-2398
+             (apply (field 27 (global Stdlib!)) " "
+               (after utils/config.mlp(50):2357-2398
+                 (apply (field 27 (global Stdlib!)) ocamlopt_cflags
+                   (after utils/config.mlp(50):2375-2398
+                     (apply (field 27 (global Stdlib!)) " "
+                       ocamlopt_cppflags))))))))
+     native_c_libraries = "-lm -ldl "
+     native_pack_linker = "ld -r -o "
+     ranlib = "ranlib"
+     ar = "ar")
+    (catch
+      (if
+        (after utils/config.mlp(58):2649-2670
+          (caml_string_equal (field 3 (global Stdlib__sys!)) "Win32"))
+        (before utils/config.mlp(59):2680-3215
+          (try
+            (let
+              (flexlink =
+                 (let
+                   (flexlink =
+                      (after utils/config.mlp(61):2728-2755
+                        (caml_sys_getenv "OCAML_FLEXLINK")))
+                   (before utils/config.mlp(62):2767-2906
+                     (let
+                       (f =
+                          (function i[int] : int
+                            (funct-body utils/config.mlp(62)<ghost>:2773-2848
+                              (before utils/config.mlp(63):2787-2848
+                                (let
+                                  (c =[int]
+                                     (after utils/config.mlp(63):2795-2807
+                                       (string.get flexlink i)))
+                                  (before utils/config.mlp(64):2821-2848
+                                    (if (== c '/')
+                                      (before utils/config.mlp(64):2837-2841
+                                        '\\')
+                                      (before utils/config.mlp(64):2847-2848
+                                        c))))))))
+                       (before utils/config.mlp(65):2860-2906
+                         (after utils/config.mlp(65):2860-2906
+                           (apply (field 27 (global Stdlib!))
+                             (after utils/config.mlp(65):2860-2900
+                               (apply (field 1 (global Stdlib__string!))
+                                 (string.length flexlink) f))
+                             " ")))))))
+              (before utils/config.mlp(66):2916-2997
+                (let
+                  (mkmaindll =
+                     (after utils/config.mlp(68):2975-2997
+                       (apply (field 27 (global Stdlib!)) flexlink
+                         " -maindll"))
+                   mkexe =
+                     (after utils/config.mlp(67):2932-2967
+                       (apply (field 27 (global Stdlib!)) flexlink
+                         " -exe -link \"-Wl,-E\""))
+                   mkdll =a flexlink)
+                  (exit 6 mkmaindll mkexe mkdll))))
+           with exn
+            (if (== exn (field 7 (global Stdlib!)))
+              (before utils/config.mlp(70):3026-3215
+                (let
+                  (mkmaindll = "gcc -shared"
+                   mkexe =
+                     "gcc -std=gnu99 -O2 -fno-strict-aliasing -fwrapv -fno-builtin-memcmp -Wall -Werror -fno-tree-vrp -D_FILE_OFFSET_BITS=64 -D_REENTRANT -DCAML_NAME_SPACE  -Wl,-E"
+                   mkdll = "gcc -shared")
+                  (exit 6 mkmaindll mkexe mkdll)))
+              (reraise exn))))
+        (before utils/config.mlp(72):3227-3416
+          (let
+            (mkmaindll = "gcc -shared"
+             mkexe =
+               "gcc -std=gnu99 -O2 -fno-strict-aliasing -fwrapv -fno-builtin-memcmp -Wall -Werror -fno-tree-vrp -D_FILE_OFFSET_BITS=64 -D_REENTRANT -DCAML_NAME_SPACE  -Wl,-E"
+             mkdll = "gcc -shared")
+            (exit 6 mkmaindll mkexe mkdll))))
+     with (6 mkmaindll mkexe mkdll)
+      (let
+        (flambda = 0a
+         with_flambda_invariants = 0a
+         safe_string = 0a
+         default_safe_string = 1a
+         windows_unicode = (!= 0 0)
+         supports_shared_libraries = 1a
+         flat_float_array = 1a
+         afl_instrument = 0a
+         exec_magic_number = "Caml1999X025"
+         cmi_magic_number = "Caml1999I025"
+         cmo_magic_number = "Caml1999O025"
+         cma_magic_number = "Caml1999A025"
+         cmx_magic_number =
+           (if flambda (before utils/config.mlp(92):3916-3930 "Caml1999y025")
+             (before utils/config.mlp(94):3942-3956 "Caml1999Y025"))
+         cmxa_magic_number =
+           (if flambda (before utils/config.mlp(97):4003-4017 "Caml1999z025")
+             (before utils/config.mlp(99):4029-4043 "Caml1999Z025"))
+         ast_impl_magic_number = "Caml1999M025"
+         ast_intf_magic_number = "Caml1999N025"
+         cmxs_magic_number = "Caml1999D025"
+         cmt_magic_number = "Caml1999T025"
+         interface_suffix = (makemutable 0 ".mli")
+         max_tag =[int] 245
+         lazy_tag =[int] 246
+         max_young_wosize =[int] 256
+         stack_threshold =[int] 256
+         stack_safety_margin =[int] 60
+         architecture = "amd64"
+         model = "default"
+         system = "linux"
+         asm = "as"
+         asm_cfi_supported = 1a
+         with_frame_pointers = 0a
+         spacetime = 0a
+         enable_call_counts = 1a
+         libunwind_available = 0a
+         libunwind_link_flags = ""
+         profinfo = 0a
+         profinfo_width =[int] 0
+         ext_exe = ""
+         ext_obj = ".o"
+         ext_asm = ".s"
+         ext_lib = ".a"
+         ext_dll = ".so"
+         host = "x86_64-pc-linux-gnu"
+         target = "x86_64-pc-linux-gnu"
+         default_executable_name =
+           (let (*match* = (field 3 (global Stdlib__sys!)))
+             (catch
+               (catch
+                 (stringswitch *match*
+                  case "Cygwin": (exit 4)
+                  case "Unix":
+                   (before utils/config.mlp(142):5096-5103 "a.out")
+                  case "Win32": (exit 4)
+                  default: (exit 5))
+                with (5) (before utils/config.mlp(144):5154-5164 "camlprog"))
+              with (4)
+               (before utils/config.mlp(143):5130-5144 "camlprog.exe")))
+         systhread_supported = 1a
+         flexdll_dirs = 0a
+         configuration_variables =
+           (let
+             (p =
+                (function x v
+                  (funct-body utils/config.mlp(156)<ghost>:5344-5363
+                    (before utils/config.mlp(156):5350-5363
+                      (makeblock 0 x (makeblock 0 v))))))
+             (before utils/config.mlp(157):5369-7345
+               (let
+                 (p_int =
+                    (function x v[int]
+                      (funct-body utils/config.mlp(157)<ghost>:5379-5395
+                        (before utils/config.mlp(157):5385-5395
+                          (makeblock 0 x (makeblock 1 (int) v))))))
+                 (before utils/config.mlp(158):5401-7345
+                   (let
+                     (p_bool =
+                        (function x v
+                          (funct-body utils/config.mlp(158)<ghost>:5412-5429
+                            (before utils/config.mlp(158):5418-5429
+                              (makeblock 0 x (makeblock 2 v))))))
+                     (before utils/config.mlp(159):5433-7345
+                       (makeblock 0
+                         (after utils/config.mlp(160):5437-5456
+                           (apply p "version" version))
+                         (makeblock 0
+                           (after utils/config.mlp(161):5460-5513
+                             (apply p "standard_library_default"
+                               standard_library_default))
+                           (makeblock 0
+                             (after utils/config.mlp(162):5517-5554
+                               (apply p "standard_library" standard_library))
+                             (makeblock 0
+                               (after utils/config.mlp(163):5558-5583
+                                 (apply p "ccomp_type" ccomp_type))
+                               (makeblock 0
+                                 (after utils/config.mlp(164):5587-5612
+                                   (apply p "c_compiler" c_compiler))
+                                 (makeblock 0
+                                   (after utils/config.mlp(165):5616-5647
+                                     (apply p "ocamlc_cflags" ocamlc_cflags))
+                                   (makeblock 0
+                                     (after utils/config.mlp(166):5651-5686
+                                       (apply p "ocamlc_cppflags"
+                                         ocamlc_cppflags))
+                                     (makeblock 0
+                                       (after utils/config.mlp(167):5690-5725
+                                         (apply p "ocamlopt_cflags"
+                                           ocamlopt_cflags))
+                                       (makeblock 0
+                                         (after utils/config.mlp(168):5729-5768
+                                           (apply p "ocamlopt_cppflags"
+                                             ocamlopt_cppflags))
+                                         (makeblock 0
+                                           (after utils/config.mlp(169):5772-5815
+                                             (apply p "bytecomp_c_compiler"
+                                               bytecomp_c_compiler))
+                                           (makeblock 0
+                                             (after utils/config.mlp(170):5819-5858
+                                               (apply p "native_c_compiler"
+                                                 native_c_compiler))
+                                             (makeblock 0
+                                               (after utils/config.mlp(171):5862-5907
+                                                 (apply p
+                                                   "bytecomp_c_libraries"
+                                                   bytecomp_c_libraries))
+                                               (makeblock 0
+                                                 (after utils/config.mlp(172):5911-5952
+                                                   (apply p
+                                                     "native_c_libraries"
+                                                     native_c_libraries))
+                                                 (makeblock 0
+                                                   (after utils/config.mlp(173):5956-5997
+                                                     (apply p
+                                                       "native_pack_linker"
+                                                       native_pack_linker))
+                                                   (makeblock 0
+                                                     (after utils/config.mlp(174):6001-6018
+                                                       (apply p "ranlib"
+                                                         ranlib))
+                                                     (makeblock 0
+                                                       (after utils/config.mlp(175):6022-6051
+                                                         (apply p
+                                                           "architecture"
+                                                           architecture))
+                                                       (makeblock 0
+                                                         (after utils/config.mlp(176):6055-6070
+                                                           (apply p "model"
+                                                             model))
+                                                         (makeblock 0
+                                                           (after utils/config.mlp(177):6074-6103
+                                                             (apply p_int
+                                                               "int_size"
+                                                               (field 9
+                                                                 (global Stdlib__sys!))))
+                                                           (makeblock 0
+                                                             (after utils/config.mlp(178):6107-6138
+                                                               (apply p_int
+                                                                 "word_size"
+                                                                 (field 8
+                                                                   (global Stdlib__sys!))))
+                                                             (makeblock 0
+                                                               (after utils/config.mlp(179):6142-6159
+                                                                 (apply p
+                                                                   "system"
+                                                                   system))
+                                                               (makeblock 0
+                                                                 (after utils/config.mlp(180):6163-6174
+                                                                   (apply p
+                                                                    "asm"
+                                                                    asm))
+                                                                 (makeblock 0
+                                                                   (after utils/config.mlp(181):6178-6222
+                                                                    (apply
+                                                                    p_bool
+                                                                    "asm_cfi_supported"
+                                                                    asm_cfi_supported))
+                                                                   (makeblock 0
+                                                                    (after utils/config.mlp(182):6226-6274
+                                                                    (apply
+                                                                    p_bool
+                                                                    "with_frame_pointers"
+                                                                    with_frame_pointers))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(183):6278-6297
+                                                                    (apply p
+                                                                    "ext_exe"
+                                                                    ext_exe))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(184):6301-6320
+                                                                    (apply p
+                                                                    "ext_obj"
+                                                                    ext_obj))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(185):6324-6343
+                                                                    (apply p
+                                                                    "ext_asm"
+                                                                    ext_asm))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(186):6347-6366
+                                                                    (apply p
+                                                                    "ext_lib"
+                                                                    ext_lib))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(187):6370-6389
+                                                                    (apply p
+                                                                    "ext_dll"
+                                                                    ext_dll))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(188):6393-6416
+                                                                    (apply p
+                                                                    "os_type"
+                                                                    (field 3
+                                                                    (global Stdlib__sys!))))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(189):6420-6471
+                                                                    (apply p
+                                                                    "default_executable_name"
+                                                                    default_executable_name))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(190):6475-6523
+                                                                    (apply
+                                                                    p_bool
+                                                                    "systhread_supported"
+                                                                    systhread_supported))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(191):6527-6540
+                                                                    (apply p
+                                                                    "host"
+                                                                    host))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(192):6544-6561
+                                                                    (apply p
+                                                                    "target"
+                                                                    target))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(193):6565-6589
+                                                                    (apply
+                                                                    p_bool
+                                                                    "flambda"
+                                                                    flambda))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(194):6593-6621
+                                                                    (apply
+                                                                    p_bool
+                                                                    "spacetime"
+                                                                    spacetime))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(195):6625-6657
+                                                                    (apply
+                                                                    p_bool
+                                                                    "safe_string"
+                                                                    safe_string))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(196):6661-6709
+                                                                    (apply
+                                                                    p_bool
+                                                                    "default_safe_string"
+                                                                    default_safe_string))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(197):6713-6755
+                                                                    (apply
+                                                                    p_bool
+                                                                    "flat_float_array"
+                                                                    flat_float_array))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(198):6759-6797
+                                                                    (apply
+                                                                    p_bool
+                                                                    "afl_instrument"
+                                                                    afl_instrument))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(199):6801-6841
+                                                                    (apply
+                                                                    p_bool
+                                                                    "windows_unicode"
+                                                                    windows_unicode))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(200):6845-6905
+                                                                    (apply
+                                                                    p_bool
+                                                                    "supports_shared_libraries"
+                                                                    supports_shared_libraries))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(202):6910-6949
+                                                                    (apply p
+                                                                    "exec_magic_number"
+                                                                    exec_magic_number))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(203):6953-6990
+                                                                    (apply p
+                                                                    "cmi_magic_number"
+                                                                    cmi_magic_number))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(204):6994-7031
+                                                                    (apply p
+                                                                    "cmo_magic_number"
+                                                                    cmo_magic_number))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(205):7035-7072
+                                                                    (apply p
+                                                                    "cma_magic_number"
+                                                                    cma_magic_number))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(206):7076-7113
+                                                                    (apply p
+                                                                    "cmx_magic_number"
+                                                                    cmx_magic_number))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(207):7117-7156
+                                                                    (apply p
+                                                                    "cmxa_magic_number"
+                                                                    cmxa_magic_number))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(208):7160-7207
+                                                                    (apply p
+                                                                    "ast_impl_magic_number"
+                                                                    ast_impl_magic_number))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(209):7211-7258
+                                                                    (apply p
+                                                                    "ast_intf_magic_number"
+                                                                    ast_intf_magic_number))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(210):7262-7301
+                                                                    (apply p
+                                                                    "cmxs_magic_number"
+                                                                    cmxs_magic_number))
+                                                                    (makeblock 0
+                                                                    (after utils/config.mlp(211):7305-7342
+                                                                    (apply p
+                                                                    "cmt_magic_number"
+                                                                    cmt_magic_number))
+                                                                    0a)))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+         print_config_value =
+           (function oc param
+             (funct-body utils/config.mlp(214)<ghost>:7370-7519
+               (switch* param
+                case tag 0:
+                 (let (s =a (field 0 param))
+                   (before utils/config.mlp(216):7406-7430
+                     (after utils/config.mlp(216):7406-7430
+                       (apply (field 0 (global Stdlib__printf!)) oc
+                         [0: [2: 0a 0a] "%s"] s))))
+                case tag 1:
+                 (let (n =a (field 0 param))
+                   (before utils/config.mlp(218):7450-7474
+                     (after utils/config.mlp(218):7450-7474
+                       (apply (field 0 (global Stdlib__printf!)) oc
+                         [0: [4: 0a 0a 0a 0a] "%d"] n))))
+                case tag 2:
+                 (let (p =a (field 0 param))
+                   (before utils/config.mlp(220):7495-7519
+                     (after utils/config.mlp(220):7495-7519
+                       (apply (field 0 (global Stdlib__printf!)) oc
+                         [0: [9: 0a 0a] "%B"] p)))))))
+         print_config =
+           (function oc
+             (funct-body utils/config.mlp(222)<ghost>:7538-7677
+               (before utils/config.mlp(223):7545-7677
+                 (let
+                   (print =
+                      (function param
+                        (funct-body utils/config.mlp(223)<ghost>:7555-7619
+                          (let (v =a (field 1 param) x =a (field 0 param))
+                            (before utils/config.mlp(224):7568-7619
+                              (after utils/config.mlp(224):7568-7619
+                                (apply (field 0 (global Stdlib__printf!)) oc
+                                  [0:
+                                   [2: 0a [11: ": " [15: [12: '\n' 0a]]]]
+                                   "%s: %a\n"]
+                                  x print_config_value v)))))))
+                   (before utils/config.mlp(225):7625-7677
+                     (seq
+                       (after utils/config.mlp(225):7625-7664
+                         (apply (field 14 (global Stdlib__list!)) print
+                           configuration_variables))
+                       (before utils/config.mlp(226):7668-7676
+                         (after utils/config.mlp(226):7668-7676
+                           (apply (field 62 (global Stdlib!)) oc)))))))))
+         config_var =
+           (function x
+             (funct-body utils/config.mlp(229)<ghost>:7697-7930
+               (before utils/config.mlp(230):7703-7930
+                 (let
+                   (*match* =
+                      (after utils/config.mlp(230):7709-7749
+                        (apply (field 39 (global Stdlib__list!)) x
+                          configuration_variables)))
+                   (if *match*
+                     (let (v =a (field 0 *match*))
+                       (before utils/config.mlp(233):7792-7930
+                         (let
+                           (s =
+                              (switch* v
+                               case tag 0:
+                                (let (s =a (field 0 v))
+                                  (before utils/config.mlp(234):7835-7836 s))
+                               case tag 1:
+                                (let (n =a (field 0 v))
+                                  (before utils/config.mlp(235):7856-7871
+                                    (after utils/config.mlp(235):7856-7871
+                                      (apply (field 9 (global Stdlib__int!))
+                                        n))))
+                               case tag 2:
+                                (let (b =a (field 0 v))
+                                  (before utils/config.mlp(236):7892-7908
+                                    (after utils/config.mlp(236):7892-7908
+                                      (apply (field 29 (global Stdlib!)) b))))))
+                           (before utils/config.mlp(238):7924-7930
+                             (makeblock 0 s)))))
+                     (before utils/config.mlp(231):7767-7771 0a)))))))
+        (pseudo _none_(0)<ghost>:-1--1
+          (makeblock 0 version standard_library ccomp_type c_compiler
+            c_output_obj c_has_debug_prefix_map as_has_debug_prefix_map
+            ocamlc_cflags ocamlc_cppflags ocamlopt_cflags ocamlopt_cppflags
+            bytecomp_c_libraries native_c_libraries native_pack_linker mkdll
+            mkexe mkmaindll ranlib ar interface_suffix exec_magic_number
+            cmi_magic_number cmo_magic_number cma_magic_number
+            cmx_magic_number cmxa_magic_number ast_intf_magic_number
+            ast_impl_magic_number cmxs_magic_number cmt_magic_number max_tag
+            lazy_tag max_young_wosize stack_threshold stack_safety_margin
+            architecture model system asm asm_cfi_supported
+            with_frame_pointers ext_obj ext_asm ext_lib ext_dll
+            default_executable_name systhread_supported flexdll_dirs host
+            target flambda with_flambda_invariants spacetime
+            enable_call_counts profinfo profinfo_width libunwind_available
+            libunwind_link_flags safe_string default_safe_string
+            flat_float_array windows_unicode supports_shared_libraries
+            afl_instrument print_config config_var))))))

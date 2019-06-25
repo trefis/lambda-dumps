@@ -1,0 +1,542 @@
+(setglobal Branch_relaxation!
+  (let
+    (Make =
+       (module-defn(Make) asmcomp/branch_relaxation.ml(20):1182-6315
+         (function T is_a_functor
+           (let
+             (T =a T
+              label_map =
+                (function code
+                  (funct-body asmcomp/branch_relaxation.ml(21)<ghost>:1250-1530
+                    (before asmcomp/branch_relaxation.ml(22):1261-1530
+                      (let
+                        (map =
+                           (after asmcomp/branch_relaxation.ml(22):1271-1288
+                             (apply (field 0 (global Stdlib__hashtbl!)) 0a
+                               37)))
+                        (before asmcomp/branch_relaxation.ml(23):1296-1530
+                          (letrec
+                            (fill_map
+                               (function pc[int] instr
+                                 (funct-body asmcomp/branch_relaxation.ml(23)<ghost>:1313-1503
+                                   (before asmcomp/branch_relaxation.ml(24):1330-1503
+                                     (let (op = (field 0 instr))
+                                       (catch
+                                         (switch op
+                                          case int 1:
+                                           (before asmcomp/branch_relaxation.ml(25):1368-1377
+                                             (makeblock 0 (int,*) pc map))
+                                          case tag 1:
+                                           (let (lbl =a (field 0 op))
+                                             (before asmcomp/branch_relaxation.ml(26):1400-1446
+                                               (seq
+                                                 (after asmcomp/branch_relaxation.ml(26):1400-1422
+                                                   (apply
+                                                     (field 4
+                                                       (global Stdlib__hashtbl!))
+                                                     map lbl pc))
+                                                 (before asmcomp/branch_relaxation.ml(26):1424-1446
+                                                   (after asmcomp/branch_relaxation.ml(26):1424-1446
+                                                     (apply fill_map pc
+                                                       (field 1 instr)))))))
+                                          default: (exit 1))
+                                        with (1)
+                                         (before asmcomp/branch_relaxation.ml(27):1461-1503
+                                           (after asmcomp/branch_relaxation.ml(27):1461-1503
+                                             (apply fill_map
+                                               (+ pc
+                                                 (after asmcomp/branch_relaxation.ml(27):1476-1491
+                                                   (apply (field 2 T) op)))
+                                               (field 1 instr))))))))))
+                            (before asmcomp/branch_relaxation.ml(29):1515-1530
+                              (after asmcomp/branch_relaxation.ml(29):1515-1530
+                                (apply fill_map 0 code)))))))))
+              branch_overflows =
+                (function map pc_branch[int] lbl_dest max_branch_offset[int]
+                  (funct-body asmcomp/branch_relaxation.ml(31)<ghost>:1555-1771
+                    (before asmcomp/branch_relaxation.ml(32):1602-1771
+                      (let
+                        (pc_dest =[int]
+                           (after asmcomp/branch_relaxation.ml(32):1616-1641
+                             (apply (field 5 (global Stdlib__hashtbl!)) map
+                               lbl_dest)))
+                        (before asmcomp/branch_relaxation.ml(33):1649-1771
+                          (let
+                            (delta =[int]
+                               (- pc_dest (+ pc_branch (field 1 T))))
+                            (before asmcomp/branch_relaxation.ml(34):1714-1771
+                              (|| (<= delta (~ max_branch_offset))
+                                (>= delta max_branch_offset)))))))))
+              opt_branch_overflows =
+                (function map pc_branch[int] opt_lbl_dest
+                  max_branch_offset[int]
+                  (funct-body asmcomp/branch_relaxation.ml(36)<ghost>:1800-1981
+                    (before asmcomp/branch_relaxation.ml(37):1851-1981
+                      (if opt_lbl_dest
+                        (let (lbl_dest =a (field 0 opt_lbl_dest))
+                          (before asmcomp/branch_relaxation.ml(40):1924-1981
+                            (after asmcomp/branch_relaxation.ml(40):1924-1981
+                              (apply branch_overflows map pc_branch lbl_dest
+                                max_branch_offset))))
+                        (before asmcomp/branch_relaxation.ml(38):1889-1894
+                          0a)))))
+              instr_overflows =
+                (function code_size[int] max_out_of_line_code_offset[int]
+                  instr map pc[int]
+                  (funct-body asmcomp/branch_relaxation.ml(42)<ghost>:2005-3309
+                    (before asmcomp/branch_relaxation.ml(43):2064-3309
+                      (let
+                        (*match* =
+                           (after asmcomp/branch_relaxation.ml(43):2070-2109
+                             (apply (field 2 (field 0 T)) (field 0 instr))))
+                        (if *match*
+                          (let (branch =a (field 0 *match*))
+                            (before asmcomp/branch_relaxation.ml(46):2162-3309
+                              (let
+                                (max_branch_offset =[int]
+                                   (-
+                                     (after asmcomp/branch_relaxation.ml(50):2402-2439
+                                       (apply (field 1 (field 0 T)) branch))
+                                     12))
+                                (before asmcomp/branch_relaxation.ml(52):2460-3309
+                                  (let (*match* = (field 0 instr))
+                                    (catch
+                                      (catch
+                                        (switch *match*
+                                         case tag 0:
+                                          (let (*match* =a (field 0 *match*))
+                                            (switch *match*
+                                             case tag 11: (exit 2)
+                                             case tag 12:
+                                              (let
+                                                (*match* =a (field 0 *match*))
+                                                (switch *match*
+                                                 case tag 1: (exit 2)
+                                                 default: (exit 3)))
+                                             case tag 13:
+                                              (let
+                                                (*match* =a (field 0 *match*))
+                                                (switch *match*
+                                                 case tag 1: (exit 2)
+                                                 default: (exit 3)))
+                                             case tag 14: (exit 2)
+                                             default: (exit 3)))
+                                         case tag 3:
+                                          (let (lbl =a (field 1 *match*))
+                                            (before asmcomp/branch_relaxation.ml(62):2948-2993
+                                              (after asmcomp/branch_relaxation.ml(62):2948-2993
+                                                (apply branch_overflows map
+                                                  pc lbl max_branch_offset))))
+                                         case tag 4:
+                                          (let
+                                            (lbl2 =a (field 2 *match*)
+                                             lbl1 =a (field 1 *match*)
+                                             lbl0 =a (field 0 *match*))
+                                            (before asmcomp/branch_relaxation.ml(64):3045-3223
+                                              (||
+                                                (after asmcomp/branch_relaxation.ml(64):3045-3095
+                                                  (apply opt_branch_overflows
+                                                    map pc lbl0
+                                                    max_branch_offset))
+                                                (||
+                                                  (after asmcomp/branch_relaxation.ml(65):3109-3159
+                                                    (apply
+                                                      opt_branch_overflows
+                                                      map pc lbl1
+                                                      max_branch_offset))
+                                                  (after asmcomp/branch_relaxation.ml(66):3173-3223
+                                                    (apply
+                                                      opt_branch_overflows
+                                                      map pc lbl2
+                                                      max_branch_offset))))))
+                                         default: (exit 3))
+                                       with (3)
+                                        (before asmcomp/branch_relaxation.ml(68):3245-3309
+                                          (after asmcomp/branch_relaxation.ml(68):3245-3309
+                                            (apply (field 0 (global Misc!))
+                                              "Unsupported instruction for branch relaxation"))))
+                                     with (2)
+                                      (before asmcomp/branch_relaxation.ml(60):2842-2907
+                                        (>=
+                                          (-
+                                            (+ code_size
+                                              max_out_of_line_code_offset)
+                                            pc)
+                                          max_branch_offset))))))))
+                          (before asmcomp/branch_relaxation.ml(44):2129-2134
+                            0a))))))
+              fixup_branches =
+                (function code_size[int] max_out_of_line_code_offset[int] map
+                  code
+                  (funct-body asmcomp/branch_relaxation.ml(70)<ghost>:3332-5728
+                    (before asmcomp/branch_relaxation.ml(71):3387-5728
+                      (let
+                        (expand_optbranch =
+                           (function lbl n[int] arg next
+                             (funct-body asmcomp/branch_relaxation.ml(71)<ghost>:3408-3580
+                               (before asmcomp/branch_relaxation.ml(72):3431-3580
+                                 (if lbl
+                                   (let (l =a (field 0 lbl))
+                                     (before asmcomp/branch_relaxation.ml(75):3493-3580
+                                       (after asmcomp/branch_relaxation.ml(75):3493-3580
+                                         (apply (field 2 (global Linearize!))
+                                           (makeblock 3 (*,int)
+                                             (makeblock 1 (*,int) [0: 0a] n)
+                                             l)
+                                           arg (makearray[addr]) next))))
+                                   (before asmcomp/branch_relaxation.ml(73):3462-3466
+                                     next))))))
+                        (before asmcomp/branch_relaxation.ml(78):3592-5728
+                          (letrec
+                            (fixup
+                               (function did_fix pc[int] instr
+                                 (funct-body asmcomp/branch_relaxation.ml(78)<ghost>:3606-5698
+                                   (before asmcomp/branch_relaxation.ml(79):3631-5698
+                                     (let (*match* = (field 0 instr))
+                                       (catch
+                                         (if (isint *match*)
+                                           (if (!= *match* 1) (exit 5)
+                                             (before asmcomp/branch_relaxation.ml(80):3669-3676
+                                               did_fix))
+                                           (exit 5))
+                                        with (5)
+                                         (before asmcomp/branch_relaxation.ml(82):3698-5698
+                                           (let
+                                             (overflows =
+                                                (after asmcomp/branch_relaxation.ml(83):3724-3792
+                                                  (apply instr_overflows
+                                                    code_size
+                                                    max_out_of_line_code_offset
+                                                    instr map pc)))
+                                             (before asmcomp/branch_relaxation.ml(85):3812-5698
+                                               (if (not overflows)
+                                                 (before asmcomp/branch_relaxation.ml(86):3844-3899
+                                                   (after asmcomp/branch_relaxation.ml(86):3844-3899
+                                                     (apply fixup did_fix
+                                                       (+ pc
+                                                         (after asmcomp/branch_relaxation.ml(86):3864-3887
+                                                           (apply (field 2 T)
+                                                             (field 0 instr))))
+                                                       (field 1 instr))))
+                                                 (before asmcomp/branch_relaxation.ml(88):3923-5698
+                                                   (let
+                                                     (*match* =
+                                                        (field 0 instr))
+                                                     (catch
+                                                       (switch *match*
+                                                        case tag 0:
+                                                         (let
+                                                           (*match* =a
+                                                              (field 0
+                                                                *match*))
+                                                           (switch *match*
+                                                            case tag 11:
+                                                             (let
+                                                               (label_after_call_gc =a
+                                                                  (field 1
+                                                                    *match*)
+                                                                num_bytes =a
+                                                                  (field 0
+                                                                    *match*))
+                                                               (before asmcomp/branch_relaxation.ml(90):4029-4159
+                                                                 (seq
+                                                                   (setfield_ptr 0
+                                                                    instr
+                                                                    (after asmcomp/branch_relaxation.ml(90):4043-4093
+                                                                    (apply
+                                                                    (field 3
+                                                                    T)
+                                                                    num_bytes
+                                                                    label_after_call_gc)))
+                                                                   (before asmcomp/branch_relaxation.ml(91):4107-4159
+                                                                    (after asmcomp/branch_relaxation.ml(91):4107-4159
+                                                                    (apply
+                                                                    fixup 1a
+                                                                    (+ pc
+                                                                    (after asmcomp/branch_relaxation.ml(91):4124-4147
+                                                                    (apply
+                                                                    (field 2
+                                                                    T)
+                                                                    (field 0
+                                                                    instr))))
+                                                                    (field 1
+                                                                    instr)))))))
+                                                            case tag 12:
+                                                             (let
+                                                               (*match* =a
+                                                                  (field 0
+                                                                    *match*))
+                                                               (switch *match*
+                                                                case tag 1:
+                                                                 (let
+                                                                   (label_after_error =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                   (before asmcomp/branch_relaxation.ml(93):4237-4360
+                                                                    (seq
+                                                                    (setfield_ptr 0
+                                                                    instr
+                                                                    (after asmcomp/branch_relaxation.ml(93):4251-4294
+                                                                    (apply
+                                                                    (field 4
+                                                                    T)
+                                                                    label_after_error)))
+                                                                    (before asmcomp/branch_relaxation.ml(94):4308-4360
+                                                                    (after asmcomp/branch_relaxation.ml(94):4308-4360
+                                                                    (apply
+                                                                    fixup 1a
+                                                                    (+ pc
+                                                                    (after asmcomp/branch_relaxation.ml(94):4325-4348
+                                                                    (apply
+                                                                    (field 2
+                                                                    T)
+                                                                    (field 0
+                                                                    instr))))
+                                                                    (field 1
+                                                                    instr)))))))
+                                                                default:
+                                                                 (exit 4)))
+                                                            case tag 13:
+                                                             (let
+                                                               (*match* =a
+                                                                  (field 0
+                                                                    *match*))
+                                                               (switch *match*
+                                                                case tag 1:
+                                                                 (let
+                                                                   (bound =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    label_after_error =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                   (before asmcomp/branch_relaxation.ml(96):4449-4597
+                                                                    (seq
+                                                                    (setfield_ptr 0
+                                                                    instr
+                                                                    (after asmcomp/branch_relaxation.ml(97):4477-4531
+                                                                    (apply
+                                                                    (field 5
+                                                                    T) bound
+                                                                    label_after_error)))
+                                                                    (before asmcomp/branch_relaxation.ml(98):4545-4597
+                                                                    (after asmcomp/branch_relaxation.ml(98):4545-4597
+                                                                    (apply
+                                                                    fixup 1a
+                                                                    (+ pc
+                                                                    (after asmcomp/branch_relaxation.ml(98):4562-4585
+                                                                    (apply
+                                                                    (field 2
+                                                                    T)
+                                                                    (field 0
+                                                                    instr))))
+                                                                    (field 1
+                                                                    instr)))))))
+                                                                default:
+                                                                 (exit 4)))
+                                                            case tag 14:
+                                                             (let
+                                                               (specific =a
+                                                                  (field 0
+                                                                    *match*))
+                                                               (before asmcomp/branch_relaxation.ml(100):4650-4758
+                                                                 (seq
+                                                                   (setfield_ptr 0
+                                                                    instr
+                                                                    (after asmcomp/branch_relaxation.ml(100):4664-4692
+                                                                    (apply
+                                                                    (field 6
+                                                                    T)
+                                                                    specific)))
+                                                                   (before asmcomp/branch_relaxation.ml(101):4706-4758
+                                                                    (after asmcomp/branch_relaxation.ml(101):4706-4758
+                                                                    (apply
+                                                                    fixup 1a
+                                                                    (+ pc
+                                                                    (after asmcomp/branch_relaxation.ml(101):4723-4746
+                                                                    (apply
+                                                                    (field 2
+                                                                    T)
+                                                                    (field 0
+                                                                    instr))))
+                                                                    (field 1
+                                                                    instr)))))))
+                                                            default: (exit 4)))
+                                                        case tag 3:
+                                                         (let
+                                                           (lbl =a
+                                                              (field 1
+                                                                *match*)
+                                                            test =a
+                                                              (field 0
+                                                                *match*))
+                                                           (before asmcomp/branch_relaxation.ml(103):4810-5151
+                                                             (let
+                                                               (lbl2 =[int]
+                                                                  (after asmcomp/branch_relaxation.ml(103):4821-4836
+                                                                    (apply
+                                                                    (field 11
+                                                                    (global Cmm!))
+                                                                    0a)))
+                                                               (before asmcomp/branch_relaxation.ml(104):4852-5151
+                                                                 (let
+                                                                   (cont =
+                                                                    (after asmcomp/branch_relaxation.ml(105):4877-4975
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Linearize!))
+                                                                    (makeblock 2 (int)
+                                                                    lbl)
+                                                                    (makearray[addr])
+                                                                    (makearray[addr])
+                                                                    (after asmcomp/branch_relaxation.ml(106):4928-4975
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Linearize!))
+                                                                    (makeblock 1 (int)
+                                                                    lbl2)
+                                                                    (makearray[addr])
+                                                                    (makearray[addr])
+                                                                    (field 1
+                                                                    instr))))))
+                                                                   (before asmcomp/branch_relaxation.ml(108):5003-5151
+                                                                    (seq
+                                                                    (setfield_ptr 0
+                                                                    instr
+                                                                    (makeblock 3 (*,int)
+                                                                    (after asmcomp/branch_relaxation.ml(108):5030-5046
+                                                                    (apply
+                                                                    (field 3
+                                                                    (global Linearize!))
+                                                                    test))
+                                                                    lbl2))
+                                                                    (before asmcomp/branch_relaxation.ml(109):5067-5151
+                                                                    (seq
+                                                                    (setfield_ptr 1
+                                                                    instr
+                                                                    cont)
+                                                                    (before asmcomp/branch_relaxation.ml(110):5099-5151
+                                                                    (after asmcomp/branch_relaxation.ml(110):5099-5151
+                                                                    (apply
+                                                                    fixup 1a
+                                                                    (+ pc
+                                                                    (after asmcomp/branch_relaxation.ml(110):5116-5139
+                                                                    (apply
+                                                                    (field 2
+                                                                    T)
+                                                                    (field 0
+                                                                    instr))))
+                                                                    (field 1
+                                                                    instr)))))))))))))
+                                                        case tag 4:
+                                                         (let
+                                                           (lbl2 =a
+                                                              (field 2
+                                                                *match*)
+                                                            lbl1 =a
+                                                              (field 1
+                                                                *match*)
+                                                            lbl0 =a
+                                                              (field 0
+                                                                *match*))
+                                                           (before asmcomp/branch_relaxation.ml(112):5211-5507
+                                                             (let
+                                                               (cont =
+                                                                  (after asmcomp/branch_relaxation.ml(113):5236-5386
+                                                                    (apply
+                                                                    expand_optbranch
+                                                                    lbl0 0
+                                                                    (field 2
+                                                                    instr)
+                                                                    (after asmcomp/branch_relaxation.ml(114):5286-5386
+                                                                    (apply
+                                                                    expand_optbranch
+                                                                    lbl1 1
+                                                                    (field 2
+                                                                    instr)
+                                                                    (after asmcomp/branch_relaxation.ml(115):5339-5385
+                                                                    (apply
+                                                                    expand_optbranch
+                                                                    lbl2 2
+                                                                    (field 2
+                                                                    instr)
+                                                                    (field 1
+                                                                    instr))))))))
+                                                               (before asmcomp/branch_relaxation.ml(117):5414-5507
+                                                                 (seq
+                                                                   (setfield_ptr 0
+                                                                    instr
+                                                                    (field 0
+                                                                    cont))
+                                                                   (before asmcomp/branch_relaxation.ml(118):5451-5507
+                                                                    (seq
+                                                                    (setfield_ptr 1
+                                                                    instr
+                                                                    (field 1
+                                                                    cont))
+                                                                    (before asmcomp/branch_relaxation.ml(119):5488-5507
+                                                                    (after asmcomp/branch_relaxation.ml(119):5488-5507
+                                                                    (apply
+                                                                    fixup 1a
+                                                                    pc instr))))))))))
+                                                        default: (exit 4))
+                                                      with (4)
+                                                       (before asmcomp/branch_relaxation.ml(124):5686-5698
+                                                         (raise
+                                                           (after asmcomp/branch_relaxation.ml(124):5686-5698
+                                                             (makeblock 0
+                                                               (global Assert_failure!)
+                                                               [0:
+                                                                "asmcomp/branch_relaxation.ml"
+                                                                124 12])))))))))))))))))
+                            (before asmcomp/branch_relaxation.ml(126):5710-5728
+                              (after asmcomp/branch_relaxation.ml(126):5710-5728
+                                (apply fixup 0a 0 code))))))))))
+             (letrec
+               (relax
+                  (function code max_out_of_line_code_offset[int]
+                    (funct-body asmcomp/branch_relaxation.ml(130)<ghost>:5817-6311
+                      (before asmcomp/branch_relaxation.ml(131):5857-6311
+                        (let
+                          (min_of_max_branch_offsets =[int]
+                             (after asmcomp/branch_relaxation.ml(132):5895-6077
+                               (apply (field 20 (global Stdlib__list!))
+                                 (function min_of_max_branch_offsets[int]
+                                   branch : int
+                                   (funct-body asmcomp/branch_relaxation.ml(132):5910-6043
+                                     (before asmcomp/branch_relaxation.ml(133):5961-6042
+                                       (after asmcomp/branch_relaxation.ml(133):5961-6042
+                                         (apply (field 15 (global Stdlib!))
+                                           min_of_max_branch_offsets
+                                           (after asmcomp/branch_relaxation.ml(134):6003-6042
+                                             (apply (field 1 (field 0 T))
+                                               branch)))))))
+                                 (field 18 (global Stdlib!))
+                                 (field 0 (field 0 T)))))
+                          (before asmcomp/branch_relaxation.ml(137):6089-6311
+                            (let
+                              (*match* =
+                                 (after asmcomp/branch_relaxation.ml(137):6112-6126
+                                   (apply label_map code))
+                               map =a (field 1 *match*)
+                               code_size =a (field 0 *match*))
+                              (before asmcomp/branch_relaxation.ml(138):6134-6311
+                                (if
+                                  (&&
+                                    (>= code_size min_of_max_branch_offsets)
+                                    (after asmcomp/branch_relaxation.ml(139):6187-6250
+                                      (apply fixup_branches code_size
+                                        max_out_of_line_code_offset map code)))
+                                  (before asmcomp/branch_relaxation.ml(140):6260-6299
+                                    (after asmcomp/branch_relaxation.ml(140):6260-6299
+                                      (apply relax code
+                                        max_out_of_line_code_offset)))
+                                  (before asmcomp/branch_relaxation.ml(141):6309-6311
+                                    0a))))))))))
+               (pseudo asmcomp/branch_relaxation.ml(20):1227-6315
+                 (makeblock 0 label_map branch_overflows opt_branch_overflows
+                   instr_overflows fixup_branches relax)))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0
+        (function funarg is_a_functor stub
+          (let (let = (apply Make funarg)) (makeblock 0 (field 5 let))))))))

@@ -1,0 +1,697 @@
+(setglobal Split!
+  (let
+    (subst_reg =
+       (function r sub
+         (funct-body asmcomp/split.ml(25)<ghost>:1265-1337
+           (before asmcomp/split.ml(26):1285-1337
+             (try
+               (after asmcomp/split.ml(27):1293-1311
+                 (apply (field 26 (field 10 (global Reg!))) r sub))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before asmcomp/split.ml(29):1336-1337 r) (reraise exn))))))
+     subst_regs =
+       (function rv sub
+         (funct-body asmcomp/split.ml(31)<ghost>:1354-1552
+           (before asmcomp/split.ml(32):1365-1552
+             (if sub
+               (let (s =a (field 0 sub))
+                 (before asmcomp/split.ml(35):1415-1552
+                   (let (n =[int] (array.length[addr] rv))
+                     (before asmcomp/split.ml(36):1448-1552
+                       (let
+                         (nv =
+                            (after asmcomp/split.ml(36):1457-1479
+                              (caml_make_vect n (field 1 (global Reg!)))))
+                         (before asmcomp/split.ml(37):1489-1552
+                           (seq
+                             (for i 0 to (- n 1)
+                               (before asmcomp/split.ml(37):1509-1537
+                                 (after asmcomp/split.ml(37):1509-1537
+                                   (array.set[addr] nv i
+                                     (after asmcomp/split.ml(37):1519-1537
+                                       (apply subst_reg
+                                         (after asmcomp/split.ml(37):1529-1535
+                                           (array.get[addr] rv i))
+                                         s))))))
+                             (before asmcomp/split.ml(38):1550-1552 nv))))))))
+               (before asmcomp/split.ml(33):1392-1394 rv)))))
+     equiv_classes = (makemutable 0 (field 0 (field 10 (global Reg!)))))
+    (letrec
+      (repres_reg
+         (function r
+           (funct-body asmcomp/split.ml(45)<ghost>:1725-1806
+             (before asmcomp/split.ml(46):1731-1806
+               (try
+                 (after asmcomp/split.ml(47):1739-1780
+                   (apply repres_reg
+                     (after asmcomp/split.ml(47):1749-1780
+                       (apply (field 26 (field 10 (global Reg!))) r
+                         (field 0 equiv_classes)))))
+                with exn
+                 (if (== exn (field 7 (global Stdlib!)))
+                   (before asmcomp/split.ml(49):1805-1806 r) (reraise exn)))))))
+      (let
+        (repres_regs =
+           (function rv
+             (funct-body asmcomp/split.ml(51)<ghost>:1824-1912
+               (before asmcomp/split.ml(52):1831-1912
+                 (let (n =[int] (array.length[addr] rv))
+                   (before asmcomp/split.ml(53):1860-1912
+                     (for i 0 to (- n 1)
+                       (before asmcomp/split.ml(53):1880-1907
+                         (after asmcomp/split.ml(53):1880-1907
+                           (array.set[addr] rv i
+                             (after asmcomp/split.ml(53):1890-1907
+                               (apply repres_reg
+                                 (after asmcomp/split.ml(53):1901-1907
+                                   (array.get[addr] rv i)))))))))))))
+         identify =
+           (function r1 r2
+             (funct-body asmcomp/split.ml(58)<ghost>:2020-2217
+               (before asmcomp/split.ml(59):2030-2217
+                 (let
+                   (repres1 =
+                      (after asmcomp/split.ml(59):2044-2057
+                        (apply repres_reg r1)))
+                   (before asmcomp/split.ml(60):2063-2217
+                     (let
+                       (repres2 =
+                          (after asmcomp/split.ml(60):2077-2090
+                            (apply repres_reg r2)))
+                       (before asmcomp/split.ml(61):2096-2217
+                         (if (== (field 1 repres1) (field 1 repres2))
+                           (before asmcomp/split.ml(61):2134-2136 0a)
+                           (before asmcomp/split.ml(61):2142-2217
+                             (setfield_ptr 0 equiv_classes
+                               (after asmcomp/split.ml(62):2169-2211
+                                 (apply (field 3 (field 10 (global Reg!)))
+                                   repres1 repres2 (field 0 equiv_classes)))))))))))))
+         identify_sub =
+           (function sub1 sub2 reg
+             (funct-body asmcomp/split.ml(69)<ghost>:2442-2735
+               (before asmcomp/split.ml(70):2460-2735
+                 (try
+                   (let
+                     (r1 =
+                        (after asmcomp/split.ml(71):2477-2498
+                          (apply (field 26 (field 10 (global Reg!))) reg
+                            sub1)))
+                     (before asmcomp/split.ml(72):2506-2614
+                       (try
+                         (let
+                           (r2 =
+                              (after asmcomp/split.ml(73):2525-2546
+                                (apply (field 26 (field 10 (global Reg!)))
+                                  reg sub2)))
+                           (before asmcomp/split.ml(74):2556-2570
+                             (after asmcomp/split.ml(74):2556-2570
+                               (apply identify r1 r2))))
+                        with exn
+                         (if (== exn (field 7 (global Stdlib!)))
+                           (before asmcomp/split.ml(76):2599-2614
+                             (after asmcomp/split.ml(76):2599-2614
+                               (apply identify r1 reg)))
+                           (reraise exn)))))
+                  with exn
+                   (if (== exn (field 7 (global Stdlib!)))
+                     (before asmcomp/split.ml(78):2639-2735
+                       (try
+                         (let
+                           (r2 =
+                              (after asmcomp/split.ml(79):2658-2679
+                                (apply (field 26 (field 10 (global Reg!)))
+                                  reg sub2)))
+                           (before asmcomp/split.ml(80):2689-2704
+                             (after asmcomp/split.ml(80):2689-2704
+                               (apply identify r2 reg))))
+                        with exn
+                         (if (== exn (field 7 (global Stdlib!)))
+                           (before asmcomp/split.ml(82):2733-2735 0a)
+                           (reraise exn))))
+                     (reraise exn))))))
+         merge_substs =
+           (function sub1 sub2 i
+             (funct-body asmcomp/split.ml(87)<ghost>:2871-3100
+               (before asmcomp/split.ml(88):2887-3100
+                 (let (*match* = sub1 *match* = sub2)
+                   (if *match*
+                     (let (s1 =a (field 0 *match*))
+                       (if *match*
+                         (let (s2 =a (field 0 *match*))
+                           (before asmcomp/split.ml(93):3022-3100
+                             (seq
+                               (after asmcomp/split.ml(93):3022-3088
+                                 (apply (field 13 (field 9 (global Reg!)))
+                                   (after asmcomp/split.ml(93):3035-3055
+                                     (apply identify_sub s1 s2))
+                                   (after asmcomp/split.ml(93):3056-3088
+                                     (apply (field 11 (global Reg!))
+                                       (field 5 i) (field 2 i)))))
+                               (before asmcomp/split.ml(94):3096-3100 sub1))))
+                         (before asmcomp/split.ml(90):2958-2962 sub1)))
+                     (if *match* (before asmcomp/split.ml(91):2985-2989 sub2)
+                       (before asmcomp/split.ml(89):2931-2935 0a)))))))
+         merge_subst_array =
+           (function subv instr
+             (funct-body asmcomp/split.ml(98)<ghost>:3157-3650
+               (before asmcomp/split.ml(99):3172-3650
+                 (letrec
+                   (find_one_subst
+                      (function i[int]
+                        (funct-body asmcomp/split.ml(99)<ghost>:3195-3628
+                          (before asmcomp/split.ml(100):3203-3628
+                            (if (>= i (array.length[addr] subv))
+                              (before asmcomp/split.ml(100):3234-3238 0a)
+                              (before asmcomp/split.ml(100):3244-3628
+                                (let
+                                  (sub =
+                                     (after asmcomp/split.ml(101):3262-3270
+                                       (array.get[addr] subv i)))
+                                  (if sub
+                                    (let (si =a (field 0 sub))
+                                      (before asmcomp/split.ml(104):3349-3620
+                                        (seq
+                                          (for j (+ i 1) to
+                                            (- (array.length[addr] subv) 1)
+                                            (before asmcomp/split.ml(105):3401-3590
+                                              (let
+                                                (*match* =
+                                                   (after asmcomp/split.ml(105):3407-3415
+                                                     (array.get[addr] subv j)))
+                                                (if *match*
+                                                  (let
+                                                    (sj =a (field 0 *match*))
+                                                    (before asmcomp/split.ml(108):3487-3590
+                                                      (after asmcomp/split.ml(108):3487-3590
+                                                        (apply
+                                                          (field 13
+                                                            (field 9
+                                                              (global Reg!)))
+                                                          (after asmcomp/split.ml(108):3500-3520
+                                                            (apply
+                                                              identify_sub si
+                                                              sj))
+                                                          (after asmcomp/split.ml(109):3550-3590
+                                                            (apply
+                                                              (field 11
+                                                                (global Reg!))
+                                                              (field 5 instr)
+                                                              (field 2 instr)))))))
+                                                  (before asmcomp/split.ml(106):3443-3445
+                                                    0a)))))
+                                          (before asmcomp/split.ml(111):3617-3620
+                                            sub))))
+                                    (before asmcomp/split.ml(102):3292-3312
+                                      (after asmcomp/split.ml(102):3292-3312
+                                        (apply find_one_subst (+ i 1))))))))))))
+                   (before asmcomp/split.ml(113):3634-3650
+                     (after asmcomp/split.ml(113):3634-3650
+                       (apply find_one_subst 0)))))))
+         exit_subst = (makemutable 0 0a)
+         find_exit_subst =
+           (function k[int]
+             (funct-body asmcomp/split.ml(119)<ghost>:3750-3851
+               (before asmcomp/split.ml(120):3756-3851
+                 (try
+                   (after asmcomp/split.ml(121):3764-3788
+                     (apply (field 38 (global Stdlib__list!)) k
+                       (field 0 exit_subst)))
+                  with exn
+                   (if (== exn (field 7 (global Stdlib!)))
+                     (before asmcomp/split.ml(122):3811-3851
+                       (after asmcomp/split.ml(122):3811-3851
+                         (apply (field 0 (global Misc!))
+                           "Split.find_exit_subst")))
+                     (reraise exn)))))))
+        (letrec
+          (rename
+             (function i sub
+               (funct-body asmcomp/split.ml(124)<ghost>:3868-6869
+                 (before asmcomp/split.ml(125):3878-6869
+                   (let (*match* = (field 0 i))
+                     (catch
+                       (switch* *match*
+                        case int 0:
+                         (before asmcomp/split.ml(127):3914-3922
+                           (makeblock 0 i sub))
+                        case int 1: (exit 40)
+                        case tag 0:
+                         (let (*match* =a (field 0 *match*))
+                           (catch
+                             (switch *match*
+                              case int 2:
+                               (before asmcomp/split.ml(131):4091-4114
+                                 (if
+                                   (==
+                                     (field 3
+                                       (after asmcomp/split.ml(131):4091-4100
+                                         (array.get[addr] (field 3 i) 0)))
+                                     0a)
+                                   (before asmcomp/split.ml(132):4124-4457
+                                     (if sub
+                                       (let (s =a (field 0 sub))
+                                         (before asmcomp/split.ml(135):4207-4447
+                                           (let
+                                             (oldr =
+                                                (after asmcomp/split.ml(135):4218-4227
+                                                  (array.get[addr]
+                                                    (field 3 i) 0)))
+                                             (before asmcomp/split.ml(136):4241-4447
+                                               (let
+                                                 (newr =
+                                                    (after asmcomp/split.ml(136):4252-4271
+                                                      (apply
+                                                        (field 5
+                                                          (global Reg!))
+                                                        (after asmcomp/split.ml(136):4262-4271
+                                                          (array.get[addr]
+                                                            (field 3 i) 0)))))
+                                                 (before asmcomp/split.ml(137):4285-4447
+                                                   (let
+                                                     (*match* =
+                                                        (after asmcomp/split.ml(138):4324-4369
+                                                          (apply rename
+                                                            (field 1 i)
+                                                            (makeblock 0
+                                                              (after asmcomp/split.ml(138):4343-4368
+                                                                (apply
+                                                                  (field 3
+                                                                    (field 10
+                                                                    (global Reg!)))
+                                                                  oldr newr
+                                                                  s)))))
+                                                      sub_next =a
+                                                        (field 1 *match*)
+                                                      new_next =a
+                                                        (field 0 *match*))
+                                                     (before asmcomp/split.ml(139):4383-4447
+                                                       (makeblock 0
+                                                         (after asmcomp/split.ml(139):4384-4425
+                                                           (apply
+                                                             (field 2
+                                                               (global Mach!))
+                                                             (field 0 i)
+                                                             (field 2 i)
+                                                             (makearray[addr]
+                                                               newr)
+                                                             new_next))
+                                                         sub_next)))))))))
+                                       (before asmcomp/split.ml(133):4161-4178
+                                         (after asmcomp/split.ml(133):4161-4178
+                                           (apply rename (field 1 i) sub)))))
+                                   (exit 41)))
+                              case tag 5: (exit 40)
+                              case tag 6: (exit 40)
+                              default: (exit 41))
+                            with (41)
+                             (before asmcomp/split.ml(143):4477-4658
+                               (let
+                                 (*match* =
+                                    (after asmcomp/split.ml(143):4504-4521
+                                      (apply rename (field 1 i) sub))
+                                  sub_next =a (field 1 *match*)
+                                  new_next =a (field 0 *match*))
+                                 (before asmcomp/split.ml(144):4531-4658
+                                   (makeblock 0
+                                     (after asmcomp/split.ml(144):4532-4640
+                                       (apply (field 3 (global Mach!))
+                                         (field 0 i)
+                                         (after asmcomp/split.ml(144):4556-4578
+                                           (apply subst_regs (field 2 i) sub))
+                                         (after asmcomp/split.ml(144):4579-4601
+                                           (apply subst_regs (field 3 i) sub))
+                                         (field 4 i) new_next))
+                                     sub_next))))))
+                        case tag 1:
+                         (let
+                           (ifnot =a (field 2 *match*)
+                            ifso =a (field 1 *match*)
+                            tst =a (field 0 *match*))
+                           (before asmcomp/split.ml(148):4702-5032
+                             (let
+                               (*match* =
+                                  (after asmcomp/split.ml(148):4729-4744
+                                    (apply rename ifso sub))
+                                sub_ifso =a (field 1 *match*)
+                                new_ifso =a (field 0 *match*))
+                               (before asmcomp/split.ml(149):4754-5032
+                                 (let
+                                   (*match* =
+                                      (after asmcomp/split.ml(149):4783-4799
+                                        (apply rename ifnot sub))
+                                    sub_ifnot =a (field 1 *match*)
+                                    new_ifnot =a (field 0 *match*))
+                                   (before asmcomp/split.ml(150):4809-5032
+                                     (let
+                                       (*match* =
+                                          (after asmcomp/split.ml(151):4844-4898
+                                            (apply rename (field 1 i)
+                                              (after asmcomp/split.ml(151):4858-4898
+                                                (apply merge_substs sub_ifso
+                                                  sub_ifnot (field 1 i)))))
+                                        sub_next =a (field 1 *match*)
+                                        new_next =a (field 0 *match*))
+                                       (before asmcomp/split.ml(152):4908-5032
+                                         (makeblock 0
+                                           (after asmcomp/split.ml(152):4909-5014
+                                             (apply (field 2 (global Mach!))
+                                               (makeblock 1 tst new_ifso
+                                                 new_ifnot)
+                                               (after asmcomp/split.ml(153):4978-5000
+                                                 (apply subst_regs
+                                                   (field 2 i) sub))
+                                               (makearray[addr]) new_next))
+                                           sub_next)))))))))
+                        case tag 2:
+                         (let
+                           (cases =a (field 1 *match*)
+                            index =a (field 0 *match*))
+                           (before asmcomp/split.ml(156):5068-5445
+                             (let
+                               (new_sub_cases =
+                                  (after asmcomp/split.ml(156):5088-5127
+                                    (apply (field 14 (global Stdlib__array!))
+                                      (function c
+                                        (funct-body asmcomp/split.ml(156):5098-5121
+                                          (before asmcomp/split.ml(156):5108-5120
+                                            (after asmcomp/split.ml(156):5108-5120
+                                              (apply rename c sub)))))
+                                      cases)))
+                               (before asmcomp/split.ml(157):5137-5445
+                                 (let
+                                   (sub_merge =
+                                      (after asmcomp/split.ml(158):5161-5230
+                                        (apply merge_subst_array
+                                          (after asmcomp/split.ml(158):5179-5223
+                                            (apply
+                                              (field 14
+                                                (global Stdlib__array!))
+                                              (function param
+                                                (funct-body asmcomp/split.ml(158):5190-5208
+                                                  (let (s =a (field 1 param))
+                                                    (before asmcomp/split.ml(158):5206-5207
+                                                      s))))
+                                              new_sub_cases))
+                                          (field 1 i))))
+                                   (before asmcomp/split.ml(159):5240-5445
+                                     (let
+                                       (*match* =
+                                          (after asmcomp/split.ml(159):5267-5290
+                                            (apply rename (field 1 i)
+                                              sub_merge))
+                                        sub_next =a (field 1 *match*)
+                                        new_next =a (field 0 *match*))
+                                       (before asmcomp/split.ml(160):5300-5445
+                                         (makeblock 0
+                                           (after asmcomp/split.ml(160):5301-5427
+                                             (apply (field 2 (global Mach!))
+                                               (makeblock 2 index
+                                                 (after asmcomp/split.ml(160):5328-5370
+                                                   (apply
+                                                     (field 14
+                                                       (global Stdlib__array!))
+                                                     (function param
+                                                       (funct-body asmcomp/split.ml(160):5338-5356
+                                                         (let
+                                                           (n =a
+                                                              (field 0 param))
+                                                           (before asmcomp/split.ml(160):5354-5355
+                                                             n))))
+                                                     new_sub_cases)))
+                                               (after asmcomp/split.ml(161):5391-5413
+                                                 (apply subst_regs
+                                                   (field 2 i) sub))
+                                               (makearray[addr]) new_next))
+                                           sub_next)))))))))
+                        case tag 3:
+                         (let
+                           (body =a (field 2 *match*)
+                            handlers =a (field 1 *match*)
+                            rec_flag =a (field 0 *match*))
+                           (before asmcomp/split.ml(164):5492-6321
+                             (let
+                               (new_subst =
+                                  (after asmcomp/split.ml(164):5508-5571
+                                    (apply (field 16 (global Stdlib__list!))
+                                      (function param
+                                        (funct-body asmcomp/split.ml(164):5517-5552
+                                          (let (nfail =a (field 0 param))
+                                            (before asmcomp/split.ml(164):5536-5551
+                                              (makeblock 0 (int,*) nfail
+                                                (makemutable 0 0a))))))
+                                      handlers)))
+                               (before asmcomp/split.ml(166):5581-6321
+                                 (let
+                                   (previous_exit_subst =
+                                      (field 0 exit_subst))
+                                   (before asmcomp/split.ml(167):5628-6321
+                                     (seq
+                                       (setfield_ptr 0 exit_subst
+                                         (after asmcomp/split.ml(167):5642-5665
+                                           (apply (field 36 (global Stdlib!))
+                                             new_subst (field 0 exit_subst))))
+                                       (before asmcomp/split.ml(168):5673-6321
+                                         (let
+                                           (*match* =
+                                              (after asmcomp/split.ml(168):5700-5715
+                                                (apply rename body sub))
+                                            sub_body =a (field 1 *match*)
+                                            new_body =a (field 0 *match*))
+                                           (before asmcomp/split.ml(169):5725-6321
+                                             (let
+                                               (res =
+                                                  (after asmcomp/split.ml(170):5743-5844
+                                                    (apply
+                                                      (field 23
+                                                        (global Stdlib__list!))
+                                                      (function param param
+                                                        (funct-body asmcomp/split.ml(170):5753-5815
+                                                          (let
+                                                            (new_subst =a
+                                                               (field 1
+                                                                 param)
+                                                             handler =a
+                                                               (field 1
+                                                                 param))
+                                                            (before asmcomp/split.ml(170):5789-5814
+                                                              (after asmcomp/split.ml(170):5789-5814
+                                                                (apply rename
+                                                                  handler
+                                                                  (field 0
+                                                                    new_subst)))))))
+                                                      handlers new_subst)))
+                                               (before asmcomp/split.ml(172):5854-6321
+                                                 (seq
+                                                   (setfield_ptr 0 exit_subst
+                                                     previous_exit_subst)
+                                                   (before asmcomp/split.ml(173):5895-6321
+                                                     (let
+                                                       (merged_subst =
+                                                          (after asmcomp/split.ml(174):5922-6037
+                                                            (apply
+                                                              (field 20
+                                                                (global Stdlib__list!))
+                                                              (function acc
+                                                                param
+                                                                (funct-body asmcomp/split.ml(174):5937-6014
+                                                                  (let
+                                                                    (sub_handler =a
+                                                                    (field 1
+                                                                    param))
+                                                                    (before asmcomp/split.ml(175):5978-6013
+                                                                    (after asmcomp/split.ml(175):5978-6013
+                                                                    (apply
+                                                                    merge_substs
+                                                                    acc
+                                                                    sub_handler
+                                                                    (field 1
+                                                                    i)))))))
+                                                              sub_body res)))
+                                                       (before asmcomp/split.ml(177):6047-6321
+                                                         (let
+                                                           (*match* =
+                                                              (after asmcomp/split.ml(177):6074-6100
+                                                                (apply rename
+                                                                  (field 1 i)
+                                                                  merged_subst))
+                                                            sub_next =a
+                                                              (field 1
+                                                                *match*)
+                                                            new_next =a
+                                                              (field 0
+                                                                *match*))
+                                                           (before asmcomp/split.ml(178):6110-6321
+                                                             (let
+                                                               (new_handlers =
+                                                                  (after asmcomp/split.ml(178):6129-6211
+                                                                    (apply
+                                                                    (field 23
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    param
+                                                                    param
+                                                                    (funct-body asmcomp/split.ml(178):6139-6198
+                                                                    (let
+                                                                    (handler =a
+                                                                    (field 0
+                                                                    param)
+                                                                    nfail =a
+                                                                    (field 0
+                                                                    param))
+                                                                    (before asmcomp/split.ml(179):6181-6197
+                                                                    (makeblock 0 (int,*)
+                                                                    nfail
+                                                                    handler)))))
+                                                                    handlers
+                                                                    res)))
+                                                               (before asmcomp/split.ml(180):6221-6321
+                                                                 (makeblock 0
+                                                                   (after asmcomp/split.ml(180):6222-6303
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Mach!))
+                                                                    (makeblock 3
+                                                                    rec_flag
+                                                                    new_handlers
+                                                                    new_body)
+                                                                    (makearray[addr])
+                                                                    (makearray[addr])
+                                                                    new_next))
+                                                                   sub_next)))))))))))))))))))))
+                        case tag 4:
+                         (let (nfail =a (field 0 *match*))
+                           (before asmcomp/split.ml(184):6347-6429
+                             (let
+                               (r =
+                                  (after asmcomp/split.ml(184):6355-6376
+                                    (apply find_exit_subst nfail)))
+                               (before asmcomp/split.ml(185):6386-6429
+                                 (seq
+                                   (setfield_ptr 0 r
+                                     (after asmcomp/split.ml(185):6391-6412
+                                       (apply merge_substs (field 0 r) sub i)))
+                                   (before asmcomp/split.ml(186):6420-6429
+                                     (makeblock 0 i 0a)))))))
+                        case tag 5:
+                         (let
+                           (handler =a (field 1 *match*)
+                            body =a (field 0 *match*))
+                           (before asmcomp/split.ml(188):6467-6763
+                             (let
+                               (*match* =
+                                  (after asmcomp/split.ml(188):6494-6509
+                                    (apply rename body sub))
+                                sub_body =a (field 1 *match*)
+                                new_body =a (field 0 *match*))
+                               (before asmcomp/split.ml(189):6519-6763
+                                 (let
+                                   (*match* =
+                                      (after asmcomp/split.ml(189):6552-6570
+                                        (apply rename handler sub))
+                                    sub_handler =a (field 1 *match*)
+                                    new_handler =a (field 0 *match*))
+                                   (before asmcomp/split.ml(190):6580-6763
+                                     (let
+                                       (*match* =
+                                          (after asmcomp/split.ml(191):6615-6671
+                                            (apply rename (field 1 i)
+                                              (after asmcomp/split.ml(191):6629-6671
+                                                (apply merge_substs sub_body
+                                                  sub_handler (field 1 i)))))
+                                        sub_next =a (field 1 *match*)
+                                        new_next =a (field 0 *match*))
+                                       (before asmcomp/split.ml(192):6681-6763
+                                         (makeblock 0
+                                           (after asmcomp/split.ml(192):6682-6745
+                                             (apply (field 2 (global Mach!))
+                                               (makeblock 5 new_body
+                                                 new_handler)
+                                               (makearray[addr])
+                                               (makearray[addr]) new_next))
+                                           sub_next)))))))))
+                        case tag 6:
+                         (let (k =a (field 0 *match*))
+                           (before asmcomp/split.ml(195):6786-6869
+                             (makeblock 0
+                               (after asmcomp/split.ml(195):6787-6855
+                                 (apply (field 3 (global Mach!))
+                                   (makeblock 6 k)
+                                   (after asmcomp/split.ml(195):6815-6837
+                                     (apply subst_regs (field 2 i) sub))
+                                   (makearray[addr]) (field 4 i) (field 1 i)))
+                               0a))))
+                      with (40)
+                       (before asmcomp/split.ml(129):3990-4069
+                         (makeblock 0
+                           (after asmcomp/split.ml(129):3991-4055
+                             (apply (field 3 (global Mach!)) (field 0 i)
+                               (after asmcomp/split.ml(129):4015-4037
+                                 (apply subst_regs (field 2 i) sub))
+                               (makearray[addr]) (field 4 i) (field 1 i)))
+                           0a))))))))
+          (let
+            (set_repres =
+               (function i
+                 (funct-body asmcomp/split.ml(200)<ghost>:6955-7021
+                   (before asmcomp/split.ml(201):6961-7021
+                     (after asmcomp/split.ml(201):6961-7021
+                       (apply (field 4 (global Mach!))
+                         (function i
+                           (funct-body asmcomp/split.ml(201):6972-7019
+                             (before asmcomp/split.ml(201):6982-7018
+                               (seq
+                                 (after asmcomp/split.ml(201):6982-6999
+                                   (apply repres_regs (field 2 i)))
+                                 (before asmcomp/split.ml(201):7001-7018
+                                   (after asmcomp/split.ml(201):7001-7018
+                                     (apply repres_regs (field 3 i))))))))
+                         i)))))
+             reset =
+               (function param
+                 (funct-body asmcomp/split.ml(205)<ghost>:7052-7109
+                   (before asmcomp/split.ml(206):7059-7109
+                     (seq
+                       (setfield_ptr 0 equiv_classes
+                         (field 0 (field 10 (global Reg!))))
+                       (before asmcomp/split.ml(207):7093-7109
+                         (setfield_ptr 0 exit_subst 0a))))))
+             fundecl =
+               (function f
+                 (funct-body asmcomp/split.ml(209)<ghost>:7123-7539
+                   (before asmcomp/split.ml(210):7129-7539
+                     (seq
+                       (after asmcomp/split.ml(210):7129-7137
+                         (apply reset 0a))
+                       (before asmcomp/split.ml(212):7142-7539
+                         (let
+                           (new_args =
+                              (after asmcomp/split.ml(212):7157-7178
+                                (apply (field 7 (global Stdlib__array!))
+                                  (field 1 f))))
+                           (before asmcomp/split.ml(213):7184-7539
+                             (let
+                               (*match* =
+                                  (after asmcomp/split.ml(213):7212-7250
+                                    (apply rename (field 2 f)
+                                      (makeblock 0
+                                        (field 0 (field 10 (global Reg!))))))
+                                new_body =a (field 0 *match*))
+                               (before asmcomp/split.ml(214):7256-7539
+                                 (seq
+                                   (after asmcomp/split.ml(214):7256-7276
+                                     (apply repres_regs new_args))
+                                   (before asmcomp/split.ml(215):7280-7539
+                                     (seq
+                                       (after asmcomp/split.ml(215):7280-7299
+                                         (apply set_repres new_body))
+                                       (before asmcomp/split.ml(216):7303-7539
+                                         (seq
+                                           (setfield_ptr 0 equiv_classes
+                                             (field 0
+                                               (field 10 (global Reg!))))
+                                           (before asmcomp/split.ml(217):7337-7539
+                                             (makeblock 0 (field 0 f)
+                                               new_args new_body (field 3 f)
+                                               (field 4 f) (field 5 f))))))))))))))))))
+            (pseudo _none_(0)<ghost>:-1--1 (makeblock 0 fundecl reset))))))))

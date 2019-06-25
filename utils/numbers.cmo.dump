@@ -1,0 +1,185 @@
+(setglobal Numbers!
+  (let
+    (Int_base =
+       (module-defn(Int_base) utils/numbers.ml(17):1156-1374
+         (apply (field 1 (global Identifiable!))
+           (let
+             (compare =
+                (function x[int] y[int] : int
+                  (funct-body utils/numbers.ml(20)<ghost>:1230-1241
+                    (before utils/numbers.ml(20):1236-1241 (- x y))))
+              output =
+                (function oc x[int]
+                  (funct-body utils/numbers.ml(21)<ghost>:1255-1286
+                    (before utils/numbers.ml(21):1262-1286
+                      (after utils/numbers.ml(21):1262-1286
+                        (apply (field 0 (global Stdlib__printf!)) oc
+                          [0: [4: 3a 0a 0a 0a] "%i"] x)))))
+              hash =
+                (function i
+                  (funct-body utils/numbers.ml(22)<ghost>:1298-1303
+                    (before utils/numbers.ml(22):1302-1303 i)))
+              equal =
+                (function i[int] j[int]
+                  (funct-body utils/numbers.ml(23)<ghost>:1316-1335
+                    (before utils/numbers.ml(23):1330-1335 (== i j))))
+              print = (field 16 (global Stdlib__format!)))
+             (pseudo utils/numbers.ml(17):1193-1373
+               (makeblock 0 equal hash compare output print)))))
+     Int =
+       (module-defn(Int) utils/numbers.ml(27):1376-1520
+         (let
+           (include =a Int_base
+            T =a (field 0 include)
+            equal =a (field 1 include)
+            hash =a (field 2 include)
+            compare =a (field 3 include)
+            output =a (field 4 include)
+            print =a (field 5 include)
+            Set =a (field 6 include)
+            Map =a (field 7 include)
+            Tbl =a (field 8 include))
+           (letrec
+             (zero_to_n
+                (function n[int]
+                  (funct-body utils/numbers.ml(32)<ghost>:1452-1516
+                    (before utils/numbers.ml(33):1460-1516
+                      (if (< n 0)
+                        (before utils/numbers.ml(33):1474-1483 (field 0 Set))
+                        (before utils/numbers.ml(33):1489-1516
+                          (after utils/numbers.ml(33):1489-1516
+                            (apply (field 3 Set) n
+                              (after utils/numbers.ml(33):1499-1516
+                                (apply zero_to_n (- n 1)))))))))))
+             (pseudo utils/numbers.ml(27):1389-1520
+               (makeblock 0 T equal hash compare output print Set Map Tbl
+                 zero_to_n)))))
+     Int8 =
+       (module-defn(Int8) utils/numbers.ml(36):1522-1764
+         (let
+           (zero =[int] 0
+            one =[int] 1
+            of_int_exn =
+              (function i[int] : int
+                (funct-body utils/numbers.ml(42)<ghost>:1606-1740
+                  (before utils/numbers.ml(43):1614-1740
+                    (if (|| (< i (~ (lsl 1 7))) (> i (- (lsl 1 7) 1)))
+                      (before utils/numbers.ml(44):1666-1723
+                        (after utils/numbers.ml(44):1666-1723
+                          (apply (field 1 (global Misc!))
+                            [0:
+                             [11:
+                              "Int8.of_int_exn: "
+                              [4: 0a 0a 0a [11: " is out of range" 0a]]]
+                             "Int8.of_int_exn: %d is out of range"]
+                            i)))
+                      (before utils/numbers.ml(46):1739-1740 i)))))
+            to_int =
+              (function i
+                (funct-body utils/numbers.ml(48)<ghost>:1755-1760
+                  (before utils/numbers.ml(48):1759-1760 i))))
+           (pseudo utils/numbers.ml(36):1536-1764
+             (makeblock 0 zero one of_int_exn to_int))))
+     Int16 =
+       (module-defn(Int16) utils/numbers.ml(51):1766-2330
+         (let
+           (of_int_exn =
+              (function i[int] : int
+                (funct-body utils/numbers.ml(54)<ghost>:1821-1958
+                  (before utils/numbers.ml(55):1829-1958
+                    (if (|| (< i (~ (lsl 1 15))) (> i (- (lsl 1 15) 1)))
+                      (before utils/numbers.ml(56):1883-1941
+                        (after utils/numbers.ml(56):1883-1941
+                          (apply (field 1 (global Misc!))
+                            [0:
+                             [11:
+                              "Int16.of_int_exn: "
+                              [4: 0a 0a 0a [11: " is out of range" 0a]]]
+                             "Int16.of_int_exn: %d is out of range"]
+                            i)))
+                      (before utils/numbers.ml(58):1957-1958 i)))))
+            lower_int64 =[int64]
+              (Int64.neg (Int64.lsl (field 1 (global Stdlib__int64!)) 15))
+            upper_int64 =[int64]
+              (Int64.sub (Int64.lsl (field 1 (global Stdlib__int64!)) 15)
+                (field 1 (global Stdlib__int64!)))
+            of_int64_exn =
+              (function i[int64] : int
+                (funct-body utils/numbers.ml(63)<ghost>:2114-2306
+                  (before utils/numbers.ml(64):2122-2306
+                    (if
+                      (||
+                        (<
+                          (after utils/numbers.ml(64):2125-2152
+                            (apply (field 14 (global Stdlib__int64!)) i
+                              lower_int64))
+                          0)
+                        (>
+                          (after utils/numbers.ml(65):2168-2195
+                            (apply (field 14 (global Stdlib__int64!)) i
+                              upper_int64))
+                          0))
+                      (before utils/numbers.ml(67):2215-2276
+                        (after utils/numbers.ml(67):2215-2276
+                          (apply (field 1 (global Misc!))
+                            [0:
+                             [11:
+                              "Int16.of_int64_exn: "
+                              [7: 0a 0a 0a [11: " is out of range" 0a]]]
+                             "Int16.of_int64_exn: %Ld is out of range"]
+                            i)))
+                      (before utils/numbers.ml(69):2292-2306
+                        (Int64.to_int i))))))
+            to_int =
+              (function t
+                (funct-body utils/numbers.ml(71)<ghost>:2321-2326
+                  (before utils/numbers.ml(71):2325-2326 t))))
+           (pseudo utils/numbers.ml(51):1781-2330
+             (makeblock 0 of_int_exn lower_int64 upper_int64 of_int64_exn
+               to_int))))
+     Float =
+       (module-defn(Float) utils/numbers.ml(74):2332-2632
+         (let
+           (include =
+              (apply (field 1 (global Identifiable!))
+                (let
+                  (compare =
+                     (function x y : int
+                       (funct-body utils/numbers.ml(80)<ghost>:2444-2468
+                         (before utils/numbers.ml(80):2450-2468
+                           (after utils/numbers.ml(80):2450-2468
+                             (caml_compare x y)))))
+                   output =
+                     (function oc x[float]
+                       (funct-body utils/numbers.ml(81)<ghost>:2484-2515
+                         (before utils/numbers.ml(81):2491-2515
+                           (after utils/numbers.ml(81):2491-2515
+                             (apply (field 0 (global Stdlib__printf!)) oc
+                               [0: [8: [0: 0a 0a] 0a 0a 0a] "%f"] x)))))
+                   hash =
+                     (function f : int
+                       (funct-body utils/numbers.ml(82)<ghost>:2529-2547
+                         (before utils/numbers.ml(82):2533-2547
+                           (after utils/numbers.ml(82):2533-2547
+                             (apply (field 26 (global Stdlib__hashtbl!)) f)))))
+                   equal =
+                     (function i[float] j[float]
+                       (funct-body utils/numbers.ml(83)<ghost>:2562-2583
+                         (before utils/numbers.ml(83):2578-2583 (==. i j))))
+                   print = (field 18 (global Stdlib__format!)))
+                  (pseudo utils/numbers.ml(77):2401-2627
+                    (makeblock 0 equal hash compare output print))))
+            T =a (field 0 include)
+            equal =a (field 1 include)
+            hash =a (field 2 include)
+            compare =a (field 3 include)
+            output =a (field 4 include)
+            print =a (field 5 include)
+            Set =a (field 6 include)
+            Map =a (field 7 include)
+            Tbl =a (field 8 include))
+           (pseudo utils/numbers.ml(74):2347-2632
+             (makeblock 0 T equal hash compare output print Set Map Tbl)))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 Int Int8
+        (makeblock 0 (field 0 Int16) (field 3 Int16) (field 4 Int16)) Float))))

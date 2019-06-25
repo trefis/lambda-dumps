@@ -1,0 +1,85 @@
+(setglobal CSE!
+  (let
+    (shared =a [0: #"class_of_operation" #"fundecl" #"is_cheap_operation"]
+     shared =a [0: #"is_cheap_operation" #"class_of_operation" #"fundecl"])
+    (letrec
+      (cse
+         (let
+           (cse_init =
+              (function class
+                (let
+                  (class_of_operation =
+                     (apply (field 6 (global CamlinternalOO!)) class
+                       #"class_of_operation")
+                   inh =
+                     (apply (field 17 (global CamlinternalOO!)) class 0a 0a
+                       shared (field 0 (global CSEgen!)) 1a)
+                   obj_init =o (field 0 inh)
+                   class_of_operation =o (field 1 inh))
+                  (seq
+                    (apply (field 9 (global CamlinternalOO!)) class
+                      class_of_operation
+                      (function self-1 op
+                        (funct-body asmcomp/CSE.ml(26)<ghost>:1214-1560
+                          (before asmcomp/CSE.ml(27):1221-1560
+                            (catch
+                              (switch op
+                               case tag 14:
+                                (let (spec =a (field 0 op))
+                                  (before asmcomp/CSE.ml(29):1261-1523
+                                    (catch
+                                      (catch
+                                        (catch
+                                          (switch* spec
+                                           case int 0: (exit 3)
+                                           case int 1: (exit 1)
+                                           case tag 0: (exit 1)
+                                           case tag 1:
+                                            (let (is_asg =a (field 2 spec))
+                                              (before asmcomp/CSE.ml(31):1354-1369
+                                                (makeblock 0 is_asg)))
+                                           case tag 2:
+                                            (before asmcomp/CSE.ml(32):1397-1410
+                                              [0: 1a])
+                                           case tag 3: (exit 2)
+                                           case tag 4: (exit 3)
+                                           case tag 5: (exit 2))
+                                         with (1)
+                                          (before asmcomp/CSE.ml(30):1312-1319
+                                            0a))
+                                       with (2)
+                                        (before asmcomp/CSE.ml(33):1453-1460
+                                          2a))
+                                     with (3)
+                                      (before asmcomp/CSE.ml(34):1488-1515
+                                        (after asmcomp/CSE.ml(34):1488-1515
+                                          (apply
+                                            (after asmcomp/CSE.ml(34):1488-1512
+                                              (apply class_of_operation
+                                                self-1))
+                                            op))))))
+                               default: (exit 4))
+                             with (4)
+                              (before asmcomp/CSE.ml(36):1533-1560
+                                (after asmcomp/CSE.ml(36):1533-1560
+                                  (apply
+                                    (after asmcomp/CSE.ml(36):1533-1557
+                                      (apply class_of_operation self-1))
+                                    op))))))))
+                    (function env self
+                      (let
+                        (self =
+                           (apply (field 23 (global CamlinternalOO!)) self
+                             class))
+                        (seq (apply obj_init self)
+                          (apply (field 25 (global CamlinternalOO!)) self
+                            self class))))))))
+           (apply (field 18 (global CamlinternalOO!)) shared cse_init)))
+      (let
+        (fundecl =
+           (function f
+             (funct-body asmcomp/CSE.ml(40)<ghost>:1579-1604
+               (before asmcomp/CSE.ml(41):1585-1604
+                 (after asmcomp/CSE.ml(41):1585-1604
+                   (send (apply (field 0 cse) 0a) -238507991 f))))))
+        (pseudo _none_(0)<ghost>:-1--1 (makeblock 0 cse fundecl))))))

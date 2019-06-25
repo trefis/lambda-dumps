@@ -1,0 +1,2015 @@
+(setglobal Toploop!
+  (let
+    (toplevel_value_bindings =
+       (makemutable 0
+         (field 0 (field 39 (field 3 (field 11 (global Misc!))))))
+     getvalue =
+       (function name
+         (funct-body toplevel/toploop.ml(43)<ghost>:1683-1813
+           (before toplevel/toploop.ml(44):1692-1813
+             (try
+               (after toplevel/toploop.ml(45):1700-1745
+                 (apply
+                   (field 26 (field 39 (field 3 (field 11 (global Misc!)))))
+                   name (field 0 toplevel_value_bindings)))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before toplevel/toploop.ml(47):1770-1813
+                   (after toplevel/toploop.ml(47):1770-1813
+                     (apply (field 0 (global Misc!))
+                       (after toplevel/toploop.ml(47):1782-1813
+                         (apply (field 27 (global Stdlib!)) name
+                           " unbound at toplevel")))))
+                 (reraise exn))))))
+     setvalue =
+       (function name v
+         (funct-body toplevel/toploop.ml(49)<ghost>:1828-1912
+           (before toplevel/toploop.ml(50):1839-1912
+             (setfield_ptr 0 toplevel_value_bindings
+               (after toplevel/toploop.ml(50):1866-1912
+                 (apply
+                   (field 3 (field 39 (field 3 (field 11 (global Misc!)))))
+                   name v (field 0 toplevel_value_bindings))))))))
+    (letrec
+      (eval_address
+         (function param
+           (funct-body toplevel/toploop.ml(54):1983-2398
+             (switch* param
+              case tag 0:
+               (let (id =a (field 0 param))
+                 (before toplevel/toploop.ml(56):2019-2337
+                   (if
+                     (||
+                       (after toplevel/toploop.ml(56):2022-2041
+                         (apply (field 17 (global Ident!)) id))
+                       (after toplevel/toploop.ml(56):2045-2060
+                         (apply (field 20 (global Ident!)) id)))
+                     (before toplevel/toploop.ml(57):2074-2102
+                       (after toplevel/toploop.ml(57):2074-2102
+                         (apply (field 12 (global Symtable!)) id)))
+                     (before toplevel/toploop.ml(58):2114-2337
+                       (let
+                         (name =
+                            (after toplevel/toploop.ml(59):2139-2165
+                              (apply (field 8 (global Translmod!)) id)))
+                         (before toplevel/toploop.ml(60):2177-2327
+                           (try
+                             (after toplevel/toploop.ml(61):2191-2236
+                               (apply
+                                 (field 26
+                                   (field 39
+                                     (field 3 (field 11 (global Misc!)))))
+                                 name (field 0 toplevel_value_bindings)))
+                            with exn
+                             (if (== exn (field 7 (global Stdlib!)))
+                               (before toplevel/toploop.ml(63):2273-2327
+                                 (raise
+                                   (after toplevel/toploop.ml(63):2279-2327
+                                     (makeblock 0
+                                       (field 26 (global Symtable!))
+                                       (makeblock 0 name)))))
+                               (reraise exn)))))))))
+              case tag 1:
+               (let (pos =a (field 1 param) p =a (field 0 param))
+                 (before toplevel/toploop.ml(66):2368-2398
+                   (array.unsafe_get[gen]
+                     (after toplevel/toploop.ml(66):2378-2394
+                       (apply eval_address p))
+                     pos)))))))
+      (let
+        (eval_path =
+           (function find env path
+             (funct-body toplevel/toploop.ml(68)<ghost>:2414-2580
+               (before toplevel/toploop.ml(69):2432-2580
+                 (catch
+                   (try
+                     (exit 3
+                       (after toplevel/toploop.ml(69):2438-2451
+                         (apply find path env)))
+                    with exn
+                     (if (== exn (field 7 (global Stdlib!)))
+                       (before toplevel/toploop.ml(72):2520-2580
+                         (after toplevel/toploop.ml(72):2520-2580
+                           (apply (field 0 (global Misc!))
+                             (after toplevel/toploop.ml(72):2532-2580
+                               (apply (field 27 (global Stdlib!))
+                                 "Cannot find address for: "
+                                 (after toplevel/toploop.ml(72):2563-2579
+                                   (apply (field 6 (global Path!)) 0a path)))))))
+                       (reraise exn)))
+                  with (3 addr)
+                   (before toplevel/toploop.ml(70):2469-2486
+                     (after toplevel/toploop.ml(70):2469-2486
+                       (apply eval_address addr)))))))
+         eval_module_path =
+           (function env path
+             (funct-body toplevel/toploop.ml(74)<ghost>:2603-2658
+               (before toplevel/toploop.ml(75):2616-2658
+                 (after toplevel/toploop.ml(75):2616-2658
+                   (apply eval_path (field 22 (global Env!)) env path)))))
+         eval_value_path =
+           (function env path
+             (funct-body toplevel/toploop.ml(77)<ghost>:2680-2734
+               (before toplevel/toploop.ml(78):2693-2734
+                 (after toplevel/toploop.ml(78):2693-2734
+                   (apply eval_path (field 21 (global Env!)) env path)))))
+         eval_extension_path =
+           (function env path
+             (funct-body toplevel/toploop.ml(80)<ghost>:2760-2820
+               (before toplevel/toploop.ml(81):2773-2820
+                 (after toplevel/toploop.ml(81):2773-2820
+                   (apply eval_path (field 24 (global Env!)) env path)))))
+         eval_class_path =
+           (function env path
+             (funct-body toplevel/toploop.ml(83)<ghost>:2842-2896
+               (before toplevel/toploop.ml(84):2855-2896
+                 (after toplevel/toploop.ml(84):2855-2896
+                   (apply eval_path (field 23 (global Env!)) env path)))))
+         EvalPath =
+           (module-defn(EvalPath) toplevel/toploop.ml(88):2921-3112
+             (let
+               (Error =
+                  (makeblock 248 "Toploop.EvalPath.Error"
+                    (caml_fresh_oo_id 0))
+                eval_address =
+                  (function addr
+                    (funct-body toplevel/toploop.ml(91)<ghost>:3003-3072
+                      (before toplevel/toploop.ml(92):3014-3072
+                        (try
+                          (after toplevel/toploop.ml(92):3018-3035
+                            (apply eval_address addr))
+                         with exn
+                          (let (tag =a (field 0 exn))
+                            (if (== tag (field 26 (global Symtable!)))
+                              (before toplevel/toploop.ml(92):3061-3072
+                                (raise
+                                  (after toplevel/toploop.ml(92):3067-3072
+                                    Error)))
+                              (reraise exn)))))))
+                same_value =
+                  (function v1 v2
+                    (funct-body toplevel/toploop.ml(93)<ghost>:3090-3108
+                      (before toplevel/toploop.ml(93):3098-3108 (== v1 v2)))))
+               (pseudo toplevel/toploop.ml(88):2939-3112
+                 (makeblock 0 Error eval_address same_value))))
+         Printer =
+           (module-defn(Printer) toplevel/toploop.ml(96):3114-3162
+             (apply
+               (apply (field 0 (global Genprintval!))
+                 (let
+                   (let = (global Stdlib__obj!) let =a (global Stdlib__obj!))
+                   (makeblock 0 (function prim stub prim)
+                     (function prim stub prim) (field 0 let)
+                     (function prim stub (caml_obj_tag prim))
+                     (function prim stub (array.length[gen] prim))
+                     (function prim prim stub
+                       (array.unsafe_get[gen] prim prim))
+                     (field 14 let) (field 1 let))))
+               (makeblock 0 (field 1 EvalPath) (field 0 EvalPath)
+                 (field 2 EvalPath))))
+         max_printer_depth = (makemutable 0 (int) 100)
+         max_printer_steps = (makemutable 0 (int) 300)
+         print_out_value = (field 1 (global Oprint!))
+         print_out_type = (field 2 (global Oprint!))
+         print_out_class_type = (field 3 (global Oprint!))
+         print_out_module_type = (field 4 (global Oprint!))
+         print_out_type_extension = (field 7 (global Oprint!))
+         print_out_sig_item = (field 5 (global Oprint!))
+         print_out_signature = (field 6 (global Oprint!))
+         print_out_phrase = (field 8 (global Oprint!))
+         print_untyped_exception =
+           (function ppf obj
+             (funct-body toplevel/toploop.ml(110)<ghost>:3624-3698
+               (before toplevel/toploop.ml(111):3636-3698
+                 (after toplevel/toploop.ml(111):3636-3698
+                   (apply (field 0 print_out_value) ppf
+                     (after toplevel/toploop.ml(111):3657-3698
+                       (apply (field 4 Printer) obj)))))))
+         outval_of_value =
+           (function env obj ty
+             (funct-body toplevel/toploop.ml(112)<ghost>:3719-3830
+               (before toplevel/toploop.ml(113):3734-3830
+                 (after toplevel/toploop.ml(113):3734-3830
+                   (apply (field 5 Printer) (field 0 max_printer_steps)
+                     (field 0 max_printer_depth)
+                     (function param[int] param param
+                       (funct-body toplevel/toploop.ml(114):3800-3819
+                         (before toplevel/toploop.ml(114):3814-3818 0a)))
+                     env obj ty)))))
+         print_value =
+           (function env obj ppf ty
+             (funct-body toplevel/toploop.ml(115)<ghost>:3847-3915
+               (before toplevel/toploop.ml(116):3866-3915
+                 (after toplevel/toploop.ml(116):3866-3915
+                   (apply (field 0 print_out_value) ppf
+                     (after toplevel/toploop.ml(116):3887-3915
+                       (apply outval_of_value env obj ty)))))))
+         install_printer = (field 0 Printer)
+         install_generic_printer = (field 1 Printer)
+         install_generic_printer' = (field 2 Printer)
+         remove_printer = (field 3 Printer)
+         parse_toplevel_phrase = (makemutable 0 (field 2 (global Parse!)))
+         parse_use_file = (makemutable 0 (field 3 (global Parse!)))
+         print_location = (field 19 (global Location!))
+         print_error = (field 26 (global Location!))
+         print_warning = (field 33 (global Location!))
+         input_name = (field 11 (global Location!))
+         parse_mod_use_file =
+           (function name lb
+             (funct-body toplevel/toploop.ml(136)<ghost>:4567-4972
+               (before toplevel/toploop.ml(137):4579-4972
+                 (let
+                   (modname =
+                      (after toplevel/toploop.ml(138):4597-4679
+                        (apply (field 30 (field 3 (field 11 (global Misc!))))
+                          (after toplevel/toploop.ml(139):4627-4679
+                            (apply (field 10 (global Stdlib__filename!))
+                              (after toplevel/toploop.ml(139):4654-4678
+                                (apply (field 12 (global Stdlib__filename!))
+                                  name)))))))
+                   (before toplevel/toploop.ml(141):4687-4972
+                     (let
+                       (items =
+                          (after toplevel/toploop.ml(142):4703-4816
+                            (apply (field 12 (global Stdlib__list!))
+                              (after toplevel/toploop.ml(143):4721-4816
+                                (apply (field 16 (global Stdlib__list!))
+                                  (function param
+                                    (funct-body toplevel/toploop.ml(144):4740-4785
+                                      (switch* param
+                                       case tag 0:
+                                        (let (s =a (field 0 param))
+                                          (before toplevel/toploop.ml(144):4764-4765
+                                            s))
+                                       case tag 1:
+                                        (before toplevel/toploop.ml(144):4782-4784
+                                          0a))))
+                                  (after toplevel/toploop.ml(145):4795-4815
+                                    (apply (field 0 parse_use_file) lb)))))))
+                       (before toplevel/toploop.ml(147):4824-4972
+                         (makeblock 0
+                           (makeblock 0
+                             (makeblock 0
+                               (after toplevel/toploop.ml(148):4843-4958
+                                 (apply
+                                   (field 7 (field 13 (global Ast_helper!)))
+                                   0a
+                                   (after toplevel/toploop.ml(149):4865-4958
+                                     (apply
+                                       (field 0
+                                         (field 17 (global Ast_helper!)))
+                                       0a 0a 0a 0a
+                                       (after toplevel/toploop.ml(150):4885-4911
+                                         (apply (field 9 (global Location!))
+                                           modname))
+                                       (after toplevel/toploop.ml(151):4925-4946
+                                         (apply
+                                           (field 3
+                                             (field 11 (global Ast_helper!)))
+                                           0a 0a items))))))
+                               0a))
+                           0a))))))))
+         toplevel_startup_hook =
+           (makemutable 0
+             (function param
+               (funct-body toplevel/toploop.ml(158):5037-5051
+                 (before toplevel/toploop.ml(158):5048-5050 0a))))
+         Startup = (makeblock 248 "Toploop.Startup" (caml_fresh_oo_id 0))
+         After_setup =
+           (makeblock 248 "Toploop.After_setup" (caml_fresh_oo_id 0))
+         hooks = (makemutable 0 0a)
+         add_hook =
+           (function f
+             (funct-body toplevel/toploop.ml(167)<ghost>:5145-5169
+               (before toplevel/toploop.ml(167):5149-5169
+                 (setfield_ptr 0 hooks (makeblock 0 f (field 0 hooks))))))
+         *match* =
+           (after toplevel/toploop.ml(170):5182-5262
+             (apply add_hook
+               (function param
+                 (funct-body toplevel/toploop.ml(170):5191-5262
+                   (if (== param Startup)
+                     (before toplevel/toploop.ml(171):5220-5245
+                       (after toplevel/toploop.ml(171):5220-5245
+                         (apply (field 0 toplevel_startup_hook) 0a)))
+                     (before toplevel/toploop.ml(172):5259-5261 0a))))))
+         run_hooks =
+           (function hook
+             (funct-body toplevel/toploop.ml(174)<ghost>:5278-5319
+               (before toplevel/toploop.ml(174):5285-5319
+                 (after toplevel/toploop.ml(174):5285-5319
+                   (apply (field 14 (global Stdlib__list!))
+                     (function f
+                       (funct-body toplevel/toploop.ml(174):5295-5312
+                         (before toplevel/toploop.ml(174):5305-5311
+                           (after toplevel/toploop.ml(174):5305-5311
+                             (apply f hook)))))
+                     (field 0 hooks))))))
+         may_trace = (makemutable 0 0a)
+         backtrace = (makemutable 0 0a)
+         record_backtrace =
+           (function param
+             (funct-body toplevel/toploop.ml(183)<ghost>:5531-5622
+               (before toplevel/toploop.ml(184):5538-5622
+                 (if
+                   (after toplevel/toploop.ml(184):5541-5569
+                     (apply (field 7 (global Stdlib__printexc!)) 0a))
+                   (before toplevel/toploop.ml(185):5577-5622
+                     (setfield_ptr 0 backtrace
+                       (makeblock 0
+                         (after toplevel/toploop.ml(185):5595-5622
+                           (apply (field 5 (global Stdlib__printexc!)) 0a)))))
+                   0a))))
+         load_lambda =
+           (function ppf lam
+             (funct-body toplevel/toploop.ml(187)<ghost>:5640-6828
+               (before toplevel/toploop.ml(188):5652-6828
+                 (seq
+                   (if (field 0 (field 66 (global Clflags!)))
+                     (before toplevel/toploop.ml(188):5684-5725
+                       (after toplevel/toploop.ml(188):5684-5725
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0: [15: [17: 4a 0a]] "%a@."]
+                           (field 3 (global Printlambda!)) lam)))
+                     0a)
+                   (before toplevel/toploop.ml(189):5729-6828
+                     (let
+                       (slam =
+                          (after toplevel/toploop.ml(189):5740-5767
+                            (apply (field 0 (global Simplif!)) lam)))
+                       (before toplevel/toploop.ml(190):5773-6828
+                         (seq
+                           (if (field 0 (field 67 (global Clflags!)))
+                             (before toplevel/toploop.ml(190):5802-5844
+                               (after toplevel/toploop.ml(190):5802-5844
+                                 (apply (field 122 (global Stdlib__format!))
+                                   ppf [0: [15: [17: 4a 0a]] "%a@."]
+                                   (field 3 (global Printlambda!)) slam)))
+                             0a)
+                           (before toplevel/toploop.ml(191):5848-6828
+                             (let
+                               (*match* =
+                                  (after toplevel/toploop.ml(191):5876-5903
+                                    (apply (field 1 (global Bytegen!)) slam))
+                                fun_code =a (field 1 *match*)
+                                init_code =a (field 0 *match*))
+                               (before toplevel/toploop.ml(192):5909-6828
+                                 (seq
+                                   (if (field 0 (field 73 (global Clflags!)))
+                                     (before toplevel/toploop.ml(193):5941-6030
+                                       (after toplevel/toploop.ml(193):5941-6030
+                                         (apply
+                                           (field 122
+                                             (global Stdlib__format!))
+                                           ppf
+                                           [0:
+                                            [15: [15: [17: 4a 0a]]] "%a%a@."]
+                                           (field 1 (global Printinstr!))
+                                           init_code
+                                           (field 1 (global Printinstr!))
+                                           fun_code)))
+                                     0a)
+                                   (before toplevel/toploop.ml(196):6034-6828
+                                     (let
+                                       (*match* =
+                                          (after toplevel/toploop.ml(197):6066-6103
+                                            (apply
+                                              (field 1 (global Emitcode!))
+                                              init_code fun_code))
+                                        events =a (field 2 *match*)
+                                        reloc =a (field 1 *match*)
+                                        code =a (field 0 *match*))
+                                       (before toplevel/toploop.ml(199):6111-6828
+                                         (let (can_free = (== fun_code 0a))
+                                           (before toplevel/toploop.ml(200):6147-6828
+                                             (let
+                                               (initial_symtable =
+                                                  (after toplevel/toploop.ml(200):6170-6194
+                                                    (apply
+                                                      (field 20
+                                                        (global Symtable!))
+                                                      0a)))
+                                               (before toplevel/toploop.ml(201):6200-6828
+                                                 (seq
+                                                   (after toplevel/toploop.ml(201):6200-6232
+                                                     (apply
+                                                       (field 1
+                                                         (global Symtable!))
+                                                       code reloc))
+                                                   (before toplevel/toploop.ml(202):6236-6828
+                                                     (seq
+                                                       (after toplevel/toploop.ml(202):6236-6275
+                                                         (apply
+                                                           (field 16
+                                                             (global Symtable!))
+                                                           reloc))
+                                                       (before toplevel/toploop.ml(203):6279-6828
+                                                         (seq
+                                                           (after toplevel/toploop.ml(203):6279-6309
+                                                             (apply
+                                                               (field 11
+                                                                 (global Symtable!))
+                                                               0a))
+                                                           (before toplevel/toploop.ml(204):6313-6828
+                                                             (let
+                                                               (initial_bindings =
+                                                                  (field 0
+                                                                    toplevel_value_bindings))
+                                                               (before toplevel/toploop.ml(205):6366-6828
+                                                                 (let
+                                                                   (*match* =
+                                                                    (after toplevel/toploop.ml(205):6390-6432
+                                                                    (caml_reify_bytecode
+                                                                    code
+                                                                    (makearray[addr]
+                                                                    events)
+                                                                    0a))
+                                                                    closure =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    bytecode =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                   (before toplevel/toploop.ml(206):6438-6828
+                                                                    (try
+                                                                    (seq
+                                                                    (setfield_imm 0
+                                                                    may_trace
+                                                                    1a)
+                                                                    (before toplevel/toploop.ml(208):6469-6590
+                                                                    (let
+                                                                    (retval =
+                                                                    (after toplevel/toploop.ml(208):6482-6492
+                                                                    (apply
+                                                                    closure
+                                                                    0a)))
+                                                                    (before toplevel/toploop.ml(209):6500-6590
+                                                                    (seq
+                                                                    (setfield_imm 0
+                                                                    may_trace
+                                                                    0a)
+                                                                    (before toplevel/toploop.ml(210):6524-6590
+                                                                    (seq
+                                                                    (if
+                                                                    can_free
+                                                                    (before toplevel/toploop.ml(210):6541-6571
+                                                                    (after toplevel/toploop.ml(210):6541-6571
+                                                                    (caml_static_release_bytecode
+                                                                    bytecode)))
+                                                                    0a)
+                                                                    (before toplevel/toploop.ml(211):6577-6590
+                                                                    (makeblock 0
+                                                                    retval)))))))))
+                                                                    with x
+                                                                    (before toplevel/toploop.ml(213):6607-6828
+                                                                    (seq
+                                                                    (setfield_imm 0
+                                                                    may_trace
+                                                                    0a)
+                                                                    (before toplevel/toploop.ml(214):6631-6828
+                                                                    (seq
+                                                                    (if
+                                                                    can_free
+                                                                    (before toplevel/toploop.ml(214):6648-6678
+                                                                    (after toplevel/toploop.ml(214):6648-6678
+                                                                    (caml_static_release_bytecode
+                                                                    bytecode)))
+                                                                    0a)
+                                                                    (before toplevel/toploop.ml(215):6684-6828
+                                                                    (seq
+                                                                    (after toplevel/toploop.ml(215):6684-6703
+                                                                    (apply
+                                                                    record_backtrace
+                                                                    0a))
+                                                                    (before toplevel/toploop.ml(216):6709-6828
+                                                                    (seq
+                                                                    (setfield_ptr 0
+                                                                    toplevel_value_bindings
+                                                                    initial_bindings)
+                                                                    (before toplevel/toploop.ml(217):6772-6828
+                                                                    (seq
+                                                                    (after toplevel/toploop.ml(217):6772-6811
+                                                                    (apply
+                                                                    (field 21
+                                                                    (global Symtable!))
+                                                                    initial_symtable))
+                                                                    (before toplevel/toploop.ml(218):6817-6828
+                                                                    (makeblock 1
+                                                                    x))))))))))))))))))))))))))))))))))))))))))
+         pr_item =
+           (after toplevel/toploop.ml(223):6888-7121
+             (apply (field 48 (global Printtyp!))
+               (function env param
+                 (funct-body toplevel/toploop.ml(224):6913-7121
+                   (catch
+                     (switch param
+                      case tag 0:
+                       (let
+                         (*match* =a (field 1 param)
+                          *match* =a (field 1 *match*))
+                         (if (isint *match*)
+                           (let
+                             (val_type =a (field 0 *match*)
+                              id =a (field 0 param))
+                             (before toplevel/toploop.ml(226):7004-7097
+                               (makeblock 0
+                                 (after toplevel/toploop.ml(226):7009-7097
+                                   (apply outval_of_value env
+                                     (after toplevel/toploop.ml(226):7030-7069
+                                       (apply getvalue
+                                         (after toplevel/toploop.ml(226):7040-7068
+                                           (apply
+                                             (field 8 (global Translmod!))
+                                             id))))
+                                     val_type)))))
+                           (exit 17)))
+                      default: (exit 17))
+                    with (17) (before toplevel/toploop.ml(228):7111-7115 0a))))))
+         toplevel_env = (makemutable 0 (field 0 (global Env!)))
+         print_out_exception =
+           (function ppf exn outv
+             (funct-body toplevel/toploop.ml(237)<ghost>:7288-7355
+               (before toplevel/toploop.ml(238):7305-7355
+                 (after toplevel/toploop.ml(238):7305-7355
+                   (apply (field 0 print_out_phrase) ppf
+                     (makeblock 2 (makeblock 0 exn outv)))))))
+         print_exception_outcome =
+           (function ppf exn
+             (funct-body toplevel/toploop.ml(240)<ghost>:7385-7713
+               (before toplevel/toploop.ml(241):7397-7713
+                 (seq
+                   (if
+                     (after toplevel/toploop.ml(241):7400-7419
+                       (caml_equal exn (field 8 (global Stdlib!))))
+                     (before toplevel/toploop.ml(241):7425-7441
+                       (after toplevel/toploop.ml(241):7425-7441
+                         (caml_gc_full_major 0a)))
+                     0a)
+                   (before toplevel/toploop.ml(242):7445-7713
+                     (let
+                       (outv =
+                          (after toplevel/toploop.ml(242):7456-7516
+                            (apply outval_of_value (field 0 toplevel_env) exn
+                              (field 7 (global Predef!)))))
+                       (before toplevel/toploop.ml(243):7522-7713
+                         (seq
+                           (after toplevel/toploop.ml(243):7522-7554
+                             (apply print_out_exception ppf exn outv))
+                           (before toplevel/toploop.ml(244):7558-7713
+                             (if
+                               (after toplevel/toploop.ml(244):7561-7589
+                                 (apply (field 7 (global Stdlib__printexc!))
+                                   0a))
+                               (before toplevel/toploop.ml(246):7601-7713
+                                 (let (*match* = (field 0 backtrace))
+                                   (if *match*
+                                     (let (b =a (field 0 *match*))
+                                       (before toplevel/toploop.ml(249):7670-7713
+                                         (seq
+                                           (after toplevel/toploop.ml(249):7670-7684
+                                             (apply
+                                               (field 13
+                                                 (global Stdlib__format!))
+                                               b))
+                                           (before toplevel/toploop.ml(250):7696-7713
+                                             (setfield_ptr 0 backtrace 0a)))))
+                                     (before toplevel/toploop.ml(247):7639-7641
+                                       0a))))
+                               0a))))))))))
+         directive_table =
+           (after toplevel/toploop.ml(255):7780-7797
+             (apply (field 0 (global Stdlib__hashtbl!)) 0a 23))
+         directive_info_table =
+           (after toplevel/toploop.ml(258):7866-7883
+             (apply (field 0 (global Stdlib__hashtbl!)) 0a 23))
+         add_directive =
+           (function name dir_fun dir_info
+             (funct-body toplevel/toploop.ml(260)<ghost>:7941-8057
+               (before toplevel/toploop.ml(261):7967-8057
+                 (seq
+                   (after toplevel/toploop.ml(261):7967-8007
+                     (apply (field 4 (global Stdlib__hashtbl!))
+                       directive_table name dir_fun))
+                   (before toplevel/toploop.ml(262):8011-8057
+                     (after toplevel/toploop.ml(262):8011-8057
+                       (apply (field 4 (global Stdlib__hashtbl!))
+                         directive_info_table name dir_info)))))))
+         execute_phrase =
+           (function print_outcome ppf phr
+             (funct-body toplevel/toploop.ml(266)<ghost>:8111-12115
+               (before toplevel/toploop.ml(267):8137-12115
+                 (switch* phr
+                  case tag 0:
+                   (let (sstr =a (field 0 phr))
+                     (before toplevel/toploop.ml(269):8179-10526
+                       (let (oldenv = (field 0 toplevel_env))
+                         (before toplevel/toploop.ml(270):8215-10526
+                           (seq
+                             (after toplevel/toploop.ml(270):8215-8247
+                               (apply (field 17 (global Typecore!)) 0a))
+                             (before toplevel/toploop.ml(271):8255-10526
+                               (let
+                                 (*match* =
+                                    (after toplevel/toploop.ml(271):8283-8323
+                                      (apply (field 3 (global Typemod!))
+                                        oldenv sstr))
+                                  newenv =a (field 3 *match*)
+                                  sn =a (field 2 *match*)
+                                  sg =a (field 1 *match*)
+                                  str =a (field 0 *match*))
+                                 (before toplevel/toploop.ml(272):8333-10526
+                                   (seq
+                                     (if
+                                       (field 0 (field 65 (global Clflags!)))
+                                       (before toplevel/toploop.ml(272):8365-8398
+                                         (after toplevel/toploop.ml(272):8365-8398
+                                           (apply
+                                             (field 1 (global Printtyped!))
+                                             ppf str)))
+                                       0a)
+                                     (before toplevel/toploop.ml(273):8406-10526
+                                       (let
+                                         (sg' =
+                                            (after toplevel/toploop.ml(273):8416-8461
+                                              (apply
+                                                (field 0
+                                                  (field 0 (global Typemod!)))
+                                                newenv sn sg)))
+                                         (before toplevel/toploop.ml(274):8471-10526
+                                           (seq
+                                             (ignore
+                                               (after toplevel/toploop.ml(274):8478-8515
+                                                 (apply
+                                                   (field 2
+                                                     (global Includemod!))
+                                                   oldenv 0a sg sg')))
+                                             (before toplevel/toploop.ml(275):8523-10526
+                                               (seq
+                                                 (after toplevel/toploop.ml(275):8523-8555
+                                                   (apply
+                                                     (field 18
+                                                       (global Typecore!))
+                                                     0a))
+                                                 (before toplevel/toploop.ml(276):8563-10526
+                                                   (let
+                                                     (lam =
+                                                        (after toplevel/toploop.ml(276):8573-8613
+                                                          (apply
+                                                            (field 4
+                                                              (global Translmod!))
+                                                            str)))
+                                                     (before toplevel/toploop.ml(277):8623-10526
+                                                       (seq
+                                                         (after toplevel/toploop.ml(277):8623-8646
+                                                           (apply
+                                                             (field 10
+                                                               (global Warnings!))
+                                                             0a))
+                                                         (before toplevel/toploop.ml(278):8654-10526
+                                                           (try
+                                                             (seq
+                                                               (setfield_ptr 0
+                                                                 toplevel_env
+                                                                 newenv)
+                                                               (before toplevel/toploop.ml(280):8704-10460
+                                                                 (let
+                                                                   (res =
+                                                                    (after toplevel/toploop.ml(280):8714-8733
+                                                                    (apply
+                                                                    load_lambda
+                                                                    ppf lam)))
+                                                                   (before toplevel/toploop.ml(281):8745-10460
+                                                                    (let
+                                                                    (out_phr =
+                                                                    (switch* res
+                                                                    case tag 0:
+                                                                    (let
+                                                                    (v =a
+                                                                    (field 0
+                                                                    res))
+                                                                    (before toplevel/toploop.ml(284):8822-9723
+                                                                    (if
+                                                                    print_outcome
+                                                                    (before toplevel/toploop.ml(285):8860-9686
+                                                                    (after toplevel/toploop.ml(285):8860-9686
+                                                                    (apply
+                                                                    (field 9
+                                                                    (global Printtyp!))
+                                                                    0a oldenv
+                                                                    (function
+                                                                    param
+                                                                    (funct-body toplevel/toploop.ml(285):8907-9686
+                                                                    (before toplevel/toploop.ml(286):8936-9685
+                                                                    (let
+                                                                    (*match* =
+                                                                    (field 0
+                                                                    str))
+                                                                    (catch
+                                                                    (if
+                                                                    *match*
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 0
+                                                                    *match*)
+                                                                    *match* =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (catch
+                                                                    (switch *match*
+                                                                    case tag 0:
+                                                                    (let
+                                                                    (exp =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (exit 21
+                                                                    exp))
+                                                                    case tag 1:
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (if
+                                                                    *match*
+                                                                    (exit 20)
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 1
+                                                                    *match*))
+                                                                    (if
+                                                                    *match*
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 0
+                                                                    *match*)
+                                                                    *match* =a
+                                                                    (field 0
+                                                                    *match*)
+                                                                    *match* =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (if
+                                                                    (isint
+                                                                    *match*)
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 1
+                                                                    *match*))
+                                                                    (if
+                                                                    *match*
+                                                                    (exit 20)
+                                                                    (let
+                                                                    (exp =a
+                                                                    (field 1
+                                                                    *match*))
+                                                                    (exit 21
+                                                                    exp))))
+                                                                    (exit 20)))
+                                                                    (exit 20)))))
+                                                                    default:
+                                                                    (exit 20))
+                                                                    with (21 exp)
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 1
+                                                                    *match*))
+                                                                    (if
+                                                                    *match*
+                                                                    (exit 20)
+                                                                    (before toplevel/toploop.ml(298):9409-9579
+                                                                    (let
+                                                                    (outv =
+                                                                    (after toplevel/toploop.ml(298):9420-9457
+                                                                    (apply
+                                                                    outval_of_value
+                                                                    newenv v
+                                                                    (field 3
+                                                                    exp))))
+                                                                    (before toplevel/toploop.ml(299):9483-9579
+                                                                    (let
+                                                                    (ty =
+                                                                    (after toplevel/toploop.ml(299):9492-9533
+                                                                    (apply
+                                                                    (field 18
+                                                                    (global Printtyp!))
+                                                                    (field 3
+                                                                    exp))))
+                                                                    (before toplevel/toploop.ml(300):9559-9579
+                                                                    (makeblock 0
+                                                                    outv ty))))))))))
+                                                                    (before toplevel/toploop.ml(302):9607-9624
+                                                                    [1: 0a]))
+                                                                    with (20)
+                                                                    (before toplevel/toploop.ml(303):9650-9685
+                                                                    (makeblock 1
+                                                                    (after toplevel/toploop.ml(303):9665-9685
+                                                                    (apply
+                                                                    pr_item
+                                                                    oldenv
+                                                                    sg'))))))))))))
+                                                                    (before toplevel/toploop.ml(304):9706-9723
+                                                                    [1: 0a]))))
+                                                                    case tag 1:
+                                                                    (let
+                                                                    (exn =a
+                                                                    (field 0
+                                                                    res))
+                                                                    (before toplevel/toploop.ml(306):9767-10009
+                                                                    (seq
+                                                                    (setfield_ptr 0
+                                                                    toplevel_env
+                                                                    oldenv)
+                                                                    (before toplevel/toploop.ml(307):9805-10009
+                                                                    (seq
+                                                                    (if
+                                                                    (after toplevel/toploop.ml(307):9808-9827
+                                                                    (caml_equal
+                                                                    exn
+                                                                    (field 8
+                                                                    (global Stdlib!))))
+                                                                    (before toplevel/toploop.ml(307):9833-9848
+                                                                    (after toplevel/toploop.ml(307):9833-9848
+                                                                    (caml_gc_full_major
+                                                                    0a))) 0a)
+                                                                    (before toplevel/toploop.ml(308):9864-10009
+                                                                    (let
+                                                                    (outv =
+                                                                    (after toplevel/toploop.ml(309):9891-9951
+                                                                    (apply
+                                                                    outval_of_value
+                                                                    (field 0
+                                                                    toplevel_env)
+                                                                    exn
+                                                                    (field 7
+                                                                    (global Predef!)))))
+                                                                    (before toplevel/toploop.ml(311):9983-10009
+                                                                    (makeblock 2
+                                                                    (makeblock 0
+                                                                    exn outv))))))))))))
+                                                                    (before toplevel/toploop.ml(313):10029-10460
+                                                                    (seq
+                                                                    (after toplevel/toploop.ml(313):10029-10058
+                                                                    (apply
+                                                                    (field 0
+                                                                    print_out_phrase)
+                                                                    ppf
+                                                                    out_phr))
+                                                                    (before toplevel/toploop.ml(314):10068-10460
+                                                                    (seq
+                                                                    (if
+                                                                    (after toplevel/toploop.ml(314):10071-10099
+                                                                    (apply
+                                                                    (field 7
+                                                                    (global Stdlib__printexc!))
+                                                                    0a))
+                                                                    (before toplevel/toploop.ml(315):10113-10324
+                                                                    (let
+                                                                    (*match* =
+                                                                    (field 0
+                                                                    backtrace))
+                                                                    (if
+                                                                    *match*
+                                                                    (let
+                                                                    (b =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before toplevel/toploop.ml(319):10216-10312
+                                                                    (seq
+                                                                    (after toplevel/toploop.ml(319):10216-10237
+                                                                    (apply
+                                                                    (field 12
+                                                                    (global Stdlib__format!))
+                                                                    ppf b))
+                                                                    (before toplevel/toploop.ml(320):10255-10312
+                                                                    (seq
+                                                                    (after toplevel/toploop.ml(320):10255-10276
+                                                                    (apply
+                                                                    (field 35
+                                                                    (global Stdlib__format!))
+                                                                    ppf 0a))
+                                                                    (before toplevel/toploop.ml(321):10294-10311
+                                                                    (setfield_ptr 0
+                                                                    backtrace
+                                                                    0a)))))))
+                                                                    (before toplevel/toploop.ml(317):10173-10175
+                                                                    0a))))
+                                                                    0a)
+                                                                    (before toplevel/toploop.ml(323):10334-10460
+                                                                    (catch
+                                                                    (switch* out_phr
+                                                                    case tag 0:
+                                                                    (exit 19)
+                                                                    case tag 1:
+                                                                    (exit 19)
+                                                                    case tag 2:
+                                                                    (before toplevel/toploop.ml(325):10443-10448
+                                                                    0a))
+                                                                    with (19)
+                                                                    (before toplevel/toploop.ml(324):10408-10412
+                                                                    1a))))))))))))
+                                                            with x
+                                                             (before toplevel/toploop.ml(328):10485-10516
+                                                               (seq
+                                                                 (setfield_ptr 0
+                                                                   toplevel_env
+                                                                   oldenv)
+                                                                 (before toplevel/toploop.ml(328):10509-10516
+                                                                   (reraise
+                                                                    (after toplevel/toploop.ml(328):10515-10516
+                                                                    x))))))))))))))))))))))))))
+                  case tag 1:
+                   (let
+                     (*match* =a (field 0 phr)
+                      pdir_arg =a (field 1 *match*)
+                      *match* =a (field 0 *match*)
+                      dir_name =a (field 0 *match*))
+                     (before toplevel/toploop.ml(331):10600-12115
+                       (let
+                         (d =
+                            (try
+                              (makeblock 0
+                                (after toplevel/toploop.ml(332):10625-10664
+                                  (apply (field 5 (global Stdlib__hashtbl!))
+                                    directive_table dir_name)))
+                             with exn
+                              (if (== exn (field 7 (global Stdlib!)))
+                                (before toplevel/toploop.ml(333):10691-10695
+                                  0a)
+                                (reraise exn))))
+                         (before toplevel/toploop.ml(335):10711-12115
+                           (if d
+                             (let (d =a (field 0 d))
+                               (before toplevel/toploop.ml(345):11071-12105
+                                 (let (*match* = d *match* = pdir_arg)
+                                   (catch
+                                     (switch* *match*
+                                      case tag 0:
+                                       (if *match* (exit 27)
+                                         (let (f =a (field 0 *match*))
+                                           (before toplevel/toploop.ml(346):11132-11142
+                                             (seq
+                                               (after toplevel/toploop.ml(346):11132-11136
+                                                 (apply f 0a))
+                                               (before toplevel/toploop.ml(346):11138-11142
+                                                 1a)))))
+                                      case tag 1:
+                                       (if *match*
+                                         (let
+                                           (*match* =a (field 0 *match*)
+                                            *match* =a (field 0 *match*))
+                                           (switch *match*
+                                            case tag 0:
+                                             (let
+                                               (s =a (field 0 *match*)
+                                                f =a (field 0 *match*))
+                                               (before toplevel/toploop.ml(347):11212-11221
+                                                 (seq
+                                                   (after toplevel/toploop.ml(347):11212-11215
+                                                     (apply f s))
+                                                   (before toplevel/toploop.ml(347):11217-11221
+                                                     1a))))
+                                            default: (exit 27)))
+                                         (exit 27))
+                                      case tag 2:
+                                       (if *match*
+                                         (let
+                                           (*match* =a (field 0 *match*)
+                                            *match* =a (field 0 *match*))
+                                           (switch *match*
+                                            case tag 1:
+                                             (let
+                                               (*match* =a (field 1 *match*)
+                                                n =a (field 0 *match*)
+                                                f =a (field 0 *match*))
+                                               (if *match*
+                                                 (before toplevel/toploop.ml(358):11710-11813
+                                                   (seq
+                                                     (after toplevel/toploop.ml(358):11710-11792
+                                                       (apply
+                                                         (field 122
+                                                           (global Stdlib__format!))
+                                                         ppf
+                                                         [0:
+                                                          [11:
+                                                           "Wrong integer literal for directive `"
+                                                           [2:
+                                                            0a
+                                                            [11:
+                                                             "'." [17: 4a 0a]]]]
+                                                          "Wrong integer literal for directive `%s'.@."]
+                                                         dir_name))
+                                                     (before toplevel/toploop.ml(360):11808-11813
+                                                       0a)))
+                                                 (before toplevel/toploop.ml(349):11306-11622
+                                                   (catch
+                                                     (try
+                                                       (exit 25
+                                                         (after toplevel/toploop.ml(349):11318-11345
+                                                           (apply
+                                                             (field 0
+                                                               (field 30
+                                                                 (global Misc!)))
+                                                             n)))
+                                                      with exn
+                                                       (before toplevel/toploop.ml(352):11426-11605
+                                                         (seq
+                                                           (after toplevel/toploop.ml(352):11426-11583
+                                                             (apply
+                                                               (field 122
+                                                                 (global Stdlib__format!))
+                                                               ppf
+                                                               [0:
+                                                                [11:
+                                                                 "Integer literal exceeds the range of representable integers for directive `"
+                                                                 [2:
+                                                                  0a
+                                                                  [11:
+                                                                   "'."
+                                                                   [17:
+                                                                    4a 0a]]]]
+                                                                "Integer literal exceeds the range of representable integers for directive `%s'.@."]
+                                                               dir_name))
+                                                           (before toplevel/toploop.ml(355):11600-11605
+                                                             0a))))
+                                                    with (25 n[int])
+                                                     (before toplevel/toploop.ml(350):11371-11380
+                                                       (seq
+                                                         (after toplevel/toploop.ml(350):11371-11374
+                                                           (apply f n))
+                                                         (before toplevel/toploop.ml(350):11376-11380
+                                                           1a)))))))
+                                            default: (exit 27)))
+                                         (exit 27))
+                                      case tag 3:
+                                       (if *match*
+                                         (let
+                                           (*match* =a (field 0 *match*)
+                                            *match* =a (field 0 *match*))
+                                           (switch *match*
+                                            case tag 2:
+                                             (let
+                                               (lid =a (field 0 *match*)
+                                                f =a (field 0 *match*))
+                                               (before toplevel/toploop.ml(361):11883-11894
+                                                 (seq
+                                                   (after toplevel/toploop.ml(361):11883-11888
+                                                     (apply f lid))
+                                                   (before toplevel/toploop.ml(361):11890-11894
+                                                     1a))))
+                                            default: (exit 27)))
+                                         (exit 27))
+                                      case tag 4:
+                                       (if *match*
+                                         (let
+                                           (*match* =a (field 0 *match*)
+                                            *match* =a (field 0 *match*))
+                                           (switch *match*
+                                            case tag 3:
+                                             (let
+                                               (b =a (field 0 *match*)
+                                                f =a (field 0 *match*))
+                                               (before toplevel/toploop.ml(362):11960-11969
+                                                 (seq
+                                                   (after toplevel/toploop.ml(362):11960-11963
+                                                     (apply f b))
+                                                   (before toplevel/toploop.ml(362):11965-11969
+                                                     1a))))
+                                            default: (exit 27)))
+                                         (exit 27)))
+                                    with (27)
+                                     (before toplevel/toploop.ml(364):12001-12105
+                                       (seq
+                                         (after toplevel/toploop.ml(364):12001-12084
+                                           (apply
+                                             (field 122
+                                               (global Stdlib__format!))
+                                             ppf
+                                             [0:
+                                              [11:
+                                               "Wrong type of argument for directive `"
+                                               [2: 0a [11: "'." [17: 4a 0a]]]]
+                                              "Wrong type of argument for directive `%s'.@."]
+                                             dir_name))
+                                         (before toplevel/toploop.ml(366):12100-12105
+                                           0a)))))))
+                             (before toplevel/toploop.ml(337):10756-11042
+                               (seq
+                                 (after toplevel/toploop.ml(337):10756-10802
+                                   (apply
+                                     (field 122 (global Stdlib__format!)) ppf
+                                     [0:
+                                      [11:
+                                       "Unknown directive `"
+                                       [2: 0a [11: "'." 0a]]]
+                                      "Unknown directive `%s'."]
+                                     dir_name))
+                                 (before toplevel/toploop.ml(338):10814-11042
+                                   (let
+                                     (directives =
+                                        (after toplevel/toploop.ml(339):10843-10902
+                                          (apply
+                                            (field 13
+                                              (global Stdlib__hashtbl!))
+                                            (function dir param acc
+                                              (funct-body toplevel/toploop.ml(339):10856-10883
+                                                (before toplevel/toploop.ml(339):10874-10882
+                                                  (makeblock 0 dir acc))))
+                                            directive_table 0a)))
+                                     (before toplevel/toploop.ml(340):10916-11042
+                                       (seq
+                                         (after toplevel/toploop.ml(340):10916-10997
+                                           (apply (field 47 (global Misc!))
+                                             ppf
+                                             (function param
+                                               (funct-body toplevel/toploop.ml(341):10950-10997
+                                                 (before toplevel/toploop.ml(341):10961-10996
+                                                   (after toplevel/toploop.ml(341):10961-10996
+                                                     (apply
+                                                       (field 46
+                                                         (global Misc!))
+                                                       directives dir_name)))))))
+                                         (before toplevel/toploop.ml(342):11009-11042
+                                           (seq
+                                             (after toplevel/toploop.ml(342):11009-11025
+                                               (apply
+                                                 (field 122
+                                                   (global Stdlib__format!))
+                                                 ppf [0: [17: 4a 0a] "@."]))
+                                             (before toplevel/toploop.ml(343):11037-11042
+                                               0a))))))))))))))))))
+         execute_phrase =
+           (function print_outcome ppf phr
+             (funct-body toplevel/toploop.ml(369)<ghost>:12136-12259
+               (before toplevel/toploop.ml(370):12162-12259
+                 (try
+                   (after toplevel/toploop.ml(370):12166-12202
+                     (apply execute_phrase print_outcome ppf phr))
+                  with exn
+                   (before toplevel/toploop.ml(372):12221-12259
+                     (seq
+                       (after toplevel/toploop.ml(372):12221-12244
+                         (apply (field 11 (global Warnings!)) 0a))
+                       (before toplevel/toploop.ml(373):12250-12259
+                         (reraise
+                           (after toplevel/toploop.ml(373):12256-12259 exn)))))))))
+         use_print_results = (makemutable 0 1a)
+         preprocess_phrase =
+           (function ppf phr
+             (funct-body toplevel/toploop.ml(379)<ghost>:12394-12732
+               (before toplevel/toploop.ml(380):12406-12732
+                 (let
+                   (phr =
+                      (switch* phr
+                       case tag 0:
+                        (let (str =a (field 0 phr))
+                          (before toplevel/toploop.ml(383):12465-12580
+                            (let
+                              (str =
+                                 (after toplevel/toploop.ml(384):12485-12548
+                                   (apply (field 7 (global Pparse!)) 
+                                     [0: 1a] "ocaml" str)))
+                              (before toplevel/toploop.ml(386):12568-12580
+                                (makeblock 0 str)))))
+                       case tag 1:
+                        (let (phr =a phr)
+                          (before toplevel/toploop.ml(387):12594-12597 phr))))
+                   (before toplevel/toploop.ml(389):12605-12732
+                     (seq
+                       (if (field 0 (field 64 (global Clflags!)))
+                         (before toplevel/toploop.ml(389):12637-12664
+                           (after toplevel/toploop.ml(389):12637-12664
+                             (apply (field 2 (global Printast!)) ppf phr)))
+                         0a)
+                       (before toplevel/toploop.ml(390):12668-12732
+                         (seq
+                           (if (field 0 (field 63 (global Clflags!)))
+                             (before toplevel/toploop.ml(390):12697-12725
+                               (after toplevel/toploop.ml(390):12697-12725
+                                 (apply (field 9 (global Pprintast!)) ppf
+                                   phr)))
+                             0a)
+                           (before toplevel/toploop.ml(391):12729-12732 phr)))))))))
+         use_file =
+           (function ppf wrap_mod name
+             (funct-body toplevel/toploop.ml(393)<ghost>:12747-13934
+               (before toplevel/toploop.ml(394):12769-13934
+                 (try
+                   (catch
+                     (if
+                       (after toplevel/toploop.ml(396):12819-12828
+                         (caml_string_equal name ""))
+                       (before toplevel/toploop.ml(397):12842-12867
+                         (let
+                           (must_close = 0a
+                            ic = (field 37 (global Stdlib!))
+                            filename = "(stdin)")
+                           (exit 35 must_close ic filename)))
+                       (before toplevel/toploop.ml(398):12879-13010
+                         (let
+                           (filename =
+                              (after toplevel/toploop.ml(399):12908-12927
+                                (apply (field 5 (global Load_path!)) name)))
+                           (before toplevel/toploop.ml(400):12939-13000
+                             (let
+                               (ic =
+                                  (after toplevel/toploop.ml(400):12948-12968
+                                    (apply (field 79 (global Stdlib!))
+                                      filename)))
+                               (before toplevel/toploop.ml(401):12980-13000
+                                 (let
+                                   (must_close = 1a
+                                    ic =a ic
+                                    filename =a filename)
+                                   (exit 35 must_close ic filename))))))))
+                    with (35 must_close ic filename)
+                     (before toplevel/toploop.ml(404):13022-13865
+                       (let
+                         (lb =
+                            (after toplevel/toploop.ml(404):13031-13053
+                              (apply (field 1 (global Stdlib__lexing!)) 0a
+                                ic)))
+                         (before toplevel/toploop.ml(405):13061-13865
+                           (seq
+                             (after toplevel/toploop.ml(405):13061-13084
+                               (apply (field 11 (global Warnings!)) 0a))
+                             (before toplevel/toploop.ml(406):13090-13865
+                               (seq
+                                 (after toplevel/toploop.ml(406):13090-13115
+                                   (apply (field 2 (global Location!)) lb
+                                     filename))
+                                 (before toplevel/toploop.ml(408):13159-13865
+                                   (seq
+                                     (after toplevel/toploop.ml(408):13159-13182
+                                       (apply (field 2 (global Lexer!)) lb))
+                                     (before toplevel/toploop.ml(409):13188-13865
+                                       (let
+                                         (success =
+                                            (after toplevel/toploop.ml(410):13208-13814
+                                              (apply
+                                                (field 10 (global Misc!))
+                                                (makeblock 0
+                                                  (makeblock 0
+                                                    (field 11
+                                                      (global Location!))
+                                                    filename)
+                                                  (makeblock 0
+                                                    (makeblock 0
+                                                      (field 12
+                                                        (global Location!))
+                                                      (makeblock 0 lb))
+                                                    0a))
+                                                (function param
+                                                  (funct-body toplevel/toploop.ml(412):13325-13814
+                                                    (before toplevel/toploop.ml(413):13344-13813
+                                                      (try
+                                                        (seq
+                                                          (after toplevel/toploop.ml(414):13358-13647
+                                                            (apply
+                                                              (field 14
+                                                                (global Stdlib__list!))
+                                                              (function ph
+                                                                (funct-body toplevel/toploop.ml(415):13380-13522
+                                                                  (before toplevel/toploop.ml(416):13405-13521
+                                                                    (let
+                                                                    (ph =
+                                                                    (after toplevel/toploop.ml(416):13414-13438
+                                                                    (apply
+                                                                    preprocess_phrase
+                                                                    ppf ph)))
+                                                                    (before toplevel/toploop.ml(417):13456-13521
+                                                                    (if
+                                                                    (not
+                                                                    (after toplevel/toploop.ml(417):13463-13505
+                                                                    (apply
+                                                                    execute_phrase
+                                                                    (field 0
+                                                                    use_print_results)
+                                                                    ppf ph)))
+                                                                    (before toplevel/toploop.ml(417):13511-13521
+                                                                    (raise
+                                                                    (after toplevel/toploop.ml(417):13517-13521
+                                                                    (field 2
+                                                                    (global Stdlib!)))))
+                                                                    0a))))))
+                                                              (if wrap_mod
+                                                                (before toplevel/toploop.ml(419):13568-13594
+                                                                  (after toplevel/toploop.ml(419):13568-13594
+                                                                    (apply
+                                                                    parse_mod_use_file
+                                                                    name lb)))
+                                                                (before toplevel/toploop.ml(421):13628-13646
+                                                                  (after toplevel/toploop.ml(421):13628-13646
+                                                                    (apply
+                                                                    (field 0
+                                                                    parse_use_file)
+                                                                    lb))))))
+                                                          (before toplevel/toploop.ml(422):13659-13663
+                                                            1a))
+                                                       with x
+                                                        (if
+                                                          (== x
+                                                            (field 2
+                                                              (global Stdlib!)))
+                                                          (before toplevel/toploop.ml(424):13695-13700
+                                                            0a)
+                                                          (if
+                                                            (== x
+                                                              (field 43
+                                                                (global Stdlib__sys!)))
+                                                            (before toplevel/toploop.ml(425):13724-13759
+                                                              (seq
+                                                                (after toplevel/toploop.ml(425):13724-13752
+                                                                  (apply
+                                                                    (field 122
+                                                                    (global Stdlib__format!))
+                                                                    ppf
+                                                                    [0:
+                                                                    [11:
+                                                                    "Interrupted."
+                                                                    [17:
+                                                                    4a 0a]]
+                                                                    "Interrupted.@."]))
+                                                                (before toplevel/toploop.ml(425):13754-13759
+                                                                  0a)))
+                                                            (before toplevel/toploop.ml(426):13775-13813
+                                                              (seq
+                                                                (after toplevel/toploop.ml(426):13775-13806
+                                                                  (apply
+                                                                    (field 51
+                                                                    (global Location!))
+                                                                    ppf x))
+                                                                (before toplevel/toploop.ml(426):13808-13813
+                                                                  0a))))))))))))
+                                         (before toplevel/toploop.ml(427):13822-13865
+                                           (seq
+                                             (if must_close
+                                               (before toplevel/toploop.ml(427):13841-13852
+                                                 (after toplevel/toploop.ml(427):13841-13852
+                                                   (apply
+                                                     (field 92
+                                                       (global Stdlib!))
+                                                     ic)))
+                                               0a)
+                                             (before toplevel/toploop.ml(428):13858-13865
+                                               success))))))))))))))
+                  with exn
+                   (if (== exn (field 7 (global Stdlib!)))
+                     (before toplevel/toploop.ml(429):13886-13934
+                       (seq
+                         (after toplevel/toploop.ml(429):13886-13927
+                           (apply (field 122 (global Stdlib__format!)) ppf
+                             [0:
+                              [11:
+                               "Cannot find file "
+                               [2: 0a [12: '.' [17: 4a 0a]]]]
+                              "Cannot find file %s.@."]
+                             name))
+                         (before toplevel/toploop.ml(429):13929-13934 0a)))
+                     (reraise exn))))))
+         mod_use_file =
+           (function ppf name
+             (funct-body toplevel/toploop.ml(431)<ghost>:13953-13986
+               (before toplevel/toploop.ml(431):13964-13986
+                 (after toplevel/toploop.ml(431):13964-13986
+                   (apply use_file ppf 1a name)))))
+         use_file =
+           (function ppf name
+             (funct-body toplevel/toploop.ml(432)<ghost>:14000-14034
+               (before toplevel/toploop.ml(432):14011-14034
+                 (after toplevel/toploop.ml(432):14011-14034
+                   (apply use_file ppf 0a name)))))
+         use_silently =
+           (function ppf name
+             (funct-body toplevel/toploop.ml(434)<ghost>:14053-14141
+               (before toplevel/toploop.ml(435):14066-14141
+                 (after toplevel/toploop.ml(435):14066-14141
+                   (apply (field 10 (global Misc!))
+                     (makeblock 0 (makeblock 0 use_print_results 0a) 0a)
+                     (function param
+                       (funct-body toplevel/toploop.ml(435):14112-14141
+                         (before toplevel/toploop.ml(435):14123-14140
+                           (after toplevel/toploop.ml(435):14123-14140
+                             (apply use_file ppf name))))))))))
+         first_line = (makemutable 0 1a)
+         got_eof = (makemutable 0 0a)
+         read_input_default =
+           (function prompt buffer len[int]
+             (funct-body toplevel/toploop.ml(442)<ghost>:14263-14617
+               (before toplevel/toploop.ml(443):14285-14617
+                 (seq
+                   (after toplevel/toploop.ml(443):14285-14312
+                     (apply (field 65 (global Stdlib!))
+                       (field 38 (global Stdlib!)) prompt))
+                   (before toplevel/toploop.ml(443):14314-14617
+                     (seq
+                       (after toplevel/toploop.ml(443):14314-14326
+                         (apply (field 62 (global Stdlib!))
+                           (field 38 (global Stdlib!))))
+                       (before toplevel/toploop.ml(444):14330-14617
+                         (let (i = (makemutable 0 (int) 0))
+                           (before toplevel/toploop.ml(445):14349-14617
+                             (try
+                               (seq
+                                 (while 1a
+                                   (before toplevel/toploop.ml(447):14377-14518
+                                     (seq
+                                       (if (>= (field 0 i) len)
+                                         (before toplevel/toploop.ml(447):14395-14405
+                                           (raise
+                                             (after toplevel/toploop.ml(447):14401-14405
+                                               (field 2 (global Stdlib!)))))
+                                         0a)
+                                       (before toplevel/toploop.ml(448):14413-14518
+                                         (let
+                                           (c =[int]
+                                              (after toplevel/toploop.ml(448):14421-14437
+                                                (apply
+                                                  (field 81 (global Stdlib!))
+                                                  (field 37 (global Stdlib!)))))
+                                           (before toplevel/toploop.ml(449):14447-14518
+                                             (seq
+                                               (after toplevel/toploop.ml(449):14447-14468
+                                                 (bytes.set buffer
+                                                   (field 0 i) c))
+                                               (before toplevel/toploop.ml(450):14476-14518
+                                                 (seq (+:=1 i)
+                                                   (before toplevel/toploop.ml(451):14490-14517
+                                                     (if (== c '\n')
+                                                       (before toplevel/toploop.ml(451):14507-14517
+                                                         (raise
+                                                           (after toplevel/toploop.ml(451):14513-14517
+                                                             (field 2
+                                                               (global Stdlib!)))))
+                                                       0a)))))))))))
+                                 (before toplevel/toploop.ml(453):14533-14544
+                                   (makeblock 0 (int,*) (field 0 i) 0a)))
+                              with exn
+                               (if (== exn (field 11 (global Stdlib!)))
+                                 (before toplevel/toploop.ml(456):14577-14587
+                                   (makeblock 0 (int,*) (field 0 i) 1a))
+                                 (if (== exn (field 2 (global Stdlib!)))
+                                   (before toplevel/toploop.ml(458):14606-14617
+                                     (makeblock 0 (int,*) (field 0 i) 0a))
+                                   (reraise exn)))))))))))))
+         read_interactive_input = (makemutable 0 read_input_default)
+         refill_lexbuf =
+           (function buffer len[int] : int
+             (funct-body toplevel/toploop.ml(462)<ghost>:14690-15172
+               (before toplevel/toploop.ml(463):14705-15172
+                 (if (field 0 got_eof)
+                   (before toplevel/toploop.ml(463):14722-14743
+                     (seq (setfield_imm 0 got_eof 0a)
+                       (before toplevel/toploop.ml(463):14741-14742 0)))
+                   (before toplevel/toploop.ml(463):14749-15172
+                     (let
+                       (prompt =
+                          (if (field 0 (field 39 (global Clflags!)))
+                            (before toplevel/toploop.ml(465):14804-14806 "")
+                            (before toplevel/toploop.ml(466):14818-14946
+                              (if (field 0 first_line)
+                                (before toplevel/toploop.ml(466):14838-14842
+                                  "# ")
+                                (before toplevel/toploop.ml(467):14854-14946
+                                  (if (field 0 (field 40 (global Clflags!)))
+                                    (before toplevel/toploop.ml(467):14884-14886
+                                      "")
+                                    (before toplevel/toploop.ml(468):14898-14946
+                                      (if
+                                        (after toplevel/toploop.ml(468):14901-14920
+                                          (apply (field 4 (global Lexer!))
+                                            0a))
+                                        (before toplevel/toploop.ml(468):14926-14930
+                                          "* ")
+                                        (before toplevel/toploop.ml(469):14942-14946
+                                          "  ")))))))))
+                       (before toplevel/toploop.ml(471):14958-15166
+                         (seq (setfield_imm 0 first_line 0a)
+                           (before toplevel/toploop.ml(472):14983-15166
+                             (let
+                               (*match* =
+                                  (after toplevel/toploop.ml(472):15000-15041
+                                    (apply (field 0 read_interactive_input)
+                                      prompt buffer len))
+                                eof =a (field 1 *match*)
+                                len =a (field 0 *match*))
+                               (before toplevel/toploop.ml(473):15049-15166
+                                 (if eof
+                                   (before toplevel/toploop.ml(473):15061-15151
+                                     (seq
+                                       (after toplevel/toploop.ml(474):15073-15093
+                                         (apply (field 13 (global Location!))
+                                           0a))
+                                       (before toplevel/toploop.ml(475):15101-15143
+                                         (seq
+                                           (if (> len 0)
+                                             (before toplevel/toploop.ml(475):15117-15132
+                                               (setfield_imm 0 got_eof 1a))
+                                             0a)
+                                           (before toplevel/toploop.ml(476):15140-15143
+                                             len)))))
+                                   (before toplevel/toploop.ml(478):15163-15166
+                                     len))))))))))))))
+        (seq
+          (seq
+            (if (field 0 (field 2 (global Stdlib__sys!)))
+              (before toplevel/toploop.ml(487):15396-15520
+                (after toplevel/toploop.ml(487):15396-15520
+                  (apply (field 0 (global Stdlib!))
+                    "The ocamltoplevel.cma library from compiler-libs cannot be loaded inside the OCaml toplevel")))
+              0a)
+            (before toplevel/toploop.ml(489):15524-15681
+              (seq (setfield_imm 0 (field 2 (global Stdlib__sys!)) 1a)
+                (before toplevel/toploop.ml(490):15551-15681
+                  (let
+                    (crc_intfs =
+                       (after toplevel/toploop.ml(490):15567-15591
+                         (apply (field 10 (global Symtable!)) 0a)))
+                    (before toplevel/toploop.ml(491):15597-15681
+                      (seq
+                        (after toplevel/toploop.ml(491):15597-15618
+                          (apply (field 0 (global Compmisc!)) 0a 0a))
+                        (before toplevel/toploop.ml(492):15622-15681
+                          (seq
+                            (after toplevel/toploop.ml(492):15622-15675
+                              (apply (field 81 (global Env!))
+                                (field 0 (global Stdlib__sys!)) crc_intfs))
+                            (before toplevel/toploop.ml(493):15679-15681 0a))))))))))
+          (let
+            (load_ocamlinit =
+               (function ppf
+                 (funct-body toplevel/toploop.ml(495)<ghost>:15702-16192
+                   (before toplevel/toploop.ml(496):15710-16192
+                     (if (field 0 (field 42 (global Clflags!)))
+                       (before toplevel/toploop.ml(496):15734-15736 0a)
+                       (before toplevel/toploop.ml(497):15744-16192
+                         (let
+                           (*match* = (field 0 (field 41 (global Clflags!))))
+                           (if *match*
+                             (let (f =a (field 0 *match*))
+                               (before toplevel/toploop.ml(498):15788-15907
+                                 (if
+                                   (after toplevel/toploop.ml(498):15791-15808
+                                     (caml_sys_file_exists f))
+                                   (before toplevel/toploop.ml(498):15814-15841
+                                     (ignore
+                                       (after toplevel/toploop.ml(498):15821-15841
+                                         (apply use_silently ppf f))))
+                                   (before toplevel/toploop.ml(499):15861-15907
+                                     (after toplevel/toploop.ml(499):15861-15907
+                                       (apply
+                                         (field 122 (global Stdlib__format!))
+                                         ppf
+                                         [0:
+                                          [11:
+                                           "Init file not found: \""
+                                           [2: 0a [11: "\"." [17: 4a 0a]]]]
+                                          "Init file not found: \"%s\".@."]
+                                         f))))))
+                             (before toplevel/toploop.ml(501):15925-16192
+                               (if
+                                 (after toplevel/toploop.ml(501):15928-15956
+                                   (caml_sys_file_exists ".ocamlinit"))
+                                 (before toplevel/toploop.ml(501):15962-16000
+                                   (ignore
+                                     (after toplevel/toploop.ml(501):15969-16000
+                                       (apply use_silently ppf ".ocamlinit"))))
+                                 (before toplevel/toploop.ml(502):16011-16192
+                                   (try
+                                     (let
+                                       (home_init =
+                                          (after toplevel/toploop.ml(503):16038-16086
+                                            (apply
+                                              (field 3
+                                                (global Stdlib__filename!))
+                                              (after toplevel/toploop.ml(503):16054-16073
+                                                (caml_sys_getenv "HOME"))
+                                              ".ocamlinit")))
+                                       (before toplevel/toploop.ml(504):16097-16166
+                                         (if
+                                           (after toplevel/toploop.ml(504):16100-16125
+                                             (caml_sys_file_exists home_init))
+                                           (before toplevel/toploop.ml(504):16131-16166
+                                             (ignore
+                                               (after toplevel/toploop.ml(504):16138-16166
+                                                 (apply use_silently ppf
+                                                   home_init))))
+                                           0a)))
+                                    with exn
+                                     (if (== exn (field 7 (global Stdlib!)))
+                                       (before toplevel/toploop.ml(505):16190-16192
+                                         0a)
+                                       (reraise exn)))))))))))))
+             set_paths =
+               (function param
+                 (funct-body toplevel/toploop.ml(508)<ghost>:16211-16849
+                   (before toplevel/toploop.ml(512):16396-16849
+                     (let
+                       (expand =
+                          (after toplevel/toploop.ml(512):16409-16454
+                            (apply (field 16 (global Misc!))
+                              (field 1 (global Config!)))))
+                       (before toplevel/toploop.ml(513):16460-16849
+                         (let
+                           (current_load_path =
+                              (after toplevel/toploop.ml(513):16484-16506
+                                (apply (field 4 (global Load_path!)) 0a)))
+                           (before toplevel/toploop.ml(514):16512-16849
+                             (let
+                               (load_path =
+                                  (after toplevel/toploop.ml(514):16528-16791
+                                    (apply (field 12 (global Stdlib__list!))
+                                      (makeblock 0 [0: "" 0a]
+                                        (makeblock 0
+                                          (after toplevel/toploop.ml(516):16562-16616
+                                            (apply
+                                              (field 16
+                                                (global Stdlib__list!))
+                                              expand
+                                              (after toplevel/toploop.ml(516):16578-16616
+                                                (apply
+                                                  (field 8
+                                                    (global Stdlib__list!))
+                                                  (field 0
+                                                    (field 10
+                                                      (global Compenv!)))))))
+                                          (makeblock 0
+                                            (after toplevel/toploop.ml(517):16624-16672
+                                              (apply
+                                                (field 16
+                                                  (global Stdlib__list!))
+                                                expand
+                                                (after toplevel/toploop.ml(517):16640-16672
+                                                  (apply
+                                                    (field 8
+                                                      (global Stdlib__list!))
+                                                    (field 0
+                                                      (field 12
+                                                        (global Clflags!)))))))
+                                            (makeblock 0
+                                              (after toplevel/toploop.ml(518):16680-16733
+                                                (apply
+                                                  (field 16
+                                                    (global Stdlib__list!))
+                                                  expand
+                                                  (after toplevel/toploop.ml(518):16696-16733
+                                                    (apply
+                                                      (field 8
+                                                        (global Stdlib__list!))
+                                                      (field 0
+                                                        (field 11
+                                                          (global Compenv!)))))))
+                                              (makeblock 0 current_load_path
+                                                (makeblock 0
+                                                  (makeblock 0
+                                                    (after toplevel/toploop.ml(520):16767-16783
+                                                      (apply expand
+                                                        "+camlp4"))
+                                                    0a)
+                                                  0a)))))))))
+                               (before toplevel/toploop.ml(523):16799-16849
+                                 (seq
+                                   (after toplevel/toploop.ml(523):16799-16823
+                                     (apply (field 3 (global Load_path!))
+                                       load_path))
+                                   (before toplevel/toploop.ml(524):16827-16849
+                                     (after toplevel/toploop.ml(524):16827-16849
+                                       (apply (field 5 (global Dll!))
+                                         load_path)))))))))))))
+             initialize_toplevel_env =
+               (function param
+                 (funct-body toplevel/toploop.ml(526)<ghost>:16879-16924
+                   (before toplevel/toploop.ml(527):16886-16924
+                     (setfield_ptr 0 toplevel_env
+                       (after toplevel/toploop.ml(527):16902-16924
+                         (apply (field 1 (global Compmisc!)) 0a))))))
+             PPerror = (makeblock 248 "Toploop.PPerror" (caml_fresh_oo_id 0))
+             loop =
+               (function ppf
+                 (funct-body toplevel/toploop.ml(533)<ghost>:16982-18098
+                   (before toplevel/toploop.ml(534):16990-18098
+                     (seq (setfield_imm 0 (field 16 (global Clflags!)) 1a)
+                       (before toplevel/toploop.ml(535):17015-18098
+                         (seq
+                           (setfield_ptr 0 (field 32 (global Location!)) ppf)
+                           (before toplevel/toploop.ml(536):17057-18098
+                             (seq
+                               (if
+                                 (not (field 0 (field 43 (global Clflags!))))
+                                 (before toplevel/toploop.ml(537):17092-17149
+                                   (after toplevel/toploop.ml(537):17092-17149
+                                     (apply
+                                       (field 122 (global Stdlib__format!))
+                                       ppf
+                                       [0:
+                                        [11:
+                                         "        OCaml version "
+                                         [2: 0a [17: 4a [17: 4a 0a]]]]
+                                        "        OCaml version %s@.@."]
+                                       (field 0 (global Config!)))))
+                                 0a)
+                               (before toplevel/toploop.ml(538):17153-18098
+                                 (seq
+                                   (try
+                                     (after toplevel/toploop.ml(539):17167-17193
+                                       (apply initialize_toplevel_env 0a))
+                                    with exn
+                                     (catch
+                                       (let (tag =a (field 0 exn))
+                                         (if
+                                           (== tag (field 86 (global Env!)))
+                                           (exit 54)
+                                           (let (tag =a (field 0 exn))
+                                             (if
+                                               (== tag
+                                                 (field 11
+                                                   (global Typetexp!)))
+                                               (exit 54) (reraise exn)))))
+                                      with (54)
+                                       (before toplevel/toploop.ml(541):17250-17291
+                                         (seq
+                                           (after toplevel/toploop.ml(541):17250-17283
+                                             (apply
+                                               (field 51 (global Location!))
+                                               ppf exn))
+                                           (before toplevel/toploop.ml(541):17285-17291
+                                             (after toplevel/toploop.ml(541):17285-17291
+                                               (apply
+                                                 (field 98 (global Stdlib!))
+                                                 2)))))))
+                                   (before toplevel/toploop.ml(543):17301-18098
+                                     (let
+                                       (lb =
+                                          (after toplevel/toploop.ml(543):17310-17344
+                                            (apply
+                                              (field 3
+                                                (global Stdlib__lexing!))
+                                              0a refill_lexbuf)))
+                                       (before toplevel/toploop.ml(544):17350-18098
+                                         (seq
+                                           (after toplevel/toploop.ml(544):17350-17381
+                                             (apply
+                                               (field 2 (global Location!))
+                                               lb "//toplevel//"))
+                                           (before toplevel/toploop.ml(545):17385-18098
+                                             (seq
+                                               (setfield_ptr 0
+                                                 (field 11
+                                                   (global Location!))
+                                                 "//toplevel//")
+                                               (before toplevel/toploop.ml(546):17426-18098
+                                                 (seq
+                                                   (setfield_ptr 0
+                                                     (field 12
+                                                       (global Location!))
+                                                     (makeblock 0 lb))
+                                                   (before toplevel/toploop.ml(547):17462-18098
+                                                     (seq
+                                                       (after toplevel/toploop.ml(547):17462-17482
+                                                         (apply
+                                                           (field 44
+                                                             (global Stdlib__sys!))
+                                                           1a))
+                                                       (before toplevel/toploop.ml(548):17486-18098
+                                                         (seq
+                                                           (after toplevel/toploop.ml(548):17486-17507
+                                                             (apply run_hooks
+                                                               After_setup))
+                                                           (before toplevel/toploop.ml(549):17511-18098
+                                                             (seq
+                                                               (after toplevel/toploop.ml(549):17511-17529
+                                                                 (apply
+                                                                   load_ocamlinit
+                                                                   ppf))
+                                                               (before toplevel/toploop.ml(550):17533-18098
+                                                                 (while 1a
+                                                                   (before toplevel/toploop.ml(551):17551-18091
+                                                                    (let
+                                                                    (snap =
+                                                                    (after toplevel/toploop.ml(551):17562-17579
+                                                                    (apply
+                                                                    (field 56
+                                                                    (global Btype!))
+                                                                    0a)))
+                                                                    (before toplevel/toploop.ml(552):17587-18091
+                                                                    (try
+                                                                    (seq
+                                                                    (after toplevel/toploop.ml(553):17597-17618
+                                                                    (apply
+                                                                    (field 12
+                                                                    (global Stdlib__lexing!))
+                                                                    lb))
+                                                                    (before toplevel/toploop.ml(554):17626-17899
+                                                                    (seq
+                                                                    (after toplevel/toploop.ml(554):17626-17642
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Location!))
+                                                                    0a))
+                                                                    (before toplevel/toploop.ml(555):17650-17899
+                                                                    (seq
+                                                                    (after toplevel/toploop.ml(555):17650-17673
+                                                                    (apply
+                                                                    (field 11
+                                                                    (global Warnings!))
+                                                                    0a))
+                                                                    (before toplevel/toploop.ml(556):17681-17899
+                                                                    (seq
+                                                                    (setfield_imm 0
+                                                                    first_line
+                                                                    1a)
+                                                                    (before toplevel/toploop.ml(557):17707-17899
+                                                                    (let
+                                                                    (phr =
+                                                                    (try
+                                                                    (after toplevel/toploop.ml(557):17721-17746
+                                                                    (apply
+                                                                    (field 0
+                                                                    parse_toplevel_phrase)
+                                                                    lb))
+                                                                    with exn
+                                                                    (if
+                                                                    (== exn
+                                                                    (field 2
+                                                                    (global Stdlib!)))
+                                                                    (before toplevel/toploop.ml(557):17760-17773
+                                                                    (raise
+                                                                    (after toplevel/toploop.ml(557):17766-17773
+                                                                    PPerror)))
+                                                                    (reraise
+                                                                    exn))))
+                                                                    (before toplevel/toploop.ml(558):17783-17899
+                                                                    (let
+                                                                    (phr =
+                                                                    (after toplevel/toploop.ml(558):17793-17818
+                                                                    (apply
+                                                                    preprocess_phrase
+                                                                    ppf phr)))
+                                                                    (before toplevel/toploop.ml(559):17829-17899
+                                                                    (seq
+                                                                    (after toplevel/toploop.ml(559):17829-17856
+                                                                    (apply
+                                                                    (field 73
+                                                                    (global Env!))
+                                                                    0a))
+                                                                    (before toplevel/toploop.ml(560):17864-17899
+                                                                    (ignore
+                                                                    (after toplevel/toploop.ml(560):17870-17899
+                                                                    (apply
+                                                                    execute_phrase
+                                                                    1a ppf
+                                                                    phr)))))))))))))))))
+                                                                    with x
+                                                                    (if
+                                                                    (== x
+                                                                    (field 11
+                                                                    (global Stdlib!)))
+                                                                    (before toplevel/toploop.ml(562):17930-17936
+                                                                    (after toplevel/toploop.ml(562):17930-17936
+                                                                    (apply
+                                                                    (field 98
+                                                                    (global Stdlib!))
+                                                                    0)))
+                                                                    (if
+                                                                    (== x
+                                                                    (field 43
+                                                                    (global Stdlib__sys!)))
+                                                                    (before toplevel/toploop.ml(563):17956-18006
+                                                                    (seq
+                                                                    (after toplevel/toploop.ml(563):17956-17984
+                                                                    (apply
+                                                                    (field 122
+                                                                    (global Stdlib__format!))
+                                                                    ppf
+                                                                    [0:
+                                                                    [11:
+                                                                    "Interrupted."
+                                                                    [17:
+                                                                    4a 0a]]
+                                                                    "Interrupted.@."]))
+                                                                    (before toplevel/toploop.ml(563):17986-18006
+                                                                    (after toplevel/toploop.ml(563):17986-18006
+                                                                    (apply
+                                                                    (field 57
+                                                                    (global Btype!))
+                                                                    snap)))))
+                                                                    (if
+                                                                    (== x
+                                                                    PPerror)
+                                                                    (before toplevel/toploop.ml(564):18024-18026
+                                                                    0a)
+                                                                    (before toplevel/toploop.ml(565):18038-18091
+                                                                    (seq
+                                                                    (after toplevel/toploop.ml(565):18038-18069
+                                                                    (apply
+                                                                    (field 51
+                                                                    (global Location!))
+                                                                    ppf x))
+                                                                    (before toplevel/toploop.ml(565):18071-18091
+                                                                    (after toplevel/toploop.ml(565):18071-18091
+                                                                    (apply
+                                                                    (field 57
+                                                                    (global Btype!))
+                                                                    snap))))))))))))))))))))))))))))))))))))))
+             override_sys_argv =
+               (function new_argv
+                 (funct-body toplevel/toploop.ml(571)<ghost>:18203-18265
+                   (before toplevel/toploop.ml(572):18216-18265
+                     (seq
+                       (after toplevel/toploop.ml(572):18216-18245
+                         (caml_sys_modify_argv new_argv))
+                       (before toplevel/toploop.ml(573):18249-18265
+                         (setfield_imm 0 (field 11 (global Stdlib__arg!)) 0))))))
+             run_script =
+               (function ppf name args
+                 (funct-body toplevel/toploop.ml(577)<ghost>:18353-18977
+                   (before toplevel/toploop.ml(578):18371-18977
+                     (seq
+                       (after toplevel/toploop.ml(578):18371-18393
+                         (apply override_sys_argv args))
+                       (before toplevel/toploop.ml(579):18397-18977
+                         (seq
+                           (after toplevel/toploop.ml(579):18397-18447
+                             (apply (field 0 (global Compmisc!))
+                               (makeblock 0
+                                 (after toplevel/toploop.ml(579):18421-18444
+                                   (apply
+                                     (field 13 (global Stdlib__filename!))
+                                     name)))
+                               0a))
+                           (before toplevel/toploop.ml(581):18531-18977
+                             (seq
+                               (try
+                                 (setfield_ptr 0 toplevel_env
+                                   (after toplevel/toploop.ml(582):18561-18583
+                                     (apply (field 1 (global Compmisc!)) 0a)))
+                                with exn
+                                 (catch
+                                   (let (tag =a (field 0 exn))
+                                     (if (== tag (field 86 (global Env!)))
+                                       (exit 57)
+                                       (let (tag =a (field 0 exn))
+                                         (if
+                                           (== tag
+                                             (field 11 (global Typetexp!)))
+                                           (exit 57) (reraise exn)))))
+                                  with (57)
+                                   (before toplevel/toploop.ml(584):18640-18681
+                                     (seq
+                                       (after toplevel/toploop.ml(584):18640-18673
+                                         (apply (field 51 (global Location!))
+                                           ppf exn))
+                                       (before toplevel/toploop.ml(584):18675-18681
+                                         (after toplevel/toploop.ml(584):18675-18681
+                                           (apply (field 98 (global Stdlib!))
+                                             2)))))))
+                               (before toplevel/toploop.ml(586):18691-18977
+                                 (seq
+                                   (setfield_imm 0
+                                     (field 2 (global Stdlib__sys!)) 0a)
+                                   (before toplevel/toploop.ml(587):18719-18977
+                                     (seq
+                                       (after toplevel/toploop.ml(587):18719-18740
+                                         (apply run_hooks After_setup))
+                                       (before toplevel/toploop.ml(588):18744-18977
+                                         (let
+                                           (explicit_name =
+                                              (if
+                                                (&&
+                                                  (after toplevel/toploop.ml(590):18830-18840
+                                                    (caml_string_notequal
+                                                      name ""))
+                                                  (after toplevel/toploop.ml(590):18844-18869
+                                                    (apply
+                                                      (field 5
+                                                        (global Stdlib__filename!))
+                                                      name)))
+                                                (before toplevel/toploop.ml(591):18879-18925
+                                                  (after toplevel/toploop.ml(591):18879-18925
+                                                    (apply
+                                                      (field 3
+                                                        (global Stdlib__filename!))
+                                                      (field 0
+                                                        (global Stdlib__filename!))
+                                                      name)))
+                                                (before toplevel/toploop.ml(592):18935-18939
+                                                  name)))
+                                           (before toplevel/toploop.ml(594):18947-18977
+                                             (after toplevel/toploop.ml(594):18947-18977
+                                               (apply use_silently ppf
+                                                 explicit_name))))))))))))))))))
+            (pseudo _none_(0)<ghost>:-1--1
+              (makeblock 0 getvalue setvalue set_paths loop run_script
+                add_directive directive_table directive_info_table
+                toplevel_env initialize_toplevel_env print_exception_outcome
+                execute_phrase preprocess_phrase use_file use_silently
+                mod_use_file eval_module_path eval_value_path
+                eval_extension_path eval_class_path record_backtrace
+                print_value print_untyped_exception install_printer
+                install_generic_printer install_generic_printer'
+                remove_printer max_printer_depth max_printer_steps
+                parse_toplevel_phrase parse_use_file print_location
+                print_error print_warning input_name print_out_value
+                print_out_type print_out_class_type print_out_module_type
+                print_out_type_extension print_out_sig_item
+                print_out_signature print_out_phrase read_interactive_input
+                toplevel_startup_hook Startup After_setup add_hook run_hooks
+                may_trace override_sys_argv))))))))

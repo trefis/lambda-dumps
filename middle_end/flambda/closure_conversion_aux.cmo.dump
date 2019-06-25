@@ -1,0 +1,389 @@
+(setglobal Closure_conversion_aux!
+  (let
+    (Env =
+       (module-defn(Env) middle_end/flambda/closure_conversion_aux.ml(20):1238-3197
+         (let
+           (empty =
+              (makeblock 0 (field 26 (global Ident!))
+                (field 26 (global Ident!))
+                (field 0 (field 7 (field 0 (global Numbers!))))
+                (field 0 (field 7 (field 0 (global Numbers!)))) 1a)
+            clear_local_bindings =
+              (function env
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(37)<ghost>:1718-1764
+                  (before middle_end/flambda/closure_conversion_aux.ml(38):1728-1764
+                    (let (init = empty)
+                      (makeblock 0 (field 0 init) (field 1 init)
+                        (field 2 init) (field 3 env) (field 4 init))))))
+            add_var =
+              (function t id var
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(40)<ghost>:1780-1842
+                  (before middle_end/flambda/closure_conversion_aux.ml(40):1791-1842
+                    (let (init = t)
+                      (makeblock 0
+                        (after middle_end/flambda/closure_conversion_aux.ml(40):1812-1840
+                          (apply (field 27 (global Ident!)) id var
+                            (field 0 t)))
+                        (field 1 init) (field 2 init) (field 3 init)
+                        (field 4 init))))))
+            add_vars =
+              (function t ids vars
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(41)<ghost>:1858-1905
+                  (before middle_end/flambda/closure_conversion_aux.ml(41):1871-1905
+                    (after middle_end/flambda/closure_conversion_aux.ml(41):1871-1905
+                      (apply (field 25 (global Stdlib__list!)) add_var t ids
+                        vars)))))
+            find_var =
+              (function t id
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(43)<ghost>:1922-2157
+                  (before middle_end/flambda/closure_conversion_aux.ml(44):1933-2157
+                    (try
+                      (after middle_end/flambda/closure_conversion_aux.ml(44):1937-1967
+                        (apply (field 28 (global Ident!)) id (field 0 t)))
+                     with exn
+                      (if (== exn (field 7 (global Stdlib!)))
+                        (before middle_end/flambda/closure_conversion_aux.ml(46):1996-2157
+                          (after middle_end/flambda/closure_conversion_aux.ml(46):1996-2157
+                            (apply (field 1 (global Misc!))
+                              [0:
+                               [11:
+                                "Closure_conversion.Env.find_var: "
+                                [2: 0a [17: [0: "@ " 1 0] [2: 0a 0a]]]]
+                               "Closure_conversion.Env.find_var: %s@ %s"]
+                              (after middle_end/flambda/closure_conversion_aux.ml(47):2064-2086
+                                (apply (field 15 (global Ident!)) id))
+                              (after middle_end/flambda/closure_conversion_aux.ml(48):2095-2157
+                                (apply (field 12 (global Stdlib__printexc!))
+                                  (after middle_end/flambda/closure_conversion_aux.ml(48):2129-2156
+                                    (apply
+                                      (field 13 (global Stdlib__printexc!))
+                                      42)))))))
+                        (reraise exn))))))
+            find_var_exn =
+              (function t id
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(50)<ghost>:2178-2219
+                  (before middle_end/flambda/closure_conversion_aux.ml(51):2189-2219
+                    (after middle_end/flambda/closure_conversion_aux.ml(51):2189-2219
+                      (apply (field 28 (global Ident!)) id (field 0 t))))))
+            add_mutable_var =
+              (function t id mutable_var
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(53)<ghost>:2243-2341
+                  (before middle_end/flambda/closure_conversion_aux.ml(54):2266-2341
+                    (let (init = t)
+                      (makeblock 0 (field 0 init)
+                        (after middle_end/flambda/closure_conversion_aux.ml(54):2295-2339
+                          (apply (field 27 (global Ident!)) id mutable_var
+                            (field 1 t)))
+                        (field 2 init) (field 3 init) (field 4 init))))))
+            find_mutable_var_exn =
+              (function t id
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(56)<ghost>:2370-2419
+                  (before middle_end/flambda/closure_conversion_aux.ml(57):2381-2419
+                    (after middle_end/flambda/closure_conversion_aux.ml(57):2381-2419
+                      (apply (field 28 (global Ident!)) id (field 1 t))))))
+            add_static_exception =
+              (function t st_exn[int] fresh_st_exn
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(59)<ghost>:2448-2580
+                  (before middle_end/flambda/closure_conversion_aux.ml(60):2476-2580
+                    (let (init = t)
+                      (makeblock 0 (field 0 init) (field 1 init)
+                        (after middle_end/flambda/closure_conversion_aux.ml(62):2519-2578
+                          (apply
+                            (field 3 (field 7 (field 0 (global Numbers!))))
+                            st_exn fresh_st_exn (field 2 t)))
+                        (field 3 init) (field 4 init))))))
+            find_static_exception =
+              (function t st_exn[int]
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(64)<ghost>:2610-2807
+                  (before middle_end/flambda/closure_conversion_aux.ml(65):2625-2807
+                    (try
+                      (after middle_end/flambda/closure_conversion_aux.ml(65):2629-2676
+                        (apply
+                          (field 26 (field 7 (field 0 (global Numbers!))))
+                          st_exn (field 2 t)))
+                     with exn
+                      (if (== exn (field 7 (global Stdlib!)))
+                        (before middle_end/flambda/closure_conversion_aux.ml(67):2705-2807
+                          (after middle_end/flambda/closure_conversion_aux.ml(67):2705-2807
+                            (apply (field 0 (global Misc!))
+                              (after middle_end/flambda/closure_conversion_aux.ml(67):2722-2807
+                                (apply (field 27 (global Stdlib!))
+                                  "Closure_conversion.Env.find_static_exception: exn "
+                                  (after middle_end/flambda/closure_conversion_aux.ml(68):2786-2806
+                                    (apply (field 9 (global Stdlib__int!))
+                                      st_exn)))))))
+                        (reraise exn))))))
+            add_global =
+              (function t pos[int] symbol
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(70)<ghost>:2826-2906
+                  (before middle_end/flambda/closure_conversion_aux.ml(71):2845-2906
+                    (let (init = t)
+                      (makeblock 0 (field 0 init) (field 1 init)
+                        (field 2 init)
+                        (after middle_end/flambda/closure_conversion_aux.ml(71):2864-2904
+                          (apply
+                            (field 3 (field 7 (field 0 (global Numbers!))))
+                            pos symbol (field 3 t)))
+                        (field 4 init))))))
+            find_global =
+              (function t pos[int]
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(73)<ghost>:2926-3097
+                  (before middle_end/flambda/closure_conversion_aux.ml(74):2938-3097
+                    (try
+                      (after middle_end/flambda/closure_conversion_aux.ml(74):2942-2976
+                        (apply
+                          (field 26 (field 7 (field 0 (global Numbers!))))
+                          pos (field 3 t)))
+                     with exn
+                      (if (== exn (field 7 (global Stdlib!)))
+                        (before middle_end/flambda/closure_conversion_aux.ml(76):3005-3097
+                          (after middle_end/flambda/closure_conversion_aux.ml(76):3005-3097
+                            (apply (field 0 (global Misc!))
+                              (after middle_end/flambda/closure_conversion_aux.ml(76):3022-3097
+                                (apply (field 27 (global Stdlib!))
+                                  "Closure_conversion.Env.find_global: global "
+                                  (after middle_end/flambda/closure_conversion_aux.ml(77):3079-3096
+                                    (apply (field 9 (global Stdlib__int!))
+                                      pos)))))))
+                        (reraise exn))))))
+            at_toplevel =
+              (function t
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(79)<ghost>:3117-3134
+                  (before middle_end/flambda/closure_conversion_aux.ml(79):3121-3134
+                    (field 4 t))))
+            not_at_toplevel =
+              (function t
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(81)<ghost>:3158-3193
+                  (before middle_end/flambda/closure_conversion_aux.ml(81):3162-3193
+                    (let (init = t)
+                      (makeblock 0 (field 0 init) (field 1 init)
+                        (field 2 init) (field 3 init) 0a))))))
+           (pseudo middle_end/flambda/closure_conversion_aux.ml(20):1251-3197
+             (makeblock 0 empty clear_local_bindings add_var add_vars
+               find_var find_var_exn add_mutable_var find_mutable_var_exn
+               add_static_exception find_static_exception add_global
+               find_global at_toplevel not_at_toplevel))))
+     Function_decls =
+       (module-defn(Function_decls) middle_end/flambda/closure_conversion_aux.ml(84):3199-6451
+         (let
+           (Function_decl =
+              (module-defn(Function_decl) middle_end/flambda/closure_conversion_aux.ml(85):3232-4388
+                (let
+                  (create =
+                     (function let_rec_ident closure_bound_var kind params
+                       body attr loc
+                       (funct-body middle_end/flambda/closure_conversion_aux.ml(97)<ghost>:3565-3996
+                         (before middle_end/flambda/closure_conversion_aux.ml(99):3646-3996
+                           (let
+                             (let_rec_ident =
+                                (if let_rec_ident
+                                  (let
+                                    (let_rec_ident =a (field 0 let_rec_ident))
+                                    (before middle_end/flambda/closure_conversion_aux.ml(102):3787-3800
+                                      let_rec_ident))
+                                  (before middle_end/flambda/closure_conversion_aux.ml(101):3717-3754
+                                    (after middle_end/flambda/closure_conversion_aux.ml(101):3717-3754
+                                      (apply (field 10 (global Ident!))
+                                        "unnamed_function")))))
+                             (before middle_end/flambda/closure_conversion_aux.ml(104):3816-3996
+                               (makeblock 0 let_rec_ident closure_bound_var
+                                 kind params body
+                                 (after middle_end/flambda/closure_conversion_aux.ml(109):3934-3960
+                                   (apply (field 14 (global Lambda!)) body))
+                                 attr loc))))))
+                   let_rec_ident =
+                     (function t
+                       (funct-body middle_end/flambda/closure_conversion_aux.ml(114)<ghost>:4020-4039
+                         (before middle_end/flambda/closure_conversion_aux.ml(114):4024-4039
+                           (field 0 t))))
+                   closure_bound_var =
+                     (function t
+                       (funct-body middle_end/flambda/closure_conversion_aux.ml(115)<ghost>:4066-4089
+                         (before middle_end/flambda/closure_conversion_aux.ml(115):4070-4089
+                           (field 1 t))))
+                   kind =
+                     (function t
+                       (funct-body middle_end/flambda/closure_conversion_aux.ml(116)<ghost>:4103-4113
+                         (before middle_end/flambda/closure_conversion_aux.ml(116):4107-4113
+                           (field 2 t))))
+                   params =
+                     (function t
+                       (funct-body middle_end/flambda/closure_conversion_aux.ml(117)<ghost>:4129-4141
+                         (before middle_end/flambda/closure_conversion_aux.ml(117):4133-4141
+                           (field 3 t))))
+                   body =
+                     (function t
+                       (funct-body middle_end/flambda/closure_conversion_aux.ml(118)<ghost>:4155-4165
+                         (before middle_end/flambda/closure_conversion_aux.ml(118):4159-4165
+                           (field 4 t))))
+                   free_idents =
+                     (function t
+                       (funct-body middle_end/flambda/closure_conversion_aux.ml(119)<ghost>:4186-4211
+                         (before middle_end/flambda/closure_conversion_aux.ml(119):4190-4211
+                           (field 5 t))))
+                   inline =
+                     (function t
+                       (funct-body middle_end/flambda/closure_conversion_aux.ml(120)<ghost>:4227-4244
+                         (before middle_end/flambda/closure_conversion_aux.ml(120):4231-4244
+                           (field 0 (field 6 t)))))
+                   specialise =
+                     (function t
+                       (funct-body middle_end/flambda/closure_conversion_aux.ml(121)<ghost>:4264-4285
+                         (before middle_end/flambda/closure_conversion_aux.ml(121):4268-4285
+                           (field 1 (field 6 t)))))
+                   is_a_functor =
+                     (function t
+                       (funct-body middle_end/flambda/closure_conversion_aux.ml(122)<ghost>:4307-4330
+                         (before middle_end/flambda/closure_conversion_aux.ml(122):4311-4330
+                           (field 3 (field 6 t)))))
+                   stub =
+                     (function t
+                       (funct-body middle_end/flambda/closure_conversion_aux.ml(123)<ghost>:4344-4359
+                         (before middle_end/flambda/closure_conversion_aux.ml(123):4348-4359
+                           (field 4 (field 6 t)))))
+                   loc =
+                     (function t
+                       (funct-body middle_end/flambda/closure_conversion_aux.ml(124)<ghost>:4372-4381
+                         (before middle_end/flambda/closure_conversion_aux.ml(124):4376-4381
+                           (field 7 t)))))
+                  (pseudo middle_end/flambda/closure_conversion_aux.ml(85):3255-4388
+                    (makeblock 0 create let_rec_ident closure_bound_var kind
+                      params body free_idents inline specialise is_a_functor
+                      stub loc))))
+            free_idents_by_function =
+              (function function_decls
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(135)<ghost>:4670-4875
+                  (before middle_end/flambda/closure_conversion_aux.ml(136):4691-4875
+                    (after middle_end/flambda/closure_conversion_aux.ml(136):4691-4875
+                      (apply (field 21 (global Stdlib__list!))
+                        (function decl map
+                          (funct-body middle_end/flambda/closure_conversion_aux.ml(136):4707-4835
+                            (before middle_end/flambda/closure_conversion_aux.ml(137):4732-4834
+                              (after middle_end/flambda/closure_conversion_aux.ml(137):4732-4834
+                                (apply (field 3 (field 7 (global Variable!)))
+                                  (after middle_end/flambda/closure_conversion_aux.ml(137):4749-4787
+                                    (apply (field 2 Function_decl) decl))
+                                  (after middle_end/flambda/closure_conversion_aux.ml(138):4798-4830
+                                    (apply (field 6 Function_decl) decl))
+                                  map)))))
+                        function_decls
+                        (field 0 (field 7 (global Variable!))))))))
+            all_free_idents =
+              (function function_decls
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(141)<ghost>:4899-5027
+                  (before middle_end/flambda/closure_conversion_aux.ml(142):4920-5027
+                    (after middle_end/flambda/closure_conversion_aux.ml(142):4920-5027
+                      (apply (field 12 (field 7 (global Variable!)))
+                        (function param
+                          (funct-body middle_end/flambda/closure_conversion_aux.ml(142):4938-4964
+                            (before middle_end/flambda/closure_conversion_aux.ml(142):4948-4963
+                              (field 6 (field 5 (global Ident!))))))
+                        (after middle_end/flambda/closure_conversion_aux.ml(143):4971-5011
+                          (apply free_idents_by_function function_decls))
+                        (field 0 (field 5 (global Ident!))))))))
+            let_rec_idents =
+              (function function_decls
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(146)<ghost>:5119-5191
+                  (before middle_end/flambda/closure_conversion_aux.ml(147):5140-5191
+                    (after middle_end/flambda/closure_conversion_aux.ml(147):5140-5191
+                      (apply (field 16 (global Stdlib__list!))
+                        (field 1 Function_decl) function_decls)))))
+            all_params =
+              (function function_decls
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(150)<ghost>:5255-5334
+                  (before middle_end/flambda/closure_conversion_aux.ml(151):5276-5334
+                    (after middle_end/flambda/closure_conversion_aux.ml(151):5276-5334
+                      (apply (field 12 (global Stdlib__list!))
+                        (after middle_end/flambda/closure_conversion_aux.ml(151):5288-5334
+                          (apply (field 16 (global Stdlib__list!))
+                            (field 4 Function_decl) function_decls)))))))
+            set_diff =
+              (function from idents
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(153)<ghost>:5351-5446
+                  (before middle_end/flambda/closure_conversion_aux.ml(154):5402-5446
+                    (after middle_end/flambda/closure_conversion_aux.ml(154):5402-5446
+                      (apply (field 21 (global Stdlib__list!))
+                        (field 5 (field 5 (global Ident!))) idents from)))))
+            all_free_idents =
+              (function function_decls
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(158)<ghost>:5560-5707
+                  (before middle_end/flambda/closure_conversion_aux.ml(159):5581-5707
+                    (after middle_end/flambda/closure_conversion_aux.ml(159):5581-5707
+                      (apply set_diff
+                        (after middle_end/flambda/closure_conversion_aux.ml(159):5590-5669
+                          (apply set_diff
+                            (after middle_end/flambda/closure_conversion_aux.ml(159):5600-5632
+                              (apply all_free_idents function_decls))
+                            (after middle_end/flambda/closure_conversion_aux.ml(160):5641-5668
+                              (apply all_params function_decls))))
+                        (after middle_end/flambda/closure_conversion_aux.ml(161):5676-5707
+                          (apply let_rec_idents function_decls)))))))
+            create =
+              (function function_decls
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(163)<ghost>:5722-5822
+                  (before middle_end/flambda/closure_conversion_aux.ml(164):5743-5822
+                    (makeblock 0 function_decls
+                      (after middle_end/flambda/closure_conversion_aux.ml(165):5785-5815
+                        (apply all_free_idents function_decls))))))
+            to_list =
+              (function t
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(168)<ghost>:5838-5858
+                  (before middle_end/flambda/closure_conversion_aux.ml(168):5842-5858
+                    (field 0 t))))
+            all_free_idents =
+              (function t
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(170)<ghost>:5882-5903
+                  (before middle_end/flambda/closure_conversion_aux.ml(170):5886-5903
+                    (field 1 t))))
+            closure_env_without_parameters =
+              (function external_env t
+                (funct-body middle_end/flambda/closure_conversion_aux.ml(172)<ghost>:5942-6447
+                  (before middle_end/flambda/closure_conversion_aux.ml(173):5963-6447
+                    (let
+                      (closure_env =
+                         (after middle_end/flambda/closure_conversion_aux.ml(175):6030-6267
+                           (apply (field 21 (global Stdlib__list!))
+                             (function function_decl env
+                               (funct-body middle_end/flambda/closure_conversion_aux.ml(175):6046-6202
+                                 (before middle_end/flambda/closure_conversion_aux.ml(176):6082-6201
+                                   (after middle_end/flambda/closure_conversion_aux.ml(176):6082-6201
+                                     (apply (field 2 Env) env
+                                       (after middle_end/flambda/closure_conversion_aux.ml(176):6098-6141
+                                         (apply (field 1 Function_decl)
+                                           function_decl))
+                                       (after middle_end/flambda/closure_conversion_aux.ml(177):6154-6201
+                                         (apply (field 2 Function_decl)
+                                           function_decl)))))))
+                             (field 0 t)
+                             (after middle_end/flambda/closure_conversion_aux.ml(178):6228-6267
+                               (apply (field 1 Env) external_env)))))
+                      (before middle_end/flambda/closure_conversion_aux.ml(181):6309-6447
+                        (after middle_end/flambda/closure_conversion_aux.ml(181):6309-6447
+                          (apply (field 14 (field 5 (global Ident!)))
+                            (function id env
+                              (funct-body middle_end/flambda/closure_conversion_aux.ml(181):6324-6411
+                                (before middle_end/flambda/closure_conversion_aux.ml(182):6347-6410
+                                  (after middle_end/flambda/closure_conversion_aux.ml(182):6347-6410
+                                    (apply (field 2 Env) env id
+                                      (after middle_end/flambda/closure_conversion_aux.ml(182):6366-6410
+                                        (apply (field 10 (global Variable!))
+                                          id)))))))
+                            (field 1 t) closure_env))))))))
+           (pseudo middle_end/flambda/closure_conversion_aux.ml(84):3223-6451
+             (makeblock 0 Function_decl free_idents_by_function
+               let_rec_idents all_params set_diff create to_list
+               all_free_idents closure_env_without_parameters)))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0
+        (makeblock 0 (field 0 Env) (field 2 Env) (field 3 Env) (field 4 Env)
+          (field 5 Env) (field 6 Env) (field 7 Env) (field 8 Env)
+          (field 9 Env) (field 10 Env) (field 11 Env) (field 12 Env)
+          (field 13 Env))
+        (makeblock 0
+          (let (let =a (field 0 Function_decls))
+            (makeblock 0 (field 0 let) (field 1 let) (field 2 let)
+              (field 3 let) (field 4 let) (field 5 let) (field 7 let)
+              (field 8 let) (field 9 let) (field 10 let) (field 11 let)
+              (field 6 let)))
+          (field 5 Function_decls) (field 6 Function_decls)
+          (field 7 Function_decls) (field 8 Function_decls))))))

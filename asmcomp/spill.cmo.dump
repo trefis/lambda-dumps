@@ -1,0 +1,1814 @@
+(setglobal Spill!
+  (let
+    (spill_env = (makemutable 0 (field 0 (field 10 (global Reg!))))
+     spill_reg =
+       (function r
+         (funct-body asmcomp/spill.ml(40)<ghost>:2011-2264
+           (before asmcomp/spill.ml(41):2017-2264
+             (try
+               (after asmcomp/spill.ml(42):2025-2050
+                 (apply (field 26 (field 10 (global Reg!))) r
+                   (field 0 spill_env)))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before asmcomp/spill.ml(44):2075-2264
+                   (let
+                     (spill_r =
+                        (after asmcomp/spill.ml(44):2089-2105
+                          (apply (field 2 (global Reg!)) (field 2 r))))
+                     (before asmcomp/spill.ml(45):2113-2264
+                       (seq (setfield_imm 4 spill_r 1a)
+                         (before asmcomp/spill.ml(46):2140-2264
+                           (seq
+                             (if
+                               (not
+                                 (after asmcomp/spill.ml(46):2147-2164
+                                   (apply (field 7 (global Reg!)) r)))
+                               (before asmcomp/spill.ml(46):2170-2200
+                                 (setfield_ptr 0 spill_r (field 0 r)))
+                               0a)
+                             (before asmcomp/spill.ml(47):2206-2264
+                               (seq
+                                 (setfield_ptr 0 spill_env
+                                   (after asmcomp/spill.ml(47):2219-2251
+                                     (apply
+                                       (field 3 (field 10 (global Reg!))) r
+                                       spill_r (field 0 spill_env))))
+                                 (before asmcomp/spill.ml(48):2257-2264
+                                   spill_r)))))))))
+                 (reraise exn))))))
+     use_date = (makemutable 0 (field 0 (field 10 (global Reg!))))
+     current_date = (makemutable 0 (int) 0)
+     record_use =
+       (function regv
+         (funct-body asmcomp/spill.ml(55)<ghost>:2410-2653
+           (before asmcomp/spill.ml(56):2419-2653
+             (for i 0 to (- (array.length[addr] regv) 1)
+               (before asmcomp/spill.ml(57):2461-2646
+                 (let
+                   (r =
+                      (after asmcomp/spill.ml(57):2469-2477
+                        (array.get[addr] regv i)))
+                   (before asmcomp/spill.ml(58):2485-2646
+                     (let
+                       (prev_date =[int]
+                          (try
+                            (after asmcomp/spill.ml(58):2505-2529
+                              (apply (field 26 (field 10 (global Reg!))) r
+                                (field 0 use_date)))
+                           with exn
+                            (if (== exn (field 7 (global Stdlib!)))
+                              (before asmcomp/spill.ml(58):2548-2549 0)
+                              (reraise exn))))
+                       (before asmcomp/spill.ml(59):2557-2646
+                         (if (> (field 0 current_date) prev_date)
+                           (before asmcomp/spill.ml(60):2597-2646
+                             (setfield_ptr 0 use_date
+                               (after asmcomp/spill.ml(60):2609-2646
+                                 (apply (field 3 (field 10 (global Reg!))) r
+                                   (field 0 current_date) (field 0 use_date)))))
+                           0a))))))))))
+     add_superpressure_regs =
+       (function op live_regs res_regs spilled
+         (funct-body asmcomp/spill.ml(66)<ghost>:2830-4533
+           (before asmcomp/spill.ml(67):2864-4533
+             (let
+               (max_pressure =
+                  (after asmcomp/spill.ml(67):2883-2912
+                    (apply (field 17 (global Proc!)) op)))
+               (before asmcomp/spill.ml(68):2918-4533
+                 (let
+                   (regs =
+                      (after asmcomp/spill.ml(68):2929-2965
+                        (apply (field 11 (global Reg!)) live_regs res_regs)))
+                   (before asmcomp/spill.ml(70):3023-4533
+                     (let
+                       (pressure =
+                          (after asmcomp/spill.ml(70):3038-3076
+                            (caml_make_vect (field 1 (global Proc!)) 0)))
+                       (before asmcomp/spill.ml(71):3082-4533
+                         (seq
+                           (after asmcomp/spill.ml(71):3082-3323
+                             (apply (field 13 (field 9 (global Reg!)))
+                               (function r
+                                 (funct-body asmcomp/spill.ml(72):3099-3314
+                                   (before asmcomp/spill.ml(73):3115-3313
+                                     (if
+                                       (after asmcomp/spill.ml(73):3118-3139
+                                         (apply
+                                           (field 2 (field 9 (global Reg!)))
+                                           r spilled))
+                                       (before asmcomp/spill.ml(73):3145-3147
+                                         0a)
+                                       (before asmcomp/spill.ml(73):3153-3313
+                                         (let (*match* = (field 3 r))
+                                           (catch
+                                             (switch* *match*
+                                              case int 0: (exit 4)
+                                              case tag 0: (exit 4)
+                                              case tag 1:
+                                               (before asmcomp/spill.ml(75):3205-3207
+                                                 0a))
+                                            with (4)
+                                             (before asmcomp/spill.ml(76):3223-3303
+                                               (let
+                                                 (c =[int]
+                                                    (after asmcomp/spill.ml(76):3231-3252
+                                                      (apply
+                                                        (field 2
+                                                          (global Proc!))
+                                                        r)))
+                                                 (before asmcomp/spill.ml(77):3271-3303
+                                                   (after asmcomp/spill.ml(77):3271-3303
+                                                     (array.set[int] pressure
+                                                       c
+                                                       (+
+                                                         (after asmcomp/spill.ml(77):3287-3299
+                                                           (array.get[int]
+                                                             pressure c))
+                                                         1)))))))))))))
+                               regs))
+                           (before asmcomp/spill.ml(81):3381-4533
+                             (letrec
+                               (check_pressure
+                                  (function cl[int] spilled
+                                    (funct-body asmcomp/spill.ml(81)<ghost>:3404-4503
+                                      (before asmcomp/spill.ml(82):3421-4503
+                                        (if (>= cl (field 1 (global Proc!)))
+                                          (before asmcomp/spill.ml(83):3467-3474
+                                            spilled)
+                                          (before asmcomp/spill.ml(84):3484-4503
+                                            (if
+                                              (<=
+                                                (after asmcomp/spill.ml(84):3487-3500
+                                                  (array.get[int] pressure
+                                                    cl))
+                                                (after asmcomp/spill.ml(84):3504-3521
+                                                  (array.get[int]
+                                                    max_pressure cl)))
+                                              (before asmcomp/spill.ml(85):3533-3562
+                                                (after asmcomp/spill.ml(85):3533-3562
+                                                  (apply check_pressure
+                                                    (+ cl 1) spilled)))
+                                              (before asmcomp/spill.ml(86):3572-4503
+                                                (let
+                                                  (lru_date =
+                                                     (makemutable 0 (int)
+                                                       1000000)
+                                                   lru_reg =
+                                                     (makemutable 0
+                                                       (field 1
+                                                         (global Reg!))))
+                                                  (before asmcomp/spill.ml(90):3750-4495
+                                                    (seq
+                                                      (after asmcomp/spill.ml(90):3750-4223
+                                                        (apply
+                                                          (field 13
+                                                            (field 9
+                                                              (global Reg!)))
+                                                          (function r
+                                                            (funct-body asmcomp/spill.ml(91):3771-4205
+                                                              (before asmcomp/spill.ml(92):3791-4204
+                                                                (if
+                                                                  (&&
+                                                                    (==
+                                                                    (after asmcomp/spill.ml(92):3794-3815
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Proc!))
+                                                                    r)) cl)
+                                                                    (&&
+                                                                    (not
+                                                                    (after asmcomp/spill.ml(93):3841-3864
+                                                                    (apply
+                                                                    (field 2
+                                                                    (field 9
+                                                                    (global Reg!)))
+                                                                    r
+                                                                    spilled)))
+                                                                    (==
+                                                                    (field 3
+                                                                    r) 0a)))
+                                                                  (before asmcomp/spill.ml(95):3912-4204
+                                                                    (try
+                                                                    (let
+                                                                    (d =[int]
+                                                                    (after asmcomp/spill.ml(97):3956-3980
+                                                                    (apply
+                                                                    (field 26
+                                                                    (field 10
+                                                                    (global Reg!)))
+                                                                    r
+                                                                    (field 0
+                                                                    use_date))))
+                                                                    (before asmcomp/spill.ml(98):3998-4103
+                                                                    (if
+                                                                    (< d
+                                                                    (field 0
+                                                                    lru_date))
+                                                                    (before asmcomp/spill.ml(98):4020-4103
+                                                                    (seq
+                                                                    (setfield_imm 0
+                                                                    lru_date
+                                                                    d)
+                                                                    (before asmcomp/spill.ml(100):4073-4085
+                                                                    (setfield_ptr 0
+                                                                    lru_reg
+                                                                    r)))) 0a)))
+                                                                    with exn
+                                                                    (if
+                                                                    (== exn
+                                                                    (field 7
+                                                                    (global Stdlib!)))
+                                                                    (before asmcomp/spill.ml(103):4188-4190
+                                                                    0a)
+                                                                    (reraise
+                                                                    exn))))
+                                                                  0a))))
+                                                          live_regs))
+                                                      (before asmcomp/spill.ml(106):4231-4495
+                                                        (if
+                                                          (!=
+                                                            (field 0 lru_reg)
+                                                            (field 1
+                                                              (global Reg!)))
+                                                          (before asmcomp/spill.ml(106):4261-4377
+                                                            (seq
+                                                              (after asmcomp/spill.ml(107):4275-4309
+                                                                (array.set[int]
+                                                                  pressure cl
+                                                                  (-
+                                                                    (after asmcomp/spill.ml(107):4292-4305
+                                                                    (array.get[int]
+                                                                    pressure
+                                                                    cl)) 1)))
+                                                              (before asmcomp/spill.ml(108):4319-4367
+                                                                (after asmcomp/spill.ml(108):4319-4367
+                                                                  (apply
+                                                                    check_pressure
+                                                                    cl
+                                                                    (after asmcomp/spill.ml(108):4337-4367
+                                                                    (apply
+                                                                    (field 3
+                                                                    (field 9
+                                                                    (global Reg!)))
+                                                                    (field 0
+                                                                    lru_reg)
+                                                                    spilled)))))))
+                                                          (before asmcomp/spill.ml(111):4466-4495
+                                                            (after asmcomp/spill.ml(111):4466-4495
+                                                              (apply
+                                                                check_pressure
+                                                                (+ cl 1)
+                                                                spilled))))))))))))))))
+                               (before asmcomp/spill.ml(113):4509-4533
+                                 (after asmcomp/spill.ml(113):4509-4533
+                                   (apply check_pressure 0 spilled)))))))))))))))
+     destroyed_at_fork = (makemutable 0 0a)
+     add_reloads =
+       (function regset i
+         (funct-body asmcomp/spill.ml(122)<ghost>:4800-4904
+           (before asmcomp/spill.ml(123):4813-4904
+             (after asmcomp/spill.ml(123):4813-4904
+               (apply (field 15 (field 9 (global Reg!)))
+                 (function r i
+                   (funct-body asmcomp/spill.ml(124):4830-4891
+                     (before asmcomp/spill.ml(124):4842-4890
+                       (after asmcomp/spill.ml(124):4842-4890
+                         (apply (field 2 (global Mach!)) [0: 2a]
+                           (makearray[addr]
+                             (after asmcomp/spill.ml(124):4869-4880
+                               (apply spill_reg r)))
+                           (makearray[addr] r) i)))))
+                 regset i)))))
+     reload_at_exit = (makemutable 0 0a)
+     find_reload_at_exit =
+       (function k[int]
+         (funct-body asmcomp/spill.ml(129)<ghost>:4959-5070
+           (before asmcomp/spill.ml(130):4965-5070
+             (try
+               (after asmcomp/spill.ml(131):4973-5001
+                 (apply (field 38 (global Stdlib__list!)) k
+                   (field 0 reload_at_exit)))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before asmcomp/spill.ml(133):5026-5070
+                   (after asmcomp/spill.ml(133):5026-5070
+                     (apply (field 0 (global Misc!))
+                       "Spill.find_reload_at_exit")))
+                 (reraise exn)))))))
+    (letrec
+      (reload
+         (function i before
+           (funct-body asmcomp/spill.ml(135)<ghost>:5087-10109
+             (before asmcomp/spill.ml(136):5100-10109
+               (seq (+:=1 current_date)
+                 (before asmcomp/spill.ml(137):5121-10109
+                   (seq
+                     (after asmcomp/spill.ml(137):5121-5137
+                       (apply record_use (field 2 i)))
+                     (before asmcomp/spill.ml(138):5141-10109
+                       (seq
+                         (after asmcomp/spill.ml(138):5141-5157
+                           (apply record_use (field 3 i)))
+                         (before asmcomp/spill.ml(139):5161-10109
+                           (let (*match* = (field 0 i))
+                             (catch
+                               (switch* *match*
+                                case int 0:
+                                 (before asmcomp/spill.ml(141):5197-5208
+                                   (makeblock 0 i before))
+                                case int 1: (exit 42)
+                                case tag 0:
+                                 (let (op =a (field 0 *match*))
+                                   (catch
+                                     (catch
+                                       (switch op
+                                        case tag 3: (exit 43)
+                                        case tag 4: (exit 43)
+                                        case tag 5: (exit 42)
+                                        case tag 6: (exit 42)
+                                        case tag 7:
+                                         (let (*match* =a (field 1 op))
+                                           (if *match* (exit 43) (exit 44)))
+                                        default: (exit 44))
+                                      with (44)
+                                       (before asmcomp/spill.ml(152):5684-6294
+                                         (let
+                                           (new_before =
+                                              (if
+                                                (||
+                                                  (field 0
+                                                    (field 19
+                                                      (global Clflags!)))
+                                                  (<=
+                                                    (+
+                                                      (after asmcomp/spill.ml(155):5827-5850
+                                                        (apply
+                                                          (field 20
+                                                            (field 9
+                                                              (global Reg!)))
+                                                          (field 5 i)))
+                                                      (array.length[addr]
+                                                        (field 3 i)))
+                                                    (after asmcomp/spill.ml(156):5887-5917
+                                                      (apply
+                                                        (field 16
+                                                          (global Proc!))
+                                                        op))))
+                                                (before asmcomp/spill.ml(157):5932-5938
+                                                  before)
+                                                (before asmcomp/spill.ml(158):5952-5997
+                                                  (after asmcomp/spill.ml(158):5952-5997
+                                                    (apply
+                                                      add_superpressure_regs
+                                                      op (field 5 i)
+                                                      (field 3 i) before)))))
+                                           (before asmcomp/spill.ml(159):6007-6294
+                                             (let
+                                               (after =
+                                                  (after asmcomp/spill.ml(160):6027-6089
+                                                    (apply
+                                                      (field 12
+                                                        (global Reg!))
+                                                      (after asmcomp/spill.ml(160):6046-6083
+                                                        (apply
+                                                          (field 12
+                                                            (global Reg!))
+                                                          new_before
+                                                          (field 2 i)))
+                                                      (field 3 i))))
+                                               (before asmcomp/spill.ml(161):6099-6294
+                                                 (let
+                                                   (*match* =
+                                                      (after asmcomp/spill.ml(161):6125-6144
+                                                        (apply reload
+                                                          (field 1 i) after))
+                                                    finally =a
+                                                      (field 1 *match*)
+                                                    new_next =a
+                                                      (field 0 *match*))
+                                                   (before asmcomp/spill.ml(162):6154-6294
+                                                     (makeblock 0
+                                                       (after asmcomp/spill.ml(162):6155-6277
+                                                         (apply add_reloads
+                                                           (after asmcomp/spill.ml(162):6167-6205
+                                                             (apply
+                                                               (field 13
+                                                                 (global Reg!))
+                                                               new_before
+                                                               (field 2 i)))
+                                                           (after asmcomp/spill.ml(163):6225-6277
+                                                             (apply
+                                                               (field 3
+                                                                 (global Mach!))
+                                                               (field 0 i)
+                                                               (field 2 i)
+                                                               (field 3 i)
+                                                               (field 4 i)
+                                                               new_next))))
+                                                       finally)))))))))
+                                    with (43)
+                                     (before asmcomp/spill.ml(147):5471-5663
+                                       (let
+                                         (*match* =
+                                            (after asmcomp/spill.ml(147):5497-5517
+                                              (apply reload (field 1 i)
+                                                (field 5 i)))
+                                          finally =a (field 1 *match*)
+                                          new_next =a (field 0 *match*))
+                                         (before asmcomp/spill.ml(148):5527-5663
+                                           (makeblock 0
+                                             (after asmcomp/spill.ml(148):5528-5646
+                                               (apply add_reloads
+                                                 (after asmcomp/spill.ml(148):5540-5574
+                                                   (apply
+                                                     (field 13 (global Reg!))
+                                                     before (field 2 i)))
+                                                 (after asmcomp/spill.ml(149):5594-5646
+                                                   (apply
+                                                     (field 3 (global Mach!))
+                                                     (field 0 i) (field 2 i)
+                                                     (field 3 i) (field 4 i)
+                                                     new_next))))
+                                             finally))))))
+                                case tag 1:
+                                 (let
+                                   (ifnot =a (field 2 *match*)
+                                    ifso =a (field 1 *match*)
+                                    test =a (field 0 *match*))
+                                   (before asmcomp/spill.ml(166):6339-7018
+                                     (let
+                                       (at_fork =
+                                          (after asmcomp/spill.ml(166):6353-6384
+                                            (apply (field 12 (global Reg!))
+                                              before (field 2 i))))
+                                       (before asmcomp/spill.ml(167):6394-7018
+                                         (let
+                                           (date_fork =[int]
+                                              (field 0 current_date))
+                                           (before asmcomp/spill.ml(168):6433-7018
+                                             (let
+                                               (*match* =
+                                                  (after asmcomp/spill.ml(168):6462-6481
+                                                    (apply reload ifso
+                                                      at_fork))
+                                                after_ifso =a
+                                                  (field 1 *match*)
+                                                new_ifso =a (field 0 *match*))
+                                               (before asmcomp/spill.ml(169):6491-7018
+                                                 (let
+                                                   (date_ifso =[int]
+                                                      (field 0 current_date))
+                                                   (before asmcomp/spill.ml(170):6530-7018
+                                                     (seq
+                                                       (setfield_imm 0
+                                                         current_date
+                                                         date_fork)
+                                                       (before asmcomp/spill.ml(171):6563-7018
+                                                         (let
+                                                           (*match* =
+                                                              (after asmcomp/spill.ml(171):6594-6614
+                                                                (apply reload
+                                                                  ifnot
+                                                                  at_fork))
+                                                            after_ifnot =a
+                                                              (field 1
+                                                                *match*)
+                                                            new_ifnot =a
+                                                              (field 0
+                                                                *match*))
+                                                           (before asmcomp/spill.ml(172):6624-7018
+                                                             (seq
+                                                               (setfield_imm 0
+                                                                 current_date
+                                                                 (after asmcomp/spill.ml(172):6640-6667
+                                                                   (apply
+                                                                    (field 16
+                                                                    (global Stdlib!))
+                                                                    date_ifso
+                                                                    (field 0
+                                                                    current_date))))
+                                                               (before asmcomp/spill.ml(173):6675-7018
+                                                                 (let
+                                                                   (*match* =
+                                                                    (after asmcomp/spill.ml(174):6709-6761
+                                                                    (apply
+                                                                    reload
+                                                                    (field 1
+                                                                    i)
+                                                                    (after asmcomp/spill.ml(174):6723-6761
+                                                                    (apply
+                                                                    (field 6
+                                                                    (field 9
+                                                                    (global Reg!)))
+                                                                    after_ifso
+                                                                    after_ifnot))))
+                                                                    finally =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    new_next =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                   (before asmcomp/spill.ml(175):6771-7018
+                                                                    (let
+                                                                    (new_i =
+                                                                    (after asmcomp/spill.ml(176):6791-6871
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Mach!))
+                                                                    (makeblock 1
+                                                                    test
+                                                                    new_ifso
+                                                                    new_ifnot)
+                                                                    (field 2
+                                                                    i)
+                                                                    (field 3
+                                                                    i)
+                                                                    new_next)))
+                                                                    (before asmcomp/spill.ml(178):6881-7018
+                                                                    (seq
+                                                                    (setfield_ptr 0
+                                                                    destroyed_at_fork
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    new_i
+                                                                    at_fork)
+                                                                    (field 0
+                                                                    destroyed_at_fork)))
+                                                                    (before asmcomp/spill.ml(179):6948-7018
+                                                                    (makeblock 0
+                                                                    (after asmcomp/spill.ml(179):6949-7001
+                                                                    (apply
+                                                                    add_reloads
+                                                                    (after asmcomp/spill.ml(179):6961-6995
+                                                                    (apply
+                                                                    (field 13
+                                                                    (global Reg!))
+                                                                    before
+                                                                    (field 2
+                                                                    i)))
+                                                                    new_i))
+                                                                    finally)))))))))))))))))))))))
+                                case tag 2:
+                                 (let
+                                   (cases =a (field 1 *match*)
+                                    index =a (field 0 *match*))
+                                   (before asmcomp/spill.ml(182):7054-7806
+                                     (let
+                                       (at_fork =
+                                          (after asmcomp/spill.ml(182):7068-7099
+                                            (apply (field 12 (global Reg!))
+                                              before (field 2 i))))
+                                       (before asmcomp/spill.ml(183):7109-7806
+                                         (let
+                                           (date_fork =[int]
+                                              (field 0 current_date))
+                                           (before asmcomp/spill.ml(184):7148-7806
+                                             (let
+                                               (date_join =
+                                                  (makemutable 0 (int) 0))
+                                               (before asmcomp/spill.ml(185):7179-7806
+                                                 (let
+                                                   (after_cases =
+                                                      (makemutable 0
+                                                        (field 0
+                                                          (field 9
+                                                            (global Reg!)))))
+                                                   (before asmcomp/spill.ml(186):7224-7806
+                                                     (let
+                                                       (new_cases =
+                                                          (after asmcomp/spill.ml(187):7248-7524
+                                                            (apply
+                                                              (field 14
+                                                                (global Stdlib__array!))
+                                                              (function c
+                                                                (funct-body asmcomp/spill.ml(188):7268-7508
+                                                                  (before asmcomp/spill.ml(189):7290-7507
+                                                                    (seq
+                                                                    (setfield_imm 0
+                                                                    current_date
+                                                                    date_fork)
+                                                                    (before asmcomp/spill.ml(190):7329-7507
+                                                                    (let
+                                                                    (*match* =
+                                                                    (after asmcomp/spill.ml(190):7352-7368
+                                                                    (apply
+                                                                    reload c
+                                                                    at_fork))
+                                                                    after_c =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    new_c =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/spill.ml(191):7384-7507
+                                                                    (seq
+                                                                    (setfield_ptr 0
+                                                                    after_cases
+                                                                    (after asmcomp/spill.ml(191):7399-7433
+                                                                    (apply
+                                                                    (field 6
+                                                                    (field 9
+                                                                    (global Reg!)))
+                                                                    (field 0
+                                                                    after_cases)
+                                                                    after_c)))
+                                                                    (before asmcomp/spill.ml(192):7447-7507
+                                                                    (seq
+                                                                    (setfield_imm 0
+                                                                    date_join
+                                                                    (after asmcomp/spill.ml(192):7460-7488
+                                                                    (apply
+                                                                    (field 16
+                                                                    (global Stdlib!))
+                                                                    (field 0
+                                                                    date_join)
+                                                                    (field 0
+                                                                    current_date))))
+                                                                    (before asmcomp/spill.ml(193):7502-7507
+                                                                    new_c)))))))))))
+                                                              cases)))
+                                                       (before asmcomp/spill.ml(195):7534-7806
+                                                         (seq
+                                                           (setfield_imm 0
+                                                             current_date
+                                                             (field 0
+                                                               date_join))
+                                                           (before asmcomp/spill.ml(196):7568-7806
+                                                             (let
+                                                               (*match* =
+                                                                  (after asmcomp/spill.ml(196):7594-7620
+                                                                    (apply
+                                                                    reload
+                                                                    (field 1
+                                                                    i)
+                                                                    (field 0
+                                                                    after_cases)))
+                                                                finally =a
+                                                                  (field 1
+                                                                    *match*)
+                                                                new_next =a
+                                                                  (field 0
+                                                                    *match*))
+                                                               (before asmcomp/spill.ml(197):7630-7806
+                                                                 (makeblock 0
+                                                                   (after asmcomp/spill.ml(197):7631-7789
+                                                                    (apply
+                                                                    add_reloads
+                                                                    (after asmcomp/spill.ml(197):7643-7677
+                                                                    (apply
+                                                                    (field 13
+                                                                    (global Reg!))
+                                                                    before
+                                                                    (field 2
+                                                                    i)))
+                                                                    (after asmcomp/spill.ml(198):7697-7789
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Mach!))
+                                                                    (makeblock 2
+                                                                    index
+                                                                    new_cases)
+                                                                    (field 2
+                                                                    i)
+                                                                    (field 3
+                                                                    i)
+                                                                    new_next))))
+                                                                   finally)))))))))))))))))
+                                case tag 3:
+                                 (let
+                                   (body =a (field 2 *match*)
+                                    handlers =a (field 1 *match*)
+                                    rec_flag =a (field 0 *match*))
+                                   (before asmcomp/spill.ml(202):7853-9286
+                                     (let
+                                       (new_sets =
+                                          (after asmcomp/spill.ml(202):7868-7940
+                                            (apply
+                                              (field 16
+                                                (global Stdlib__list!))
+                                              (function param
+                                                (funct-body asmcomp/spill.ml(203):7887-7931
+                                                  (let
+                                                    (nfail =a (field 0 param))
+                                                    (before asmcomp/spill.ml(203):7906-7930
+                                                      (makeblock 0 (int,*)
+                                                        nfail
+                                                        (makemutable 0
+                                                          (field 0
+                                                            (field 9
+                                                              (global Reg!)))))))))
+                                              handlers)))
+                                       (before asmcomp/spill.ml(204):7950-9286
+                                         (let
+                                           (previous_reload_at_exit =
+                                              (field 0 reload_at_exit))
+                                           (before asmcomp/spill.ml(205):8005-9286
+                                             (seq
+                                               (setfield_ptr 0 reload_at_exit
+                                                 (after asmcomp/spill.ml(205):8023-8049
+                                                   (apply
+                                                     (field 36
+                                                       (global Stdlib!))
+                                                     new_sets
+                                                     (field 0 reload_at_exit))))
+                                               (before asmcomp/spill.ml(206):8058-9286
+                                                 (let
+                                                   (*match* =
+                                                      (after asmcomp/spill.ml(206):8087-8105
+                                                        (apply reload body
+                                                          before))
+                                                    after_body =a
+                                                      (field 1 *match*)
+                                                    new_body =a
+                                                      (field 0 *match*))
+                                                   (before asmcomp/spill.ml(207):8115-9286
+                                                     (letrec
+                                                       (fixpoint
+                                                          (function param
+                                                            (funct-body asmcomp/spill.ml(207)<ghost>:8132-8772
+                                                              (before asmcomp/spill.ml(208):8145-8772
+                                                                (let
+                                                                  (at_exits =
+                                                                    (after asmcomp/spill.ml(208):8160-8213
+                                                                    (apply
+                                                                    (field 16
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    param
+                                                                    (funct-body asmcomp/spill.ml(208):8169-8204
+                                                                    (let
+                                                                    (set =a
+                                                                    (field 1
+                                                                    param)
+                                                                    nfail =a
+                                                                    (field 0
+                                                                    param))
+                                                                    (before asmcomp/spill.ml(208):8190-8203
+                                                                    (makeblock 0 (int,*)
+                                                                    nfail
+                                                                    (field 0
+                                                                    set))))))
+                                                                    new_sets)))
+                                                                  (before asmcomp/spill.ml(209):8225-8772
+                                                                    (let
+                                                                    (res =
+                                                                    (after asmcomp/spill.ml(210):8245-8391
+                                                                    (apply
+                                                                    (field 23
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    param
+                                                                    param
+                                                                    (funct-body asmcomp/spill.ml(210):8255-8373
+                                                                    (let
+                                                                    (at_exit =a
+                                                                    (field 1
+                                                                    param)
+                                                                    nfail =a
+                                                                    (field 0
+                                                                    param)
+                                                                    handler =a
+                                                                    (field 1
+                                                                    param)
+                                                                    nfail' =a
+                                                                    (field 0
+                                                                    param))
+                                                                    (before asmcomp/spill.ml(211):8312-8372
+                                                                    (seq
+                                                                    (if
+                                                                    (== nfail
+                                                                    nfail')
+                                                                    0a
+                                                                    (raise
+                                                                    (after asmcomp/spill.ml(211):8312-8334
+                                                                    (makeblock 0
+                                                                    (global Assert_failure!)
+                                                                    [0:
+                                                                    "asmcomp/spill.ml"
+                                                                    211 14]))))
+                                                                    (before asmcomp/spill.ml(212):8350-8372
+                                                                    (after asmcomp/spill.ml(212):8350-8372
+                                                                    (apply
+                                                                    reload
+                                                                    handler
+                                                                    at_exit))))))))
+                                                                    handlers
+                                                                    at_exits)))
+                                                                    (before asmcomp/spill.ml(213):8403-8772
+                                                                    (if
+                                                                    rec_flag
+                                                                    (before asmcomp/spill.ml(217):8508-8772
+                                                                    (let
+                                                                    (equal =
+                                                                    (after asmcomp/spill.ml(217):8520-8698
+                                                                    (apply
+                                                                    (field 29
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    param
+                                                                    param
+                                                                    (funct-body asmcomp/spill.ml(217):8534-8664
+                                                                    (let
+                                                                    (new_set =a
+                                                                    (field 1
+                                                                    param)
+                                                                    nfail =a
+                                                                    (field 0
+                                                                    param)
+                                                                    at_exit =a
+                                                                    (field 1
+                                                                    param)
+                                                                    nfail' =a
+                                                                    (field 0
+                                                                    param))
+                                                                    (before asmcomp/spill.ml(218):8593-8663
+                                                                    (seq
+                                                                    (if
+                                                                    (== nfail
+                                                                    nfail')
+                                                                    0a
+                                                                    (raise
+                                                                    (after asmcomp/spill.ml(218):8593-8615
+                                                                    (makeblock 0
+                                                                    (global Assert_failure!)
+                                                                    [0:
+                                                                    "asmcomp/spill.ml"
+                                                                    218 16]))))
+                                                                    (before asmcomp/spill.ml(219):8633-8663
+                                                                    (after asmcomp/spill.ml(219):8633-8663
+                                                                    (apply
+                                                                    (field 11
+                                                                    (field 9
+                                                                    (global Reg!)))
+                                                                    at_exit
+                                                                    (field 0
+                                                                    new_set)))))))))
+                                                                    at_exits
+                                                                    new_sets)))
+                                                                    (before asmcomp/spill.ml(221):8714-8772
+                                                                    (if equal
+                                                                    (before asmcomp/spill.ml(222):8740-8743
+                                                                    res)
+                                                                    (before asmcomp/spill.ml(223):8761-8772
+                                                                    (after asmcomp/spill.ml(223):8761-8772
+                                                                    (apply
+                                                                    fixpoint
+                                                                    0a)))))))
+                                                                    (before asmcomp/spill.ml(215):8465-8468
+                                                                    res))))))))))
+                                                       (before asmcomp/spill.ml(225):8788-9286
+                                                         (let
+                                                           (res =
+                                                              (after asmcomp/spill.ml(225):8798-8809
+                                                                (apply
+                                                                  fixpoint
+                                                                  0a)))
+                                                           (before asmcomp/spill.ml(226):8819-9286
+                                                             (seq
+                                                               (setfield_ptr 0
+                                                                 reload_at_exit
+                                                                 previous_reload_at_exit)
+                                                               (before asmcomp/spill.ml(227):8868-9286
+                                                                 (let
+                                                                   (union =
+                                                                    (after asmcomp/spill.ml(227):8880-8993
+                                                                    (apply
+                                                                    (field 20
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    acc param
+                                                                    (funct-body asmcomp/spill.ml(228):8905-8968
+                                                                    (let
+                                                                    (after_handler =a
+                                                                    (field 1
+                                                                    param))
+                                                                    (before asmcomp/spill.ml(228):8936-8967
+                                                                    (after asmcomp/spill.ml(228):8936-8967
+                                                                    (apply
+                                                                    (field 6
+                                                                    (field 9
+                                                                    (global Reg!)))
+                                                                    acc
+                                                                    after_handler))))))
+                                                                    after_body
+                                                                    res)))
+                                                                   (before asmcomp/spill.ml(230):9003-9286
+                                                                    (let
+                                                                    (*match* =
+                                                                    (after asmcomp/spill.ml(230):9029-9048
+                                                                    (apply
+                                                                    reload
+                                                                    (field 1
+                                                                    i) union))
+                                                                    finally =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    new_next =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/spill.ml(231):9058-9286
+                                                                    (let
+                                                                    (new_handlers =
+                                                                    (after asmcomp/spill.ml(231):9077-9175
+                                                                    (apply
+                                                                    (field 23
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    param
+                                                                    param
+                                                                    (funct-body asmcomp/spill.ml(232):9097-9152
+                                                                    (let
+                                                                    (new_handler =a
+                                                                    (field 0
+                                                                    param)
+                                                                    nfail =a
+                                                                    (field 0
+                                                                    param))
+                                                                    (before asmcomp/spill.ml(232):9133-9151
+                                                                    (makeblock 0 (int,*)
+                                                                    nfail
+                                                                    new_handler)))))
+                                                                    handlers
+                                                                    res)))
+                                                                    (before asmcomp/spill.ml(234):9185-9286
+                                                                    (makeblock 0
+                                                                    (after asmcomp/spill.ml(234):9186-9269
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Mach!))
+                                                                    (makeblock 3
+                                                                    rec_flag
+                                                                    new_handlers
+                                                                    new_body)
+                                                                    (field 2
+                                                                    i)
+                                                                    (field 3
+                                                                    i)
+                                                                    new_next))
+                                                                    finally)))))))))))))))))))))))
+                                case tag 4:
+                                 (let (nfail =a (field 0 *match*))
+                                   (before asmcomp/spill.ml(238):9312-9415
+                                     (let
+                                       (set =
+                                          (after asmcomp/spill.ml(238):9322-9347
+                                            (apply find_reload_at_exit nfail)))
+                                       (before asmcomp/spill.ml(239):9357-9415
+                                         (seq
+                                           (setfield_ptr 0 set
+                                             (after asmcomp/spill.ml(239):9364-9389
+                                               (apply
+                                                 (field 6
+                                                   (field 9 (global Reg!)))
+                                                 (field 0 set) before)))
+                                           (before asmcomp/spill.ml(240):9397-9415
+                                             (makeblock 0 i
+                                               (field 0
+                                                 (field 9 (global Reg!))))))))))
+                                case tag 5:
+                                 (let
+                                   (handler =a (field 1 *match*)
+                                    body =a (field 0 *match*))
+                                   (before asmcomp/spill.ml(242):9453-10021
+                                     (let
+                                       (*match* =
+                                          (after asmcomp/spill.ml(242):9482-9500
+                                            (apply reload body before))
+                                        after_body =a (field 1 *match*)
+                                        new_body =a (field 0 *match*))
+                                       (before asmcomp/spill.ml(245):9625-10021
+                                         (let
+                                           (before_handler =
+                                              (after asmcomp/spill.ml(246):9654-9756
+                                                (apply
+                                                  (field 5
+                                                    (field 9 (global Reg!)))
+                                                  (field 13 (global Proc!))
+                                                  (after asmcomp/spill.ml(247):9712-9756
+                                                    (apply
+                                                      (field 11
+                                                        (global Reg!))
+                                                      (field 5 handler)
+                                                      (field 2 handler))))))
+                                           (before asmcomp/spill.ml(248):9766-10021
+                                             (let
+                                               (*match* =
+                                                  (after asmcomp/spill.ml(248):9801-9830
+                                                    (apply reload handler
+                                                      before_handler))
+                                                after_handler =a
+                                                  (field 1 *match*)
+                                                new_handler =a
+                                                  (field 0 *match*))
+                                               (before asmcomp/spill.ml(249):9840-10021
+                                                 (let
+                                                   (*match* =
+                                                      (after asmcomp/spill.ml(250):9874-9928
+                                                        (apply reload
+                                                          (field 1 i)
+                                                          (after asmcomp/spill.ml(250):9888-9928
+                                                            (apply
+                                                              (field 6
+                                                                (field 9
+                                                                  (global Reg!)))
+                                                              after_body
+                                                              after_handler))))
+                                                    finally =a
+                                                      (field 1 *match*)
+                                                    new_next =a
+                                                      (field 0 *match*))
+                                                   (before asmcomp/spill.ml(251):9938-10021
+                                                     (makeblock 0
+                                                       (after asmcomp/spill.ml(251):9939-10004
+                                                         (apply
+                                                           (field 2
+                                                             (global Mach!))
+                                                           (makeblock 5
+                                                             new_body
+                                                             new_handler)
+                                                           (field 2 i)
+                                                           (field 3 i)
+                                                           new_next))
+                                                       finally)))))))))))
+                                case tag 6:
+                                 (before asmcomp/spill.ml(254):10044-10109
+                                   (makeblock 0
+                                     (after asmcomp/spill.ml(254):10045-10093
+                                       (apply add_reloads
+                                         (after asmcomp/spill.ml(254):10057-10091
+                                           (apply (field 13 (global Reg!))
+                                             before (field 2 i)))
+                                         i))
+                                     (field 0 (field 9 (global Reg!))))))
+                              with (42)
+                               (before asmcomp/spill.ml(143):5276-5348
+                                 (makeblock 0
+                                   (after asmcomp/spill.ml(143):5277-5325
+                                     (apply add_reloads
+                                       (after asmcomp/spill.ml(143):5289-5323
+                                         (apply (field 13 (global Reg!))
+                                           before (field 2 i)))
+                                       i))
+                                   (field 0 (field 9 (global Reg!)))))))))))))))))
+      (let
+        (spill_at_exit = (makemutable 0 0a)
+         find_spill_at_exit =
+           (function k[int]
+             (funct-body asmcomp/spill.ml(275)<ghost>:10924-11078
+               (before asmcomp/spill.ml(276):10930-11078
+                 (try
+                   (let
+                     (*match* =
+                        (after asmcomp/spill.ml(277):10954-10981
+                          (apply (field 38 (global Stdlib__list!)) k
+                            (field 0 spill_at_exit)))
+                      set =a (field 1 *match*)
+                      used =a (field 0 *match*))
+                     (before asmcomp/spill.ml(278):10989-11010
+                       (seq (setfield_imm 0 used 1a)
+                         (before asmcomp/spill.ml(279):11007-11010 set))))
+                  with exn
+                   (if (== exn (field 7 (global Stdlib!)))
+                     (before asmcomp/spill.ml(281):11035-11078
+                       (after asmcomp/spill.ml(281):11035-11078
+                         (apply (field 0 (global Misc!))
+                           "Spill.find_spill_at_exit")))
+                     (reraise exn))))))
+         spill_at_raise = (makemutable 0 (field 0 (field 9 (global Reg!))))
+         inside_loop = (makemutable 0 0a)
+         inside_arm = (makemutable 0 0a)
+         inside_catch = (makemutable 0 0a)
+         add_spills =
+           (function regset i
+             (funct-body asmcomp/spill.ml(288)<ghost>:11219-11322
+               (before asmcomp/spill.ml(289):11232-11322
+                 (after asmcomp/spill.ml(289):11232-11322
+                   (apply (field 15 (field 9 (global Reg!)))
+                     (function r i
+                       (funct-body asmcomp/spill.ml(290):11249-11309
+                         (before asmcomp/spill.ml(290):11261-11308
+                           (after asmcomp/spill.ml(290):11261-11308
+                             (apply (field 2 (global Mach!)) [0: 1a]
+                               (makearray[addr] r)
+                               (makearray[addr]
+                                 (after asmcomp/spill.ml(290):11293-11304
+                                   (apply spill_reg r)))
+                               i)))))
+                     regset i))))))
+        (letrec
+          (spill
+             (function i finally
+               (funct-body asmcomp/spill.ml(293)<ghost>:11338-16114
+                 (before asmcomp/spill.ml(294):11352-16114
+                   (let (*match* = (field 0 i))
+                     (catch
+                       (switch* *match*
+                        case int 0:
+                         (before asmcomp/spill.ml(296):11388-11400
+                           (makeblock 0 i finally))
+                        case int 1: (exit 87)
+                        case tag 0:
+                         (let (*match* =a (field 0 *match*))
+                           (catch
+                             (switch *match*
+                              case int 2:
+                               (before asmcomp/spill.ml(300):11512-11700
+                                 (let
+                                   (*match* =
+                                      (after asmcomp/spill.ml(300):11536-11556
+                                        (apply spill (field 1 i) finally))
+                                    after =a (field 1 *match*)
+                                    new_next =a (field 0 *match*))
+                                   (before asmcomp/spill.ml(301):11566-11700
+                                     (let
+                                       (before1 =
+                                          (after asmcomp/spill.ml(301):11580-11610
+                                            (apply (field 12 (global Reg!))
+                                              after (field 3 i))))
+                                       (before asmcomp/spill.ml(302):11620-11700
+                                         (makeblock 0
+                                           (after asmcomp/spill.ml(302):11621-11659
+                                             (apply (field 2 (global Mach!))
+                                               (field 0 i) (field 2 i)
+                                               (field 3 i) new_next))
+                                           (after asmcomp/spill.ml(303):11668-11699
+                                             (apply (field 11 (global Reg!))
+                                               before1 (field 3 i)))))))))
+                              case tag 5: (exit 87)
+                              case tag 6: (exit 87)
+                              default: (exit 88))
+                            with (88)
+                             (before asmcomp/spill.ml(305):11720-12251
+                               (let
+                                 (*match* =
+                                    (after asmcomp/spill.ml(305):11744-11764
+                                      (apply spill (field 1 i) finally))
+                                  after =a (field 1 *match*)
+                                  new_next =a (field 0 *match*))
+                                 (before asmcomp/spill.ml(306):11774-12251
+                                   (let
+                                     (before1 =
+                                        (after asmcomp/spill.ml(306):11788-11818
+                                          (apply (field 12 (global Reg!))
+                                            after (field 3 i))))
+                                     (before asmcomp/spill.ml(307):11828-12251
+                                       (let
+                                         (before =
+                                            (let (*match* = (field 0 i))
+                                              (catch
+                                                (catch
+                                                  (switch *match*
+                                                   case tag 0:
+                                                    (let
+                                                      (*match* =a
+                                                         (field 0 *match*))
+                                                      (switch *match*
+                                                       case tag 3: (exit 52)
+                                                       case tag 4: (exit 52)
+                                                       case tag 7: (exit 52)
+                                                       case tag 11: (exit 52)
+                                                       case tag 12:
+                                                        (let
+                                                          (*match* =a
+                                                             (field 0
+                                                               *match*))
+                                                          (switch *match*
+                                                           case tag 1:
+                                                            (exit 52)
+                                                           default: (exit 53)))
+                                                       case tag 13:
+                                                        (let
+                                                          (*match* =a
+                                                             (field 0
+                                                               *match*))
+                                                          (switch *match*
+                                                           case tag 1:
+                                                            (exit 52)
+                                                           default: (exit 53)))
+                                                       default: (exit 53)))
+                                                   default: (exit 53))
+                                                 with (53)
+                                                  (before asmcomp/spill.ml(313):12102-12109
+                                                    before1))
+                                               with (52)
+                                                (before asmcomp/spill.ml(311):12037-12074
+                                                  (after asmcomp/spill.ml(311):12037-12074
+                                                    (apply
+                                                      (field 6
+                                                        (field 9
+                                                          (global Reg!)))
+                                                      before1
+                                                      (field 0
+                                                        spill_at_raise)))))))
+                                         (before asmcomp/spill.ml(314):12119-12251
+                                           (makeblock 0
+                                             (after asmcomp/spill.ml(314):12120-12235
+                                               (apply
+                                                 (field 3 (global Mach!))
+                                                 (field 0 i) (field 2 i)
+                                                 (field 3 i) (field 4 i)
+                                                 (after asmcomp/spill.ml(315):12180-12235
+                                                   (apply add_spills
+                                                     (after asmcomp/spill.ml(315):12192-12225
+                                                       (apply
+                                                         (field 13
+                                                           (global Reg!))
+                                                         after (field 3 i)))
+                                                     new_next))))
+                                             before))))))))))
+                        case tag 1:
+                         (let
+                           (ifnot =a (field 2 *match*)
+                            ifso =a (field 1 *match*)
+                            test =a (field 0 *match*))
+                           (before asmcomp/spill.ml(318):12296-13361
+                             (let
+                               (*match* =
+                                  (after asmcomp/spill.ml(318):12322-12342
+                                    (apply spill (field 1 i) finally))
+                                at_join =a (field 1 *match*)
+                                new_next =a (field 0 *match*))
+                               (before asmcomp/spill.ml(319):12352-13361
+                                 (let
+                                   (*match* =
+                                      (after asmcomp/spill.ml(319):12382-12400
+                                        (apply spill ifso at_join))
+                                    before_ifso =a (field 1 *match*)
+                                    new_ifso =a (field 0 *match*))
+                                   (before asmcomp/spill.ml(320):12410-13361
+                                     (let
+                                       (*match* =
+                                          (after asmcomp/spill.ml(320):12442-12461
+                                            (apply spill ifnot at_join))
+                                        before_ifnot =a (field 1 *match*)
+                                        new_ifnot =a (field 0 *match*))
+                                       (before asmcomp/spill.ml(321):12471-13361
+                                         (if
+                                           (|| (field 0 inside_loop)
+                                             (|| (field 0 inside_arm)
+                                               (field 0 inside_catch)))
+                                           (before asmcomp/spill.ml(324):12546-12690
+                                             (makeblock 0
+                                               (after asmcomp/spill.ml(324):12547-12640
+                                                 (apply
+                                                   (field 2 (global Mach!))
+                                                   (makeblock 1 test new_ifso
+                                                     new_ifnot)
+                                                   (field 2 i) (field 3 i)
+                                                   new_next))
+                                               (after asmcomp/spill.ml(326):12651-12689
+                                                 (apply
+                                                   (field 6
+                                                     (field 9 (global Reg!)))
+                                                   before_ifso before_ifnot))))
+                                           (before asmcomp/spill.ml(327):12702-13361
+                                             (let
+                                               (destroyed =
+                                                  (after asmcomp/spill.ml(328):12732-12762
+                                                    (apply
+                                                      (field 40
+                                                        (global Stdlib__list!))
+                                                      i
+                                                      (field 0
+                                                        destroyed_at_fork))))
+                                               (before asmcomp/spill.ml(329):12774-13351
+                                                 (let
+                                                   (spill_ifso_branch =
+                                                      (after asmcomp/spill.ml(330):12808-12870
+                                                        (apply
+                                                          (field 9
+                                                            (field 9
+                                                              (global Reg!)))
+                                                          (after asmcomp/spill.ml(330):12821-12860
+                                                            (apply
+                                                              (field 9
+                                                                (field 9
+                                                                  (global Reg!)))
+                                                              before_ifso
+                                                              before_ifnot))
+                                                          destroyed))
+                                                    spill_ifnot_branch =
+                                                      (after asmcomp/spill.ml(332):12914-12976
+                                                        (apply
+                                                          (field 9
+                                                            (field 9
+                                                              (global Reg!)))
+                                                          (after asmcomp/spill.ml(332):12927-12966
+                                                            (apply
+                                                              (field 9
+                                                                (field 9
+                                                                  (global Reg!)))
+                                                              before_ifnot
+                                                              before_ifso))
+                                                          destroyed)))
+                                                   (before asmcomp/spill.ml(333):12988-13351
+                                                     (makeblock 0
+                                                       (after asmcomp/spill.ml(333):12989-13175
+                                                         (apply
+                                                           (field 2
+                                                             (global Mach!))
+                                                           (makeblock 1 test
+                                                             (after asmcomp/spill.ml(334):13031-13068
+                                                               (apply
+                                                                 add_spills
+                                                                 spill_ifso_branch
+                                                                 new_ifso))
+                                                             (after asmcomp/spill.ml(335):13101-13140
+                                                               (apply
+                                                                 add_spills
+                                                                 spill_ifnot_branch
+                                                                 new_ifnot)))
+                                                           (field 2 i)
+                                                           (field 3 i)
+                                                           new_next))
+                                                       (after asmcomp/spill.ml(337):13186-13350
+                                                         (apply
+                                                           (field 9
+                                                             (field 9
+                                                               (global Reg!)))
+                                                           (after asmcomp/spill.ml(337):13199-13308
+                                                             (apply
+                                                               (field 9
+                                                                 (field 9
+                                                                   (global Reg!)))
+                                                               (after asmcomp/spill.ml(337):13213-13253
+                                                                 (apply
+                                                                   (field 6
+                                                                    (field 9
+                                                                    (global Reg!)))
+                                                                   before_ifso
+                                                                   before_ifnot))
+                                                               spill_ifso_branch))
+                                                           spill_ifnot_branch)))))))))))))))))
+                        case tag 2:
+                         (let
+                           (cases =a (field 1 *match*)
+                            index =a (field 0 *match*))
+                           (before asmcomp/spill.ml(342):13397-13887
+                             (let
+                               (*match* =
+                                  (after asmcomp/spill.ml(342):13423-13443
+                                    (apply spill (field 1 i) finally))
+                                at_join =a (field 1 *match*)
+                                new_next =a (field 0 *match*))
+                               (before asmcomp/spill.ml(343):13453-13887
+                                 (let
+                                   (saved_inside_arm = (field 0 inside_arm))
+                                   (before asmcomp/spill.ml(344):13497-13887
+                                     (seq (setfield_imm 0 inside_arm 1a)
+                                       (before asmcomp/spill.ml(345):13524-13887
+                                         (let
+                                           (before =
+                                              (makemutable 0
+                                                (field 0
+                                                  (field 9 (global Reg!)))))
+                                           (before asmcomp/spill.ml(346):13564-13887
+                                             (let
+                                               (new_cases =
+                                                  (after asmcomp/spill.ml(347):13588-13761
+                                                    (apply
+                                                      (field 14
+                                                        (global Stdlib__array!))
+                                                      (function c
+                                                        (funct-body asmcomp/spill.ml(348):13608-13745
+                                                          (before asmcomp/spill.ml(349):13630-13744
+                                                            (let
+                                                              (*match* =
+                                                                 (after asmcomp/spill.ml(349):13654-13669
+                                                                   (apply
+                                                                    spill c
+                                                                    at_join))
+                                                               before_c =a
+                                                                 (field 1
+                                                                   *match*)
+                                                               new_c =a
+                                                                 (field 0
+                                                                   *match*))
+                                                              (before asmcomp/spill.ml(350):13685-13744
+                                                                (seq
+                                                                  (setfield_ptr 0
+                                                                    before
+                                                                    (after asmcomp/spill.ml(350):13695-13725
+                                                                    (apply
+                                                                    (field 6
+                                                                    (field 9
+                                                                    (global Reg!)))
+                                                                    (field 0
+                                                                    before)
+                                                                    before_c)))
+                                                                  (before asmcomp/spill.ml(351):13739-13744
+                                                                    new_c)))))))
+                                                      cases)))
+                                               (before asmcomp/spill.ml(353):13771-13887
+                                                 (seq
+                                                   (setfield_imm 0 inside_arm
+                                                     saved_inside_arm)
+                                                   (before asmcomp/spill.ml(354):13810-13887
+                                                     (makeblock 0
+                                                       (after asmcomp/spill.ml(354):13811-13870
+                                                         (apply
+                                                           (field 2
+                                                             (global Mach!))
+                                                           (makeblock 2 index
+                                                             new_cases)
+                                                           (field 2 i)
+                                                           (field 3 i)
+                                                           new_next))
+                                                       (field 0 before))))))))))))))))
+                        case tag 3:
+                         (let
+                           (body =a (field 2 *match*)
+                            handlers =a (field 1 *match*)
+                            rec_flag =a (field 0 *match*))
+                           (before asmcomp/spill.ml(357):13934-15572
+                             (let
+                               (*match* =
+                                  (after asmcomp/spill.ml(357):13960-13980
+                                    (apply spill (field 1 i) finally))
+                                at_join =a (field 1 *match*)
+                                new_next =a (field 0 *match*))
+                               (before asmcomp/spill.ml(358):13990-15572
+                                 (let
+                                   (saved_inside_catch =
+                                      (field 0 inside_catch))
+                                   (before asmcomp/spill.ml(359):14038-15572
+                                     (seq (setfield_imm 0 inside_catch 1a)
+                                       (before asmcomp/spill.ml(360):14067-15572
+                                         (let
+                                           (previous_spill_at_exit =
+                                              (field 0 spill_at_exit))
+                                           (before asmcomp/spill.ml(361):14120-15572
+                                             (let
+                                               (spill_at_exit_add =
+                                                  (function at_exits
+                                                    (funct-body asmcomp/spill.ml(361)<ghost>:14142-14255
+                                                      (before asmcomp/spill.ml(361):14153-14255
+                                                        (after asmcomp/spill.ml(361):14153-14255
+                                                          (apply
+                                                            (field 23
+                                                              (global Stdlib__list!))
+                                                            (function param
+                                                              at_exit
+                                                              (funct-body asmcomp/spill.ml(362):14173-14227
+                                                                (let
+                                                                  (nfail =a
+                                                                    (field 0
+                                                                    param))
+                                                                  (before asmcomp/spill.ml(362):14199-14226
+                                                                    (makeblock 0 (int,*)
+                                                                    nfail
+                                                                    (makeblock 0
+                                                                    (makemutable 0
+                                                                    0a)
+                                                                    at_exit))))))
+                                                            handlers
+                                                            at_exits))))))
+                                               (before asmcomp/spill.ml(365):14271-15572
+                                                 (letrec
+                                                   (fixpoint
+                                                      (function at_exits
+                                                        (funct-body asmcomp/spill.ml(365)<ghost>:14288-14992
+                                                          (before asmcomp/spill.ml(366):14307-14992
+                                                            (let
+                                                              (spill_at_exit_add =
+                                                                 (after asmcomp/spill.ml(366):14331-14357
+                                                                   (apply
+                                                                    spill_at_exit_add
+                                                                    at_exits)))
+                                                              (before asmcomp/spill.ml(367):14369-14992
+                                                                (seq
+                                                                  (setfield_ptr 0
+                                                                    spill_at_exit
+                                                                    (after asmcomp/spill.ml(367):14386-14420
+                                                                    (apply
+                                                                    (field 36
+                                                                    (global Stdlib!))
+                                                                    spill_at_exit_add
+                                                                    (field 0
+                                                                    spill_at_exit))))
+                                                                  (before asmcomp/spill.ml(368):14430-14992
+                                                                    (let
+                                                                    (res =
+                                                                    (after asmcomp/spill.ml(369):14450-14511
+                                                                    (apply
+                                                                    (field 16
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    param
+                                                                    (funct-body asmcomp/spill.ml(369):14459-14502
+                                                                    (let
+                                                                    (handler =a
+                                                                    (field 1
+                                                                    param))
+                                                                    (before asmcomp/spill.ml(369):14480-14501
+                                                                    (after asmcomp/spill.ml(369):14480-14501
+                                                                    (apply
+                                                                    spill
+                                                                    handler
+                                                                    at_join))))))
+                                                                    handlers)))
+                                                                    (before asmcomp/spill.ml(371):14531-14992
+                                                                    (seq
+                                                                    (setfield_ptr 0
+                                                                    spill_at_exit
+                                                                    previous_spill_at_exit)
+                                                                    (before asmcomp/spill.ml(372):14580-14992
+                                                                    (if
+                                                                    rec_flag
+                                                                    (before asmcomp/spill.ml(376):14685-14992
+                                                                    (let
+                                                                    (equal =
+                                                                    (after asmcomp/spill.ml(377):14711-14902
+                                                                    (apply
+                                                                    (field 29
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    param
+                                                                    param
+                                                                    (funct-body asmcomp/spill.ml(378):14741-14864
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 1
+                                                                    param)
+                                                                    at_exit =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    used =a
+                                                                    (field 0
+                                                                    *match*)
+                                                                    new_at_exit =a
+                                                                    (field 1
+                                                                    param))
+                                                                    (before asmcomp/spill.ml(379):14817-14863
+                                                                    (||
+                                                                    (after asmcomp/spill.ml(379):14817-14850
+                                                                    (apply
+                                                                    (field 11
+                                                                    (field 9
+                                                                    (global Reg!)))
+                                                                    at_exit
+                                                                    new_at_exit))
+                                                                    (not
+                                                                    (field 0
+                                                                    used)))))))
+                                                                    res
+                                                                    spill_at_exit_add)))
+                                                                    (before asmcomp/spill.ml(381):14918-14992
+                                                                    (if equal
+                                                                    (before asmcomp/spill.ml(382):14944-14947
+                                                                    res)
+                                                                    (before asmcomp/spill.ml(383):14965-14992
+                                                                    (after asmcomp/spill.ml(383):14965-14992
+                                                                    (apply
+                                                                    fixpoint
+                                                                    (after asmcomp/spill.ml(383):14974-14992
+                                                                    (apply
+                                                                    (field 16
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    prim stub
+                                                                    (field 1
+                                                                    prim))
+                                                                    res)))))))))
+                                                                    (before asmcomp/spill.ml(374):14642-14645
+                                                                    res))))))))))))))
+                                                   (before asmcomp/spill.ml(385):15008-15572
+                                                     (let
+                                                       (res =
+                                                          (after asmcomp/spill.ml(385):15018-15071
+                                                            (apply fixpoint
+                                                              (after asmcomp/spill.ml(385):15027-15071
+                                                                (apply
+                                                                  (field 16
+                                                                    (global Stdlib__list!))
+                                                                  (function
+                                                                    param
+                                                                    (funct-body asmcomp/spill.ml(385):15037-15061
+                                                                    (before asmcomp/spill.ml(385):15047-15060
+                                                                    (field 0
+                                                                    (field 9
+                                                                    (global Reg!))))))
+                                                                  handlers)))))
+                                                       (before asmcomp/spill.ml(386):15081-15572
+                                                         (seq
+                                                           (setfield_imm 0
+                                                             inside_catch
+                                                             saved_inside_catch)
+                                                           (before asmcomp/spill.ml(387):15124-15572
+                                                             (let
+                                                               (spill_at_exit_add =
+                                                                  (after asmcomp/spill.ml(387):15148-15184
+                                                                    (apply
+                                                                    spill_at_exit_add
+                                                                    (after asmcomp/spill.ml(387):15166-15184
+                                                                    (apply
+                                                                    (field 16
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    prim stub
+                                                                    (field 1
+                                                                    prim))
+                                                                    res)))))
+                                                               (before asmcomp/spill.ml(388):15194-15572
+                                                                 (seq
+                                                                   (setfield_ptr 0
+                                                                    spill_at_exit
+                                                                    (after asmcomp/spill.ml(388):15211-15245
+                                                                    (apply
+                                                                    (field 36
+                                                                    (global Stdlib!))
+                                                                    spill_at_exit_add
+                                                                    (field 0
+                                                                    spill_at_exit))))
+                                                                   (before asmcomp/spill.ml(389):15253-15572
+                                                                    (let
+                                                                    (*match* =
+                                                                    (after asmcomp/spill.ml(389):15278-15296
+                                                                    (apply
+                                                                    spill
+                                                                    body
+                                                                    at_join))
+                                                                    before =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    new_body =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/spill.ml(390):15306-15572
+                                                                    (seq
+                                                                    (setfield_ptr 0
+                                                                    spill_at_exit
+                                                                    previous_spill_at_exit)
+                                                                    (before asmcomp/spill.ml(391):15353-15572
+                                                                    (let
+                                                                    (new_handlers =
+                                                                    (after asmcomp/spill.ml(391):15372-15462
+                                                                    (apply
+                                                                    (field 23
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    param
+                                                                    param
+                                                                    (funct-body asmcomp/spill.ml(392):15392-15439
+                                                                    (let
+                                                                    (handler =a
+                                                                    (field 0
+                                                                    param)
+                                                                    nfail =a
+                                                                    (field 0
+                                                                    param))
+                                                                    (before asmcomp/spill.ml(392):15424-15438
+                                                                    (makeblock 0 (int,*)
+                                                                    nfail
+                                                                    handler)))))
+                                                                    handlers
+                                                                    res)))
+                                                                    (before asmcomp/spill.ml(394):15472-15572
+                                                                    (makeblock 0
+                                                                    (after asmcomp/spill.ml(394):15473-15556
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Mach!))
+                                                                    (makeblock 3
+                                                                    rec_flag
+                                                                    new_handlers
+                                                                    new_body)
+                                                                    (field 2
+                                                                    i)
+                                                                    (field 3
+                                                                    i)
+                                                                    new_next))
+                                                                    before)))))))))))))))))))))))))))))
+                        case tag 4:
+                         (let (nfail =a (field 0 *match*))
+                           (before asmcomp/spill.ml(398):15598-15627
+                             (makeblock 0 i
+                               (after asmcomp/spill.ml(398):15602-15626
+                                 (apply find_spill_at_exit nfail)))))
+                        case tag 5:
+                         (let
+                           (handler =a (field 1 *match*)
+                            body =a (field 0 *match*))
+                           (before asmcomp/spill.ml(400):15665-16071
+                             (let
+                               (*match* =
+                                  (after asmcomp/spill.ml(400):15691-15711
+                                    (apply spill (field 1 i) finally))
+                                at_join =a (field 1 *match*)
+                                new_next =a (field 0 *match*))
+                               (before asmcomp/spill.ml(401):15721-16071
+                                 (let
+                                   (*match* =
+                                      (after asmcomp/spill.ml(401):15757-15778
+                                        (apply spill handler at_join))
+                                    before_handler =a (field 1 *match*)
+                                    new_handler =a (field 0 *match*))
+                                   (before asmcomp/spill.ml(402):15788-16071
+                                     (let
+                                       (saved_spill_at_raise =
+                                          (field 0 spill_at_raise))
+                                       (before asmcomp/spill.ml(403):15840-16071
+                                         (seq
+                                           (setfield_ptr 0 spill_at_raise
+                                             before_handler)
+                                           (before asmcomp/spill.ml(404):15880-16071
+                                             (let
+                                               (*match* =
+                                                  (after asmcomp/spill.ml(404):15910-15928
+                                                    (apply spill body
+                                                      at_join))
+                                                before_body =a
+                                                  (field 1 *match*)
+                                                new_body =a (field 0 *match*))
+                                               (before asmcomp/spill.ml(405):15938-16071
+                                                 (seq
+                                                   (setfield_ptr 0
+                                                     spill_at_raise
+                                                     saved_spill_at_raise)
+                                                   (before asmcomp/spill.ml(406):15984-16071
+                                                     (makeblock 0
+                                                       (after asmcomp/spill.ml(406):15985-16050
+                                                         (apply
+                                                           (field 2
+                                                             (global Mach!))
+                                                           (makeblock 5
+                                                             new_body
+                                                             new_handler)
+                                                           (field 2 i)
+                                                           (field 3 i)
+                                                           new_next))
+                                                       before_body)))))))))))))))
+                        case tag 6:
+                         (before asmcomp/spill.ml(409):16094-16114
+                           (makeblock 0 i (field 0 spill_at_raise))))
+                      with (87)
+                       (before asmcomp/spill.ml(298):11468-11486
+                         (makeblock 0 i (field 0 (field 9 (global Reg!)))))))))))
+          (let
+            (reset =
+               (function param
+                 (funct-body asmcomp/spill.ml(413)<ghost>:16145-16255
+                   (before asmcomp/spill.ml(414):16152-16255
+                     (seq
+                       (setfield_ptr 0 spill_env
+                         (field 0 (field 10 (global Reg!))))
+                       (before asmcomp/spill.ml(415):16182-16255
+                         (seq
+                           (setfield_ptr 0 use_date
+                             (field 0 (field 10 (global Reg!))))
+                           (before asmcomp/spill.ml(416):16211-16255
+                             (seq (setfield_imm 0 current_date 0)
+                               (before asmcomp/spill.ml(417):16232-16255
+                                 (setfield_ptr 0 destroyed_at_fork 0a))))))))))
+             fundecl =
+               (function f
+                 (funct-body asmcomp/spill.ml(419)<ghost>:16269-16786
+                   (before asmcomp/spill.ml(420):16275-16786
+                     (seq
+                       (after asmcomp/spill.ml(420):16275-16283
+                         (apply reset 0a))
+                       (before asmcomp/spill.ml(422):16288-16786
+                         (let
+                           (*match* =
+                              (after asmcomp/spill.ml(422):16305-16336
+                                (apply reload (field 2 f)
+                                  (field 0 (field 9 (global Reg!)))))
+                            body1 =a (field 0 *match*))
+                           (before asmcomp/spill.ml(423):16342-16786
+                             (let
+                               (*match* =
+                                  (after asmcomp/spill.ml(423):16374-16399
+                                    (apply spill body1
+                                      (field 0 (field 9 (global Reg!)))))
+                                tospill_at_entry =a (field 1 *match*)
+                                body2 =a (field 0 *match*))
+                               (before asmcomp/spill.ml(424):16405-16786
+                                 (let
+                                   (new_body =
+                                      (after asmcomp/spill.ml(425):16424-16490
+                                        (apply add_spills
+                                          (after asmcomp/spill.ml(425):16435-16484
+                                            (apply (field 13 (global Reg!))
+                                              tospill_at_entry (field 1 f)))
+                                          body2)))
+                                   (before asmcomp/spill.ml(426):16496-16786
+                                     (seq
+                                       (setfield_ptr 0 spill_env
+                                         (field 0 (field 10 (global Reg!))))
+                                       (before asmcomp/spill.ml(427):16526-16786
+                                         (seq
+                                           (setfield_ptr 0 use_date
+                                             (field 0
+                                               (field 10 (global Reg!))))
+                                           (before asmcomp/spill.ml(428):16555-16786
+                                             (seq
+                                               (setfield_ptr 0
+                                                 destroyed_at_fork 0a)
+                                               (before asmcomp/spill.ml(429):16582-16786
+                                                 (makeblock 0 (field 0 f)
+                                                   (field 1 f) new_body
+                                                   (field 3 f) (field 4 f)
+                                                   (field 5 f))))))))))))))))))))
+            (pseudo _none_(0)<ghost>:-1--1 (makeblock 0 fundecl reset))))))))

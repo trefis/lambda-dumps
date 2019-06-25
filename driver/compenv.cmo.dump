@@ -1,0 +1,2068 @@
+(setglobal Compenv!
+  (let
+    (output_prefix =
+       (function name
+         (funct-body driver/compenv.ml(18)<ghost>:1111-1288
+           (before driver/compenv.ml(19):1120-1288
+             (let
+               (oname =
+                  (let (*match* = (field 0 (field 11 (global Clflags!))))
+                    (if *match*
+                      (let (n =a (field 0 *match*))
+                        (before driver/compenv.ml(22):1195-1251
+                          (if (field 0 (field 10 (global Clflags!)))
+                            (before driver/compenv.ml(22):1217-1241
+                              (seq
+                                (setfield_ptr 0 (field 11 (global Clflags!))
+                                  0a)
+                                (before driver/compenv.ml(22):1239-1240 n)))
+                            (before driver/compenv.ml(22):1247-1251 name))))
+                      (before driver/compenv.ml(21):1174-1178 name))))
+               (before driver/compenv.ml(23):1257-1288
+                 (after driver/compenv.ml(23):1257-1288
+                   (apply (field 10 (global Stdlib__filename!)) oname)))))))
+     print_version_and_library =
+       (function compiler
+         (funct-body driver/compenv.ml(25)<ghost>:1320-1542
+           (before driver/compenv.ml(26):1333-1542
+             (seq
+               (after driver/compenv.ml(26):1333-1380
+                 (apply (field 1 (global Stdlib__printf!))
+                   [0:
+                    [11: "The OCaml " [2: 0a [11: ", version " 0a]]]
+                    "The OCaml %s, version "]
+                   compiler))
+               (before driver/compenv.ml(27):1384-1542
+                 (seq
+                   (after driver/compenv.ml(27):1384-1411
+                     (apply (field 41 (global Stdlib!))
+                       (field 0 (global Config!))))
+                   (before driver/compenv.ml(27):1413-1542
+                     (seq
+                       (after driver/compenv.ml(27):1413-1428
+                         (apply (field 46 (global Stdlib!)) 0a))
+                       (before driver/compenv.ml(28):1432-1542
+                         (seq
+                           (after driver/compenv.ml(28):1432-1475
+                             (apply (field 41 (global Stdlib!))
+                               "Standard library directory: "))
+                           (before driver/compenv.ml(29):1479-1542
+                             (seq
+                               (after driver/compenv.ml(29):1479-1515
+                                 (apply (field 41 (global Stdlib!))
+                                   (field 1 (global Config!))))
+                               (before driver/compenv.ml(29):1517-1542
+                                 (seq
+                                   (after driver/compenv.ml(29):1517-1532
+                                     (apply (field 46 (global Stdlib!)) 0a))
+                                   (before driver/compenv.ml(30):1536-1542
+                                     (after driver/compenv.ml(30):1536-1542
+                                       (apply (field 98 (global Stdlib!)) 0)))))))))))))))))
+     print_version_string =
+       (function param
+         (funct-body driver/compenv.ml(32)<ghost>:1569-1628
+           (before driver/compenv.ml(33):1576-1628
+             (seq
+               (after driver/compenv.ml(33):1576-1603
+                 (apply (field 41 (global Stdlib!))
+                   (field 0 (global Config!))))
+               (before driver/compenv.ml(33):1605-1628
+                 (seq
+                   (after driver/compenv.ml(33):1605-1620
+                     (apply (field 46 (global Stdlib!)) 0a))
+                   (before driver/compenv.ml(33):1622-1628
+                     (after driver/compenv.ml(33):1622-1628
+                       (apply (field 98 (global Stdlib!)) 0)))))))))
+     print_standard_library =
+       (function param
+         (funct-body driver/compenv.ml(35)<ghost>:1657-1725
+           (before driver/compenv.ml(36):1664-1725
+             (seq
+               (after driver/compenv.ml(36):1664-1700
+                 (apply (field 41 (global Stdlib!))
+                   (field 1 (global Config!))))
+               (before driver/compenv.ml(36):1702-1725
+                 (seq
+                   (after driver/compenv.ml(36):1702-1717
+                     (apply (field 46 (global Stdlib!)) 0a))
+                   (before driver/compenv.ml(36):1719-1725
+                     (after driver/compenv.ml(36):1719-1725
+                       (apply (field 98 (global Stdlib!)) 0)))))))))
+     fatal =
+       (function err
+         (funct-body driver/compenv.ml(38)<ghost>:1737-1772
+           (before driver/compenv.ml(39):1745-1772
+             (seq
+               (after driver/compenv.ml(39):1745-1762
+                 (apply (field 52 (global Stdlib!)) err))
+               (before driver/compenv.ml(40):1766-1772
+                 (after driver/compenv.ml(40):1766-1772
+                   (apply (field 98 (global Stdlib!)) 2)))))))
+     extract_output =
+       (function param
+         (funct-body driver/compenv.ml(42):1795-1905
+           (if param
+             (let (s =a (field 0 param))
+               (before driver/compenv.ml(43):1818-1819 s))
+             (before driver/compenv.ml(45):1838-1905
+               (after driver/compenv.ml(45):1838-1905
+                 (apply fatal
+                   "Please specify the name of the output file, using option -o"))))))
+     default_output =
+       (function param
+         (funct-body driver/compenv.ml(47):1928-1995
+           (if param
+             (let (s =a (field 0 param))
+               (before driver/compenv.ml(48):1951-1952 s))
+             (before driver/compenv.ml(49):1965-1995
+               (field 45 (global Config!))))))
+     first_include_dirs = (makemutable 0 0a)
+     last_include_dirs = (makemutable 0 0a)
+     first_ccopts = (makemutable 0 0a)
+     last_ccopts = (makemutable 0 0a)
+     first_ppx = (makemutable 0 0a)
+     last_ppx = (makemutable 0 0a)
+     first_objfiles = (makemutable 0 0a)
+     last_objfiles = (makemutable 0 0a)
+     is_unit_name =
+       (function name
+         (funct-body driver/compenv.ml(61)<ghost>:2265-2602
+           (before driver/compenv.ml(62):2274-2602
+             (try
+               (seq
+                 (if
+                   (after driver/compenv.ml(63):2285-2294
+                     (caml_string_equal name ""))
+                   (before driver/compenv.ml(63):2300-2310
+                     (raise
+                       (after driver/compenv.ml(63):2306-2310
+                         (field 2 (global Stdlib!)))))
+                   0a)
+                 (before driver/compenv.ml(64):2316-2581
+                   (seq
+                     (let
+                       (*match* =
+                          (after driver/compenv.ml(64):2328-2336
+                            (string.get name 0))
+                        switcher =a (-65+ *match*))
+                       (if (isout 25 switcher)
+                         (before driver/compenv.ml(67):2381-2391
+                           (raise
+                             (after driver/compenv.ml(67):2387-2391
+                               (field 2 (global Stdlib!)))))
+                         (before driver/compenv.ml(65):2360-2362 0a)))
+                     (before driver/compenv.ml(69):2406-2581
+                       (seq
+                         (for i 1 to (- (string.length name) 1)
+                           (before driver/compenv.ml(70):2451-2562
+                             (let
+                               (*match* =
+                                  (after driver/compenv.ml(70):2457-2465
+                                    (string.get name i)))
+                               (catch
+                                 (catch
+                                   (if (>= *match* 65)
+                                     (let (switcher =a (-91+ *match*))
+                                       (if (isout 5 switcher)
+                                         (if (>= switcher 32) (exit 3)
+                                           (exit 2))
+                                         (if (!= switcher 4) (exit 3)
+                                           (exit 2))))
+                                     (if (>= *match* 48)
+                                       (if (>= *match* 58) (exit 3) (exit 2))
+                                       (if (!= *match* 39) (exit 3) (exit 2))))
+                                  with (3)
+                                   (before driver/compenv.ml(73):2551-2561
+                                     (raise
+                                       (after driver/compenv.ml(73):2557-2561
+                                         (field 2 (global Stdlib!))))))
+                                with (2)
+                                 (before driver/compenv.ml(71):2526-2528 0a)))))
+                         (before driver/compenv.ml(75):2577-2581 1a))))))
+              with exn
+               (if (== exn (field 2 (global Stdlib!)))
+                 (before driver/compenv.ml(76):2597-2602 0a) (reraise exn))))))
+     check_unit_name =
+       (function filename name
+         (funct-body driver/compenv.ml(79)<ghost>:2627-2769
+           (before driver/compenv.ml(80):2645-2769
+             (if
+               (not
+                 (after driver/compenv.ml(80):2652-2671
+                   (apply is_unit_name name)))
+               (before driver/compenv.ml(81):2681-2769
+                 (after driver/compenv.ml(81):2681-2769
+                   (apply (field 34 (global Location!))
+                     (after driver/compenv.ml(81):2704-2731
+                       (apply (field 1 (global Location!)) filename))
+                     (makeblock 11 name))))
+               0a))))
+     module_of_filename =
+       (function inputfile outputprefix
+         (funct-body driver/compenv.ml(85)<ghost>:2847-3142
+           (before driver/compenv.ml(86):2874-3142
+             (let
+               (basename =
+                  (after driver/compenv.ml(86):2889-2919
+                    (apply (field 12 (global Stdlib__filename!))
+                      outputprefix)))
+               (before driver/compenv.ml(87):2925-3142
+                 (let
+                   (name =
+                      (try
+                        (let
+                          (pos =[int]
+                             (after driver/compenv.ml(89):2960-2985
+                               (apply (field 13 (global Stdlib__string!))
+                                 basename '.')))
+                          (before driver/compenv.ml(90):2995-3020
+                            (after driver/compenv.ml(90):2995-3020
+                              (apply (field 3 (global Stdlib__string!))
+                                basename 0 pos))))
+                       with exn
+                        (if (== exn (field 7 (global Stdlib!)))
+                          (before driver/compenv.ml(91):3043-3051 basename)
+                          (reraise exn))))
+                   (before driver/compenv.ml(93):3059-3142
+                     (let
+                       (name =
+                          (after driver/compenv.ml(93):3070-3098
+                            (apply (field 30 (global Stdlib__string!)) name)))
+                       (before driver/compenv.ml(94):3104-3142
+                         (seq
+                           (after driver/compenv.ml(94):3104-3134
+                             (apply check_unit_name inputfile name))
+                           (before driver/compenv.ml(95):3138-3142 name)))))))))))
+     SyntaxError = (makeblock 248 "Compenv.SyntaxError" (caml_fresh_oo_id 0))
+     print_error =
+       (function ppf msg
+         (funct-body driver/compenv.ml(108)<ghost>:3474-3578
+           (before driver/compenv.ml(109):3486-3578
+             (after driver/compenv.ml(109):3486-3578
+               (apply (field 33 (global Location!))
+                 (field 0 (global Location!)) ppf
+                 (makeblock 29 "OCAMLPARAM" msg))))))
+     parse_args =
+       (function s
+         (funct-body driver/compenv.ml(112)<ghost>:3595-4629
+           (before driver/compenv.ml(113):3601-4629
+             (let
+               (args =
+                  (let (len =[int] (string.length s))
+                    (before driver/compenv.ml(115):3649-3907
+                      (if (== len 0)
+                        (before driver/compenv.ml(115):3665-3667 0a)
+                        (before driver/compenv.ml(118):3759-3907
+                          (let
+                            (c =
+                               (after driver/compenv.ml(118):3765-3770
+                                 (string.get s 0)))
+                            (catch
+                              (catch
+                                (if (>= c 45)
+                                  (if (>= c 60)
+                                    (if (!= c 124) (exit 10) (exit 9))
+                                    (if (>= c 58) (exit 9) (exit 10)))
+                                  (if (!= c 32)
+                                    (if (>= c 44) (exit 9) (exit 10))
+                                    (exit 9)))
+                               with (10)
+                                (before driver/compenv.ml(121):3881-3907
+                                  (after driver/compenv.ml(121):3881-3907
+                                    (apply
+                                      (field 34 (global Stdlib__string!)) ','
+                                      s))))
+                             with (9)
+                              (before driver/compenv.ml(120):3833-3867
+                                (after driver/compenv.ml(120):3833-3867
+                                  (apply (field 5 (global Stdlib__list!))
+                                    (after driver/compenv.ml(120):3841-3867
+                                      (apply
+                                        (field 34 (global Stdlib__string!)) c
+                                        s))))))))))))
+               (before driver/compenv.ml(123):3915-4629
+                 (letrec
+                   (iter
+                      (function is_after args before after
+                        (funct-body driver/compenv.ml(123)<ghost>:3928-4600
+                          (before driver/compenv.ml(124):3961-4600
+                            (if args
+                              (let (arg =a (field 0 args))
+                                (catch
+                                  (stringswitch arg
+                                   case "":
+                                    (let (tail =a (field 1 args))
+                                      (before driver/compenv.ml(130):4142-4173
+                                        (after driver/compenv.ml(130):4142-4173
+                                          (apply iter is_after tail before
+                                            after))))
+                                   case "_":
+                                    (let (tail =a (field 1 args))
+                                      (before driver/compenv.ml(131):4194-4202
+                                        (if is_after
+                                          (before driver/compenv.ml(131):4206-4251
+                                            (raise
+                                              (after driver/compenv.ml(131):4212-4251
+                                                (makeblock 0 SyntaxError
+                                                  "too many '_' separators"))))
+                                          (before driver/compenv.ml(132):4273-4300
+                                            (after driver/compenv.ml(132):4273-4300
+                                              (apply iter 1a tail before
+                                                after))))))
+                                   default: (exit 8))
+                                 with (8)
+                                  (let (tail =a (field 1 args))
+                                    (before driver/compenv.ml(134):4328-4600
+                                      (let
+                                        (binding =
+                                           (try
+                                             (after driver/compenv.ml(135):4354-4373
+                                               (apply
+                                                 (field 48 (global Misc!))
+                                                 arg '='))
+                                            with exn
+                                             (if
+                                               (== exn
+                                                 (field 7 (global Stdlib!)))
+                                               (before driver/compenv.ml(137):4406-4451
+                                                 (raise
+                                                   (after driver/compenv.ml(137):4412-4451
+                                                     (makeblock 0 SyntaxError
+                                                       (after driver/compenv.ml(137):4425-4450
+                                                         (apply
+                                                           (field 27
+                                                             (global Stdlib!))
+                                                           "missing '=' in "
+                                                           arg))))))
+                                               (reraise exn))))
+                                        (before driver/compenv.ml(139):4467-4600
+                                          (if is_after
+                                            (before driver/compenv.ml(140):4492-4536
+                                              (after driver/compenv.ml(140):4492-4536
+                                                (apply iter is_after tail
+                                                  before
+                                                  (makeblock 0 binding after))))
+                                            (before driver/compenv.ml(142):4556-4600
+                                              (after driver/compenv.ml(142):4556-4600
+                                                (apply iter is_after tail
+                                                  (makeblock 0 binding
+                                                    before)
+                                                  after))))))))))
+                              (before driver/compenv.ml(126):3995-4121
+                                (if (not is_after)
+                                  (before driver/compenv.ml(127):4024-4068
+                                    (raise
+                                      (after driver/compenv.ml(127):4030-4068
+                                        (makeblock 0 SyntaxError
+                                          "no '_' separator found"))))
+                                  (before driver/compenv.ml(129):4088-4121
+                                    (makeblock 0
+                                      (after driver/compenv.ml(129):4089-4104
+                                        (apply
+                                          (field 8 (global Stdlib__list!))
+                                          before))
+                                      (after driver/compenv.ml(129):4106-4120
+                                        (apply
+                                          (field 8 (global Stdlib__list!))
+                                          after)))))))))))
+                   (before driver/compenv.ml(144):4608-4629
+                     (after driver/compenv.ml(144):4608-4629
+                       (apply iter 0a args 0a 0a)))))))))
+     setter =
+       (function ppf f name options s
+         (funct-body driver/compenv.ml(146)<ghost>:4642-4913
+           (before driver/compenv.ml(147):4667-4913
+             (try
+               (let
+                 (bool =
+                    (catch
+                      (stringswitch s
+                       case "0": (before driver/compenv.ml(149):4714-4719 0a)
+                       case "1": (before driver/compenv.ml(150):4735-4739 1a)
+                       default: (exit 12))
+                     with (12)
+                      (before driver/compenv.ml(151):4753-4768
+                        (raise
+                          (after driver/compenv.ml(151):4759-4768
+                            (field 7 (global Stdlib!)))))))
+                 (before driver/compenv.ml(153):4780-4820
+                   (after driver/compenv.ml(153):4780-4820
+                     (apply (field 14 (global Stdlib__list!))
+                       (function b
+                         (funct-body driver/compenv.ml(153):4790-4812
+                           (before driver/compenv.ml(153):4800-4811
+                             (setfield_ptr 0 b
+                               (after driver/compenv.ml(153):4805-4811
+                                 (apply f bool))))))
+                       options))))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before driver/compenv.ml(155):4845-4913
+                   (after driver/compenv.ml(155):4845-4913
+                     (apply (field 8 (global Stdlib__printf!))
+                       (after driver/compenv.ml(155):4861-4878
+                         (apply print_error ppf))
+                       [0:
+                        [11: "bad value " [2: 0a [11: " for " [2: 0a 0a]]]]
+                        "bad value %s for %s"]
+                       s name)))
+                 (reraise exn))))))
+     int_setter =
+       (function ppf name option s
+         (funct-body driver/compenv.ml(158)<ghost>:4930-5082
+           (before driver/compenv.ml(159):4952-5082
+             (try
+               (setfield_imm 0 option
+                 (after driver/compenv.ml(160):4970-4985
+                   (caml_int_of_string s)))
+              with exn
+               (before driver/compenv.ml(162):5002-5082
+                 (after driver/compenv.ml(162):5002-5082
+                   (apply (field 8 (global Stdlib__printf!))
+                     (after driver/compenv.ml(162):5018-5035
+                       (apply print_error ppf))
+                     [0:
+                      [11:
+                       "non-integer parameter "
+                       [2: 0a [11: " for " [3: 0a 0a]]]]
+                      "non-integer parameter %s for %S"]
+                     s name)))))))
+     int_option_setter =
+       (function ppf name option s
+         (funct-body driver/compenv.ml(165)<ghost>:5106-5265
+           (before driver/compenv.ml(166):5128-5265
+             (try
+               (setfield_ptr 0 option
+                 (makeblock 0 (int)
+                   (after driver/compenv.ml(167):5151-5168
+                     (caml_int_of_string s))))
+              with exn
+               (before driver/compenv.ml(169):5185-5265
+                 (after driver/compenv.ml(169):5185-5265
+                   (apply (field 8 (global Stdlib__printf!))
+                     (after driver/compenv.ml(169):5201-5218
+                       (apply print_error ppf))
+                     [0:
+                      [11:
+                       "non-integer parameter "
+                       [2: 0a [11: " for " [3: 0a 0a]]]]
+                      "non-integer parameter %s for %S"]
+                     s name)))))))
+     check_bool =
+       (function ppf name s
+         (funct-body driver/compenv.ml(182)<ghost>:5533-5686
+           (before driver/compenv.ml(183):5548-5686
+             (catch
+               (stringswitch s
+                case "0": (before driver/compenv.ml(184):5572-5577 0a)
+                case "1": (before driver/compenv.ml(185):5589-5593 1a)
+                default: (exit 15))
+              with (15)
+               (before driver/compenv.ml(187):5607-5686
+                 (seq
+                   (after driver/compenv.ml(187):5607-5675
+                     (apply (field 8 (global Stdlib__printf!))
+                       (after driver/compenv.ml(187):5623-5640
+                         (apply print_error ppf))
+                       [0:
+                        [11: "bad value " [2: 0a [11: " for " [2: 0a 0a]]]]
+                        "bad value %s for %s"]
+                       s name))
+                   (before driver/compenv.ml(189):5681-5686 0a)))))))
+     can_discard = (makemutable 0 0a)
+     read_one_param =
+       (function ppf position name v
+         (funct-body driver/compenv.ml(195)<ghost>:5875-14572
+           (before driver/compenv.ml(196):5899-14572
+             (let
+               (set =
+                  (function name options s
+                    (funct-body driver/compenv.ml(196)<ghost>:5907-5963
+                      (before driver/compenv.ml(196):5925-5963
+                        (after driver/compenv.ml(196):5925-5963
+                          (apply setter ppf
+                            (function b
+                              (funct-body driver/compenv.ml(196):5936-5948
+                                (before driver/compenv.ml(196):5946-5947 b)))
+                            name options s))))))
+               (before driver/compenv.ml(197):5969-14572
+                 (let
+                   (clear =
+                      (function name options s
+                        (funct-body driver/compenv.ml(197)<ghost>:5979-6038
+                          (before driver/compenv.ml(197):5996-6038
+                            (after driver/compenv.ml(197):5996-6038
+                              (apply setter ppf
+                                (function b
+                                  (funct-body driver/compenv.ml(197):6007-6023
+                                    (before driver/compenv.ml(197):6017-6022
+                                      (not b))))
+                                name options s))))))
+                   (before driver/compenv.ml(198):6044-14572
+                     (catch
+                       (catch
+                         (catch
+                           (catch
+                             (catch
+                               (catch
+                                 (stringswitch name
+                                  case "I":
+                                   (before driver/compenv.ml(364):12274-12478
+                                     (catch
+                                       (if (isint position)
+                                         (if position (exit 16)
+                                           (before driver/compenv.ml(366):12329-12375
+                                             (setfield_ptr 0
+                                               first_include_dirs
+                                               (makeblock 0 v
+                                                 (field 0 first_include_dirs)))))
+                                         (exit 16))
+                                      with (16)
+                                       (before driver/compenv.ml(368):12426-12470
+                                         (setfield_ptr 0 last_include_dirs
+                                           (makeblock 0 v
+                                             (field 0 last_include_dirs))))))
+                                  case "O2":
+                                   (before driver/compenv.ml(312):10524-10705
+                                     (if
+                                       (after driver/compenv.ml(312):10527-10548
+                                         (apply check_bool ppf "O2" v))
+                                       (before driver/compenv.ml(312):10554-10705
+                                         (seq
+                                           (setfield_imm 0
+                                             (field 99 (global Clflags!)) 2)
+                                           (before driver/compenv.ml(314):10602-10697
+                                             (seq
+                                               (after driver/compenv.ml(314):10602-10641
+                                                 (apply
+                                                   (field 6
+                                                     (global Clflags!))
+                                                   0a
+                                                   (field 4
+                                                     (global Clflags!))))
+                                               (before driver/compenv.ml(315):10649-10697
+                                                 (after driver/compenv.ml(315):10649-10697
+                                                   (apply
+                                                     (field 6
+                                                       (global Clflags!))
+                                                     [0: 0]
+                                                     (field 3
+                                                       (global Clflags!)))))))))
+                                       0a))
+                                  case "O3":
+                                   (before driver/compenv.ml(319):10723-10960
+                                     (if
+                                       (after driver/compenv.ml(319):10726-10747
+                                         (apply check_bool ppf "O3" v))
+                                       (before driver/compenv.ml(319):10753-10960
+                                         (seq
+                                           (setfield_imm 0
+                                             (field 99 (global Clflags!)) 3)
+                                           (before driver/compenv.ml(321):10801-10952
+                                             (seq
+                                               (after driver/compenv.ml(321):10801-10840
+                                                 (apply
+                                                   (field 6
+                                                     (global Clflags!))
+                                                   0a
+                                                   (field 5
+                                                     (global Clflags!))))
+                                               (before driver/compenv.ml(322):10848-10952
+                                                 (seq
+                                                   (after driver/compenv.ml(322):10848-10896
+                                                     (apply
+                                                       (field 6
+                                                         (global Clflags!))
+                                                       [0: 1]
+                                                       (field 4
+                                                         (global Clflags!))))
+                                                   (before driver/compenv.ml(323):10904-10952
+                                                     (after driver/compenv.ml(323):10904-10952
+                                                       (apply
+                                                         (field 6
+                                                           (global Clflags!))
+                                                         [0: 0]
+                                                         (field 3
+                                                           (global Clflags!)))))))))))
+                                       0a))
+                                  case "Oclassic":
+                                   (before driver/compenv.ml(310):10470-10507
+                                     (after driver/compenv.ml(310):10470-10507
+                                       (apply set "Oclassic"
+                                         (makeblock 0
+                                           (field 144 (global Clflags!)) 0a)
+                                         v)))
+                                  case "S":
+                                   (before driver/compenv.ml(245):8285-8320
+                                     (after driver/compenv.ml(245):8285-8320
+                                       (apply set "S"
+                                         (makeblock 0
+                                           (field 75 (global Clflags!)) 0a)
+                                         v)))
+                                  case "absname":
+                                   (before driver/compenv.ml(205):6390-6425
+                                     (after driver/compenv.ml(205):6390-6425
+                                       (apply set "absname"
+                                         (makeblock 0
+                                           (field 33 (global Clflags!)) 0a)
+                                         v)))
+                                  case "afl-inst-ratio":
+                                   (before driver/compenv.ml(203):6271-6319
+                                     (after driver/compenv.ml(203):6271-6319
+                                       (apply int_setter ppf "afl-inst-ratio"
+                                         (field 146 (global Clflags!)) v)))
+                                  case "afl-instrument":
+                                   (before driver/compenv.ml(201):6191-6240
+                                     (after driver/compenv.ml(201):6191-6240
+                                       (apply set "afl-instrument"
+                                         (makeblock 0
+                                           (field 145 (global Clflags!)) 0a)
+                                         v)))
+                                  case "alert":
+                                   (before driver/compenv.ml(255):8660-8689
+                                     (after driver/compenv.ml(255):8660-8689
+                                       (apply (field 1 (global Warnings!)) v)))
+                                  case "annot":
+                                   (before driver/compenv.ml(204):6335-6372
+                                     (after driver/compenv.ml(204):6335-6372
+                                       (apply set "annot"
+                                         (makeblock 0
+                                           (field 34 (global Clflags!)) 0a)
+                                         v)))
+                                  case "bin-annot":
+                                   (before driver/compenv.ml(200):6118-6166
+                                     (after driver/compenv.ml(200):6118-6166
+                                       (apply set "bin-annot"
+                                         (makeblock 0
+                                           (field 35 (global Clflags!)) 0a)
+                                         v)))
+                                  case "can-discard":
+                                   (before driver/compenv.ml(425):13677-13708
+                                     (setfield_ptr 0 can_discard
+                                       (makeblock 0 v (field 0 can_discard))))
+                                  case "cc":
+                                   (before driver/compenv.ml(238):8079-8099
+                                     (setfield_ptr 0
+                                       (field 54 (global Clflags!))
+                                       (makeblock 0 v)))
+                                  case "cclib":
+                                   (before driver/compenv.ml(372):12499-12657
+                                     (if (isint position)
+                                       (before driver/compenv.ml(376):12607-12649
+                                         (setfield_ptr 0
+                                           (field 8 (global Clflags!))
+                                           (after driver/compenv.ml(376):12617-12649
+                                             (apply
+                                               (field 36 (global Stdlib!))
+                                               (after driver/compenv.ml(376):12617-12639
+                                                 (apply
+                                                   (field 34 (global Misc!))
+                                                   v))
+                                               (field 0
+                                                 (field 8 (global Clflags!)))))))
+                                       (before driver/compenv.ml(374):12559-12561
+                                         0a)))
+                                  case "ccopt": (exit 24)
+                                  case "ccopts": (exit 24)
+                                  case "clambda-checks":
+                                   (before driver/compenv.ml(240):8125-8166
+                                     (after driver/compenv.ml(240):8125-8166
+                                       (apply set "clambda-checks"
+                                         (makeblock 0
+                                           (field 139 (global Clflags!)) 0a)
+                                         v)))
+                                  case "cma": (exit 25)
+                                  case "cmo": (exit 25)
+                                  case "cmx": (exit 26)
+                                  case "cmxa": (exit 26)
+                                  case "color":
+                                   (before driver/compenv.ml(347):11719-11936
+                                     (let
+                                       (*match* =
+                                          (after driver/compenv.ml(347):11731-11751
+                                            (apply
+                                              (field 0
+                                                (field 152 (global Clflags!)))
+                                              v)))
+                                       (if *match*
+                                         (let (setting =a (field 0 *match*))
+                                           (before driver/compenv.ml(351):11905-11926
+                                             (setfield_ptr 0
+                                               (field 151 (global Clflags!))
+                                               (makeblock 0 setting))))
+                                         (before driver/compenv.ml(349):11781-11880
+                                           (after driver/compenv.ml(349):11781-11880
+                                             (apply
+                                               (field 8
+                                                 (global Stdlib__printf!))
+                                               (after driver/compenv.ml(349):11797-11814
+                                                 (apply print_error ppf))
+                                               [0:
+                                                [11:
+                                                 "bad value "
+                                                 [2:
+                                                  0a
+                                                  [11:
+                                                   " for \"color\", ("
+                                                   [2: 0a [12: ')' 0a]]]]]
+                                                "bad value %s for \"color\", (%s)"]
+                                               v
+                                               (field 2
+                                                 (field 152
+                                                   (global Clflags!)))))))))
+                                  case "compact":
+                                   (before driver/compenv.ml(226):7508-7548
+                                     (after driver/compenv.ml(226):7508-7548
+                                       (apply clear "compact"
+                                         (makeblock 0
+                                           (field 76 (global Clflags!)) 0a)
+                                         v)))
+                                  case "compat-32":
+                                   (before driver/compenv.ml(206):6445-6489
+                                     (after driver/compenv.ml(206):6445-6489
+                                       (apply set "compat-32"
+                                         (makeblock 0
+                                           (field 23 (global Clflags!)) 0a)
+                                         v)))
+                                  case "dstartup":
+                                   (before driver/compenv.ml(246):8340-8386
+                                     (after driver/compenv.ml(246):8340-8386
+                                       (apply set "dstartup"
+                                         (makeblock 0
+                                           (field 92 (global Clflags!)) 0a)
+                                         v)))
+                                  case "error-style":
+                                   (before driver/compenv.ml(355):11965-12210
+                                     (let
+                                       (*match* =
+                                          (after driver/compenv.ml(355):11977-12003
+                                            (apply
+                                              (field 0
+                                                (field 154 (global Clflags!)))
+                                              v)))
+                                       (if *match*
+                                         (let (setting =a (field 0 *match*))
+                                           (before driver/compenv.ml(359):12173-12200
+                                             (setfield_ptr 0
+                                               (field 153 (global Clflags!))
+                                               (makeblock 0 setting))))
+                                         (before driver/compenv.ml(357):12035-12148
+                                           (after driver/compenv.ml(357):12035-12148
+                                             (apply
+                                               (field 8
+                                                 (global Stdlib__printf!))
+                                               (after driver/compenv.ml(357):12051-12068
+                                                 (apply print_error ppf))
+                                               [0:
+                                                [11:
+                                                 "bad value "
+                                                 [2:
+                                                  0a
+                                                  [11:
+                                                   " for \"error-style\", ("
+                                                   [2: 0a [12: ')' 0a]]]]]
+                                                "bad value %s for \"error-style\", (%s)"]
+                                               v
+                                               (field 2
+                                                 (field 154
+                                                   (global Clflags!)))))))))
+                                  case "flambda-invariants":
+                                   (before driver/compenv.ml(339):11452-11507
+                                     (after driver/compenv.ml(339):11452-11507
+                                       (apply set "flambda-invariants"
+                                         (makeblock 0
+                                           (field 133 (global Clflags!)) 0a)
+                                         v)))
+                                  case "flambda-verbose":
+                                   (before driver/compenv.ml(337):11369-11417
+                                     (after driver/compenv.ml(337):11369-11417
+                                       (apply set "flambda-verbose"
+                                         (makeblock 0
+                                           (field 143 (global Clflags!)) 0a)
+                                         v)))
+                                  case "g":
+                                   (before driver/compenv.ml(199):6071-6098
+                                     (after driver/compenv.ml(199):6071-6098
+                                       (apply set "g"
+                                         (makeblock 0
+                                           (field 16 (global Clflags!)) 0a)
+                                         v)))
+                                  case "inline":
+                                   (before driver/compenv.ml(259):8730-9000
+                                     (let
+                                       (*match* =
+                                          (after driver/compenv.ml(260):8783-8818
+                                            (apply
+                                              (field 1
+                                                (field 1 (global Clflags!)))
+                                              v (field 96 (global Clflags!)))))
+                                       (if *match*
+                                         (let (exn =a (field 0 *match*))
+                                           (before driver/compenv.ml(263):8883-8990
+                                             (after driver/compenv.ml(263):8883-8990
+                                               (apply
+                                                 (field 8
+                                                   (global Stdlib__printf!))
+                                                 (after driver/compenv.ml(263):8899-8916
+                                                   (apply print_error ppf))
+                                                 [0:
+                                                  [11:
+                                                   "bad syntax "
+                                                   [2:
+                                                    0a
+                                                    [11:
+                                                     " for \"inline\": "
+                                                     [2: 0a 0a]]]]
+                                                  "bad syntax %s for \"inline\": %s"]
+                                                 v
+                                                 (after driver/compenv.ml(264):8966-8990
+                                                   (apply
+                                                     (field 0
+                                                       (global Stdlib__printexc!))
+                                                     exn))))))
+                                         (before driver/compenv.ml(261):8840-8842
+                                           0a))))
+                                  case "inline-alloc-cost":
+                                   (before driver/compenv.ml(281):9499-9602
+                                     (after driver/compenv.ml(281):9499-9602
+                                       (apply
+                                         (field 0
+                                           (field 0 (global Clflags!)))
+                                         v
+                                         "Bad syntax in OCAMLPARAM for 'inline-alloc-cost'"
+                                         (field 112 (global Clflags!)))))
+                                  case "inline-branch-cost":
+                                   (before driver/compenv.ml(289):9767-9872
+                                     (after driver/compenv.ml(289):9767-9872
+                                       (apply
+                                         (field 0
+                                           (field 0 (global Clflags!)))
+                                         v
+                                         "Bad syntax in OCAMLPARAM for 'inline-branch-cost'"
+                                         (field 114 (global Clflags!)))))
+                                  case "inline-branch-factor":
+                                   (before driver/compenv.ml(301):10201-10312
+                                     (after driver/compenv.ml(301):10201-10312
+                                       (apply
+                                         (field 0
+                                           (field 1 (global Clflags!)))
+                                         v
+                                         "Bad syntax in OCAMLPARAM for 'inline-branch-factor'"
+                                         (field 118 (global Clflags!)))))
+                                  case "inline-call-cost":
+                                   (before driver/compenv.ml(277):9366-9467
+                                     (after driver/compenv.ml(277):9366-9467
+                                       (apply
+                                         (field 0
+                                           (field 0 (global Clflags!)))
+                                         v
+                                         "Bad syntax in OCAMLPARAM for 'inline-call-cost'"
+                                         (field 111 (global Clflags!)))))
+                                  case "inline-indirect-cost":
+                                   (before driver/compenv.ml(293):9907-10016
+                                     (after driver/compenv.ml(293):9907-10016
+                                       (apply
+                                         (field 0
+                                           (field 0 (global Clflags!)))
+                                         v
+                                         "Bad syntax in OCAMLPARAM for 'inline-indirect-cost'"
+                                         (field 115 (global Clflags!)))))
+                                  case "inline-lifting-benefit":
+                                   (before driver/compenv.ml(297):10053-10166
+                                     (after driver/compenv.ml(297):10053-10166
+                                       (apply
+                                         (field 0
+                                           (field 0 (global Clflags!)))
+                                         v
+                                         "Bad syntax in OCAMLPARAM for 'inline-lifting-benefit'"
+                                         (field 116 (global Clflags!)))))
+                                  case "inline-max-depth":
+                                   (before driver/compenv.ml(305):10343-10444
+                                     (after driver/compenv.ml(305):10343-10444
+                                       (apply
+                                         (field 0
+                                           (field 0 (global Clflags!)))
+                                         v
+                                         "Bad syntax in OCAMLPARAM for 'inline-max-depth'"
+                                         (field 141 (global Clflags!)))))
+                                  case "inline-max-unroll":
+                                   (before driver/compenv.ml(274):9238-9335
+                                     (after driver/compenv.ml(274):9238-9335
+                                       (apply
+                                         (field 0
+                                           (field 0 (global Clflags!)))
+                                         v
+                                         "Bad syntax in OCAMLPARAM for 'inline-max-unroll'"
+                                         (field 102 (global Clflags!)))))
+                                  case "inline-prim-cost":
+                                   (before driver/compenv.ml(285):9633-9734
+                                     (after driver/compenv.ml(285):9633-9734
+                                       (apply
+                                         (field 0
+                                           (field 0 (global Clflags!)))
+                                         v
+                                         "Bad syntax in OCAMLPARAM for 'inline-prim-cost'"
+                                         (field 113 (global Clflags!)))))
+                                  case "inline-toplevel":
+                                   (before driver/compenv.ml(268):9031-9140
+                                     (after driver/compenv.ml(268):9031-9140
+                                       (apply
+                                         (field 0
+                                           (field 0 (global Clflags!)))
+                                         v
+                                         "Bad syntax in OCAMLPARAM for 'inline-toplevel'"
+                                         (field 104 (global Clflags!)))))
+                                  case "inlining-report":
+                                   (before driver/compenv.ml(333):11264-11336
+                                     (if
+                                       (field 0 (field 94 (global Clflags!)))
+                                       (before driver/compenv.ml(334):11293-11336
+                                         (after driver/compenv.ml(334):11293-11336
+                                           (apply set "inlining-report"
+                                             (makeblock 0
+                                               (field 97 (global Clflags!))
+                                               0a)
+                                             v)))
+                                       0a))
+                                  case "insn-sched":
+                                   (before driver/compenv.ml(342):11583-11616
+                                     (after driver/compenv.ml(342):11583-11616
+                                       (apply set "insn-sched"
+                                         (makeblock 0
+                                           (field 156 (global Clflags!)) 0a)
+                                         v)))
+                                  case "intf-suffix":
+                                   (before driver/compenv.ml(362):12233-12261
+                                     (setfield_ptr 0
+                                       (field 19 (global Config!)) v))
+                                  case "keep-docs":
+                                   (before driver/compenv.ml(223):7391-7430
+                                     (after driver/compenv.ml(223):7391-7430
+                                       (apply set "keep-docs"
+                                         (makeblock 0
+                                           (field 128 (global Clflags!)) 0a)
+                                         v)))
+                                  case "keep-locs":
+                                   (before driver/compenv.ml(224):7450-7489
+                                     (after driver/compenv.ml(224):7450-7489
+                                       (apply set "keep-locs"
+                                         (makeblock 0
+                                           (field 129 (global Clflags!)) 0a)
+                                         v)))
+                                  case "linkall":
+                                   (before driver/compenv.ml(210):6665-6700
+                                     (after driver/compenv.ml(210):6665-6700
+                                       (apply set "linkall"
+                                         (makeblock 0
+                                           (field 20 (global Clflags!)) 0a)
+                                         v)))
+                                  case "linscan":
+                                   (before driver/compenv.ml(341):11531-11562
+                                     (after driver/compenv.ml(341):11531-11562
+                                       (apply set "linscan"
+                                         (makeblock 0
+                                           (field 19 (global Clflags!)) 0a)
+                                         v)))
+                                  case "no-app-funct":
+                                   (before driver/compenv.ml(227):7571-7618
+                                     (after driver/compenv.ml(227):7571-7618
+                                       (apply clear "no-app-funct"
+                                         (makeblock 0
+                                           (field 52 (global Clflags!)) 0a)
+                                         v)))
+                                  case "no-insn-sched":
+                                   (before driver/compenv.ml(343):11640-11675
+                                     (after driver/compenv.ml(343):11640-11675
+                                       (apply clear "insn-sched"
+                                         (makeblock 0
+                                           (field 156 (global Clflags!)) 0a)
+                                         v)))
+                                  case "noassert":
+                                   (before driver/compenv.ml(207):6508-6537
+                                     (after driver/compenv.ml(207):6508-6537
+                                       (apply set "noassert"
+                                         (makeblock 0
+                                           (field 37 (global Clflags!)) 0a)
+                                         v)))
+                                  case "noautolink":
+                                   (before driver/compenv.ml(208):6558-6593
+                                     (after driver/compenv.ml(208):6558-6593
+                                       (apply set "noautolink"
+                                         (makeblock 0
+                                           (field 55 (global Clflags!)) 0a)
+                                         v)))
+                                  case "nodynlink":
+                                   (before driver/compenv.ml(228):7638-7668
+                                     (after driver/compenv.ml(228):7638-7668
+                                       (apply clear "nodynlink"
+                                         (makeblock 0
+                                           (field 123 (global Clflags!)) 0a)
+                                         v)))
+                                  case "nolabels":
+                                   (before driver/compenv.ml(211):6719-6747
+                                     (after driver/compenv.ml(211):6719-6747
+                                       (apply set "nolabels"
+                                         (makeblock 0
+                                           (field 27 (global Clflags!)) 0a)
+                                         v)))
+                                  case "nopervasives":
+                                   (before driver/compenv.ml(221):7270-7307
+                                     (after driver/compenv.ml(221):7270-7307
+                                       (apply set "nopervasives"
+                                         (makeblock 0
+                                           (field 28 (global Clflags!)) 0a)
+                                         v)))
+                                  case "nostdlib":
+                                   (before driver/compenv.ml(209):6612-6647
+                                     (after driver/compenv.ml(209):6612-6647
+                                       (apply set "nostdlib"
+                                         (makeblock 0
+                                           (field 13 (global Clflags!)) 0a)
+                                         v)))
+                                  case "opaque":
+                                   (before driver/compenv.ml(231):7804-7829
+                                     (after driver/compenv.ml(231):7804-7829
+                                       (apply set "opaque"
+                                         (makeblock 0
+                                           (field 131 (global Clflags!)) 0a)
+                                         v)))
+                                  case "open":
+                                   (before driver/compenv.ml(237):7992-8066
+                                     (setfield_ptr 0
+                                       (field 30 (global Clflags!))
+                                       (after driver/compenv.ml(237):8008-8066
+                                         (apply
+                                           (field 11 (global Stdlib__list!))
+                                           (after driver/compenv.ml(237):8024-8052
+                                             (apply
+                                               (field 34
+                                                 (global Stdlib__string!))
+                                               ',' v))
+                                           (field 0
+                                             (field 30 (global Clflags!)))))))
+                                  case "pic":
+                                   (before driver/compenv.ml(421):13599-13650
+                                     (if
+                                       (field 0 (field 94 (global Clflags!)))
+                                       (before driver/compenv.ml(422):13626-13650
+                                         (after driver/compenv.ml(422):13626-13650
+                                           (apply set "pic"
+                                             (makeblock 0
+                                               (field 124 (global Clflags!))
+                                               0a)
+                                             v)))
+                                       0a))
+                                  case "pp":
+                                   (before driver/compenv.ml(233):7843-7865
+                                     (setfield_ptr 0
+                                       (field 31 (global Clflags!))
+                                       (makeblock 0 v)))
+                                  case "ppx":
+                                   (before driver/compenv.ml(391):12902-13078
+                                     (catch
+                                       (if (isint position)
+                                         (if position (exit 19)
+                                           (before driver/compenv.ml(396):13042-13070
+                                             (setfield_ptr 0 first_ppx
+                                               (makeblock 0 v
+                                                 (field 0 first_ppx)))))
+                                         (exit 19))
+                                      with (19)
+                                       (before driver/compenv.ml(394):12984-13010
+                                         (setfield_ptr 0 last_ppx
+                                           (makeblock 0 v (field 0 last_ppx))))))
+                                  case "principal":
+                                   (before driver/compenv.ml(212):6767-6799
+                                     (after driver/compenv.ml(212):6767-6799
+                                       (apply set "principal"
+                                         (makeblock 0
+                                           (field 47 (global Clflags!)) 0a)
+                                         v)))
+                                  case "profile": (exit 27)
+                                  case "rectypes":
+                                   (before driver/compenv.ml(213):6818-6854
+                                     (after driver/compenv.ml(213):6818-6854
+                                       (apply set "rectypes"
+                                         (makeblock 0
+                                           (field 49 (global Clflags!)) 0a)
+                                         v)))
+                                  case "remove-unused-arguments":
+                                   (before driver/compenv.ml(330):11172-11231
+                                     (after driver/compenv.ml(330):11172-11231
+                                       (apply set "remove-unused-arguments"
+                                         (makeblock 0
+                                           (field 142 (global Clflags!)) 0a)
+                                         v)))
+                                  case "rounds":
+                                   (before driver/compenv.ml(272):9158-9206
+                                     (after driver/compenv.ml(272):9158-9206
+                                       (apply int_option_setter ppf "rounds"
+                                         (field 98 (global Clflags!)) v)))
+                                  case "runtime-variant":
+                                   (before driver/compenv.ml(234):7891-7911
+                                     (setfield_ptr 0
+                                       (field 125 (global Clflags!)) v))
+                                  case "s":
+                                   (before driver/compenv.ml(244):8209-8272
+                                     (after driver/compenv.ml(244):8209-8272
+                                       (apply set "s"
+                                         (makeblock 0
+                                           (field 75 (global Clflags!))
+                                           (makeblock 0
+                                             (field 92 (global Clflags!)) 0a))
+                                         v)))
+                                  case "safe-string":
+                                   (before driver/compenv.ml(214):6876-6915
+                                     (after driver/compenv.ml(214):6876-6915
+                                       (apply clear "safe-string"
+                                         (makeblock 0
+                                           (field 130 (global Clflags!)) 0a)
+                                         v)))
+                                  case "short-paths":
+                                   (before driver/compenv.ml(229):7690-7726
+                                     (after driver/compenv.ml(229):7690-7726
+                                       (apply clear "short-paths"
+                                         (makeblock 0
+                                           (field 48 (global Clflags!)) 0a)
+                                         v)))
+                                  case "slash":
+                                   (before driver/compenv.ml(222):7323-7352
+                                     (after driver/compenv.ml(222):7323-7352
+                                       (apply set "slash"
+                                         (makeblock 0
+                                           (field 127 (global Clflags!)) 0a)
+                                         v)))
+                                  case "stop-after":
+                                   (before driver/compenv.ml(432):13912-14339
+                                     (let
+                                       (*match* =
+                                          (after driver/compenv.ml(433):13968-13981
+                                            (apply
+                                              (field 0
+                                                (field 158 (global Clflags!)))
+                                              v)))
+                                       (if *match*
+                                         (let (pass =a (field 0 *match*))
+                                           (before driver/compenv.ml(439):14189-14331
+                                             (seq
+                                               (setfield_ptr 0
+                                                 (field 159
+                                                   (global Clflags!))
+                                                 (makeblock 0 pass))
+                                               (before driver/compenv.ml(440):14230-14330
+                                                 (before driver/compenv.ml(442):14298-14318
+                                                   (setfield_imm 0
+                                                     (field 10
+                                                       (global Clflags!))
+                                                     1a))))))
+                                         (before driver/compenv.ml(435):14009-14161
+                                           (after driver/compenv.ml(435):14009-14161
+                                             (apply
+                                               (field 8
+                                                 (global Stdlib__printf!))
+                                               (after driver/compenv.ml(435):14025-14042
+                                                 (apply print_error ppf))
+                                               [0:
+                                                [11:
+                                                 "bad value "
+                                                 [2:
+                                                  0a
+                                                  [11:
+                                                   " for option \"stop-after\" (expected one of: "
+                                                   [2: 0a [12: ')' 0a]]]]]
+                                                "bad value %s for option \"stop-after\" (expected one of: %s)"]
+                                               v
+                                               (after driver/compenv.ml(437):14128-14161
+                                                 (apply
+                                                   (field 6
+                                                     (global Stdlib__string!))
+                                                   ", "
+                                                   (field 3
+                                                     (field 158
+                                                       (global Clflags!)))))))))))
+                                  case "strict-formats":
+                                   (before driver/compenv.ml(216):7009-7050
+                                     (after driver/compenv.ml(216):7009-7050
+                                       (apply set "strict-formats"
+                                         (makeblock 0
+                                           (field 51 (global Clflags!)) 0a)
+                                         v)))
+                                  case "strict-sequence":
+                                   (before driver/compenv.ml(215):6941-6984
+                                     (after driver/compenv.ml(215):6941-6984
+                                       (apply set "strict-sequence"
+                                         (makeblock 0
+                                           (field 50 (global Clflags!)) 0a)
+                                         v)))
+                                  case "thread":
+                                   (before driver/compenv.ml(217):7067-7097
+                                     (after driver/compenv.ml(217):7067-7097
+                                       (apply set "thread"
+                                         (makeblock 0
+                                           (field 36 (global Clflags!)) 0a)
+                                         v)))
+                                  case "timings": (exit 27)
+                                  case "trans-mod":
+                                   (before driver/compenv.ml(230):7746-7787
+                                     (after driver/compenv.ml(230):7746-7787
+                                       (apply set "trans-mod"
+                                         (makeblock 0
+                                           (field 61 (global Clflags!)) 0a)
+                                         v)))
+                                  case "unbox-closures":
+                                   (before driver/compenv.ml(326):10991-11032
+                                     (after driver/compenv.ml(326):10991-11032
+                                       (apply set "unbox-closures"
+                                         (makeblock 0
+                                           (field 134 (global Clflags!)) 0a)
+                                         v)))
+                                  case "unbox-closures-factor":
+                                   (before driver/compenv.ml(328):11070-11132
+                                     (after driver/compenv.ml(328):11070-11132
+                                       (apply int_setter ppf
+                                         "unbox-closures-factor"
+                                         (field 135 (global Clflags!)) v)))
+                                  case "unboxed-types":
+                                   (before driver/compenv.ml(218):7121-7160
+                                     (after driver/compenv.ml(218):7121-7160
+                                       (apply set "unboxed-types"
+                                         (makeblock 0
+                                           (field 155 (global Clflags!)) 0a)
+                                         v)))
+                                  case "unsafe":
+                                   (before driver/compenv.ml(219):7177-7202
+                                     (after driver/compenv.ml(219):7177-7202
+                                       (apply set "unsafe"
+                                         (makeblock 0
+                                           (field 18 (global Clflags!)) 0a)
+                                         v)))
+                                  case "verbose":
+                                   (before driver/compenv.ml(220):7220-7247
+                                     (after driver/compenv.ml(220):7220-7247
+                                       (apply set "verbose"
+                                         (makeblock 0
+                                           (field 38 (global Clflags!)) 0a)
+                                         v)))
+                                  case "w":
+                                   (before driver/compenv.ml(251):8509-8539
+                                     (after driver/compenv.ml(251):8509-8539
+                                       (apply (field 0 (global Warnings!)) 0a
+                                         v)))
+                                  case "warn-error": (exit 23)
+                                  case "we": (exit 23)
+                                  case "with-runtime":
+                                   (before driver/compenv.ml(235):7934-7971
+                                     (after driver/compenv.ml(235):7934-7971
+                                       (apply set "with-runtime"
+                                         (makeblock 0
+                                           (field 126 (global Clflags!)) 0a)
+                                         v)))
+                                  case "wwe":
+                                   (before driver/compenv.ml(253):8587-8617
+                                     (after driver/compenv.ml(253):8587-8617
+                                       (apply (field 0 (global Warnings!)) 0a
+                                         v)))
+                                  default: (exit 28))
+                                with (28)
+                                 (before driver/compenv.ml(446):14353-14572
+                                   (if
+                                     (not
+                                       (after driver/compenv.ml(446):14360-14388
+                                         (apply
+                                           (field 31 (global Stdlib__list!))
+                                           name (field 0 can_discard))))
+                                     (before driver/compenv.ml(446):14394-14572
+                                       (seq
+                                         (setfield_ptr 0 can_discard
+                                           (makeblock 0 name
+                                             (field 0 can_discard)))
+                                         (before driver/compenv.ml(448):14449-14564
+                                           (after driver/compenv.ml(448):14449-14564
+                                             (apply
+                                               (field 8
+                                                 (global Stdlib__printf!))
+                                               (after driver/compenv.ml(448):14465-14482
+                                                 (apply print_error ppf))
+                                               [0:
+                                                [11:
+                                                 "Warning: discarding value of variable "
+                                                 [3:
+                                                  0a
+                                                  [11:
+                                                   " in OCAMLPARAM\n"
+                                                   [10: 0a]]]]
+                                                "Warning: discarding value of variable %S in OCAMLPARAM\n%!"]
+                                               name)))))
+                                     0a)))
+                              with (23)
+                               (before driver/compenv.ml(249):8435-8464
+                                 (after driver/compenv.ml(249):8435-8464
+                                   (apply (field 0 (global Warnings!)) 1a v))))
+                            with (24)
+                             (before driver/compenv.ml(382):12695-12883
+                               (catch
+                                 (if (isint position)
+                                   (if position (exit 18)
+                                     (before driver/compenv.ml(387):12841-12875
+                                       (setfield_ptr 0 first_ccopts
+                                         (makeblock 0 v
+                                           (field 0 first_ccopts)))))
+                                   (exit 18))
+                                with (18)
+                                 (before driver/compenv.ml(385):12777-12809
+                                   (setfield_ptr 0 last_ccopts
+                                     (makeblock 0 v (field 0 last_ccopts)))))))
+                          with (25)
+                           (before driver/compenv.ml(401):13106-13331
+                             (if (not (field 0 (field 94 (global Clflags!))))
+                               (before driver/compenv.ml(402):13135-13331
+                                 (catch
+                                   (if (isint position)
+                                     (if position (exit 20)
+                                       (before driver/compenv.ml(407):13285-13323
+                                         (setfield_ptr 0 first_objfiles
+                                           (makeblock 0 v
+                                             (field 0 first_objfiles)))))
+                                     (exit 20))
+                                  with (20)
+                                   (before driver/compenv.ml(405):13217-13253
+                                     (setfield_ptr 0 last_objfiles
+                                       (makeblock 0 v
+                                         (field 0 last_objfiles))))))
+                               0a)))
+                        with (26)
+                         (before driver/compenv.ml(411):13359-13580
+                           (if (field 0 (field 94 (global Clflags!)))
+                             (before driver/compenv.ml(412):13384-13580
+                               (catch
+                                 (if (isint position)
+                                   (if position (exit 21)
+                                     (before driver/compenv.ml(417):13534-13572
+                                       (setfield_ptr 0 first_objfiles
+                                         (makeblock 0 v
+                                           (field 0 first_objfiles)))))
+                                   (exit 21))
+                                with (21)
+                                 (before driver/compenv.ml(415):13466-13502
+                                   (setfield_ptr 0 last_objfiles
+                                     (makeblock 0 v (field 0 last_objfiles))))))
+                             0a)))
+                      with (27)
+                       (before driver/compenv.ml(428):13744-13886
+                         (let
+                           (if_on =
+                              (if
+                                (after driver/compenv.ml(428):13759-13775
+                                  (caml_string_equal name "timings"))
+                                (before driver/compenv.ml(428):13781-13790
+                                  [0: 936769581a 0a])
+                                (before driver/compenv.ml(428):13796-13815
+                                  (field 5 (global Profile!)))))
+                           (before driver/compenv.ml(429):13824-13886
+                             (setfield_ptr 0 (field 132 (global Clflags!))
+                               (if
+                                 (after driver/compenv.ml(429):13846-13867
+                                   (apply check_bool ppf name v))
+                                 (before driver/compenv.ml(429):13873-13878
+                                   if_on)
+                                 (before driver/compenv.ml(429):13884-13886
+                                   0a))))))))))))))
+     read_OCAMLPARAM =
+       (function ppf position
+         (funct-body driver/compenv.ml(453)<ghost>:14594-14985
+           (before driver/compenv.ml(454):14611-14985
+             (try
+               (let
+                 (s =
+                    (after driver/compenv.ml(455):14627-14650
+                      (caml_sys_getenv "OCAMLPARAM")))
+                 (before driver/compenv.ml(456):14658-14962
+                   (catch
+                     (try
+                       (after driver/compenv.ml(458):14698-14710
+                         (let
+                           (*match* = (apply parse_args s)
+                            after =a (field 1 *match*)
+                            before =a (field 0 *match*))
+                           (exit 32 after before)))
+                      with exn
+                       (let (tag =a (field 0 exn))
+                         (if (== tag SyntaxError)
+                           (let (s =a (field 1 exn))
+                             (before driver/compenv.ml(460):14747-14779
+                               (seq
+                                 (after driver/compenv.ml(460):14747-14764
+                                   (apply print_error ppf s))
+                                 (before driver/compenv.ml(461):14774-14779
+                                   (let (after = 0a before = 0a)
+                                     (exit 32 after before))))))
+                           (reraise exn))))
+                    with (32 after before)
+                     (before driver/compenv.ml(463):14791-14962
+                       (after driver/compenv.ml(463):14791-14962
+                         (apply (field 14 (global Stdlib__list!))
+                           (function param
+                             (funct-body driver/compenv.ml(463):14801-14854
+                               (let
+                                 (v =a (field 1 param)
+                                  name =a (field 0 param))
+                                 (before driver/compenv.ml(463):14819-14853
+                                   (after driver/compenv.ml(463):14819-14853
+                                     (apply read_one_param ppf position name
+                                       v))))))
+                           (catch
+                             (if (isint position)
+                               (if position (exit 30)
+                                 (before driver/compenv.ml(465):14906-14912
+                                   before))
+                               (exit 30))
+                            with (30)
+                             (before driver/compenv.ml(466):14956-14961
+                               after))))))))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before driver/compenv.ml(467):14983-14985 0a)
+                 (reraise exn))))))
+     scan_line =
+       (function ic
+         (funct-body driver/compenv.ml(481)<ghost>:15161-15399
+           (before driver/compenv.ml(482):15168-15399
+             (after driver/compenv.ml(482):15168-15399
+               (apply (field 2 (global Stdlib__scanf!)) ic
+                 [0:
+                  [20:
+                   0a
+                   "\000\000\000\000\000D\255\003\254\255\255\135\254\255\255\007\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+                   [11:
+                    " : "
+                    [20:
+                     0a
+                     "\000\000\000\000\000 \000\000\254\255\255\135\254\255\255\007\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+                     [11: " = " [2: 0a [12: ' ' 0a]]]]]]
+                  "%[0-9a-zA-Z_.*] : %[a-zA-Z_-] = %s "]
+                 (function pattern name value
+                   (funct-body driver/compenv.ml(483):15226-15399
+                     (before driver/compenv.ml(484):15260-15398
+                       (let
+                         (pattern =
+                            (stringswitch pattern
+                             case "*":
+                              (before driver/compenv.ml(486):15320-15323 0a)
+                             default:
+                              (before driver/compenv.ml(487):15340-15356
+                                (makeblock 0 pattern))))
+                         (before driver/compenv.ml(489):15374-15398
+                           (makeblock 0 pattern name value)))))))))))
+     load_config =
+       (function ppf filename
+         (funct-body driver/compenv.ml(491)<ghost>:15417-16596
+           (before driver/compenv.ml(492):15434-16596
+             (catch
+               (try
+                 (exit 40
+                   (after driver/compenv.ml(492):15440-15460
+                     (apply (field 79 (global Stdlib!)) filename)))
+                with e
+                 (before driver/compenv.ml(494):15491-15645
+                   (seq
+                     (after driver/compenv.ml(494):15491-15627
+                       (apply (field 26 (global Location!)) ppf
+                         (after driver/compenv.ml(494):15491-15592
+                           (apply (field 43 (global Location!))
+                             (makeblock 0
+                               (after driver/compenv.ml(494):15512-15539
+                                 (apply (field 1 (global Location!))
+                                   filename)))
+                             0a
+                             [0:
+                              [11: "Cannot open file " [2: 0a 0a]]
+                              "Cannot open file %s"]
+                             (after driver/compenv.ml(495):15570-15592
+                               (apply (field 0 (global Stdlib__printexc!)) e))))))
+                     (before driver/compenv.ml(497):15635-15645
+                       (raise
+                         (after driver/compenv.ml(497):15641-15645
+                           (field 2 (global Stdlib!))))))))
+              with (40 ic)
+               (before driver/compenv.ml(499):15662-16596
+                 (let
+                   (sic =
+                      (after driver/compenv.ml(499):15672-15702
+                        (apply (field 8 (field 0 (global Stdlib__scanf!)))
+                          ic)))
+                   (before driver/compenv.ml(500):15712-16596
+                     (letrec
+                       (read
+                          (function line_number[int] line_start[int] acc
+                            (funct-body driver/compenv.ml(500)<ghost>:15725-16542
+                              (before driver/compenv.ml(501):15762-16542
+                                (catch
+                                  (try
+                                    (exit 37
+                                      (after driver/compenv.ml(501):15768-15781
+                                        (apply scan_line sic)))
+                                   with exn
+                                    (if (== exn (field 11 (global Stdlib!)))
+                                      (before driver/compenv.ml(503):15834-15862
+                                        (seq
+                                          (after driver/compenv.ml(503):15834-15845
+                                            (apply
+                                              (field 92 (global Stdlib!)) ic))
+                                          (before driver/compenv.ml(504):15859-15862
+                                            acc)))
+                                      (let (tag =a (field 0 exn))
+                                        (if
+                                          (== tag
+                                            (field 1 (global Stdlib__scanf!)))
+                                          (let (error =a (field 1 exn))
+                                            (before driver/compenv.ml(506):15923-16463
+                                              (let
+                                                (position =
+                                                   (makeblock 0 (*,int,int,int)
+                                                     filename line_number
+                                                     line_start
+                                                     (after driver/compenv.ml(510):16090-16099
+                                                       (apply
+                                                         (field 90
+                                                           (global Stdlib!))
+                                                         ic))))
+                                                (before driver/compenv.ml(513):16144-16463
+                                                  (let
+                                                    (loc =
+                                                       (makeblock 0 position
+                                                         position 0a))
+                                                    (before driver/compenv.ml(519):16317-16463
+                                                      (seq
+                                                        (after driver/compenv.ml(519):16317-16414
+                                                          (apply
+                                                            (field 26
+                                                              (global Location!))
+                                                            ppf
+                                                            (after driver/compenv.ml(519):16317-16373
+                                                              (apply
+                                                                (field 43
+                                                                  (global Location!))
+                                                                (makeblock 0
+                                                                  loc)
+                                                                0a
+                                                                [0:
+                                                                 [11:
+                                                                  "Configuration file error "
+                                                                  [2: 0a 0a]]
+                                                                 "Configuration file error %s"]
+                                                                error))))
+                                                        (before driver/compenv.ml(521):16428-16463
+                                                          (seq
+                                                            (after driver/compenv.ml(521):16428-16439
+                                                              (apply
+                                                                (field 92
+                                                                  (global Stdlib!))
+                                                                ic))
+                                                            (before driver/compenv.ml(522):16453-16463
+                                                              (raise
+                                                                (after driver/compenv.ml(522):16459-16463
+                                                                  (field 2
+                                                                    (global Stdlib!))))))))))))))
+                                          (reraise exn)))))
+                                 with (37 line)
+                                  (before driver/compenv.ml(524):16494-16542
+                                    (after driver/compenv.ml(524):16494-16542
+                                      (apply read (+ line_number 1)
+                                        (after driver/compenv.ml(524):16517-16528
+                                          (apply (field 90 (global Stdlib!))
+                                            ic))
+                                        (makeblock 0 line acc)))))))))
+                       (before driver/compenv.ml(526):16558-16596
+                         (let
+                           (lines =
+                              (after driver/compenv.ml(526):16570-16581
+                                (apply read 0 0 0a)))
+                           (before driver/compenv.ml(527):16591-16596 lines)))))))))))
+     matching_filename =
+       (function filename param
+         (funct-body driver/compenv.ml(529)<ghost>:16620-16832
+           (let (pattern =a (field 0 param))
+             (before driver/compenv.ml(530):16645-16832
+               (if pattern
+                 (let (pattern =a (field 0 pattern))
+                   (before driver/compenv.ml(533):16708-16832
+                     (let
+                       (filename =
+                          (after driver/compenv.ml(533):16723-16754
+                            (apply (field 29 (global Stdlib__string!))
+                              filename)))
+                       (before driver/compenv.ml(534):16762-16832
+                         (let
+                           (pattern =
+                              (after driver/compenv.ml(534):16776-16806
+                                (apply (field 29 (global Stdlib__string!))
+                                  pattern)))
+                           (before driver/compenv.ml(535):16814-16832
+                             (after driver/compenv.ml(535):16814-16832
+                               (caml_string_equal filename pattern))))))))
+                 (before driver/compenv.ml(531):16675-16679 1a))))))
+     apply_config_file =
+       (function ppf position
+         (funct-body driver/compenv.ml(537)<ghost>:16856-17397
+           (before driver/compenv.ml(538):16873-17397
+             (let
+               (config_file =
+                  (after driver/compenv.ml(539):16895-16967
+                    (apply (field 3 (global Stdlib__filename!))
+                      (field 1 (global Config!))
+                      "ocaml_compiler_internal_params")))
+               (before driver/compenv.ml(541):16975-17397
+                 (let
+                   (config =
+                      (if
+                        (after driver/compenv.ml(542):16995-17022
+                          (caml_sys_file_exists config_file))
+                        (before driver/compenv.ml(543):17034-17061
+                          (after driver/compenv.ml(543):17034-17061
+                            (apply load_config ppf config_file)))
+                        (before driver/compenv.ml(545):17077-17079 0a)))
+                   (before driver/compenv.ml(547):17087-17397
+                     (let
+                       (config =
+                          (if (isint position)
+                            (before driver/compenv.ml(552):17252-17305
+                              (after driver/compenv.ml(552):17252-17305
+                                (apply (field 35 (global Stdlib__list!))
+                                  (function param
+                                    (funct-body driver/compenv.ml(552):17264-17298
+                                      (let (pattern =a (field 0 param))
+                                        (before driver/compenv.ml(552):17284-17297
+                                          (== pattern 0a)))))
+                                  config)))
+                            (let (filename =a (field 0 position))
+                              (before driver/compenv.ml(550):17163-17210
+                                (after driver/compenv.ml(550):17163-17210
+                                  (apply (field 35 (global Stdlib__list!))
+                                    (after driver/compenv.ml(550):17175-17203
+                                      (apply matching_filename filename))
+                                    config))))))
+                       (before driver/compenv.ml(554):17313-17397
+                         (after driver/compenv.ml(554):17313-17397
+                           (apply (field 14 (global Stdlib__list!))
+                             (function param
+                               (funct-body driver/compenv.ml(554):17323-17386
+                                 (let
+                                   (value =a (field 2 param)
+                                    name =a (field 1 param))
+                                   (before driver/compenv.ml(554):17347-17385
+                                     (after driver/compenv.ml(554):17347-17385
+                                       (apply read_one_param ppf position
+                                         name value))))))
+                             config)))))))))))
+     readenv =
+       (function ppf position
+         (funct-body driver/compenv.ml(557)<ghost>:17411-17662
+           (before driver/compenv.ml(558):17428-17662
+             (seq (setfield_ptr 0 last_include_dirs 0a)
+               (before driver/compenv.ml(559):17455-17662
+                 (seq (setfield_ptr 0 last_ccopts 0a)
+                   (before driver/compenv.ml(560):17476-17662
+                     (seq (setfield_ptr 0 last_ppx 0a)
+                       (before driver/compenv.ml(561):17494-17662
+                         (seq (setfield_ptr 0 last_objfiles 0a)
+                           (before driver/compenv.ml(562):17517-17662
+                             (seq
+                               (after driver/compenv.ml(562):17517-17547
+                                 (apply apply_config_file ppf position))
+                               (before driver/compenv.ml(563):17551-17662
+                                 (seq
+                                   (after driver/compenv.ml(563):17551-17579
+                                     (apply read_OCAMLPARAM ppf position))
+                                   (before driver/compenv.ml(564):17583-17662
+                                     (seq
+                                       (setfield_ptr 0
+                                         (field 26 (global Clflags!))
+                                         (after driver/compenv.ml(564):17597-17625
+                                           (apply (field 36 (global Stdlib!))
+                                             (field 0 last_ccopts)
+                                             (field 0 first_ccopts))))
+                                       (before driver/compenv.ml(565):17629-17662
+                                         (setfield_ptr 0
+                                           (field 32 (global Clflags!))
+                                           (after driver/compenv.ml(565):17640-17662
+                                             (apply
+                                               (field 36 (global Stdlib!))
+                                               (field 0 last_ppx)
+                                               (field 0 first_ppx)))))))))))))))))))))
+     get_objfiles =
+       (function with_ocamlparam
+         (funct-body driver/compenv.ml(567)<ghost>:17681-17815
+           (before driver/compenv.ml(568):17702-17815
+             (if with_ocamlparam
+               (before driver/compenv.ml(569):17730-17785
+                 (after driver/compenv.ml(569):17730-17785
+                   (apply (field 8 (global Stdlib__list!))
+                     (after driver/compenv.ml(569):17739-17785
+                       (apply (field 36 (global Stdlib!))
+                         (field 0 last_objfiles)
+                         (after driver/compenv.ml(569):17757-17784
+                           (apply (field 36 (global Stdlib!))
+                             (field 0 (field 7 (global Clflags!)))
+                             (field 0 first_objfiles))))))))
+               (before driver/compenv.ml(571):17797-17815
+                 (after driver/compenv.ml(571):17797-17815
+                   (apply (field 8 (global Stdlib__list!))
+                     (field 0 (field 7 (global Clflags!))))))))))
+     c_object_of_filename =
+       (function name
+         (funct-body driver/compenv.ml(586)<ghost>:18061-18137
+           (before driver/compenv.ml(587):18070-18137
+             (after driver/compenv.ml(587):18070-18137
+               (apply (field 27 (global Stdlib!))
+                 (after driver/compenv.ml(587):18070-18120
+                   (apply (field 7 (global Stdlib__filename!))
+                     (after driver/compenv.ml(587):18091-18115
+                       (apply (field 12 (global Stdlib__filename!)) name))
+                     ".c"))
+                 (field 41 (global Config!)))))))
+     process_action =
+       (function param action
+         (funct-body driver/compenv.ml(590)<ghost>:18162-19660
+           (let
+             (ocaml_lib_ext =a (field 4 param)
+              ocaml_mod_ext =a (field 3 param)
+              interface =a (field 2 param)
+              implementation =a (field 1 param)
+              ppf =a (field 0 param))
+             (before driver/compenv.ml(591):18236-19660
+               (switch* action
+                case tag 0:
+                 (let (name =a (field 0 action))
+                   (before driver/compenv.ml(593):18294-18484
+                     (seq
+                       (after driver/compenv.ml(593):18294-18327
+                         (apply readenv ppf (makeblock 0 name)))
+                       (before driver/compenv.ml(594):18335-18484
+                         (let
+                           (opref =
+                              (after driver/compenv.ml(594):18347-18365
+                                (apply output_prefix name)))
+                           (before driver/compenv.ml(595):18375-18484
+                             (seq
+                               (after driver/compenv.ml(595):18375-18428
+                                 (apply implementation name opref))
+                               (before driver/compenv.ml(596):18436-18484
+                                 (setfield_ptr 0 (field 7 (global Clflags!))
+                                   (makeblock 0
+                                     (after driver/compenv.ml(596):18448-18471
+                                       (apply (field 27 (global Stdlib!))
+                                         opref ocaml_mod_ext))
+                                     (field 0 (field 7 (global Clflags!)))))))))))))
+                case tag 1:
+                 (let (name =a (field 0 action))
+                   (before driver/compenv.ml(598):18520-18720
+                     (seq
+                       (after driver/compenv.ml(598):18520-18553
+                         (apply readenv ppf (makeblock 0 name)))
+                       (before driver/compenv.ml(599):18561-18720
+                         (let
+                           (opref =
+                              (after driver/compenv.ml(599):18573-18591
+                                (apply output_prefix name)))
+                           (before driver/compenv.ml(600):18601-18720
+                             (seq
+                               (after driver/compenv.ml(600):18601-18649
+                                 (apply interface name opref))
+                               (before driver/compenv.ml(601):18657-18720
+                                 (if (field 0 (field 57 (global Clflags!)))
+                                   (before driver/compenv.ml(601):18679-18720
+                                     (setfield_ptr 0
+                                       (field 7 (global Clflags!))
+                                       (makeblock 0
+                                         (after driver/compenv.ml(601):18691-18707
+                                           (apply (field 27 (global Stdlib!))
+                                             opref ".cmi"))
+                                         (field 0
+                                           (field 7 (global Clflags!))))))
+                                   0a)))))))))
+                case tag 2:
+                 (let (name =a (field 0 action))
+                   (before driver/compenv.ml(603):18752-18925
+                     (seq
+                       (after driver/compenv.ml(603):18752-18785
+                         (apply readenv ppf (makeblock 0 name)))
+                       (before driver/compenv.ml(604):18793-18925
+                         (seq
+                           (setfield_ptr 0 (field 11 (global Location!))
+                             name)
+                           (before driver/compenv.ml(605):18828-18925
+                             (seq
+                               (if
+                                 (!=
+                                   (after driver/compenv.ml(605):18831-18854
+                                     (apply (field 2 (global Ccomp!)) 0a 0a
+                                       0a name))
+                                   0)
+                                 (before driver/compenv.ml(605):18865-18871
+                                   (after driver/compenv.ml(605):18865-18871
+                                     (apply (field 98 (global Stdlib!)) 2)))
+                                 0a)
+                               (before driver/compenv.ml(606):18879-18925
+                                 (setfield_ptr 0 (field 8 (global Clflags!))
+                                   (makeblock 0
+                                     (after driver/compenv.ml(606):18889-18914
+                                       (apply c_object_of_filename name))
+                                     (field 0 (field 8 (global Clflags!)))))))))))))
+                case tag 3:
+                 (let (name =a (field 0 action))
+                   (before driver/compenv.ml(612):19078-19660
+                     (if
+                       (||
+                         (after driver/compenv.ml(612):19081-19121
+                           (apply (field 6 (global Stdlib__filename!)) name
+                             ocaml_mod_ext))
+                         (after driver/compenv.ml(613):19131-19171
+                           (apply (field 6 (global Stdlib__filename!)) name
+                             ocaml_lib_ext)))
+                       (before driver/compenv.ml(614):19185-19214
+                         (setfield_ptr 0 (field 7 (global Clflags!))
+                           (makeblock 0 name
+                             (field 0 (field 7 (global Clflags!))))))
+                       (before driver/compenv.ml(615):19226-19660
+                         (if
+                           (&&
+                             (after driver/compenv.ml(615):19229-19262
+                               (apply (field 6 (global Stdlib__filename!))
+                                 name ".cmi"))
+                             (field 0 (field 57 (global Clflags!))))
+                           (before driver/compenv.ml(616):19293-19322
+                             (setfield_ptr 0 (field 7 (global Clflags!))
+                               (makeblock 0 name
+                                 (field 0 (field 7 (global Clflags!))))))
+                           (before driver/compenv.ml(617):19334-19660
+                             (if
+                               (||
+                                 (after driver/compenv.ml(617):19337-19378
+                                   (apply
+                                     (field 6 (global Stdlib__filename!))
+                                     name (field 41 (global Config!))))
+                                 (after driver/compenv.ml(618):19393-19434
+                                   (apply
+                                     (field 6 (global Stdlib__filename!))
+                                     name (field 43 (global Config!)))))
+                               (before driver/compenv.ml(619):19448-19473
+                                 (setfield_ptr 0 (field 8 (global Clflags!))
+                                   (makeblock 0 name
+                                     (field 0 (field 8 (global Clflags!))))))
+                               (before driver/compenv.ml(620):19485-19660
+                                 (if
+                                   (&&
+                                     (not
+                                       (field 0 (field 94 (global Clflags!))))
+                                     (after driver/compenv.ml(620):19508-19549
+                                       (apply
+                                         (field 6 (global Stdlib__filename!))
+                                         name (field 44 (global Config!)))))
+                                   (before driver/compenv.ml(621):19563-19588
+                                     (setfield_ptr 0
+                                       (field 9 (global Clflags!))
+                                       (makeblock 0 name
+                                         (field 0
+                                           (field 9 (global Clflags!))))))
+                                   (before driver/compenv.ml(623):19608-19660
+                                     (raise
+                                       (after driver/compenv.ml(623):19613-19660
+                                         (makeblock 0
+                                           (field 7 (global Stdlib__arg!))
+                                           (after driver/compenv.ml(623):19621-19659
+                                             (apply
+                                               (field 27 (global Stdlib!))
+                                               "don't know what to do with "
+                                               name)))))))))))))))
+                case tag 4:
+                 (let (names =a (field 0 action))
+                   (before driver/compenv.ml(608):18960-18985
+                     (setfield_ptr 0 (field 8 (global Clflags!))
+                       (after driver/compenv.ml(608):18970-18985
+                         (apply (field 36 (global Stdlib!)) names
+                           (field 0 (field 8 (global Clflags!))))))))
+                case tag 5:
+                 (let (names =a (field 0 action))
+                   (before driver/compenv.ml(610):19017-19042
+                     (setfield_ptr 0 (field 9 (global Clflags!))
+                       (after driver/compenv.ml(610):19027-19042
+                         (apply (field 36 (global Stdlib!)) names
+                           (field 0 (field 9 (global Clflags!)))))))))))))
+     action_of_file =
+       (function name
+         (funct-body driver/compenv.ml(626)<ghost>:19682-19996
+           (before driver/compenv.ml(627):19691-19996
+             (if
+               (||
+                 (after driver/compenv.ml(627):19694-19726
+                   (apply (field 6 (global Stdlib__filename!)) name ".ml"))
+                 (after driver/compenv.ml(628):19732-19765
+                   (apply (field 6 (global Stdlib__filename!)) name ".mlt")))
+               (before driver/compenv.ml(629):19775-19801 (makeblock 0 name))
+               (before driver/compenv.ml(630):19809-19996
+                 (if
+                   (after driver/compenv.ml(630):19812-19863
+                     (apply (field 6 (global Stdlib__filename!)) name
+                       (field 0 (field 19 (global Config!)))))
+                   (before driver/compenv.ml(631):19873-19894
+                     (makeblock 1 name))
+                   (before driver/compenv.ml(632):19902-19996
+                     (if
+                       (after driver/compenv.ml(632):19905-19936
+                         (apply (field 6 (global Stdlib__filename!)) name
+                           ".c"))
+                       (before driver/compenv.ml(633):19946-19963
+                         (makeblock 2 name))
+                       (before driver/compenv.ml(635):19975-19996
+                         (makeblock 3 name))))))))))
+     deferred_actions = (makemutable 0 0a)
+     defer =
+       (function action
+         (funct-body driver/compenv.ml(638)<ghost>:20038-20096
+           (before driver/compenv.ml(639):20049-20096
+             (setfield_ptr 0 deferred_actions
+               (makeblock 0 action (field 0 deferred_actions))))))
+     anonymous =
+       (function filename
+         (funct-body driver/compenv.ml(641)<ghost>:20112-20154
+           (before driver/compenv.ml(641):20123-20154
+             (after driver/compenv.ml(641):20123-20154
+               (apply defer
+                 (after driver/compenv.ml(641):20129-20154
+                   (apply action_of_file filename)))))))
+     impl =
+       (function filename
+         (funct-body driver/compenv.ml(642)<ghost>:20164-20213
+           (before driver/compenv.ml(642):20175-20213
+             (after driver/compenv.ml(642):20175-20213
+               (apply defer (makeblock 0 filename))))))
+     intf =
+       (function filename
+         (funct-body driver/compenv.ml(643)<ghost>:20223-20267
+           (before driver/compenv.ml(643):20234-20267
+             (after driver/compenv.ml(643):20234-20267
+               (apply defer (makeblock 1 filename))))))
+     process_deferred_actions =
+       (function env
+         (funct-body driver/compenv.ml(645)<ghost>:20298-21495
+           (before driver/compenv.ml(646):20306-21495
+             (let
+               (final_output_name = (field 0 (field 11 (global Clflags!))))
+               (before driver/compenv.ml(649):20483-21495
+                 (seq
+                   (if (not (field 0 (field 10 (global Clflags!))))
+                     (before driver/compenv.ml(649):20509-20528
+                       (setfield_ptr 0 (field 11 (global Clflags!)) 0a))
+                     0a)
+                   (before driver/compenv.ml(650):20532-21495
+                     (seq
+                       (if final_output_name
+                         (let (output_name =a (field 0 final_output_name))
+                           (before driver/compenv.ml(654):20622-21171
+                             (if (field 0 (field 10 (global Clflags!)))
+                               (before driver/compenv.ml(654):20644-21171
+                                 (seq
+                                   (if
+                                     (!=
+                                       (after driver/compenv.ml(655):20663-20808
+                                         (apply
+                                           (field 35 (global Stdlib__list!))
+                                           (function param
+                                             (funct-body driver/compenv.ml(655):20675-20790
+                                               (switch param
+                                                case tag 2:
+                                                 (let
+                                                   (name =a (field 0 param))
+                                                   (before driver/compenv.ml(656):20722-20762
+                                                     (after driver/compenv.ml(656):20722-20762
+                                                       (caml_string_notequal
+                                                         (after driver/compenv.ml(656):20722-20747
+                                                           (apply
+                                                             c_object_of_filename
+                                                             name))
+                                                         output_name))))
+                                                default:
+                                                 (before driver/compenv.ml(657):20784-20789
+                                                   0a))))
+                                           (field 0 deferred_actions)))
+                                       0a)
+                                     (before driver/compenv.ml(658):20832-20897
+                                       (after driver/compenv.ml(658):20832-20897
+                                         (apply fatal
+                                           "Options -c and -o are incompatible when compiling C files")))
+                                     0a)
+                                   (before driver/compenv.ml(660):20910-21159
+                                     (if
+                                       (>
+                                         (after driver/compenv.ml(660):20913-21069
+                                           (apply
+                                             (field 0 (global Stdlib__list!))
+                                             (after driver/compenv.ml(660):20925-21069
+                                               (apply
+                                                 (field 35
+                                                   (global Stdlib__list!))
+                                                 (function param
+                                                   (funct-body driver/compenv.ml(660):20938-21050
+                                                     (catch
+                                                       (switch param
+                                                        case tag 0: (exit 44)
+                                                        case tag 1: (exit 44)
+                                                        default: (exit 44))
+                                                      with (44)
+                                                       (before driver/compenv.ml(663):21044-21049
+                                                         0a))))
+                                                 (field 0 deferred_actions)))))
+                                         1)
+                                       (before driver/compenv.ml(664):21091-21159
+                                         (after driver/compenv.ml(664):21091-21159
+                                           (apply fatal
+                                             "Options -c -o are incompatible with compiling multiple files")))
+                                       0a))))
+                               0a)))
+                         (before driver/compenv.ml(652):20585-20587 0a))
+                       (before driver/compenv.ml(667):21182-21495
+                         (seq
+                           (if
+                             (&& (field 0 (field 15 (global Clflags!)))
+                               (after driver/compenv.ml(667):21202-21329
+                                 (apply (field 28 (global Stdlib__list!))
+                                   (function param
+                                     (funct-body driver/compenv.ml(667):21214-21311
+                                       (switch param
+                                        case tag 3:
+                                         (let (name =a (field 0 param))
+                                           (before driver/compenv.ml(668):21257-21291
+                                             (after driver/compenv.ml(668):21257-21291
+                                               (apply
+                                                 (field 6
+                                                   (global Stdlib__filename!))
+                                                 name ".cmxa"))))
+                                        default:
+                                         (before driver/compenv.ml(669):21305-21310
+                                           0a))))
+                                   (field 0 deferred_actions))))
+                             (before driver/compenv.ml(670):21339-21395
+                               (after driver/compenv.ml(670):21339-21395
+                                 (apply fatal
+                                   "Option -a cannot be used with .cmxa input files.")))
+                             0a)
+                           (before driver/compenv.ml(671):21399-21495
+                             (seq
+                               (after driver/compenv.ml(671):21399-21458
+                                 (apply (field 14 (global Stdlib__list!))
+                                   (after driver/compenv.ml(671):21409-21429
+                                     (apply process_action env))
+                                   (after driver/compenv.ml(671):21430-21458
+                                     (apply (field 8 (global Stdlib__list!))
+                                       (field 0 deferred_actions)))))
+                               (before driver/compenv.ml(672):21462-21494
+                                 (setfield_ptr 0 (field 11 (global Clflags!))
+                                   final_output_name)))))))))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 module_of_filename output_prefix extract_output
+        default_output print_version_and_library print_version_string
+        print_standard_library fatal first_ccopts first_ppx
+        first_include_dirs last_include_dirs get_objfiles last_objfiles
+        first_objfiles readenv is_unit_name check_unit_name
+        c_object_of_filename defer anonymous impl intf
+        process_deferred_actions))))

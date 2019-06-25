@@ -1,0 +1,1531 @@
+(setglobal Selection!
+  (let
+    (shared =a
+       [0:
+        #"emit_blockheader" #"effects_of" #"insert_moves" #"mark_c_tailcall"
+        #"insert_move_args" #"select_floatarith" #"select_checkbound"
+        #"mark_instr" #"adjust_types" #"select_allocation" #"emit_fundecl"
+        #"select_checkbound_extra_args" #"extract" #"emit_expr"
+        #"adjust_type" #"extract_core" #"emit_tail" #"regs_for"
+        #"is_immediate" #"select_allocation_args" #"is_simple_expr"
+        #"select_condition" #"emit_extcall_args" #"insert_debug"
+        #"is_immediate_natint" #"insert_op" #"insert" #"emit_stores"
+        #"insert_op_debug" #"about_to_emit_call" #"select_addressing"
+        #"select_store" #"insert_move" #"initial_env" #"insert_move_results"
+        #"select_operation" #"insert_prologue" #"mark_call" #"mark_tailcall"]
+     shared =a [0: #"select_addressing" #"is_immediate"]
+     shared =a [0: #"instr_seq"]
+     shared =a
+       [0:
+        #"select_store" #"select_operation" #"select_floatarith"
+        #"select_addressing" #"mark_c_tailcall" #"is_simple_expr"
+        #"is_immediate_natint" #"is_immediate" #"insert_op_debug"
+        #"insert_moves" #"insert_debug" #"effects_of"]
+     shared =a
+       [0:
+        #"about_to_emit_call" #"adjust_type" #"adjust_types" #"effects_of"
+        #"emit_blockheader" #"emit_expr" #"emit_extcall_args" #"emit_fundecl"
+        #"emit_stores" #"emit_tail" #"extract" #"extract_core" #"initial_env"
+        #"insert" #"insert_debug" #"insert_move" #"insert_move_args"
+        #"insert_move_results" #"insert_moves" #"insert_op"
+        #"insert_op_debug" #"insert_prologue" #"is_simple_expr"
+        #"mark_c_tailcall" #"mark_call" #"mark_instr" #"mark_tailcall"
+        #"regs_for" #"select_allocation" #"select_allocation_args"
+        #"select_checkbound" #"select_checkbound_extra_args"
+        #"select_condition" #"select_operation" #"select_store"])
+    (letrec
+      (select_addr
+         (function exp
+           (funct-body asmcomp/selection.ml(32)<ghost>:1419-3120
+             (before asmcomp/selection.ml(33):1427-3120
+               (catch
+                 (switch exp
+                  case tag 3:
+                   (let (s =a (field 0 exp))
+                     (before asmcomp/selection.ml(34):1472-1491
+                       (if (not (field 0 (field 123 (global Clflags!))))
+                         (before asmcomp/selection.ml(35):1501-1515
+                           (makeblock 0 (*,int) (makeblock 0 s) 0))
+                         (exit 16))))
+                  case tag 12:
+                   (let (*match* =a (field 0 exp))
+                     (catch
+                       (if (isint *match*)
+                         (switch* *match*
+                          case int 0: (exit 16)
+                          case int 1: (exit 17)
+                          case int 2:
+                           (let (*match* =a (field 1 exp))
+                             (if *match*
+                               (let (*match* =a (field 1 *match*))
+                                 (if *match*
+                                   (let (*match* =a (field 0 *match*))
+                                     (switch *match*
+                                      case tag 0:
+                                       (let (*match* =a (field 1 *match*))
+                                         (if *match* (exit 16)
+                                           (let
+                                             (m =a (field 0 *match*)
+                                              arg =a (field 0 *match*))
+                                             (before asmcomp/selection.ml(39):1683-1725
+                                               (let
+                                                 (*match* =
+                                                    (after asmcomp/selection.ml(39):1696-1711
+                                                      (apply select_addr arg))
+                                                  n =a (field 1 *match*)
+                                                  a =a (field 0 *match*))
+                                                 (before asmcomp/selection.ml(39):1715-1725
+                                                   (makeblock 0 (*,int) a
+                                                     (- n m))))))))
+                                      default: (exit 16)))
+                                   (exit 16)))
+                               (exit 16)))
+                          case int 3:
+                           (let (*match* =a (field 1 exp))
+                             (if *match*
+                               (let (arg =a (field 0 *match*))
+                                 (catch
+                                   (let (*match* =a (field 1 *match*))
+                                     (if *match*
+                                       (let (*match* =a (field 0 *match*))
+                                         (switch *match*
+                                          case tag 0:
+                                           (let (mult =a (field 0 *match*))
+                                             (catch
+                                               (let (switcher =a (-2+ mult))
+                                                 (if (isout 6 switcher)
+                                                   (exit 19)
+                                                   (switch* switcher
+                                                    case int 0: (exit 20)
+                                                    case int 1: (exit 19)
+                                                    case int 2: (exit 20)
+                                                    case int 3: (exit 19)
+                                                    case int 4: (exit 19)
+                                                    case int 5: (exit 19)
+                                                    case int 6: (exit 20))))
+                                              with (20)
+                                               (let
+                                                 (*match* =a
+                                                    (field 1 *match*))
+                                                 (if *match* (exit 16)
+                                                   (before asmcomp/selection.ml(48):2109-2235
+                                                     (let
+                                                       (*match* =
+                                                          (after asmcomp/selection.ml(48):2121-2136
+                                                            (apply
+                                                              select_addr
+                                                              arg))
+                                                        *match* =a
+                                                          (field 0 *match*))
+                                                       (switch *match*
+                                                        case tag 1:
+                                                         (let
+                                                           (n =a
+                                                              (field 1
+                                                                *match*)
+                                                            e =a
+                                                              (field 0
+                                                                *match*))
+                                                           (before asmcomp/selection.ml(49):2168-2195
+                                                             (makeblock 0 (*,int)
+                                                               (makeblock 3 (*,int)
+                                                                 e mult)
+                                                               (* n mult))))
+                                                        default:
+                                                         (before asmcomp/selection.ml(50):2209-2225
+                                                           (makeblock 0 (*,int)
+                                                             (makeblock 1
+                                                               exp)
+                                                             0)))))))))
+                                          default: (exit 19)))
+                                       (exit 16)))
+                                  with (19)
+                                   (switch arg
+                                    case tag 0:
+                                     (let (mult =a (field 0 arg))
+                                       (catch
+                                         (let (switcher =a (-2+ mult))
+                                           (if (isout 6 switcher) (exit 16)
+                                             (switch* switcher
+                                              case int 0: (exit 21)
+                                              case int 1: (exit 16)
+                                              case int 2: (exit 21)
+                                              case int 3: (exit 16)
+                                              case int 4: (exit 16)
+                                              case int 5: (exit 16)
+                                              case int 6: (exit 21))))
+                                        with (21)
+                                         (let
+                                           (*match* =a (field 1 *match*)
+                                            *match* =a (field 1 *match*))
+                                           (if *match* (exit 16)
+                                             (let (arg =a (field 0 *match*))
+                                               (before asmcomp/selection.ml(53):2302-2428
+                                                 (let
+                                                   (*match* =
+                                                      (after asmcomp/selection.ml(53):2314-2329
+                                                        (apply select_addr
+                                                          arg))
+                                                    *match* =a
+                                                      (field 0 *match*))
+                                                   (switch *match*
+                                                    case tag 1:
+                                                     (let
+                                                       (n =a
+                                                          (field 1 *match*)
+                                                        e =a
+                                                          (field 0 *match*))
+                                                       (before asmcomp/selection.ml(54):2361-2388
+                                                         (makeblock 0 (*,int)
+                                                           (makeblock 3 (*,int)
+                                                             e mult)
+                                                           (* n mult))))
+                                                    default:
+                                                     (before asmcomp/selection.ml(55):2402-2418
+                                                       (makeblock 0 (*,int)
+                                                         (makeblock 1 exp) 0))))))))))
+                                    default: (exit 16))))
+                               (exit 16)))
+                          case int 4: (exit 16)
+                          case int 5: (exit 16)
+                          case int 6: (exit 16)
+                          case int 7: (exit 16)
+                          case int 8: (exit 16)
+                          case int 9: (exit 16)
+                          case int 10:
+                           (let (*match* =a (field 1 exp))
+                             (if *match*
+                               (let (*match* =a (field 1 *match*))
+                                 (if *match*
+                                   (let (*match* =a (field 0 *match*))
+                                     (switch *match*
+                                      case tag 0:
+                                       (let
+                                         (shift =a (field 0 *match*)
+                                          arg =a (field 0 *match*)
+                                          switcher =a (-1+ shift))
+                                         (if (isout 2 switcher) (exit 16)
+                                           (let
+                                             (*match* =a (field 1 *match*))
+                                             (if *match* (exit 16)
+                                               (before asmcomp/selection.ml(43):1906-2042
+                                                 (let
+                                                   (*match* =
+                                                      (after asmcomp/selection.ml(43):1918-1933
+                                                        (apply select_addr
+                                                          arg))
+                                                    *match* =a
+                                                      (field 0 *match*))
+                                                   (switch *match*
+                                                    case tag 1:
+                                                     (let
+                                                       (n =a
+                                                          (field 1 *match*)
+                                                        e =a
+                                                          (field 0 *match*))
+                                                       (before asmcomp/selection.ml(44):1965-2002
+                                                         (makeblock 0 (*,int)
+                                                           (makeblock 3 (*,int)
+                                                             e (lsl 1 shift))
+                                                           (lsl n shift))))
+                                                    default:
+                                                     (before asmcomp/selection.ml(45):2016-2032
+                                                       (makeblock 0 (*,int)
+                                                         (makeblock 1 exp) 0)))))))))
+                                      default: (exit 16)))
+                                   (exit 16)))
+                               (exit 16)))
+                          case int 11: (exit 16)
+                          case int 12: (exit 16)
+                          case int 13: (exit 17)
+                          case int 14: (exit 17)
+                          case int 15: (exit 16)
+                          case int 16: (exit 16)
+                          case int 17: (exit 16)
+                          case int 18: (exit 16)
+                          case int 19: (exit 16)
+                          case int 20: (exit 16)
+                          case int 21: (exit 16)
+                          case int 22: (exit 16)
+                          case int 23: (exit 16))
+                         (exit 16))
+                      with (17)
+                       (let (*match* =a (field 1 exp))
+                         (if *match*
+                           (let
+                             (arg =a (field 0 *match*)
+                              *match* =a (field 1 *match*))
+                             (if *match*
+                               (let (*match* =a (field 0 *match*))
+                                 (switch *match*
+                                  case tag 0:
+                                   (let (*match* =a (field 1 *match*))
+                                     (if *match* (exit 16)
+                                       (let (m =a (field 0 *match*))
+                                         (before asmcomp/selection.ml(37):1587-1629
+                                           (let
+                                             (*match* =
+                                                (after asmcomp/selection.ml(37):1600-1615
+                                                  (apply select_addr arg))
+                                              n =a (field 1 *match*)
+                                              a =a (field 0 *match*))
+                                             (before asmcomp/selection.ml(37):1619-1629
+                                               (makeblock 0 (*,int) a
+                                                 (+ n m))))))))
+                                  default:
+                                   (switch arg
+                                    case tag 0:
+                                     (let
+                                       (*match* =a (field 1 *match*)
+                                        *match* =a (field 1 *match*))
+                                       (if *match* (exit 16)
+                                         (let
+                                           (arg =a (field 0 *match*)
+                                            m =a (field 0 arg))
+                                           (before asmcomp/selection.ml(41):1797-1839
+                                             (let
+                                               (*match* =
+                                                  (after asmcomp/selection.ml(41):1810-1825
+                                                    (apply select_addr arg))
+                                                n =a (field 1 *match*)
+                                                a =a (field 0 *match*))
+                                               (before asmcomp/selection.ml(41):1829-1839
+                                                 (makeblock 0 (*,int) a
+                                                   (+ n m))))))))
+                                    default:
+                                     (let
+                                       (*match* =a (field 1 *match*)
+                                        *match* =a (field 1 *match*))
+                                       (if *match* (exit 16)
+                                         (let
+                                           (arg1 =a arg
+                                            arg2 =a (field 0 *match*))
+                                           (before asmcomp/selection.ml(58):2488-3086
+                                             (let
+                                               (*match* =
+                                                  (after asmcomp/selection.ml(58):2501-2517
+                                                    (apply select_addr arg1))
+                                                *match* =
+                                                  (after asmcomp/selection.ml(58):2519-2535
+                                                    (apply select_addr arg2))
+                                                *match* = *match*
+                                                *match* = *match*
+                                                *match* =a (field 0 *match*))
+                                               (catch
+                                                 (catch
+                                                   (catch
+                                                     (switch *match*
+                                                      case tag 1:
+                                                       (let
+                                                         (*match* =a
+                                                            (field 0 *match*)
+                                                          n1 =a
+                                                            (field 1 *match*)
+                                                          e1 =a
+                                                            (field 0 *match*))
+                                                         (switch *match*
+                                                          case tag 1:
+                                                           (let
+                                                             (n2 =a
+                                                                (field 1
+                                                                  *match*)
+                                                              e2 =a
+                                                                (field 0
+                                                                  *match*))
+                                                             (before asmcomp/selection.ml(60):2606-2629
+                                                               (makeblock 0 (*,int)
+                                                                 (makeblock 2
+                                                                   e1 e2)
+                                                                 (+ n1 n2))))
+                                                          case tag 3:
+                                                           (let
+                                                             (n1 =a[int] n1
+                                                              e1 =a e1
+                                                              n2 =a
+                                                                (field 1
+                                                                  *match*)
+                                                              scale =a
+                                                                (field 1
+                                                                  *match*)
+                                                              e2 =a
+                                                                (field 0
+                                                                  *match*))
+                                                             (before asmcomp/selection.ml(62):2701-2737
+                                                               (makeblock 0 (*,int)
+                                                                 (makeblock 4 (*,*,int)
+                                                                   e1 e2
+                                                                   scale)
+                                                                 (+ n1 n2))))
+                                                          default: (exit 13)))
+                                                      case tag 3:
+                                                       (let
+                                                         (*match* =a
+                                                            (field 0 *match*)
+                                                          n1 =a
+                                                            (field 1 *match*)
+                                                          scale =a
+                                                            (field 1 *match*)
+                                                          e1 =a
+                                                            (field 0 *match*))
+                                                         (switch *match*
+                                                          case tag 1:
+                                                           (let
+                                                             (n2 =a
+                                                                (field 1
+                                                                  *match*)
+                                                              e2 =a
+                                                                (field 0
+                                                                  *match*))
+                                                             (before asmcomp/selection.ml(64):2809-2845
+                                                               (makeblock 0 (*,int)
+                                                                 (makeblock 4 (*,*,int)
+                                                                   e2 e1
+                                                                   scale)
+                                                                 (+ n1 n2))))
+                                                          case tag 3:
+                                                           (exit 15)
+                                                          default: (exit 14)))
+                                                      default: (exit 15))
+                                                    with (15)
+                                                     (let
+                                                       (*match* =a
+                                                          (field 0 *match*))
+                                                       (switch *match*
+                                                        case tag 3:
+                                                         (let
+                                                           (n2 =a
+                                                              (field 1
+                                                                *match*)
+                                                            scale =a
+                                                              (field 1
+                                                                *match*)
+                                                            e2 =a
+                                                              (field 0
+                                                                *match*))
+                                                           (before asmcomp/selection.ml(66):2902-2935
+                                                             (makeblock 0 (*,int)
+                                                               (makeblock 4 (*,*,int)
+                                                                 arg1 e2
+                                                                 scale)
+                                                               n2)))
+                                                        default: (exit 14))))
+                                                  with (14)
+                                                   (switch *match*
+                                                    case tag 3:
+                                                     (let
+                                                       (n1 =a
+                                                          (field 1 *match*)
+                                                        scale =a
+                                                          (field 1 *match*)
+                                                        e1 =a
+                                                          (field 0 *match*))
+                                                       (before asmcomp/selection.ml(68):2992-3025
+                                                         (makeblock 0 (*,int)
+                                                           (makeblock 4 (*,*,int)
+                                                             arg2 e1 scale)
+                                                           n1)))
+                                                    default: (exit 13)))
+                                                with (13)
+                                                 (before asmcomp/selection.ml(70):3055-3076
+                                                   (makeblock 0 (*,int)
+                                                     (makeblock 2 arg1 arg2)
+                                                     0)))))))))))
+                               (exit 16)))
+                           (exit 16)))))
+                  default: (exit 16))
+                with (16)
+                 (let (arg =a exp)
+                   (before asmcomp/selection.ml(73):3104-3120
+                     (makeblock 0 (*,int) (makeblock 1 arg) 0))))))))
+      (let
+        (Use_default =
+           (makeblock 248 "Selection.Use_default" (caml_fresh_oo_id 0))
+         rax =
+           (after asmcomp/selection.ml(79):3214-3224
+             (apply (field 6 (global Proc!)) 0))
+         rcx =
+           (after asmcomp/selection.ml(80):3235-3245
+             (apply (field 6 (global Proc!)) 5))
+         rdx =
+           (after asmcomp/selection.ml(81):3256-3266
+             (apply (field 6 (global Proc!)) 4))
+         pseudoregs_for_operation =
+           (function op arg res
+             (funct-body asmcomp/selection.ml(83)<ghost>:3297-4673
+               (before asmcomp/selection.ml(84):3312-4673
+                 (catch
+                   (catch
+                     (catch
+                       (switch op
+                        case int 3: (exit 25)
+                        case int 4: (exit 25)
+                        case int 5: (exit 24)
+                        case int 6: (exit 24)
+                        case int 7: (exit 24)
+                        case int 8: (exit 24)
+                        case tag 12:
+                         (let (*match* =a (field 0 op))
+                           (catch
+                             (if (isint *match*)
+                               (switch* *match*
+                                case int 0: (exit 24)
+                                case int 1: (exit 24)
+                                case int 2: (exit 24)
+                                case int 3:
+                                 (before asmcomp/selection.ml(100):4046-4077
+                                   (makeblock 0
+                                     (makearray[addr] rax
+                                       (after asmcomp/selection.ml(100):4055-4062
+                                         (array.get[addr] arg 1)))
+                                     (makearray[addr] rdx)))
+                                case int 4:
+                                 (before asmcomp/selection.ml(112):4526-4553
+                                   (makeblock 0 (makearray[addr] rax rcx)
+                                     (makearray[addr] rax)))
+                                case int 5:
+                                 (before asmcomp/selection.ml(114):4580-4607
+                                   (makeblock 0 (makearray[addr] rax rcx)
+                                     (makearray[addr] rdx)))
+                                case int 6: (exit 24)
+                                case int 7: (exit 24)
+                                case int 8: (exit 24)
+                                case int 9: (exit 27)
+                                case int 10: (exit 27)
+                                case int 11: (exit 27))
+                               (exit 26))
+                            with (27)
+                             (before asmcomp/selection.ml(107):4304-4327
+                               (makeblock 0
+                                 (makearray[addr]
+                                   (after asmcomp/selection.ml(107):4307-4314
+                                     (array.get[addr] res 0))
+                                   rcx)
+                                 res))))
+                        case tag 13:
+                         (let (*match* =a (field 0 op))
+                           (if (isint *match*)
+                             (let (switcher =a (-3+ *match*))
+                               (if (isout 2 switcher) (exit 25) (exit 26)))
+                             (exit 26)))
+                        case tag 14:
+                         (let (*match* =a (field 0 op))
+                           (switch *match*
+                            case tag 3:
+                             (before asmcomp/selection.ml(102):4122-4195
+                               (let
+                                 (arg' =
+                                    (after asmcomp/selection.ml(102):4133-4147
+                                      (apply
+                                        (field 7 (global Stdlib__array!))
+                                        arg)))
+                                 (before asmcomp/selection.ml(103):4157-4195
+                                   (seq
+                                     (after asmcomp/selection.ml(103):4157-4176
+                                       (array.set[addr] arg' 0
+                                         (after asmcomp/selection.ml(103):4169-4176
+                                           (array.get[addr] res 0))))
+                                     (before asmcomp/selection.ml(104):4184-4195
+                                       (makeblock 0 arg' res))))))
+                            case tag 4:
+                             (let
+                               (*match* =a (field 0 *match*)
+                                switcher =a (-32+ *match*))
+                               (if (not (isout 32 switcher))
+                                 (let (switcher =a (-1+ switcher))
+                                   (if (isout 30 switcher) (exit 25)
+                                     (exit 26)))
+                                 (if (!= switcher -16) (exit 26)
+                                   (before asmcomp/selection.ml(96):3906-3928
+                                     (makeblock 0 (makearray[addr] rax)
+                                       (makearray[addr] rax))))))
+                            default: (exit 26)))
+                        default: (exit 26))
+                      with (26)
+                       (before asmcomp/selection.ml(116):4656-4673
+                         (raise
+                           (after asmcomp/selection.ml(116):4662-4673
+                             Use_default))))
+                    with (24)
+                     (before asmcomp/selection.ml(87):3478-3505
+                       (makeblock 0
+                         (makearray[addr]
+                           (after asmcomp/selection.ml(87):3481-3488
+                             (array.get[addr] res 0))
+                           (after asmcomp/selection.ml(87):3490-3497
+                             (array.get[addr] arg 1)))
+                         res)))
+                  with (25)
+                   (before asmcomp/selection.ml(92):3703-3713
+                     (makeblock 0 res res))))))
+         inline_ops =
+           [0:
+            "sqrt"
+            [0:
+             "caml_bswap16_direct"
+             [0:
+              "caml_int32_direct_bswap"
+              [0:
+               "caml_int64_direct_bswap"
+               [0: "caml_nativeint_direct_bswap" 0a]]]]])
+        (letrec
+          (selector
+             (let
+               (selector_init =
+                  (function class
+                    (let
+                      (ids =
+                         (apply (field 7 (global CamlinternalOO!)) class
+                           shared)
+                       select_store =o (field 0 ids)
+                       select_operation =o (field 1 ids)
+                       select_floatarith =o (field 2 ids)
+                       select_addressing =o (field 3 ids)
+                       mark_c_tailcall =o (field 4 ids)
+                       is_simple_expr =o (field 5 ids)
+                       is_immediate_natint =o (field 6 ids)
+                       is_immediate =o (field 7 ids)
+                       insert_op_debug =o (field 8 ids)
+                       insert_moves =o (field 9 ids)
+                       insert_debug =o (field 10 ids)
+                       effects_of =o (field 11 ids)
+                       inh =
+                         (apply (field 17 (global CamlinternalOO!)) class
+                           shared shared shared
+                           (field 0 (global Spacetime_profiling!)) 1a)
+                       obj_init =o (field 0 inh)
+                       effects_of =o (field 5 inh)
+                       insert_op_debug =o (field 22 inh)
+                       is_simple_expr =o (field 24 inh)
+                       select_operation =o (field 35 inh)
+                       select_store =o (field 36 inh))
+                      (seq
+                        (apply (field 10 (global CamlinternalOO!)) class
+                          (makeblock 0 is_immediate
+                            (function self-1 n[int]
+                              (funct-body asmcomp/selection.ml(130)<ghost>:5061-5106
+                                (before asmcomp/selection.ml(130):5065-5106
+                                  (&& (<= n 2147483647)
+                                    (>= n (- -1 2147483647))))))
+                            is_immediate_natint
+                            (function self-1 n[nativeint]
+                              (funct-body asmcomp/selection.ml(134)<ghost>:5231-5272
+                                (before asmcomp/selection.ml(134):5235-5272
+                                  (&& (Nativeint.<= n 2147483647n)
+                                    (Nativeint.>= n -2147483648n)))))
+                            is_simple_expr
+                            (function self-1 e
+                              (funct-body asmcomp/selection.ml(136)<ghost>:5297-5531
+                                (before asmcomp/selection.ml(137):5303-5531
+                                  (catch
+                                    (switch e
+                                     case tag 12:
+                                      (let (*match* =a (field 0 e))
+                                        (switch *match*
+                                         case tag 1:
+                                          (let
+                                            (args =a (field 1 e)
+                                             fn =a (field 0 *match*))
+                                            (before asmcomp/selection.ml(139):5366-5388
+                                              (if
+                                                (after asmcomp/selection.ml(139):5366-5388
+                                                  (apply
+                                                    (field 31
+                                                      (global Stdlib__list!))
+                                                    fn inline_ops))
+                                                (before asmcomp/selection.ml(141):5456-5493
+                                                  (after asmcomp/selection.ml(141):5456-5493
+                                                    (apply
+                                                      (field 27
+                                                        (global Stdlib__list!))
+                                                      (after asmcomp/selection.ml(141):5469-5488
+                                                        (sendself self-1
+                                                          is_simple_expr))
+                                                      args)))
+                                                (exit 68))))
+                                         default: (exit 68)))
+                                     default: (exit 68))
+                                   with (68)
+                                    (before asmcomp/selection.ml(143):5509-5531
+                                      (after asmcomp/selection.ml(143):5509-5531
+                                        (apply
+                                          (after asmcomp/selection.ml(143):5509-5529
+                                            (apply is_simple_expr self-1))
+                                          e)))))))
+                            effects_of
+                            (function self-1 e
+                              (funct-body asmcomp/selection.ml(145)<ghost>:5552-5750
+                                (before asmcomp/selection.ml(146):5558-5750
+                                  (catch
+                                    (switch e
+                                     case tag 12:
+                                      (let (*match* =a (field 0 e))
+                                        (switch *match*
+                                         case tag 1:
+                                          (let
+                                            (args =a (field 1 e)
+                                             fn =a (field 0 *match*))
+                                            (before asmcomp/selection.ml(148):5620-5642
+                                              (if
+                                                (after asmcomp/selection.ml(148):5620-5642
+                                                  (apply
+                                                    (field 31
+                                                      (global Stdlib__list!))
+                                                    fn inline_ops))
+                                                (before asmcomp/selection.ml(149):5652-5716
+                                                  (after asmcomp/selection.ml(149):5652-5716
+                                                    (apply
+                                                      (field 7
+                                                        (field 5
+                                                          (global Selectgen!)))
+                                                      args
+                                                      (after asmcomp/selection.ml(149):5701-5716
+                                                        (sendself self-1
+                                                          effects_of)))))
+                                                (exit 67))))
+                                         default: (exit 67)))
+                                     default: (exit 67))
+                                   with (67)
+                                    (before asmcomp/selection.ml(151):5732-5750
+                                      (after asmcomp/selection.ml(151):5732-5750
+                                        (apply
+                                          (after asmcomp/selection.ml(151):5732-5748
+                                            (apply effects_of self-1))
+                                          e)))))))
+                            select_addressing
+                            (function self-1 _chunk exp
+                              (funct-body asmcomp/selection.ml(153)<ghost>:5777-6265
+                                (before asmcomp/selection.ml(154):5792-6265
+                                  (let
+                                    (*match* =
+                                       (after asmcomp/selection.ml(154):5805-5820
+                                         (apply select_addr exp))
+                                     d =a (field 1 *match*)
+                                     a =a (field 0 *match*))
+                                    (before asmcomp/selection.ml(156):5890-6265
+                                      (if
+                                        (not
+                                          (after asmcomp/selection.ml(156):5897-5920
+                                            (sendself self-1 is_immediate d)))
+                                        (before asmcomp/selection.ml(157):5928-5945
+                                          (makeblock 0 [1: 0] exp))
+                                        (before asmcomp/selection.ml(158):5953-6265
+                                          (switch* a
+                                           case tag 0:
+                                            (let (s =a (field 0 a))
+                                              (before asmcomp/selection.ml(160):5993-6018
+                                                (makeblock 0
+                                                  (makeblock 0 (*,int) s d)
+                                                  [11: 0a])))
+                                           case tag 1:
+                                            (let (e =a (field 0 a))
+                                              (before asmcomp/selection.ml(162):6046-6061
+                                                (makeblock 0
+                                                  (makeblock 1 (int) d) e)))
+                                           case tag 2:
+                                            (let
+                                              (e2 =a (field 1 a)
+                                               e1 =a (field 0 a))
+                                              (before asmcomp/selection.ml(164):6092-6121
+                                                (makeblock 0
+                                                  (makeblock 2 (int) d)
+                                                  (makeblock 11
+                                                    (makeblock 0 e1
+                                                      (makeblock 0 e2 0a))))))
+                                           case tag 3:
+                                            (let
+                                              (scale =a (field 1 a)
+                                               e =a (field 0 a))
+                                              (before asmcomp/selection.ml(166):6156-6178
+                                                (makeblock 0
+                                                  (makeblock 3 (int,int)
+                                                    scale d)
+                                                  e)))
+                                           case tag 4:
+                                            (let
+                                              (scale =a (field 2 a)
+                                               e2 =a (field 1 a)
+                                               e1 =a (field 0 a))
+                                              (before asmcomp/selection.ml(168):6222-6265
+                                                (makeblock 0
+                                                  (makeblock 4 (int,int)
+                                                    scale d)
+                                                  (makeblock 11
+                                                    (makeblock 0 e1
+                                                      (makeblock 0 e2 0a))))))))))))))
+                            select_store
+                            (function self-1 is_assign addr exp
+                              (funct-body asmcomp/selection.ml(170)<ghost>:6288-7052
+                                (before asmcomp/selection.ml(171):6311-7052
+                                  (catch
+                                    (switch exp
+                                     case tag 0:
+                                      (let (n =a (field 0 exp))
+                                        (before asmcomp/selection.ml(172):6356-6375
+                                          (if
+                                            (after asmcomp/selection.ml(172):6356-6375
+                                              (sendself self-1 is_immediate
+                                                n))
+                                            (before asmcomp/selection.ml(173):6385-6456
+                                              (makeblock 0
+                                                (makeblock 14
+                                                  (makeblock 1 (nativeint,*,*)
+                                                    (Nativeint.of_int n) addr
+                                                    is_assign))
+                                                [11: 0a]))
+                                            (exit 63))))
+                                     case tag 1:
+                                      (let (n =a (field 0 exp))
+                                        (before asmcomp/selection.ml(174):6492-6518
+                                          (if
+                                            (after asmcomp/selection.ml(174):6492-6518
+                                              (sendself self-1
+                                                is_immediate_natint n))
+                                            (before asmcomp/selection.ml(175):6528-6582
+                                              (makeblock 0
+                                                (makeblock 14
+                                                  (makeblock 1 (nativeint,*,*)
+                                                    n addr is_assign))
+                                                [11: 0a]))
+                                            (exit 63))))
+                                     case tag 4:
+                                      (let (n =a (field 0 exp))
+                                        (before asmcomp/selection.ml(179):6771-6790
+                                          (if
+                                            (after asmcomp/selection.ml(179):6771-6790
+                                              (sendself self-1 is_immediate
+                                                n))
+                                            (before asmcomp/selection.ml(180):6800-6871
+                                              (makeblock 0
+                                                (makeblock 14
+                                                  (makeblock 1 (nativeint,*,*)
+                                                    (Nativeint.of_int n) addr
+                                                    is_assign))
+                                                [11: 0a]))
+                                            (exit 63))))
+                                     case tag 5:
+                                      (let (n =a (field 0 exp))
+                                        (before asmcomp/selection.ml(181):6909-6935
+                                          (if
+                                            (after asmcomp/selection.ml(181):6909-6935
+                                              (sendself self-1
+                                                is_immediate_natint n))
+                                            (before asmcomp/selection.ml(182):6945-6999
+                                              (makeblock 0
+                                                (makeblock 14
+                                                  (makeblock 1 (nativeint,*,*)
+                                                    n addr is_assign))
+                                                [11: 0a]))
+                                            (exit 63))))
+                                     case tag 6:
+                                      (let (n =a (field 0 exp))
+                                        (before asmcomp/selection.ml(177):6622-6672
+                                          (if
+                                            (&&
+                                              (after asmcomp/selection.ml(177):6622-6648
+                                                (sendself self-1
+                                                  is_immediate_natint n))
+                                              (not
+                                                (field 52 (global Config!))))
+                                            (before asmcomp/selection.ml(178):6682-6736
+                                              (makeblock 0
+                                                (makeblock 14
+                                                  (makeblock 1 (nativeint,*,*)
+                                                    n addr is_assign))
+                                                [11: 0a]))
+                                            (exit 63))))
+                                     default: (exit 63))
+                                   with (63)
+                                    (before asmcomp/selection.ml(184):7015-7052
+                                      (after asmcomp/selection.ml(184):7015-7052
+                                        (apply
+                                          (after asmcomp/selection.ml(184):7015-7033
+                                            (apply select_store self-1))
+                                          is_assign addr exp)))))))
+                            select_operation
+                            (function self-1 op args dbg
+                              (funct-body asmcomp/selection.ml(186)<ghost>:7079-9215
+                                (before asmcomp/selection.ml(187):7095-9215
+                                  (catch
+                                    (catch
+                                      (catch
+                                        (switch op
+                                         case int 1: (exit 59)
+                                         case int 2: (exit 59)
+                                         case int 4:
+                                          (before asmcomp/selection.ml(233):8903-8923
+                                            (makeblock 0 [12: 3a] args))
+                                         case int 12:
+                                          (before asmcomp/selection.ml(235):8942-9171
+                                            (catch
+                                              (if args
+                                                (let
+                                                  (*match* =a (field 0 args))
+                                                  (switch *match*
+                                                   case tag 12:
+                                                    (let
+                                                      (*match* =a
+                                                         (field 0 *match*))
+                                                      (if (isint *match*)
+                                                        (if (!= *match* 10)
+                                                          (exit 58)
+                                                          (let
+                                                            (*match* =a
+                                                               (field 1
+                                                                 *match*))
+                                                            (if *match*
+                                                              (let
+                                                                (*match* =a
+                                                                   (field 1
+                                                                    *match*))
+                                                                (if *match*
+                                                                  (let
+                                                                    (*match* =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (switch *match*
+                                                                    case tag 0:
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (if
+                                                                    (!=
+                                                                    *match*
+                                                                    32)
+                                                                    (exit 58)
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 1
+                                                                    *match*))
+                                                                    (if
+                                                                    *match*
+                                                                    (exit 58)
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 1
+                                                                    args))
+                                                                    (if
+                                                                    *match*
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (switch *match*
+                                                                    case tag 0:
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (if
+                                                                    (!=
+                                                                    *match*
+                                                                    32)
+                                                                    (exit 58)
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 1
+                                                                    *match*))
+                                                                    (if
+                                                                    *match*
+                                                                    (exit 58)
+                                                                    (let
+                                                                    (k =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/selection.ml(238):9084-9111
+                                                                    (makeblock 0
+                                                                    [14: 1a]
+                                                                    (makeblock 0
+                                                                    k 0a))))))))
+                                                                    default:
+                                                                    (exit 58)))
+                                                                    (exit 58)))))))
+                                                                    default:
+                                                                    (exit 58)))
+                                                                  (exit 58)))
+                                                              (exit 58))))
+                                                        (exit 58)))
+                                                   default: (exit 58)))
+                                                (exit 58))
+                                             with (58)
+                                              (before asmcomp/selection.ml(239):9127-9161
+                                                (after asmcomp/selection.ml(239):9127-9161
+                                                  (apply
+                                                    (after asmcomp/selection.ml(239):9127-9149
+                                                      (apply select_operation
+                                                        self-1))
+                                                    op args dbg)))))
+                                         case int 13: (exit 59)
+                                         case int 14: (exit 59)
+                                         case int 17:
+                                          (before asmcomp/selection.ml(197):7477-7525
+                                            (after asmcomp/selection.ml(197):7477-7525
+                                              (sendself self-1
+                                                select_floatarith 1a 5a 0a
+                                                args)))
+                                         case int 18:
+                                          (before asmcomp/selection.ml(199):7545-7594
+                                            (after asmcomp/selection.ml(199):7545-7594
+                                              (sendself self-1
+                                                select_floatarith 0a 6a 1a
+                                                args)))
+                                         case int 19:
+                                          (before asmcomp/selection.ml(201):7614-7662
+                                            (after asmcomp/selection.ml(201):7614-7662
+                                              (sendself self-1
+                                                select_floatarith 1a 7a 2a
+                                                args)))
+                                         case int 20:
+                                          (before asmcomp/selection.ml(203):7682-7731
+                                            (after asmcomp/selection.ml(203):7682-7731
+                                              (sendself self-1
+                                                select_floatarith 0a 8a 3a
+                                                args)))
+                                         case tag 1:
+                                          (let (*match* =a (field 0 op))
+                                            (stringswitch *match*
+                                             case "caml_bswap16_direct":
+                                              (before asmcomp/selection.ml(225):8549-8578
+                                                (makeblock 0 [14: [4: 16]]
+                                                  args))
+                                             case "caml_int32_direct_bswap":
+                                              (before asmcomp/selection.ml(227):8637-8666
+                                                (makeblock 0 [14: [4: 32]]
+                                                  args))
+                                             case "caml_int64_direct_bswap":
+                                              (exit 60)
+                                             case "caml_nativeint_direct_bswap":
+                                              (exit 60)
+                                             case "sqrt":
+                                              (let (*match* =a (field 2 op))
+                                                (if *match* (exit 61)
+                                                  (before asmcomp/selection.ml(205):7774-8066
+                                                    (catch
+                                                      (if args
+                                                        (let
+                                                          (arg =a
+                                                             (field 0 args))
+                                                          (catch
+                                                            (switch arg
+                                                             case tag 12:
+                                                              (let
+                                                                (*match* =a
+                                                                   (field 0
+                                                                    arg))
+                                                                (switch *match*
+                                                                 case tag 2:
+                                                                  (let
+                                                                    (chunk =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (if
+                                                                    (>= chunk
+                                                                    9)
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 1
+                                                                    arg))
+                                                                    (if
+                                                                    *match*
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 1
+                                                                    *match*))
+                                                                    (if
+                                                                    *match*
+                                                                    (exit 52)
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 1
+                                                                    args))
+                                                                    (if
+                                                                    *match*
+                                                                    (exit 51)
+                                                                    (let
+                                                                    (loc =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/selection.ml(207):7873-7972
+                                                                    (let
+                                                                    (*match* =
+                                                                    (after asmcomp/selection.ml(207):7891-7923
+                                                                    (sendself
+                                                                    self-1
+                                                                    select_addressing
+                                                                    chunk
+                                                                    loc))
+                                                                    arg =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    addr =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/selection.ml(208):7936-7972
+                                                                    (makeblock 0
+                                                                    (makeblock 14
+                                                                    (makeblock 5
+                                                                    addr))
+                                                                    (makeblock 0
+                                                                    arg 0a))))))))))
+                                                                    (exit 52)))
+                                                                    (exit 52)))
+                                                                 default:
+                                                                  (exit 52)))
+                                                             default:
+                                                              (exit 52))
+                                                           with (52)
+                                                            (let
+                                                              (*match* =a
+                                                                 (field 1
+                                                                   args))
+                                                              (if *match*
+                                                                (exit 51)
+                                                                (before asmcomp/selection.ml(210):7998-8023
+                                                                  (makeblock 0
+                                                                    [14: 0a]
+                                                                    (makeblock 0
+                                                                    arg 0a)))))))
+                                                        (exit 51))
+                                                     with (51)
+                                                      (before asmcomp/selection.ml(212):8045-8057
+                                                        (raise
+                                                          (after asmcomp/selection.ml(212):8045-8057
+                                                            (makeblock 0
+                                                              (global Assert_failure!)
+                                                              [0:
+                                                               "asmcomp/selection.ml"
+                                                               212 9]))))))))
+                                             default: (exit 61)))
+                                         case tag 3:
+                                          (let
+                                            (chunk =a (field 0 op)
+                                             switcher =a (-6+ chunk))
+                                            (if (isout 1 switcher) (exit 61)
+                                              (before asmcomp/selection.ml(216):8162-8494
+                                                (catch
+                                                  (if args
+                                                    (let
+                                                      (*match* =a
+                                                         (field 1 args))
+                                                      (if *match*
+                                                        (let
+                                                          (*match* =a
+                                                             (field 0
+                                                               *match*))
+                                                          (switch *match*
+                                                           case tag 12:
+                                                            (let
+                                                              (*match* =a
+                                                                 (field 0
+                                                                   *match*))
+                                                              (if
+                                                                (isint
+                                                                  *match*)
+                                                                (if
+                                                                  (!= *match*
+                                                                    1)
+                                                                  (exit 57)
+                                                                  (let
+                                                                    (*match* =a
+                                                                    (field 1
+                                                                    *match*))
+                                                                    (if
+                                                                    *match*
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (switch *match*
+                                                                    case tag 12:
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (switch *match*
+                                                                    case tag 2:
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 1
+                                                                    *match*))
+                                                                    (if
+                                                                    *match*
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 1
+                                                                    *match*))
+                                                                    (if
+                                                                    *match*
+                                                                    (exit 57)
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 1
+                                                                    *match*))
+                                                                    (if
+                                                                    *match*
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (switch *match*
+                                                                    case tag 0:
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 1
+                                                                    *match*))
+                                                                    (if
+                                                                    *match*
+                                                                    (exit 57)
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 1
+                                                                    *match*))
+                                                                    (if
+                                                                    *match*
+                                                                    (exit 57)
+                                                                    (let
+                                                                    (n =a
+                                                                    (field 0
+                                                                    *match*)
+                                                                    loc' =a
+                                                                    (field 0
+                                                                    *match*)
+                                                                    loc =a
+                                                                    (field 0
+                                                                    args))
+                                                                    (before asmcomp/selection.ml(218):8275-8308
+                                                                    (if
+                                                                    (&&
+                                                                    (after asmcomp/selection.ml(218):8275-8285
+                                                                    (caml_equal
+                                                                    loc loc'))
+                                                                    (after asmcomp/selection.ml(218):8289-8308
+                                                                    (sendself
+                                                                    self-1
+                                                                    is_immediate
+                                                                    n)))
+                                                                    (before asmcomp/selection.ml(219):8322-8426
+                                                                    (let
+                                                                    (*match* =
+                                                                    (after asmcomp/selection.ml(219):8340-8372
+                                                                    (sendself
+                                                                    self-1
+                                                                    select_addressing
+                                                                    chunk
+                                                                    loc))
+                                                                    arg =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    addr =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/selection.ml(220):8386-8426
+                                                                    (makeblock 0
+                                                                    (makeblock 14
+                                                                    (makeblock 2 (int,*)
+                                                                    n addr))
+                                                                    (makeblock 0
+                                                                    arg 0a)))))
+                                                                    (exit 57))))))))
+                                                                    default:
+                                                                    (exit 57)))
+                                                                    (exit 57)))))
+                                                                    (exit 57)))
+                                                                    default:
+                                                                    (exit 57)))
+                                                                    default:
+                                                                    (exit 57)))
+                                                                    (exit 57))))
+                                                                (exit 57)))
+                                                           default: (exit 57)))
+                                                        (exit 57)))
+                                                    (exit 57))
+                                                 with (57)
+                                                  (before asmcomp/selection.ml(222):8450-8484
+                                                    (after asmcomp/selection.ml(222):8450-8484
+                                                      (apply
+                                                        (after asmcomp/selection.ml(222):8450-8472
+                                                          (apply
+                                                            select_operation
+                                                            self-1))
+                                                        op args dbg)))))))
+                                         default: (exit 61))
+                                       with (61)
+                                        (before asmcomp/selection.ml(241):9181-9215
+                                          (after asmcomp/selection.ml(241):9181-9215
+                                            (apply
+                                              (after asmcomp/selection.ml(241):9181-9203
+                                                (apply select_operation
+                                                  self-1))
+                                              op args dbg))))
+                                     with (59)
+                                      (before asmcomp/selection.ml(190):7190-7409
+                                        (let
+                                          (*match* =
+                                             (after asmcomp/selection.ml(190):7202-7254
+                                               (sendself self-1
+                                                 select_addressing 6a
+                                                 (makeblock 12 op args dbg))))
+                                          (catch
+                                            (let (addr =a (field 0 *match*))
+                                              (catch
+                                                (switch addr
+                                                 case tag 1: (exit 46)
+                                                 case tag 2:
+                                                  (let
+                                                    (*match* =a
+                                                       (field 0 addr))
+                                                    (if (!= *match* 0)
+                                                      (exit 47) (exit 46)))
+                                                 default: (exit 47))
+                                               with (47)
+                                                (let
+                                                  (arg =a (field 1 *match*))
+                                                  (before asmcomp/selection.ml(193):7370-7399
+                                                    (makeblock 0
+                                                      (makeblock 14
+                                                        (makeblock 0 addr))
+                                                      (makeblock 0 arg 0a))))))
+                                           with (46)
+                                            (before asmcomp/selection.ml(192):7312-7346
+                                              (after asmcomp/selection.ml(192):7312-7346
+                                                (apply
+                                                  (after asmcomp/selection.ml(192):7312-7334
+                                                    (apply select_operation
+                                                      self-1))
+                                                  op args dbg)))))))
+                                   with (60)
+                                    (before asmcomp/selection.ml(230):8778-8807
+                                      (makeblock 0 [14: [4: 64]] args))))))
+                            select_floatarith
+                            (function self-1 commutative regular_op mem_op
+                              args
+                              (funct-body asmcomp/selection.ml(245)<ghost>:9285-9865
+                                (before asmcomp/selection.ml(246):9324-9865
+                                  (catch
+                                    (if args
+                                      (let (arg1 =a (field 0 args))
+                                        (catch
+                                          (catch
+                                            (let (*match* =a (field 1 args))
+                                              (if *match*
+                                                (let
+                                                  (*match* =a
+                                                     (field 0 *match*))
+                                                  (switch *match*
+                                                   case tag 12:
+                                                    (let
+                                                      (*match* =a
+                                                         (field 0 *match*))
+                                                      (switch *match*
+                                                       case tag 2:
+                                                        (let
+                                                          (chunk =a
+                                                             (field 0
+                                                               *match*))
+                                                          (if (>= chunk 9)
+                                                            (let
+                                                              (*match* =a
+                                                                 (field 1
+                                                                   *match*))
+                                                              (if *match*
+                                                                (let
+                                                                  (*match* =a
+                                                                    (field 1
+                                                                    *match*))
+                                                                  (if *match*
+                                                                    (exit 43)
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 1
+                                                                    *match*))
+                                                                    (if
+                                                                    *match*
+                                                                    (exit 41)
+                                                                    (let
+                                                                    (loc2 =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/selection.ml(248):9415-9549
+                                                                    (let
+                                                                    (*match* =
+                                                                    (after asmcomp/selection.ml(248):9434-9467
+                                                                    (sendself
+                                                                    self-1
+                                                                    select_addressing
+                                                                    chunk
+                                                                    loc2))
+                                                                    arg2 =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    addr =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/selection.ml(249):9477-9549
+                                                                    (makeblock 0
+                                                                    (makeblock 14
+                                                                    (makeblock 3
+                                                                    mem_op
+                                                                    addr))
+                                                                    (makeblock 0
+                                                                    arg1
+                                                                    (makeblock 0
+                                                                    arg2 0a)))))))))))
+                                                                (exit 43)))
+                                                            (exit 43)))
+                                                       default: (exit 43)))
+                                                   default: (exit 43)))
+                                                (exit 41)))
+                                           with (43)
+                                            (switch arg1
+                                             case tag 12:
+                                              (let
+                                                (*match* =a (field 0 arg1))
+                                                (switch *match*
+                                                 case tag 2:
+                                                  (let
+                                                    (chunk =a
+                                                       (field 0 *match*))
+                                                    (if (>= chunk 9)
+                                                      (let
+                                                        (*match* =a
+                                                           (field 1 arg1))
+                                                        (if *match*
+                                                          (let
+                                                            (*match* =a
+                                                               (field 1
+                                                                 *match*))
+                                                            (if *match*
+                                                              (exit 42)
+                                                              (let
+                                                                (*match* =a
+                                                                   (field 1
+                                                                    args)
+                                                                 *match* =a
+                                                                   (field 1
+                                                                    *match*))
+                                                                (if *match*
+                                                                  (exit 41)
+                                                                  (let
+                                                                    (arg2 =a
+                                                                    (field 0
+                                                                    *match*)
+                                                                    loc1 =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/selection.ml(252):9629-9640
+                                                                    (if
+                                                                    commutative
+                                                                    (before asmcomp/selection.ml(253):9650-9784
+                                                                    (let
+                                                                    (*match* =
+                                                                    (after asmcomp/selection.ml(253):9669-9702
+                                                                    (sendself
+                                                                    self-1
+                                                                    select_addressing
+                                                                    chunk
+                                                                    loc1))
+                                                                    arg1 =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    addr =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/selection.ml(254):9712-9784
+                                                                    (makeblock 0
+                                                                    (makeblock 14
+                                                                    (makeblock 3
+                                                                    mem_op
+                                                                    addr))
+                                                                    (makeblock 0
+                                                                    arg2
+                                                                    (makeblock 0
+                                                                    arg1 0a))))))
+                                                                    (exit 42))))))))
+                                                          (exit 42)))
+                                                      (exit 42)))
+                                                 default: (exit 42)))
+                                             default: (exit 42)))
+                                         with (42)
+                                          (let
+                                            (*match* =a (field 1 args)
+                                             *match* =a (field 1 *match*))
+                                            (if *match* (exit 41)
+                                              (let
+                                                (arg1 =a arg1
+                                                 arg2 =a (field 0 *match*))
+                                                (before asmcomp/selection.ml(257):9811-9837
+                                                  (makeblock 0 regular_op
+                                                    (makeblock 0 arg1
+                                                      (makeblock 0 arg2 0a)))))))))
+                                      (exit 41))
+                                   with (41)
+                                    (before asmcomp/selection.ml(259):9853-9865
+                                      (raise
+                                        (after asmcomp/selection.ml(259):9853-9865
+                                          (makeblock 0
+                                            (global Assert_failure!)
+                                            [0: "asmcomp/selection.ml" 259 6]))))))))
+                            mark_c_tailcall
+                            (function self-1
+                              (funct-body asmcomp/selection.ml(262)<ghost>:9895-9922
+                                (before asmcomp/selection.ml(262):9895-9922
+                                  (setfield_imm 0 (field 24 (global Proc!))
+                                    1a))))
+                            insert_op_debug
+                            (function self-1 env op dbg rs rd
+                              (funct-body asmcomp/selection.ml(266)<ghost>:9986-10262
+                                (before asmcomp/selection.ml(267):10007-10262
+                                  (try
+                                    (let
+                                      (*match* =
+                                         (after asmcomp/selection.ml(268):10034-10067
+                                           (apply pseudoregs_for_operation op
+                                             rs rd))
+                                       rdst =a (field 1 *match*)
+                                       rsrc =a (field 0 *match*))
+                                      (before asmcomp/selection.ml(269):10075-10197
+                                        (seq
+                                          (after asmcomp/selection.ml(269):10075-10104
+                                            (sendself self-1 insert_moves env
+                                              rs rsrc))
+                                          (before asmcomp/selection.ml(270):10110-10197
+                                            (seq
+                                              (after asmcomp/selection.ml(270):10110-10154
+                                                (sendself self-1 insert_debug
+                                                  env (makeblock 0 op) dbg
+                                                  rsrc rdst))
+                                              (before asmcomp/selection.ml(271):10160-10197
+                                                (seq
+                                                  (after asmcomp/selection.ml(271):10160-10189
+                                                    (sendself self-1
+                                                      insert_moves env rdst
+                                                      rd))
+                                                  (before asmcomp/selection.ml(272):10195-10197
+                                                    rd))))))))
+                                   with exn
+                                    (if (== exn Use_default)
+                                      (before asmcomp/selection.ml(274):10224-10262
+                                        (after asmcomp/selection.ml(274):10224-10262
+                                          (apply
+                                            (after asmcomp/selection.ml(274):10224-10245
+                                              (apply insert_op_debug self-1))
+                                            env op dbg rs rd)))
+                                      (reraise exn))))))))
+                        (function env self
+                          (let
+                            (self =
+                               (apply (field 23 (global CamlinternalOO!))
+                                 self class))
+                            (seq (apply obj_init self)
+                              (apply (field 25 (global CamlinternalOO!)) self
+                                self class))))))))
+               (apply (field 18 (global CamlinternalOO!)) shared
+                 selector_init)))
+          (let
+            (fundecl =
+               (function f
+                 (funct-body asmcomp/selection.ml(278)<ghost>:10281-10314
+                   (before asmcomp/selection.ml(278):10285-10314
+                     (after asmcomp/selection.ml(278):10285-10314
+                       (send (apply (field 0 selector) 0a) -290870531 f))))))
+            (pseudo _none_(0)<ghost>:-1--1 (makeblock 0 fundecl))))))))

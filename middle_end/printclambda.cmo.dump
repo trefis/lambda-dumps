@@ -1,0 +1,1492 @@
+(setglobal Printclambda!
+  (let
+    (mutable_flag =
+       (function param
+         (funct-body middle_end/printclambda.ml(24):1203-1253
+           (if param
+             (before middle_end/printclambda.ml(25):1226-1233 "[mut]")
+             (before middle_end/printclambda.ml(26):1251-1253 ""))))
+     value_kind =
+       (function param
+         (funct-body middle_end/printclambda.ml(30):1295-1485
+           (if (isint param)
+             (switch* param
+              case int 0:
+               (before middle_end/printclambda.ml(31):1319-1321 "")
+              case int 1:
+               (before middle_end/printclambda.ml(33):1361-1369 ":float")
+              case int 2:
+               (before middle_end/printclambda.ml(32):1337-1343 ":int"))
+             (let (*match* =a (field 0 param))
+               (switch* *match*
+                case int 0:
+                 (before middle_end/printclambda.ml(34):1401-1413
+                   ":nativeint")
+                case int 1:
+                 (before middle_end/printclambda.ml(35):1441-1449 ":int32")
+                case int 2:
+                 (before middle_end/printclambda.ml(36):1477-1485 ":int64")))))))
+    (letrec
+      (structured_constant
+         (function ppf param
+           (funct-body middle_end/printclambda.ml(38)<ghost>:1515-2382
+             (switch* param
+              case tag 0:
+               (let (x =a (field 0 param))
+                 (before middle_end/printclambda.ml(39):1552-1570
+                   (after middle_end/printclambda.ml(39):1552-1570
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [8: [0: 0a 5a] 0a 0a 0a] "%F"] x))))
+              case tag 1:
+               (let (x =a (field 0 param))
+                 (before middle_end/printclambda.ml(40):1593-1613
+                   (after middle_end/printclambda.ml(40):1593-1613
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [5: 0a 0a 0a [12: 'l' 0a]] "%ldl"] x))))
+              case tag 2:
+               (let (x =a (field 0 param))
+                 (before middle_end/printclambda.ml(41):1636-1656
+                   (after middle_end/printclambda.ml(41):1636-1656
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [7: 0a 0a 0a [12: 'L' 0a]] "%LdL"] x))))
+              case tag 3:
+               (let (x =a (field 0 param))
+                 (before middle_end/printclambda.ml(42):1683-1703
+                   (after middle_end/printclambda.ml(42):1683-1703
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [6: 0a 0a 0a [12: 'n' 0a]] "%ndn"] x))))
+              case tag 4:
+               (let (l =a (field 1 param) tag =a (field 0 param))
+                 (before middle_end/printclambda.ml(44):1739-1848
+                   (seq
+                     (after middle_end/printclambda.ml(44):1739-1765
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [11: "block(" [4: 3a 0a 0a 0a]] "block(%i"] tag))
+                     (before middle_end/printclambda.ml(45):1773-1848
+                       (seq
+                         (after middle_end/printclambda.ml(45):1773-1825
+                           (apply (field 14 (global Stdlib__list!))
+                             (function u
+                               (funct-body middle_end/printclambda.ml(45):1783-1823
+                                 (before middle_end/printclambda.ml(45):1793-1822
+                                   (after middle_end/printclambda.ml(45):1793-1822
+                                     (apply
+                                       (field 122 (global Stdlib__format!))
+                                       ppf [0: [12: ',' [15: 0a]] ",%a"]
+                                       uconstant u)))))
+                             l))
+                         (before middle_end/printclambda.ml(46):1833-1848
+                           (after middle_end/printclambda.ml(46):1833-1848
+                             (apply (field 122 (global Stdlib__format!)) ppf
+                               [0: [12: ')' 0a] ")"]))))))))
+              case tag 5:
+               (let (*match* =a (field 0 param))
+                 (if *match*
+                   (let (fl =a (field 1 *match*) f1 =a (field 0 *match*))
+                     (before middle_end/printclambda.ml(50):1954-2058
+                       (seq
+                         (after middle_end/printclambda.ml(50):1954-1984
+                           (apply (field 122 (global Stdlib__format!)) ppf
+                             [0:
+                              [11: "floatarray(" [8: [0: 0a 5a] 0a 0a 0a]]
+                              "floatarray(%F"]
+                             f1))
+                         (before middle_end/printclambda.ml(51):1992-2058
+                           (seq
+                             (after middle_end/printclambda.ml(51):1992-2035
+                               (apply (field 14 (global Stdlib__list!))
+                                 (function f[float]
+                                   (funct-body middle_end/printclambda.ml(51):2002-2032
+                                     (before middle_end/printclambda.ml(51):2012-2031
+                                       (after middle_end/printclambda.ml(51):2012-2031
+                                         (apply
+                                           (field 122
+                                             (global Stdlib__format!))
+                                           ppf
+                                           [0:
+                                            [12:
+                                             ',' [8: [0: 0a 5a] 0a 0a 0a]]
+                                            ",%F"]
+                                           f)))))
+                                 fl))
+                             (before middle_end/printclambda.ml(52):2043-2058
+                               (after middle_end/printclambda.ml(52):2043-2058
+                                 (apply (field 122 (global Stdlib__format!))
+                                   ppf [0: [12: ')' 0a] ")"]))))))))
+                   (before middle_end/printclambda.ml(48):1884-1910
+                     (after middle_end/printclambda.ml(48):1884-1910
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [11: "floatarray()" 0a] "floatarray()"])))))
+              case tag 6:
+               (let (s =a (field 0 param))
+                 (before middle_end/printclambda.ml(53):2082-2100
+                   (after middle_end/printclambda.ml(53):2082-2100
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [3: 0a 0a] "%S"] s))))
+              case tag 7:
+               (let
+                 (fv =a (field 2 param)
+                  sym =a (field 1 param)
+                  clos =a (field 0 param))
+                 (before middle_end/printclambda.ml(55):2144-2382
+                   (let
+                     (funs =
+                        (function ppf
+                          (funct-body middle_end/printclambda.ml(55)<ghost>:2153-2205
+                            (before middle_end/printclambda.ml(56):2167-2205
+                              (after middle_end/printclambda.ml(56):2167-2205
+                                (apply (field 14 (global Stdlib__list!))
+                                  (after middle_end/printclambda.ml(56):2177-2205
+                                    (apply
+                                      (field 122 (global Stdlib__format!))
+                                      ppf
+                                      [0:
+                                       [17: [0: "@ " 1 0] [15: 0a]] "@ %a"]
+                                      one_fun))))))))
+                     (before middle_end/printclambda.ml(57):2215-2382
+                       (let
+                         (sconsts =
+                            (function ppf scl
+                              (funct-body middle_end/printclambda.ml(57)<ghost>:2227-2302
+                                (before middle_end/printclambda.ml(58):2245-2302
+                                  (after middle_end/printclambda.ml(58):2245-2302
+                                    (apply (field 14 (global Stdlib__list!))
+                                      (function sc
+                                        (funct-body middle_end/printclambda.ml(58):2255-2298
+                                          (before middle_end/printclambda.ml(58):2266-2297
+                                            (after middle_end/printclambda.ml(58):2266-2297
+                                              (apply
+                                                (field 122
+                                                  (global Stdlib__format!))
+                                                ppf
+                                                [0:
+                                                 [17: [0: "@ " 1 0] [15: 0a]]
+                                                 "@ %a"]
+                                                uconstant sc)))))
+                                      scl))))))
+                         (before middle_end/printclambda.ml(59):2312-2382
+                           (after middle_end/printclambda.ml(59):2312-2382
+                             (apply (field 122 (global Stdlib__format!)) ppf
+                               [0:
+                                [18:
+                                 [1: [0: [11: "<2>" 0a] "<2>"]]
+                                 [11:
+                                  "(const_closure"
+                                  [15:
+                                   [12:
+                                    ' '
+                                    [2:
+                                     0a
+                                     [17:
+                                      [0: "@ " 1 0]
+                                      [15: [12: ')' [17: 0a 0a]]]]]]]]]
+                                "@[<2>(const_closure%a %s@ %a)@]"]
+                               funs clos sym sconsts fv)))))))))))
+        one_fun
+          (function ppf f
+            (funct-body middle_end/printclambda.ml(61)<ghost>:2396-2681
+              (before middle_end/printclambda.ml(62):2406-2681
+                (let
+                  (idents =
+                     (function ppf
+                       (funct-body middle_end/printclambda.ml(62)<ghost>:2417-2553
+                         (before middle_end/printclambda.ml(63):2427-2553
+                           (after middle_end/printclambda.ml(63):2427-2553
+                             (apply (field 14 (global Stdlib__list!))
+                               (function param
+                                 (funct-body middle_end/printclambda.ml(64):2443-2553
+                                   (let
+                                     (k =a (field 1 param)
+                                      x =a (field 0 param))
+                                     (before middle_end/printclambda.ml(65):2467-2545
+                                       (after middle_end/printclambda.ml(65):2467-2545
+                                         (apply
+                                           (field 122
+                                             (global Stdlib__format!))
+                                           ppf
+                                           [0:
+                                            [17:
+                                             [0: "@ " 1 0] [15: [15: 0a]]]
+                                            "@ %a%a"]
+                                           (field 0
+                                             (field 33 (global Backend_var!)))
+                                           x (field 7 (global Printlambda!))
+                                           k))))))))))))
+                  (before middle_end/printclambda.ml(70):2561-2681
+                    (after middle_end/printclambda.ml(70):2561-2681
+                      (apply (field 122 (global Stdlib__format!)) ppf
+                        [0:
+                         [11:
+                          "(fun"
+                          [17:
+                           [0: "@ " 1 0]
+                           [2:
+                            0a
+                            [2:
+                             0a
+                             [17:
+                              [0: "@ " 1 0]
+                              [4:
+                               0a 0a 0a
+                               [17:
+                                [0: "@ " 1 0]
+                                [18:
+                                 [1: [0: [11: "<2>" 0a] "<2>"]]
+                                 [15:
+                                  [17:
+                                   0a
+                                   [17:
+                                    [0: "@ " 1 0]
+                                    [18:
+                                     [1: [0: [11: "<2>" 0a] "<2>"]]
+                                     [15: [17: 0a [12: ')' 0a]]]]]]]]]]]]]]]
+                         "(fun@ %s%s@ %d@ @[<2>%a@]@ @[<2>%a@])"]
+                        (field 0 f)
+                        (after middle_end/printclambda.ml(71):2625-2646
+                          (apply value_kind (field 3 f)))
+                        (field 1 f) idents (field 2 f) lam (field 4 f))))))))
+        phantom_defining_expr
+          (function ppf param
+            (funct-body middle_end/printclambda.ml(73)<ghost>:2709-3337
+              (switch* param
+               case tag 0:
+                (let (const =a (field 0 param))
+                  (before middle_end/printclambda.ml(74):2752-2771
+                    (after middle_end/printclambda.ml(74):2752-2771
+                      (apply uconstant ppf const))))
+               case tag 1:
+                (let (var =a (field 0 param))
+                  (before middle_end/printclambda.ml(75):2796-2815
+                    (after middle_end/printclambda.ml(75):2796-2815
+                      (apply (field 4 (global Ident!)) ppf var))))
+               case tag 2:
+                (let
+                  (offset_in_words =a (field 1 param) var =a (field 0 param))
+                  (before middle_end/printclambda.ml(77):2873-2939
+                    (after middle_end/printclambda.ml(77):2873-2939
+                      (apply (field 122 (global Stdlib__format!)) ppf
+                        [0:
+                         [15: [11: "+(" [4: 0a 0a 0a [12: ')' 0a]]]]
+                         "%a+(%d)"]
+                        (field 3 (global Backend_var!)) var offset_in_words))))
+               case tag 3:
+                (let (field =a (field 1 param) var =a (field 0 param))
+                  (before middle_end/printclambda.ml(79):2987-3042
+                    (after middle_end/printclambda.ml(79):2987-3042
+                      (apply (field 122 (global Stdlib__format!)) ppf
+                        [0:
+                         [15: [12: '[' [4: 0a 0a 0a [12: ']' 0a]]]] "%a[%d]"]
+                        (field 3 (global Backend_var!)) var field))))
+               case tag 4:
+                (let (field =a (field 1 param) sym =a (field 0 param))
+                  (before middle_end/printclambda.ml(81):3097-3134
+                    (after middle_end/printclambda.ml(81):3097-3134
+                      (apply (field 122 (global Stdlib__format!)) ppf
+                        [0:
+                         [2: 0a [12: '[' [4: 0a 0a 0a [12: ']' 0a]]]]
+                         "%s[%d]"]
+                        sym field))))
+               case tag 5:
+                (let (fields =a (field 1 param) tag =a (field 0 param))
+                  (before middle_end/printclambda.ml(83):3178-3337
+                    (seq
+                      (after middle_end/printclambda.ml(83):3178-3208
+                        (apply (field 122 (global Stdlib__format!)) ppf
+                          [0: [12: '[' [4: 0a 0a 0a [11: ": " 0a]]] "[%d: "]
+                          tag))
+                      (before middle_end/printclambda.ml(84):3214-3337
+                        (seq
+                          (after middle_end/printclambda.ml(84):3214-3309
+                            (apply (field 14 (global Stdlib__list!))
+                              (function field
+                                (funct-body middle_end/printclambda.ml(84):3224-3296
+                                  (before middle_end/printclambda.ml(85):3246-3295
+                                    (after middle_end/printclambda.ml(85):3246-3295
+                                      (apply
+                                        (field 122 (global Stdlib__format!))
+                                        ppf [0: [15: [11: "; " 0a]] "%a; "]
+                                        (field 3 (global Backend_var!))
+                                        field)))))
+                              fields))
+                          (before middle_end/printclambda.ml(87):3315-3337
+                            (after middle_end/printclambda.ml(87):3315-3337
+                              (apply (field 122 (global Stdlib__format!)) ppf
+                                [0: [12: ']' 0a] "]"])))))))))))
+        phantom_defining_expr_opt
+          (function ppf param
+            (funct-body middle_end/printclambda.ml(89)<ghost>:3369-3469
+              (if param
+                (let (expr =a (field 0 param))
+                  (before middle_end/printclambda.ml(91):3439-3469
+                    (after middle_end/printclambda.ml(91):3439-3469
+                      (apply phantom_defining_expr ppf expr))))
+                (before middle_end/printclambda.ml(90):3396-3421
+                  (after middle_end/printclambda.ml(90):3396-3421
+                    (apply (field 122 (global Stdlib__format!)) ppf
+                      [0: [11: "DEAD" 0a] "DEAD"]))))))
+        uconstant
+          (function ppf param
+            (funct-body middle_end/printclambda.ml(93)<ghost>:3485-3704
+              (switch* param
+               case tag 0:
+                (let (*match* =a (field 1 param) s =a (field 0 param))
+                  (if *match*
+                    (let (c =a (field 0 *match*))
+                      (before middle_end/printclambda.ml(95):3536-3579
+                        (after middle_end/printclambda.ml(95):3536-3579
+                          (apply (field 122 (global Stdlib__format!)) ppf
+                            [0: [3: 0a [12: '=' [15: 0a]]] "%S=%a"] s
+                            structured_constant c))))
+                    (let (s =a s)
+                      (before middle_end/printclambda.ml(96):3608-3625
+                        (after middle_end/printclambda.ml(96):3608-3625
+                          (apply (field 122 (global Stdlib__format!)) ppf
+                            [0: [3: 0a 0a] "%S"] s))))))
+               case tag 1:
+                (let (i =a (field 0 param))
+                  (before middle_end/printclambda.ml(97):3646-3664
+                    (after middle_end/printclambda.ml(97):3646-3664
+                      (apply (field 122 (global Stdlib__format!)) ppf
+                        [0: [4: 3a 0a 0a 0a] "%i"] i))))
+               case tag 2:
+                (let (i =a (field 0 param))
+                  (before middle_end/printclambda.ml(98):3685-3704
+                    (after middle_end/printclambda.ml(98):3685-3704
+                      (apply (field 122 (global Stdlib__format!)) ppf
+                        [0: [4: 3a 0a 0a [12: 'a' 0a]] "%ia"] i)))))))
+        lam
+          (function ppf param
+            (funct-body middle_end/printclambda.ml(100)<ghost>:3714-9034
+              (switch* param
+               case int 0:
+                (before middle_end/printclambda.ml(238):9009-9034
+                  (after middle_end/printclambda.ml(238):9009-9034
+                    (apply (field 122 (global Stdlib__format!)) ppf
+                      [0: [11: "unreachable" 0a] "unreachable"])))
+               case tag 0:
+                (let (id =a (field 0 param))
+                  (before middle_end/printclambda.ml(102):3750-3764
+                    (after middle_end/printclambda.ml(102):3750-3764
+                      (apply (field 3 (global Backend_var!)) ppf id))))
+               case tag 1:
+                (let (c =a (field 0 param))
+                  (before middle_end/printclambda.ml(103):3781-3796
+                    (after middle_end/printclambda.ml(103):3781-3796
+                      (apply uconstant ppf c))))
+               case tag 2:
+                (let (largs =a (field 1 param) f =a (field 0 param))
+                  (before middle_end/printclambda.ml(105):3837-3976
+                    (let
+                      (lams =
+                         (function ppf largs
+                           (funct-body middle_end/printclambda.ml(105)<ghost>:3846-3917
+                             (before middle_end/printclambda.ml(106):3866-3917
+                               (after middle_end/printclambda.ml(106):3866-3917
+                                 (apply (field 14 (global Stdlib__list!))
+                                   (function l
+                                     (funct-body middle_end/printclambda.ml(106):3876-3911
+                                       (before middle_end/printclambda.ml(106):3886-3910
+                                         (after middle_end/printclambda.ml(106):3886-3910
+                                           (apply
+                                             (field 122
+                                               (global Stdlib__format!))
+                                             ppf
+                                             [0:
+                                              [17: [0: "@ " 1 0] [15: 0a]]
+                                              "@ %a"]
+                                             lam l)))))
+                                   largs))))))
+                      (before middle_end/printclambda.ml(107):3927-3976
+                        (after middle_end/printclambda.ml(107):3927-3976
+                          (apply (field 122 (global Stdlib__format!)) ppf
+                            [0:
+                             [18:
+                              [1: [0: [11: "<2>" 0a] "<2>"]]
+                              [11:
+                               "(apply*"
+                               [17:
+                                [0: "@ " 1 0]
+                                [2: 0a [12: ' ' [15: [12: ')' [17: 0a 0a]]]]]]]]
+                             "@[<2>(apply*@ %s %a)@]"]
+                            f lams largs))))))
+               case tag 3:
+                (let (largs =a (field 1 param) lfun =a (field 0 param))
+                  (before middle_end/printclambda.ml(109):4021-4165
+                    (let
+                      (lams =
+                         (function ppf largs
+                           (funct-body middle_end/printclambda.ml(109)<ghost>:4030-4101
+                             (before middle_end/printclambda.ml(110):4050-4101
+                               (after middle_end/printclambda.ml(110):4050-4101
+                                 (apply (field 14 (global Stdlib__list!))
+                                   (function l
+                                     (funct-body middle_end/printclambda.ml(110):4060-4095
+                                       (before middle_end/printclambda.ml(110):4070-4094
+                                         (after middle_end/printclambda.ml(110):4070-4094
+                                           (apply
+                                             (field 122
+                                               (global Stdlib__format!))
+                                             ppf
+                                             [0:
+                                              [17: [0: "@ " 1 0] [15: 0a]]
+                                              "@ %a"]
+                                             lam l)))))
+                                   largs))))))
+                      (before middle_end/printclambda.ml(111):4111-4165
+                        (after middle_end/printclambda.ml(111):4111-4165
+                          (apply (field 122 (global Stdlib__format!)) ppf
+                            [0:
+                             [18:
+                              [1: [0: [11: "<2>" 0a] "<2>"]]
+                              [11:
+                               "(apply"
+                               [17:
+                                [0: "@ " 1 0]
+                                [15: [15: [12: ')' [17: 0a 0a]]]]]]]
+                             "@[<2>(apply@ %a%a)@]"]
+                            lam lfun lams largs))))))
+               case tag 4:
+                (let (fv =a (field 1 param) clos =a (field 0 param))
+                  (before middle_end/printclambda.ml(113):4198-4398
+                    (let
+                      (funs =
+                         (function ppf
+                           (funct-body middle_end/printclambda.ml(113)<ghost>:4207-4266
+                             (before middle_end/printclambda.ml(114):4221-4266
+                               (after middle_end/printclambda.ml(114):4221-4266
+                                 (apply (field 14 (global Stdlib__list!))
+                                   (after middle_end/printclambda.ml(114):4231-4266
+                                     (apply
+                                       (field 122 (global Stdlib__format!))
+                                       ppf
+                                       [0:
+                                        [17:
+                                         [0: "@ " 1 0]
+                                         [18:
+                                          [1: [0: [11: "<2>" 0a] "<2>"]]
+                                          [15: [17: 0a 0a]]]]
+                                        "@ @[<2>%a@]"]
+                                       one_fun))))))))
+                      (before middle_end/printclambda.ml(115):4276-4398
+                        (let
+                          (lams =
+                             (function ppf
+                               (funct-body middle_end/printclambda.ml(115)<ghost>:4285-4333
+                                 (before middle_end/printclambda.ml(116):4299-4333
+                                   (after middle_end/printclambda.ml(116):4299-4333
+                                     (apply (field 14 (global Stdlib__list!))
+                                       (after middle_end/printclambda.ml(116):4309-4333
+                                         (apply
+                                           (field 122
+                                             (global Stdlib__format!))
+                                           ppf
+                                           [0:
+                                            [17: [0: "@ " 1 0] [15: 0a]]
+                                            "@ %a"]
+                                           lam))))))))
+                          (before middle_end/printclambda.ml(117):4343-4398
+                            (after middle_end/printclambda.ml(117):4343-4398
+                              (apply (field 122 (global Stdlib__format!)) ppf
+                                [0:
+                                 [18:
+                                  [1: [0: [11: "<2>" 0a] "<2>"]]
+                                  [11:
+                                   "(closure"
+                                   [17:
+                                    [0: "@ " 1 0]
+                                    [15:
+                                     [12: ' ' [15: [12: ')' [17: 0a 0a]]]]]]]]
+                                 "@[<2>(closure@ %a %a)@]"]
+                                funs clos lams fv))))))))
+               case tag 5:
+                (let (i =a (field 1 param) l =a (field 0 param))
+                  (before middle_end/printclambda.ml(118):4419-4462
+                    (after middle_end/printclambda.ml(118):4419-4462
+                      (apply (field 122 (global Stdlib__format!)) ppf
+                        [0:
+                         [18:
+                          [1: [0: [11: "<2>" 0a] "<2>"]]
+                          [11:
+                           "(offset "
+                           [15:
+                            [12: ' ' [4: 0a 0a 0a [12: ')' [17: 0a 0a]]]]]]]
+                         "@[<2>(offset %a %d)@]"]
+                        lam l i))))
+               case tag 6:
+                (let
+                  (body =a (field 4 param)
+                   arg =a (field 3 param)
+                   id =a (field 2 param)
+                   kind =a (field 1 param)
+                   mut =a (field 0 param))
+                  (before middle_end/printclambda.ml(120):4507-4970
+                    (letrec
+                      (letbody
+                         (function ul
+                           (funct-body middle_end/printclambda.ml(120)<ghost>:4523-4760
+                             (before middle_end/printclambda.ml(120):4528-4760
+                               (catch
+                                 (switch ul
+                                  case tag 6:
+                                   (let
+                                     (body =a (field 4 ul)
+                                      arg =a (field 3 ul)
+                                      id =a (field 2 ul)
+                                      kind =a (field 1 ul)
+                                      mut =a (field 0 ul))
+                                     (before middle_end/printclambda.ml(122):4598-4742
+                                       (seq
+                                         (after middle_end/printclambda.ml(122):4598-4716
+                                           (apply
+                                             (field 122
+                                               (global Stdlib__format!))
+                                             ppf
+                                             [0:
+                                              [17:
+                                               [0: "@ " 1 0]
+                                               [18:
+                                                [1:
+                                                 [0: [11: "<2>" 0a] "<2>"]]
+                                                [15:
+                                                 [2:
+                                                  0a
+                                                  [2:
+                                                   0a
+                                                   [17:
+                                                    [0: "@ " 1 0]
+                                                    [15: [17: 0a 0a]]]]]]]]
+                                              "@ @[<2>%a%s%s@ %a@]"]
+                                             (field 0
+                                               (field 33
+                                                 (global Backend_var!)))
+                                             id
+                                             (after middle_end/printclambda.ml(124):4672-4690
+                                               (apply mutable_flag mut))
+                                             (after middle_end/printclambda.ml(124):4691-4708
+                                               (apply value_kind kind))
+                                             lam arg))
+                                         (before middle_end/printclambda.ml(125):4730-4742
+                                           (after middle_end/printclambda.ml(125):4730-4742
+                                             (apply letbody body))))))
+                                  default: (exit 1))
+                                with (1)
+                                 (before middle_end/printclambda.ml(126):4758-4760
+                                   ul))))))
+                      (before middle_end/printclambda.ml(127):4770-4970
+                        (seq
+                          (after middle_end/printclambda.ml(127):4770-4896
+                            (apply (field 122 (global Stdlib__format!)) ppf
+                              [0:
+                               [18:
+                                [1: [0: [11: "<2>" 0a] "<2>"]]
+                                [11:
+                                 "(let"
+                                 [17:
+                                  [0: "@ " 1 0]
+                                  [18:
+                                   [1: [0: [11: "<hv 1>" 0a] "<hv 1>"]]
+                                   [12:
+                                    '('
+                                    [18:
+                                     [1: [0: [11: "<2>" 0a] "<2>"]]
+                                     [15:
+                                      [2:
+                                       0a
+                                       [2:
+                                        0a
+                                        [17: [0: "@ " 1 0] [15: [17: 0a 0a]]]]]]]]]]]]
+                               "@[<2>(let@ @[<hv 1>(@[<2>%a%s%s@ %a@]"]
+                              (field 0 (field 33 (global Backend_var!))) id
+                              (after middle_end/printclambda.ml(128):4842-4860
+                                (apply mutable_flag mut))
+                              (after middle_end/printclambda.ml(129):4871-4888
+                                (apply value_kind kind))
+                              lam arg))
+                          (before middle_end/printclambda.ml(130):4904-4970
+                            (let
+                              (expr =
+                                 (after middle_end/printclambda.ml(130):4915-4927
+                                   (apply letbody body)))
+                              (before middle_end/printclambda.ml(131):4937-4970
+                                (after middle_end/printclambda.ml(131):4937-4970
+                                  (apply (field 122 (global Stdlib__format!))
+                                    ppf
+                                    [0:
+                                     [12:
+                                      ')'
+                                      [17:
+                                       0a
+                                       [17:
+                                        [0: "@ " 1 0]
+                                        [15: [12: ')' [17: 0a 0a]]]]]]
+                                     ")@]@ %a)@]"]
+                                    lam expr))))))))))
+               case tag 7:
+                (let
+                  (body =a (field 2 param)
+                   defining_expr =a (field 1 param)
+                   id =a (field 0 param))
+                  (before middle_end/printclambda.ml(133):5023-5532
+                    (letrec
+                      (letbody
+                         (function ul
+                           (funct-body middle_end/printclambda.ml(133)<ghost>:5039-5300
+                             (before middle_end/printclambda.ml(133):5044-5300
+                               (catch
+                                 (switch ul
+                                  case tag 7:
+                                   (let
+                                     (body =a (field 2 ul)
+                                      defining_expr =a (field 1 ul)
+                                      id =a (field 0 ul))
+                                     (before middle_end/printclambda.ml(135):5122-5282
+                                       (seq
+                                         (after middle_end/printclambda.ml(135):5122-5256
+                                           (apply
+                                             (field 122
+                                               (global Stdlib__format!))
+                                             ppf
+                                             [0:
+                                              [17:
+                                               [0: "@ " 1 0]
+                                               [18:
+                                                [1:
+                                                 [0: [11: "<2>" 0a] "<2>"]]
+                                                [15:
+                                                 [17:
+                                                  [0: "@ " 1 0]
+                                                  [15: [17: 0a 0a]]]]]]
+                                              "@ @[<2>%a@ %a@]"]
+                                             (field 0
+                                               (field 33
+                                                 (global Backend_var!)))
+                                             id phantom_defining_expr_opt
+                                             defining_expr))
+                                         (before middle_end/printclambda.ml(138):5270-5282
+                                           (after middle_end/printclambda.ml(138):5270-5282
+                                             (apply letbody body))))))
+                                  default: (exit 2))
+                                with (2)
+                                 (before middle_end/printclambda.ml(139):5298-5300
+                                   ul))))))
+                      (before middle_end/printclambda.ml(140):5310-5532
+                        (seq
+                          (after middle_end/printclambda.ml(140):5310-5458
+                            (apply (field 122 (global Stdlib__format!)) ppf
+                              [0:
+                               [18:
+                                [1: [0: [11: "<2>" 0a] "<2>"]]
+                                [11:
+                                 "(phantom_let"
+                                 [17:
+                                  [0: "@ " 1 0]
+                                  [18:
+                                   [1: [0: [11: "<hv 1>" 0a] "<hv 1>"]]
+                                   [12:
+                                    '('
+                                    [18:
+                                     [1: [0: [11: "<2>" 0a] "<2>"]]
+                                     [15:
+                                      [17: [0: "@ " 1 0] [15: [17: 0a 0a]]]]]]]]]]
+                               "@[<2>(phantom_let@ @[<hv 1>(@[<2>%a@ %a@]"]
+                              (field 0 (field 33 (global Backend_var!))) id
+                              phantom_defining_expr_opt defining_expr))
+                          (before middle_end/printclambda.ml(143):5466-5532
+                            (let
+                              (expr =
+                                 (after middle_end/printclambda.ml(143):5477-5489
+                                   (apply letbody body)))
+                              (before middle_end/printclambda.ml(144):5499-5532
+                                (after middle_end/printclambda.ml(144):5499-5532
+                                  (apply (field 122 (global Stdlib__format!))
+                                    ppf
+                                    [0:
+                                     [12:
+                                      ')'
+                                      [17:
+                                       0a
+                                       [17:
+                                        [0: "@ " 1 0]
+                                        [15: [12: ')' [17: 0a 0a]]]]]]
+                                     ")@]@ %a)@]"]
+                                    lam expr))))))))))
+               case tag 8:
+                (let (body =a (field 1 param) id_arg_list =a (field 0 param))
+                  (before middle_end/printclambda.ml(146):5573-5944
+                    (let
+                      (bindings =
+                         (function ppf id_arg_list
+                           (funct-body middle_end/printclambda.ml(146)<ghost>:5586-5847
+                             (before middle_end/printclambda.ml(147):5612-5847
+                               (let (spc = (makemutable 0 0a))
+                                 (before middle_end/printclambda.ml(148):5643-5847
+                                   (after middle_end/printclambda.ml(148):5643-5847
+                                     (apply (field 14 (global Stdlib__list!))
+                                       (function param
+                                         (funct-body middle_end/printclambda.ml(149):5663-5825
+                                           (let
+                                             (l =a (field 1 param)
+                                              id =a (field 0 param))
+                                             (before middle_end/printclambda.ml(150):5691-5824
+                                               (seq
+                                                 (if (field 0 spc)
+                                                   (before middle_end/printclambda.ml(150):5704-5720
+                                                     (after middle_end/printclambda.ml(150):5704-5720
+                                                       (apply
+                                                         (field 122
+                                                           (global Stdlib__format!))
+                                                         ppf
+                                                         [0:
+                                                          [17:
+                                                           [0: "@ " 1 0] 0a]
+                                                          "@ "])))
+                                                   (before middle_end/printclambda.ml(150):5726-5737
+                                                     (setfield_imm 0 spc 1a)))
+                                                 (before middle_end/printclambda.ml(151):5751-5824
+                                                   (after middle_end/printclambda.ml(151):5751-5824
+                                                     (apply
+                                                       (field 122
+                                                         (global Stdlib__format!))
+                                                       ppf
+                                                       [0:
+                                                        [18:
+                                                         [1:
+                                                          [0:
+                                                           [11: "<2>" 0a]
+                                                           "<2>"]]
+                                                         [15:
+                                                          [17:
+                                                           [0: "@ " 1 0]
+                                                           [15: [17: 0a 0a]]]]]
+                                                        "@[<2>%a@ %a@]"]
+                                                       (field 0
+                                                         (field 33
+                                                           (global Backend_var!)))
+                                                       id lam l))))))))
+                                       id_arg_list))))))))
+                      (before middle_end/printclambda.ml(155):5857-5944
+                        (after middle_end/printclambda.ml(155):5857-5944
+                          (apply (field 122 (global Stdlib__format!)) ppf
+                            [0:
+                             [18:
+                              [1: [0: [11: "<2>" 0a] "<2>"]]
+                              [11:
+                               "(letrec"
+                               [17:
+                                [0: "@ " 1 0]
+                                [12:
+                                 '('
+                                 [18:
+                                  [1: [0: [11: "<hv 1>" 0a] "<hv 1>"]]
+                                  [15:
+                                   [17:
+                                    0a
+                                    [12:
+                                     ')'
+                                     [17:
+                                      [0: "@ " 1 0]
+                                      [15: [12: ')' [17: 0a 0a]]]]]]]]]]]]
+                             "@[<2>(letrec@ (@[<hv 1>%a@])@ %a)@]"]
+                            bindings id_arg_list lam body))))))
+               case tag 9:
+                (let (largs =a (field 1 param) prim =a (field 0 param))
+                  (before middle_end/printclambda.ml(158):5980-6155
+                    (let
+                      (lams =
+                         (function ppf largs
+                           (funct-body middle_end/printclambda.ml(158)<ghost>:5989-6060
+                             (before middle_end/printclambda.ml(159):6009-6060
+                               (after middle_end/printclambda.ml(159):6009-6060
+                                 (apply (field 14 (global Stdlib__list!))
+                                   (function l
+                                     (funct-body middle_end/printclambda.ml(159):6019-6054
+                                       (before middle_end/printclambda.ml(159):6029-6053
+                                         (after middle_end/printclambda.ml(159):6029-6053
+                                           (apply
+                                             (field 122
+                                               (global Stdlib__format!))
+                                             ppf
+                                             [0:
+                                              [17: [0: "@ " 1 0] [15: 0a]]
+                                              "@ %a"]
+                                             lam l)))))
+                                   largs))))))
+                      (before middle_end/printclambda.ml(160):6070-6155
+                        (after middle_end/printclambda.ml(160):6070-6155
+                          (apply (field 122 (global Stdlib__format!)) ppf
+                            [0:
+                             [18:
+                              [1: [0: [11: "<2>" 0a] "<2>"]]
+                              [12: '(' [15: [15: [12: ')' [17: 0a 0a]]]]]]
+                             "@[<2>(%a%a)@]"]
+                            (field 0 (global Printclambda_primitives!)) prim
+                            lams largs))))))
+               case tag 10:
+                (let (sw =a (field 1 param) larg =a (field 0 param))
+                  (before middle_end/printclambda.ml(163):6193-6814
+                    (let
+                      (print_case =
+                         (function tag index i ppf
+                           (funct-body middle_end/printclambda.ml(163)<ghost>:6208-6349
+                             (before middle_end/printclambda.ml(164):6234-6349
+                               (for j 0 to (- (array.length[gen] index) 1)
+                                 (before middle_end/printclambda.ml(165):6283-6336
+                                   (if
+                                     (after middle_end/printclambda.ml(165):6286-6299
+                                       (caml_equal
+                                         (after middle_end/printclambda.ml(165):6286-6295
+                                           (array.get[gen] index j))
+                                         i))
+                                     (before middle_end/printclambda.ml(165):6305-6336
+                                       (after middle_end/printclambda.ml(165):6305-6336
+                                         (apply
+                                           (field 122
+                                             (global Stdlib__format!))
+                                           ppf
+                                           [0:
+                                            [11:
+                                             "case "
+                                             [2:
+                                              0a
+                                              [12:
+                                               ' ' [4: 3a 0a 0a [12: ':' 0a]]]]]
+                                            "case %s %i:"]
+                                           tag j)))
+                                     0a)))))))
+                      (before middle_end/printclambda.ml(167):6359-6814
+                        (let
+                          (print_cases =
+                             (function tag index cases ppf
+                               (funct-body middle_end/printclambda.ml(167)<ghost>:6375-6552
+                                 (before middle_end/printclambda.ml(168):6405-6552
+                                   (for i 0 to
+                                     (- (array.length[addr] cases) 1)
+                                     (before middle_end/printclambda.ml(169):6454-6539
+                                       (after middle_end/printclambda.ml(169):6454-6539
+                                         (apply
+                                           (field 122
+                                             (global Stdlib__format!))
+                                           ppf
+                                           [0:
+                                            [17:
+                                             [0: "@ " 1 0]
+                                             [18:
+                                              [1: [0: [11: "<2>" 0a] "<2>"]]
+                                              [16:
+                                               [17:
+                                                [0: "@ " 1 0]
+                                                [15: [17: 0a 0a]]]]]]
+                                            "@ @[<2>%t@ %a@]"]
+                                           (after middle_end/printclambda.ml(170):6496-6520
+                                             (apply print_case tag index i))
+                                           sequence
+                                           (after middle_end/printclambda.ml(170):6530-6539
+                                             (array.get[addr] cases i))))))))))
+                          (before middle_end/printclambda.ml(172):6562-6814
+                            (let
+                              (switch =
+                                 (function ppf sw
+                                   (funct-body middle_end/printclambda.ml(172)<ghost>:6573-6723
+                                     (before middle_end/printclambda.ml(173):6590-6723
+                                       (seq
+                                         (after middle_end/printclambda.ml(173):6590-6651
+                                           (apply print_cases "int"
+                                             (field 0 sw) (field 1 sw) ppf))
+                                         (before middle_end/printclambda.ml(174):6662-6723
+                                           (after middle_end/printclambda.ml(174):6662-6723
+                                             (apply print_cases "tag"
+                                               (field 2 sw) (field 3 sw) ppf))))))))
+                              (before middle_end/printclambda.ml(175):6734-6814
+                                (after middle_end/printclambda.ml(175):6734-6814
+                                  (apply (field 122 (global Stdlib__format!))
+                                    ppf
+                                    [0:
+                                     [18:
+                                      [1: [0: [11: "<v 0>" 0a] "<v 0>"]]
+                                      [18:
+                                       [1: [0: [11: "<2>" 0a] "<2>"]]
+                                       [11:
+                                        "(switch"
+                                        [17:
+                                         [0: "@ " 1 0]
+                                         [15:
+                                          [17:
+                                           [0: "@ " 1 0]
+                                           [17:
+                                            0a [15: [12: ')' [17: 0a 0a]]]]]]]]]]
+                                     "@[<v 0>@[<2>(switch@ %a@ @]%a)@]"]
+                                    lam larg switch sw))))))))))
+               case tag 11:
+                (let
+                  (d =a (field 2 param)
+                   sw =a (field 1 param)
+                   larg =a (field 0 param))
+                  (before middle_end/printclambda.ml(179):6853-7390
+                    (let
+                      (switch =
+                         (function ppf sw
+                           (funct-body middle_end/printclambda.ml(179)<ghost>:6864-7308
+                             (before middle_end/printclambda.ml(180):6881-7308
+                               (let (spc = (makemutable 0 0a))
+                                 (before middle_end/printclambda.ml(181):6912-7308
+                                   (seq
+                                     (after middle_end/printclambda.ml(181):6912-7111
+                                       (apply
+                                         (field 14 (global Stdlib__list!))
+                                         (function param
+                                           (funct-body middle_end/printclambda.ml(182):6932-7098
+                                             (let
+                                               (l =a (field 1 param)
+                                                s =a (field 0 param))
+                                               (before middle_end/printclambda.ml(183):6958-7097
+                                                 (seq
+                                                   (if (field 0 spc)
+                                                     (before middle_end/printclambda.ml(183):6971-6987
+                                                       (after middle_end/printclambda.ml(183):6971-6987
+                                                         (apply
+                                                           (field 122
+                                                             (global Stdlib__format!))
+                                                           ppf
+                                                           [0:
+                                                            [17:
+                                                             [0: "@ " 1 0] 0a]
+                                                            "@ "])))
+                                                     (before middle_end/printclambda.ml(183):6993-7004
+                                                       (setfield_imm 0 spc
+                                                         1a)))
+                                                   (before middle_end/printclambda.ml(184):7018-7097
+                                                     (after middle_end/printclambda.ml(184):7018-7097
+                                                       (apply
+                                                         (field 122
+                                                           (global Stdlib__format!))
+                                                         ppf
+                                                         [0:
+                                                          [18:
+                                                           [1:
+                                                            [0:
+                                                             [11:
+                                                              "<hv 1>" 0a]
+                                                             "<hv 1>"]]
+                                                           [11:
+                                                            "case \""
+                                                            [2:
+                                                             0a
+                                                             [11:
+                                                              "\":"
+                                                              [17:
+                                                               [0: "@ " 1 0]
+                                                               [15:
+                                                                [17: 0a 0a]]]]]]]
+                                                          "@[<hv 1>case \"%s\":@ %a@]"]
+                                                         (after middle_end/printclambda.ml(185):7073-7091
+                                                           (apply
+                                                             (field 12
+                                                               (global Stdlib__string!))
+                                                             s))
+                                                         lam l))))))))
+                                         sw))
+                                     (before middle_end/printclambda.ml(187):7122-7308
+                                       (if d
+                                         (let (d =a (field 0 d))
+                                           (before middle_end/printclambda.ml(189):7173-7275
+                                             (seq
+                                               (if (field 0 spc)
+                                                 (before middle_end/printclambda.ml(189):7186-7202
+                                                   (after middle_end/printclambda.ml(189):7186-7202
+                                                     (apply
+                                                       (field 122
+                                                         (global Stdlib__format!))
+                                                       ppf
+                                                       [0:
+                                                        [17:
+                                                         [0: "@ " 1 0] 0a]
+                                                        "@ "])))
+                                                 (before middle_end/printclambda.ml(189):7208-7219
+                                                   (setfield_imm 0 spc 1a)))
+                                               (before middle_end/printclambda.ml(190):7233-7275
+                                                 (after middle_end/printclambda.ml(190):7233-7275
+                                                   (apply
+                                                     (field 122
+                                                       (global Stdlib__format!))
+                                                     ppf
+                                                     [0:
+                                                      [18:
+                                                       [1:
+                                                        [0:
+                                                         [11: "<hv 1>" 0a]
+                                                         "<hv 1>"]]
+                                                       [11:
+                                                        "default:"
+                                                        [17:
+                                                         [0: "@ " 1 0]
+                                                         [15: [17: 0a 0a]]]]]
+                                                      "@[<hv 1>default:@ %a@]"]
+                                                     lam d))))))
+                                         (before middle_end/printclambda.ml(191):7294-7296
+                                           0a))))))))))
+                      (before middle_end/printclambda.ml(193):7318-7390
+                        (after middle_end/printclambda.ml(193):7318-7390
+                          (apply (field 122 (global Stdlib__format!)) ppf
+                            [0:
+                             [18:
+                              [1: [0: [11: "<1>" 0a] "<1>"]]
+                              [11:
+                               "(switch "
+                               [15:
+                                [17:
+                                 [0: "@ " 1 0]
+                                 [18:
+                                  [1: [0: [11: "<v 0>" 0a] "<v 0>"]]
+                                  [15: [17: 0a [12: ')' [17: 0a 0a]]]]]]]]]
+                             "@[<1>(switch %a@ @[<v 0>%a@])@]"]
+                            lam larg switch sw))))))
+               case tag 12:
+                (let (ls =a (field 1 param) i =a (field 0 param))
+                  (before middle_end/printclambda.ml(196):7425-7559
+                    (let
+                      (lams =
+                         (function ppf largs
+                           (funct-body middle_end/printclambda.ml(196)<ghost>:7434-7505
+                             (before middle_end/printclambda.ml(197):7454-7505
+                               (after middle_end/printclambda.ml(197):7454-7505
+                                 (apply (field 14 (global Stdlib__list!))
+                                   (function l
+                                     (funct-body middle_end/printclambda.ml(197):7464-7499
+                                       (before middle_end/printclambda.ml(197):7474-7498
+                                         (after middle_end/printclambda.ml(197):7474-7498
+                                           (apply
+                                             (field 122
+                                               (global Stdlib__format!))
+                                             ppf
+                                             [0:
+                                              [17: [0: "@ " 1 0] [15: 0a]]
+                                              "@ %a"]
+                                             lam l)))))
+                                   largs))))))
+                      (before middle_end/printclambda.ml(198):7515-7558
+                        (after middle_end/printclambda.ml(198):7515-7558
+                          (apply (field 122 (global Stdlib__format!)) ppf
+                            [0:
+                             [18:
+                              [1: [0: [11: "<2>" 0a] "<2>"]]
+                              [11:
+                               "(exit"
+                               [17:
+                                [0: "@ " 1 0]
+                                [4: 0a 0a 0a [15: [12: ')' [17: 0a 0a]]]]]]]
+                             "@[<2>(exit@ %d%a)@]"]
+                            i lams ls))))))
+               case tag 13:
+                (let
+                  (lhandler =a (field 3 param)
+                   lbody =a (field 2 param)
+                   vars =a (field 1 param)
+                   i =a (field 0 param))
+                  (before middle_end/printclambda.ml(200):7606-7938
+                    (after middle_end/printclambda.ml(200):7606-7938
+                      (apply (field 122 (global Stdlib__format!)) ppf
+                        [0:
+                         [18:
+                          [1: [0: [11: "<2>" 0a] "<2>"]]
+                          [11:
+                           "(catch"
+                           [17:
+                            [0: "@ " 1 0]
+                            [15:
+                             [17:
+                              [0: "@;<1 -1>" 1 -1]
+                              [11:
+                               "with ("
+                               [4:
+                                0a 0a 0a
+                                [15:
+                                 [12:
+                                  ')'
+                                  [17:
+                                   [0: "@ " 1 0] [15: [12: ')' [17: 0a 0a]]]]]]]]]]]]]
+                         "@[<2>(catch@ %a@;<1 -1>with (%d%a)@ %a)@]"]
+                        lam lbody i
+                        (function ppf vars
+                          (funct-body middle_end/printclambda.ml(202):7690-7904
+                            (before middle_end/printclambda.ml(203):7718-7894
+                              (after middle_end/printclambda.ml(203):7718-7894
+                                (apply (field 14 (global Stdlib__list!))
+                                  (function param
+                                    (funct-body middle_end/printclambda.ml(204):7741-7876
+                                      (let
+                                        (k =a (field 1 param)
+                                         x =a (field 0 param))
+                                        (before middle_end/printclambda.ml(205):7772-7861
+                                          (after middle_end/printclambda.ml(205):7772-7861
+                                            (apply
+                                              (field 122
+                                                (global Stdlib__format!))
+                                              ppf
+                                              [0:
+                                               [12: ' ' [15: [15: 0a]]]
+                                               " %a%a"]
+                                              (field 0
+                                                (field 33
+                                                  (global Backend_var!)))
+                                              x
+                                              (field 7 (global Printlambda!))
+                                              k))))))
+                                  vars)))))
+                        vars lam lhandler))))
+               case tag 14:
+                (let
+                  (lhandler =a (field 2 param)
+                   param =a (field 1 param)
+                   lbody =a (field 0 param))
+                  (before middle_end/printclambda.ml(214):7985-8080
+                    (after middle_end/printclambda.ml(214):7985-8080
+                      (apply (field 122 (global Stdlib__format!)) ppf
+                        [0:
+                         [18:
+                          [1: [0: [11: "<2>" 0a] "<2>"]]
+                          [11:
+                           "(try"
+                           [17:
+                            [0: "@ " 1 0]
+                            [15:
+                             [17:
+                              [0: "@;<1 -1>" 1 -1]
+                              [11:
+                               "with "
+                               [15:
+                                [17:
+                                 [0: "@ " 1 0] [15: [12: ')' [17: 0a 0a]]]]]]]]]]]
+                         "@[<2>(try@ %a@;<1 -1>with %a@ %a)@]"]
+                        lam lbody (field 0 (field 33 (global Backend_var!)))
+                        param lam lhandler))))
+               case tag 15:
+                (let
+                  (lelse =a (field 2 param)
+                   lif =a (field 1 param)
+                   lcond =a (field 0 param))
+                  (before middle_end/printclambda.ml(217):8125-8190
+                    (after middle_end/printclambda.ml(217):8125-8190
+                      (apply (field 122 (global Stdlib__format!)) ppf
+                        [0:
+                         [18:
+                          [1: [0: [11: "<2>" 0a] "<2>"]]
+                          [11:
+                           "(if"
+                           [17:
+                            [0: "@ " 1 0]
+                            [15:
+                             [17:
+                              [0: "@ " 1 0]
+                              [15:
+                               [17:
+                                [0: "@ " 1 0] [15: [12: ')' [17: 0a 0a]]]]]]]]]]
+                         "@[<2>(if@ %a@ %a@ %a)@]"]
+                        lam lcond lam lif lam lelse))))
+               case tag 16:
+                (let (l2 =a (field 1 param) l1 =a (field 0 param))
+                  (before middle_end/printclambda.ml(219):8222-8275
+                    (after middle_end/printclambda.ml(219):8222-8275
+                      (apply (field 122 (global Stdlib__format!)) ppf
+                        [0:
+                         [18:
+                          [1: [0: [11: "<2>" 0a] "<2>"]]
+                          [11:
+                           "(seq"
+                           [17:
+                            [0: "@ " 1 0]
+                            [15:
+                             [17: [0: "@ " 1 0] [15: [12: ')' [17: 0a 0a]]]]]]]]
+                         "@[<2>(seq@ %a@ %a)@]"]
+                        lam l1 sequence l2))))
+               case tag 17:
+                (let (lbody =a (field 1 param) lcond =a (field 0 param))
+                  (before middle_end/printclambda.ml(221):8310-8366
+                    (after middle_end/printclambda.ml(221):8310-8366
+                      (apply (field 122 (global Stdlib__format!)) ppf
+                        [0:
+                         [18:
+                          [1: [0: [11: "<2>" 0a] "<2>"]]
+                          [11:
+                           "(while"
+                           [17:
+                            [0: "@ " 1 0]
+                            [15:
+                             [17: [0: "@ " 1 0] [15: [12: ')' [17: 0a 0a]]]]]]]]
+                         "@[<2>(while@ %a@ %a)@]"]
+                        lam lcond lam lbody))))
+               case tag 18:
+                (let
+                  (body =a (field 4 param)
+                   dir =a (field 3 param)
+                   hi =a (field 2 param)
+                   lo =a (field 1 param)
+                   param =a (field 0 param))
+                  (before middle_end/printclambda.ml(223):8411-8566
+                    (after middle_end/printclambda.ml(223):8411-8566
+                      (apply (field 122 (global Stdlib__format!)) ppf
+                        [0:
+                         [18:
+                          [1: [0: [11: "<2>" 0a] "<2>"]]
+                          [11:
+                           "(for "
+                           [15:
+                            [17:
+                             [0: "@ " 1 0]
+                             [15:
+                              [17:
+                               [0: "@ " 1 0]
+                               [2:
+                                0a
+                                [17:
+                                 [0: "@ " 1 0]
+                                 [15:
+                                  [17:
+                                   [0: "@ " 1 0] [15: [12: ')' [17: 0a 0a]]]]]]]]]]]]]
+                         "@[<2>(for %a@ %a@ %s@ %a@ %a)@]"]
+                        (field 0 (field 33 (global Backend_var!))) param lam
+                        lo
+                        (if dir
+                          (before middle_end/printclambda.ml(225):8534-8542
+                            "downto")
+                          (before middle_end/printclambda.ml(225):8517-8521
+                            "to"))
+                        lam hi lam body))))
+               case tag 19:
+                (let (expr =a (field 1 param) id =a (field 0 param))
+                  (before middle_end/printclambda.ml(228):8598-8655
+                    (after middle_end/printclambda.ml(228):8598-8655
+                      (apply (field 122 (global Stdlib__format!)) ppf
+                        [0:
+                         [18:
+                          [1: [0: [11: "<2>" 0a] "<2>"]]
+                          [11:
+                           "(assign"
+                           [17:
+                            [0: "@ " 1 0]
+                            [15:
+                             [17: [0: "@ " 1 0] [15: [12: ')' [17: 0a 0a]]]]]]]]
+                         "@[<2>(assign@ %a@ %a)@]"]
+                        (field 3 (global Backend_var!)) id lam expr))))
+               case tag 20:
+                (let
+                  (largs =a (field 3 param)
+                   obj =a (field 2 param)
+                   met =a (field 1 param)
+                   k =a (field 0 param))
+                  (before middle_end/printclambda.ml(230):8699-8982
+                    (let
+                      (args =
+                         (function ppf largs
+                           (funct-body middle_end/printclambda.ml(230)<ghost>:8708-8779
+                             (before middle_end/printclambda.ml(231):8728-8779
+                               (after middle_end/printclambda.ml(231):8728-8779
+                                 (apply (field 14 (global Stdlib__list!))
+                                   (function l
+                                     (funct-body middle_end/printclambda.ml(231):8738-8773
+                                       (before middle_end/printclambda.ml(231):8748-8772
+                                         (after middle_end/printclambda.ml(231):8748-8772
+                                           (apply
+                                             (field 122
+                                               (global Stdlib__format!))
+                                             ppf
+                                             [0:
+                                              [17: [0: "@ " 1 0] [15: 0a]]
+                                              "@ %a"]
+                                             lam l)))))
+                                   largs))))))
+                      (before middle_end/printclambda.ml(232):8789-8982
+                        (let
+                          (kind =
+                             (if (== k 0a)
+                               (before middle_end/printclambda.ml(233):8832-8838
+                                 "self")
+                               (before middle_end/printclambda.ml(234):8852-8901
+                                 (if (== k 2a)
+                                   (before middle_end/printclambda.ml(234):8878-8885
+                                     "cache")
+                                   (before middle_end/printclambda.ml(235):8899-8901
+                                     "")))))
+                          (before middle_end/printclambda.ml(236):8911-8982
+                            (after middle_end/printclambda.ml(236):8911-8982
+                              (apply (field 122 (global Stdlib__format!)) ppf
+                                [0:
+                                 [18:
+                                  [1: [0: [11: "<2>" 0a] "<2>"]]
+                                  [11:
+                                   "(send"
+                                   [2:
+                                    0a
+                                    [17:
+                                     [0: "@ " 1 0]
+                                     [15:
+                                      [17:
+                                       [0: "@ " 1 0]
+                                       [15: [15: [12: ')' [17: 0a 0a]]]]]]]]]]
+                                 "@[<2>(send%s@ %a@ %a%a)@]"]
+                                kind lam obj lam met args largs)))))))))))
+        sequence
+          (function ppf ulam
+            (funct-body middle_end/printclambda.ml(240)<ghost>:9049-9173
+              (before middle_end/printclambda.ml(240):9060-9173
+                (catch
+                  (switch ulam
+                   case tag 16:
+                    (let (l2 =a (field 1 ulam) l1 =a (field 0 ulam))
+                      (before middle_end/printclambda.ml(242):9107-9151
+                        (after middle_end/printclambda.ml(242):9107-9151
+                          (apply (field 122 (global Stdlib__format!)) ppf
+                            [0: [15: [17: [0: "@ " 1 0] [15: 0a]]] "%a@ %a"]
+                            sequence l1 sequence l2))))
+                   default: (exit 3))
+                 with (3)
+                  (before middle_end/printclambda.ml(243):9161-9173
+                    (after middle_end/printclambda.ml(243):9161-9173
+                      (apply lam ppf ulam))))))))
+      (let
+        (clambda =
+           (function ppf ulam
+             (funct-body middle_end/printclambda.ml(245)<ghost>:9187-9227
+               (before middle_end/printclambda.ml(246):9200-9227
+                 (after middle_end/printclambda.ml(246):9200-9227
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [15: [17: 4a 0a]] "%a@."] lam ulam))))))
+        (letrec
+          (approx
+             (function ppf param
+               (funct-body middle_end/printclambda.ml(249)<ghost>:9245-10077
+                 (switch* param
+                  case int 0:
+                   (before middle_end/printclambda.ml(268):9913-9935
+                     (after middle_end/printclambda.ml(268):9913-9935
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [12: '_' 0a] "_"])))
+                  case tag 0:
+                   (let (a =a (field 1 param) fundesc =a (field 0 param))
+                     (before middle_end/printclambda.ml(251):9299-9627
+                       (seq
+                         (after middle_end/printclambda.ml(251):9299-9390
+                           (apply (field 122 (global Stdlib__format!)) ppf
+                             [0:
+                              [18:
+                               [1: [0: [11: "<2>" 0a] "<2>"]]
+                               [11:
+                                "function "
+                                [2:
+                                 0a
+                                 [17:
+                                  [0: "@ " 1 0]
+                                  [11: "arity " [4: 3a 0a 0a 0a]]]]]]
+                              "@[<2>function %s@ arity %i"]
+                             (field 0 fundesc) (field 1 fundesc)))
+                         (before middle_end/printclambda.ml(253):9398-9627
+                           (seq
+                             (if (field 2 fundesc)
+                               (before middle_end/printclambda.ml(253):9425-9480
+                                 (after middle_end/printclambda.ml(253):9425-9480
+                                   (apply
+                                     (field 122 (global Stdlib__format!)) ppf
+                                     [0:
+                                      [17: [0: "@ " 1 0] [11: "(closed)" 0a]]
+                                      "@ (closed)"])))
+                               0a)
+                             (before middle_end/printclambda.ml(256):9488-9627
+                               (seq
+                                 (if (!= (field 3 fundesc) 0a)
+                                   (before middle_end/printclambda.ml(256):9523-9578
+                                     (after middle_end/printclambda.ml(256):9523-9578
+                                       (apply
+                                         (field 122 (global Stdlib__format!))
+                                         ppf
+                                         [0:
+                                          [17:
+                                           [0: "@ " 1 0] [11: "(inline)" 0a]]
+                                          "@ (inline)"])))
+                                   0a)
+                                 (before middle_end/printclambda.ml(259):9586-9627
+                                   (after middle_end/printclambda.ml(259):9586-9627
+                                     (apply
+                                       (field 122 (global Stdlib__format!))
+                                       ppf
+                                       [0:
+                                        [17:
+                                         [0: "@ " 1 0]
+                                         [11:
+                                          "-> "
+                                          [17:
+                                           [0: "@ " 1 0] [15: [17: 0a 0a]]]]]
+                                        "@ -> @ %a@]"]
+                                       approx a))))))))))
+                  case tag 1:
+                   (let (a =a (field 0 param))
+                     (before middle_end/printclambda.ml(261):9655-9885
+                       (let
+                         (tuple =
+                            (function ppf a
+                              (funct-body middle_end/printclambda.ml(261)<ghost>:9665-9831
+                                (before middle_end/printclambda.ml(262):9681-9831
+                                  (for i 0 to (- (array.length[addr] a) 1)
+                                    (before middle_end/printclambda.ml(263):9726-9818
+                                      (seq
+                                        (if (> i 0)
+                                          (before middle_end/printclambda.ml(263):9740-9764
+                                            (after middle_end/printclambda.ml(263):9740-9764
+                                              (apply
+                                                (field 122
+                                                  (global Stdlib__format!))
+                                                ppf
+                                                [0:
+                                                 [12:
+                                                  ';' [17: [0: "@ " 1 0] 0a]]
+                                                 ";@ "])))
+                                          0a)
+                                        (before middle_end/printclambda.ml(264):9776-9818
+                                          (after middle_end/printclambda.ml(264):9776-9818
+                                            (apply
+                                              (field 122
+                                                (global Stdlib__format!))
+                                              ppf
+                                              [0:
+                                               [4:
+                                                3a 0a 0a [11: ": " [15: 0a]]]
+                                               "%i: %a"]
+                                              i approx
+                                              (after middle_end/printclambda.ml(264):9813-9818
+                                                (array.get[addr] a i))))))))))))
+                         (before middle_end/printclambda.ml(266):9841-9885
+                           (after middle_end/printclambda.ml(266):9841-9885
+                             (apply (field 122 (global Stdlib__format!)) ppf
+                               [0:
+                                [18:
+                                 [1: [0: [11: "<hov 1>" 0a] "<hov 1>"]]
+                                 [12: '(' [15: [12: ')' [17: 0a 0a]]]]]
+                                "@[<hov 1>(%a)@]"]
+                               tuple a))))))
+                  case tag 2:
+                   (let (c =a (field 0 param))
+                     (before middle_end/printclambda.ml(270):9963-10002
+                       (after middle_end/printclambda.ml(270):9963-10002
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [18:
+                             [1: [0: 0a ""]]
+                             [11: "const(" [15: [12: ')' [17: 0a 0a]]]]]
+                            "@[const(%a)@]"]
+                           uconstant c))))
+                  case tag 3:
+                   (let (i =a (field 1 param) s =a (field 0 param))
+                     (before middle_end/printclambda.ml(272):10042-10077
+                       (after middle_end/printclambda.ml(272):10042-10077
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [18:
+                             [1: [0: 0a ""]]
+                             [11:
+                              "global("
+                              [2:
+                               0a
+                               [12: ',' [4: 3a 0a 0a [12: ')' [17: 0a 0a]]]]]]]
+                            "@[global(%s,%i)@]"]
+                           s i))))))))
+          (pseudo _none_(0)<ghost>:-1--1
+            (makeblock 0 clambda approx structured_constant
+              phantom_defining_expr_opt)))))))

@@ -1,0 +1,1170 @@
+(setglobal Linearize!
+  (let
+    (has_fallthrough =
+       (function param
+         (funct-body asmcomp/linearize.ml(48):1801-1927
+           (catch
+             (catch
+               (switch param
+                case int 3: (exit 1)
+                case tag 0:
+                 (let (*match* =a (field 0 param))
+                   (switch *match*
+                    case tag 5: (exit 1)
+                    case tag 6: (exit 1)
+                    default: (exit 2)))
+                case tag 2: (exit 1)
+                case tag 5: (exit 1)
+                case tag 8: (exit 1)
+                default: (exit 2))
+              with (2) (before asmcomp/linearize.ml(51):1923-1927 1a))
+            with (1) (before asmcomp/linearize.ml(50):1908-1913 0a))))
+     invert_integer_test =
+       (function param
+         (funct-body asmcomp/linearize.ml(64):2190-2326
+           (switch* param
+            case tag 0:
+             (let (cmp =a (field 0 param))
+               (before asmcomp/linearize.ml(65):2218-2260
+                 (makeblock 0
+                   (after asmcomp/linearize.ml(65):2225-2260
+                     (apply (field 7 (global Cmm!)) cmp)))))
+            case tag 1:
+             (let (cmp =a (field 0 param))
+               (before asmcomp/linearize.ml(66):2282-2326
+                 (makeblock 1
+                   (after asmcomp/linearize.ml(66):2291-2326
+                     (apply (field 7 (global Cmm!)) cmp))))))))
+     invert_test =
+       (function param
+         (funct-body asmcomp/linearize.ml(68):2346-2653
+           (switch* param
+            case int 0: (before asmcomp/linearize.ml(69):2372-2382 1a)
+            case int 1: (before asmcomp/linearize.ml(70):2401-2410 0a)
+            case int 2: (before asmcomp/linearize.ml(75):2644-2653 3a)
+            case int 3: (before asmcomp/linearize.ml(74):2619-2627 2a)
+            case tag 0:
+             (let (cmp =a (field 0 param))
+               (before asmcomp/linearize.ml(71):2432-2465
+                 (makeblock 0
+                   (after asmcomp/linearize.ml(71):2440-2465
+                     (apply invert_integer_test cmp)))))
+            case tag 1:
+             (let (n =a (field 1 param) cmp =a (field 0 param))
+               (before asmcomp/linearize.ml(72):2494-2534
+                 (makeblock 1 (*,int)
+                   (after asmcomp/linearize.ml(72):2507-2530
+                     (apply invert_integer_test cmp))
+                   n)))
+            case tag 2:
+             (let (cmp =a (field 0 param))
+               (before asmcomp/linearize.ml(73):2558-2601
+                 (makeblock 2
+                   (after asmcomp/linearize.ml(73):2568-2601
+                     (apply (field 9 (global Cmm!)) cmp)))))))))
+    (letrec
+      (end_instr
+         (makemutable 0 1a end_instr (makearray[addr]) (makearray[addr])
+           (field 0 (global Debuginfo!)) (field 0 (field 9 (global Reg!)))))
+      (let
+        (instr_cons =
+           (function d a r n
+             (funct-body asmcomp/linearize.ml(89)<ghost>:2891-2991
+               (before asmcomp/linearize.ml(90):2903-2991
+                 (makemutable 0 d n a r (field 0 (global Debuginfo!))
+                   (field 0 (field 9 (global Reg!)))))))
+         cons_instr =
+           (function d n
+             (funct-body asmcomp/linearize.ml(95)<ghost>:3064-3166
+               (before asmcomp/linearize.ml(96):3072-3166
+                 (makemutable 0 d n (makearray[addr]) (makearray[addr])
+                   (field 0 (global Debuginfo!))
+                   (field 0 (field 9 (global Reg!)))))))
+         copy_instr =
+           (function d i n
+             (funct-body asmcomp/linearize.ml(102)<ghost>:3277-3391
+               (before asmcomp/linearize.ml(103):3287-3391
+                 (makemutable 0 d n (field 2 i) (field 3 i) (field 4 i)
+                   (field 5 i)))))
+         get_label =
+           (function n
+             (funct-body asmcomp/linearize.ml(113)<ghost>:3600-3767
+               (before asmcomp/linearize.ml(113):3604-3767
+                 (let (*match* = (field 0 n))
+                   (catch
+                     (switch *match*
+                      case int 1:
+                       (before asmcomp/linearize.ml(116):3689-3696
+                         (makeblock 0 (int,*) -1 n))
+                      case tag 1:
+                       (let (lbl =a (field 0 *match*))
+                         (before asmcomp/linearize.ml(115):3668-3676
+                           (makeblock 0 (int,*) lbl n)))
+                      case tag 2:
+                       (let (lbl =a (field 0 *match*))
+                         (before asmcomp/linearize.ml(114):3641-3649
+                           (makeblock 0 (int,*) lbl n)))
+                      default: (exit 3))
+                    with (3)
+                     (before asmcomp/linearize.ml(117):3706-3767
+                       (let
+                         (lbl =[int]
+                            (after asmcomp/linearize.ml(117):3716-3731
+                              (apply (field 11 (global Cmm!)) 0a)))
+                         (before asmcomp/linearize.ml(117):3735-3767
+                           (makeblock 0 (int,*) lbl
+                             (after asmcomp/linearize.ml(117):3741-3766
+                               (apply cons_instr (makeblock 1 (int) lbl) n)))))))))))
+         check_label =
+           (function n : int
+             (funct-body asmcomp/linearize.ml(120)<ghost>:3819-3897
+               (before asmcomp/linearize.ml(120):3823-3897
+                 (let (*match* = (field 0 n))
+                   (catch
+                     (switch *match*
+                      case tag 1:
+                       (let (lbl =a (field 0 *match*))
+                         (before asmcomp/linearize.ml(122):3882-3885 lbl))
+                      case tag 2:
+                       (let (lbl =a (field 0 *match*))
+                         (before asmcomp/linearize.ml(121):3860-3863 lbl))
+                      default: (exit 4))
+                    with (4) (before asmcomp/linearize.ml(123):3895-3897 -1)))))))
+        (letrec
+          (adjust_trap_depth
+             (function delta_traps[int] next
+               (funct-body asmcomp/linearize.ml(131)<ghost>:4183-4524
+                 (before asmcomp/linearize.ml(134):4304-4524
+                   (let (*match* = (field 0 next))
+                     (catch
+                       (switch *match*
+                        case tag 6:
+                         (let (k =a (field 0 *match*))
+                           (before asmcomp/linearize.ml(136):4375-4420
+                             (after asmcomp/linearize.ml(136):4375-4420
+                               (apply adjust_trap_depth (+ delta_traps k)
+                                 (field 1 next)))))
+                        default: (exit 5))
+                      with (5)
+                       (before asmcomp/linearize.ml(138):4434-4524
+                         (if (== delta_traps 0)
+                           (before asmcomp/linearize.ml(138):4458-4462 next)
+                           (before asmcomp/linearize.ml(139):4472-4524
+                             (after asmcomp/linearize.ml(139):4472-4524
+                               (apply cons_instr
+                                 (makeblock 6 (int) delta_traps) next)))))))))))
+          (letrec
+            (discard_dead_code
+               (function n
+                 (funct-body asmcomp/linearize.ml(145)<ghost>:4687-5711
+                   (before asmcomp/linearize.ml(146):4693-5711
+                     (let
+                       (adjust =
+                          (function trap_depth[int]
+                            (funct-body asmcomp/linearize.ml(146)<ghost>:4704-4776
+                              (before asmcomp/linearize.ml(147):4721-4776
+                                (after asmcomp/linearize.ml(147):4721-4776
+                                  (apply adjust_trap_depth trap_depth
+                                    (after asmcomp/linearize.ml(147):4750-4776
+                                      (apply discard_dead_code (field 1 n)))))))))
+                       (before asmcomp/linearize.ml(149):4784-5711
+                         (let (*match* = (field 0 n))
+                           (catch
+                             (switch *match*
+                              case int 1:
+                               (before asmcomp/linearize.ml(150):4814-4815 n)
+                              case int 5:
+                               (before asmcomp/linearize.ml(157):5178-5189
+                                 (after asmcomp/linearize.ml(157):5178-5189
+                                   (apply adjust -1)))
+                              case tag 0:
+                               (let (*match* =a (field 0 *match*))
+                                 (switch *match*
+                                  case tag 8:
+                                   (before asmcomp/linearize.ml(166):5634-5677
+                                     (let (init = n)
+                                       (makemutable 0 (field 0 init)
+                                         (after asmcomp/linearize.ml(166):5650-5674
+                                           (apply discard_dead_code
+                                             (field 1 n)))
+                                         (field 2 init) (field 3 init)
+                                         (field 4 init) (field 5 init))))
+                                  default: (exit 6)))
+                              case tag 1:
+                               (before asmcomp/linearize.ml(151):4832-4833 n)
+                              case tag 6:
+                               (let (delta_traps =a (field 0 *match*))
+                                 (before asmcomp/linearize.ml(159):5263-5281
+                                   (after asmcomp/linearize.ml(159):5263-5281
+                                     (apply adjust delta_traps))))
+                              case tag 7:
+                               (before asmcomp/linearize.ml(158):5209-5220
+                                 (after asmcomp/linearize.ml(158):5209-5220
+                                   (apply adjust 1)))
+                              default: (exit 6))
+                            with (6)
+                             (before asmcomp/linearize.ml(167):5687-5711
+                               (after asmcomp/linearize.ml(167):5687-5711
+                                 (apply discard_dead_code (field 1 n))))))))))))
+            (let
+              (add_branch =
+                 (function lbl[int] n
+                   (funct-body asmcomp/linearize.ml(176)<ghost>:5944-6139
+                     (before asmcomp/linearize.ml(177):5954-6139
+                       (if (>= lbl 0)
+                         (before asmcomp/linearize.ml(178):5975-6108
+                           (let
+                             (n1 =
+                                (after asmcomp/linearize.ml(178):5984-6003
+                                  (apply discard_dead_code n)))
+                             (before asmcomp/linearize.ml(179):6011-6108
+                               (let (*match* = (field 0 n1))
+                                 (catch
+                                   (switch *match*
+                                    case tag 1:
+                                     (let (lbl1 =a (field 0 *match*))
+                                       (before asmcomp/linearize.ml(180):6053-6063
+                                         (if (== lbl1 lbl)
+                                           (before asmcomp/linearize.ml(180):6067-6069
+                                             n1)
+                                           (exit 7))))
+                                    default: (exit 7))
+                                  with (7)
+                                   (before asmcomp/linearize.ml(181):6081-6108
+                                     (after asmcomp/linearize.ml(181):6081-6108
+                                       (apply cons_instr
+                                         (makeblock 2 (int) lbl) n1))))))))
+                         (before asmcomp/linearize.ml(183):6120-6139
+                           (after asmcomp/linearize.ml(183):6120-6139
+                             (apply discard_dead_code n)))))))
+               try_depth = (makemutable 0 (int) 0)
+               exit_label = (makemutable 0 0a)
+               find_exit_label_try_depth =
+                 (function k[int]
+                   (funct-body asmcomp/linearize.ml(191)<ghost>:6296-6403
+                     (before asmcomp/linearize.ml(192):6302-6403
+                       (try
+                         (after asmcomp/linearize.ml(193):6310-6334
+                           (apply (field 38 (global Stdlib__list!)) k
+                             (field 0 exit_label)))
+                        with exn
+                         (if (== exn (field 7 (global Stdlib!)))
+                           (before asmcomp/linearize.ml(195):6359-6403
+                             (after asmcomp/linearize.ml(195):6359-6403
+                               (apply (field 0 (global Misc!))
+                                 "Linearize.find_exit_label")))
+                           (reraise exn))))))
+               find_exit_label =
+                 (function k[int] : int
+                   (funct-body asmcomp/linearize.ml(197)<ghost>:6425-6512
+                     (before asmcomp/linearize.ml(198):6431-6512
+                       (let
+                         (*match* =
+                            (after asmcomp/linearize.ml(198):6448-6475
+                              (apply find_exit_label_try_depth k))
+                          t =a (field 1 *match*)
+                          label =a (field 0 *match*))
+                         (before asmcomp/linearize.ml(199):6481-6512
+                           (seq
+                             (if (== t (field 0 try_depth)) 0a
+                               (raise
+                                 (after asmcomp/linearize.ml(199):6481-6503
+                                   (makeblock 0 (global Assert_failure!)
+                                     [0: "asmcomp/linearize.ml" 199 2]))))
+                             (before asmcomp/linearize.ml(200):6507-6512
+                               label)))))))
+               is_next_catch =
+                 (function n[int]
+                   (funct-body asmcomp/linearize.ml(202)<ghost>:6532-6624
+                     (before asmcomp/linearize.ml(202):6536-6624
+                       (let (*match* = (field 0 exit_label))
+                         (catch
+                           (if *match*
+                             (let
+                               (*match* =a (field 0 *match*)
+                                *match* =a (field 1 *match*)
+                                t =a (field 1 *match*)
+                                n0 =a (field 0 *match*))
+                               (before asmcomp/linearize.ml(203):6581-6603
+                                 (if
+                                   (&& (== n0 n) (== t (field 0 try_depth)))
+                                   (before asmcomp/linearize.ml(203):6607-6611
+                                     1a)
+                                   (exit 12))))
+                             (exit 12))
+                          with (12)
+                           (before asmcomp/linearize.ml(204):6619-6624 0a))))))
+               local_exit =
+                 (function k[int]
+                   (funct-body asmcomp/linearize.ml(206)<ghost>:6641-6693
+                     (before asmcomp/linearize.ml(207):6647-6693
+                       (==
+                         (field 1
+                           (after asmcomp/linearize.ml(207):6651-6680
+                             (apply find_exit_label_try_depth k)))
+                         (field 0 try_depth))))))
+              (letrec
+                (linear
+                   (function i n
+                     (funct-body asmcomp/linearize.ml(211)<ghost>:6787-11953
+                       (before asmcomp/linearize.ml(212):6795-11953
+                         (let (*match* = (field 0 i))
+                           (switch* *match*
+                            case int 0:
+                             (before asmcomp/linearize.ml(213):6830-6831 n)
+                            case int 1:
+                             (before asmcomp/linearize.ml(225):7234-7372
+                               (let
+                                 (n1 =
+                                    (after asmcomp/linearize.ml(225):7243-7285
+                                      (apply copy_instr 3a i
+                                        (after asmcomp/linearize.ml(225):7264-7285
+                                          (apply discard_dead_code n)))))
+                                 (before asmcomp/linearize.ml(226):7295-7372
+                                   (if (field 0 (field 24 (global Proc!)))
+                                     (before asmcomp/linearize.ml(227):7330-7358
+                                       (after asmcomp/linearize.ml(227):7330-7358
+                                         (apply cons_instr 2a n1)))
+                                     (before asmcomp/linearize.ml(228):7370-7372
+                                       n1)))))
+                            case tag 0:
+                             (let (op =a (field 0 *match*))
+                               (catch
+                                 (catch
+                                   (catch
+                                     (switch op
+                                      case int 0: (exit 53)
+                                      case int 1: (exit 53)
+                                      case int 2: (exit 53)
+                                      case tag 5: (exit 52)
+                                      case tag 6: (exit 52)
+                                      default: (exit 51))
+                                    with (52)
+                                     (before asmcomp/linearize.ml(215):6890-7034
+                                       (if (not (field 52 (global Config!)))
+                                         (before asmcomp/linearize.ml(216):6927-6970
+                                           (after asmcomp/linearize.ml(216):6927-6970
+                                             (apply copy_instr
+                                               (makeblock 0 op) i
+                                               (after asmcomp/linearize.ml(216):6949-6970
+                                                 (apply discard_dead_code n)))))
+                                         (before asmcomp/linearize.ml(218):6990-7034
+                                           (after asmcomp/linearize.ml(218):6990-7034
+                                             (apply copy_instr
+                                               (makeblock 0 op) i
+                                               (after asmcomp/linearize.ml(218):7012-7034
+                                                 (apply linear (field 1 i) n))))))))
+                                  with (53)
+                                   (before asmcomp/linearize.ml(220):7078-7117
+                                     (if
+                                       (after asmcomp/linearize.ml(220):7078-7117
+                                         (caml_equal
+                                           (field 3
+                                             (after asmcomp/linearize.ml(220):7078-7092
+                                               (array.get[addr] (field 2 i)
+                                                 0)))
+                                           (field 3
+                                             (after asmcomp/linearize.ml(220):7099-7113
+                                               (array.get[addr] (field 3 i)
+                                                 0)))))
+                                       (before asmcomp/linearize.ml(221):7127-7147
+                                         (after asmcomp/linearize.ml(221):7127-7147
+                                           (apply linear (field 1 i) n)))
+                                       (exit 51))))
+                                with (51)
+                                 (let (op =a op)
+                                   (before asmcomp/linearize.ml(223):7168-7212
+                                     (after asmcomp/linearize.ml(223):7168-7212
+                                       (apply copy_instr (makeblock 0 op) i
+                                         (after asmcomp/linearize.ml(223):7190-7212
+                                           (apply linear (field 1 i) n))))))))
+                            case tag 1:
+                             (let
+                               (ifnot =a (field 2 *match*)
+                                ifso =a (field 1 *match*)
+                                test =a (field 0 *match*))
+                               (before asmcomp/linearize.ml(230):7417-8958
+                                 (let
+                                   (n1 =
+                                      (after asmcomp/linearize.ml(230):7426-7446
+                                        (apply linear (field 1 i) n)))
+                                   (before asmcomp/linearize.ml(231):7456-8958
+                                     (let
+                                       (*match* = (field 0 ifso)
+                                        *match* = (field 0 ifnot)
+                                        *match* = (field 0 n1)
+                                        *match* = *match*
+                                        *match* = *match*
+                                        *match* = *match*)
+                                       (catch
+                                         (catch
+                                           (catch
+                                             (catch
+                                               (catch
+                                                 (catch
+                                                   (switch *match*
+                                                    case int 0:
+                                                     (switch *match*
+                                                      case tag 2:
+                                                       (let
+                                                         (lbl =a
+                                                            (field 0 *match*))
+                                                         (before asmcomp/linearize.ml(233):7558-7613
+                                                           (after asmcomp/linearize.ml(233):7558-7613
+                                                             (apply
+                                                               copy_instr
+                                                               (makeblock 3 (*,int)
+                                                                 test lbl)
+                                                               i
+                                                               (after asmcomp/linearize.ml(233):7596-7613
+                                                                 (apply
+                                                                   linear
+                                                                   ifnot n1))))))
+                                                      default: (exit 28))
+                                                    case tag 4:
+                                                     (let
+                                                       (nfail1 =a
+                                                          (field 0 *match*))
+                                                       (switch *match*
+                                                        case int 0: (exit 30)
+                                                        case tag 4:
+                                                         (let
+                                                           (nfail2 =a
+                                                              (field 0
+                                                                *match*))
+                                                           (before asmcomp/linearize.ml(237):7778-7819
+                                                             (if
+                                                               (&&
+                                                                 (after asmcomp/linearize.ml(237):7778-7798
+                                                                   (apply
+                                                                    is_next_catch
+                                                                    nfail1))
+                                                                 (after asmcomp/linearize.ml(237):7802-7819
+                                                                   (apply
+                                                                    local_exit
+                                                                    nfail2)))
+                                                               (before asmcomp/linearize.ml(238):7833-7960
+                                                                 (let
+                                                                   (lbl2 =[int]
+                                                                    (after asmcomp/linearize.ml(238):7844-7866
+                                                                    (apply
+                                                                    find_exit_label
+                                                                    nfail2)))
+                                                                   (before asmcomp/linearize.ml(239):7880-7960
+                                                                    (after asmcomp/linearize.ml(239):7880-7960
+                                                                    (apply
+                                                                    copy_instr
+                                                                    (makeblock 3 (*,int)
+                                                                    (after asmcomp/linearize.ml(240):7917-7933
+                                                                    (apply
+                                                                    invert_test
+                                                                    test))
+                                                                    lbl2) i
+                                                                    (after asmcomp/linearize.ml(240):7944-7960
+                                                                    (apply
+                                                                    linear
+                                                                    ifso n1)))))))
+                                                               (exit 29))))
+                                                        default: (exit 29)))
+                                                    default: (exit 30))
+                                                  with (30)
+                                                   (if (isint *match*)
+                                                     (if *match* (exit 29)
+                                                       (switch *match*
+                                                        case tag 2:
+                                                         (let
+                                                           (lbl =a
+                                                              (field 0
+                                                                *match*))
+                                                           (before asmcomp/linearize.ml(235):7656-7722
+                                                             (after asmcomp/linearize.ml(235):7656-7722
+                                                               (apply
+                                                                 copy_instr
+                                                                 (makeblock 3 (*,int)
+                                                                   (after asmcomp/linearize.ml(235):7680-7696
+                                                                    (apply
+                                                                    invert_test
+                                                                    test))
+                                                                   lbl)
+                                                                 i
+                                                                 (after asmcomp/linearize.ml(235):7706-7722
+                                                                   (apply
+                                                                    linear
+                                                                    ifso n1))))))
+                                                        default: (exit 29)))
+                                                     (exit 29)))
+                                                with (29)
+                                                 (switch *match*
+                                                  case tag 4:
+                                                   (let
+                                                     (nfail =a
+                                                        (field 0 *match*))
+                                                     (before asmcomp/linearize.ml(241):7992-8008
+                                                       (if
+                                                         (after asmcomp/linearize.ml(241):7992-8008
+                                                           (apply local_exit
+                                                             nfail))
+                                                         (before asmcomp/linearize.ml(242):8022-8142
+                                                           (let
+                                                             (n2 =
+                                                                (after asmcomp/linearize.ml(242):8031-8046
+                                                                  (apply
+                                                                    linear
+                                                                    ifnot n1))
+                                                              lbl =[int]
+                                                                (after asmcomp/linearize.ml(243):8067-8088
+                                                                  (apply
+                                                                    find_exit_label
+                                                                    nfail)))
+                                                             (before asmcomp/linearize.ml(244):8102-8142
+                                                               (after asmcomp/linearize.ml(244):8102-8142
+                                                                 (apply
+                                                                   copy_instr
+                                                                   (makeblock 3 (*,int)
+                                                                    test lbl)
+                                                                   i n2)))))
+                                                         (exit 28))))
+                                                  default: (exit 28)))
+                                              with (28)
+                                               (switch *match*
+                                                case tag 4:
+                                                 (let
+                                                   (nfail =a
+                                                      (field 0 *match*))
+                                                   (before asmcomp/linearize.ml(245):8175-8191
+                                                     (if
+                                                       (after asmcomp/linearize.ml(245):8175-8191
+                                                         (apply local_exit
+                                                           nfail))
+                                                       (before asmcomp/linearize.ml(246):8205-8339
+                                                         (let
+                                                           (n2 =
+                                                              (after asmcomp/linearize.ml(246):8214-8228
+                                                                (apply linear
+                                                                  ifso n1)))
+                                                           (before asmcomp/linearize.ml(247):8242-8339
+                                                             (let
+                                                               (lbl =[int]
+                                                                  (after asmcomp/linearize.ml(247):8252-8273
+                                                                    (apply
+                                                                    find_exit_label
+                                                                    nfail)))
+                                                               (before asmcomp/linearize.ml(248):8287-8339
+                                                                 (after asmcomp/linearize.ml(248):8287-8339
+                                                                   (apply
+                                                                    copy_instr
+                                                                    (makeblock 3 (*,int)
+                                                                    (after asmcomp/linearize.ml(248):8311-8327
+                                                                    (apply
+                                                                    invert_test
+                                                                    test))
+                                                                    lbl) i
+                                                                    n2)))))))
+                                                       (exit 27))))
+                                                default: (exit 27)))
+                                            with (27)
+                                             (if (isint *match*)
+                                               (if *match* (exit 26)
+                                                 (before asmcomp/linearize.ml(250):8372-8477
+                                                   (let
+                                                     (*match* =
+                                                        (after asmcomp/linearize.ml(250):8392-8404
+                                                          (apply get_label
+                                                            n1))
+                                                      n2 =a (field 1 *match*)
+                                                      lbl_end =a
+                                                        (field 0 *match*))
+                                                     (before asmcomp/linearize.ml(251):8418-8477
+                                                       (after asmcomp/linearize.ml(251):8418-8477
+                                                         (apply copy_instr
+                                                           (makeblock 3 (*,int)
+                                                             test lbl_end)
+                                                           i
+                                                           (after asmcomp/linearize.ml(251):8460-8477
+                                                             (apply linear
+                                                               ifnot n2))))))))
+                                               (exit 26)))
+                                          with (26)
+                                           (if (isint *match*)
+                                             (if *match* (exit 25)
+                                               (before asmcomp/linearize.ml(253):8511-8648
+                                                 (let
+                                                   (*match* =
+                                                      (after asmcomp/linearize.ml(253):8531-8543
+                                                        (apply get_label n1))
+                                                    n2 =a (field 1 *match*)
+                                                    lbl_end =a
+                                                      (field 0 *match*))
+                                                   (before asmcomp/linearize.ml(254):8557-8648
+                                                     (after asmcomp/linearize.ml(254):8557-8648
+                                                       (apply copy_instr
+                                                         (makeblock 3 (*,int)
+                                                           (after asmcomp/linearize.ml(254):8581-8597
+                                                             (apply
+                                                               invert_test
+                                                               test))
+                                                           lbl_end)
+                                                         i
+                                                         (after asmcomp/linearize.ml(255):8632-8648
+                                                           (apply linear ifso
+                                                             n2))))))))
+                                             (exit 25)))
+                                        with (25)
+                                         (before asmcomp/linearize.ml(258):8730-8948
+                                           (let
+                                             (*match* =
+                                                (after asmcomp/linearize.ml(258):8750-8762
+                                                  (apply get_label n1))
+                                              n2 =a (field 1 *match*)
+                                              lbl_end =a (field 0 *match*))
+                                             (before asmcomp/linearize.ml(259):8776-8948
+                                               (let
+                                                 (*match* =
+                                                    (after asmcomp/linearize.ml(259):8800-8827
+                                                      (apply get_label
+                                                        (after asmcomp/linearize.ml(259):8810-8827
+                                                          (apply linear ifnot
+                                                            n2))))
+                                                  nelse =a (field 1 *match*)
+                                                  lbl_else =a
+                                                    (field 0 *match*))
+                                                 (before asmcomp/linearize.ml(260):8841-8948
+                                                   (after asmcomp/linearize.ml(260):8841-8948
+                                                     (apply copy_instr
+                                                       (makeblock 3 (*,int)
+                                                         (after asmcomp/linearize.ml(260):8865-8881
+                                                           (apply invert_test
+                                                             test))
+                                                         lbl_else)
+                                                       i
+                                                       (after asmcomp/linearize.ml(261):8908-8948
+                                                         (apply linear ifso
+                                                           (after asmcomp/linearize.ml(261):8921-8947
+                                                             (apply
+                                                               add_branch
+                                                               lbl_end nelse)))))))))))))))))
+                            case tag 2:
+                             (let
+                               (cases =a (field 1 *match*)
+                                index =a (field 0 *match*))
+                               (before asmcomp/linearize.ml(264):8994-9943
+                                 (let
+                                   (lbl_cases =
+                                      (after asmcomp/linearize.ml(264):9010-9043
+                                        (caml_make_vect
+                                          (array.length[addr] cases) 0)))
+                                   (before asmcomp/linearize.ml(265):9053-9943
+                                     (let
+                                       (*match* =
+                                          (after asmcomp/linearize.ml(265):9073-9104
+                                            (apply get_label
+                                              (after asmcomp/linearize.ml(265):9082-9104
+                                                (apply linear (field 1 i) n))))
+                                        n1 =a (field 1 *match*)
+                                        lbl_end =a (field 0 *match*))
+                                       (before asmcomp/linearize.ml(266):9114-9943
+                                         (let
+                                           (n2 =
+                                              (makemutable 0
+                                                (after asmcomp/linearize.ml(266):9127-9149
+                                                  (apply discard_dead_code
+                                                    n1))))
+                                           (before asmcomp/linearize.ml(267):9159-9943
+                                             (seq
+                                               (for i
+                                                 (-
+                                                   (array.length[addr] cases)
+                                                   1)
+                                                 downto 0
+                                                 (before asmcomp/linearize.ml(268):9210-9378
+                                                   (let
+                                                     (*match* =
+                                                        (after asmcomp/linearize.ml(269):9250-9302
+                                                          (apply get_label
+                                                            (after asmcomp/linearize.ml(269):9259-9302
+                                                              (apply linear
+                                                                (after asmcomp/linearize.ml(269):9267-9276
+                                                                  (array.get[addr]
+                                                                    cases i))
+                                                                (after asmcomp/linearize.ml(269):9277-9301
+                                                                  (apply
+                                                                    add_branch
+                                                                    lbl_end
+                                                                    (field 0
+                                                                    n2)))))))
+                                                      ncase =a
+                                                        (field 1 *match*)
+                                                      lbl_case =a
+                                                        (field 0 *match*))
+                                                     (before asmcomp/linearize.ml(270):9314-9378
+                                                       (seq
+                                                         (after asmcomp/linearize.ml(270):9314-9339
+                                                           (array.set[int]
+                                                             lbl_cases i
+                                                             lbl_case))
+                                                         (before asmcomp/linearize.ml(271):9349-9378
+                                                           (setfield_ptr 0 n2
+                                                             (after asmcomp/linearize.ml(271):9355-9378
+                                                               (apply
+                                                                 discard_dead_code
+                                                                 ncase)))))))))
+                                               (before asmcomp/linearize.ml(275):9531-9943
+                                                 (if
+                                                   (==
+                                                     (array.length[int]
+                                                       index)
+                                                     3)
+                                                   (before asmcomp/linearize.ml(275):9562-9861
+                                                     (let
+                                                       (fallthrough_lbl =[int]
+                                                          (after asmcomp/linearize.ml(276):9598-9613
+                                                            (apply
+                                                              check_label
+                                                              (field 0 n2))))
+                                                       (before asmcomp/linearize.ml(277):9625-9851
+                                                         (let
+                                                           (find_label =
+                                                              (function
+                                                                n[int]
+                                                                (funct-body asmcomp/linearize.ml(277)<ghost>:9640-9747
+                                                                  (before asmcomp/linearize.ml(278):9654-9747
+                                                                    (let
+                                                                    (lbl =[int]
+                                                                    (after asmcomp/linearize.ml(278):9664-9685
+                                                                    (array.get[int]
+                                                                    lbl_cases
+                                                                    (after asmcomp/linearize.ml(278):9675-9684
+                                                                    (array.get[int]
+                                                                    index n)))))
+                                                                    (before asmcomp/linearize.ml(279):9699-9747
+                                                                    (if
+                                                                    (== lbl
+                                                                    fallthrough_lbl)
+                                                                    (before asmcomp/linearize.ml(279):9729-9733
+                                                                    0a)
+                                                                    (before asmcomp/linearize.ml(279):9739-9747
+                                                                    (makeblock 0 (int)
+                                                                    lbl)))))))))
+                                                           (before asmcomp/linearize.ml(280):9759-9851
+                                                             (after asmcomp/linearize.ml(280):9759-9851
+                                                               (apply
+                                                                 copy_instr
+                                                                 (makeblock 4
+                                                                   (after asmcomp/linearize.ml(280):9784-9796
+                                                                    (apply
+                                                                    find_label
+                                                                    0))
+                                                                   (after asmcomp/linearize.ml(280):9798-9810
+                                                                    (apply
+                                                                    find_label
+                                                                    1))
+                                                                   (after asmcomp/linearize.ml(280):9812-9824
+                                                                    (apply
+                                                                    find_label
+                                                                    2)))
+                                                                 i
+                                                                 (field 0 n2))))))))
+                                                   (before asmcomp/linearize.ml(283):9875-9943
+                                                     (after asmcomp/linearize.ml(283):9875-9943
+                                                       (apply copy_instr
+                                                         (makeblock 5
+                                                           (after asmcomp/linearize.ml(283):9894-9936
+                                                             (apply
+                                                               (field 14
+                                                                 (global Stdlib__array!))
+                                                               (function
+                                                                 n[int] : int
+                                                                 (funct-body asmcomp/linearize.ml(283):9905-9929
+                                                                   (before asmcomp/linearize.ml(283):9915-9928
+                                                                    (after asmcomp/linearize.ml(283):9915-9928
+                                                                    (array.get[int]
+                                                                    lbl_cases
+                                                                    n)))))
+                                                               index)))
+                                                         i (field 0 n2)))))))))))))))
+                            case tag 3:
+                             (let
+                               (body =a (field 2 *match*)
+                                handlers =a (field 1 *match*))
+                               (before asmcomp/linearize.ml(285):9991-11021
+                                 (let
+                                   (*match* =
+                                      (after asmcomp/linearize.ml(285):10011-10042
+                                        (apply get_label
+                                          (after asmcomp/linearize.ml(285):10020-10042
+                                            (apply linear (field 1 i) n))))
+                                    n1 =a (field 1 *match*)
+                                    lbl_end =a (field 0 *match*))
+                                   (before asmcomp/linearize.ml(289):10180-11021
+                                     (let
+                                       (labels_at_entry_to_handlers =
+                                          (after asmcomp/linearize.ml(289):10214-10369
+                                            (apply
+                                              (field 16
+                                                (global Stdlib__list!))
+                                              (function param : int
+                                                (funct-body asmcomp/linearize.ml(289):10223-10350
+                                                  (let
+                                                    (handler =a
+                                                       (field 1 param))
+                                                    (before asmcomp/linearize.ml(290):10259-10349
+                                                      (let
+                                                        (*match* =
+                                                           (field 0 handler))
+                                                        (catch
+                                                          (if (isint *match*)
+                                                            (if *match*
+                                                              (exit 38)
+                                                              (before asmcomp/linearize.ml(291):10308-10315
+                                                                lbl_end))
+                                                            (exit 38))
+                                                         with (38)
+                                                          (before asmcomp/linearize.ml(292):10333-10349
+                                                            (after asmcomp/linearize.ml(292):10333-10349
+                                                              (apply
+                                                                (field 11
+                                                                  (global Cmm!))
+                                                                0a)))))))))
+                                              handlers)))
+                                       (before asmcomp/linearize.ml(294):10379-11021
+                                         (let
+                                           (exit_label_add =
+                                              (after asmcomp/linearize.ml(294):10400-10517
+                                                (apply
+                                                  (field 23
+                                                    (global Stdlib__list!))
+                                                  (function param lbl[int]
+                                                    (funct-body asmcomp/linearize.ml(295):10420-10470
+                                                      (let
+                                                        (nfail =a
+                                                           (field 0 param))
+                                                        (before asmcomp/linearize.ml(295):10443-10469
+                                                          (makeblock 0 (int,*)
+                                                            nfail
+                                                            (makeblock 0 (int,int)
+                                                              lbl
+                                                              (field 0
+                                                                try_depth)))))))
+                                                  handlers
+                                                  labels_at_entry_to_handlers)))
+                                           (before asmcomp/linearize.ml(297):10527-11021
+                                             (let
+                                               (previous_exit_label =
+                                                  (field 0 exit_label))
+                                               (before asmcomp/linearize.ml(298):10574-11021
+                                                 (seq
+                                                   (setfield_ptr 0 exit_label
+                                                     (after asmcomp/linearize.ml(298):10588-10616
+                                                       (apply
+                                                         (field 36
+                                                           (global Stdlib!))
+                                                         exit_label_add
+                                                         (field 0 exit_label))))
+                                                   (before asmcomp/linearize.ml(299):10624-11021
+                                                     (let
+                                                       (n2 =
+                                                          (after asmcomp/linearize.ml(299):10633-10908
+                                                            (apply
+                                                              (field 25
+                                                                (global Stdlib__list!))
+                                                              (function n
+                                                                param
+                                                                lbl_handler[int]
+                                                                (funct-body asmcomp/linearize.ml(299):10649-10858
+                                                                  (let
+                                                                    (handler =a
+                                                                    (field 1
+                                                                    param))
+                                                                    (before asmcomp/linearize.ml(300):10699-10857
+                                                                    (let
+                                                                    (*match* =
+                                                                    (field 0
+                                                                    handler))
+                                                                    (catch
+                                                                    (if
+                                                                    (isint
+                                                                    *match*)
+                                                                    (if
+                                                                    *match*
+                                                                    (exit 37)
+                                                                    (before asmcomp/linearize.ml(301):10748-10749
+                                                                    n))
+                                                                    (exit 37))
+                                                                    with (37)
+                                                                    (before asmcomp/linearize.ml(302):10767-10857
+                                                                    (after asmcomp/linearize.ml(302):10767-10857
+                                                                    (apply
+                                                                    cons_instr
+                                                                    (makeblock 1 (int)
+                                                                    lbl_handler)
+                                                                    (after asmcomp/linearize.ml(303):10818-10857
+                                                                    (apply
+                                                                    linear
+                                                                    handler
+                                                                    (after asmcomp/linearize.ml(303):10834-10856
+                                                                    (apply
+                                                                    add_branch
+                                                                    lbl_end
+                                                                    n)))))))))))))
+                                                              n1 handlers
+                                                              labels_at_entry_to_handlers)))
+                                                       (before asmcomp/linearize.ml(306):10924-11021
+                                                         (let
+                                                           (n3 =
+                                                              (after asmcomp/linearize.ml(306):10933-10968
+                                                                (apply linear
+                                                                  body
+                                                                  (after asmcomp/linearize.ml(306):10945-10968
+                                                                    (apply
+                                                                    add_branch
+                                                                    lbl_end
+                                                                    n2)))))
+                                                           (before asmcomp/linearize.ml(307):10978-11021
+                                                             (seq
+                                                               (setfield_ptr 0
+                                                                 exit_label
+                                                                 previous_exit_label)
+                                                               (before asmcomp/linearize.ml(308):11019-11021
+                                                                 n3))))))))))))))))))
+                            case tag 4:
+                             (let (nfail =a (field 0 *match*))
+                               (before asmcomp/linearize.ml(310):11047-11379
+                                 (let
+                                   (*match* =
+                                      (after asmcomp/linearize.ml(310):11060-11091
+                                        (apply find_exit_label_try_depth
+                                          nfail))
+                                    t =a (field 1 *match*)
+                                    lbl =a (field 0 *match*))
+                                   (before asmcomp/linearize.ml(311):11101-11379
+                                     (seq
+                                       (if (== (field 0 (field 1 i)) 0a) 0a
+                                         (raise
+                                           (after asmcomp/linearize.ml(311):11101-11133
+                                             (makeblock 0
+                                               (global Assert_failure!)
+                                               [0:
+                                                "asmcomp/linearize.ml" 311 6]))))
+                                       (before asmcomp/linearize.ml(312):11141-11379
+                                         (let
+                                           (delta_traps =[int]
+                                              (- (field 0 try_depth) t))
+                                           (before asmcomp/linearize.ml(313):11183-11379
+                                             (let
+                                               (n1 =
+                                                  (after asmcomp/linearize.ml(313):11192-11223
+                                                    (apply adjust_trap_depth
+                                                      delta_traps n)))
+                                               (before asmcomp/linearize.ml(314):11233-11379
+                                                 (letrec
+                                                   (loop
+                                                      (function i tt[int]
+                                                        (funct-body asmcomp/linearize.ml(314)<ghost>:11246-11328
+                                                          (before asmcomp/linearize.ml(315):11261-11328
+                                                            (if (== t tt)
+                                                              (before asmcomp/linearize.ml(315):11276-11277
+                                                                i)
+                                                              (before asmcomp/linearize.ml(316):11291-11328
+                                                                (after asmcomp/linearize.ml(316):11291-11328
+                                                                  (apply loop
+                                                                    (after asmcomp/linearize.ml(316):11296-11319
+                                                                    (apply
+                                                                    cons_instr
+                                                                    5a i))
+                                                                    (- tt 1)))))))))
+                                                   (before asmcomp/linearize.ml(318):11344-11379
+                                                     (after asmcomp/linearize.ml(318):11344-11379
+                                                       (apply loop
+                                                         (after asmcomp/linearize.ml(318):11349-11368
+                                                           (apply add_branch
+                                                             lbl n1))
+                                                         (field 0 try_depth)))))))))))))))
+                            case tag 5:
+                             (let
+                               (handler =a (field 1 *match*)
+                                body =a (field 0 *match*))
+                               (before asmcomp/linearize.ml(320):11417-11884
+                                 (let
+                                   (*match* =
+                                      (after asmcomp/linearize.ml(320):11438-11470
+                                        (apply get_label
+                                          (after asmcomp/linearize.ml(320):11448-11470
+                                            (apply linear (field 1 i) n))))
+                                    n1 =a (field 1 *match*)
+                                    lbl_join =a (field 0 *match*))
+                                   (before asmcomp/linearize.ml(321):11480-11884
+                                     (let
+                                       (*match* =
+                                          (after asmcomp/linearize.ml(322):11512-11565
+                                            (apply get_label
+                                              (after asmcomp/linearize.ml(322):11522-11565
+                                                (apply cons_instr 4a
+                                                  (after asmcomp/linearize.ml(322):11545-11564
+                                                    (apply linear handler n1))))))
+                                        n2 =a (field 1 *match*)
+                                        lbl_handler =a (field 0 *match*))
+                                       (before asmcomp/linearize.ml(324):11581-11884
+                                         (seq (+:=1 try_depth)
+                                           (before asmcomp/linearize.ml(325):11603-11884
+                                             (seq
+                                               (if
+                                                 (||
+                                                   (after asmcomp/linearize.ml(325):11611-11629
+                                                     (caml_equal (field 2 i)
+                                                       (makearray[addr])))
+                                                   (field 52
+                                                     (global Config!)))
+                                                 0a
+                                                 (raise
+                                                   (after asmcomp/linearize.ml(325):11603-11650
+                                                     (makeblock 0
+                                                       (global Assert_failure!)
+                                                       [0:
+                                                        "asmcomp/linearize.ml"
+                                                        325 6]))))
+                                               (before asmcomp/linearize.ml(326):11658-11884
+                                                 (let
+                                                   (n3 =
+                                                      (after asmcomp/linearize.ml(326):11667-11850
+                                                        (apply cons_instr
+                                                          (makeblock 7 (int)
+                                                            lbl_handler)
+                                                          (after asmcomp/linearize.ml(327):11724-11850
+                                                            (apply linear
+                                                              body
+                                                              (after asmcomp/linearize.ml(328):11757-11849
+                                                                (apply
+                                                                  cons_instr
+                                                                  5a
+                                                                  (after asmcomp/linearize.ml(330):11824-11848
+                                                                    (apply
+                                                                    add_branch
+                                                                    lbl_join
+                                                                    n2)))))))))
+                                                   (before asmcomp/linearize.ml(331):11860-11884
+                                                     (seq (+:=-1 try_depth)
+                                                       (before asmcomp/linearize.ml(332):11882-11884
+                                                         n3))))))))))))))
+                            case tag 6:
+                             (let (k =a (field 0 *match*))
+                               (before asmcomp/linearize.ml(335):11908-11953
+                                 (after asmcomp/linearize.ml(335):11908-11953
+                                   (apply copy_instr (makeblock 8 k) i
+                                     (after asmcomp/linearize.ml(335):11932-11953
+                                       (apply discard_dead_code n))))))))))))
+                (let
+                  (add_prologue =
+                     (function first_insn
+                       (funct-body asmcomp/linearize.ml(337)<ghost>:11972-14537
+                         (before asmcomp/linearize.ml(341):12171-14537
+                           (letrec
+                             (skip_naming_ops
+                                (function insn
+                                  (funct-body asmcomp/linearize.ml(341)<ghost>:12195-14503
+                                    (before asmcomp/linearize.ml(342):12244-14503
+                                      (let (*match* = (field 0 insn))
+                                        (catch
+                                          (switch *match*
+                                           case tag 0:
+                                            (let
+                                              (*match* =a (field 0 *match*))
+                                              (switch *match*
+                                               case tag 15:
+                                                (before asmcomp/linearize.ml(344):12307-12426
+                                                  (let
+                                                    (*match* =
+                                                       (after asmcomp/linearize.ml(344):12345-12370
+                                                         (apply
+                                                           skip_naming_ops
+                                                           (field 1 insn)))
+                                                     next =a
+                                                       (field 1 *match*)
+                                                     tailrec_entry_point_label =a
+                                                       (field 0 *match*))
+                                                    (before asmcomp/linearize.ml(345):12380-12426
+                                                      (makeblock 0 (int,*)
+                                                        tailrec_entry_point_label
+                                                        (let (init = insn)
+                                                          (makemutable 0
+                                                            (field 0 init)
+                                                            next
+                                                            (field 2 init)
+                                                            (field 3 init)
+                                                            (field 4 init)
+                                                            (field 5 init)))))))
+                                               default: (exit 57)))
+                                           default: (exit 57))
+                                         with (57)
+                                          (before asmcomp/linearize.ml(347):12444-14503
+                                            (let
+                                              (tailrec_entry_point_label =[int]
+                                                 (after asmcomp/linearize.ml(347):12476-12492
+                                                   (apply
+                                                     (field 11 (global Cmm!))
+                                                     0a)))
+                                              (before asmcomp/linearize.ml(348):12502-14503
+                                                (let
+                                                  (tailrec_entry_point =
+                                                     (makemutable 0
+                                                       (makeblock 1 (int)
+                                                         tailrec_entry_point_label)
+                                                       insn (makearray[addr])
+                                                       (makearray[addr])
+                                                       (field 4 insn)
+                                                       (field 5 insn)))
+                                                  (before asmcomp/linearize.ml(380):14093-14503
+                                                    (if
+                                                      (after asmcomp/linearize.ml(380):14096-14121
+                                                        (apply
+                                                          (field 26
+                                                            (global Proc!))
+                                                          0a))
+                                                      (before asmcomp/linearize.ml(381):14135-14437
+                                                        (let
+                                                          (prologue =
+                                                             (makemutable 0
+                                                               0a
+                                                               tailrec_entry_point
+                                                               (makearray[addr])
+                                                               (makearray[addr])
+                                                               (field 4
+                                                                 tailrec_entry_point)
+                                                               (field 0
+                                                                 (field 9
+                                                                   (global Reg!)))))
+                                                          (before asmcomp/linearize.ml(390):14402-14437
+                                                            (makeblock 0 (int,*)
+                                                              tailrec_entry_point_label
+                                                              prologue))))
+                                                      (before asmcomp/linearize.ml(392):14457-14503
+                                                        (makeblock 0 (int,*)
+                                                          tailrec_entry_point_label
+                                                          tailrec_entry_point))))))))))))))
+                             (before asmcomp/linearize.ml(394):14511-14537
+                               (after asmcomp/linearize.ml(394):14511-14537
+                                 (apply skip_naming_ops first_insn)))))))
+                   fundecl =
+                     (function f
+                       (funct-body asmcomp/linearize.ml(396)<ghost>:14551-14908
+                         (before asmcomp/linearize.ml(397):14557-14908
+                           (let
+                             (*match* =
+                                (after asmcomp/linearize.ml(398):14607-14654
+                                  (apply add_prologue
+                                    (after asmcomp/linearize.ml(398):14620-14654
+                                      (apply linear (field 2 f) end_instr))))
+                              fun_body =a (field 1 *match*)
+                              fun_tailrec_entry_point_label =a
+                                (field 0 *match*))
+                             (before asmcomp/linearize.ml(400):14662-14908
+                               (makeblock 0 (*,*,*,*,*,int) (field 0 f)
+                                 fun_body
+                                 (not
+                                   (after asmcomp/linearize.ml(402):14725-14783
+                                     (apply (field 31 (global Stdlib__list!))
+                                       0a (field 3 f))))
+                                 (field 4 f) (field 5 f)
+                                 fun_tailrec_entry_point_label)))))))
+                  (pseudo _none_(0)<ghost>:-1--1
+                    (makeblock 0 has_fallthrough end_instr instr_cons
+                      invert_test fundecl)))))))))))

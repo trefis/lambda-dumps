@@ -1,0 +1,184 @@
+(setglobal Compmisc!
+  (let
+    (init_path =
+       (function *opt* param
+         (funct-body driver/compmisc.ml(24)<ghost>:1368-1786
+           (before driver/compmisc.ml(25):1385-1786
+             (let
+               (dir =
+                  (if *opt*
+                    (let (*sth* =a (field 0 *opt*))
+                      (before driver/compmisc.ml(24):1374-1376 *sth*))
+                    (before driver/compmisc.ml(24):1374-1376 "")))
+               (before driver/compmisc.ml(25):1385-1786
+                 (let
+                   (dirs =
+                      (if (field 0 (field 36 (global Clflags!)))
+                        (before driver/compmisc.ml(26):1429-1464
+                          (makeblock 0 "+threads"
+                            (field 0 (field 12 (global Clflags!)))))
+                        (before driver/compmisc.ml(28):1480-1501
+                          (field 0 (field 12 (global Clflags!))))))
+                   (before driver/compmisc.ml(30):1509-1786
+                     (let
+                       (dirs =
+                          (after driver/compmisc.ml(31):1524-1593
+                            (apply (field 36 (global Stdlib!))
+                              (field 0 (field 11 (global Compenv!)))
+                              (after driver/compmisc.ml(31):1545-1593
+                                (apply (field 36 (global Stdlib!)) dirs
+                                  (after driver/compmisc.ml(31):1552-1593
+                                    (apply (field 36 (global Stdlib!))
+                                      (field 47 (global Config!))
+                                      (field 0 (field 10 (global Compenv!))))))))))
+                       (before driver/compmisc.ml(33):1601-1786
+                         (let
+                           (exp_dirs =
+                              (after driver/compmisc.ml(34):1620-1681
+                                (apply (field 16 (global Stdlib__list!))
+                                  (after driver/compmisc.ml(34):1629-1676
+                                    (apply (field 16 (global Misc!))
+                                      (field 1 (global Config!))))
+                                  dirs)))
+                           (before driver/compmisc.ml(35):1687-1786
+                             (seq
+                               (after driver/compmisc.ml(35):1687-1764
+                                 (apply (field 3 (global Load_path!))
+                                   (makeblock 0 dir
+                                     (after driver/compmisc.ml(35):1710-1763
+                                       (apply
+                                         (field 11 (global Stdlib__list!))
+                                         exp_dirs
+                                         (after driver/compmisc.ml(35):1735-1763
+                                           (apply
+                                             (field 121 (global Clflags!))
+                                             0a)))))))
+                               (before driver/compmisc.ml(36):1768-1786
+                                 (after driver/compmisc.ml(36):1768-1786
+                                   (apply (field 72 (global Env!)) 0a)))))))))))))))
+     initial_env =
+       (function param
+         (funct-body driver/compmisc.ml(43)<ghost>:1973-2328
+           (before driver/compmisc.ml(44):1980-2328
+             (seq
+               (after driver/compmisc.ml(44):1980-1994
+                 (apply (field 25 (global Ident!)) 0a))
+               (before driver/compmisc.ml(45):1998-2328
+                 (let
+                   (initially_opened_module =
+                      (if (field 0 (field 28 (global Clflags!)))
+                        (before driver/compmisc.ml(47):2068-2072 0a)
+                        (before driver/compmisc.ml(49):2088-2101
+                          [0: "Stdlib"])))
+                   (before driver/compmisc.ml(51):2109-2328
+                     (after driver/compmisc.ml(51):2109-2328
+                       (apply (field 12 (global Typemod!))
+                         (after driver/compmisc.ml(52):2138-2171
+                           (apply (field 1 (global Location!))
+                             "command line"))
+                         (|| (field 58 (global Config!))
+                           (not (field 0 (field 130 (global Clflags!)))))
+                         initially_opened_module
+                         (after driver/compmisc.ml(55):2296-2328
+                           (apply (field 8 (global Stdlib__list!))
+                             (field 0 (field 30 (global Clflags!))))))))))))))
+     set_from_env =
+       (function flag param
+         (funct-body driver/compmisc.ml(57)<ghost>:2347-2661
+           (let
+             (env_var =a (field 3 param)
+              usage =a (field 2 param)
+              parse =a (field 0 param))
+             (before driver/compmisc.ml(58):2390-2661
+               (try
+                 (let
+                   (*match* =
+                      (after driver/compmisc.ml(59):2404-2430
+                        (apply parse
+                          (after driver/compmisc.ml(59):2410-2430
+                            (caml_sys_getenv env_var)))))
+                   (if *match*
+                     (let (x =a (field 0 *match*))
+                       (before driver/compmisc.ml(63):2566-2634
+                         (let (*match* = (field 0 flag))
+                           (if *match*
+                             (before driver/compmisc.ml(65):2632-2634 0a)
+                             (before driver/compmisc.ml(64):2599-2613
+                               (setfield_ptr 0 flag (makeblock 0 x)))))))
+                     (before driver/compmisc.ml(61):2458-2549
+                       (after driver/compmisc.ml(61):2458-2549
+                         (apply (field 34 (global Location!))
+                           (field 0 (global Location!))
+                           (makeblock 29 env_var usage))))))
+                with exn
+                 (if (== exn (field 7 (global Stdlib!)))
+                   (before driver/compmisc.ml(67):2659-2661 0a)
+                   (reraise exn)))))))
+     read_clflags_from_env =
+       (function param
+         (funct-body driver/compmisc.ml(69)<ghost>:2689-2812
+           (before driver/compmisc.ml(70):2696-2812
+             (seq
+               (after driver/compmisc.ml(70):2696-2743
+                 (apply set_from_env (field 151 (global Clflags!))
+                   (field 152 (global Clflags!))))
+               (before driver/compmisc.ml(71):2747-2812
+                 (seq
+                   (after driver/compmisc.ml(71):2747-2806
+                     (apply set_from_env (field 153 (global Clflags!))
+                       (field 154 (global Clflags!))))
+                   (before driver/compmisc.ml(72):2810-2812 0a)))))))
+     with_ppf_dump =
+       (function file_prefix f
+         (funct-body driver/compmisc.ml(74)<ghost>:2832-3218
+           (before driver/compmisc.ml(75):2851-3218
+             (catch
+               (if (not (field 0 (field 150 (global Clflags!))))
+                 (before driver/compmisc.ml(77):2919-2947
+                   (let
+                     (finally = (function prim stub (ignore prim))
+                      ppf_dump = (field 105 (global Stdlib__format!)))
+                     (exit 2 finally ppf_dump)))
+                 (before driver/compmisc.ml(79):2964-3155
+                   (let
+                     (ch =
+                        (after driver/compmisc.ml(79):2973-3005
+                          (apply (field 59 (global Stdlib!))
+                            (after driver/compmisc.ml(79):2982-3005
+                              (apply (field 27 (global Stdlib!)) file_prefix
+                                ".dump")))))
+                     (before driver/compmisc.ml(80):3016-3155
+                       (let
+                         (ppf =
+                            (after driver/compmisc.ml(80):3026-3060
+                              (apply (field 103 (global Stdlib__format!)) ch)))
+                         (before driver/compmisc.ml(81):3071-3155
+                           (let
+                             (finally =
+                                (function param
+                                  (funct-body driver/compmisc.ml(82):3083-3155
+                                    (before driver/compmisc.ml(83):3103-3154
+                                      (seq
+                                        (after driver/compmisc.ml(83):3103-3131
+                                          (apply
+                                            (field 35
+                                              (global Stdlib__format!))
+                                            ppf 0a))
+                                        (before driver/compmisc.ml(84):3142-3154
+                                          (after driver/compmisc.ml(84):3142-3154
+                                            (apply
+                                              (field 75 (global Stdlib!)) ch)))))))
+                              ppf_dump =a ppf)
+                             (exit 2 finally ppf_dump))))))))
+              with (2 finally ppf_dump)
+               (before driver/compmisc.ml(86):3163-3218
+                 (after driver/compmisc.ml(86):3163-3218
+                   (apply (field 3 (global Misc!)) (makeblock 0 finally) 0a
+                     (function param
+                       (funct-body driver/compmisc.ml(86):3180-3202
+                         (before driver/compmisc.ml(86):3191-3201
+                           (after driver/compmisc.ml(86):3191-3201
+                             (apply f ppf_dump)))))))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 init_path initial_env set_from_env read_clflags_from_env
+        with_ppf_dump))))

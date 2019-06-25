@@ -1,0 +1,1790 @@
+(setglobal Inlining_transforms!
+  (let
+    (new_var =
+       (function name
+         (funct-body middle_end/flambda/inlining_transforms.ml(25)<ghost>:1396-1493
+           (before middle_end/flambda/inlining_transforms.ml(26):1405-1493
+             (after middle_end/flambda/inlining_transforms.ml(26):1405-1493
+               (apply (field 9 (global Variable!))
+                 (makeblock 0
+                   (after middle_end/flambda/inlining_transforms.ml(27):1456-1493
+                     (apply (field 15 (global Compilation_unit!)) 0a)))
+                 name)))))
+     fold_over_projections_of_vars_bound_by_closure =
+       (function closure_id_being_applied lhs_of_application bound_variables
+         init f
+         (funct-body middle_end/flambda/inlining_transforms.ml(34)<ghost>:1871-2248
+           (before middle_end/flambda/inlining_transforms.ml(36):1953-2248
+             (after middle_end/flambda/inlining_transforms.ml(36):1953-2248
+               (apply (field 14 (field 6 (global Variable!)))
+                 (function var acc
+                   (funct-body middle_end/flambda/inlining_transforms.ml(36):1971-2219
+                     (before middle_end/flambda/inlining_transforms.ml(37):1993-2218
+                       (let
+                         (expr =
+                            (makeblock 8
+                              (makeblock 0 lhs_of_application
+                                closure_id_being_applied
+                                (after middle_end/flambda/inlining_transforms.ml(41):2147-2174
+                                  (apply
+                                    (field 9 (global Var_within_closure!))
+                                    var)))))
+                         (before middle_end/flambda/inlining_transforms.ml(44):2201-2218
+                           (after middle_end/flambda/inlining_transforms.ml(44):2201-2218
+                             (apply f acc var expr)))))))
+                 bound_variables init)))))
+     set_inline_attribute_on_all_apply =
+       (function body inline specialise
+         (funct-body middle_end/flambda/inlining_transforms.ml(48)<ghost>:2288-2454
+           (before middle_end/flambda/inlining_transforms.ml(49):2315-2454
+             (after middle_end/flambda/inlining_transforms.ml(49):2315-2454
+               (apply (field 21 (global Flambda_iterators!))
+                 (function expr
+                   (funct-body middle_end/flambda/inlining_transforms.ml(49):2351-2445
+                     (catch
+                       (switch expr
+                        case tag 4:
+                         (let (apply =a (field 0 expr))
+                           (before middle_end/flambda/inlining_transforms.ml(50):2384-2423
+                             (makeblock 4
+                               (let (init = apply)
+                                 (makeblock 0 (field 0 init) (field 1 init)
+                                   (field 2 init) (field 3 init) inline
+                                   specialise)))))
+                        default: (exit 1))
+                      with (1)
+                       (before middle_end/flambda/inlining_transforms.ml(51):2440-2444
+                         expr))))
+                 body)))))
+     copy_of_function's_body_with_freshened_params =
+       (function env function_decl function_body
+         (funct-body middle_end/flambda/inlining_transforms.ml(56)<ghost>:2609-3775
+           (before middle_end/flambda/inlining_transforms.ml(59):2706-3775
+             (let (params = (field 1 function_decl))
+               (before middle_end/flambda/inlining_transforms.ml(60):2745-3775
+                 (let
+                   (param_vars =
+                      (after middle_end/flambda/inlining_transforms.ml(60):2762-2788
+                        (apply (field 0 (field 13 (global Parameter!)))
+                          params)))
+                   (before middle_end/flambda/inlining_transforms.ml(69):3351-3775
+                     (if
+                       (&&
+                         (after middle_end/flambda/inlining_transforms.ml(69):3354-3384
+                           (apply
+                             (field 13
+                               (field 0 (global Inline_and_simplify_aux!)))
+                             env param_vars))
+                         (after middle_end/flambda/inlining_transforms.ml(70):3392-3425
+                           (apply
+                             (field 14
+                               (field 0 (global Inline_and_simplify_aux!)))
+                             env param_vars)))
+                       (before middle_end/flambda/inlining_transforms.ml(72):3437-3463
+                         (makeblock 0 params (field 7 function_body)))
+                       (before middle_end/flambda/inlining_transforms.ml(74):3475-3775
+                         (let
+                           (freshened_params =
+                              (after middle_end/flambda/inlining_transforms.ml(74):3498-3543
+                                (apply (field 16 (global Stdlib__list!))
+                                  (function p
+                                    (funct-body middle_end/flambda/inlining_transforms.ml(74):3507-3536
+                                      (before middle_end/flambda/inlining_transforms.ml(74):3517-3535
+                                        (after middle_end/flambda/inlining_transforms.ml(74):3517-3535
+                                          (apply
+                                            (field 2 (global Parameter!)) 0a
+                                            p)))))
+                                  params)))
+                           (before middle_end/flambda/inlining_transforms.ml(75):3551-3775
+                             (let
+                               (subst =
+                                  (after middle_end/flambda/inlining_transforms.ml(76):3569-3662
+                                    (apply
+                                      (field 39 (field 7 (global Variable!)))
+                                      (after middle_end/flambda/inlining_transforms.ml(77):3598-3662
+                                        (apply
+                                          (field 47 (global Stdlib__list!))
+                                          param_vars
+                                          (after middle_end/flambda/inlining_transforms.ml(77):3623-3661
+                                            (apply
+                                              (field 0
+                                                (field 13
+                                                  (global Parameter!)))
+                                              freshened_params)))))))
+                               (before middle_end/flambda/inlining_transforms.ml(79):3674-3775
+                                 (let
+                                   (body =
+                                      (after middle_end/flambda/inlining_transforms.ml(79):3685-3745
+                                        (apply
+                                          (field 8 (global Flambda_utils!))
+                                          subst (field 7 function_body))))
+                                   (before middle_end/flambda/inlining_transforms.ml(80):3753-3775
+                                     (makeblock 0 freshened_params body))))))))))))))))
+     inline_by_copying_function_body =
+       (function env r lhs_of_application inline_requested
+         specialise_requested closure_id_being_applied function_decl
+         function_body fun_vars args dbg simplify
+         (funct-body middle_end/flambda/inlining_transforms.ml(91)<ghost>:4322-7557
+           (before middle_end/flambda/inlining_transforms.ml(100):4636-7557
+             (seq
+               (if
+                 (after middle_end/flambda/inlining_transforms.ml(100):4643-4673
+                   (apply
+                     (field 23 (field 0 (global Inline_and_simplify_aux!)))
+                     env lhs_of_application))
+                 0a
+                 (raise
+                   (after middle_end/flambda/inlining_transforms.ml(100):4636-4673
+                     (makeblock 0 (global Assert_failure!)
+                       [0: "middle_end/flambda/inlining_transforms.ml" 100 2]))))
+               (before middle_end/flambda/inlining_transforms.ml(101):4677-7557
+                 (seq
+                   (if
+                     (after middle_end/flambda/inlining_transforms.ml(101):4684-4715
+                       (apply (field 27 (global Stdlib__list!))
+                         (after middle_end/flambda/inlining_transforms.ml(101):4698-4709
+                           (apply
+                             (field 23
+                               (field 0 (global Inline_and_simplify_aux!)))
+                             env))
+                         args))
+                     0a
+                     (raise
+                       (after middle_end/flambda/inlining_transforms.ml(101):4677-4715
+                         (makeblock 0 (global Assert_failure!)
+                           [0:
+                            "middle_end/flambda/inlining_transforms.ml" 101 2]))))
+                   (before middle_end/flambda/inlining_transforms.ml(102):4719-7557
+                     (let
+                       (r =
+                          (if (field 2 function_body)
+                            (before middle_end/flambda/inlining_transforms.ml(103):4758-4759
+                              r)
+                            (before middle_end/flambda/inlining_transforms.ml(104):4769-4798
+                              (after middle_end/flambda/inlining_transforms.ml(104):4769-4798
+                                (apply
+                                  (field 8
+                                    (field 1
+                                      (global Inline_and_simplify_aux!)))
+                                  r
+                                  (field 3 (field 3 (global Inlining_cost!))))))))
+                       (before middle_end/flambda/inlining_transforms.ml(106):4806-7557
+                         (let
+                           (*match* =
+                              (after middle_end/flambda/inlining_transforms.ml(107):4839-4924
+                                (apply
+                                  copy_of_function's_body_with_freshened_params
+                                  env function_decl function_body))
+                            body =a (field 1 *match*)
+                            freshened_params =a (field 0 *match*))
+                           (before middle_end/flambda/inlining_transforms.ml(110):4932-7557
+                             (let
+                               (body =
+                                  (let
+                                    (default_inline =
+                                       (after middle_end/flambda/inlining_transforms.ml(112):4974-5035
+                                         (apply (field 3 (global Lambda!))
+                                           inline_requested 2a)))
+                                    (before middle_end/flambda/inlining_transforms.ml(114):5047-5661
+                                      (let
+                                        (default_specialise =
+                                           (after middle_end/flambda/inlining_transforms.ml(115):5078-5151
+                                             (apply
+                                               (field 4 (global Lambda!))
+                                               specialise_requested 2a)))
+                                        (before middle_end/flambda/inlining_transforms.ml(117):5163-5661
+                                          (if
+                                            (&& (field 2 function_body)
+                                              (|| (not default_inline)
+                                                (not default_specialise)))
+                                            (before middle_end/flambda/inlining_transforms.ml(124):5557-5641
+                                              (after middle_end/flambda/inlining_transforms.ml(124):5557-5641
+                                                (apply
+                                                  set_inline_attribute_on_all_apply
+                                                  body inline_requested
+                                                  specialise_requested)))
+                                            (before middle_end/flambda/inlining_transforms.ml(127):5657-5661
+                                              body)))))))
+                               (before middle_end/flambda/inlining_transforms.ml(129):5669-7557
+                                 (let
+                                   (bindings_for_params_to_args =
+                                      (let
+                                        (args =
+                                           (after middle_end/flambda/inlining_transforms.ml(131):5796-5845
+                                             (apply
+                                               (field 16
+                                                 (global Stdlib__list!))
+                                               (function arg
+                                                 (funct-body middle_end/flambda/inlining_transforms.ml(131):5805-5840
+                                                   (before middle_end/flambda/inlining_transforms.ml(131):5817-5839
+                                                     (makeblock 10
+                                                       (makeblock 0 arg)))))
+                                               args)))
+                                        (before middle_end/flambda/inlining_transforms.ml(132):5853-5952
+                                          (after middle_end/flambda/inlining_transforms.ml(132):5853-5952
+                                            (apply
+                                              (field 10
+                                                (global Flambda_utils!))
+                                              (after middle_end/flambda/inlining_transforms.ml(133):5894-5952
+                                                (apply
+                                                  (field 47
+                                                    (global Stdlib__list!))
+                                                  (after middle_end/flambda/inlining_transforms.ml(133):5908-5946
+                                                    (apply
+                                                      (field 0
+                                                        (field 13
+                                                          (global Parameter!)))
+                                                      freshened_params))
+                                                  args))
+                                              body)))))
+                                   (before middle_end/flambda/inlining_transforms.ml(136):6021-7557
+                                     (let
+                                       (bindings_for_vars_bound_by_closure_and_params_to_args =
+                                          (let
+                                            (bound_variables =
+                                               (let
+                                                 (params =
+                                                    (after middle_end/flambda/inlining_transforms.ml(138):6126-6165
+                                                      (apply
+                                                        (field 43
+                                                          (field 5
+                                                            (global Parameter!)))
+                                                        (field 1
+                                                          function_decl))))
+                                                 (before middle_end/flambda/inlining_transforms.ml(139):6175-6273
+                                                   (after middle_end/flambda/inlining_transforms.ml(139):6175-6273
+                                                     (apply
+                                                       (field 9
+                                                         (field 6
+                                                           (global Variable!)))
+                                                       (after middle_end/flambda/inlining_transforms.ml(140):6201-6256
+                                                         (apply
+                                                           (field 9
+                                                             (field 6
+                                                               (global Variable!)))
+                                                           (field 0
+                                                             function_body)
+                                                           params))
+                                                       fun_vars)))))
+                                            (before middle_end/flambda/inlining_transforms.ml(143):6285-6506
+                                              (after middle_end/flambda/inlining_transforms.ml(143):6285-6506
+                                                (apply
+                                                  fold_over_projections_of_vars_bound_by_closure
+                                                  closure_id_being_applied
+                                                  lhs_of_application
+                                                  bound_variables
+                                                  bindings_for_params_to_args
+                                                  (function body var expr
+                                                    (funct-body middle_end/flambda/inlining_transforms.ml(145):6444-6506
+                                                      (before middle_end/flambda/inlining_transforms.ml(145):6473-6505
+                                                        (after middle_end/flambda/inlining_transforms.ml(145):6473-6505
+                                                          (apply
+                                                            (field 11
+                                                              (global Flambda!))
+                                                            var expr body))))))))))
+                                       (before middle_end/flambda/inlining_transforms.ml(152):6801-7557
+                                         (let
+                                           (expr =
+                                              (after middle_end/flambda/inlining_transforms.ml(153):6816-7404
+                                                (apply
+                                                  (field 14
+                                                    (field 6
+                                                      (global Variable!)))
+                                                  (function
+                                                    another_closure_in_the_same_set
+                                                    expr
+                                                    (funct-body middle_end/flambda/inlining_transforms.ml(153):6834-7329
+                                                      (before middle_end/flambda/inlining_transforms.ml(154):6885-7328
+                                                        (let
+                                                          (used =
+                                                             (after middle_end/flambda/inlining_transforms.ml(155):6904-6992
+                                                               (apply
+                                                                 (field 2
+                                                                   (field 6
+                                                                    (global Variable!)))
+                                                                 another_closure_in_the_same_set
+                                                                 (field 0
+                                                                   function_body))))
+                                                          (before middle_end/flambda/inlining_transforms.ml(158):7008-7328
+                                                            (if used
+                                                              (before middle_end/flambda/inlining_transforms.ml(159):7029-7312
+                                                                (after middle_end/flambda/inlining_transforms.ml(159):7029-7312
+                                                                  (apply
+                                                                    (field 11
+                                                                    (global Flambda!))
+                                                                    another_closure_in_the_same_set
+                                                                    (makeblock 7
+                                                                    (makeblock 0
+                                                                    lhs_of_application
+                                                                    closure_id_being_applied
+                                                                    (after middle_end/flambda/inlining_transforms.ml(163):7236-7283
+                                                                    (apply
+                                                                    (field 9
+                                                                    (global Closure_id!))
+                                                                    another_closure_in_the_same_set))))
+                                                                    expr)))
+                                                              (before middle_end/flambda/inlining_transforms.ml(166):7324-7328
+                                                                expr)))))))
+                                                  fun_vars
+                                                  bindings_for_vars_bound_by_closure_and_params_to_args)))
+                                           (before middle_end/flambda/inlining_transforms.ml(170):7412-7557
+                                             (let
+                                               (env =
+                                                  (after middle_end/flambda/inlining_transforms.ml(170):7422-7444
+                                                    (apply
+                                                      (field 34
+                                                        (field 0
+                                                          (global Inline_and_simplify_aux!)))
+                                                      env)))
+                                               (before middle_end/flambda/inlining_transforms.ml(171):7450-7557
+                                                 (let
+                                                   (env =
+                                                      (after middle_end/flambda/inlining_transforms.ml(171):7460-7485
+                                                        (apply
+                                                          (field 26
+                                                            (field 0
+                                                              (global Inline_and_simplify_aux!)))
+                                                          env)))
+                                                   (before middle_end/flambda/inlining_transforms.ml(172):7491-7557
+                                                     (let
+                                                       (env =
+                                                          (after middle_end/flambda/inlining_transforms.ml(172):7501-7532
+                                                            (apply
+                                                              (field 56
+                                                                (field 0
+                                                                  (global Inline_and_simplify_aux!)))
+                                                              env dbg)))
+                                                       (before middle_end/flambda/inlining_transforms.ml(173):7538-7557
+                                                         (after middle_end/flambda/inlining_transforms.ml(173):7538-7557
+                                                           (apply simplify
+                                                             env r expr)))))))))))))))))))))))))))
+     empty_state =
+       (makeblock 0 (field 0 (field 7 (global Variable!)))
+         (field 0 (field 7 (global Variable!)))
+         (field 0 (field 7 (global Variable!)))
+         (field 0 (field 7 (global Variable!))) 0a 0a
+         (field 0 (field 7 (global Variable!)))
+         (field 0 (field 7 (global Variable!)))
+         (field 0 (field 7 (global Variable!))))
+     bind_free_vars =
+       (function lhs_of_application closure_id_being_applied state free_vars
+         (funct-body middle_end/flambda/inlining_transforms.ml(217)<ghost>:9585-10304
+           (before middle_end/flambda/inlining_transforms.ml(219):9659-10304
+             (after middle_end/flambda/inlining_transforms.ml(219):9659-10304
+               (apply (field 12 (field 7 (global Variable!)))
+                 (function free_var spec state
+                   (funct-body middle_end/flambda/inlining_transforms.ml(220):9681-10284
+                     (before middle_end/flambda/inlining_transforms.ml(221):9743-10283
+                       (let
+                         (var_clos =
+                            (after middle_end/flambda/inlining_transforms.ml(221):9758-9802
+                              (apply new_var
+                                (field 32 (global Internal_variable_names!)))))
+                         (before middle_end/flambda/inlining_transforms.ml(222):9813-10283
+                           (let
+                             (expr =
+                                (makeblock 8
+                                  (makeblock 0 lhs_of_application
+                                    closure_id_being_applied
+                                    (after middle_end/flambda/inlining_transforms.ml(226):9971-10003
+                                      (apply
+                                        (field 9
+                                          (global Var_within_closure!))
+                                        free_var)))))
+                             (before middle_end/flambda/inlining_transforms.ml(229):10033-10283
+                               (let
+                                 (let_bindings =
+                                    (makeblock 0 (makeblock 0 var_clos expr)
+                                      (field 4 state)))
+                                 (before middle_end/flambda/inlining_transforms.ml(230):10101-10283
+                                   (let
+                                     (old_outside_to_new_outside =
+                                        (after middle_end/flambda/inlining_transforms.ml(231):10143-10210
+                                          (apply
+                                            (field 3
+                                              (field 7 (global Variable!)))
+                                            (field 0 spec) var_clos
+                                            (field 1 state))))
+                                     (before middle_end/flambda/inlining_transforms.ml(233):10228-10283
+                                       (let (init = state)
+                                         (makeblock 0 (field 0 init)
+                                           old_outside_to_new_outside
+                                           (field 2 init) (field 3 init)
+                                           let_bindings (field 5 init)
+                                           (field 6 init) (field 7 init)
+                                           (field 8 init))))))))))))))
+                 free_vars state)))))
+     register_arguments =
+       (function specialised_args invariant_params state params args
+         args_approxs
+         (funct-body middle_end/flambda/inlining_transforms.ml(241)<ghost>:10625-12442
+           (before middle_end/flambda/inlining_transforms.ml(243):10706-12442
+             (letrec
+               (loop
+                  (function state params args args_approxs
+                    (funct-body middle_end/flambda/inlining_transforms.ml(243)<ghost>:10719-12395
+                      (before middle_end/flambda/inlining_transforms.ml(244):10760-12395
+                        (let
+                          (*match* = params
+                           *match* = args
+                           *match* = args_approxs)
+                          (catch
+                            (if *match*
+                              (if *match*
+                                (if *match*
+                                  (let
+                                    (args_approxs =a (field 1 *match*)
+                                     arg_approx =a (field 0 *match*)
+                                     args =a (field 1 *match*)
+                                     arg =a (field 0 *match*)
+                                     params =a (field 1 *match*)
+                                     param =a (field 0 *match*))
+                                    (before middle_end/flambda/inlining_transforms.ml(246):10890-12365
+                                      (let
+                                        (param =
+                                           (after middle_end/flambda/inlining_transforms.ml(247):10916-10935
+                                             (apply
+                                               (field 1 (global Parameter!))
+                                               param)))
+                                        (before middle_end/flambda/inlining_transforms.ml(248):10947-12355
+                                          (catch
+                                            (let
+                                              (*match* =
+                                                 (after middle_end/flambda/inlining_transforms.ml(249):11016-11060
+                                                   (apply
+                                                     (field 27
+                                                       (field 7
+                                                         (global Variable!)))
+                                                     param specialised_args)))
+                                              (if *match*
+                                                (let
+                                                  (spec =a (field 0 *match*))
+                                                  (before middle_end/flambda/inlining_transforms.ml(251):11132-11307
+                                                    (let
+                                                      (old_outside_to_new_outside =
+                                                         (after middle_end/flambda/inlining_transforms.ml(252):11181-11243
+                                                           (apply
+                                                             (field 3
+                                                               (field 7
+                                                                 (global Variable!)))
+                                                             (field 0 spec)
+                                                             arg
+                                                             (field 1 state))))
+                                                      (before middle_end/flambda/inlining_transforms.ml(254):11275-11307
+                                                        (let
+                                                          (old_outside_to_new_outside =a
+                                                             old_outside_to_new_outside
+                                                           worth_specialising =
+                                                             1a)
+                                                          (exit 5
+                                                            old_outside_to_new_outside
+                                                            worth_specialising))))))
+                                                (before middle_end/flambda/inlining_transforms.ml(256):11342-11558
+                                                  (let
+                                                    (worth_specialising =
+                                                       (&&
+                                                         (after middle_end/flambda/inlining_transforms.ml(257):11383-11402
+                                                           (apply
+                                                             (field 47
+                                                               (global Simple_value_approx!))
+                                                             arg_approx))
+                                                         (after middle_end/flambda/inlining_transforms.ml(258):11422-11474
+                                                           (apply
+                                                             (field 2
+                                                               (field 7
+                                                                 (global Variable!)))
+                                                             param
+                                                             (after middle_end/flambda/inlining_transforms.ml(258):11445-11474
+                                                               (let
+                                                                 (lzarg =
+                                                                    invariant_params
+                                                                  tag =a
+                                                                    (caml_obj_tag
+                                                                    lzarg))
+                                                                 (if
+                                                                   (== tag
+                                                                    250)
+                                                                   (field 0
+                                                                    lzarg)
+                                                                   (if
+                                                                    (== tag
+                                                                    246)
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global CamlinternalLazy!))
+                                                                    lzarg)
+                                                                    lzarg))))))))
+                                                    (before middle_end/flambda/inlining_transforms.ml(260):11506-11558
+                                                      (let
+                                                        (old_outside_to_new_outside =
+                                                           (field 1 state)
+                                                         worth_specialising =a
+                                                           worth_specialising)
+                                                        (exit 5
+                                                          old_outside_to_new_outside
+                                                          worth_specialising)))))))
+                                           with (5 old_outside_to_new_outside worth_specialising)
+                                            (before middle_end/flambda/inlining_transforms.ml(262):11578-12355
+                                              (let
+                                                (old_params_to_new_outside =
+                                                   (if worth_specialising
+                                                     (before middle_end/flambda/inlining_transforms.ml(263):11647-12117
+                                                       (let
+                                                         (old_params_to_new_outside =
+                                                            (after middle_end/flambda/inlining_transforms.ml(265):11711-11769
+                                                              (apply
+                                                                (field 3
+                                                                  (field 7
+                                                                    (global Variable!)))
+                                                                param arg
+                                                                (field 2
+                                                                  state))))
+                                                         (before middle_end/flambda/inlining_transforms.ml(267):11797-12103
+                                                           (let
+                                                             (*match* =
+                                                                (after middle_end/flambda/inlining_transforms.ml(267):11803-11860
+                                                                  (apply
+                                                                    (field 27
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    param
+                                                                    (after middle_end/flambda/inlining_transforms.ml(267):11831-11860
+                                                                    (let
+                                                                    (lzarg =
+                                                                    invariant_params
+                                                                    tag =a
+                                                                    (caml_obj_tag
+                                                                    lzarg))
+                                                                    (if
+                                                                    (== tag
+                                                                    250)
+                                                                    (field 0
+                                                                    lzarg)
+                                                                    (if
+                                                                    (== tag
+                                                                    246)
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global CamlinternalLazy!))
+                                                                    lzarg)
+                                                                    lzarg)))))))
+                                                             (if *match*
+                                                               (let
+                                                                 (set =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                 (before middle_end/flambda/inlining_transforms.ml(269):11908-12039
+                                                                   (after middle_end/flambda/inlining_transforms.ml(269):11908-12039
+                                                                    (apply
+                                                                    (field 14
+                                                                    (field 6
+                                                                    (global Variable!)))
+                                                                    (function
+                                                                    elem acc
+                                                                    (funct-body middle_end/flambda/inlining_transforms.ml(270):11944-11991
+                                                                    (before middle_end/flambda/inlining_transforms.ml(270):11961-11990
+                                                                    (after middle_end/flambda/inlining_transforms.ml(270):11961-11990
+                                                                    (apply
+                                                                    (field 3
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    elem arg
+                                                                    acc)))))
+                                                                    set
+                                                                    old_params_to_new_outside))))
+                                                               (before middle_end/flambda/inlining_transforms.ml(273):12078-12103
+                                                                 old_params_to_new_outside))))))
+                                                     (before middle_end/flambda/inlining_transforms.ml(274):12123-12186
+                                                       (field 2 state))))
+                                                (before middle_end/flambda/inlining_transforms.ml(278):12206-12355
+                                                  (let
+                                                    (state =
+                                                       (let (init = state)
+                                                         (makeblock 0
+                                                           (field 0 init)
+                                                           old_outside_to_new_outside
+                                                           old_params_to_new_outside
+                                                           (field 3 init)
+                                                           (field 4 init)
+                                                           (field 5 init)
+                                                           (field 6 init)
+                                                           (field 7 init)
+                                                           (field 8 init))))
+                                                    (before middle_end/flambda/inlining_transforms.ml(281):12316-12355
+                                                      (after middle_end/flambda/inlining_transforms.ml(281):12316-12355
+                                                        (apply loop state
+                                                          params args
+                                                          args_approxs))))))))))))
+                                  (exit 10))
+                                (exit 10))
+                              (if *match* (exit 10)
+                                (if *match* (exit 10)
+                                  (before middle_end/flambda/inlining_transforms.ml(245):10818-10823
+                                    state))))
+                           with (10)
+                            (before middle_end/flambda/inlining_transforms.ml(283):12383-12395
+                              (raise
+                                (after middle_end/flambda/inlining_transforms.ml(283):12383-12395
+                                  (makeblock 0 (global Assert_failure!)
+                                    [0:
+                                     "middle_end/flambda/inlining_transforms.ml"
+                                     283 17]))))))))))
+               (before middle_end/flambda/inlining_transforms.ml(285):12403-12442
+                 (after middle_end/flambda/inlining_transforms.ml(285):12403-12442
+                   (apply loop state params args args_approxs)))))))
+     add_param =
+       (function specialised_args state param
+         (funct-body middle_end/flambda/inlining_transforms.ml(289)<ghost>:12610-13910
+           (before middle_end/flambda/inlining_transforms.ml(290):12646-13910
+             (let
+               (param =
+                  (after middle_end/flambda/inlining_transforms.ml(290):12658-12677
+                    (apply (field 1 (global Parameter!)) param)))
+               (before middle_end/flambda/inlining_transforms.ml(291):12683-13910
+                 (let
+                   (new_param =
+                      (after middle_end/flambda/inlining_transforms.ml(291):12699-12720
+                        (apply (field 11 (global Variable!)) 0a param)))
+                   (before middle_end/flambda/inlining_transforms.ml(292):12726-13910
+                     (let
+                       (old_inside_to_new_inside =
+                          (after middle_end/flambda/inlining_transforms.ml(293):12761-12824
+                            (apply (field 3 (field 7 (global Variable!)))
+                              param new_param (field 0 state))))
+                       (before middle_end/flambda/inlining_transforms.ml(295):12832-13910
+                         (let
+                           (new_specialised_args_with_old_projections =
+                              (let
+                                (*match* =
+                                   (after middle_end/flambda/inlining_transforms.ml(296):12890-12934
+                                     (apply
+                                       (field 27
+                                         (field 7 (global Variable!)))
+                                       param specialised_args)))
+                                (if *match*
+                                  (let (spec =a (field 0 *match*))
+                                    (before middle_end/flambda/inlining_transforms.ml(298):12994-13303
+                                      (let
+                                        (new_outside_var =
+                                           (after middle_end/flambda/inlining_transforms.ml(299):13026-13085
+                                             (apply
+                                               (field 26
+                                                 (field 7 (global Variable!)))
+                                               (field 0 spec)
+                                               (field 1 state))))
+                                        (before middle_end/flambda/inlining_transforms.ml(301):13105-13303
+                                          (let
+                                            (new_spec =
+                                               (let (init = spec)
+                                                 (makeblock 0 new_outside_var
+                                                   (field 1 init))))
+                                            (before middle_end/flambda/inlining_transforms.ml(304):13210-13303
+                                              (after middle_end/flambda/inlining_transforms.ml(304):13210-13303
+                                                (apply
+                                                  (field 3
+                                                    (field 7
+                                                      (global Variable!)))
+                                                  new_param new_spec
+                                                  (field 8 state)))))))))
+                                  (before middle_end/flambda/inlining_transforms.ml(306):13318-13748
+                                    (let
+                                      (*match* =
+                                         (after middle_end/flambda/inlining_transforms.ml(307):13338-13397
+                                           (apply
+                                             (field 27
+                                               (field 7 (global Variable!)))
+                                             param (field 2 state))))
+                                      (if *match*
+                                        (let
+                                          (new_outside_var =a
+                                             (field 0 *match*))
+                                          (before middle_end/flambda/inlining_transforms.ml(310):13515-13738
+                                            (let
+                                              (new_spec =
+                                                 (makeblock 0 new_outside_var
+                                                   0a))
+                                              (before middle_end/flambda/inlining_transforms.ml(313):13641-13738
+                                                (after middle_end/flambda/inlining_transforms.ml(313):13641-13738
+                                                  (apply
+                                                    (field 3
+                                                      (field 7
+                                                        (global Variable!)))
+                                                    new_param new_spec
+                                                    (field 8 state)))))))
+                                        (before middle_end/flambda/inlining_transforms.ml(308):13421-13468
+                                          (field 8 state))))))))
+                           (before middle_end/flambda/inlining_transforms.ml(317):13756-13910
+                             (let
+                               (state =
+                                  (let (init = state)
+                                    (makeblock 0 old_inside_to_new_inside
+                                      (field 1 init) (field 2 init)
+                                      (field 3 init) (field 4 init)
+                                      (field 5 init) (field 6 init)
+                                      (field 7 init)
+                                      new_specialised_args_with_old_projections)))
+                               (before middle_end/flambda/inlining_transforms.ml(321):13879-13910
+                                 (makeblock 0 state
+                                   (after middle_end/flambda/inlining_transforms.ml(321):13886-13910
+                                     (apply (field 0 (global Parameter!))
+                                       new_param))))))))))))))))
+     add_fun_var =
+       (function lhs_of_application closure_id_being_applied state fun_var
+         (funct-body middle_end/flambda/inlining_transforms.ml(325)<ghost>:14050-15051
+           (before middle_end/flambda/inlining_transforms.ml(326):14116-15051
+             (if
+               (after middle_end/flambda/inlining_transforms.ml(326):14119-14174
+                 (apply (field 2 (field 7 (global Variable!))) fun_var
+                   (field 0 state)))
+               (before middle_end/flambda/inlining_transforms.ml(326):14180-14185
+                 state)
+               (before middle_end/flambda/inlining_transforms.ml(327):14193-15051
+                 (let
+                   (inside_var =
+                      (after middle_end/flambda/inlining_transforms.ml(328):14220-14243
+                        (apply (field 11 (global Variable!)) 0a fun_var)))
+                   (before middle_end/flambda/inlining_transforms.ml(329):14251-15045
+                     (let
+                       (outside_var =
+                          (after middle_end/flambda/inlining_transforms.ml(329):14269-14316
+                            (apply (field 9 (global Variable!)) 0a
+                              (field 5 (global Internal_variable_names!)))))
+                       (before middle_end/flambda/inlining_transforms.ml(330):14324-15045
+                         (let
+                           (expr =
+                              (makeblock 7
+                                (makeblock 0 lhs_of_application
+                                  closure_id_being_applied
+                                  (after middle_end/flambda/inlining_transforms.ml(334):14492-14515
+                                    (apply (field 9 (global Closure_id!))
+                                      fun_var)))))
+                           (before middle_end/flambda/inlining_transforms.ml(336):14530-15045
+                             (let
+                               (let_bindings =
+                                  (makeblock 0 (makeblock 0 outside_var expr)
+                                    (field 4 state)))
+                               (before middle_end/flambda/inlining_transforms.ml(337):14598-15045
+                                 (let (spec = (makeblock 0 outside_var 0a))
+                                   (before middle_end/flambda/inlining_transforms.ml(340):14693-15045
+                                     (let
+                                       (new_free_vars_with_old_projections =
+                                          (after middle_end/flambda/inlining_transforms.ml(341):14740-14813
+                                            (apply
+                                              (field 3
+                                                (field 7 (global Variable!)))
+                                              inside_var spec
+                                              (field 7 state))))
+                                       (before middle_end/flambda/inlining_transforms.ml(343):14825-15045
+                                         (let
+                                           (old_inside_to_new_inside =
+                                              (after middle_end/flambda/inlining_transforms.ml(344):14862-14928
+                                                (apply
+                                                  (field 3
+                                                    (field 7
+                                                      (global Variable!)))
+                                                  fun_var inside_var
+                                                  (field 0 state))))
+                                           (before middle_end/flambda/inlining_transforms.ml(346):14940-15045
+                                             (let (init = state)
+                                               (makeblock 0
+                                                 old_inside_to_new_inside
+                                                 (field 1 init)
+                                                 (field 2 init)
+                                                 (field 3 init) let_bindings
+                                                 (field 5 init)
+                                                 (field 6 init)
+                                                 new_free_vars_with_old_projections
+                                                 (field 8 init))))))))))))))))))))))
+     add_free_var =
+       (function free_vars state free_var
+         (funct-body middle_end/flambda/inlining_transforms.ml(353)<ghost>:15167-15998
+           (before middle_end/flambda/inlining_transforms.ml(354):15199-15998
+             (if
+               (after middle_end/flambda/inlining_transforms.ml(354):15202-15258
+                 (apply (field 2 (field 7 (global Variable!))) free_var
+                   (field 0 state)))
+               (before middle_end/flambda/inlining_transforms.ml(354):15264-15269
+                 state)
+               (before middle_end/flambda/inlining_transforms.ml(355):15277-15998
+                 (let
+                   (spec =
+                      (after middle_end/flambda/inlining_transforms.ml(356):15323-15359
+                        (apply (field 26 (field 7 (global Variable!)))
+                          free_var free_vars)))
+                   (before middle_end/flambda/inlining_transforms.ml(357):15367-15992
+                     (let (outside_var = (field 0 spec))
+                       (before middle_end/flambda/inlining_transforms.ml(358):15401-15992
+                         (let
+                           (new_outside_var =
+                              (after middle_end/flambda/inlining_transforms.ml(359):15429-15491
+                                (apply
+                                  (field 26 (field 7 (global Variable!)))
+                                  outside_var (field 1 state))))
+                           (before middle_end/flambda/inlining_transforms.ml(361):15503-15992
+                             (let
+                               (new_spec =
+                                  (let (init = spec)
+                                    (makeblock 0 new_outside_var
+                                      (field 1 init))))
+                               (before middle_end/flambda/inlining_transforms.ml(364):15596-15992
+                                 (let
+                                   (new_inside_var =
+                                      (after middle_end/flambda/inlining_transforms.ml(364):15617-15641
+                                        (apply (field 11 (global Variable!))
+                                          0a free_var)))
+                                   (before middle_end/flambda/inlining_transforms.ml(365):15649-15992
+                                     (let
+                                       (new_free_vars_with_old_projections =
+                                          (after middle_end/flambda/inlining_transforms.ml(366):15696-15785
+                                            (apply
+                                              (field 3
+                                                (field 7 (global Variable!)))
+                                              new_inside_var new_spec
+                                              (field 7 state))))
+                                       (before middle_end/flambda/inlining_transforms.ml(369):15797-15992
+                                         (let
+                                           (old_inside_to_new_inside =
+                                              (after middle_end/flambda/inlining_transforms.ml(370):15834-15905
+                                                (apply
+                                                  (field 3
+                                                    (field 7
+                                                      (global Variable!)))
+                                                  free_var new_inside_var
+                                                  (field 0 state))))
+                                           (before middle_end/flambda/inlining_transforms.ml(372):15917-15992
+                                             (let (init = state)
+                                               (makeblock 0
+                                                 old_inside_to_new_inside
+                                                 (field 1 init)
+                                                 (field 2 init)
+                                                 (field 3 init)
+                                                 (field 4 init)
+                                                 (field 5 init)
+                                                 (field 6 init)
+                                                 new_free_vars_with_old_projections
+                                                 (field 8 init))))))))))))))))))))))
+     add_function =
+       (function specialised_args state fun_var function_decl
+         (funct-body middle_end/flambda/inlining_transforms.ml(379)<ghost>:16218-17458
+           (before middle_end/flambda/inlining_transforms.ml(380):16271-17458
+             (let (*match* = (field 2 function_decl))
+               (if *match*
+                 (before middle_end/flambda/inlining_transforms.ml(382):16343-17458
+                   (letrec
+                     (loop
+                        (function worth_specialising param
+                          (funct-body middle_end/flambda/inlining_transforms.ml(383)<ghost>:16366-16987
+                            (if param
+                              (let
+                                (params =a (field 1 param)
+                                 param =a (field 0 param))
+                                (before middle_end/flambda/inlining_transforms.ml(385):16456-16987
+                                  (let
+                                    (param =
+                                       (after middle_end/flambda/inlining_transforms.ml(386):16484-16503
+                                         (apply (field 1 (global Parameter!))
+                                           param)))
+                                    (before middle_end/flambda/inlining_transforms.ml(387):16517-16975
+                                      (let
+                                        (*match* =
+                                           (after middle_end/flambda/inlining_transforms.ml(387):16523-16567
+                                             (apply
+                                               (field 27
+                                                 (field 7 (global Variable!)))
+                                               param specialised_args)))
+                                        (if *match*
+                                          (let (spec =a (field 0 *match*))
+                                            (before middle_end/flambda/inlining_transforms.ml(389):16639-16745
+                                              (&&
+                                                (after middle_end/flambda/inlining_transforms.ml(389):16639-16697
+                                                  (apply
+                                                    (field 2
+                                                      (field 7
+                                                        (global Variable!)))
+                                                    (field 0 spec)
+                                                    (field 1 state)))
+                                                (after middle_end/flambda/inlining_transforms.ml(390):16715-16745
+                                                  (apply loop
+                                                    worth_specialising
+                                                    params)))))
+                                          (before middle_end/flambda/inlining_transforms.ml(392):16780-16975
+                                            (let
+                                              (worth_specialising =
+                                                 (|| worth_specialising
+                                                   (after middle_end/flambda/inlining_transforms.ml(394):16859-16913
+                                                     (apply
+                                                       (field 2
+                                                         (field 7
+                                                           (global Variable!)))
+                                                       param (field 2 state)))))
+                                              (before middle_end/flambda/inlining_transforms.ml(396):16945-16975
+                                                (after middle_end/flambda/inlining_transforms.ml(396):16945-16975
+                                                  (apply loop
+                                                    worth_specialising
+                                                    params)))))))))))
+                              (before middle_end/flambda/inlining_transforms.ml(384):16410-16428
+                                worth_specialising)))))
+                     (before middle_end/flambda/inlining_transforms.ml(399):16999-17452
+                       (let
+                         (worth_specialising =
+                            (after middle_end/flambda/inlining_transforms.ml(399):17024-17057
+                              (apply loop 0a (field 1 function_decl))))
+                         (before middle_end/flambda/inlining_transforms.ml(400):17065-17452
+                           (if (not worth_specialising)
+                             (before middle_end/flambda/inlining_transforms.ml(400):17096-17100
+                               0a)
+                             (before middle_end/flambda/inlining_transforms.ml(401):17110-17452
+                               (let
+                                 (new_fun_var =
+                                    (after middle_end/flambda/inlining_transforms.ml(402):17140-17163
+                                      (apply (field 11 (global Variable!)) 0a
+                                        fun_var)))
+                                 (before middle_end/flambda/inlining_transforms.ml(403):17173-17444
+                                   (let
+                                     (old_fun_var_to_new_fun_var =
+                                        (after middle_end/flambda/inlining_transforms.ml(404):17214-17283
+                                          (apply
+                                            (field 3
+                                              (field 7 (global Variable!)))
+                                            fun_var new_fun_var
+                                            (field 3 state))))
+                                     (before middle_end/flambda/inlining_transforms.ml(406):17299-17444
+                                       (let
+                                         (to_copy =
+                                            (makeblock 0 fun_var
+                                              (field 5 state)))
+                                         (before middle_end/flambda/inlining_transforms.ml(407):17347-17444
+                                           (let
+                                             (state =
+                                                (let (init = state)
+                                                  (makeblock 0 (field 0 init)
+                                                    (field 1 init)
+                                                    (field 2 init)
+                                                    old_fun_var_to_new_fun_var
+                                                    (field 4 init) to_copy
+                                                    (field 6 init)
+                                                    (field 7 init)
+                                                    (field 8 init))))
+                                             (before middle_end/flambda/inlining_transforms.ml(408):17419-17444
+                                               (makeblock 0
+                                                 (makeblock 0 state
+                                                   new_fun_var)))))))))))))))))
+                 (before middle_end/flambda/inlining_transforms.ml(381):16324-16328
+                   0a))))))
+     lookup_function =
+       (function specialised_args state fun_var function_decl
+         (funct-body middle_end/flambda/inlining_transforms.ml(414)<ghost>:17566-17816
+           (before middle_end/flambda/inlining_transforms.ml(415):17619-17816
+             (let
+               (*match* =
+                  (after middle_end/flambda/inlining_transforms.ml(415):17625-17687
+                    (apply (field 27 (field 7 (global Variable!))) fun_var
+                      (field 3 state))))
+               (if *match*
+                 (let (new_fun_var =a (field 0 *match*))
+                   (before middle_end/flambda/inlining_transforms.ml(416):17717-17742
+                     (makeblock 0 (makeblock 0 state new_fun_var))))
+                 (before middle_end/flambda/inlining_transforms.ml(417):17755-17816
+                   (after middle_end/flambda/inlining_transforms.ml(417):17755-17816
+                     (apply add_function specialised_args state fun_var
+                       function_decl))))))))
+     specialisable_call =
+       (function specialised_args state args params
+         (funct-body middle_end/flambda/inlining_transforms.ml(422)<ghost>:18049-18697
+           (before middle_end/flambda/inlining_transforms.ml(423):18092-18697
+             (after middle_end/flambda/inlining_transforms.ml(423):18092-18697
+               (apply (field 29 (global Stdlib__list!))
+                 (function arg param
+                   (funct-body middle_end/flambda/inlining_transforms.ml(424):18110-18681
+                     (before middle_end/flambda/inlining_transforms.ml(425):18135-18680
+                       (let
+                         (param =
+                            (after middle_end/flambda/inlining_transforms.ml(425):18147-18166
+                              (apply (field 1 (global Parameter!)) param)))
+                         (before middle_end/flambda/inlining_transforms.ml(426):18177-18680
+                           (if
+                             (after middle_end/flambda/inlining_transforms.ml(426):18180-18219
+                               (apply (field 2 (field 7 (global Variable!)))
+                                 param specialised_args))
+                             (before middle_end/flambda/inlining_transforms.ml(426):18225-18229
+                               1a)
+                             (before middle_end/flambda/inlining_transforms.ml(427):18242-18680
+                               (let
+                                 (old_params_to_new_outside = (field 2 state))
+                                 (before middle_end/flambda/inlining_transforms.ml(429):18333-18669
+                                   (let
+                                     (*match* =
+                                        (after middle_end/flambda/inlining_transforms.ml(429):18339-18392
+                                          (apply
+                                            (field 27
+                                              (field 7 (global Variable!)))
+                                            param old_params_to_new_outside)))
+                                     (if *match*
+                                       (let
+                                         (outside_var =a (field 0 *match*))
+                                         (before middle_end/flambda/inlining_transforms.ml(431):18453-18669
+                                           (let
+                                             (*match* =
+                                                (after middle_end/flambda/inlining_transforms.ml(432):18478-18529
+                                                  (apply
+                                                    (field 27
+                                                      (field 7
+                                                        (global Variable!)))
+                                                    arg
+                                                    old_params_to_new_outside)))
+                                             (if *match*
+                                               (let
+                                                 (outside_var' =a
+                                                    (field 0 *match*))
+                                                 (before middle_end/flambda/inlining_transforms.ml(434):18586-18625
+                                                   (after middle_end/flambda/inlining_transforms.ml(434):18586-18625
+                                                     (apply
+                                                       (field 1
+                                                         (global Variable!))
+                                                       outside_var
+                                                       outside_var'))))
+                                               (before middle_end/flambda/inlining_transforms.ml(435):18649-18654
+                                                 0a)))))
+                                       (before middle_end/flambda/inlining_transforms.ml(430):18417-18421
+                                         1a))))))))))))
+                 args params))))))
+    (letrec
+      (rewrite_direct_call
+         (function specialised_args funs direct_call_surrogates state
+           closure_id apply
+           (funct-body middle_end/flambda/inlining_transforms.ml(444)<ghost>:18961-20158
+             (before middle_end/flambda/inlining_transforms.ml(446):19063-20158
+               (let
+                 (*match* =
+                    (after middle_end/flambda/inlining_transforms.ml(446):19069-19126
+                      (apply (field 27 (field 7 (global Closure_id!)))
+                        closure_id direct_call_surrogates)))
+                 (if *match*
+                   (let (closure_id =a (field 0 *match*))
+                     (before middle_end/flambda/inlining_transforms.ml(448):19161-19262
+                       (after middle_end/flambda/inlining_transforms.ml(448):19161-19262
+                         (apply rewrite_direct_call specialised_args funs
+                           direct_call_surrogates state closure_id apply))))
+                   (before middle_end/flambda/inlining_transforms.ml(450):19275-20158
+                     (let
+                       (fun_var =
+                          (after middle_end/flambda/inlining_transforms.ml(451):19301-19329
+                            (apply (field 10 (global Closure_id!))
+                              closure_id)))
+                       (before middle_end/flambda/inlining_transforms.ml(452):19339-20150
+                         (let
+                           (*match* =
+                              (after middle_end/flambda/inlining_transforms.ml(452):19345-19379
+                                (apply
+                                  (field 27 (field 7 (global Variable!)))
+                                  fun_var funs)))
+                           (if *match*
+                             (let (function_decl =a (field 0 *match*))
+                               (before middle_end/flambda/inlining_transforms.ml(454):19436-20150
+                                 (let
+                                   (*match* =
+                                      (after middle_end/flambda/inlining_transforms.ml(456):19470-19534
+                                        (apply lookup_function
+                                          specialised_args state fun_var
+                                          function_decl)))
+                                   (if *match*
+                                     (let
+                                       (*match* =a (field 0 *match*)
+                                        new_fun_var =a (field 1 *match*)
+                                        state =a (field 0 *match*))
+                                       (before middle_end/flambda/inlining_transforms.ml(459):19616-20138
+                                         (let (args = (field 1 apply))
+                                           (before middle_end/flambda/inlining_transforms.ml(461):19675-20122
+                                             (let
+                                               (params =
+                                                  (field 1 function_decl))
+                                               (before middle_end/flambda/inlining_transforms.ml(462):19728-20122
+                                                 (let
+                                                   (specialisable =
+                                                      (after middle_end/flambda/inlining_transforms.ml(463):19764-19821
+                                                        (apply
+                                                          specialisable_call
+                                                          specialised_args
+                                                          state args params)))
+                                                   (before middle_end/flambda/inlining_transforms.ml(465):19853-20122
+                                                     (if (not specialisable)
+                                                       (before middle_end/flambda/inlining_transforms.ml(465):19879-19883
+                                                         0a)
+                                                       (before middle_end/flambda/inlining_transforms.ml(466):19903-20122
+                                                         (let
+                                                           (kind =
+                                                              (makeblock 0
+                                                                (after middle_end/flambda/inlining_transforms.ml(467):19951-19980
+                                                                  (apply
+                                                                    (field 9
+                                                                    (global Closure_id!))
+                                                                    new_fun_var))))
+                                                           (before middle_end/flambda/inlining_transforms.ml(468):20000-20104
+                                                             (let
+                                                               (apply =
+                                                                  (let
+                                                                    (init =
+                                                                    apply)
+                                                                    (makeblock 0
+                                                                    new_fun_var
+                                                                    (field 1
+                                                                    init)
+                                                                    kind
+                                                                    (field 3
+                                                                    init)
+                                                                    (field 4
+                                                                    init)
+                                                                    (field 5
+                                                                    init))))
+                                                               (before middle_end/flambda/inlining_transforms.ml(469):20071-20104
+                                                                 (makeblock 0
+                                                                   (makeblock 0
+                                                                    state
+                                                                    (makeblock 4
+                                                                    apply)))))))))))))))))
+                                     (before middle_end/flambda/inlining_transforms.ml(458):19570-19574
+                                       0a)))))
+                             (before middle_end/flambda/inlining_transforms.ml(453):19401-19405
+                               0a))))))))))))
+      (let
+        (rewrite_function =
+           (function lhs_of_application closure_id_being_applied
+             direct_call_surrogates specialised_args free_vars funs state
+             fun_var
+             (funct-body middle_end/flambda/inlining_transforms.ml(477)<ghost>:20266-22496
+               (before middle_end/flambda/inlining_transforms.ml(480):20402-22496
+                 (let
+                   (function_decl =
+                      (after middle_end/flambda/inlining_transforms.ml(481):20451-20481
+                        (apply (field 26 (field 7 (global Variable!)))
+                          fun_var funs)))
+                   (before middle_end/flambda/inlining_transforms.ml(483):20489-22496
+                     (let
+                       (function_body =
+                          (let (*match* = (field 2 function_decl))
+                            (if *match*
+                              (let (function_body =a (field 0 *match*))
+                                (before middle_end/flambda/inlining_transforms.ml(486):20607-20620
+                                  function_body))
+                              (before middle_end/flambda/inlining_transforms.ml(485):20566-20578
+                                (raise
+                                  (after middle_end/flambda/inlining_transforms.ml(485):20566-20578
+                                    (makeblock 0 (global Assert_failure!)
+                                      [0:
+                                       "middle_end/flambda/inlining_transforms.ml"
+                                       485 14])))))))
+                       (before middle_end/flambda/inlining_transforms.ml(488):20628-22496
+                         (let
+                           (new_fun_var =
+                              (after middle_end/flambda/inlining_transforms.ml(489):20650-20708
+                                (apply
+                                  (field 26 (field 7 (global Variable!)))
+                                  fun_var (field 3 state))))
+                           (before middle_end/flambda/inlining_transforms.ml(491):20716-22496
+                             (let
+                               (*match* =
+                                  (after middle_end/flambda/inlining_transforms.ml(492):20740-20938
+                                    (apply (field 21 (global Stdlib__list!))
+                                      (function param param
+                                        (funct-body middle_end/flambda/inlining_transforms.ml(493):20762-20899
+                                          (let
+                                            (params =a (field 1 param)
+                                             state =a (field 0 param))
+                                            (before middle_end/flambda/inlining_transforms.ml(494):20801-20898
+                                              (let
+                                                (*match* =
+                                                   (after middle_end/flambda/inlining_transforms.ml(494):20820-20861
+                                                     (apply add_param
+                                                       specialised_args state
+                                                       param))
+                                                 param =a (field 1 *match*)
+                                                 state =a (field 0 *match*))
+                                                (before middle_end/flambda/inlining_transforms.ml(495):20874-20898
+                                                  (makeblock 0 state
+                                                    (makeblock 0 param
+                                                      params))))))))
+                                      (field 1 function_decl)
+                                      (makeblock 0 state 0a)))
+                                params =a (field 1 *match*)
+                                state =a (field 0 *match*))
+                               (before middle_end/flambda/inlining_transforms.ml(498):20946-22496
+                                 (let
+                                   (state =
+                                      (after middle_end/flambda/inlining_transforms.ml(499):20962-21330
+                                        (apply
+                                          (field 14
+                                            (field 6 (global Variable!)))
+                                          (function var state
+                                            (funct-body middle_end/flambda/inlining_transforms.ml(500):20986-21289
+                                              (before middle_end/flambda/inlining_transforms.ml(501):21013-21288
+                                                (if
+                                                  (after middle_end/flambda/inlining_transforms.ml(501):21016-21041
+                                                    (apply
+                                                      (field 2
+                                                        (field 7
+                                                          (global Variable!)))
+                                                      var funs))
+                                                  (before middle_end/flambda/inlining_transforms.ml(502):21058-21148
+                                                    (after middle_end/flambda/inlining_transforms.ml(502):21058-21148
+                                                      (apply add_fun_var
+                                                        lhs_of_application
+                                                        closure_id_being_applied
+                                                        state var)))
+                                                  (before middle_end/flambda/inlining_transforms.ml(504):21163-21288
+                                                    (if
+                                                      (after middle_end/flambda/inlining_transforms.ml(504):21166-21196
+                                                        (apply
+                                                          (field 2
+                                                            (field 7
+                                                              (global Variable!)))
+                                                          var free_vars))
+                                                      (before middle_end/flambda/inlining_transforms.ml(505):21213-21257
+                                                        (after middle_end/flambda/inlining_transforms.ml(505):21213-21257
+                                                          (apply add_free_var
+                                                            free_vars state
+                                                            var)))
+                                                      (before middle_end/flambda/inlining_transforms.ml(507):21283-21288
+                                                        state)))))))
+                                          (field 0 function_body) state)))
+                                   (before middle_end/flambda/inlining_transforms.ml(510):21338-22496
+                                     (let (state_ref = (makemutable 0 state))
+                                       (before middle_end/flambda/inlining_transforms.ml(511):21369-22496
+                                         (let
+                                           (body =
+                                              (after middle_end/flambda/inlining_transforms.ml(512):21384-21903
+                                                (apply
+                                                  (field 21
+                                                    (global Flambda_iterators!))
+                                                  (function expr
+                                                    (funct-body middle_end/flambda/inlining_transforms.ml(513):21426-21878
+                                                      (before middle_end/flambda/inlining_transforms.ml(514):21462-21877
+                                                        (catch
+                                                          (switch expr
+                                                           case tag 4:
+                                                            (let
+                                                              (apply =a
+                                                                 (field 0
+                                                                   expr)
+                                                               *match* =a
+                                                                 (field 2
+                                                                   apply))
+                                                              (if *match*
+                                                                (let
+                                                                  (closure_id =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                  (before middle_end/flambda/inlining_transforms.ml(515):21538-21856
+                                                                    (let
+                                                                    (*match* =
+                                                                    (after middle_end/flambda/inlining_transforms.ml(517):21578-21699
+                                                                    (apply
+                                                                    rewrite_direct_call
+                                                                    specialised_args
+                                                                    funs
+                                                                    direct_call_surrogates
+                                                                    (field 0
+                                                                    state_ref)
+                                                                    closure_id
+                                                                    apply)))
+                                                                    (if
+                                                                    *match*
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 0
+                                                                    *match*)
+                                                                    expr =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    state =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before middle_end/flambda/inlining_transforms.ml(522):21800-21841
+                                                                    (seq
+                                                                    (setfield_ptr 0
+                                                                    state_ref
+                                                                    state)
+                                                                    (before middle_end/flambda/inlining_transforms.ml(523):21837-21841
+                                                                    expr))))
+                                                                    (before middle_end/flambda/inlining_transforms.ml(520):21741-21745
+                                                                    expr)))))
+                                                                (exit 11)))
+                                                           default: (exit 11))
+                                                         with (11)
+                                                          (before middle_end/flambda/inlining_transforms.ml(525):21873-21877
+                                                            expr)))))
+                                                  (field 7 function_body))))
+                                           (before middle_end/flambda/inlining_transforms.ml(528):21911-22496
+                                             (let
+                                               (body =
+                                                  (after middle_end/flambda/inlining_transforms.ml(529):21926-21997
+                                                    (apply
+                                                      (field 8
+                                                        (global Flambda_utils!))
+                                                      (field 0 state) body)))
+                                               (before middle_end/flambda/inlining_transforms.ml(531):22005-22496
+                                                 (let
+                                                   (new_function_decl =
+                                                      (after middle_end/flambda/inlining_transforms.ml(532):22033-22349
+                                                        (apply
+                                                          (field 14
+                                                            (global Flambda!))
+                                                          params body
+                                                          (field 2
+                                                            function_body)
+                                                          (field 3
+                                                            function_body)
+                                                          (field 4
+                                                            function_body)
+                                                          (field 5
+                                                            function_body)
+                                                          (field 6
+                                                            function_body)
+                                                          (after middle_end/flambda/inlining_transforms.ml(539):22296-22349
+                                                            (apply
+                                                              (field 9
+                                                                (global Closure_origin!))
+                                                              (after middle_end/flambda/inlining_transforms.ml(539):22319-22348
+                                                                (apply
+                                                                  (field 9
+                                                                    (global Closure_id!))
+                                                                  new_fun_var)))))))
+                                                   (before middle_end/flambda/inlining_transforms.ml(541):22357-22496
+                                                     (let
+                                                       (new_funs =
+                                                          (after middle_end/flambda/inlining_transforms.ml(542):22376-22437
+                                                            (apply
+                                                              (field 3
+                                                                (field 7
+                                                                  (global Variable!)))
+                                                              new_fun_var
+                                                              new_function_decl
+                                                              (field 6 state))))
+                                                       (before middle_end/flambda/inlining_transforms.ml(544):22445-22496
+                                                         (let
+                                                           (state =
+                                                              (let
+                                                                (init =
+                                                                   (field 0
+                                                                    state_ref))
+                                                                (makeblock 0
+                                                                  (field 0
+                                                                    init)
+                                                                  (field 1
+                                                                    init)
+                                                                  (field 2
+                                                                    init)
+                                                                  (field 3
+                                                                    init)
+                                                                  (field 4
+                                                                    init)
+                                                                  (field 5
+                                                                    init)
+                                                                  new_funs
+                                                                  (field 7
+                                                                    init)
+                                                                  (field 8
+                                                                    init))))
+                                                           (before middle_end/flambda/inlining_transforms.ml(545):22491-22496
+                                                             state)))))))))))))))))))))))))
+         update_projections =
+           (function state projections
+             (funct-body middle_end/flambda/inlining_transforms.ml(547)<ghost>:22521-23985
+               (before middle_end/flambda/inlining_transforms.ml(548):22544-23985
+                 (let (old_to_new = (field 0 state))
+                   (before middle_end/flambda/inlining_transforms.ml(549):22597-23985
+                     (after middle_end/flambda/inlining_transforms.ml(549):22597-23985
+                       (apply (field 32 (field 7 (global Variable!)))
+                         (function spec_to
+                           (funct-body middle_end/flambda/inlining_transforms.ml(550):22618-23969
+                             (before middle_end/flambda/inlining_transforms.ml(551):22668-23968
+                               (let
+                                 (projection =
+                                    (let (*match* = (field 1 spec_to))
+                                      (if *match*
+                                        (let (*match* =a (field 0 *match*))
+                                          (switch* *match*
+                                           case tag 0:
+                                            (let (proj =a (field 0 *match*))
+                                              (before middle_end/flambda/inlining_transforms.ml(554):22808-23062
+                                                (let
+                                                  (*match* =
+                                                     (after middle_end/flambda/inlining_transforms.ml(555):22833-22878
+                                                       (apply
+                                                         (field 27
+                                                           (field 7
+                                                             (global Variable!)))
+                                                         (field 0 proj)
+                                                         old_to_new)))
+                                                  (if *match*
+                                                    (let
+                                                      (closure =a
+                                                         (field 0 *match*))
+                                                      (before middle_end/flambda/inlining_transforms.ml(558):22960-23047
+                                                        (let
+                                                          (proj =
+                                                             (let
+                                                               (init = proj)
+                                                               (makeblock 0
+                                                                 closure
+                                                                 (field 1
+                                                                   init)
+                                                                 (field 2
+                                                                   init))))
+                                                          (before middle_end/flambda/inlining_transforms.ml(559):23013-23047
+                                                            (makeblock 0
+                                                              (makeblock 0
+                                                                proj))))))
+                                                    (before middle_end/flambda/inlining_transforms.ml(556):22907-22911
+                                                      0a)))))
+                                           case tag 1:
+                                            (let (proj =a (field 0 *match*))
+                                              (before middle_end/flambda/inlining_transforms.ml(561):23105-23387
+                                                (let
+                                                  (*match* =
+                                                     (after middle_end/flambda/inlining_transforms.ml(562):23130-23183
+                                                       (apply
+                                                         (field 27
+                                                           (field 7
+                                                             (global Variable!)))
+                                                         (field 0 proj)
+                                                         old_to_new)))
+                                                  (if *match*
+                                                    (let
+                                                      (set_of_closures =a
+                                                         (field 0 *match*))
+                                                      (before middle_end/flambda/inlining_transforms.ml(565):23273-23372
+                                                        (let
+                                                          (proj =
+                                                             (let
+                                                               (init = proj)
+                                                               (makeblock 0
+                                                                 set_of_closures
+                                                                 (field 1
+                                                                   init))))
+                                                          (before middle_end/flambda/inlining_transforms.ml(566):23334-23372
+                                                            (makeblock 0
+                                                              (makeblock 1
+                                                                proj))))))
+                                                    (before middle_end/flambda/inlining_transforms.ml(563):23212-23216
+                                                      0a)))))
+                                           case tag 2:
+                                            (let (proj =a (field 0 *match*))
+                                              (before middle_end/flambda/inlining_transforms.ml(568):23442-23712
+                                                (let
+                                                  (*match* =
+                                                     (after middle_end/flambda/inlining_transforms.ml(569):23467-23512
+                                                       (apply
+                                                         (field 27
+                                                           (field 7
+                                                             (global Variable!)))
+                                                         (field 0 proj)
+                                                         old_to_new)))
+                                                  (if *match*
+                                                    (let
+                                                      (closure =a
+                                                         (field 0 *match*))
+                                                      (before middle_end/flambda/inlining_transforms.ml(572):23594-23697
+                                                        (let
+                                                          (proj =
+                                                             (let
+                                                               (init = proj)
+                                                               (makeblock 0
+                                                                 closure
+                                                                 (field 1
+                                                                   init)
+                                                                 (field 2
+                                                                   init))))
+                                                          (before middle_end/flambda/inlining_transforms.ml(573):23647-23697
+                                                            (makeblock 0
+                                                              (makeblock 2
+                                                                proj))))))
+                                                    (before middle_end/flambda/inlining_transforms.ml(570):23541-23545
+                                                      0a)))))
+                                           case tag 3:
+                                            (let
+                                              (var =a (field 1 *match*)
+                                               index =a (field 0 *match*))
+                                              (before middle_end/flambda/inlining_transforms.ml(575):23753-23925
+                                                (let
+                                                  (*match* =
+                                                     (after middle_end/flambda/inlining_transforms.ml(576):23778-23814
+                                                       (apply
+                                                         (field 27
+                                                           (field 7
+                                                             (global Variable!)))
+                                                         var old_to_new)))
+                                                  (if *match*
+                                                    (let
+                                                      (var =a
+                                                         (field 0 *match*))
+                                                      (before middle_end/flambda/inlining_transforms.ml(578):23875-23910
+                                                        (makeblock 0
+                                                          (makeblock 3 (int,*)
+                                                            index var))))
+                                                    (before middle_end/flambda/inlining_transforms.ml(577):23843-23847
+                                                      0a)))))))
+                                        (before middle_end/flambda/inlining_transforms.ml(553):22765-22769
+                                          0a))))
+                                 (before middle_end/flambda/inlining_transforms.ml(581):23941-23968
+                                   (let (init = spec_to)
+                                     (makeblock 0 (field 0 init) projection)))))))
+                         projections)))))))
+         inline_by_copying_function_declaration =
+           (function env r function_decls lhs_of_application inline_requested
+             closure_id_being_applied function_decl args args_approxs
+             invariant_params specialised_args free_vars
+             direct_call_surrogates dbg simplify
+             (funct-body middle_end/flambda/inlining_transforms.ml(585)<ghost>:24034-27318
+               (before middle_end/flambda/inlining_transforms.ml(600):24733-27318
+                 (let (state = empty_state)
+                   (before middle_end/flambda/inlining_transforms.ml(601):24762-27318
+                     (let
+                       (state =
+                          (after middle_end/flambda/inlining_transforms.ml(602):24778-24862
+                            (apply bind_free_vars lhs_of_application
+                              closure_id_being_applied state free_vars)))
+                       (before middle_end/flambda/inlining_transforms.ml(605):24870-27318
+                         (let (params = (field 1 function_decl))
+                           (before middle_end/flambda/inlining_transforms.ml(606):24909-27318
+                             (let
+                               (state =
+                                  (after middle_end/flambda/inlining_transforms.ml(607):24925-25020
+                                    (apply register_arguments
+                                      specialised_args invariant_params state
+                                      params args args_approxs)))
+                               (before middle_end/flambda/inlining_transforms.ml(610):25028-27318
+                                 (let
+                                   (fun_var =
+                                      (after middle_end/flambda/inlining_transforms.ml(610):25042-25084
+                                        (apply
+                                          (field 10 (global Closure_id!))
+                                          closure_id_being_applied)))
+                                   (before middle_end/flambda/inlining_transforms.ml(611):25090-27318
+                                     (let
+                                       (*match* =
+                                          (after middle_end/flambda/inlining_transforms.ml(611):25096-25157
+                                            (apply add_function
+                                              specialised_args state fun_var
+                                              function_decl)))
+                                       (if *match*
+                                         (let
+                                           (*match* =a (field 0 *match*)
+                                            new_fun_var =a (field 1 *match*)
+                                            state =a (field 0 *match*))
+                                           (before middle_end/flambda/inlining_transforms.ml(613):25213-27318
+                                             (let
+                                               (funs =
+                                                  (field 3 function_decls))
+                                               (before middle_end/flambda/inlining_transforms.ml(615):25265-27310
+                                                 (letrec
+                                                   (loop
+                                                      (function state
+                                                        (funct-body middle_end/flambda/inlining_transforms.ml(615)<ghost>:25278-25651
+                                                          (before middle_end/flambda/inlining_transforms.ml(616):25294-25651
+                                                            (let
+                                                              (*match* =
+                                                                 (field 5
+                                                                   state))
+                                                              (if *match*
+                                                                (let
+                                                                  (rest =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                   next =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                  (before middle_end/flambda/inlining_transforms.ml(619):25377-25651
+                                                                    (let
+                                                                    (state =
+                                                                    (let
+                                                                    (init =
+                                                                    state)
+                                                                    (makeblock 0
+                                                                    (field 0
+                                                                    init)
+                                                                    (field 1
+                                                                    init)
+                                                                    (field 2
+                                                                    init)
+                                                                    (field 3
+                                                                    init)
+                                                                    (field 4
+                                                                    init)
+                                                                    rest
+                                                                    (field 6
+                                                                    init)
+                                                                    (field 7
+                                                                    init)
+                                                                    (field 8
+                                                                    init))))
+                                                                    (before middle_end/flambda/inlining_transforms.ml(620):25432-25651
+                                                                    (let
+                                                                    (state =
+                                                                    (after middle_end/flambda/inlining_transforms.ml(621):25456-25617
+                                                                    (apply
+                                                                    rewrite_function
+                                                                    lhs_of_application
+                                                                    closure_id_being_applied
+                                                                    direct_call_surrogates
+                                                                    specialised_args
+                                                                    free_vars
+                                                                    funs
+                                                                    state
+                                                                    next)))
+                                                                    (before middle_end/flambda/inlining_transforms.ml(625):25641-25651
+                                                                    (after middle_end/flambda/inlining_transforms.ml(625):25641-25651
+                                                                    (apply
+                                                                    loop
+                                                                    state))))))))
+                                                                (before middle_end/flambda/inlining_transforms.ml(617):25335-25340
+                                                                  state)))))))
+                                                   (before middle_end/flambda/inlining_transforms.ml(627):25667-27310
+                                                     (let
+                                                       (state =
+                                                          (after middle_end/flambda/inlining_transforms.ml(627):25679-25689
+                                                            (apply loop
+                                                              state)))
+                                                       (before middle_end/flambda/inlining_transforms.ml(628):25699-27310
+                                                         (let
+                                                           (closure_id =
+                                                              (after middle_end/flambda/inlining_transforms.ml(628):25716-25743
+                                                                (apply
+                                                                  (field 9
+                                                                    (global Closure_id!))
+                                                                  new_fun_var)))
+                                                           (before middle_end/flambda/inlining_transforms.ml(629):25753-27310
+                                                             (let
+                                                               (function_decls =
+                                                                  (after middle_end/flambda/inlining_transforms.ml(630):25782-25991
+                                                                    (apply
+                                                                    (field 17
+                                                                    (global Flambda!))
+                                                                    (field 0
+                                                                    function_decls)
+                                                                    (field 6
+                                                                    state)
+                                                                    (field 2
+                                                                    function_decls))))
+                                                               (before middle_end/flambda/inlining_transforms.ml(635):26007-27310
+                                                                 (let
+                                                                   (free_vars =
+                                                                    (after middle_end/flambda/inlining_transforms.ml(636):26031-26107
+                                                                    (apply
+                                                                    update_projections
+                                                                    state
+                                                                    (field 7
+                                                                    state))))
+                                                                   (before middle_end/flambda/inlining_transforms.ml(639):26123-27310
+                                                                    (let
+                                                                    (specialised_args =
+                                                                    (after middle_end/flambda/inlining_transforms.ml(640):26154-26237
+                                                                    (apply
+                                                                    update_projections
+                                                                    state
+                                                                    (field 8
+                                                                    state))))
+                                                                    (before middle_end/flambda/inlining_transforms.ml(643):26253-27310
+                                                                    (let
+                                                                    (direct_call_surrogates =
+                                                                    (field 0
+                                                                    (field 7
+                                                                    (global Variable!))))
+                                                                    (before middle_end/flambda/inlining_transforms.ml(644):26310-27310
+                                                                    (let
+                                                                    (set_of_closures =
+                                                                    (after middle_end/flambda/inlining_transforms.ml(645):26340-26449
+                                                                    (apply
+                                                                    (field 23
+                                                                    (global Flambda!))
+                                                                    function_decls
+                                                                    free_vars
+                                                                    specialised_args
+                                                                    direct_call_surrogates)))
+                                                                    (before middle_end/flambda/inlining_transforms.ml(648):26465-27310
+                                                                    (let
+                                                                    (closure_var =
+                                                                    (after middle_end/flambda/inlining_transforms.ml(648):26483-26523
+                                                                    (apply
+                                                                    new_var
+                                                                    (field 26
+                                                                    (global Internal_variable_names!)))))
+                                                                    (before middle_end/flambda/inlining_transforms.ml(649):26533-27310
+                                                                    (let
+                                                                    (set_of_closures_var =
+                                                                    (after middle_end/flambda/inlining_transforms.ml(650):26567-26618
+                                                                    (apply
+                                                                    new_var
+                                                                    (field 27
+                                                                    (global Internal_variable_names!)))))
+                                                                    (before middle_end/flambda/inlining_transforms.ml(652):26634-27310
+                                                                    (let
+                                                                    (project =
+                                                                    (makeblock 0
+                                                                    set_of_closures_var
+                                                                    closure_id))
+                                                                    (before middle_end/flambda/inlining_transforms.ml(655):26749-27310
+                                                                    (let
+                                                                    (apply =
+                                                                    (makeblock 0
+                                                                    closure_var
+                                                                    args
+                                                                    (makeblock 0
+                                                                    closure_id)
+                                                                    dbg
+                                                                    inline_requested
+                                                                    2a))
+                                                                    (before middle_end/flambda/inlining_transforms.ml(659):26931-27310
+                                                                    (let
+                                                                    (body =
+                                                                    (after middle_end/flambda/inlining_transforms.ml(660):26950-27128
+                                                                    (apply
+                                                                    (field 11
+                                                                    (global Flambda!))
+                                                                    set_of_closures_var
+                                                                    (makeblock 5
+                                                                    set_of_closures)
+                                                                    (after middle_end/flambda/inlining_transforms.ml(662):27043-27128
+                                                                    (apply
+                                                                    (field 11
+                                                                    (global Flambda!))
+                                                                    closure_var
+                                                                    (makeblock 6
+                                                                    project)
+                                                                    (makeblock 4
+                                                                    apply))))))
+                                                                    (before middle_end/flambda/inlining_transforms.ml(665):27144-27310
+                                                                    (let
+                                                                    (expr =
+                                                                    (after middle_end/flambda/inlining_transforms.ml(665):27155-27208
+                                                                    (apply
+                                                                    (field 10
+                                                                    (global Flambda_utils!))
+                                                                    (field 4
+                                                                    state)
+                                                                    body)))
+                                                                    (before middle_end/flambda/inlining_transforms.ml(666):27218-27310
+                                                                    (let
+                                                                    (env =
+                                                                    (after middle_end/flambda/inlining_transforms.ml(666):27228-27274
+                                                                    (apply
+                                                                    (field 26
+                                                                    (field 0
+                                                                    (global Inline_and_simplify_aux!)))
+                                                                    (after middle_end/flambda/inlining_transforms.ml(666):27250-27274
+                                                                    (apply
+                                                                    (field 34
+                                                                    (field 0
+                                                                    (global Inline_and_simplify_aux!)))
+                                                                    env)))))
+                                                                    (before middle_end/flambda/inlining_transforms.ml(667):27284-27310
+                                                                    (makeblock 0
+                                                                    (after middle_end/flambda/inlining_transforms.ml(667):27289-27310
+                                                                    (apply
+                                                                    simplify
+                                                                    env r
+                                                                    expr)))))))))))))))))))))))))))))))))))))
+                                         (before middle_end/flambda/inlining_transforms.ml(612):25175-25179
+                                           0a)))))))))))))))))
+        (pseudo _none_(0)<ghost>:-1--1
+          (makeblock 0 inline_by_copying_function_body
+            inline_by_copying_function_declaration))))))

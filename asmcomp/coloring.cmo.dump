@@ -1,0 +1,901 @@
+(setglobal Coloring!
+  (let
+    (OrderedRegSet =
+       (module-defn(OrderedRegSet) asmcomp/coloring.ml(18):1144-1559
+         (apply
+           (let (let = (field 0 (global Stdlib__set!)))
+             (field 0 (global Stdlib__set!)))
+           (let
+             (compare =
+                (function r1 r2 : int
+                  (funct-body asmcomp/coloring.ml(21)<ghost>:1220-1552
+                    (before asmcomp/coloring.ml(22):1234-1552
+                      (let (c1 =[int] (field 9 r1) d1 =[int] (field 8 r1))
+                        (before asmcomp/coloring.ml(24):1307-1552
+                          (let
+                            (c2 =[int] (field 9 r2) d2 =[int] (field 8 r2))
+                            (before asmcomp/coloring.ml(25):1358-1552
+                              (let (n =[int] (- (* c2 d1) (* c1 d2)))
+                                (before asmcomp/coloring.ml(26):1393-1552
+                                  (if (!= n 0)
+                                    (before asmcomp/coloring.ml(26):1408-1409
+                                      n)
+                                    (before asmcomp/coloring.ml(27):1423-1552
+                                      (let (n =[int] (- c2 c1))
+                                        (before asmcomp/coloring.ml(28):1450-1552
+                                          (if (!= n 0)
+                                            (before asmcomp/coloring.ml(28):1465-1466
+                                              n)
+                                            (before asmcomp/coloring.ml(29):1482-1552
+                                              (let (n =[int] (- d1 d2))
+                                                (before asmcomp/coloring.ml(30):1511-1552
+                                                  (if (!= n 0)
+                                                    (before asmcomp/coloring.ml(30):1526-1527
+                                                      n)
+                                                    (before asmcomp/coloring.ml(30):1533-1552
+                                                      (- (field 1 r1)
+                                                        (field 1 r2))))))))))))))))))))))
+             (pseudo asmcomp/coloring.ml(19):1178-1558 (makeblock 0 compare)))))
+     allocate_registers =
+       (function param
+         (funct-body asmcomp/coloring.ml(35)<ghost>:1593-8705
+           (before asmcomp/coloring.ml(41):1834-8705
+             (let (constrained = (makemutable 0 (field 0 OrderedRegSet)))
+               (before asmcomp/coloring.ml(44):1953-8705
+                 (let (unconstrained = (makemutable 0 0a))
+                   (before asmcomp/coloring.ml(48):2113-8705
+                     (let
+                       (remove_reg =
+                          (function reg
+                            (funct-body asmcomp/coloring.ml(48)<ghost>:2128-2940
+                              (before asmcomp/coloring.ml(49):2138-2940
+                                (let
+                                  (cl =[int]
+                                     (after asmcomp/coloring.ml(49):2147-2170
+                                       (apply (field 2 (global Proc!)) reg)))
+                                  (before asmcomp/coloring.ml(50):2178-2940
+                                    (if (field 4 reg)
+                                      (before asmcomp/coloring.ml(50):2196-2756
+                                        (let
+                                          (nslots =[int]
+                                             (after asmcomp/coloring.ml(52):2272-2297
+                                               (array.get[int]
+                                                 (field 23 (global Proc!))
+                                                 cl)))
+                                          (before asmcomp/coloring.ml(53):2307-2748
+                                            (let
+                                              (conflict =
+                                                 (after asmcomp/coloring.ml(53):2322-2345
+                                                   (caml_make_vect nslots 0a)))
+                                              (before asmcomp/coloring.ml(54):2355-2748
+                                                (seq
+                                                  (after asmcomp/coloring.ml(54):2355-2549
+                                                    (apply
+                                                      (field 14
+                                                        (global Stdlib__list!))
+                                                      (function r
+                                                        (funct-body asmcomp/coloring.ml(55):2373-2530
+                                                          (before asmcomp/coloring.ml(56):2393-2529
+                                                            (let
+                                                              (*match* =
+                                                                 (field 3 r))
+                                                              (catch
+                                                                (switch* *match*
+                                                                 case int 0:
+                                                                  (exit 10)
+                                                                 case tag 0:
+                                                                  (exit 10)
+                                                                 case tag 1:
+                                                                  (let
+                                                                    (*match* =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (switch* *match*
+                                                                    case tag 0:
+                                                                    (let
+                                                                    (n =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/coloring.ml(58):2454-2509
+                                                                    (if
+                                                                    (==
+                                                                    (after asmcomp/coloring.ml(58):2457-2478
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Proc!))
+                                                                    r)) cl)
+                                                                    (before asmcomp/coloring.ml(58):2489-2509
+                                                                    (after asmcomp/coloring.ml(58):2489-2509
+                                                                    (array.set[int]
+                                                                    conflict
+                                                                    n 1a)))
+                                                                    0a)))
+                                                                    case tag 1:
+                                                                    (exit 10)
+                                                                    case tag 2:
+                                                                    (exit 10))))
+                                                               with (10)
+                                                                (before asmcomp/coloring.ml(59):2527-2529
+                                                                  0a))))))
+                                                      (field 6 reg)))
+                                                  (before asmcomp/coloring.ml(61):2557-2748
+                                                    (let
+                                                      (slot =
+                                                         (makemutable 0 (int)
+                                                           0))
+                                                      (before asmcomp/coloring.ml(62):2583-2748
+                                                        (seq
+                                                          (while
+                                                            (&&
+                                                              (<
+                                                                (field 0
+                                                                  slot)
+                                                                nslots)
+                                                              (after asmcomp/coloring.ml(62):2607-2623
+                                                                (array.get[int]
+                                                                  conflict
+                                                                  (field 0
+                                                                    slot))))
+                                                            (before asmcomp/coloring.ml(62):2627-2636
+                                                              (+:=1 slot)))
+                                                          (before asmcomp/coloring.ml(63):2649-2748
+                                                            (seq
+                                                              (setfield_ptr 3
+                                                                reg
+                                                                (makeblock 1
+                                                                  (makeblock 0 (int)
+                                                                    (field 0
+                                                                    slot))))
+                                                              (before asmcomp/coloring.ml(64):2686-2748
+                                                                (if
+                                                                  (>=
+                                                                    (field 0
+                                                                    slot)
+                                                                    nslots)
+                                                                  (before asmcomp/coloring.ml(64):2710-2748
+                                                                    (after asmcomp/coloring.ml(64):2710-2748
+                                                                    (array.set[int]
+                                                                    (field 23
+                                                                    (global Proc!))
+                                                                    cl
+                                                                    (+
+                                                                    (field 0
+                                                                    slot) 1))))
+                                                                  0a))))))))))))))
+                                      (before asmcomp/coloring.ml(65):2762-2940
+                                        (if
+                                          (< (field 8 reg)
+                                            (after asmcomp/coloring.ml(65):2778-2811
+                                              (array.get[int]
+                                                (field 3 (global Proc!)) cl)))
+                                          (before asmcomp/coloring.ml(66):2823-2861
+                                            (setfield_ptr 0 unconstrained
+                                              (makeblock 0 reg
+                                                (field 0 unconstrained))))
+                                          (before asmcomp/coloring.ml(67):2871-2940
+                                            (setfield_ptr 0 constrained
+                                              (after asmcomp/coloring.ml(68):2898-2932
+                                                (apply
+                                                  (field 3 OrderedRegSet) reg
+                                                  (field 0 constrained))))))))))))))
+                       (before asmcomp/coloring.ml(72):3027-8705
+                         (let
+                           (iter_preferred =
+                              (function f reg
+                                (funct-body asmcomp/coloring.ml(72)<ghost>:3046-3448
+                                  (before asmcomp/coloring.ml(73):3058-3448
+                                    (letrec
+                                      (walk
+                                         (function r w[int]
+                                           (funct-body asmcomp/coloring.ml(73)<ghost>:3071-3344
+                                             (before asmcomp/coloring.ml(74):3083-3344
+                                               (if (not (field 10 r))
+                                                 (before asmcomp/coloring.ml(74):3105-3344
+                                                   (seq
+                                                     (after asmcomp/coloring.ml(75):3119-3124
+                                                       (apply f r w))
+                                                     (before asmcomp/coloring.ml(76):3134-3334
+                                                       (let (p = (field 7 r))
+                                                         (if p
+                                                           (before asmcomp/coloring.ml(78):3199-3322
+                                                             (seq
+                                                               (setfield_imm 10
+                                                                 r 1a)
+                                                               (before asmcomp/coloring.ml(79):3236-3322
+                                                                 (seq
+                                                                   (after asmcomp/coloring.ml(79):3236-3284
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    param
+                                                                    (funct-body asmcomp/coloring.ml(79):3246-3282
+                                                                    (let
+                                                                    (w1 =a
+                                                                    (field 1
+                                                                    param)
+                                                                    r1 =a
+                                                                    (field 0
+                                                                    param))
+                                                                    (before asmcomp/coloring.ml(79):3263-3281
+                                                                    (after asmcomp/coloring.ml(79):3263-3281
+                                                                    (apply
+                                                                    walk r1
+                                                                    (after asmcomp/coloring.ml(79):3271-3281
+                                                                    (apply
+                                                                    (field 15
+                                                                    (global Stdlib!))
+                                                                    w w1))))))))
+                                                                    p))
+                                                                   (before asmcomp/coloring.ml(80):3304-3322
+                                                                    (setfield_imm 10
+                                                                    r 0a))))))
+                                                           (before asmcomp/coloring.ml(77):3178-3180
+                                                             0a))))))
+                                                 0a)))))
+                                      (before asmcomp/coloring.ml(83):3352-3448
+                                        (seq (setfield_imm 10 reg 1a)
+                                          (before asmcomp/coloring.ml(84):3377-3448
+                                            (seq
+                                              (after asmcomp/coloring.ml(84):3377-3422
+                                                (apply
+                                                  (field 14
+                                                    (global Stdlib__list!))
+                                                  (function param
+                                                    (funct-body asmcomp/coloring.ml(84):3387-3411
+                                                      (let
+                                                        (w =a (field 1 param)
+                                                         r =a (field 0 param))
+                                                        (before asmcomp/coloring.ml(84):3402-3410
+                                                          (after asmcomp/coloring.ml(84):3402-3410
+                                                            (apply walk r w))))))
+                                                  (field 7 reg)))
+                                              (before asmcomp/coloring.ml(85):3428-3448
+                                                (setfield_imm 10 reg 0a)))))))))))
+                           (before asmcomp/coloring.ml(90):3658-8705
+                             (let
+                               (start_register =
+                                  (after asmcomp/coloring.ml(90):3679-3717
+                                    (caml_make_vect (field 1 (global Proc!))
+                                      0)))
+                               (before asmcomp/coloring.ml(93):3782-8705
+                                 (let
+                                   (assign_location =
+                                      (function reg
+                                        (funct-body asmcomp/coloring.ml(93)<ghost>:3802-8249
+                                          (before asmcomp/coloring.ml(94):3812-8249
+                                            (let
+                                              (cl =[int]
+                                                 (after asmcomp/coloring.ml(94):3821-3844
+                                                   (apply
+                                                     (field 2 (global Proc!))
+                                                     reg)))
+                                              (before asmcomp/coloring.ml(95):3852-8249
+                                                (let
+                                                  (first_reg =[int]
+                                                     (after asmcomp/coloring.ml(95):3868-3902
+                                                       (array.get[int]
+                                                         (field 4
+                                                           (global Proc!))
+                                                         cl)))
+                                                  (before asmcomp/coloring.ml(96):3910-8249
+                                                    (let
+                                                      (num_regs =[int]
+                                                         (after asmcomp/coloring.ml(96):3925-3958
+                                                           (array.get[int]
+                                                             (field 3
+                                                               (global Proc!))
+                                                             cl)))
+                                                      (before asmcomp/coloring.ml(97):3966-8249
+                                                        (let
+                                                          (score =
+                                                             (after asmcomp/coloring.ml(97):3978-3999
+                                                               (caml_make_vect
+                                                                 num_regs 0)))
+                                                          (before asmcomp/coloring.ml(98):4007-8249
+                                                            (let
+                                                              (best_score =
+                                                                 (makemutable 0 (int)
+                                                                   -1000000)
+                                                               best_reg =
+                                                                 (makemutable 0 (int)
+                                                                   -1))
+                                                              (before asmcomp/coloring.ml(99):4070-8249
+                                                                (let
+                                                                  (start =[int]
+                                                                    (after asmcomp/coloring.ml(99):4082-4101
+                                                                    (array.get[int]
+                                                                    start_register
+                                                                    cl)))
+                                                                  (before asmcomp/coloring.ml(100):4109-8249
+                                                                    (seq
+                                                                    (if
+                                                                    (!=
+                                                                    num_regs
+                                                                    0)
+                                                                    (before asmcomp/coloring.ml(100):4131-6252
+                                                                    (seq
+                                                                    (after asmcomp/coloring.ml(104):4361-4933
+                                                                    (apply
+                                                                    iter_preferred
+                                                                    (function
+                                                                    r w[int]
+                                                                    (funct-body asmcomp/coloring.ml(105):4384-4921
+                                                                    (before asmcomp/coloring.ml(106):4406-4920
+                                                                    (let
+                                                                    (*match* =
+                                                                    (field 3
+                                                                    r))
+                                                                    (switch* *match*
+                                                                    case int 0:
+                                                                    (before asmcomp/coloring.ml(111):4598-4900
+                                                                    (after asmcomp/coloring.ml(111):4598-4900
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    neighbour
+                                                                    (funct-body asmcomp/coloring.ml(112):4624-4875
+                                                                    (before asmcomp/coloring.ml(113):4660-4874
+                                                                    (let
+                                                                    (*match* =
+                                                                    (field 3
+                                                                    neighbour))
+                                                                    (catch
+                                                                    (switch* *match*
+                                                                    case int 0:
+                                                                    (exit 7)
+                                                                    case tag 0:
+                                                                    (let
+                                                                    (n =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/coloring.ml(114):4714-4846
+                                                                    (let
+                                                                    (n =[int]
+                                                                    (- n
+                                                                    first_reg))
+                                                                    (before asmcomp/coloring.ml(115):4768-4846
+                                                                    (if
+                                                                    (< n
+                                                                    num_regs)
+                                                                    (before asmcomp/coloring.ml(116):4820-4846
+                                                                    (after asmcomp/coloring.ml(116):4820-4846
+                                                                    (array.set[int]
+                                                                    score n
+                                                                    (-
+                                                                    (after asmcomp/coloring.ml(116):4833-4842
+                                                                    (array.get[int]
+                                                                    score n))
+                                                                    w)))) 0a)))))
+                                                                    case tag 1:
+                                                                    (exit 7))
+                                                                    with (7)
+                                                                    (before asmcomp/coloring.ml(117):4872-4874
+                                                                    0a))))))
+                                                                    (field 6
+                                                                    r))))
+                                                                    case tag 0:
+                                                                    (let
+                                                                    (n =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/coloring.ml(107):4444-4560
+                                                                    (let
+                                                                    (n =[int]
+                                                                    (- n
+                                                                    first_reg))
+                                                                    (before asmcomp/coloring.ml(108):4490-4560
+                                                                    (if
+                                                                    (< n
+                                                                    num_regs)
+                                                                    (before asmcomp/coloring.ml(109):4534-4560
+                                                                    (after asmcomp/coloring.ml(109):4534-4560
+                                                                    (array.set[int]
+                                                                    score n
+                                                                    (+
+                                                                    (after asmcomp/coloring.ml(109):4547-4556
+                                                                    (array.get[int]
+                                                                    score n))
+                                                                    w)))) 0a)))))
+                                                                    case tag 1:
+                                                                    (before asmcomp/coloring.ml(119):4918-4920
+                                                                    0a))))))
+                                                                    reg))
+                                                                    (before asmcomp/coloring.ml(121):4941-6244
+                                                                    (seq
+                                                                    (after asmcomp/coloring.ml(121):4941-5865
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    neighbour
+                                                                    (funct-body asmcomp/coloring.ml(122):4959-5846
+                                                                    (before asmcomp/coloring.ml(125):5081-5845
+                                                                    (seq
+                                                                    (let
+                                                                    (*match* =
+                                                                    (field 3
+                                                                    neighbour))
+                                                                    (catch
+                                                                    (switch* *match*
+                                                                    case int 0:
+                                                                    (exit 6)
+                                                                    case tag 0:
+                                                                    (let
+                                                                    (n =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/coloring.ml(126):5133-5246
+                                                                    (let
+                                                                    (n =[int]
+                                                                    (- n
+                                                                    first_reg))
+                                                                    (before asmcomp/coloring.ml(127):5179-5246
+                                                                    (if
+                                                                    (< n
+                                                                    num_regs)
+                                                                    (before asmcomp/coloring.ml(128):5223-5246
+                                                                    (after asmcomp/coloring.ml(128):5223-5246
+                                                                    (array.set[int]
+                                                                    score n
+                                                                    -1000000)))
+                                                                    0a)))))
+                                                                    case tag 1:
+                                                                    (exit 6))
+                                                                    with (6)
+                                                                    (before asmcomp/coloring.ml(129):5264-5266
+                                                                    0a)))
+                                                                    (before asmcomp/coloring.ml(133):5422-5845
+                                                                    (after asmcomp/coloring.ml(133):5422-5845
+                                                                    (apply
+                                                                    iter_preferred
+                                                                    (function
+                                                                    r w[int]
+                                                                    (funct-body asmcomp/coloring.ml(134):5449-5823
+                                                                    (before asmcomp/coloring.ml(135):5475-5822
+                                                                    (let
+                                                                    (*match* =
+                                                                    (field 3
+                                                                    r))
+                                                                    (catch
+                                                                    (switch* *match*
+                                                                    case int 0:
+                                                                    (exit 5)
+                                                                    case tag 0:
+                                                                    (let
+                                                                    (n =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/coloring.ml(136):5517-5645
+                                                                    (let
+                                                                    (n =[int]
+                                                                    (- n
+                                                                    first_reg))
+                                                                    (before asmcomp/coloring.ml(137):5567-5645
+                                                                    (if
+                                                                    (< n
+                                                                    num_regs)
+                                                                    (before asmcomp/coloring.ml(138):5615-5645
+                                                                    (after asmcomp/coloring.ml(138):5615-5645
+                                                                    (array.set[int]
+                                                                    score n
+                                                                    (-
+                                                                    (after asmcomp/coloring.ml(138):5628-5637
+                                                                    (array.get[int]
+                                                                    score n))
+                                                                    (- w 1)))))
+                                                                    0a)))))
+                                                                    case tag 1:
+                                                                    (exit 5))
+                                                                    with (5)
+                                                                    (before asmcomp/coloring.ml(141):5820-5822
+                                                                    0a))))))
+                                                                    neighbour)))))))
+                                                                    (field 6
+                                                                    reg)))
+                                                                    (before asmcomp/coloring.ml(145):5923-6244
+                                                                    (seq
+                                                                    (for n
+                                                                    start to
+                                                                    (-
+                                                                    num_regs
+                                                                    1)
+                                                                    (before asmcomp/coloring.ml(146):5964-6072
+                                                                    (if
+                                                                    (>
+                                                                    (after asmcomp/coloring.ml(146):5967-5976
+                                                                    (array.get[int]
+                                                                    score n))
+                                                                    (field 0
+                                                                    best_score))
+                                                                    (before asmcomp/coloring.ml(146):5996-6072
+                                                                    (seq
+                                                                    (setfield_imm 0
+                                                                    best_score
+                                                                    (after asmcomp/coloring.ml(147):6026-6035
+                                                                    (array.get[int]
+                                                                    score n)))
+                                                                    (before asmcomp/coloring.ml(148):6047-6060
+                                                                    (setfield_imm 0
+                                                                    best_reg
+                                                                    n)))) 0a)))
+                                                                    (before asmcomp/coloring.ml(151):6091-6244
+                                                                    (for n 0
+                                                                    to
+                                                                    (- start
+                                                                    1)
+                                                                    (before asmcomp/coloring.ml(152):6125-6233
+                                                                    (if
+                                                                    (>
+                                                                    (after asmcomp/coloring.ml(152):6128-6137
+                                                                    (array.get[int]
+                                                                    score n))
+                                                                    (field 0
+                                                                    best_score))
+                                                                    (before asmcomp/coloring.ml(152):6157-6233
+                                                                    (seq
+                                                                    (setfield_imm 0
+                                                                    best_score
+                                                                    (after asmcomp/coloring.ml(153):6187-6196
+                                                                    (array.get[int]
+                                                                    score n)))
+                                                                    (before asmcomp/coloring.ml(154):6208-6221
+                                                                    (setfield_imm 0
+                                                                    best_reg
+                                                                    n)))) 0a))))))))))
+                                                                    0a)
+                                                                    (before asmcomp/coloring.ml(159):6286-8249
+                                                                    (seq
+                                                                    (if
+                                                                    (>=
+                                                                    (field 0
+                                                                    best_reg)
+                                                                    0)
+                                                                    (before asmcomp/coloring.ml(159):6309-6532
+                                                                    (seq
+                                                                    (setfield_ptr 3
+                                                                    reg
+                                                                    (makeblock 0 (int)
+                                                                    (+
+                                                                    first_reg
+                                                                    (field 0
+                                                                    best_reg))))
+                                                                    (before asmcomp/coloring.ml(161):6366-6524
+                                                                    (if
+                                                                    (field 7
+                                                                    (global Proc!))
+                                                                    (before asmcomp/coloring.ml(162):6404-6524
+                                                                    (after asmcomp/coloring.ml(162):6404-6524
+                                                                    (array.set[int]
+                                                                    start_register
+                                                                    cl
+                                                                    (let
+                                                                    (start =[int]
+                                                                    (+ start
+                                                                    1))
+                                                                    (before asmcomp/coloring.ml(163):6485-6523
+                                                                    (if
+                                                                    (>= start
+                                                                    num_regs)
+                                                                    (before asmcomp/coloring.ml(163):6511-6512
+                                                                    0)
+                                                                    (before asmcomp/coloring.ml(163):6518-6523
+                                                                    start)))))))
+                                                                    0a))))
+                                                                    (before asmcomp/coloring.ml(164):6538-8078
+                                                                    (let
+                                                                    (nslots =[int]
+                                                                    (after asmcomp/coloring.ml(166):6628-6653
+                                                                    (array.get[int]
+                                                                    (field 23
+                                                                    (global Proc!))
+                                                                    cl)))
+                                                                    (before asmcomp/coloring.ml(167):6663-8070
+                                                                    (let
+                                                                    (score =
+                                                                    (after asmcomp/coloring.ml(167):6675-6694
+                                                                    (caml_make_vect
+                                                                    nslots 0)))
+                                                                    (before asmcomp/coloring.ml(169):6752-8070
+                                                                    (seq
+                                                                    (after asmcomp/coloring.ml(169):6752-7151
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    param
+                                                                    (funct-body asmcomp/coloring.ml(170):6770-7132
+                                                                    (let
+                                                                    (w =a
+                                                                    (field 1
+                                                                    param)
+                                                                    r =a
+                                                                    (field 0
+                                                                    param))
+                                                                    (before asmcomp/coloring.ml(171):6795-7131
+                                                                    (let
+                                                                    (*match* =
+                                                                    (field 3
+                                                                    r))
+                                                                    (catch
+                                                                    (switch* *match*
+                                                                    case int 0:
+                                                                    (before asmcomp/coloring.ml(174):6906-7111
+                                                                    (after asmcomp/coloring.ml(174):6906-7111
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    neighbour
+                                                                    (funct-body asmcomp/coloring.ml(175):6932-7086
+                                                                    (before asmcomp/coloring.ml(176):6968-7085
+                                                                    (let
+                                                                    (*match* =
+                                                                    (field 3
+                                                                    neighbour))
+                                                                    (catch
+                                                                    (switch* *match*
+                                                                    case int 0:
+                                                                    (exit 3)
+                                                                    case tag 0:
+                                                                    (exit 3)
+                                                                    case tag 1:
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (switch* *match*
+                                                                    case tag 0:
+                                                                    (let
+                                                                    (n =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/coloring.ml(177):7031-7057
+                                                                    (after asmcomp/coloring.ml(177):7031-7057
+                                                                    (array.set[int]
+                                                                    score n
+                                                                    (-
+                                                                    (after asmcomp/coloring.ml(177):7044-7053
+                                                                    (array.get[int]
+                                                                    score n))
+                                                                    w)))))
+                                                                    case tag 1:
+                                                                    (exit 3)
+                                                                    case tag 2:
+                                                                    (exit 3))))
+                                                                    with (3)
+                                                                    (before asmcomp/coloring.ml(178):7083-7085
+                                                                    0a))))))
+                                                                    (field 6
+                                                                    r))))
+                                                                    case tag 0:
+                                                                    (exit 4)
+                                                                    case tag 1:
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (switch* *match*
+                                                                    case tag 0:
+                                                                    (let
+                                                                    (n =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/coloring.ml(172):6842-6868
+                                                                    (after asmcomp/coloring.ml(172):6842-6868
+                                                                    (array.set[int]
+                                                                    score n
+                                                                    (+
+                                                                    (after asmcomp/coloring.ml(172):6855-6864
+                                                                    (array.get[int]
+                                                                    score n))
+                                                                    w)))))
+                                                                    case tag 1:
+                                                                    (exit 4)
+                                                                    case tag 2:
+                                                                    (exit 4))))
+                                                                    with (4)
+                                                                    (before asmcomp/coloring.ml(180):7129-7131
+                                                                    0a)))))))
+                                                                    (field 7
+                                                                    reg)))
+                                                                    (before asmcomp/coloring.ml(182):7159-8070
+                                                                    (seq
+                                                                    (after asmcomp/coloring.ml(182):7159-7539
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    neighbour
+                                                                    (funct-body asmcomp/coloring.ml(183):7177-7520
+                                                                    (before asmcomp/coloring.ml(184):7205-7519
+                                                                    (seq
+                                                                    (let
+                                                                    (*match* =
+                                                                    (field 3
+                                                                    neighbour))
+                                                                    (catch
+                                                                    (switch* *match*
+                                                                    case int 0:
+                                                                    (exit 2)
+                                                                    case tag 0:
+                                                                    (exit 2)
+                                                                    case tag 1:
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (switch* *match*
+                                                                    case tag 0:
+                                                                    (let
+                                                                    (n =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/coloring.ml(185):7268-7291
+                                                                    (after asmcomp/coloring.ml(185):7268-7291
+                                                                    (array.set[int]
+                                                                    score n
+                                                                    -1000000))))
+                                                                    case tag 1:
+                                                                    (exit 2)
+                                                                    case tag 2:
+                                                                    (exit 2))))
+                                                                    with (2)
+                                                                    (before asmcomp/coloring.ml(186):7309-7311
+                                                                    0a)))
+                                                                    (before asmcomp/coloring.ml(188):7337-7519
+                                                                    (after asmcomp/coloring.ml(188):7337-7519
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    param
+                                                                    (funct-body asmcomp/coloring.ml(189):7359-7490
+                                                                    (let
+                                                                    (w =a
+                                                                    (field 1
+                                                                    param)
+                                                                    r =a
+                                                                    (field 0
+                                                                    param))
+                                                                    (before asmcomp/coloring.ml(190):7388-7489
+                                                                    (let
+                                                                    (*match* =
+                                                                    (field 3
+                                                                    r))
+                                                                    (catch
+                                                                    (switch* *match*
+                                                                    case int 0:
+                                                                    (exit 1)
+                                                                    case tag 0:
+                                                                    (exit 1)
+                                                                    case tag 1:
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (switch* *match*
+                                                                    case tag 0:
+                                                                    (let
+                                                                    (n =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/coloring.ml(191):7439-7465
+                                                                    (after asmcomp/coloring.ml(191):7439-7465
+                                                                    (array.set[int]
+                                                                    score n
+                                                                    (-
+                                                                    (after asmcomp/coloring.ml(191):7452-7461
+                                                                    (array.get[int]
+                                                                    score n))
+                                                                    w)))))
+                                                                    case tag 1:
+                                                                    (exit 1)
+                                                                    case tag 2:
+                                                                    (exit 1))))
+                                                                    with (1)
+                                                                    (before asmcomp/coloring.ml(192):7487-7489
+                                                                    0a)))))))
+                                                                    (field 7
+                                                                    neighbour))))))))
+                                                                    (field 6
+                                                                    reg)))
+                                                                    (before asmcomp/coloring.ml(196):7597-8070
+                                                                    (let
+                                                                    (best_score =
+                                                                    (makemutable 0 (int)
+                                                                    -1000000)
+                                                                    best_slot =
+                                                                    (makemutable 0 (int)
+                                                                    -1))
+                                                                    (before asmcomp/coloring.ml(197):7663-8070
+                                                                    (seq
+                                                                    (for n 0
+                                                                    to
+                                                                    (- nslots
+                                                                    1)
+                                                                    (before asmcomp/coloring.ml(198):7698-7807
+                                                                    (if
+                                                                    (>
+                                                                    (after asmcomp/coloring.ml(198):7701-7710
+                                                                    (array.get[int]
+                                                                    score n))
+                                                                    (field 0
+                                                                    best_score))
+                                                                    (before asmcomp/coloring.ml(198):7730-7807
+                                                                    (seq
+                                                                    (setfield_imm 0
+                                                                    best_score
+                                                                    (after asmcomp/coloring.ml(199):7760-7769
+                                                                    (array.get[int]
+                                                                    score n)))
+                                                                    (before asmcomp/coloring.ml(200):7781-7795
+                                                                    (setfield_imm 0
+                                                                    best_slot
+                                                                    n)))) 0a)))
+                                                                    (before asmcomp/coloring.ml(204):7849-8070
+                                                                    (if
+                                                                    (>=
+                                                                    (field 0
+                                                                    best_slot)
+                                                                    0)
+                                                                    (before asmcomp/coloring.ml(205):7881-7915
+                                                                    (setfield_ptr 3
+                                                                    reg
+                                                                    (makeblock 1
+                                                                    (makeblock 0 (int)
+                                                                    (field 0
+                                                                    best_slot)))))
+                                                                    (before asmcomp/coloring.ml(206):7927-8070
+                                                                    (seq
+                                                                    (setfield_ptr 3
+                                                                    reg
+                                                                    (makeblock 1
+                                                                    (makeblock 0 (int)
+                                                                    nslots)))
+                                                                    (before asmcomp/coloring.ml(209):8021-8060
+                                                                    (after asmcomp/coloring.ml(209):8021-8060
+                                                                    (array.set[int]
+                                                                    (field 23
+                                                                    (global Proc!))
+                                                                    cl
+                                                                    (+ nslots
+                                                                    1)))))))))))))))))))))
+                                                                    (before asmcomp/coloring.ml(214):8233-8249
+                                                                    (setfield_ptr 7
+                                                                    reg 0a)))))))))))))))))))))
+                                   (before asmcomp/coloring.ml(217):8292-8705
+                                     (seq
+                                       (for i 0 to
+                                         (- (field 1 (global Proc!)) 1)
+                                         (before asmcomp/coloring.ml(218):8342-8371
+                                           (after asmcomp/coloring.ml(218):8342-8371
+                                             (array.set[int]
+                                               (field 23 (global Proc!)) i 0))))
+                                       (before asmcomp/coloring.ml(224):8568-8705
+                                         (seq
+                                           (after asmcomp/coloring.ml(224):8568-8610
+                                             (apply
+                                               (field 14
+                                                 (global Stdlib__list!))
+                                               remove_reg
+                                               (after asmcomp/coloring.ml(224):8589-8610
+                                                 (apply
+                                                   (field 17 (global Reg!))
+                                                   0a))))
+                                           (before asmcomp/coloring.ml(225):8614-8705
+                                             (seq
+                                               (after asmcomp/coloring.ml(225):8614-8661
+                                                 (apply
+                                                   (field 13 OrderedRegSet)
+                                                   assign_location
+                                                   (field 0 constrained)))
+                                               (before asmcomp/coloring.ml(226):8665-8705
+                                                 (after asmcomp/coloring.ml(226):8665-8705
+                                                   (apply
+                                                     (field 14
+                                                       (global Stdlib__list!))
+                                                     assign_location
+                                                     (field 0 unconstrained)))))))))))))))))))))))))
+    (pseudo _none_(0)<ghost>:-1--1 (makeblock 0 allocate_registers))))

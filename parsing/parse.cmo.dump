@@ -1,0 +1,399 @@
+(setglobal Parse!
+  (let
+    (last_token = (makemutable 0 75a)
+     token =
+       (function lexbuf
+         (funct-body parsing/parse.ml(22)<ghost>:1200-1275
+           (before parsing/parse.ml(23):1211-1275
+             (let
+               (token =
+                  (after parsing/parse.ml(23):1223-1241
+                    (apply (field 1 (global Lexer!)) lexbuf)))
+               (before parsing/parse.ml(24):1247-1275
+                 (seq (setfield_ptr 0 last_token token)
+                   (before parsing/parse.ml(25):1270-1275 token))))))))
+    (letrec
+      (skip_phrase
+         (function lexbuf
+           (funct-body parsing/parse.ml(27)<ghost>:1297-1737
+             (before parsing/parse.ml(28):1308-1737
+               (catch
+                 (try
+                   (exit 3
+                     (after parsing/parse.ml(28):1314-1326
+                       (apply token lexbuf)))
+                  with exn
+                   (catch
+                     (catch
+                       (let (tag =a (field 0 exn))
+                         (if (== tag (field 3 (global Lexer!)))
+                           (let (*match* =a (field 1 exn))
+                             (switch *match*
+                              case tag 1: (exit 4)
+                              case tag 5: (exit 4)
+                              case tag 6: (exit 4)
+                              case tag 7: (exit 4)
+                              default: (exit 5)))
+                           (exit 4)))
+                      with (5)
+                       (before parsing/parse.ml(36):1719-1737
+                         (after parsing/parse.ml(36):1719-1737
+                           (apply skip_phrase lexbuf))))
+                    with (4) (reraise exn)))
+                with (3 val)
+                 (catch
+                   (catch
+                     (if (isint val)
+                       (if (!= val 15) (if (!= val 75) (exit 2) (exit 1))
+                         (exit 1))
+                       (exit 2))
+                    with (2)
+                     (before parsing/parse.ml(30):1380-1398
+                       (after parsing/parse.ml(30):1380-1398
+                         (apply skip_phrase lexbuf))))
+                  with (1) (before parsing/parse.ml(29):1368-1370 0a)))))))
+      (let
+        (maybe_skip_phrase =
+           (function lexbuf
+             (funct-body parsing/parse.ml(38)<ghost>:1761-1861
+               (before parsing/parse.ml(39):1772-1861
+                 (let (*match* = (field 0 last_token))
+                   (catch
+                     (catch
+                       (if (isint *match*)
+                         (if (!= *match* 15)
+                           (if (!= *match* 75) (exit 7) (exit 6)) (exit 6))
+                         (exit 7))
+                      with (7)
+                       (before parsing/parse.ml(41):1843-1861
+                         (after parsing/parse.ml(41):1843-1861
+                           (apply skip_phrase lexbuf))))
+                    with (6) (before parsing/parse.ml(40):1831-1833 0a))))))
+         wrap =
+           (function parsing_fun lexbuf
+             (funct-body parsing/parse.ml(43)<ghost>:1872-2586
+               (before parsing/parse.ml(44):1895-2586
+                 (try
+                   (seq
+                     (after parsing/parse.ml(45):1903-1921
+                       (apply (field 0 (global Docstrings!)) 0a))
+                     (before parsing/parse.ml(46):1927-2082
+                       (seq
+                         (after parsing/parse.ml(46):1927-1940
+                           (apply (field 0 (global Lexer!)) 0a))
+                         (before parsing/parse.ml(47):1946-2082
+                           (let
+                             (ast =
+                                (after parsing/parse.ml(47):1956-1974
+                                  (apply parsing_fun lexbuf)))
+                             (before parsing/parse.ml(48):1982-2082
+                               (seq
+                                 (after parsing/parse.ml(48):1982-2004
+                                   (apply (field 8 (global Stdlib__parsing!))
+                                     0a))
+                                 (before parsing/parse.ml(49):2010-2082
+                                   (seq
+                                     (after parsing/parse.ml(49):2010-2043
+                                       (apply (field 1 (global Docstrings!))
+                                         0a))
+                                     (before parsing/parse.ml(50):2049-2082
+                                       (seq (setfield_ptr 0 last_token 75a)
+                                         (before parsing/parse.ml(51):2079-2082
+                                           ast))))))))))))
+                  with err
+                   (catch
+                     (catch
+                       (let (tag =a (field 0 err))
+                         (if (== tag (field 3 (global Lexer!)))
+                           (let (*match* =a (field 1 err))
+                             (switch *match*
+                              case tag 0:
+                               (before parsing/parse.ml(54):2152-2189
+                                 (if
+                                   (after parsing/parse.ml(54):2152-2189
+                                     (caml_string_equal
+                                       (field 0
+                                         (field 11 (global Location!)))
+                                       "//toplevel//"))
+                                   (before parsing/parse.ml(55):2198-2233
+                                     (seq
+                                       (after parsing/parse.ml(55):2198-2216
+                                         (apply skip_phrase lexbuf))
+                                       (before parsing/parse.ml(56):2224-2233
+                                         (reraise
+                                           (after parsing/parse.ml(56):2230-2233
+                                             err)))))
+                                   (exit 8)))
+                              default: (exit 8)))
+                           (let (tag =a (field 0 err))
+                             (if (== tag (field 0 (global Syntaxerr!)))
+                               (let (err =a err)
+                                 (before parsing/parse.ml(58):2272-2309
+                                   (if
+                                     (after parsing/parse.ml(58):2272-2309
+                                       (caml_string_equal
+                                         (field 0
+                                           (field 11 (global Location!)))
+                                         "//toplevel//"))
+                                     (before parsing/parse.ml(59):2319-2360
+                                       (seq
+                                         (after parsing/parse.ml(59):2319-2343
+                                           (apply maybe_skip_phrase lexbuf))
+                                         (before parsing/parse.ml(60):2351-2360
+                                           (reraise
+                                             (after parsing/parse.ml(60):2357-2360
+                                               err)))))
+                                     (exit 8))))
+                               (if
+                                 (== err (field 9 (global Stdlib__parsing!)))
+                                 (exit 9)
+                                 (if (== err (field 1 (global Syntaxerr!)))
+                                   (exit 9) (exit 8)))))))
+                      with (9)
+                       (before parsing/parse.ml(62):2419-2586
+                         (let
+                           (loc =
+                              (after parsing/parse.ml(62):2429-2449
+                                (apply (field 3 (global Location!)) lexbuf)))
+                           (before parsing/parse.ml(63):2459-2586
+                             (seq
+                               (if
+                                 (after parsing/parse.ml(63):2462-2499
+                                   (caml_string_equal
+                                     (field 0 (field 11 (global Location!)))
+                                     "//toplevel//"))
+                                 (before parsing/parse.ml(64):2511-2535
+                                   (after parsing/parse.ml(64):2511-2535
+                                     (apply maybe_skip_phrase lexbuf)))
+                                 0a)
+                               (before parsing/parse.ml(65):2543-2586
+                                 (raise
+                                   (after parsing/parse.ml(65):2548-2586
+                                     (makeblock 0
+                                       (field 0 (global Syntaxerr!))
+                                       (makeblock 5 loc))))))))))
+                    with (8) (reraise err)))))))
+        (letrec
+          (loop
+             (function lexbuf in_error checkpoint
+               (funct-body parsing/parse.ml(67)<ghost>:2601-4804
+                 (before parsing/parse.ml(68):2632-4804
+                   (catch
+                     (switch* checkpoint
+                      case int 0:
+                       (before parsing/parse.ml(108):4716-4734
+                         (raise
+                           (after parsing/parse.ml(108):4722-4734
+                             (field 0 (global Parser!)))))
+                      case tag 0:
+                       (before parsing/parse.ml(71):2731-4586
+                         (let
+                           (triple =
+                              (if in_error
+                                (before parsing/parse.ml(98):4301-4365
+                                  (makeblock 0 75a (field 11 lexbuf)
+                                    (field 11 lexbuf)))
+                                (before parsing/parse.ml(100):4389-4487
+                                  (let
+                                    (token =
+                                       (after parsing/parse.ml(100):4401-4413
+                                         (apply token lexbuf)))
+                                    (before parsing/parse.ml(101):4427-4487
+                                      (makeblock 0 token (field 10 lexbuf)
+                                        (field 11 lexbuf)))))))
+                           (before parsing/parse.ml(103):4503-4586
+                             (let
+                               (checkpoint =
+                                  (after parsing/parse.ml(103):4520-4545
+                                    (apply
+                                      (field 0 (field 8 (global Parser!)))
+                                      checkpoint triple)))
+                               (before parsing/parse.ml(104):4555-4586
+                                 (after parsing/parse.ml(104):4555-4586
+                                   (apply loop lexbuf in_error checkpoint)))))))
+                      case tag 1: (exit 13)
+                      case tag 2: (exit 13)
+                      case tag 3:
+                       (before parsing/parse.ml(110):4766-4804
+                         (after parsing/parse.ml(110):4766-4804
+                           (apply loop lexbuf 1a
+                             (after parsing/parse.ml(110):4783-4804
+                               (apply (field 1 (field 8 (global Parser!)))
+                                 checkpoint)))))
+                      case tag 4:
+                       (let (v =a (field 0 checkpoint))
+                         (before parsing/parse.ml(107):4696-4697 v)))
+                    with (13)
+                     (before parsing/parse.ml(106):4633-4675
+                       (after parsing/parse.ml(106):4633-4675
+                         (apply loop lexbuf in_error
+                           (after parsing/parse.ml(106):4654-4675
+                             (apply (field 1 (field 8 (global Parser!)))
+                               checkpoint))))))))))
+          (let
+            (wrap_menhir =
+               (function entry lexbuf
+                 (funct-body parsing/parse.ml(112)<ghost>:4822-4942
+                   (before parsing/parse.ml(113):4839-4942
+                     (let
+                       (initial =
+                          (after parsing/parse.ml(113):4853-4883
+                            (apply entry (field 11 lexbuf))))
+                       (before parsing/parse.ml(114):4889-4942
+                         (after parsing/parse.ml(114):4889-4942
+                           (apply wrap
+                             (function lexbuf
+                               (funct-body parsing/parse.ml(114):4894-4935
+                                 (before parsing/parse.ml(114):4909-4934
+                                   (after parsing/parse.ml(114):4909-4934
+                                     (apply loop lexbuf 0a initial)))))
+                             lexbuf)))))))
+             implementation =
+               (after parsing/parse.ml(116):4965-5010
+                 (apply wrap_menhir (field 6 (field 9 (global Parser!)))))
+             interface =
+               (after parsing/parse.ml(117):5027-5067
+                 (apply wrap_menhir (field 5 (field 9 (global Parser!)))))
+             toplevel_phrase =
+               (after parsing/parse.ml(118):5090-5136
+                 (apply wrap_menhir (field 1 (field 9 (global Parser!)))))
+             use_file =
+               (after parsing/parse.ml(119):5152-5191
+                 (apply wrap_menhir (field 0 (field 9 (global Parser!)))))
+             core_type =
+               (after parsing/parse.ml(120):5208-5254
+                 (apply wrap_menhir (field 4 (field 9 (global Parser!)))))
+             expression =
+               (after parsing/parse.ml(121):5272-5319
+                 (apply wrap_menhir (field 3 (field 9 (global Parser!)))))
+             pattern =
+               (after parsing/parse.ml(122):5334-5378
+                 (apply wrap_menhir (field 2 (field 9 (global Parser!)))))
+             prepare_error =
+               (function err
+                 (funct-body parsing/parse.ml(129)<ghost>:5510-6648
+                   (before parsing/parse.ml(130):5518-6648
+                     (switch* err
+                      case tag 0:
+                       (let
+                         (closing =a (field 3 err)
+                          closing_loc =a (field 2 err)
+                          opening =a (field 1 err)
+                          opening_loc =a (field 0 err))
+                         (before parsing/parse.ml(133):5623-5825
+                           (after parsing/parse.ml(133):5623-5825
+                             (apply (field 43 (global Location!))
+                               (makeblock 0 closing_loc)
+                               (makeblock 0
+                                 (makeblock 0
+                                   (after parsing/parse.ml(136):5689-5769
+                                     (apply (field 22 (global Location!))
+                                       (makeblock 0 opening_loc)
+                                       [0:
+                                        [11:
+                                         "This '"
+                                         [2:
+                                          0a [11: "' might be unmatched" 0a]]]
+                                        "This '%s' might be unmatched"]
+                                       opening))
+                                   0a))
+                               [0:
+                                [11:
+                                 "Syntax error: '"
+                                 [2: 0a [11: "' expected" 0a]]]
+                                "Syntax error: '%s' expected"]
+                               closing))))
+                      case tag 1:
+                       (let (nonterm =a (field 1 err) loc =a (field 0 err))
+                         (before parsing/parse.ml(142):5865-5922
+                           (after parsing/parse.ml(142):5865-5922
+                             (apply (field 43 (global Location!))
+                               (makeblock 0 loc) 0a
+                               [0:
+                                [11:
+                                 "Syntax error: "
+                                 [2: 0a [11: " expected." 0a]]]
+                                "Syntax error: %s expected."]
+                               nonterm))))
+                      case tag 2:
+                       (let (nonterm =a (field 1 err) loc =a (field 0 err))
+                         (before parsing/parse.ml(144):5965-6026
+                           (after parsing/parse.ml(144):5965-6026
+                             (apply (field 43 (global Location!))
+                               (makeblock 0 loc) 0a
+                               [0:
+                                [11:
+                                 "Syntax error: "
+                                 [2: 0a [11: " not expected." 0a]]]
+                                "Syntax error: %s not expected."]
+                               nonterm))))
+                      case tag 3:
+                       (let (loc =a (field 0 err))
+                         (before parsing/parse.ml(146):6061-6208
+                           (after parsing/parse.ml(146):6061-6208
+                             (apply (field 43 (global Location!))
+                               (makeblock 0 loc) 0a
+                               [0:
+                                [11:
+                                 "Syntax error: applicative paths of the form F(X).t are not supported when the option -no-app-func is set."
+                                 0a]
+                                "Syntax error: applicative paths of the form F(X).t are not supported when the option -no-app-func is set."]))))
+                      case tag 4:
+                       (let (var =a (field 1 err) loc =a (field 0 err))
+                         (before parsing/parse.ml(150):6251-6392
+                           (after parsing/parse.ml(150):6251-6392
+                             (apply (field 43 (global Location!))
+                               (makeblock 0 loc) 0a
+                               [0:
+                                [11:
+                                 "In this scoped type, variable "
+                                 [15:
+                                  [11:
+                                   " is reserved for the local type "
+                                   [2: 0a [12: '.' 0a]]]]]
+                                "In this scoped type, variable %a is reserved for the local type %s."]
+                               (field 10 (global Pprintast!)) var var))))
+                      case tag 5:
+                       (let (loc =a (field 0 err))
+                         (before parsing/parse.ml(155):6416-6451
+                           (after parsing/parse.ml(155):6416-6451
+                             (apply (field 43 (global Location!))
+                               (makeblock 0 loc) 0a
+                               [0: [11: "Syntax error" 0a] "Syntax error"]))))
+                      case tag 6:
+                       (let (s =a (field 1 err) loc =a (field 0 err))
+                         (before parsing/parse.ml(157):6489-6555
+                           (after parsing/parse.ml(157):6489-6555
+                             (apply (field 43 (global Location!))
+                               (makeblock 0 loc) 0a
+                               [0:
+                                [11:
+                                 "broken invariant in parsetree: " [2: 0a 0a]]
+                                "broken invariant in parsetree: %s"]
+                               s))))
+                      case tag 7:
+                       (let (s =a (field 1 err) loc =a (field 0 err))
+                         (before parsing/parse.ml(160):6599-6648
+                           (after parsing/parse.ml(160):6599-6648
+                             (apply (field 43 (global Location!))
+                               (makeblock 0 loc) 0a
+                               [0:
+                                [11: "invalid package type: " [2: 0a 0a]]
+                                "invalid package type: %s"]
+                               s))))))))
+             *match* =
+               (after parsing/parse.ml(163):6661-6785
+                 (apply (field 46 (global Location!))
+                   (function param
+                     (funct-body parsing/parse.ml(164):6696-6785
+                       (let (tag =a (field 0 param))
+                         (if (== tag (field 0 (global Syntaxerr!)))
+                           (let (err =a (field 1 param))
+                             (before parsing/parse.ml(165):6737-6761
+                               (makeblock 0
+                                 (after parsing/parse.ml(165):6742-6761
+                                   (apply prepare_error err)))))
+                           (before parsing/parse.ml(166):6775-6779 0a))))))))
+            (pseudo _none_(0)<ghost>:-1--1
+              (makeblock 0 implementation interface toplevel_phrase use_file
+                core_type expression pattern))))))))

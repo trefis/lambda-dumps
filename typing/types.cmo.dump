@@ -1,0 +1,259 @@
+(setglobal Types!
+  (let
+    (TypeOps =
+       (module-defn(TypeOps) typing/types.ml(74):2600-2733
+         (let
+           (compare =
+              (function t1 t2 : int
+                (funct-body typing/types.ml(76)<ghost>:2659-2680
+                  (before typing/types.ml(76):2667-2680
+                    (- (field 3 t1) (field 3 t2)))))
+            hash =
+              (function t : int
+                (funct-body typing/types.ml(77)<ghost>:2692-2700
+                  (before typing/types.ml(77):2696-2700 (field 3 t))))
+            equal =
+              (function t1 t2
+                (funct-body typing/types.ml(78)<ghost>:2713-2729
+                  (before typing/types.ml(78):2721-2729 (== t1 t2)))))
+           (pseudo typing/types.ml(74):2617-2733
+             (makeblock 0 compare hash equal))))
+     Variance =
+       (module-defn(Variance) typing/types.ml(114):3792-4652
+         (let
+           (single =
+              (function param : int
+                (funct-body typing/types.ml(117):3911-4040
+                  (switch* param
+                   case int 0: (before typing/types.ml(118):3937-3938 1)
+                   case int 1: (before typing/types.ml(119):3956-3957 2)
+                   case int 2: (before typing/types.ml(120):3976-3977 4)
+                   case int 3: (before typing/types.ml(121):3991-3992 8)
+                   case int 4: (before typing/types.ml(122):4006-4008 16)
+                   case int 5: (before typing/types.ml(123):4022-4024 32)
+                   case int 6: (before typing/types.ml(124):4038-4040 64))))
+            union =
+              (function v1[int] v2[int] : int
+                (funct-body typing/types.ml(125)<ghost>:4053-4070
+                  (before typing/types.ml(125):4061-4070 (or v1 v2))))
+            inter =
+              (function v1[int] v2[int] : int
+                (funct-body typing/types.ml(126)<ghost>:4083-4101
+                  (before typing/types.ml(126):4091-4101 (and v1 v2))))
+            subset =
+              (function v1[int] v2[int]
+                (funct-body typing/types.ml(127)<ghost>:4115-4140
+                  (before typing/types.ml(127):4123-4140 (== (and v1 v2) v1))))
+            eq =
+              (function v1[int] v2[int]
+                (funct-body typing/types.ml(128)<ghost>:4150-4173
+                  (before typing/types.ml(128):4164-4173 (== v1 v2))))
+            set =
+              (function x b v[int] : int
+                (funct-body typing/types.ml(129)<ghost>:4184-4251
+                  (before typing/types.ml(130):4196-4251
+                    (if b
+                      (before typing/types.ml(130):4206-4220
+                        (or v
+                          (after typing/types.ml(130):4212-4220
+                            (apply single x))))
+                      (before typing/types.ml(130):4227-4251
+                        (and v
+                          (after typing/types.ml(130):4234-4251
+                            (apply (field 20 (global Stdlib!))
+                              (after typing/types.ml(130):4240-4250
+                                (apply single x))))))))))
+            mem =
+              (function x
+                (funct-body typing/types.ml(131)<ghost>:4262-4283
+                  (before typing/types.ml(131):4266-4283
+                    (after typing/types.ml(131):4266-4283
+                      (apply subset
+                        (after typing/types.ml(131):4273-4283
+                          (apply single x)))))))
+            null =[int] 0
+            may_inv =[int] 7
+            full =[int] 127
+            covariant =[int]
+              (or
+                (or (after typing/types.ml(135):4352-4366 (apply single 0a))
+                  (after typing/types.ml(135):4371-4381 (apply single 4a)))
+                (after typing/types.ml(135):4386-4396 (apply single 3a)))
+            swap =
+              (function f1 f2 v[int] : int
+                (funct-body typing/types.ml(136)<ghost>:4408-4474
+                  (before typing/types.ml(137):4422-4474
+                    (let
+                      (v' =[int]
+                         (after typing/types.ml(137):4431-4450
+                           (apply set f1
+                             (after typing/types.ml(137):4438-4448
+                               (apply mem f2 v))
+                             v)))
+                      (before typing/types.ml(137):4454-4474
+                        (after typing/types.ml(137):4454-4474
+                          (apply set f2
+                            (after typing/types.ml(137):4461-4471
+                              (apply mem f1 v))
+                            v')))))))
+            conjugate =
+              (function v[int] : int
+                (funct-body typing/types.ml(138)<ghost>:4491-4532
+                  (before typing/types.ml(138):4495-4532
+                    (after typing/types.ml(138):4495-4532
+                      (apply swap 0a 1a
+                        (after typing/types.ml(138):4516-4532
+                          (apply swap 4a 5a v)))))))
+            get_upper =
+              (function v[int]
+                (funct-body typing/types.ml(139)<ghost>:4549-4583
+                  (before typing/types.ml(139):4553-4583
+                    (makeblock 0
+                      (after typing/types.ml(139):4554-4567 (apply mem 0a v))
+                      (after typing/types.ml(139):4569-4582 (apply mem 1a v))))))
+            get_lower =
+              (function v[int]
+                (funct-body typing/types.ml(140)<ghost>:4600-4648
+                  (before typing/types.ml(140):4604-4648
+                    (makeblock 0
+                      (after typing/types.ml(140):4605-4614 (apply mem 4a v))
+                      (after typing/types.ml(140):4616-4625 (apply mem 5a v))
+                      (after typing/types.ml(140):4627-4636 (apply mem 6a v))
+                      (after typing/types.ml(140):4638-4647 (apply mem 3a v)))))))
+           (pseudo typing/types.ml(114):3810-4652
+             (makeblock 0 single union inter subset eq set mem null may_inv
+               full covariant swap conjugate get_upper get_lower))))
+     unboxed_false_default_false = [0: 0a 0a]
+     unboxed_false_default_true = [0: 0a 1a]
+     unboxed_true_default_false = [0: 1a 0a]
+     unboxed_true_default_true = [0: 1a 1a]
+     equal_tag =
+       (function t1 t2
+         (funct-body typing/types.ml(335)<ghost>:10904-11244
+           (before typing/types.ml(336):10914-11244
+             (let (*match* = t1 *match* = t2)
+               (catch
+                 (switch* *match*
+                  case int 0:
+                   (if (isint *match*)
+                     (before typing/types.ml(339):11062-11066 1a) (exit 1))
+                  case tag 0:
+                   (let (i1 =a (field 0 *match*))
+                     (switch *match*
+                      case tag 0:
+                       (let (i2 =a (field 0 *match*))
+                         (before typing/types.ml(337):10976-10983 (== i2 i1)))
+                      default: (exit 1)))
+                  case tag 1:
+                   (let (i1 =a (field 0 *match*))
+                     (switch *match*
+                      case tag 1:
+                       (let (i2 =a (field 0 *match*))
+                         (before typing/types.ml(338):11020-11027 (== i2 i1)))
+                      default: (exit 1)))
+                  case tag 2:
+                   (let (b1 =a (field 1 *match*) path1 =a (field 0 *match*))
+                     (switch *match*
+                      case tag 2:
+                       (let
+                         (b2 =a (field 1 *match*) path2 =a (field 0 *match*))
+                         (before typing/types.ml(341):11135-11167
+                           (&&
+                             (after typing/types.ml(341):11135-11156
+                               (apply (field 0 (global Path!)) path1 path2))
+                             (== b1 b2))))
+                      default: (exit 1))))
+                with (1) (before typing/types.ml(342):11239-11244 0a))))))
+     may_equal_constr =
+       (function c1 c2
+         (funct-body typing/types.ml(344)<ghost>:11267-11413
+           (before typing/types.ml(344):11275-11413
+             (let
+               (*match* = (field 5 c1)
+                *match* = (field 5 c2)
+                *match* = *match*
+                *match* = *match*)
+               (catch
+                 (switch *match*
+                  case tag 2:
+                   (switch *match*
+                    case tag 2:
+                     (before typing/types.ml(345):11349-11378
+                       (== (field 4 c1) (field 4 c2)))
+                    default: (exit 6))
+                  default: (exit 6))
+                with (6)
+                 (let (tag2 =a *match* tag1 =a *match*)
+                   (before typing/types.ml(346):11394-11413
+                     (after typing/types.ml(346):11394-11413
+                       (apply equal_tag tag1 tag2))))))))))
+    (letrec
+      (bound_value_identifiers
+         (function param
+           (funct-body typing/types.ml(361):12085-12476
+             (if param
+               (let (*match* =a (field 0 param))
+                 (catch
+                   (switch *match*
+                    case tag 0:
+                     (let
+                       (*match* =a (field 1 *match*)
+                        *match* =a (field 1 *match*))
+                       (if (isint *match*)
+                         (let
+                           (rem =a (field 1 param) id =a (field 0 *match*))
+                           (before typing/types.ml(364):12166-12199
+                             (makeblock 0 id
+                               (after typing/types.ml(364):12172-12199
+                                 (apply bound_value_identifiers rem)))))
+                         (exit 7)))
+                    case tag 2:
+                     (let (rem =a (field 1 param) id =a (field 0 *match*))
+                       (before typing/types.ml(365):12238-12271
+                         (makeblock 0 id
+                           (after typing/types.ml(365):12244-12271
+                             (apply bound_value_identifiers rem)))))
+                    case tag 3:
+                     (let (*match* =a (field 1 *match*))
+                       (if *match* (exit 7)
+                         (let
+                           (rem =a (field 1 param) id =a (field 0 *match*))
+                           (before typing/types.ml(367):12328-12361
+                             (makeblock 0 id
+                               (after typing/types.ml(367):12334-12361
+                                 (apply bound_value_identifiers rem)))))))
+                    case tag 5:
+                     (let (rem =a (field 1 param) id =a (field 0 *match*))
+                       (before typing/types.ml(368):12399-12432
+                         (makeblock 0 id
+                           (after typing/types.ml(368):12405-12432
+                             (apply bound_value_identifiers rem)))))
+                    default: (exit 7))
+                  with (7)
+                   (let (rem =a (field 1 param))
+                     (before typing/types.ml(369):12449-12476
+                       (after typing/types.ml(369):12449-12476
+                         (apply bound_value_identifiers rem))))))
+               (before typing/types.ml(362):12104-12106 0a)))))
+      (let
+        (signature_item_id =
+           (function param
+             (funct-body typing/types.ml(371):12502-12721
+               (let (id =a (field 0 param))
+                 (before typing/types.ml(379):12719-12721 id)))))
+        (pseudo _none_(0)<ghost>:-1--1
+          (makeblock 0
+            (makeblock 0 (field 0 TypeOps) (field 2 TypeOps)
+              (field 1 TypeOps))
+            (let (let = 0a) (field 39 (field 3 (field 11 (global Misc!)))))
+            (let (let = 0a) (field 39 (field 3 (field 11 (global Misc!)))))
+            (makeblock 0 (field 7 Variance) (field 9 Variance)
+              (field 10 Variance) (field 8 Variance) (field 1 Variance)
+              (field 2 Variance) (field 3 Variance) (field 4 Variance)
+              (field 5 Variance) (field 6 Variance) (field 12 Variance)
+              (field 13 Variance) (field 14 Variance))
+            unboxed_false_default_false unboxed_false_default_true
+            unboxed_true_default_false unboxed_true_default_true
+            (let (let = 0a) (field 38 (field 3 (field 11 (global Misc!)))))
+            equal_tag may_equal_constr bound_value_identifiers
+            signature_item_id))))))

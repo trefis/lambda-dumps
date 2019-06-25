@@ -1,0 +1,79 @@
+(setglobal Cmmgen_state!
+  (let
+    (empty =
+       (makemutable 0
+         (field 0 (field 39 (field 3 (field 11 (global Misc!))))) 0a
+         (after asmcomp/cmmgen_state.ml(37):1701-1716
+           (apply (field 1 (global Stdlib__queue!)) 0a)))
+     state = empty
+     add_constant =
+       (function sym cst
+         (funct-body asmcomp/cmmgen_state.ml(42)<ghost>:1757-1821
+           (before asmcomp/cmmgen_state.ml(43):1769-1821
+             (setfield_ptr 0 state
+               (after asmcomp/cmmgen_state.ml(43):1788-1821
+                 (apply
+                   (field 3 (field 39 (field 3 (field 11 (global Misc!)))))
+                   sym cst (field 0 state)))))))
+     add_data_items =
+       (function items
+         (funct-body asmcomp/cmmgen_state.ml(45)<ghost>:1842-1897
+           (before asmcomp/cmmgen_state.ml(46):1852-1897
+             (setfield_ptr 1 state (makeblock 0 items (field 1 state))))))
+     add_function =
+       (function func
+         (funct-body asmcomp/cmmgen_state.ml(48)<ghost>:1916-1955
+           (before asmcomp/cmmgen_state.ml(49):1925-1955
+             (after asmcomp/cmmgen_state.ml(49):1925-1955
+               (apply (field 2 (global Stdlib__queue!)) func (field 2 state))))))
+     get_and_clear_constants =
+       (function param
+         (funct-body asmcomp/cmmgen_state.ml(51)<ghost>:1985-2072
+           (before asmcomp/cmmgen_state.ml(52):1992-2072
+             (let (constants = (field 0 state))
+               (before asmcomp/cmmgen_state.ml(53):2029-2072
+                 (seq
+                   (setfield_ptr 0 state
+                     (field 0 (field 39 (field 3 (field 11 (global Misc!))))))
+                   (before asmcomp/cmmgen_state.ml(54):2063-2072 constants)))))))
+     get_and_clear_data_items =
+       (function param
+         (funct-body asmcomp/cmmgen_state.ml(56)<ghost>:2103-2208
+           (before asmcomp/cmmgen_state.ml(57):2110-2208
+             (let
+               (data_items =
+                  (after asmcomp/cmmgen_state.ml(57):2127-2166
+                    (apply (field 12 (global Stdlib__list!))
+                      (after asmcomp/cmmgen_state.ml(57):2139-2166
+                        (apply (field 8 (global Stdlib__list!))
+                          (field 1 state))))))
+               (before asmcomp/cmmgen_state.ml(58):2172-2208
+                 (seq (setfield_ptr 1 state 0a)
+                   (before asmcomp/cmmgen_state.ml(59):2198-2208 data_items)))))))
+     next_function =
+       (function param
+         (funct-body asmcomp/cmmgen_state.ml(61)<ghost>:2228-2328
+           (before asmcomp/cmmgen_state.ml(62):2235-2328
+             (catch
+               (try
+                 (exit 1
+                   (after asmcomp/cmmgen_state.ml(62):2241-2267
+                     (apply (field 4 (global Stdlib__queue!))
+                       (field 2 state))))
+                with exn
+                 (if (== exn (field 0 (global Stdlib__queue!)))
+                   (before asmcomp/cmmgen_state.ml(63):2302-2306 0a)
+                   (reraise exn)))
+              with (1 func)
+               (before asmcomp/cmmgen_state.ml(64):2319-2328
+                 (makeblock 0 func))))))
+     no_more_functions =
+       (function param
+         (funct-body asmcomp/cmmgen_state.ml(66)<ghost>:2352-2389
+           (before asmcomp/cmmgen_state.ml(67):2359-2389
+             (after asmcomp/cmmgen_state.ml(67):2359-2389
+               (apply (field 12 (global Stdlib__queue!)) (field 2 state)))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 add_constant add_data_items add_function
+        get_and_clear_constants get_and_clear_data_items next_function
+        no_more_functions))))

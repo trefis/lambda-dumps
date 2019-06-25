@@ -1,0 +1,295 @@
+(setglobal Comballoc!
+  (let
+    (allocated_size =
+       (function param : int
+         (funct-body asmcomp/comballoc.ml(26):1378-1446
+           (if param
+             (let (totalsz =a (field 1 param))
+               (before asmcomp/comballoc.ml(28):1439-1446 totalsz))
+             (before asmcomp/comballoc.ml(27):1403-1404 0)))))
+    (letrec
+      (combine
+         (function i allocstate
+           (funct-body asmcomp/comballoc.ml(30)<ghost>:1464-4072
+             (before asmcomp/comballoc.ml(31):1481-4072
+               (let (*match* = (field 0 i))
+                 (catch
+                   (switch *match*
+                    case tag 0:
+                     (let (*match* =a (field 0 *match*))
+                       (catch
+                         (catch
+                           (switch *match*
+                            case tag 3: (exit 18)
+                            case tag 4: (exit 18)
+                            case tag 5: (exit 18)
+                            case tag 6: (exit 18)
+                            case tag 7: (exit 18)
+                            case tag 11:
+                             (let (sz =a (field 0 *match*))
+                               (before asmcomp/comballoc.ml(35):1622-2601
+                                 (catch
+                                   (if allocstate
+                                     (let
+                                       (totalsz =a (field 1 allocstate)
+                                        reg =a (field 0 allocstate))
+                                       (before asmcomp/comballoc.ml(37):1702-1757
+                                         (if
+                                           (< (+ totalsz sz)
+                                             (* (field 32 (global Config!))
+                                               (field 3 (global Arch!))))
+                                           (before asmcomp/comballoc.ml(38):1770-2008
+                                             (let
+                                               (*match* =
+                                                  (after asmcomp/comballoc.ml(39):1803-1890
+                                                    (apply combine
+                                                      (field 1 i)
+                                                      (makeblock 0 (*,int)
+                                                        (after asmcomp/comballoc.ml(40):1854-1863
+                                                          (array.get[addr]
+                                                            (field 3 i) 0))
+                                                        (+ totalsz sz))))
+                                                totalsz =a (field 1 *match*)
+                                                next =a (field 0 *match*))
+                                               (before asmcomp/comballoc.ml(41):1903-2008
+                                                 (makeblock 0 (*,int)
+                                                   (after asmcomp/comballoc.ml(41):1904-1988
+                                                     (apply
+                                                       (field 3
+                                                         (global Mach!))
+                                                       (makeblock 0
+                                                         (makeblock 13 (*,int)
+                                                           0a (~ sz)))
+                                                       (makearray[addr] reg)
+                                                       (field 3 i)
+                                                       (field 4 i) next))
+                                                   totalsz))))
+                                           (exit 7))))
+                                     (exit 7))
+                                  with (7)
+                                   (before asmcomp/comballoc.ml(45):2056-2591
+                                     (let
+                                       (*match* =
+                                          (after asmcomp/comballoc.ml(46):2089-2166
+                                            (apply combine (field 1 i)
+                                              (makeblock 0 (*,int)
+                                                (after asmcomp/comballoc.ml(47):2140-2149
+                                                  (array.get[addr]
+                                                    (field 3 i) 0))
+                                                sz)))
+                                        totalsz =a (field 1 *match*)
+                                        next =a (field 0 *match*))
+                                       (before asmcomp/comballoc.ml(48):2179-2591
+                                         (let
+                                           (next =
+                                              (let
+                                                (offset =[int] (- totalsz sz))
+                                                (before asmcomp/comballoc.ml(50):2241-2368
+                                                  (if (== offset 0)
+                                                    (before asmcomp/comballoc.ml(50):2260-2264
+                                                      next)
+                                                    (before asmcomp/comballoc.ml(51):2281-2368
+                                                      (after asmcomp/comballoc.ml(51):2281-2368
+                                                        (apply
+                                                          (field 3
+                                                            (global Mach!))
+                                                          (makeblock 0
+                                                            (makeblock 13 (*,int)
+                                                              0a offset))
+                                                          (field 3 i)
+                                                          (field 3 i)
+                                                          (field 4 i) next)))))))
+                                           (before asmcomp/comballoc.ml(54):2390-2591
+                                             (makeblock 0 (*,int)
+                                               (after asmcomp/comballoc.ml(54):2391-2563
+                                                 (apply
+                                                   (field 3 (global Mach!))
+                                                   (makeblock 0
+                                                     (makeblock 11 (int,*,int)
+                                                       totalsz 0a 0))
+                                                   (field 2 i) (field 3 i)
+                                                   (field 4 i) next))
+                                               (after asmcomp/comballoc.ml(56):2565-2590
+                                                 (apply allocated_size
+                                                   allocstate)))))))))))
+                            default: (exit 19))
+                          with (19)
+                           (before asmcomp/comballoc.ml(64):2854-2964
+                             (let
+                               (*match* =
+                                  (after asmcomp/comballoc.ml(64):2874-2899
+                                    (apply combine (field 1 i) allocstate))
+                                sz =a (field 1 *match*)
+                                newnext =a (field 0 *match*))
+                               (before asmcomp/comballoc.ml(65):2909-2964
+                                 (makeblock 0 (*,int)
+                                   (after asmcomp/comballoc.ml(65):2910-2959
+                                     (apply (field 3 (global Mach!))
+                                       (field 0 i) (field 2 i) (field 3 i)
+                                       (field 4 i) newnext))
+                                   sz)))))
+                        with (18)
+                         (before asmcomp/comballoc.ml(60):2703-2834
+                           (let
+                             (newnext =
+                                (after asmcomp/comballoc.ml(60):2717-2739
+                                  (apply combine_restart (field 1 i))))
+                             (before asmcomp/comballoc.ml(61):2749-2834
+                               (makeblock 0 (*,int)
+                                 (after asmcomp/comballoc.ml(61):2750-2799
+                                   (apply (field 3 (global Mach!))
+                                     (field 0 i) (field 2 i) (field 3 i)
+                                     (field 4 i) newnext))
+                                 (after asmcomp/comballoc.ml(62):2808-2833
+                                   (apply allocated_size allocstate))))))))
+                    case tag 1:
+                     (let
+                       (ifnot =a (field 2 *match*)
+                        ifso =a (field 1 *match*)
+                        test =a (field 0 *match*))
+                       (before asmcomp/comballoc.ml(67):3009-3250
+                         (let
+                           (newifso =
+                              (after asmcomp/comballoc.ml(67):3023-3043
+                                (apply combine_restart ifso)))
+                           (before asmcomp/comballoc.ml(68):3053-3250
+                             (let
+                               (newifnot =
+                                  (after asmcomp/comballoc.ml(68):3068-3089
+                                    (apply combine_restart ifnot)))
+                               (before asmcomp/comballoc.ml(69):3099-3250
+                                 (let
+                                   (newnext =
+                                      (after asmcomp/comballoc.ml(69):3113-3135
+                                        (apply combine_restart (field 1 i))))
+                                   (before asmcomp/comballoc.ml(70):3145-3250
+                                     (makeblock 0 (*,int)
+                                       (after asmcomp/comballoc.ml(70):3146-3215
+                                         (apply (field 2 (global Mach!))
+                                           (makeblock 1 test newifso
+                                             newifnot)
+                                           (field 2 i) (field 3 i) newnext))
+                                       (after asmcomp/comballoc.ml(71):3224-3249
+                                         (apply allocated_size allocstate)))))))))))
+                    case tag 2:
+                     (let
+                       (cases =a (field 1 *match*)
+                        table =a (field 0 *match*))
+                       (before asmcomp/comballoc.ml(73):3286-3481
+                         (let
+                           (newcases =
+                              (after asmcomp/comballoc.ml(73):3301-3332
+                                (apply (field 14 (global Stdlib__array!))
+                                  combine_restart cases)))
+                           (before asmcomp/comballoc.ml(74):3342-3481
+                             (let
+                               (newnext =
+                                  (after asmcomp/comballoc.ml(74):3356-3378
+                                    (apply combine_restart (field 1 i))))
+                               (before asmcomp/comballoc.ml(75):3388-3481
+                                 (makeblock 0 (*,int)
+                                   (after asmcomp/comballoc.ml(75):3389-3446
+                                     (apply (field 2 (global Mach!))
+                                       (makeblock 2 table newcases)
+                                       (field 2 i) (field 3 i) newnext))
+                                   (after asmcomp/comballoc.ml(76):3455-3480
+                                     (apply allocated_size allocstate)))))))))
+                    case tag 3:
+                     (let
+                       (body =a (field 2 *match*)
+                        handlers =a (field 1 *match*)
+                        rec_flag =a (field 0 *match*))
+                       (before asmcomp/comballoc.ml(78):3528-3817
+                         (let
+                           (*match* =
+                              (after asmcomp/comballoc.ml(78):3548-3571
+                                (apply combine body allocstate))
+                            sz =a (field 1 *match*)
+                            newbody =a (field 0 *match*))
+                           (before asmcomp/comballoc.ml(79):3581-3817
+                             (let
+                               (newhandlers =
+                                  (after asmcomp/comballoc.ml(80):3607-3675
+                                    (apply (field 16 (global Stdlib__list!))
+                                      (function param
+                                        (funct-body asmcomp/comballoc.ml(80):3616-3666
+                                          (let
+                                            (handler =a (field 1 param)
+                                             io =a (field 0 param))
+                                            (before asmcomp/comballoc.ml(80):3638-3665
+                                              (makeblock 0 (int,*) io
+                                                (after asmcomp/comballoc.ml(80):3642-3665
+                                                  (apply combine_restart
+                                                    handler)))))))
+                                      handlers)))
+                               (before asmcomp/comballoc.ml(81):3685-3817
+                                 (let
+                                   (newnext =
+                                      (after asmcomp/comballoc.ml(81):3699-3721
+                                        (apply combine_restart (field 1 i))))
+                                   (before asmcomp/comballoc.ml(82):3731-3817
+                                     (makeblock 0 (*,int)
+                                       (after asmcomp/comballoc.ml(82):3732-3812
+                                         (apply (field 2 (global Mach!))
+                                           (makeblock 3 rec_flag newhandlers
+                                             newbody)
+                                           (field 2 i) (field 3 i) newnext))
+                                       sz)))))))))
+                    case tag 5:
+                     (let
+                       (handler =a (field 1 *match*)
+                        body =a (field 0 *match*))
+                       (before asmcomp/comballoc.ml(85):3855-4072
+                         (let
+                           (*match* =
+                              (after asmcomp/comballoc.ml(85):3875-3898
+                                (apply combine body allocstate))
+                            sz =a (field 1 *match*)
+                            newbody =a (field 0 *match*))
+                           (before asmcomp/comballoc.ml(86):3908-4072
+                             (let
+                               (newhandler =
+                                  (after asmcomp/comballoc.ml(86):3925-3948
+                                    (apply combine_restart handler)))
+                               (before asmcomp/comballoc.ml(87):3958-4072
+                                 (let
+                                   (newnext =
+                                      (after asmcomp/comballoc.ml(87):3972-3994
+                                        (apply combine_restart (field 1 i))))
+                                   (before asmcomp/comballoc.ml(88):4004-4072
+                                     (makeblock 0 (*,int)
+                                       (after asmcomp/comballoc.ml(88):4005-4067
+                                         (apply (field 2 (global Mach!))
+                                           (makeblock 5 newbody newhandler)
+                                           (field 2 i) (field 3 i) newnext))
+                                       sz)))))))))
+                    default: (exit 17))
+                  with (17)
+                   (before asmcomp/comballoc.ml(33):1548-1578
+                     (makeblock 0 (*,int) i
+                       (after asmcomp/comballoc.ml(33):1552-1577
+                         (apply allocated_size allocstate)))))))))
+        combine_restart
+          (function i
+            (funct-body asmcomp/comballoc.ml(90)<ghost>:4094-4142
+              (before asmcomp/comballoc.ml(91):4100-4142
+                (let
+                  (*match* =
+                     (after asmcomp/comballoc.ml(91):4116-4134
+                       (apply combine i 0a))
+                   newi =a (field 0 *match*))
+                  (before asmcomp/comballoc.ml(91):4138-4142 newi))))))
+      (let
+        (fundecl =
+           (function f
+             (funct-body asmcomp/comballoc.ml(93)<ghost>:4156-4242
+               (before asmcomp/comballoc.ml(94):4162-4242
+                 (if (field 52 (global Config!))
+                   (before asmcomp/comballoc.ml(94):4187-4188 f)
+                   (before asmcomp/comballoc.ml(95):4196-4242
+                     (let (init = f)
+                       (makeblock 0 (field 0 init) (field 1 init)
+                         (after asmcomp/comballoc.ml(95):4215-4241
+                           (apply combine_restart (field 2 f)))
+                         (field 3 init) (field 4 init) (field 5 init)))))))))
+        (pseudo _none_(0)<ghost>:-1--1 (makeblock 0 fundecl))))))

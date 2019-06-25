@@ -1,0 +1,596 @@
+(setglobal Typeopt!
+  (let
+    (scrape_ty =
+       (function env ty
+         (funct-body typing/typeopt.ml(24)<ghost>:1222-1640
+           (before typing/typeopt.ml(25):1233-1640
+             (let
+               (ty =
+                  (after typing/typeopt.ml(25):1242-1293
+                    (apply (field 62 (global Ctype!)) env
+                      (after typing/typeopt.ml(25):1268-1293
+                        (apply (field 43 (global Ctype!)) ty)))))
+               (before typing/typeopt.ml(26):1299-1640
+                 (let (*match* = (field 0 ty))
+                   (catch
+                     (switch *match*
+                      case tag 3:
+                       (let (p =a (field 0 *match*))
+                         (before typing/typeopt.ml(28):1349-1628
+                           (catch
+                             (try
+                               (exit 2
+                                 (after typing/typeopt.ml(28):1361-1380
+                                   (apply (field 12 (global Env!)) p env)))
+                              with exn
+                               (if (== exn (field 7 (global Stdlib!)))
+                                 (before typing/typeopt.ml(35):1616-1618 ty)
+                                 (reraise exn)))
+                            with (2 val)
+                             (let
+                               (*match* =a (field 11 val)
+                                *match* =a (field 0 *match*))
+                               (if *match*
+                                 (before typing/typeopt.ml(30):1445-1568
+                                   (let
+                                     (*match* =
+                                        (after typing/typeopt.ml(30):1457-1504
+                                          (apply
+                                            (field 11 (global Typedecl!)) env
+                                            ty)))
+                                     (if *match*
+                                       (let (ty2 =a (field 0 *match*))
+                                         (before typing/typeopt.ml(32):1553-1556
+                                           ty2))
+                                       (before typing/typeopt.ml(31):1528-1530
+                                         ty))))
+                                 (before typing/typeopt.ml(34):1582-1584 ty))))))
+                      default: (exit 4))
+                    with (4) (before typing/typeopt.ml(37):1638-1640 ty))))))))
+     scrape =
+       (function env ty
+         (funct-body typing/typeopt.ml(39)<ghost>:1653-1687
+           (before typing/typeopt.ml(40):1664-1687
+             (field 0
+               (after typing/typeopt.ml(40):1664-1682
+                 (apply scrape_ty env ty))))))
+     is_function_type =
+       (function env ty
+         (funct-body typing/typeopt.ml(42)<ghost>:1710-1806
+           (before typing/typeopt.ml(43):1721-1806
+             (let
+               (*match* =
+                  (after typing/typeopt.ml(43):1727-1740
+                    (apply scrape env ty)))
+               (catch
+                 (switch *match*
+                  case tag 1:
+                   (let (rhs =a (field 2 *match*) lhs =a (field 1 *match*))
+                     (before typing/typeopt.ml(44):1777-1792
+                       (makeblock 0 (makeblock 0 lhs rhs))))
+                  default: (exit 5))
+                with (5) (before typing/typeopt.ml(45):1802-1806 0a))))))
+     is_base_type =
+       (function env ty base_ty_path
+         (funct-body typing/typeopt.ml(47)<ghost>:1825-1937
+           (before typing/typeopt.ml(48):1849-1937
+             (let
+               (*match* =
+                  (after typing/typeopt.ml(48):1855-1868
+                    (apply scrape env ty)))
+               (catch
+                 (switch *match*
+                  case tag 3:
+                   (let (p =a (field 0 *match*))
+                     (before typing/typeopt.ml(49):1898-1922
+                       (after typing/typeopt.ml(49):1898-1922
+                         (apply (field 0 (global Path!)) p base_ty_path))))
+                  default: (exit 6))
+                with (6) (before typing/typeopt.ml(50):1932-1937 0a))))))
+     maybe_pointer_type =
+       (function env ty
+         (funct-body typing/typeopt.ml(52)<ghost>:1962-2076
+           (before typing/typeopt.ml(53):1973-2076
+             (let
+               (ty =
+                  (after typing/typeopt.ml(53):1982-1998
+                    (apply scrape_ty env ty)))
+               (before typing/typeopt.ml(54):2004-2076
+                 (if
+                   (after typing/typeopt.ml(54):2007-2038
+                     (apply (field 109 (global Ctype!)) env ty))
+                   (before typing/typeopt.ml(55):2048-2055 1a)
+                   (before typing/typeopt.ml(57):2067-2076 0a)))))))
+     maybe_pointer =
+       (function exp
+         (funct-body typing/typeopt.ml(59)<ghost>:2096-2145
+           (before typing/typeopt.ml(59):2102-2145
+             (after typing/typeopt.ml(59):2102-2145
+               (apply maybe_pointer_type (field 4 exp) (field 3 exp))))))
+     classify =
+       (function env ty
+         (funct-body typing/typeopt.ml(68)<ghost>:2268-3410
+           (before typing/typeopt.ml(69):2279-3410
+             (let
+               (ty =
+                  (after typing/typeopt.ml(69):2288-2304
+                    (apply scrape_ty env ty)))
+               (before typing/typeopt.ml(70):2310-3410
+                 (if
+                   (==
+                     (after typing/typeopt.ml(70):2313-2338
+                       (apply maybe_pointer_type env ty))
+                     0a)
+                   (before typing/typeopt.ml(70):2356-2359 0a)
+                   (before typing/typeopt.ml(71):2367-3410
+                     (let (*match* = (field 0 ty))
+                       (catch
+                         (catch
+                           (catch
+                             (switch *match*
+                              case tag 0: (exit 9)
+                              case tag 3:
+                               (let (p =a (field 0 *match*))
+                                 (before typing/typeopt.ml(75):2463-3261
+                                   (if
+                                     (after typing/typeopt.ml(75):2466-2495
+                                       (apply (field 0 (global Path!)) p
+                                         (field 21 (global Predef!))))
+                                     (before typing/typeopt.ml(75):2501-2506
+                                       1a)
+                                     (before typing/typeopt.ml(76):2518-3261
+                                       (if
+                                         (after typing/typeopt.ml(76):2521-2551
+                                           (apply (field 0 (global Path!)) p
+                                             (field 31 (global Predef!))))
+                                         (before typing/typeopt.ml(76):2557-2561
+                                           2a)
+                                         (before typing/typeopt.ml(77):2573-3261
+                                           (if
+                                             (||
+                                               (after typing/typeopt.ml(77):2576-2606
+                                                 (apply
+                                                   (field 0 (global Path!)) p
+                                                   (field 19
+                                                     (global Predef!))))
+                                               (||
+                                                 (after typing/typeopt.ml(78):2621-2650
+                                                   (apply
+                                                     (field 0 (global Path!))
+                                                     p
+                                                     (field 20
+                                                       (global Predef!))))
+                                                 (||
+                                                   (after typing/typeopt.ml(79):2665-2694
+                                                     (apply
+                                                       (field 0
+                                                         (global Path!))
+                                                       p
+                                                       (field 25
+                                                         (global Predef!))))
+                                                   (||
+                                                     (after typing/typeopt.ml(80):2709-2742
+                                                       (apply
+                                                         (field 0
+                                                           (global Path!))
+                                                         p
+                                                         (field 28
+                                                           (global Predef!))))
+                                                     (||
+                                                       (after typing/typeopt.ml(81):2757-2786
+                                                         (apply
+                                                           (field 0
+                                                             (global Path!))
+                                                           p
+                                                           (field 29
+                                                             (global Predef!))))
+                                                       (after typing/typeopt.ml(82):2801-2830
+                                                         (apply
+                                                           (field 0
+                                                             (global Path!))
+                                                           p
+                                                           (field 30
+                                                             (global Predef!)))))))))
+                                             (before typing/typeopt.ml(82):2836-2840
+                                               3a)
+                                             (before typing/typeopt.ml(83):2852-3261
+                                               (try
+                                                 (let
+                                                   (*match* =
+                                                      (field 2
+                                                        (after typing/typeopt.ml(85):2886-2907
+                                                          (apply
+                                                            (field 12
+                                                              (global Env!))
+                                                            p env))))
+                                                   (catch
+                                                     (if (isint *match*)
+                                                       (if *match* (exit 8)
+                                                         (before typing/typeopt.ml(87):2966-2969
+                                                           4a))
+                                                       (exit 8))
+                                                    with (8)
+                                                     (before typing/typeopt.ml(89):3042-3046
+                                                       3a)))
+                                                with exn
+                                                 (if
+                                                   (== exn
+                                                     (field 7
+                                                       (global Stdlib!)))
+                                                   (before typing/typeopt.ml(94):3248-3251
+                                                     4a)
+                                                   (reraise exn)))))))))))
+                              case tag 5: (exit 11)
+                              case tag 6: (exit 11)
+                              case tag 7: (exit 11)
+                              case tag 9: (exit 9)
+                              case tag 10: (exit 11)
+                              default: (exit 10))
+                            with (9)
+                             (before typing/typeopt.ml(73):2418-2421 4a))
+                          with (10)
+                           (before typing/typeopt.ml(97):3340-3344 3a))
+                        with (11)
+                         (before typing/typeopt.ml(99):3398-3410
+                           (raise
+                             (after typing/typeopt.ml(99):3398-3410
+                               (makeblock 0 (global Assert_failure!)
+                                 [0: "typing/typeopt.ml" 99 6])))))))))))))
+     array_type_kind =
+       (function env ty
+         (funct-body typing/typeopt.ml(101)<ghost>:3432-4043
+           (before typing/typeopt.ml(102):3443-4043
+             (let
+               (*match* =
+                  (after typing/typeopt.ml(102):3449-3462
+                    (apply scrape env ty)))
+               (catch
+                 (catch
+                   (catch
+                     (switch *match*
+                      case tag 3:
+                       (let
+                         (*match* =a (field 1 *match*)
+                          p =a (field 0 *match*))
+                         (if *match*
+                           (let (*match* =a (field 1 *match*))
+                             (if *match* (exit 14)
+                               (let (elt_ty =a (field 0 *match*))
+                                 (exit 15 elt_ty p))))
+                           (let (p =a p) (exit 16 p))))
+                      case tag 10:
+                       (let
+                         (*match* =a (field 0 *match*)
+                          *match* =o (field 0 *match*))
+                         (switch *match*
+                          case tag 3:
+                           (let
+                             (*match* =a (field 1 *match*)
+                              p =a (field 0 *match*))
+                             (if *match*
+                               (let (*match* =a (field 1 *match*))
+                                 (if *match* (exit 14)
+                                   (let (elt_ty =a (field 0 *match*))
+                                     (exit 15 elt_ty p))))
+                               (let (p =a p) (exit 16 p))))
+                          default: (exit 14)))
+                      default: (exit 14))
+                    with (15 elt_ty p)
+                     (before typing/typeopt.ml(104):3550-3579
+                       (if
+                         (after typing/typeopt.ml(104):3550-3579
+                           (apply (field 0 (global Path!)) p
+                             (field 25 (global Predef!))))
+                         (before typing/typeopt.ml(105):3589-3844
+                           (let
+                             (*match* =
+                                (after typing/typeopt.ml(105):3601-3620
+                                  (apply classify env elt_ty)))
+                             (catch
+                               (switch* *match*
+                                case int 0:
+                                 (before typing/typeopt.ml(109):3825-3834 2a)
+                                case int 1:
+                                 (before typing/typeopt.ml(107):3716-3775
+                                   (if (field 60 (global Config!))
+                                     (before typing/typeopt.ml(107):3748-3759
+                                       3a)
+                                     (before typing/typeopt.ml(107):3765-3775
+                                       1a)))
+                                case int 2: (exit 12)
+                                case int 3: (exit 12)
+                                case int 4:
+                                 (before typing/typeopt.ml(106):3641-3698
+                                   (if (field 60 (global Config!))
+                                     (before typing/typeopt.ml(106):3673-3682
+                                       0a)
+                                     (before typing/typeopt.ml(106):3688-3698
+                                       1a))))
+                              with (12)
+                               (before typing/typeopt.ml(108):3799-3809 1a))))
+                         (exit 14))))
+                  with (16 p)
+                   (before typing/typeopt.ml(112):3915-3949
+                     (if
+                       (after typing/typeopt.ml(112):3915-3949
+                         (apply (field 0 (global Path!)) p
+                           (field 33 (global Predef!))))
+                       (before typing/typeopt.ml(113):3959-3970 3a)
+                       (exit 14))))
+                with (14) (before typing/typeopt.ml(116):4034-4043 0a))))))
+     array_kind =
+       (function exp
+         (funct-body typing/typeopt.ml(118)<ghost>:4060-4106
+           (before typing/typeopt.ml(118):4066-4106
+             (after typing/typeopt.ml(118):4066-4106
+               (apply array_type_kind (field 4 exp) (field 3 exp))))))
+     array_pattern_kind =
+       (function pat
+         (funct-body typing/typeopt.ml(120)<ghost>:4131-4177
+           (before typing/typeopt.ml(120):4137-4177
+             (after typing/typeopt.ml(120):4137-4177
+               (apply array_type_kind (field 4 pat) (field 3 pat))))))
+     bigarray_decode_type =
+       (function env ty tbl dfl
+         (funct-body typing/typeopt.ml(122)<ghost>:4204-4435
+           (before typing/typeopt.ml(123):4223-4435
+             (let
+               (*match* =
+                  (after typing/typeopt.ml(123):4229-4242
+                    (apply scrape env ty)))
+               (catch
+                 (switch *match*
+                  case tag 3:
+                   (let (*match* =a (field 0 *match*))
+                     (switch* *match*
+                      case tag 0: (exit 18)
+                      case tag 1:
+                       (let (*match* =a (field 0 *match*))
+                         (switch* *match*
+                          case tag 0:
+                           (let (*match* =a (field 1 *match*))
+                             (if *match* (exit 18)
+                               (let
+                                 (type_name =a (field 1 *match*)
+                                  mod_id =a (field 0 *match*))
+                                 (before typing/typeopt.ml(125):4308-4346
+                                   (if
+                                     (after typing/typeopt.ml(125):4308-4346
+                                       (caml_string_equal
+                                         (after typing/typeopt.ml(125):4308-4325
+                                           (apply (field 14 (global Ident!))
+                                             mod_id))
+                                         "Stdlib__bigarray"))
+                                     (before typing/typeopt.ml(126):4356-4416
+                                       (try
+                                         (after typing/typeopt.ml(126):4366-4390
+                                           (apply
+                                             (field 38
+                                               (global Stdlib__list!))
+                                             type_name tbl))
+                                        with exn
+                                         (if
+                                           (== exn
+                                             (field 7 (global Stdlib!)))
+                                           (before typing/typeopt.ml(126):4409-4412
+                                             dfl)
+                                           (reraise exn))))
+                                     (exit 18))))))
+                          case tag 1: (exit 18)
+                          case tag 2: (exit 18)))
+                      case tag 2: (exit 18)))
+                  default: (exit 18))
+                with (18) (before typing/typeopt.ml(128):4432-4435 dfl))))))
+     kind_table =
+       [0:
+        [0: "float32_elt" 1a]
+        [0:
+         [0: "float64_elt" 2a]
+         [0:
+          [0: "int8_signed_elt" 3a]
+          [0:
+           [0: "int8_unsigned_elt" 4a]
+           [0:
+            [0: "int16_signed_elt" 5a]
+            [0:
+             [0: "int16_unsigned_elt" 6a]
+             [0:
+              [0: "int32_elt" 7a]
+              [0:
+               [0: "int64_elt" 8a]
+               [0:
+                [0: "int_elt" 9a]
+                [0:
+                 [0: "nativeint_elt" 10a]
+                 [0:
+                  [0: "complex32_elt" 11a] [0: [0: "complex64_elt" 12a] 0a]]]]]]]]]]]]
+     layout_table = [0: [0: "c_layout" 1a] [0: [0: "fortran_layout" 2a] 0a]]
+     bigarray_type_kind_and_layout =
+       (function env typ
+         (funct-body typing/typeopt.ml(148)<ghost>:5053-5398
+           (before typing/typeopt.ml(149):5065-5398
+             (let
+               (*match* =
+                  (after typing/typeopt.ml(149):5071-5085
+                    (apply scrape env typ)))
+               (catch
+                 (switch *match*
+                  case tag 3:
+                   (let (*match* =a (field 1 *match*))
+                     (if *match*
+                       (let (*match* =a (field 1 *match*))
+                         (if *match*
+                           (let (*match* =a (field 1 *match*))
+                             (if *match*
+                               (let (*match* =a (field 1 *match*))
+                                 (if *match* (exit 19)
+                                   (let
+                                     (layout_type =a (field 0 *match*)
+                                      elt_type =a (field 0 *match*))
+                                     (before typing/typeopt.ml(151):5162-5337
+                                       (makeblock 0
+                                         (after typing/typeopt.ml(151):5163-5225
+                                           (apply bigarray_decode_type env
+                                             elt_type kind_table 0a))
+                                         (after typing/typeopt.ml(152):5234-5336
+                                           (apply bigarray_decode_type env
+                                             layout_type layout_table 0a)))))))
+                               (exit 19)))
+                           (exit 19)))
+                       (exit 19)))
+                  default: (exit 19))
+                with (19)
+                 (before typing/typeopt.ml(155):5353-5398 [0: 0a 0a]))))))
+     value_kind =
+       (function env ty
+         (funct-body typing/typeopt.ml(157)<ghost>:5415-5954
+           (before typing/typeopt.ml(158):5426-5954
+             (let
+               (*match* =
+                  (after typing/typeopt.ml(158):5432-5445
+                    (apply scrape env ty)))
+               (catch
+                 (switch *match*
+                  case tag 3:
+                   (let (p =a (field 0 *match*))
+                     (before typing/typeopt.ml(159):5477-5504
+                       (if
+                         (after typing/typeopt.ml(159):5477-5504
+                           (apply (field 0 (global Path!)) p
+                             (field 17 (global Predef!))))
+                         (before typing/typeopt.ml(160):5514-5521 2a)
+                         (let (p =a p)
+                           (before typing/typeopt.ml(161):5548-5576
+                             (if
+                               (after typing/typeopt.ml(161):5548-5576
+                                 (apply (field 0 (global Path!)) p
+                                   (field 18 (global Predef!))))
+                               (before typing/typeopt.ml(162):5586-5593 2a)
+                               (let (p =a p)
+                                 (before typing/typeopt.ml(163):5620-5649
+                                   (if
+                                     (after typing/typeopt.ml(163):5620-5649
+                                       (apply (field 0 (global Path!)) p
+                                         (field 21 (global Predef!))))
+                                     (before typing/typeopt.ml(164):5659-5668
+                                       1a)
+                                     (let (p =a p)
+                                       (before typing/typeopt.ml(165):5695-5724
+                                         (if
+                                           (after typing/typeopt.ml(165):5695-5724
+                                             (apply (field 0 (global Path!))
+                                               p (field 29 (global Predef!))))
+                                           (before typing/typeopt.ml(166):5734-5753
+                                             [0: 1a])
+                                           (let (p =a p)
+                                             (before typing/typeopt.ml(167):5780-5809
+                                               (if
+                                                 (after typing/typeopt.ml(167):5780-5809
+                                                   (apply
+                                                     (field 0 (global Path!))
+                                                     p
+                                                     (field 30
+                                                       (global Predef!))))
+                                                 (before typing/typeopt.ml(168):5819-5838
+                                                   [0: 2a])
+                                                 (let (p =a p)
+                                                   (before typing/typeopt.ml(169):5865-5898
+                                                     (if
+                                                       (after typing/typeopt.ml(169):5865-5898
+                                                         (apply
+                                                           (field 0
+                                                             (global Path!))
+                                                           p
+                                                           (field 28
+                                                             (global Predef!))))
+                                                       (before typing/typeopt.ml(170):5908-5931
+                                                         [0: 0a])
+                                                       (exit 20)))))))))))))))))))
+                  default: (exit 20))
+                with (20) (before typing/typeopt.ml(172):5947-5954 0a))))))
+     function_return_value_kind =
+       (function env ty
+         (funct-body typing/typeopt.ml(174)<ghost>:5987-6095
+           (before typing/typeopt.ml(175):5998-6095
+             (let
+               (*match* =
+                  (after typing/typeopt.ml(175):6004-6027
+                    (apply is_function_type env ty)))
+               (if *match*
+                 (let (*match* =a (field 0 *match*) rhs =a (field 1 *match*))
+                   (before typing/typeopt.ml(176):6057-6075
+                     (after typing/typeopt.ml(176):6057-6075
+                       (apply value_kind env rhs))))
+                 (before typing/typeopt.ml(177):6088-6095 0a))))))
+     lazy_val_requires_forward =
+       (function env ty
+         (funct-body typing/typeopt.ml(181)<ghost>:6262-6383
+           (before typing/typeopt.ml(182):6273-6383
+             (let
+               (*match* =
+                  (after typing/typeopt.ml(182):6279-6294
+                    (apply classify env ty)))
+               (catch
+                 (catch
+                   (switch* *match*
+                    case int 0: (exit 22)
+                    case int 1:
+                     (before typing/typeopt.ml(184):6336-6359
+                       (field 60 (global Config!)))
+                    case int 2: (exit 21)
+                    case int 3: (exit 22)
+                    case int 4: (exit 21))
+                  with (21) (before typing/typeopt.ml(183):6318-6322 1a))
+                with (22) (before typing/typeopt.ml(185):6378-6383 0a))))))
+     classify_lazy_argument =
+       (function e
+         (funct-body typing/typeopt.ml(195):6894-7490
+           (before typing/typeopt.ml(195):6903-7490
+             (let (*match* = (field 0 e))
+               (catch
+                 (catch
+                   (switch *match*
+                    case tag 0:
+                     (before typing/typeopt.ml(206):7334-7380
+                       (if
+                         (after typing/typeopt.ml(206):7334-7380
+                           (apply lazy_val_requires_forward (field 4 e)
+                             (field 3 e)))
+                         (before typing/typeopt.ml(207):7391-7417
+                           [0: -992097143 742267415a])
+                         (before typing/typeopt.ml(209):7447-7465
+                           [0: -992097143 -912009552a])))
+                    case tag 1:
+                     (let (*match* =a (field 0 *match*))
+                       (switch *match*
+                        case tag 3:
+                         (before typing/typeopt.ml(203):7206-7309
+                           (if (field 60 (global Config!))
+                             (before typing/typeopt.ml(204):7245-7275
+                               474895195a)
+                             (before typing/typeopt.ml(205):7288-7309
+                               -236722567a)))
+                        default: (exit 23)))
+                    case tag 3: (exit 23)
+                    case tag 8:
+                     (let
+                       (*match* =a (field 1 *match*)
+                        *match* =a (field 4 *match*))
+                       (if (!= *match* 0) (exit 24) (exit 23)))
+                    default: (exit 24))
+                  with (24)
+                   (before typing/typeopt.ml(211):7484-7490 -912009552a))
+                with (23)
+                 (before typing/typeopt.ml(201):7139-7160 -236722567a))))))
+     value_kind_union =
+       (function k1 k2
+         (funct-body typing/typeopt.ml(213)<ghost>:7513-7556
+           (before typing/typeopt.ml(214):7523-7556
+             (if (after typing/typeopt.ml(214):7526-7533 (caml_equal k1 k2))
+               (before typing/typeopt.ml(214):7539-7541 k1)
+               (before typing/typeopt.ml(215):7549-7556 0a))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 is_function_type is_base_type maybe_pointer_type
+        maybe_pointer array_type_kind array_kind array_pattern_kind
+        bigarray_type_kind_and_layout value_kind function_return_value_kind
+        classify_lazy_argument value_kind_union))))

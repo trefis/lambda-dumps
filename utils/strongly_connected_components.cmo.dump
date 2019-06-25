@@ -1,0 +1,576 @@
+(setglobal Strongly_connected_components!
+  (let
+    (Kosaraju =
+       (module-defn(Kosaraju) utils/strongly_connected_components.ml(19):1182-3715
+         (let
+           (transpose =
+              (function graph
+                (funct-body utils/strongly_connected_components.ml(27)<ghost>:1415-1673
+                  (before utils/strongly_connected_components.ml(28):1427-1673
+                    (let (size =[int] (array.length[addr] graph))
+                      (before utils/strongly_connected_components.ml(29):1464-1673
+                        (let
+                          (transposed =
+                             (after utils/strongly_connected_components.ml(29):1481-1499
+                               (caml_make_vect size 0a)))
+                          (before utils/strongly_connected_components.ml(30):1507-1673
+                            (let
+                              (add =
+                                 (function src[int] dst[int]
+                                   (funct-body utils/strongly_connected_components.ml(30)<ghost>:1515-1568
+                                     (before utils/strongly_connected_components.ml(30):1525-1568
+                                       (after utils/strongly_connected_components.ml(30):1525-1568
+                                         (array.set[addr] transposed src
+                                           (makeblock 0 (int,*) dst
+                                             (after utils/strongly_connected_components.ml(30):1552-1568
+                                               (array.get[addr] transposed
+                                                 src)))))))))
+                              (before utils/strongly_connected_components.ml(31):1576-1673
+                                (seq
+                                  (after utils/strongly_connected_components.ml(31):1576-1657
+                                    (apply (field 13 (global Stdlib__array!))
+                                      (function src[int] dsts
+                                        (funct-body utils/strongly_connected_components.ml(31):1588-1645
+                                          (before utils/strongly_connected_components.ml(31):1605-1644
+                                            (after utils/strongly_connected_components.ml(31):1605-1644
+                                              (apply
+                                                (field 14
+                                                  (global Stdlib__list!))
+                                                (function dst[int]
+                                                  (funct-body utils/strongly_connected_components.ml(31):1615-1639
+                                                    (before utils/strongly_connected_components.ml(31):1627-1638
+                                                      (after utils/strongly_connected_components.ml(31):1627-1638
+                                                        (apply add dst src)))))
+                                                dsts)))))
+                                      graph))
+                                  (before utils/strongly_connected_components.ml(33):1663-1673
+                                    transposed)))))))))))
+            depth_first_order =
+              (function graph
+                (funct-body utils/strongly_connected_components.ml(35)<ghost>:1699-2172
+                  (before utils/strongly_connected_components.ml(36):1742-2172
+                    (let (size =[int] (array.length[addr] graph))
+                      (before utils/strongly_connected_components.ml(37):1779-2172
+                        (let
+                          (marked =
+                             (after utils/strongly_connected_components.ml(37):1792-1813
+                               (caml_make_vect size 0a)))
+                          (before utils/strongly_connected_components.ml(38):1821-2172
+                            (let
+                              (stack =
+                                 (after utils/strongly_connected_components.ml(38):1833-1852
+                                   (caml_make_vect size (~ 1))))
+                              (before utils/strongly_connected_components.ml(39):1860-2172
+                                (let (pos = (makemutable 0 (int) 0))
+                                  (before utils/strongly_connected_components.ml(40):1883-2172
+                                    (let
+                                      (push =
+                                         (function i[int]
+                                           (funct-body utils/strongly_connected_components.ml(40)<ghost>:1892-1935
+                                             (before utils/strongly_connected_components.ml(41):1902-1935
+                                               (seq
+                                                 (after utils/strongly_connected_components.ml(41):1902-1919
+                                                   (array.set[int] stack
+                                                     (field 0 pos) i))
+                                                 (before utils/strongly_connected_components.ml(42):1927-1935
+                                                   (+:=1 pos)))))))
+                                      (before utils/strongly_connected_components.ml(44):1947-2172
+                                        (letrec
+                                          (aux
+                                             (function node[int]
+                                               (funct-body utils/strongly_connected_components.ml(44)<ghost>:1959-2104
+                                                 (before utils/strongly_connected_components.ml(45):1972-2104
+                                                   (if
+                                                     (not
+                                                       (after utils/strongly_connected_components.ml(45):1979-1992
+                                                         (array.get[int]
+                                                           marked node)))
+                                                     (before utils/strongly_connected_components.ml(46):2004-2104
+                                                       (seq
+                                                         (after utils/strongly_connected_components.ml(47):2018-2039
+                                                           (array.set[int]
+                                                             marked node 1a))
+                                                         (before utils/strongly_connected_components.ml(48):2049-2094
+                                                           (seq
+                                                             (after utils/strongly_connected_components.ml(48):2049-2075
+                                                               (apply
+                                                                 (field 14
+                                                                   (global Stdlib__list!))
+                                                                 aux
+                                                                 (after utils/strongly_connected_components.ml(48):2063-2075
+                                                                   (array.get[addr]
+                                                                    graph
+                                                                    node))))
+                                                             (before utils/strongly_connected_components.ml(49):2085-2094
+                                                               (after utils/strongly_connected_components.ml(49):2085-2094
+                                                                 (apply push
+                                                                   node)))))))
+                                                     0a)))))
+                                          (before utils/strongly_connected_components.ml(52):2116-2172
+                                            (seq
+                                              (for i 0 to (- size 1)
+                                                (before utils/strongly_connected_components.ml(53):2147-2152
+                                                  (after utils/strongly_connected_components.ml(53):2147-2152
+                                                    (apply aux i))))
+                                              (before utils/strongly_connected_components.ml(55):2167-2172
+                                                stack)))))))))))))))))
+            mark =
+              (function order graph
+                (funct-body utils/strongly_connected_components.ml(57)<ghost>:2185-2736
+                  (before utils/strongly_connected_components.ml(58):2203-2736
+                    (let (size =[int] (array.length[addr] graph))
+                      (before utils/strongly_connected_components.ml(59):2240-2736
+                        (let
+                          (graph =
+                             (after utils/strongly_connected_components.ml(59):2252-2267
+                               (apply transpose graph)))
+                          (before utils/strongly_connected_components.ml(60):2275-2736
+                            (let
+                              (marked =
+                                 (after utils/strongly_connected_components.ml(60):2288-2309
+                                   (caml_make_vect size 0a)))
+                              (before utils/strongly_connected_components.ml(61):2317-2736
+                                (let
+                                  (id =
+                                     (after utils/strongly_connected_components.ml(61):2326-2345
+                                       (caml_make_vect size (~ 1))))
+                                  (before utils/strongly_connected_components.ml(62):2353-2736
+                                    (let (count = (makemutable 0 (int) 0))
+                                      (before utils/strongly_connected_components.ml(63):2378-2736
+                                        (letrec
+                                          (aux
+                                             (function node[int]
+                                               (funct-body utils/strongly_connected_components.ml(63)<ghost>:2390-2545
+                                                 (before utils/strongly_connected_components.ml(64):2403-2545
+                                                   (if
+                                                     (not
+                                                       (after utils/strongly_connected_components.ml(64):2410-2423
+                                                         (array.get[int]
+                                                           marked node)))
+                                                     (before utils/strongly_connected_components.ml(65):2435-2545
+                                                       (seq
+                                                         (after utils/strongly_connected_components.ml(66):2449-2470
+                                                           (array.set[int]
+                                                             marked node 1a))
+                                                         (before utils/strongly_connected_components.ml(67):2480-2535
+                                                           (seq
+                                                             (after utils/strongly_connected_components.ml(67):2480-2499
+                                                               (array.set[int]
+                                                                 id node
+                                                                 (field 0
+                                                                   count)))
+                                                             (before utils/strongly_connected_components.ml(68):2509-2535
+                                                               (after utils/strongly_connected_components.ml(68):2509-2535
+                                                                 (apply
+                                                                   (field 14
+                                                                    (global Stdlib__list!))
+                                                                   aux
+                                                                   (after utils/strongly_connected_components.ml(68):2523-2535
+                                                                    (array.get[addr]
+                                                                    graph
+                                                                    node)))))))))
+                                                     0a)))))
+                                          (before utils/strongly_connected_components.ml(71):2557-2736
+                                            (seq
+                                              (for i (- size 1) downto 0
+                                                (before utils/strongly_connected_components.ml(72):2592-2711
+                                                  (let
+                                                    (node =[int]
+                                                       (after utils/strongly_connected_components.ml(72):2603-2612
+                                                         (array.get[int]
+                                                           order i)))
+                                                    (before utils/strongly_connected_components.ml(73):2622-2711
+                                                      (if
+                                                        (not
+                                                          (after utils/strongly_connected_components.ml(73):2629-2642
+                                                            (array.get[int]
+                                                              marked node)))
+                                                        (before utils/strongly_connected_components.ml(74):2654-2711
+                                                          (seq
+                                                            (after utils/strongly_connected_components.ml(75):2668-2681
+                                                              (apply aux
+                                                                (after utils/strongly_connected_components.ml(75):2672-2681
+                                                                  (array.get[int]
+                                                                    order i))))
+                                                            (before utils/strongly_connected_components.ml(76):2691-2701
+                                                              (+:=1 count))))
+                                                        0a)))))
+                                              (before utils/strongly_connected_components.ml(79):2726-2736
+                                                (makeblock 0 (*,int) id
+                                                  (field 0 count)))))))))))))))))))
+            kosaraju =
+              (function graph
+                (funct-body utils/strongly_connected_components.ml(81)<ghost>:2753-2881
+                  (before utils/strongly_connected_components.ml(82):2765-2881
+                    (let
+                      (dfo =
+                         (after utils/strongly_connected_components.ml(82):2775-2798
+                           (apply depth_first_order graph)))
+                      (before utils/strongly_connected_components.ml(83):2806-2881
+                        (let
+                          (*match* =
+                             (after utils/strongly_connected_components.ml(83):2836-2850
+                               (apply mark dfo graph))
+                           ncomponents =a (field 1 *match*)
+                           components =a (field 0 *match*))
+                          (before utils/strongly_connected_components.ml(84):2858-2881
+                            (makeblock 0 (int,*) ncomponents components))))))))
+            component_graph =
+              (function graph
+                (funct-body utils/strongly_connected_components.ml(91)<ghost>:3029-3711
+                  (before utils/strongly_connected_components.ml(92):3041-3711
+                    (let
+                      (*match* =
+                         (after utils/strongly_connected_components.ml(92):3071-3085
+                           (apply kosaraju graph))
+                       components =a (field 1 *match*)
+                       ncomponents =a (field 0 *match*))
+                      (before utils/strongly_connected_components.ml(93):3093-3711
+                        (let
+                          (id_scc =
+                             (after utils/strongly_connected_components.ml(93):3106-3131
+                               (caml_make_vect ncomponents 0a)))
+                          (before utils/strongly_connected_components.ml(94):3139-3711
+                            (let
+                              (component_graph =
+                                 (after utils/strongly_connected_components.ml(94):3161-3197
+                                   (caml_make_vect ncomponents
+                                     (field 0
+                                       (field 6 (field 0 (global Numbers!)))))))
+                              (before utils/strongly_connected_components.ml(95):3205-3711
+                                (let
+                                  (add_component_dep =
+                                     (function node[int] set
+                                       (funct-body utils/strongly_connected_components.ml(95)<ghost>:3227-3368
+                                         (before utils/strongly_connected_components.ml(96):3244-3368
+                                           (let
+                                             (node_deps =
+                                                (after utils/strongly_connected_components.ml(96):3260-3272
+                                                  (array.get[addr] graph
+                                                    node)))
+                                             (before utils/strongly_connected_components.ml(97):3282-3368
+                                               (after utils/strongly_connected_components.ml(97):3282-3368
+                                                 (apply
+                                                   (field 20
+                                                     (global Stdlib__list!))
+                                                   (function set dep[int]
+                                                     (funct-body utils/strongly_connected_components.ml(97):3297-3346
+                                                       (before utils/strongly_connected_components.ml(97):3313-3345
+                                                         (after utils/strongly_connected_components.ml(97):3313-3345
+                                                           (apply
+                                                             (field 3
+                                                               (field 6
+                                                                 (field 0
+                                                                   (global Numbers!))))
+                                                             (after utils/strongly_connected_components.ml(97):3325-3341
+                                                               (array.get[int]
+                                                                 components
+                                                                 dep))
+                                                             set)))))
+                                                   set node_deps))))))))
+                                  (before utils/strongly_connected_components.ml(100):3380-3711
+                                    (seq
+                                      (after utils/strongly_connected_components.ml(100):3380-3592
+                                        (apply
+                                          (field 13 (global Stdlib__array!))
+                                          (function node[int] component[int]
+                                            (funct-body utils/strongly_connected_components.ml(100):3392-3575
+                                              (before utils/strongly_connected_components.ml(101):3423-3574
+                                                (seq
+                                                  (after utils/strongly_connected_components.ml(101):3423-3471
+                                                    (array.set[addr] id_scc
+                                                      component
+                                                      (makeblock 0 (int,*)
+                                                        node
+                                                        (after utils/strongly_connected_components.ml(101):3453-3471
+                                                          (array.get[addr]
+                                                            id_scc component)))))
+                                                  (before utils/strongly_connected_components.ml(102):3481-3574
+                                                    (after utils/strongly_connected_components.ml(102):3481-3574
+                                                      (array.set[gen]
+                                                        component_graph
+                                                        component
+                                                        (after utils/strongly_connected_components.ml(103):3522-3574
+                                                          (apply
+                                                            add_component_dep
+                                                            node
+                                                            (after utils/strongly_connected_components.ml(103):3545-3574
+                                                              (array.get[gen]
+                                                                component_graph
+                                                                component)))))))))))
+                                          components))
+                                      (before utils/strongly_connected_components.ml(105):3598-3711
+                                        (makeblock 0 id_scc
+                                          (after utils/strongly_connected_components.ml(106):3662-3704
+                                            (apply
+                                              (field 14
+                                                (global Stdlib__array!))
+                                              (field 20
+                                                (field 6
+                                                  (field 0 (global Numbers!))))
+                                              component_graph)))))))))))))))))
+           (pseudo utils/strongly_connected_components.ml(26):1392-3715
+             (makeblock 0 component_graph))))
+     Make =
+       (module-defn(Make) utils/strongly_connected_components.ml(126):4055-6363
+         (function Id is_a_functor
+           (let
+             (Id =a Id
+              _check =
+                (function dependencies
+                  (funct-body utils/strongly_connected_components.ml(135)<ghost>:4353-4703
+                    (before utils/strongly_connected_components.ml(136):4372-4703
+                      (after utils/strongly_connected_components.ml(136):4372-4703
+                        (apply (field 11 (field 7 Id))
+                          (function id set
+                            (funct-body utils/strongly_connected_components.ml(136):4384-4684
+                              (before utils/strongly_connected_components.ml(137):4407-4683
+                                (after utils/strongly_connected_components.ml(137):4407-4683
+                                  (apply (field 13 (field 6 Id))
+                                    (function v
+                                      (funct-body utils/strongly_connected_components.ml(137):4419-4669
+                                        (before utils/strongly_connected_components.ml(138):4441-4668
+                                          (if
+                                            (not
+                                              (after utils/strongly_connected_components.ml(138):4448-4475
+                                                (apply (field 2 (field 7 Id))
+                                                  v dependencies)))
+                                            (before utils/strongly_connected_components.ml(140):4507-4668
+                                              (after utils/strongly_connected_components.ml(140):4507-4668
+                                                (apply
+                                                  (field 1 (global Misc!))
+                                                  [0:
+                                                   [11:
+                                                    "Strongly_connected_components.check: the graph has external dependencies ("
+                                                    [15:
+                                                     [11:
+                                                      " -> "
+                                                      [15: [12: ')' 0a]]]]]
+                                                   "Strongly_connected_components.check: the graph has external dependencies (%a -> %a)"]
+                                                  (field 5 Id) id
+                                                  (field 5 Id) v)))
+                                            0a))))
+                                    set)))))
+                          dependencies)))))
+              number =
+                (function graph
+                  (funct-body utils/strongly_connected_components.ml(151)<ghost>:4793-5572
+                    (before utils/strongly_connected_components.ml(152):4805-5572
+                      (let
+                        (size =[int]
+                           (after utils/strongly_connected_components.ml(152):4816-4837
+                             (apply (field 17 (field 7 Id)) graph)))
+                        (before utils/strongly_connected_components.ml(153):4845-5572
+                          (let
+                            (bindings =
+                               (after utils/strongly_connected_components.ml(153):4860-4881
+                                 (apply (field 18 (field 7 Id)) graph)))
+                            (before utils/strongly_connected_components.ml(154):4889-5572
+                              (let
+                                (a =
+                                   (after utils/strongly_connected_components.ml(154):4897-4919
+                                     (apply
+                                       (field 11 (global Stdlib__array!))
+                                       bindings)))
+                                (before utils/strongly_connected_components.ml(155):4927-5572
+                                  (let
+                                    (forth =
+                                       (after utils/strongly_connected_components.ml(155):4939-4954
+                                         (apply
+                                           (field 14 (global Stdlib__array!))
+                                           (function prim stub
+                                             (field 0 prim))
+                                           a)))
+                                    (before utils/strongly_connected_components.ml(156):4962-5572
+                                      (let
+                                        (back =
+                                           (let
+                                             (back =
+                                                (makemutable 0
+                                                  (field 0 (field 7 Id))))
+                                             (before utils/strongly_connected_components.ml(158):5016-5110
+                                               (seq
+                                                 (for i 0 to (- size 1)
+                                                   (before utils/strongly_connected_components.ml(159):5049-5085
+                                                     (setfield_ptr 0 back
+                                                       (after utils/strongly_connected_components.ml(159):5057-5085
+                                                         (apply
+                                                           (field 3
+                                                             (field 7 Id))
+                                                           (after utils/strongly_connected_components.ml(159):5068-5077
+                                                             (array.get[gen]
+                                                               forth i))
+                                                           i (field 0 back))))))
+                                                 (before utils/strongly_connected_components.ml(161):5105-5110
+                                                   (field 0 back))))))
+                                        (before utils/strongly_connected_components.ml(163):5122-5572
+                                          (let
+                                            (integer_graph =
+                                               (after utils/strongly_connected_components.ml(164):5148-5530
+                                                 (apply
+                                                   (field 1
+                                                     (global Stdlib__array!))
+                                                   size
+                                                   (function i[int]
+                                                     (funct-body utils/strongly_connected_components.ml(164):5164-5530
+                                                       (before utils/strongly_connected_components.ml(165):5182-5529
+                                                         (let
+                                                           (*match* =
+                                                              (after utils/strongly_connected_components.ml(165):5197-5202
+                                                                (array.get[addr]
+                                                                  a i))
+                                                            dests =a
+                                                              (field 1
+                                                                *match*))
+                                                           (before utils/strongly_connected_components.ml(166):5214-5529
+                                                             (after utils/strongly_connected_components.ml(166):5214-5529
+                                                               (apply
+                                                                 (field 14
+                                                                   (field 6
+                                                                    Id))
+                                                                 (function
+                                                                   dest acc
+                                                                   (funct-body utils/strongly_connected_components.ml(166):5226-5510
+                                                                    (before utils/strongly_connected_components.ml(167):5255-5509
+                                                                    (let
+                                                                    (v =[int]
+                                                                    (try
+                                                                    (after utils/strongly_connected_components.ml(168):5281-5302
+                                                                    (apply
+                                                                    (field 26
+                                                                    (field 7
+                                                                    Id)) dest
+                                                                    back))
+                                                                    with exn
+                                                                    (if
+                                                                    (== exn
+                                                                    (field 7
+                                                                    (global Stdlib!)))
+                                                                    (before utils/strongly_connected_components.ml(170):5351-5473
+                                                                    (after utils/strongly_connected_components.ml(170):5351-5473
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Misc!))
+                                                                    [0:
+                                                                    [11:
+                                                                    "Strongly_connected_components: missing dependency "
+                                                                    [15: 0a]]
+                                                                    "Strongly_connected_components: missing dependency %a"]
+                                                                    (field 5
+                                                                    Id) dest)))
+                                                                    (reraise
+                                                                    exn))))
+                                                                    (before utils/strongly_connected_components.ml(174):5501-5509
+                                                                    (makeblock 0 (int,*)
+                                                                    v acc))))))
+                                                                 dests 0a))))))))))
+                                            (before utils/strongly_connected_components.ml(177):5542-5572
+                                              (makeblock 0
+                                                (makeblock 0 back forth)
+                                                integer_graph))))))))))))))))
+              component_graph =
+                (function graph
+                  (funct-body utils/strongly_connected_components.ml(179)<ghost>:5596-6255
+                    (before utils/strongly_connected_components.ml(180):5608-6255
+                      (let
+                        (*match* =
+                           (after utils/strongly_connected_components.ml(180):5639-5651
+                             (apply number graph))
+                         integer_graph =a (field 1 *match*)
+                         numbering =a (field 0 *match*))
+                        (before utils/strongly_connected_components.ml(181):5659-6255
+                          (let
+                            (*match* =
+                               (after utils/strongly_connected_components.ml(183):5740-5778
+                                 (apply (field 0 Kosaraju) integer_graph))
+                             component_edges =a (field 1 *match*)
+                             sorted_connected_components =a (field 0 *match*))
+                            (before utils/strongly_connected_components.ml(185):5790-6255
+                              (after utils/strongly_connected_components.ml(185):5790-6255
+                                (apply (field 15 (global Stdlib__array!))
+                                  (function component[int] nodes
+                                    (funct-body utils/strongly_connected_components.ml(185):5801-6221
+                                      (before utils/strongly_connected_components.ml(186):5833-6220
+                                        (if nodes
+                                          (let
+                                            (*match* =a (field 1 nodes)
+                                             node =a (field 0 nodes))
+                                            (if *match*
+                                              (before utils/strongly_connected_components.ml(194):6115-6220
+                                                (makeblock 0
+                                                  (makeblock 0
+                                                    (after utils/strongly_connected_components.ml(194):6125-6178
+                                                      (apply
+                                                        (field 16
+                                                          (global Stdlib__list!))
+                                                        (function node[int]
+                                                          (funct-body utils/strongly_connected_components.ml(194):6135-6171
+                                                            (before utils/strongly_connected_components.ml(194):6148-6170
+                                                              (after utils/strongly_connected_components.ml(194):6148-6170
+                                                                (array.get[gen]
+                                                                  (field 1
+                                                                    numbering)
+                                                                  node)))))
+                                                        nodes)))
+                                                  (after utils/strongly_connected_components.ml(195):6193-6220
+                                                    (array.get[addr]
+                                                      component_edges
+                                                      component))))
+                                              (before utils/strongly_connected_components.ml(189):5909-6086
+                                                (makeblock 0
+                                                  (if
+                                                    (after utils/strongly_connected_components.ml(189):5913-5947
+                                                      (apply
+                                                        (field 31
+                                                          (global Stdlib__list!))
+                                                        node
+                                                        (after utils/strongly_connected_components.ml(189):5927-5947
+                                                          (array.get[addr]
+                                                            integer_graph
+                                                            node))))
+                                                    (before utils/strongly_connected_components.ml(190):5964-5997
+                                                      (makeblock 0
+                                                        (makeblock 0
+                                                          (after utils/strongly_connected_components.ml(190):5974-5996
+                                                            (array.get[gen]
+                                                              (field 1
+                                                                numbering)
+                                                              node))
+                                                          0a)))
+                                                    (before utils/strongly_connected_components.ml(191):6014-6044
+                                                      (makeblock 1
+                                                        (after utils/strongly_connected_components.ml(191):6022-6044
+                                                          (array.get[gen]
+                                                            (field 1
+                                                              numbering)
+                                                            node)))))
+                                                  (after utils/strongly_connected_components.ml(192):6059-6086
+                                                    (array.get[addr]
+                                                      component_edges
+                                                      component))))))
+                                          (before utils/strongly_connected_components.ml(187):5866-5878
+                                            (raise
+                                              (after utils/strongly_connected_components.ml(187):5866-5878
+                                                (makeblock 0
+                                                  (global Assert_failure!)
+                                                  [0:
+                                                   "utils/strongly_connected_components.ml"
+                                                   187 16]))))))))
+                                  sorted_connected_components)))))))))
+              connected_components_sorted_from_roots_to_leaf =
+                (function graph
+                  (funct-body utils/strongly_connected_components.ml(198)<ghost>:6310-6359
+                    (before utils/strongly_connected_components.ml(199):6322-6359
+                      (after utils/strongly_connected_components.ml(199):6322-6359
+                        (apply (field 14 (global Stdlib__array!))
+                          (function prim stub (field 0 prim))
+                          (after utils/strongly_connected_components.ml(199):6336-6359
+                            (apply component_graph graph))))))))
+             (pseudo utils/strongly_connected_components.ml(126):4091-6363
+               (makeblock 0 _check number component_graph
+                 connected_components_sorted_from_roots_to_leaf))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0
+        (function funarg is_a_functor stub
+          (let (let = (apply Make funarg))
+            (makeblock 0 (field 3 let) (field 2 let))))))))

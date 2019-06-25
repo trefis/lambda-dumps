@@ -1,0 +1,517 @@
+(setglobal Topmain!
+  (let
+    (usage =
+       "Usage: ocaml <options> <object-files> [script-file [arguments]]\noptions are:"
+     preload_objects = (makemutable 0 0a)
+     first_nonexpanded_pos = (makemutable 0 (int) 0)
+     current =
+       (makemutable 0 (int) (field 0 (field 11 (global Stdlib__arg!))))
+     argv = (makemutable 0 (caml_sys_argv 0a))
+     is_expanded =
+       (function pos[int]
+         (funct-body toplevel/topmain.ml(32)<ghost>:1460-1494
+           (before toplevel/topmain.ml(32):1466-1494
+             (< pos (field 0 first_nonexpanded_pos)))))
+     expand_position =
+       (function pos[int] len[int]
+         (funct-body toplevel/topmain.ml(34)<ghost>:1516-1729
+           (before toplevel/topmain.ml(35):1528-1729
+             (if (< pos (field 0 first_nonexpanded_pos))
+               (before toplevel/topmain.ml(37):1598-1651
+                 (setfield_imm 0 first_nonexpanded_pos
+                   (+ (field 0 first_nonexpanded_pos) len)))
+               (before toplevel/topmain.ml(40):1691-1729
+                 (setfield_imm 0 first_nonexpanded_pos (+ (+ pos len) 2)))))))
+     prepare =
+       (function ppf
+         (funct-body toplevel/topmain.ml(42)<ghost>:1743-2141
+           (before toplevel/topmain.ml(43):1751-2141
+             (seq
+               (after toplevel/topmain.ml(43):1751-1771
+                 (apply (field 2 (global Toploop!)) 0a))
+               (before toplevel/topmain.ml(44):1775-2141
+                 (try
+                   (let
+                     (res =
+                        (let
+                          (objects =
+                             (after toplevel/topmain.ml(47):1821-1866
+                               (apply (field 8 (global Stdlib__list!))
+                                 (after toplevel/topmain.ml(47):1830-1866
+                                   (apply (field 36 (global Stdlib!))
+                                     (field 0 preload_objects)
+                                     (field 0 (field 14 (global Compenv!))))))))
+                          (before toplevel/topmain.ml(49):1882-1926
+                            (after toplevel/topmain.ml(49):1882-1926
+                              (apply (field 27 (global Stdlib__list!))
+                                (after toplevel/topmain.ml(49):1895-1918
+                                  (apply (field 11 (global Topdirs!)) ppf))
+                                objects)))))
+                     (before toplevel/topmain.ml(51):1938-1980
+                       (seq
+                         (after toplevel/topmain.ml(51):1938-1971
+                           (apply (field 48 (global Toploop!))
+                             (field 45 (global Toploop!))))
+                         (before toplevel/topmain.ml(52):1977-1980 res))))
+                  with x
+                   (before toplevel/topmain.ml(54):1997-2141
+                     (try
+                       (seq
+                         (after toplevel/topmain.ml(54):2001-2032
+                           (apply (field 51 (global Location!)) ppf x))
+                         (before toplevel/topmain.ml(54):2034-2039 0a))
+                      with x
+                       (before toplevel/topmain.ml(56):2060-2141
+                         (seq
+                           (after toplevel/topmain.ml(56):2060-2128
+                             (apply (field 122 (global Stdlib__format!)) ppf
+                               [0:
+                                [11:
+                                 "Uncaught exception: " [2: 0a [12: '\n' 0a]]]
+                                "Uncaught exception: %s\n"]
+                               (after toplevel/topmain.ml(56):2106-2128
+                                 (apply (field 0 (global Stdlib__printexc!))
+                                   x))))
+                           (before toplevel/topmain.ml(57):2136-2141 0a)))))))))))
+     file_argument =
+       (function name
+         (funct-body toplevel/topmain.ml(60)<ghost>:2235-3170
+           (before toplevel/topmain.ml(61):2244-3170
+             (let (ppf = (field 105 (global Stdlib__format!)))
+               (before toplevel/topmain.ml(62):2280-3170
+                 (if
+                   (||
+                     (after toplevel/topmain.ml(62):2283-2316
+                       (apply (field 6 (global Stdlib__filename!)) name
+                         ".cmo"))
+                     (after toplevel/topmain.ml(62):2320-2353
+                       (apply (field 6 (global Stdlib__filename!)) name
+                         ".cma")))
+                   (before toplevel/topmain.ml(63):2361-2404
+                     (setfield_ptr 0 preload_objects
+                       (makeblock 0 name (field 0 preload_objects))))
+                   (before toplevel/topmain.ml(64):2412-3170
+                     (if
+                       (after toplevel/topmain.ml(64):2415-2435
+                         (apply is_expanded (field 0 current)))
+                       (before toplevel/topmain.ml(64):2441-2859
+                         (seq
+                           (after toplevel/topmain.ml(69):2642-2841
+                             (apply (field 2 (global Stdlib__printf!))
+                               [0:
+                                [11:
+                                 "For implementation reasons, the toplevel does not support having script files (here "
+                                 [3:
+                                  0a
+                                  [11:
+                                   ") inside expanded arguments passed through the -args{,0} command-line option.\n"
+                                   0a]]]
+                                "For implementation reasons, the toplevel does not support having script files (here %S) inside expanded arguments passed through the -args{,0} command-line option.\n"]
+                               name))
+                           (before toplevel/topmain.ml(72):2847-2853
+                             (after toplevel/topmain.ml(72):2847-2853
+                               (apply (field 98 (global Stdlib!)) 2)))))
+                       (before toplevel/topmain.ml(73):2865-3170
+                         (let
+                           (newargs =
+                              (after toplevel/topmain.ml(74):2891-2977
+                                (apply (field 6 (global Stdlib__array!))
+                                  (field 0 argv) (field 0 current)
+                                  (- (array.length[addr] (field 0 argv))
+                                    (field 0 current)))))
+                           (before toplevel/topmain.ml(77):2993-3162
+                             (seq
+                               (after toplevel/topmain.ml(77):2993-3024
+                                 (apply (field 15 (global Compenv!)) ppf 1a))
+                               (before toplevel/topmain.ml(78):3032-3162
+                                 (seq
+                                   (after toplevel/topmain.ml(78):3032-3065
+                                     (apply (field 3 (global Compmisc!)) 0a))
+                                   (before toplevel/topmain.ml(79):3073-3162
+                                     (if
+                                       (&&
+                                         (after toplevel/topmain.ml(79):3076-3087
+                                           (apply prepare ppf))
+                                         (after toplevel/topmain.ml(79):3091-3126
+                                           (apply (field 4 (global Toploop!))
+                                             ppf name newargs)))
+                                       (before toplevel/topmain.ml(80):3138-3144
+                                         (after toplevel/topmain.ml(80):3138-3144
+                                           (apply (field 98 (global Stdlib!))
+                                             0)))
+                                       (before toplevel/topmain.ml(81):3156-3162
+                                         (after toplevel/topmain.ml(81):3156-3162
+                                           (apply (field 98 (global Stdlib!))
+                                             2)))))))))))))))))))
+     print_version =
+       (function param
+         (funct-body toplevel/topmain.ml(84)<ghost>:3190-3274
+           (before toplevel/topmain.ml(85):3197-3274
+             (seq
+               (after toplevel/topmain.ml(85):3197-3263
+                 (apply (field 1 (global Stdlib__printf!))
+                   [0:
+                    [11:
+                     "The OCaml toplevel, version " [2: 0a [12: '\n' 0a]]]
+                    "The OCaml toplevel, version %s\n"]
+                   (field 45 (global Stdlib__sys!))))
+               (before toplevel/topmain.ml(86):3267-3273
+                 (after toplevel/topmain.ml(86):3267-3273
+                   (apply (field 98 (global Stdlib!)) 0)))))))
+     print_version_num =
+       (function param
+         (funct-body toplevel/topmain.ml(89)<ghost>:3301-3357
+           (before toplevel/topmain.ml(90):3308-3357
+             (seq
+               (after toplevel/topmain.ml(90):3308-3346
+                 (apply (field 1 (global Stdlib__printf!))
+                   [0: [2: 0a [12: '\n' 0a]] "%s\n"]
+                   (field 45 (global Stdlib__sys!))))
+               (before toplevel/topmain.ml(91):3350-3356
+                 (after toplevel/topmain.ml(91):3350-3356
+                   (apply (field 98 (global Stdlib!)) 0)))))))
+     wrap_expand =
+       (function f s
+         (funct-body toplevel/topmain.ml(94)<ghost>:3378-3478
+           (before toplevel/topmain.ml(95):3386-3478
+             (let (start =[int] (field 0 current))
+               (before toplevel/topmain.ml(96):3412-3478
+                 (let
+                   (arr =
+                      (after toplevel/topmain.ml(96):3422-3425 (apply f s)))
+                   (before toplevel/topmain.ml(97):3431-3478
+                     (seq
+                       (after toplevel/topmain.ml(97):3431-3471
+                         (apply expand_position start
+                           (array.length[gen] arr)))
+                       (before toplevel/topmain.ml(98):3475-3478 arr)))))))))
+     Options =
+       (module-defn(Options) toplevel/topmain.ml(100):3480-5855
+         (apply (field 1 (global Main_args!))
+           (let
+             (set =
+                (function r param
+                  (funct-body toplevel/topmain.ml(101)<ghost>:3546-3562
+                    (before toplevel/topmain.ml(101):3553-3562
+                      (setfield_imm 0 r 1a))))
+              clear =
+                (function r param
+                  (funct-body toplevel/topmain.ml(102)<ghost>:3575-3592
+                    (before toplevel/topmain.ml(102):3582-3592
+                      (setfield_imm 0 r 0a))))
+              _absname =
+                (after toplevel/topmain.ml(104):3611-3630
+                  (apply set (field 33 (global Clflags!))))
+              _alert = (field 1 (global Warnings!))
+              _I =
+                (function dir
+                  (funct-body toplevel/topmain.ml(106)<ghost>:3683-3725
+                    (before toplevel/topmain.ml(106):3689-3725
+                      (setfield_ptr 0 (field 12 (global Clflags!))
+                        (makeblock 0 dir
+                          (field 0 (field 12 (global Clflags!))))))))
+              _init =
+                (function s
+                  (funct-body toplevel/topmain.ml(107)<ghost>:3738-3761
+                    (before toplevel/topmain.ml(107):3742-3761
+                      (setfield_ptr 0 (field 41 (global Clflags!))
+                        (makeblock 0 s)))))
+              _noinit =
+                (after toplevel/topmain.ml(108):3778-3788
+                  (apply set (field 42 (global Clflags!))))
+              _labels =
+                (after toplevel/topmain.ml(109):3805-3818
+                  (apply clear (field 27 (global Clflags!))))
+              _alias_deps =
+                (after toplevel/topmain.ml(110):3839-3864
+                  (apply clear (field 61 (global Clflags!))))
+              _no_alias_deps =
+                (after toplevel/topmain.ml(111):3888-3911
+                  (apply set (field 61 (global Clflags!))))
+              _app_funct =
+                (after toplevel/topmain.ml(112):3931-3955
+                  (apply set (field 52 (global Clflags!))))
+              _no_app_funct =
+                (after toplevel/topmain.ml(113):3978-4004
+                  (apply clear (field 52 (global Clflags!))))
+              _noassert =
+                (after toplevel/topmain.ml(114):4023-4035
+                  (apply set (field 37 (global Clflags!))))
+              _nolabels =
+                (after toplevel/topmain.ml(115):4054-4065
+                  (apply set (field 27 (global Clflags!))))
+              _noprompt =
+                (after toplevel/topmain.ml(116):4084-4096
+                  (apply set (field 39 (global Clflags!))))
+              _nopromptcont =
+                (after toplevel/topmain.ml(117):4119-4135
+                  (apply set (field 40 (global Clflags!))))
+              _nostdlib =
+                (after toplevel/topmain.ml(118):4154-4172
+                  (apply set (field 13 (global Clflags!))))
+              _nopervasives =
+                (after toplevel/topmain.ml(119):4195-4211
+                  (apply set (field 28 (global Clflags!))))
+              _open =
+                (function s
+                  (funct-body toplevel/topmain.ml(120)<ghost>:4224-4262
+                    (before toplevel/topmain.ml(120):4228-4262
+                      (setfield_ptr 0 (field 30 (global Clflags!))
+                        (makeblock 0 s
+                          (field 0 (field 30 (global Clflags!))))))))
+              _ppx =
+                (function s
+                  (funct-body toplevel/topmain.ml(121)<ghost>:4274-4306
+                    (before toplevel/topmain.ml(121):4278-4306
+                      (setfield_ptr 0 (field 9 (global Compenv!))
+                        (makeblock 0 s (field 0 (field 9 (global Compenv!))))))))
+              _principal =
+                (after toplevel/topmain.ml(122):4326-4339
+                  (apply set (field 47 (global Clflags!))))
+              _no_principal =
+                (after toplevel/topmain.ml(123):4362-4377
+                  (apply clear (field 47 (global Clflags!))))
+              _rectypes =
+                (after toplevel/topmain.ml(124):4396-4415
+                  (apply set (field 49 (global Clflags!))))
+              _no_rectypes =
+                (after toplevel/topmain.ml(125):4437-4458
+                  (apply clear (field 49 (global Clflags!))))
+              _safe_string =
+                (after toplevel/topmain.ml(126):4480-4499
+                  (apply clear (field 130 (global Clflags!))))
+              _short_paths =
+                (after toplevel/topmain.ml(127):4521-4537
+                  (apply clear (field 48 (global Clflags!))))
+              _stdin =
+                (function param
+                  (funct-body toplevel/topmain.ml(128)<ghost>:4551-4572
+                    (before toplevel/topmain.ml(128):4556-4572
+                      (after toplevel/topmain.ml(128):4556-4572
+                        (apply file_argument "")))))
+              _strict_sequence =
+                (after toplevel/topmain.ml(129):4598-4617
+                  (apply set (field 50 (global Clflags!))))
+              _no_strict_sequence =
+                (after toplevel/topmain.ml(130):4646-4667
+                  (apply clear (field 50 (global Clflags!))))
+              _strict_formats =
+                (after toplevel/topmain.ml(131):4692-4710
+                  (apply set (field 51 (global Clflags!))))
+              _no_strict_formats =
+                (after toplevel/topmain.ml(132):4738-4758
+                  (apply clear (field 51 (global Clflags!))))
+              _unboxed_types =
+                (after toplevel/topmain.ml(133):4782-4799
+                  (apply set (field 155 (global Clflags!))))
+              _no_unboxed_types =
+                (after toplevel/topmain.ml(134):4826-4845
+                  (apply clear (field 155 (global Clflags!))))
+              _unsafe =
+                (after toplevel/topmain.ml(135):4862-4872
+                  (apply set (field 18 (global Clflags!))))
+              _unsafe_string =
+                (after toplevel/topmain.ml(136):4896-4913
+                  (apply set (field 130 (global Clflags!))))
+              _version =
+                (function param
+                  (funct-body toplevel/topmain.ml(137)<ghost>:4929-4950
+                    (before toplevel/topmain.ml(137):4934-4950
+                      (after toplevel/topmain.ml(137):4934-4950
+                        (apply print_version 0a)))))
+              _vnum =
+                (function param
+                  (funct-body toplevel/topmain.ml(138)<ghost>:4963-4988
+                    (before toplevel/topmain.ml(138):4968-4988
+                      (after toplevel/topmain.ml(138):4968-4988
+                        (apply print_version_num 0a)))))
+              _no_version =
+                (after toplevel/topmain.ml(139):5009-5022
+                  (apply set (field 43 (global Clflags!))))
+              _w =
+                (function s
+                  (funct-body toplevel/topmain.ml(140)<ghost>:5032-5066
+                    (before toplevel/topmain.ml(140):5036-5066
+                      (after toplevel/topmain.ml(140):5036-5066
+                        (apply (field 0 (global Warnings!)) 0a s)))))
+              _warn_error =
+                (function s
+                  (funct-body toplevel/topmain.ml(141)<ghost>:5085-5118
+                    (before toplevel/topmain.ml(141):5089-5118
+                      (after toplevel/topmain.ml(141):5089-5118
+                        (apply (field 0 (global Warnings!)) 1a s)))))
+              _warn_help = (field 12 (global Warnings!))
+              _dparsetree =
+                (after toplevel/topmain.ml(143):5181-5199
+                  (apply set (field 64 (global Clflags!))))
+              _dtypedtree =
+                (after toplevel/topmain.ml(144):5220-5238
+                  (apply set (field 65 (global Clflags!))))
+              _dno_unique_ids =
+                (after toplevel/topmain.ml(145):5263-5279
+                  (apply clear (field 62 (global Clflags!))))
+              _dunique_ids =
+                (after toplevel/topmain.ml(146):5301-5315
+                  (apply set (field 62 (global Clflags!))))
+              _dsource =
+                (after toplevel/topmain.ml(147):5333-5348
+                  (apply set (field 63 (global Clflags!))))
+              _drawlambda =
+                (after toplevel/topmain.ml(148):5369-5387
+                  (apply set (field 66 (global Clflags!))))
+              _dlambda =
+                (after toplevel/topmain.ml(149):5405-5420
+                  (apply set (field 67 (global Clflags!))))
+              _dflambda =
+                (after toplevel/topmain.ml(150):5439-5455
+                  (apply set (field 71 (global Clflags!))))
+              _dtimings =
+                (function param
+                  (funct-body toplevel/topmain.ml(151)<ghost>:5472-5505
+                    (before toplevel/topmain.ml(151):5477-5505
+                      (setfield_ptr 0 (field 132 (global Clflags!))
+                        [0: 936769581a 0a]))))
+              _dprofile =
+                (function param
+                  (funct-body toplevel/topmain.ml(152)<ghost>:5522-5565
+                    (before toplevel/topmain.ml(152):5527-5565
+                      (setfield_ptr 0 (field 132 (global Clflags!))
+                        (field 5 (global Profile!))))))
+              _dinstr =
+                (after toplevel/topmain.ml(153):5582-5596
+                  (apply set (field 73 (global Clflags!))))
+              _color =
+                (after toplevel/topmain.ml(154):5612-5655
+                  (apply (field 36 (global Misc!))
+                    (field 0 (field 152 (global Clflags!)))
+                    (field 151 (global Clflags!))))
+              _error_style =
+                (after toplevel/topmain.ml(155):5677-5732
+                  (apply (field 36 (global Misc!))
+                    (field 0 (field 154 (global Clflags!)))
+                    (field 153 (global Clflags!))))
+              _args =
+                (after toplevel/topmain.ml(157):5748-5772
+                  (apply wrap_expand (field 12 (global Stdlib__arg!))))
+              _args0 =
+                (after toplevel/topmain.ml(158):5788-5813
+                  (apply wrap_expand (field 13 (global Stdlib__arg!))))
+              anonymous =
+                (function s
+                  (funct-body toplevel/topmain.ml(160)<ghost>:5831-5850
+                    (before toplevel/topmain.ml(160):5835-5850
+                      (after toplevel/topmain.ml(160):5835-5850
+                        (apply file_argument s))))))
+             (pseudo toplevel/topmain.ml(100):3529-5854
+               (makeblock 0 _absname _alert _I _labels _alias_deps
+                 _no_alias_deps _app_funct _no_app_funct _noassert _nolabels
+                 _nostdlib _nopervasives _open _ppx _principal _no_principal
+                 _rectypes _no_rectypes _safe_string _short_paths
+                 _strict_sequence _no_strict_sequence _strict_formats
+                 _no_strict_formats _unboxed_types _no_unboxed_types _unsafe
+                 _unsafe_string _version _vnum _w _warn_error _warn_help
+                 _dno_unique_ids _dunique_ids _dsource _dparsetree
+                 _dtypedtree _drawlambda _dlambda anonymous _init _noinit
+                 _no_version _noprompt _nopromptcont _stdin _args _args0
+                 _color _error_style _dinstr)))))
+     *match* =
+       (let
+         (extra_paths =
+            (catch
+              (try
+                (exit 3
+                  (after toplevel/topmain.ml(165):5898-5932
+                    (caml_sys_getenv "OCAMLTOP_INCLUDE_PATH")))
+               with exn
+                (if (== exn (field 7 (global Stdlib!)))
+                  (before toplevel/topmain.ml(166):5967-5969 0a)
+                  (reraise exn)))
+             with (3 s)
+              (before toplevel/topmain.ml(167):5981-6007
+                (after toplevel/topmain.ml(167):5981-6007
+                  (apply (field 17 (global Misc!)) 0a s)))))
+         (before toplevel/topmain.ml(169):6015-6088
+           (setfield_ptr 0 (field 12 (global Clflags!))
+             (after toplevel/topmain.ml(169):6039-6088
+               (apply (field 11 (global Stdlib__list!)) extra_paths
+                 (field 0 (field 12 (global Clflags!))))))))
+     main =
+       (function param
+         (funct-body toplevel/topmain.ml(171)<ghost>:6099-6593
+           (before toplevel/topmain.ml(172):6106-6593
+             (let (ppf = (field 105 (global Stdlib__format!)))
+               (before toplevel/topmain.ml(173):6142-6593
+                 (seq
+                   (after toplevel/topmain.ml(173):6142-6173
+                     (apply (field 15 (global Compenv!)) ppf 0a))
+                   (before toplevel/topmain.ml(174):6177-6593
+                     (let (list = (makemutable 0 (field 0 Options)))
+                       (before toplevel/topmain.ml(175):6210-6593
+                         (seq
+                           (try
+                             (after toplevel/topmain.ml(177):6230-6301
+                               (apply (field 4 (global Stdlib__arg!)) current
+                                 argv list file_argument usage))
+                            with exn
+                             (let (tag =a (field 0 exn))
+                               (if (== tag (field 7 (global Stdlib__arg!)))
+                                 (let (msg =a (field 1 exn))
+                                   (before toplevel/topmain.ml(179):6333-6364
+                                     (seq
+                                       (after toplevel/topmain.ml(179):6333-6356
+                                         (apply
+                                           (field 2 (global Stdlib__printf!))
+                                           [0: [2: 0a 0a] "%s"] msg))
+                                       (before toplevel/topmain.ml(179):6358-6364
+                                         (after toplevel/topmain.ml(179):6358-6364
+                                           (apply (field 98 (global Stdlib!))
+                                             2))))))
+                                 (let (tag =a (field 0 exn))
+                                   (if
+                                     (== tag (field 6 (global Stdlib__arg!)))
+                                     (let (msg =a (field 1 exn))
+                                       (before toplevel/topmain.ml(180):6387-6417
+                                         (seq
+                                           (after toplevel/topmain.ml(180):6387-6409
+                                             (apply
+                                               (field 1
+                                                 (global Stdlib__printf!))
+                                               [0: [2: 0a 0a] "%s"] msg))
+                                           (before toplevel/topmain.ml(180):6411-6417
+                                             (after toplevel/topmain.ml(180):6411-6417
+                                               (apply
+                                                 (field 98 (global Stdlib!))
+                                                 0))))))
+                                     (reraise exn))))))
+                           (before toplevel/topmain.ml(182):6427-6593
+                             (seq
+                               (after toplevel/topmain.ml(182):6427-6458
+                                 (apply (field 15 (global Compenv!)) ppf 1a))
+                               (before toplevel/topmain.ml(183):6462-6593
+                                 (seq
+                                   (after toplevel/topmain.ml(183):6462-6495
+                                     (apply (field 3 (global Compmisc!)) 0a))
+                                   (before toplevel/topmain.ml(184):6499-6593
+                                     (seq
+                                       (if
+                                         (not
+                                           (after toplevel/topmain.ml(184):6506-6519
+                                             (apply prepare ppf)))
+                                         (before toplevel/topmain.ml(184):6525-6531
+                                           (after toplevel/topmain.ml(184):6525-6531
+                                             (apply
+                                               (field 98 (global Stdlib!)) 2)))
+                                         0a)
+                                       (before toplevel/topmain.ml(185):6535-6593
+                                         (seq
+                                           (after toplevel/topmain.ml(185):6535-6556
+                                             (apply
+                                               (field 0 (global Compmisc!))
+                                               0a 0a))
+                                           (before toplevel/topmain.ml(186):6560-6593
+                                             (after toplevel/topmain.ml(186):6560-6593
+                                               (apply
+                                                 (field 3 (global Toploop!))
+                                                 (field 104
+                                                   (global Stdlib__format!))))))))))))))))))))))))
+    (pseudo _none_(0)<ghost>:-1--1 (makeblock 0 main))))

@@ -1,0 +1,1148 @@
+(setglobal Symtable!
+  (let
+    (Error = (makeblock 248 "Symtable.Error" (caml_fresh_oo_id 0))
+     Num_tbl =
+       (module-defn(Num_tbl) bytecomp/symtable.ml(37):1445-1880
+         (function M is_a_functor
+           (let
+             (M =a M
+              empty = (makeblock 0 (int,*) 0 (field 0 M))
+              find =
+                (function nt key : int
+                  (funct-body bytecomp/symtable.ml(46)<ghost>:1652-1682
+                    (before bytecomp/symtable.ml(47):1665-1682
+                      (after bytecomp/symtable.ml(47):1665-1682
+                        (apply (field 26 M) key (field 1 nt))))))
+              enter =
+                (function nt key : int
+                  (funct-body bytecomp/symtable.ml(49)<ghost>:1696-1787
+                    (before bytecomp/symtable.ml(50):1709-1787
+                      (let (n =[int] (field 0 (field 0 nt)))
+                        (before bytecomp/symtable.ml(51):1732-1787
+                          (seq
+                            (setfield_ptr 0 nt
+                              (makeblock 0 (int,*) (+ n 1)
+                                (after bytecomp/symtable.ml(51):1759-1778
+                                  (apply (field 3 M) key n
+                                    (field 1 (field 0 nt))))))
+                            (before bytecomp/symtable.ml(52):1786-1787 n)))))))
+              incr =
+                (function nt : int
+                  (funct-body bytecomp/symtable.ml(54)<ghost>:1800-1875
+                    (before bytecomp/symtable.ml(55):1809-1875
+                      (let (n =[int] (field 0 (field 0 nt)))
+                        (before bytecomp/symtable.ml(56):1832-1875
+                          (seq
+                            (setfield_ptr 0 nt
+                              (makeblock 0 (int,*) (+ n 1)
+                                (field 1 (field 0 nt))))
+                            (before bytecomp/symtable.ml(57):1874-1875 n))))))))
+             (pseudo bytecomp/symtable.ml(37):1474-1880
+               (makeblock 0 empty find enter incr)))))
+     GlobalMap =
+       (module-defn(GlobalMap) bytecomp/symtable.ml(60):1881-1918
+         (apply Num_tbl
+           (let (let = (field 6 (global Ident!)))
+             (makeblock 0 (field 0 let) (field 1 let) (field 2 let)
+               (field 3 let) (field 4 let) (field 5 let) (field 6 let)
+               (field 7 let) (field 8 let) (field 9 let) (field 10 let)
+               (field 11 let) (field 12 let) (field 13 let) (field 14 let)
+               (field 15 let) (field 16 let) (field 17 let) (field 18 let)
+               (field 19 let) (field 20 let) (field 21 let) (field 22 let)
+               (field 23 let) (field 24 let) (field 25 let) (field 26 let)
+               (field 27 let) (field 28 let) (field 29 let) (field 30 let)
+               (field 31 let) (field 32 let) (field 33 let) (field 34 let)
+               (field 35 let) (field 36 let) (field 37 let)))))
+     PrimMap =
+       (module-defn(PrimMap) bytecomp/symtable.ml(61):1919-1967
+         (apply Num_tbl (field 39 (field 3 (field 11 (global Misc!))))))
+     global_table = (makemutable 0 (field 0 GlobalMap))
+     literal_table = (makemutable 0 0a)
+     is_global_defined =
+       (function id
+         (funct-body bytecomp/symtable.ml(68)<ghost>:2118-2161
+           (before bytecomp/symtable.ml(69):2125-2161
+             (after bytecomp/symtable.ml(69):2125-2161
+               (apply (field 2 (field 6 (global Ident!))) id
+                 (field 1 (field 0 global_table)))))))
+     slot_for_getglobal =
+       (function id : int
+         (funct-body bytecomp/symtable.ml(71)<ghost>:2186-2302
+           (before bytecomp/symtable.ml(72):2193-2302
+             (try
+               (after bytecomp/symtable.ml(73):2201-2232
+                 (apply (field 1 GlobalMap) (field 0 global_table) id))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before bytecomp/symtable.ml(75):2257-2302
+                   (raise
+                     (after bytecomp/symtable.ml(75):2262-2302
+                       (makeblock 0 Error
+                         (makeblock 0
+                           (after bytecomp/symtable.ml(75):2285-2300
+                             (apply (field 14 (global Ident!)) id)))))))
+                 (reraise exn))))))
+     slot_for_setglobal =
+       (function id : int
+         (funct-body bytecomp/symtable.ml(77)<ghost>:2327-2365
+           (before bytecomp/symtable.ml(78):2334-2365
+             (after bytecomp/symtable.ml(78):2334-2365
+               (apply (field 2 GlobalMap) global_table id)))))
+     slot_for_literal =
+       (function cst : int
+         (funct-body bytecomp/symtable.ml(80)<ghost>:2388-2485
+           (before bytecomp/symtable.ml(81):2396-2485
+             (let
+               (n =[int]
+                  (after bytecomp/symtable.ml(81):2404-2431
+                    (apply (field 3 GlobalMap) global_table)))
+               (before bytecomp/symtable.ml(82):2437-2485
+                 (seq
+                   (setfield_ptr 0 literal_table
+                     (makeblock 0 (makeblock 0 (int,*) n cst)
+                       (field 0 literal_table)))
+                   (before bytecomp/symtable.ml(83):2484-2485 n)))))))
+     c_prim_table = (makemutable 0 (field 0 PrimMap))
+     set_prim_table =
+       (function name
+         (funct-body bytecomp/symtable.ml(89)<ghost>:2568-2616
+           (before bytecomp/symtable.ml(90):2577-2616
+             (ignore
+               (after bytecomp/symtable.ml(90):2583-2616
+                 (apply (field 2 PrimMap) c_prim_table name))))))
+     of_prim =
+       (function name : int
+         (funct-body bytecomp/symtable.ml(92)<ghost>:2630-3091
+           (before bytecomp/symtable.ml(93):2639-3091
+             (try
+               (after bytecomp/symtable.ml(94):2647-2678
+                 (apply (field 1 PrimMap) (field 0 c_prim_table) name))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before bytecomp/symtable.ml(96):2703-3091
+                   (if
+                     (|| (field 0 (field 21 (global Clflags!)))
+                       (||
+                         (after bytecomp/symtable.ml(96):2733-2761
+                           (caml_string_notequal (field 48 (global Config!))
+                             (field 49 (global Config!))))
+                         (field 0 (field 22 (global Clflags!)))))
+                     (before bytecomp/symtable.ml(99):2811-2842
+                       (after bytecomp/symtable.ml(99):2811-2842
+                         (apply (field 2 PrimMap) c_prim_table name)))
+                     (before bytecomp/symtable.ml(100):2852-3091
+                       (let
+                         (symb =
+                            (try
+                              (after bytecomp/symtable.ml(102):2887-2910
+                                (apply (field 3 (global Dll!)) name))
+                             with exn
+                              (if (== exn (field 7 (global Stdlib!)))
+                                (before bytecomp/symtable.ml(103):2937-2977
+                                  (raise
+                                    (after bytecomp/symtable.ml(103):2942-2977
+                                      (makeblock 0 Error (makeblock 1 name)))))
+                                (reraise exn))))
+                         (before bytecomp/symtable.ml(104):2987-3083
+                           (let
+                             (num =[int]
+                                (after bytecomp/symtable.ml(104):2997-3028
+                                  (apply (field 2 PrimMap) c_prim_table name)))
+                             (before bytecomp/symtable.ml(105):3038-3083
+                               (seq
+                                 (after bytecomp/symtable.ml(105):3038-3072
+                                   (apply (field 4 (global Dll!)) num symb))
+                                 (before bytecomp/symtable.ml(106):3080-3083
+                                   num)))))))))
+                 (reraise exn))))))
+     require_primitive =
+       (function name
+         (funct-body bytecomp/symtable.ml(109)<ghost>:3115-3168
+           (before bytecomp/symtable.ml(110):3124-3168
+             (if
+               (!=
+                 (after bytecomp/symtable.ml(110):3127-3135
+                   (string.get name 0))
+                 '%')
+               (before bytecomp/symtable.ml(110):3148-3168
+                 (ignore
+                   (after bytecomp/symtable.ml(110):3154-3168
+                     (apply of_prim name))))
+               0a))))
+     all_primitives =
+       (function param
+         (funct-body bytecomp/symtable.ml(112)<ghost>:3189-3328
+           (before bytecomp/symtable.ml(113):3196-3328
+             (let
+               (prim =
+                  (after bytecomp/symtable.ml(113):3207-3238
+                    (caml_make_vect (field 0 (field 0 c_prim_table)) "")))
+               (before bytecomp/symtable.ml(114):3244-3328
+                 (seq
+                   (after bytecomp/symtable.ml(114):3244-3320
+                     (apply
+                       (field 11
+                         (field 39 (field 3 (field 11 (global Misc!)))))
+                       (function name number[int]
+                         (funct-body bytecomp/symtable.ml(114):3260-3302
+                           (before bytecomp/symtable.ml(114):3280-3301
+                             (after bytecomp/symtable.ml(114):3280-3301
+                               (array.set[addr] prim number name)))))
+                       (field 1 (field 0 c_prim_table))))
+                   (before bytecomp/symtable.ml(115):3324-3328 prim)))))))
+     data_primitive_names =
+       (function param
+         (funct-body bytecomp/symtable.ml(117)<ghost>:3355-3550
+           (before bytecomp/symtable.ml(118):3362-3550
+             (let
+               (prim =
+                  (after bytecomp/symtable.ml(118):3373-3389
+                    (apply all_primitives 0a)))
+               (before bytecomp/symtable.ml(119):3395-3550
+                 (let
+                   (b =
+                      (after bytecomp/symtable.ml(119):3403-3420
+                        (apply (field 0 (global Stdlib__buffer!)) 512)))
+                   (before bytecomp/symtable.ml(120):3426-3550
+                     (seq
+                       (for i 0 to (- (array.length[addr] prim) 1)
+                         (before bytecomp/symtable.ml(121):3468-3522
+                           (seq
+                             (after bytecomp/symtable.ml(121):3468-3496
+                               (apply (field 13 (global Stdlib__buffer!)) b
+                                 (after bytecomp/symtable.ml(121):3488-3496
+                                   (array.get[addr] prim i))))
+                             (before bytecomp/symtable.ml(121):3498-3522
+                               (after bytecomp/symtable.ml(121):3498-3522
+                                 (apply (field 9 (global Stdlib__buffer!)) b
+                                   '\000'))))))
+                       (before bytecomp/symtable.ml(123):3533-3550
+                         (after bytecomp/symtable.ml(123):3533-3550
+                           (apply (field 1 (global Stdlib__buffer!)) b)))))))))))
+     output_primitive_names =
+       (function outchan
+         (funct-body bytecomp/symtable.ml(125)<ghost>:3579-3637
+           (before bytecomp/symtable.ml(126):3591-3637
+             (after bytecomp/symtable.ml(126):3591-3637
+               (apply (field 65 (global Stdlib!)) outchan
+                 (after bytecomp/symtable.ml(126):3613-3637
+                   (apply data_primitive_names 0a)))))))
+     output_primitive_table =
+       (function outchan
+         (funct-body bytecomp/symtable.ml(130)<ghost>:3679-4260
+           (before bytecomp/symtable.ml(131):3691-4260
+             (let
+               (prim =
+                  (after bytecomp/symtable.ml(131):3702-3718
+                    (apply all_primitives 0a)))
+               (before bytecomp/symtable.ml(132):3724-4260
+                 (seq
+                   (for i 0 to (- (array.length[addr] prim) 1)
+                     (before bytecomp/symtable.ml(133):3766-3813
+                       (after bytecomp/symtable.ml(133):3766-3813
+                         (apply (field 0 (global Stdlib__printf!)) outchan
+                           [0:
+                            [11: "extern value " [2: 0a [11: "();\n" 0a]]]
+                            "extern value %s();\n"]
+                           (after bytecomp/symtable.ml(133):3805-3813
+                             (array.get[addr] prim i))))))
+                   (before bytecomp/symtable.ml(135):3824-4260
+                     (seq
+                       (after bytecomp/symtable.ml(135):3824-3873
+                         (apply (field 0 (global Stdlib__printf!)) outchan
+                           [0:
+                            [11: "typedef value (*primitive)();\n" 0a]
+                            "typedef value (*primitive)();\n"]))
+                       (before bytecomp/symtable.ml(136):3877-4260
+                         (seq
+                           (after bytecomp/symtable.ml(136):3877-3931
+                             (apply (field 0 (global Stdlib__printf!))
+                               outchan
+                               [0:
+                                [11:
+                                 "primitive caml_builtin_cprim[] = {\n" 0a]
+                                "primitive caml_builtin_cprim[] = {\n"]))
+                           (before bytecomp/symtable.ml(137):3935-4260
+                             (seq
+                               (for i 0 to (- (array.length[addr] prim) 1)
+                                 (before bytecomp/symtable.ml(138):3977-4011
+                                   (after bytecomp/symtable.ml(138):3977-4011
+                                     (apply
+                                       (field 0 (global Stdlib__printf!))
+                                       outchan
+                                       [0:
+                                        [11: "  " [2: 0a [11: ",\n" 0a]]]
+                                        "  %s,\n"]
+                                       (after bytecomp/symtable.ml(138):4003-4011
+                                         (array.get[addr] prim i))))))
+                               (before bytecomp/symtable.ml(140):4022-4260
+                                 (seq
+                                   (after bytecomp/symtable.ml(140):4022-4060
+                                     (apply
+                                       (field 0 (global Stdlib__printf!))
+                                       outchan
+                                       [0:
+                                        [11: "  (primitive) 0 };\n" 0a]
+                                        "  (primitive) 0 };\n"]))
+                                   (before bytecomp/symtable.ml(141):4064-4260
+                                     (seq
+                                       (after bytecomp/symtable.ml(141):4064-4130
+                                         (apply
+                                           (field 0 (global Stdlib__printf!))
+                                           outchan
+                                           [0:
+                                            [11:
+                                             "const char * caml_names_of_builtin_cprim[] = {\n"
+                                             0a]
+                                            "const char * caml_names_of_builtin_cprim[] = {\n"]))
+                                       (before bytecomp/symtable.ml(142):4134-4260
+                                         (seq
+                                           (for i 0 to
+                                             (- (array.length[addr] prim) 1)
+                                             (before bytecomp/symtable.ml(143):4176-4214
+                                               (after bytecomp/symtable.ml(143):4176-4214
+                                                 (apply
+                                                   (field 0
+                                                     (global Stdlib__printf!))
+                                                   outchan
+                                                   [0:
+                                                    [11:
+                                                     "  \""
+                                                     [2: 0a [11: "\",\n" 0a]]]
+                                                    "  \"%s\",\n"]
+                                                   (after bytecomp/symtable.ml(143):4206-4214
+                                                     (array.get[addr] prim i))))))
+                                           (before bytecomp/symtable.ml(145):4225-4260
+                                             (after bytecomp/symtable.ml(145):4225-4260
+                                               (apply
+                                                 (field 0
+                                                   (global Stdlib__printf!))
+                                                 outchan
+                                                 [0:
+                                                  [11:
+                                                   "  (char *) 0 };\n" 0a]
+                                                  "  (char *) 0 };\n"])))))))))))))))))))))
+     init =
+       (function param
+         (funct-body bytecomp/symtable.ml(149)<ghost>:4311-5784
+           (before bytecomp/symtable.ml(151):4358-5784
+             (seq
+               (after bytecomp/symtable.ml(151):4358-4844
+                 (apply (field 13 (global Stdlib__array!))
+                   (function i[int] name
+                     (funct-body bytecomp/symtable.ml(152):4374-4810
+                       (before bytecomp/symtable.ml(153):4395-4809
+                         (let
+                           (id =
+                              (try
+                                (after bytecomp/symtable.ml(154):4416-4453
+                                  (apply (field 38 (global Stdlib__list!))
+                                    name (field 38 (global Predef!))))
+                               with exn
+                                (if (== exn (field 7 (global Stdlib!)))
+                                  (before bytecomp/symtable.ml(155):4480-4507
+                                    (after bytecomp/symtable.ml(155):4480-4507
+                                      (apply (field 0 (global Misc!))
+                                        "Symtable.init")))
+                                  (reraise exn))))
+                           (before bytecomp/symtable.ml(156):4517-4809
+                             (let
+                               (c =[int]
+                                  (after bytecomp/symtable.ml(156):4525-4546
+                                    (apply slot_for_setglobal id)))
+                               (before bytecomp/symtable.ml(157):4556-4809
+                                 (let
+                                   (cst =
+                                      (makeblock 2 (int,*)
+                                        (field 7 (global Stdlib__obj!))
+                                        (makeblock 0
+                                          (makeblock 0 (makeblock 2 name 0a))
+                                          (makeblock 0
+                                            (makeblock 0
+                                              (makeblock 0 (int) (- (~ i) 1)))
+                                            0a))))
+                                   (before bytecomp/symtable.ml(162):4766-4809
+                                     (setfield_ptr 0 literal_table
+                                       (makeblock 0
+                                         (makeblock 0 (int,*) c cst)
+                                         (field 0 literal_table))))))))))))
+                   (field 0 (global Runtimedef!))))
+               (before bytecomp/symtable.ml(165):4890-5784
+                 (let
+                   (set_prim_table_from_file =
+                      (function primfile
+                        (funct-body bytecomp/symtable.ml(165)<ghost>:4919-5176
+                          (before bytecomp/symtable.ml(166):4934-5176
+                            (let
+                              (ic =
+                                 (after bytecomp/symtable.ml(166):4943-4959
+                                   (apply (field 78 (global Stdlib!))
+                                     primfile)))
+                              (before bytecomp/symtable.ml(167):4967-5176
+                                (after bytecomp/symtable.ml(167):4967-5176
+                                  (apply (field 3 (global Misc!))
+                                    (makeblock 0
+                                      (function param
+                                        (funct-body bytecomp/symtable.ml(168):4998-5021
+                                          (before bytecomp/symtable.ml(168):5009-5020
+                                            (after bytecomp/symtable.ml(168):5009-5020
+                                              (apply
+                                                (field 92 (global Stdlib!))
+                                                ic))))))
+                                    0a
+                                    (function param
+                                      (funct-body bytecomp/symtable.ml(169):5028-5176
+                                        (before bytecomp/symtable.ml(170):5048-5168
+                                          (try
+                                            (while 1a
+                                              (before bytecomp/symtable.ml(172):5090-5120
+                                                (after bytecomp/symtable.ml(172):5090-5120
+                                                  (apply set_prim_table
+                                                    (after bytecomp/symtable.ml(172):5105-5120
+                                                      (apply
+                                                        (field 82
+                                                          (global Stdlib!))
+                                                        ic))))))
+                                           with exn
+                                            (if
+                                              (== exn
+                                                (field 11 (global Stdlib!)))
+                                              (before bytecomp/symtable.ml(174):5166-5168
+                                                0a)
+                                              (reraise exn))))))))))))))
+                   (before bytecomp/symtable.ml(177):5184-5784
+                     (if
+                       (>
+                         (string.length
+                           (field 0 (field 44 (global Clflags!))))
+                         0)
+                       (before bytecomp/symtable.ml(178):5233-5276
+                         (after bytecomp/symtable.ml(178):5233-5276
+                           (apply set_prim_table_from_file
+                             (field 0 (field 44 (global Clflags!))))))
+                       (before bytecomp/symtable.ml(179):5284-5784
+                         (if
+                           (>
+                             (string.length
+                               (field 0 (field 45 (global Clflags!))))
+                             0)
+                           (before bytecomp/symtable.ml(179):5331-5707
+                             (let
+                               (primfile =
+                                  (after bytecomp/symtable.ml(180):5356-5389
+                                    (apply
+                                      (field 14 (global Stdlib__filename!))
+                                      0a "camlprims" "")))
+                               (before bytecomp/symtable.ml(181):5397-5701
+                                 (after bytecomp/symtable.ml(181):5397-5701
+                                   (apply (field 3 (global Misc!))
+                                     (makeblock 0
+                                       (function param
+                                         (funct-body bytecomp/symtable.ml(182):5428-5460
+                                           (before bytecomp/symtable.ml(182):5439-5459
+                                             (after bytecomp/symtable.ml(182):5439-5459
+                                               (apply
+                                                 (field 15 (global Misc!))
+                                                 primfile))))))
+                                     0a
+                                     (function param
+                                       (funct-body bytecomp/symtable.ml(183):5467-5701
+                                         (before bytecomp/symtable.ml(184):5487-5693
+                                           (seq
+                                             (if
+                                               (!=
+                                                 (after bytecomp/symtable.ml(184):5490-5586
+                                                   (caml_sys_system_command
+                                                     (after bytecomp/symtable.ml(184):5501-5586
+                                                       (apply
+                                                         (field 3
+                                                           (global Stdlib__printf!))
+                                                         [0:
+                                                          [2:
+                                                           0a
+                                                           [11:
+                                                            " -p > "
+                                                            [2: 0a 0a]]]
+                                                          "%s -p > %s"]
+                                                         (field 0
+                                                           (field 45
+                                                             (global Clflags!)))
+                                                         primfile))))
+                                                 0)
+                                               (before bytecomp/symtable.ml(186):5606-5649
+                                                 (raise
+                                                   (after bytecomp/symtable.ml(186):5611-5649
+                                                     (makeblock 0 Error
+                                                       (makeblock 2
+                                                         (field 0
+                                                           (field 45
+                                                             (global Clflags!))))))))
+                                               0a)
+                                             (before bytecomp/symtable.ml(187):5660-5693
+                                               (after bytecomp/symtable.ml(187):5660-5693
+                                                 (apply
+                                                   set_prim_table_from_file
+                                                   primfile))))))))))))
+                           (before bytecomp/symtable.ml(189):5713-5784
+                             (after bytecomp/symtable.ml(189):5713-5784
+                               (apply (field 12 (global Stdlib__array!))
+                                 set_prim_table
+                                 (field 1 (global Runtimedef!)))))))))))))))
+     patch_int =
+       (function buff pos[int] n[int]
+         (funct-body bytecomp/symtable.ml(195)<ghost>:5843-6086
+           (before bytecomp/symtable.ml(196):5858-6086
+             (seq
+               (after bytecomp/symtable.ml(196):5858-5901
+                 (apply (field 3 (field 44 (global Misc!))) buff pos n))
+               (before bytecomp/symtable.ml(197):5905-6086
+                 (seq
+                   (after bytecomp/symtable.ml(197):5905-5962
+                     (apply (field 3 (field 44 (global Misc!))) buff
+                       (+ pos 1) (asr n 8)))
+                   (before bytecomp/symtable.ml(198):5966-6086
+                     (seq
+                       (after bytecomp/symtable.ml(198):5966-6024
+                         (apply (field 3 (field 44 (global Misc!))) buff
+                           (+ pos 2) (asr n 16)))
+                       (before bytecomp/symtable.ml(199):6028-6086
+                         (after bytecomp/symtable.ml(199):6028-6086
+                           (apply (field 3 (field 44 (global Misc!))) buff
+                             (+ pos 3) (asr n 24))))))))))))
+     patch_object =
+       (function buff patchlist
+         (funct-body bytecomp/symtable.ml(201)<ghost>:6105-6511
+           (before bytecomp/symtable.ml(202):6124-6511
+             (after bytecomp/symtable.ml(202):6124-6511
+               (apply (field 14 (global Stdlib__list!))
+                 (function param
+                   (funct-body bytecomp/symtable.ml(203):6138-6497
+                     (let (*match* =a (field 0 param))
+                       (switch* *match*
+                        case tag 0:
+                         (let
+                           (pos =a (field 1 param) sc =a (field 0 *match*))
+                           (before bytecomp/symtable.ml(205):6193-6233
+                             (after bytecomp/symtable.ml(205):6193-6233
+                               (apply patch_int buff pos
+                                 (after bytecomp/symtable.ml(205):6212-6233
+                                   (apply slot_for_literal sc))))))
+                        case tag 1:
+                         (let
+                           (pos =a (field 1 param) id =a (field 0 *match*))
+                           (before bytecomp/symtable.ml(207):6281-6323
+                             (after bytecomp/symtable.ml(207):6281-6323
+                               (apply patch_int buff pos
+                                 (after bytecomp/symtable.ml(207):6300-6323
+                                   (apply slot_for_getglobal id))))))
+                        case tag 2:
+                         (let
+                           (pos =a (field 1 param) id =a (field 0 *match*))
+                           (before bytecomp/symtable.ml(209):6371-6413
+                             (after bytecomp/symtable.ml(209):6371-6413
+                               (apply patch_int buff pos
+                                 (after bytecomp/symtable.ml(209):6390-6413
+                                   (apply slot_for_setglobal id))))))
+                        case tag 3:
+                         (let
+                           (pos =a (field 1 param) name =a (field 0 *match*))
+                           (before bytecomp/symtable.ml(211):6463-6496
+                             (after bytecomp/symtable.ml(211):6463-6496
+                               (apply patch_int buff pos
+                                 (after bytecomp/symtable.ml(211):6482-6496
+                                   (apply of_prim name))))))))))
+                 patchlist))))))
+    (letrec
+      (transl_const
+         (function param
+           (funct-body bytecomp/symtable.ml(216):6574-7425
+             (switch* param
+              case tag 0:
+               (let (*match* =a (field 0 param))
+                 (switch* *match*
+                  case tag 0:
+                   (let (i =a (field 0 *match*))
+                     (before bytecomp/symtable.ml(217):6614-6624 i))
+                  case tag 1:
+                   (let (c =a (field 0 *match*))
+                     (before bytecomp/symtable.ml(218):6657-6667 c))
+                  case tag 2:
+                   (let (s =a (field 0 *match*))
+                     (before bytecomp/symtable.ml(219):6707-6717 s))
+                  case tag 3:
+                   (let (f =a (field 0 *match*))
+                     (before bytecomp/symtable.ml(220):6751-6779
+                       (after bytecomp/symtable.ml(220):6760-6779
+                         (caml_float_of_string f))))
+                  case tag 4:
+                   (let (i =a (field 0 *match*))
+                     (before bytecomp/symtable.ml(221):6813-6823 i))
+                  case tag 5:
+                   (let (i =a (field 0 *match*))
+                     (before bytecomp/symtable.ml(222):6857-6867 i))
+                  case tag 6:
+                   (let (i =a (field 0 *match*))
+                     (before bytecomp/symtable.ml(223):6905-6915 i))))
+              case tag 1:
+               (let (i =a (field 0 param))
+                 (before bytecomp/symtable.ml(224):6939-6949 i))
+              case tag 2:
+               (let (fields =a (field 1 param) tag =a (field 0 param))
+                 (before bytecomp/symtable.ml(227):7024-7217
+                   (let
+                     (block =
+                        (after bytecomp/symtable.ml(227):7036-7074
+                          (caml_obj_block tag
+                            (after bytecomp/symtable.ml(227):7054-7074
+                              (apply (field 0 (global Stdlib__list!)) fields)))))
+                     (before bytecomp/symtable.ml(228):7084-7217
+                       (let (pos = (makemutable 0 (int) 0))
+                         (before bytecomp/symtable.ml(229):7109-7217
+                           (seq
+                             (after bytecomp/symtable.ml(229):7109-7204
+                               (apply (field 14 (global Stdlib__list!))
+                                 (function c
+                                   (funct-body bytecomp/symtable.ml(230):7127-7189
+                                     (before bytecomp/symtable.ml(230):7137-7188
+                                       (seq
+                                         (array.unsafe_set[gen] block
+                                           (field 0 pos)
+                                           (after bytecomp/symtable.ml(230):7162-7178
+                                             (apply transl_const c)))
+                                         (before bytecomp/symtable.ml(230):7180-7188
+                                           (+:=1 pos))))))
+                                 fields))
+                             (before bytecomp/symtable.ml(232):7212-7217
+                               block))))))))
+              case tag 3:
+               (let (fields =a (field 0 param))
+                 (before bytecomp/symtable.ml(234):7256-7425
+                   (let
+                     (res =
+                        (after bytecomp/symtable.ml(234):7266-7310
+                          (caml_floatarray_create
+                            (after bytecomp/symtable.ml(234):7290-7310
+                              (apply (field 0 (global Stdlib__list!)) fields)))))
+                     (before bytecomp/symtable.ml(235):7320-7425
+                       (seq
+                         (after bytecomp/symtable.ml(235):7320-7405
+                           (apply (field 15 (global Stdlib__list!))
+                             (function i[int] f
+                               (funct-body bytecomp/symtable.ml(235):7331-7390
+                                 (before bytecomp/symtable.ml(235):7343-7389
+                                   (after bytecomp/symtable.ml(235):7343-7389
+                                     (array.set[float] res i
+                                       (after bytecomp/symtable.ml(235):7370-7389
+                                         (caml_float_of_string f)))))))
+                             fields))
+                         (before bytecomp/symtable.ml(237):7413-7425 res))))))
+              case tag 4:
+               (let (s =a (field 0 param))
+                 (before bytecomp/symtable.ml(225):6975-6985 s))))))
+      (let
+        (initial_global_table =
+           (function param
+             (funct-body bytecomp/symtable.ml(241)<ghost>:7494-7675
+               (before bytecomp/symtable.ml(242):7501-7675
+                 (let
+                   (glob =
+                      (after bytecomp/symtable.ml(242):7512-7553
+                        (caml_make_vect (field 0 (field 0 global_table)) 0)))
+                   (before bytecomp/symtable.ml(243):7559-7675
+                     (seq
+                       (after bytecomp/symtable.ml(243):7559-7644
+                         (apply (field 14 (global Stdlib__list!))
+                           (function param
+                             (funct-body bytecomp/symtable.ml(244):7573-7625
+                               (let
+                                 (cst =a (field 1 param)
+                                  slot =a (field 0 param))
+                                 (before bytecomp/symtable.ml(244):7593-7624
+                                   (after bytecomp/symtable.ml(244):7593-7624
+                                     (array.set[gen] glob slot
+                                       (after bytecomp/symtable.ml(244):7608-7624
+                                         (apply transl_const cst))))))))
+                           (field 0 literal_table)))
+                       (before bytecomp/symtable.ml(246):7648-7675
+                         (seq (setfield_ptr 0 literal_table 0a)
+                           (before bytecomp/symtable.ml(247):7671-7675 glob)))))))))
+         output_global_map =
+           (function oc
+             (funct-body bytecomp/symtable.ml(251)<ghost>:7732-7768
+               (before bytecomp/symtable.ml(252):7739-7768
+                 (after bytecomp/symtable.ml(252):7739-7768
+                   (apply (field 71 (global Stdlib!)) oc
+                     (field 0 global_table))))))
+         data_global_map =
+           (function param
+             (funct-body bytecomp/symtable.ml(254)<ghost>:7790-7819
+               (before bytecomp/symtable.ml(255):7797-7819
+                 (field 0 global_table))))
+         update_global_table =
+           (function param
+             (funct-body bytecomp/symtable.ml(261)<ghost>:7922-8181
+               (before bytecomp/symtable.ml(262):7929-8181
+                 (let (ng =[int] (field 0 (field 0 global_table)))
+                   (before bytecomp/symtable.ml(263):7961-8181
+                     (seq
+                       (if
+                         (> ng
+                           (array.length[gen]
+                             (after bytecomp/symtable.ml(263):7981-8001
+                               (caml_get_global_data 0a))))
+                         (before bytecomp/symtable.ml(263):8007-8034
+                           (after bytecomp/symtable.ml(263):8007-8034
+                             (caml_realloc_global ng)))
+                         0a)
+                       (before bytecomp/symtable.ml(264):8038-8181
+                         (let
+                           (glob =
+                              (after bytecomp/symtable.ml(264):8049-8067
+                                (caml_get_global_data 0a)))
+                           (before bytecomp/symtable.ml(265):8073-8181
+                             (seq
+                               (after bytecomp/symtable.ml(265):8073-8158
+                                 (apply (field 14 (global Stdlib__list!))
+                                   (function param
+                                     (funct-body bytecomp/symtable.ml(266):8087-8139
+                                       (let
+                                         (cst =a (field 1 param)
+                                          slot =a (field 0 param))
+                                         (before bytecomp/symtable.ml(266):8107-8138
+                                           (after bytecomp/symtable.ml(266):8107-8138
+                                             (array.set[gen] glob slot
+                                               (after bytecomp/symtable.ml(266):8122-8138
+                                                 (apply transl_const cst))))))))
+                                   (field 0 literal_table)))
+                               (before bytecomp/symtable.ml(268):8162-8181
+                                 (setfield_ptr 0 literal_table 0a))))))))))))
+         read_sections =
+           (function param
+             (funct-body bytecomp/symtable.ml(279)<ghost>:8469-8988
+               (before bytecomp/symtable.ml(280):8476-8988
+                 (try
+                   (let
+                     (sections =
+                        (after bytecomp/symtable.ml(281):8499-8524
+                          (caml_get_section_table 0a)))
+                     (before bytecomp/symtable.ml(282):8532-8731
+                       (makeblock 0
+                         (function name
+                           (funct-body bytecomp/symtable.ml(283):8556-8616
+                             (before bytecomp/symtable.ml(283):8570-8605
+                               (after bytecomp/symtable.ml(283):8579-8605
+                                 (apply (field 38 (global Stdlib__list!))
+                                   name sections)))))
+                         (function name
+                           (funct-body bytecomp/symtable.ml(285):8646-8684
+                             (before bytecomp/symtable.ml(285):8659-8683
+                               (after bytecomp/symtable.ml(285):8659-8683
+                                 (apply (field 38 (global Stdlib__list!))
+                                   name sections)))))
+                         (function param
+                           (funct-body bytecomp/symtable.ml(287):8715-8729
+                             (before bytecomp/symtable.ml(287):8726-8728 0a))))))
+                  with exn
+                   (if (== exn (field 7 (global Stdlib!)))
+                     (before bytecomp/symtable.ml(289):8756-8988
+                       (let
+                         (ic =
+                            (after bytecomp/symtable.ml(289):8765-8796
+                              (apply (field 79 (global Stdlib!))
+                                (field 0 (global Stdlib__sys!)))))
+                         (before bytecomp/symtable.ml(290):8804-8988
+                           (seq
+                             (after bytecomp/symtable.ml(290):8804-8828
+                               (apply (field 3 (global Bytesections!)) ic))
+                             (before bytecomp/symtable.ml(291):8834-8988
+                               (makeblock 0
+                                 (after bytecomp/symtable.ml(291):8850-8885
+                                   (apply (field 7 (global Bytesections!))
+                                     ic))
+                                 (after bytecomp/symtable.ml(292):8907-8942
+                                   (apply (field 8 (global Bytesections!))
+                                     ic))
+                                 (function param
+                                   (funct-body bytecomp/symtable.ml(293):8965-8986
+                                     (before bytecomp/symtable.ml(293):8975-8986
+                                       (after bytecomp/symtable.ml(293):8975-8986
+                                         (apply (field 92 (global Stdlib!))
+                                           ic)))))))))))
+                     (reraise exn))))))
+         init_toplevel =
+           (function param
+             (funct-body bytecomp/symtable.ml(297)<ghost>:9054-9993
+               (before bytecomp/symtable.ml(298):9061-9993
+                 (try
+                   (let
+                     (sect =
+                        (after bytecomp/symtable.ml(299):9080-9096
+                          (apply read_sections 0a)))
+                     (before bytecomp/symtable.ml(301):9135-9869
+                       (seq
+                         (setfield_ptr 0 global_table
+                           (after bytecomp/symtable.ml(301):9162-9187
+                             (apply (field 1 sect) "SYMB")))
+                         (before bytecomp/symtable.ml(303):9229-9869
+                           (let
+                             (prims =
+                                (after bytecomp/symtable.ml(303):9241-9264
+                                  (apply (field 0 sect) "PRIM")))
+                             (before bytecomp/symtable.ml(304):9272-9869
+                               (seq
+                                 (setfield_ptr 0 c_prim_table
+                                   (field 0 PrimMap))
+                                 (before bytecomp/symtable.ml(305):9307-9869
+                                   (let (pos = (makemutable 0 (int) 0))
+                                     (before bytecomp/symtable.ml(306):9330-9869
+                                       (seq
+                                         (while
+                                           (< (field 0 pos)
+                                             (string.length prims))
+                                           (before bytecomp/symtable.ml(307):9372-9494
+                                             (let
+                                               (i =[int]
+                                                  (after bytecomp/symtable.ml(307):9380-9415
+                                                    (apply
+                                                      (field 17
+                                                        (field 3
+                                                          (field 11
+                                                            (global Misc!))))
+                                                      prims (field 0 pos)
+                                                      '\000')))
+                                               (before bytecomp/symtable.ml(308):9425-9494
+                                                 (seq
+                                                   (after bytecomp/symtable.ml(308):9425-9474
+                                                     (apply set_prim_table
+                                                       (after bytecomp/symtable.ml(308):9440-9474
+                                                         (apply
+                                                           (field 3
+                                                             (field 3
+                                                               (field 11
+                                                                 (global Misc!))))
+                                                           prims
+                                                           (field 0 pos)
+                                                           (- i
+                                                             (field 0 pos))))))
+                                                   (before bytecomp/symtable.ml(309):9482-9494
+                                                     (setfield_imm 0 pos
+                                                       (+ i 1))))))))
+                                         (before bytecomp/symtable.ml(312):9538-9869
+                                           (let
+                                             (dllpath =
+                                                (try
+                                                  (after bytecomp/symtable.ml(312):9556-9579
+                                                    (apply (field 0 sect)
+                                                      "DLPT"))
+                                                 with exn
+                                                  (if
+                                                    (== exn
+                                                      (field 7
+                                                        (global Stdlib!)))
+                                                    (before bytecomp/symtable.ml(312):9598-9600
+                                                      "")
+                                                    (reraise exn))))
+                                             (before bytecomp/symtable.ml(313):9608-9869
+                                               (seq
+                                                 (after bytecomp/symtable.ml(313):9608-9633
+                                                   (apply
+                                                     (field 8 (global Dll!))
+                                                     dllpath))
+                                                 (before bytecomp/symtable.ml(315):9682-9869
+                                                   (let
+                                                     (crcintfs =
+                                                        (try
+                                                          (after bytecomp/symtable.ml(317):9726-9751
+                                                            (apply
+                                                              (field 1 sect)
+                                                              "CRCS"))
+                                                         with exn
+                                                          (if
+                                                            (== exn
+                                                              (field 7
+                                                                (global Stdlib!)))
+                                                            (before bytecomp/symtable.ml(318):9811-9813
+                                                              0a)
+                                                            (reraise exn))))
+                                                     (before bytecomp/symtable.ml(320):9836-9869
+                                                       (seq
+                                                         (after bytecomp/symtable.ml(320):9836-9855
+                                                           (apply
+                                                             (field 2 sect)
+                                                             0a))
+                                                         (before bytecomp/symtable.ml(321):9861-9869
+                                                           crcintfs))))))))))))))))))))
+                  with exn
+                   (catch
+                     (if (== exn (field 4 (global Bytesections!))) (exit 8)
+                       (if (== exn (field 7 (global Stdlib!))) (exit 8)
+                         (let (tag =a (field 0 exn))
+                           (if (== tag (field 6 (global Stdlib!))) (exit 8)
+                             (reraise exn)))))
+                    with (8)
+                     (before bytecomp/symtable.ml(323):9938-9993
+                       (after bytecomp/symtable.ml(323):9938-9993
+                         (apply (field 0 (global Misc!))
+                           "Toplevel bytecode executable is corrupted"))))))))
+         get_global_position =
+           (function id : int
+             (funct-body bytecomp/symtable.ml(327)<ghost>:10064-10090
+               (before bytecomp/symtable.ml(327):10069-10090
+                 (after bytecomp/symtable.ml(327):10069-10090
+                   (apply slot_for_getglobal id)))))
+         get_global_value =
+           (function id
+             (funct-body bytecomp/symtable.ml(329)<ghost>:10113-10164
+               (before bytecomp/symtable.ml(330):10120-10164
+                 (after bytecomp/symtable.ml(330):10120-10164
+                   (array.get[gen]
+                     (after bytecomp/symtable.ml(330):10120-10140
+                       (caml_get_global_data 0a))
+                     (after bytecomp/symtable.ml(330):10142-10163
+                       (apply slot_for_getglobal id)))))))
+         assign_global_value =
+           (function id v
+             (funct-body bytecomp/symtable.ml(331)<ghost>:10189-10247
+               (before bytecomp/symtable.ml(332):10198-10247
+                 (after bytecomp/symtable.ml(332):10198-10247
+                   (array.set[gen]
+                     (after bytecomp/symtable.ml(332):10198-10218
+                       (caml_get_global_data 0a))
+                     (after bytecomp/symtable.ml(332):10220-10241
+                       (apply slot_for_getglobal id))
+                     v)))))
+         defined_globals =
+           (function patchlist
+             (funct-body bytecomp/symtable.ml(337)<ghost>:10367-10522
+               (before bytecomp/symtable.ml(338):10381-10522
+                 (after bytecomp/symtable.ml(338):10381-10522
+                   (apply (field 20 (global Stdlib__list!))
+                     (function accu rel
+                       (funct-body bytecomp/symtable.ml(338):10396-10501
+                         (before bytecomp/symtable.ml(339):10419-10500
+                           (let (*match* =a (field 0 rel))
+                             (switch *match*
+                              case tag 2:
+                               (let (id =a (field 0 *match*))
+                                 (before bytecomp/symtable.ml(340):10472-10482
+                                   (makeblock 0 id accu)))
+                              default:
+                               (before bytecomp/symtable.ml(341):10496-10500
+                                 accu))))))
+                     0a patchlist)))))
+         required_globals =
+           (function patchlist
+             (funct-body bytecomp/symtable.ml(345)<ghost>:10545-10700
+               (before bytecomp/symtable.ml(346):10559-10700
+                 (after bytecomp/symtable.ml(346):10559-10700
+                   (apply (field 20 (global Stdlib__list!))
+                     (function accu rel
+                       (funct-body bytecomp/symtable.ml(346):10574-10679
+                         (before bytecomp/symtable.ml(347):10597-10678
+                           (let (*match* =a (field 0 rel))
+                             (switch *match*
+                              case tag 1:
+                               (let (id =a (field 0 *match*))
+                                 (before bytecomp/symtable.ml(348):10650-10660
+                                   (makeblock 0 id accu)))
+                              default:
+                               (before bytecomp/symtable.ml(349):10674-10678
+                                 accu))))))
+                     0a patchlist)))))
+         check_global_initialized =
+           (function patchlist
+             (funct-body bytecomp/symtable.ml(353)<ghost>:10731-11196
+               (before bytecomp/symtable.ml(355):10796-11196
+                 (let
+                   (defined_globals =
+                      (after bytecomp/symtable.ml(355):10818-10843
+                        (apply defined_globals patchlist)))
+                   (before bytecomp/symtable.ml(357):10922-11196
+                     (let
+                       (check_reference =
+                          (function param
+                            (funct-body bytecomp/symtable.ml(357):10944-11155
+                              (let (*match* =a (field 0 param))
+                                (switch *match*
+                                 case tag 1:
+                                  (let (id =a (field 0 *match*))
+                                    (before bytecomp/symtable.ml(359):10997-11141
+                                      (if
+                                        (&&
+                                          (not
+                                            (after bytecomp/symtable.ml(359):11004-11033
+                                              (apply
+                                                (field 31
+                                                  (global Stdlib__list!))
+                                                id defined_globals)))
+                                          (isint
+                                            (after bytecomp/symtable.ml(360):11056-11077
+                                              (apply get_global_value id))))
+                                        (before bytecomp/symtable.ml(361):11091-11141
+                                          (raise
+                                            (after bytecomp/symtable.ml(361):11097-11141
+                                              (makeblock 0 Error
+                                                (makeblock 3
+                                                  (after bytecomp/symtable.ml(361):11124-11139
+                                                    (apply
+                                                      (field 14
+                                                        (global Ident!))
+                                                      id)))))))
+                                        0a)))
+                                 default:
+                                  (before bytecomp/symtable.ml(362):11153-11155
+                                    0a))))))
+                       (before bytecomp/symtable.ml(363):11161-11196
+                         (after bytecomp/symtable.ml(363):11161-11196
+                           (apply (field 14 (global Stdlib__list!))
+                             check_reference patchlist)))))))))
+         current_state =
+           (function param
+             (funct-body bytecomp/symtable.ml(369)<ghost>:11289-11307
+               (before bytecomp/symtable.ml(369):11294-11307
+                 (field 0 global_table))))
+         restore_state =
+           (function st
+             (funct-body bytecomp/symtable.ml(371)<ghost>:11327-11350
+               (before bytecomp/symtable.ml(371):11332-11350
+                 (setfield_ptr 0 global_table st))))
+         hide_additions =
+           (function st
+             (funct-body bytecomp/symtable.ml(373)<ghost>:11371-11556
+               (before bytecomp/symtable.ml(374):11393-11556
+                 (seq
+                   (if (> (field 0 st) (field 0 (field 0 global_table)))
+                     (before bytecomp/symtable.ml(375):11432-11469
+                       (after bytecomp/symtable.ml(375):11432-11469
+                         (apply (field 0 (global Misc!))
+                           "Symtable.hide_additions")))
+                     0a)
+                   (before bytecomp/symtable.ml(376):11473-11556
+                     (setfield_ptr 0 global_table
+                       (makeblock 0 (int,*) (field 0 (field 0 global_table))
+                         (field 1 st))))))))
+         filter_global_map =
+           (function p gmap
+             (funct-body bytecomp/symtable.ml(384)<ghost>:11692-11901
+               (before bytecomp/symtable.ml(385):11718-11901
+                 (let
+                   (newtbl =
+                      (makemutable 0 (field 0 (field 6 (global Ident!)))))
+                   (before bytecomp/symtable.ml(386):11756-11901
+                     (seq
+                       (after bytecomp/symtable.ml(386):11756-11855
+                         (apply (field 11 (field 6 (global Ident!)))
+                           (function id num[int]
+                             (funct-body bytecomp/symtable.ml(387):11775-11842
+                               (before bytecomp/symtable.ml(387):11790-11841
+                                 (if
+                                   (after bytecomp/symtable.ml(387):11793-11797
+                                     (apply p id))
+                                   (before bytecomp/symtable.ml(387):11803-11841
+                                     (setfield_ptr 0 newtbl
+                                       (after bytecomp/symtable.ml(387):11813-11841
+                                         (apply
+                                           (field 3
+                                             (field 6 (global Ident!)))
+                                           id num (field 0 newtbl)))))
+                                   0a))))
+                           (field 1 gmap)))
+                       (before bytecomp/symtable.ml(389):11859-11901
+                         (makeblock 0 (int,*) (field 0 gmap)
+                           (field 0 newtbl)))))))))
+         iter_global_map =
+           (function f gmap
+             (funct-body bytecomp/symtable.ml(391)<ghost>:11923-11974
+               (before bytecomp/symtable.ml(392):11949-11974
+                 (after bytecomp/symtable.ml(392):11949-11974
+                   (apply (field 11 (field 6 (global Ident!))) f
+                     (field 1 gmap))))))
+         is_defined_in_global_map =
+           (function gmap id
+             (funct-body bytecomp/symtable.ml(394)<ghost>:12005-12057
+               (before bytecomp/symtable.ml(395):12032-12057
+                 (after bytecomp/symtable.ml(395):12032-12057
+                   (apply (field 2 (field 6 (global Ident!))) id
+                     (field 1 gmap))))))
+         empty_global_map = (field 0 GlobalMap)
+         report_error =
+           (function ppf param
+             (funct-body bytecomp/symtable.ml(403)<ghost>:12149-12529
+               (switch* param
+                case tag 0:
+                 (let (s =a (field 0 param))
+                   (before bytecomp/symtable.ml(405):12196-12246
+                     (after bytecomp/symtable.ml(405):12196-12246
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [11:
+                           "Reference to undefined global `"
+                           [2: 0a [12: '\'' 0a]]]
+                          "Reference to undefined global `%s'"]
+                         s))))
+                case tag 1:
+                 (let (s =a (field 0 param))
+                   (before bytecomp/symtable.ml(407):12284-12343
+                     (after bytecomp/symtable.ml(407):12284-12343
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [11:
+                           "The external function `"
+                           [2: 0a [11: "' is not available" 0a]]]
+                          "The external function `%s' is not available"]
+                         s))))
+                case tag 2:
+                 (let (s =a (field 0 param))
+                   (before bytecomp/symtable.ml(409):12368-12428
+                     (after bytecomp/symtable.ml(409):12368-12428
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [11:
+                           "Cannot find or execute the runtime system "
+                           [2: 0a 0a]]
+                          "Cannot find or execute the runtime system %s"]
+                         s))))
+                case tag 3:
+                 (let (s =a (field 0 param))
+                   (before bytecomp/symtable.ml(411):12465-12529
+                     (after bytecomp/symtable.ml(411):12465-12529
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [11:
+                           "The value of the global `"
+                           [2: 0a [11: "' is not yet computed" 0a]]]
+                          "The value of the global `%s' is not yet computed"]
+                         s)))))))
+         *match* =
+           (after bytecomp/symtable.ml(414):12542-12686
+             (apply (field 46 (global Location!))
+               (function param
+                 (funct-body bytecomp/symtable.ml(415):12577-12686
+                   (let (tag =a (field 0 param))
+                     (if (== tag Error)
+                       (let (err =a (field 1 param))
+                         (before bytecomp/symtable.ml(416):12608-12662
+                           (makeblock 0
+                             (after bytecomp/symtable.ml(416):12613-12662
+                               (apply (field 45 (global Location!))
+                                 report_error err)))))
+                       (before bytecomp/symtable.ml(417):12676-12680 0a)))))))
+         reset =
+           (function param
+             (funct-body bytecomp/symtable.ml(420)<ghost>:12698-12792
+               (before bytecomp/symtable.ml(421):12705-12792
+                 (seq (setfield_ptr 0 global_table (field 0 GlobalMap))
+                   (before bytecomp/symtable.ml(422):12740-12792
+                     (seq (setfield_ptr 0 literal_table 0a)
+                       (before bytecomp/symtable.ml(423):12763-12792
+                         (setfield_ptr 0 c_prim_table (field 0 PrimMap))))))))))
+        (pseudo _none_(0)<ghost>:-1--1
+          (makeblock 0 init patch_object require_primitive
+            initial_global_table output_global_map output_primitive_names
+            output_primitive_table data_global_map data_primitive_names
+            transl_const init_toplevel update_global_table get_global_value
+            is_global_defined assign_global_value get_global_position
+            check_global_initialized defined_globals required_globals
+            empty_global_map current_state restore_state hide_additions
+            filter_global_map iter_global_map is_defined_in_global_map Error
+            report_error reset))))))

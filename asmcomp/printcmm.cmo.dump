@@ -1,0 +1,1270 @@
+(setglobal Printcmm!
+  (let
+    (rec_flag =
+       (function ppf param
+         (funct-body asmcomp/printcmm.ml(24)<ghost>:1213-1286
+           (if param
+             (before asmcomp/printcmm.ml(26):1268-1286
+               (after asmcomp/printcmm.ml(26):1268-1286
+                 (apply (field 122 (global Stdlib__format!)) ppf
+                   [0: [11: " rec" 0a] " rec"])))
+             (before asmcomp/printcmm.ml(25):1248-1250 0a))))
+     machtype_component =
+       (function ppf param
+         (funct-body asmcomp/printcmm.ml(28)<ghost>:1311-1447
+           (switch* param
+            case int 0:
+             (before asmcomp/printcmm.ml(29):1337-1354
+               (after asmcomp/printcmm.ml(29):1337-1354
+                 (apply (field 122 (global Stdlib__format!)) ppf
+                   [0: [11: "val" 0a] "val"])))
+            case int 1:
+             (before asmcomp/printcmm.ml(30):1367-1385
+               (after asmcomp/printcmm.ml(30):1367-1385
+                 (apply (field 122 (global Stdlib__format!)) ppf
+                   [0: [11: "addr" 0a] "addr"])))
+            case int 2:
+             (before asmcomp/printcmm.ml(31):1397-1414
+               (after asmcomp/printcmm.ml(31):1397-1414
+                 (apply (field 122 (global Stdlib__format!)) ppf
+                   [0: [11: "int" 0a] "int"])))
+            case int 3:
+             (before asmcomp/printcmm.ml(32):1428-1447
+               (after asmcomp/printcmm.ml(32):1428-1447
+                 (apply (field 122 (global Stdlib__format!)) ppf
+                   [0: [11: "float" 0a] "float"]))))))
+     machtype =
+       (function ppf mty
+         (funct-body asmcomp/printcmm.ml(34)<ghost>:1462-1669
+           (before asmcomp/printcmm.ml(35):1474-1669
+             (let (n = (array.length[int] mty))
+               (if (!= n 0)
+                 (before asmcomp/printcmm.ml(37):1539-1669
+                   (seq
+                     (after asmcomp/printcmm.ml(37):1539-1569
+                       (apply machtype_component ppf
+                         (after asmcomp/printcmm.ml(37):1562-1569
+                           (array.get[int] mty 0))))
+                     (before asmcomp/printcmm.ml(38):1580-1669
+                       (for i 1 to (- n 1)
+                         (before asmcomp/printcmm.ml(39):1611-1655
+                           (after asmcomp/printcmm.ml(39):1611-1655
+                             (apply (field 122 (global Stdlib__format!)) ppf
+                               [0: [12: '*' [15: 0a]] "*%a"]
+                               machtype_component
+                               (after asmcomp/printcmm.ml(39):1648-1655
+                                 (array.get[int] mty i)))))))))
+                 (before asmcomp/printcmm.ml(36):1511-1529
+                   (after asmcomp/printcmm.ml(36):1511-1529
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [11: "unit" 0a] "unit"]))))))))
+     integer_comparison =
+       (function param
+         (funct-body asmcomp/printcmm.ml(42):1696-1798
+           (switch* param
+            case int 0: (before asmcomp/printcmm.ml(43):1716-1720 "==")
+            case int 1: (before asmcomp/printcmm.ml(44):1732-1736 "!=")
+            case int 2: (before asmcomp/printcmm.ml(45):1748-1751 "<")
+            case int 3: (before asmcomp/printcmm.ml(47):1779-1782 ">")
+            case int 4: (before asmcomp/printcmm.ml(46):1763-1767 "<=")
+            case int 5: (before asmcomp/printcmm.ml(48):1794-1798 ">="))))
+     float_comparison =
+       (function param
+         (funct-body asmcomp/printcmm.ml(50):1823-2006
+           (switch* param
+            case int 0: (before asmcomp/printcmm.ml(51):1844-1848 "==")
+            case int 1: (before asmcomp/printcmm.ml(52):1862-1866 "!=")
+            case int 2: (before asmcomp/printcmm.ml(53):1879-1882 "<")
+            case int 3: (before asmcomp/printcmm.ml(54):1896-1900 "!<")
+            case int 4: (before asmcomp/printcmm.ml(57):1949-1952 ">")
+            case int 5: (before asmcomp/printcmm.ml(58):1966-1970 "!>")
+            case int 6: (before asmcomp/printcmm.ml(55):1913-1917 "<=")
+            case int 7: (before asmcomp/printcmm.ml(56):1931-1936 "!<=")
+            case int 8: (before asmcomp/printcmm.ml(59):1983-1987 ">=")
+            case int 9: (before asmcomp/printcmm.ml(60):2001-2006 "!>="))))
+     chunk =
+       (function param
+         (funct-body asmcomp/printcmm.ml(62):2020-2377
+           (switch* param
+            case int 0:
+             (before asmcomp/printcmm.ml(63):2050-2065 "unsigned int8")
+            case int 1:
+             (before asmcomp/printcmm.ml(64):2085-2098 "signed int8")
+            case int 2:
+             (before asmcomp/printcmm.ml(65):2123-2139 "unsigned int16")
+            case int 3:
+             (before asmcomp/printcmm.ml(66):2162-2176 "signed int16")
+            case int 4:
+             (before asmcomp/printcmm.ml(67):2203-2219 "unsigned int32")
+            case int 5:
+             (before asmcomp/printcmm.ml(68):2244-2258 "signed int32")
+            case int 6: (before asmcomp/printcmm.ml(69):2275-2280 "int")
+            case int 7: (before asmcomp/printcmm.ml(70):2297-2302 "val")
+            case int 8: (before asmcomp/printcmm.ml(71):2317-2326 "float32")
+            case int 9: (before asmcomp/printcmm.ml(72):2341-2350 "float64")
+            case int 10:
+             (before asmcomp/printcmm.ml(73):2367-2377 "float64u"))))
+     raise_kind =
+       (function fmt param
+         (funct-body asmcomp/printcmm.ml(75)<ghost>:2394-2524
+           (if param
+             (before asmcomp/printcmm.ml(77):2490-2524
+               (after asmcomp/printcmm.ml(77):2490-2524
+                 (apply (field 122 (global Stdlib__format!)) fmt
+                   [0: [11: "raise_notrace" 0a] "raise_notrace"])))
+             (before asmcomp/printcmm.ml(76):2432-2468
+               (after asmcomp/printcmm.ml(76):2432-2468
+                 (apply (field 122 (global Stdlib__format!)) fmt
+                   [0: [11: "raise_withtrace" 0a] "raise_withtrace"]))))))
+     phantom_defining_expr =
+       (function ppf defining_expr
+         (funct-body asmcomp/printcmm.ml(79)<ghost>:2552-3244
+           (before asmcomp/printcmm.ml(80):2574-3244
+             (switch* defining_expr
+              case tag 0:
+               (let (i =a (field 0 defining_expr))
+                 (before asmcomp/printcmm.ml(81):2627-2648
+                   (after asmcomp/printcmm.ml(81):2627-2648
+                     (apply (field 39 (global Targetint!)) ppf i))))
+              case tag 1:
+               (let (sym =a (field 0 defining_expr))
+                 (before asmcomp/printcmm.ml(82):2682-2712
+                   (after asmcomp/printcmm.ml(82):2682-2712
+                     (apply (field 12 (global Stdlib__format!)) ppf sym))))
+              case tag 2:
+               (let (var =a (field 0 defining_expr))
+                 (before asmcomp/printcmm.ml(83):2737-2752
+                   (after asmcomp/printcmm.ml(83):2737-2752
+                     (apply (field 3 (global Backend_var!)) ppf var))))
+              case tag 3:
+               (let
+                 (offset_in_words =a (field 1 defining_expr)
+                  var =a (field 0 defining_expr))
+                 (before asmcomp/printcmm.ml(85):2810-2866
+                   (after asmcomp/printcmm.ml(85):2810-2866
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [15: [11: "+(" [4: 0a 0a 0a [12: ')' 0a]]]] "%a+(%d)"]
+                       (field 3 (global Backend_var!)) var offset_in_words))))
+              case tag 4:
+               (let
+                 (field =a (field 1 defining_expr)
+                  var =a (field 0 defining_expr))
+                 (before asmcomp/printcmm.ml(87):2914-2959
+                   (after asmcomp/printcmm.ml(87):2914-2959
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [15: [12: '[' [4: 0a 0a 0a [12: ']' 0a]]]] "%a[%d]"]
+                       (field 3 (global Backend_var!)) var field))))
+              case tag 5:
+               (let
+                 (field =a (field 1 defining_expr)
+                  sym =a (field 0 defining_expr))
+                 (before asmcomp/printcmm.ml(89):3014-3051
+                   (after asmcomp/printcmm.ml(89):3014-3051
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [2: 0a [12: '[' [4: 0a 0a 0a [12: ']' 0a]]]] "%s[%d]"]
+                       sym field))))
+              case tag 6:
+               (let
+                 (fields =a (field 1 defining_expr)
+                  tag =a (field 0 defining_expr))
+                 (before asmcomp/printcmm.ml(91):3095-3244
+                   (seq
+                     (after asmcomp/printcmm.ml(91):3095-3125
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [12: '[' [4: 0a 0a 0a [11: ": " 0a]]] "[%d: "]
+                         tag))
+                     (before asmcomp/printcmm.ml(92):3131-3244
+                       (seq
+                         (after asmcomp/printcmm.ml(92):3131-3216
+                           (apply (field 14 (global Stdlib__list!))
+                             (function field
+                               (funct-body asmcomp/printcmm.ml(92):3141-3203
+                                 (before asmcomp/printcmm.ml(93):3163-3202
+                                   (after asmcomp/printcmm.ml(93):3163-3202
+                                     (apply
+                                       (field 122 (global Stdlib__format!))
+                                       ppf [0: [15: [11: "; " 0a]] "%a; "]
+                                       (field 3 (global Backend_var!)) field)))))
+                             fields))
+                         (before asmcomp/printcmm.ml(95):3222-3244
+                           (after asmcomp/printcmm.ml(95):3222-3244
+                             (apply (field 122 (global Stdlib__format!)) ppf
+                               [0: [12: ']' 0a] "]"]))))))))))))
+     phantom_defining_expr_opt =
+       (function ppf defining_expr
+         (funct-body asmcomp/printcmm.ml(97)<ghost>:3276-3432
+           (before asmcomp/printcmm.ml(98):3298-3432
+             (if defining_expr
+               (let (defining_expr =a (field 0 defining_expr))
+                 (before asmcomp/printcmm.ml(100):3393-3432
+                   (after asmcomp/printcmm.ml(100):3393-3432
+                     (apply phantom_defining_expr ppf defining_expr))))
+               (before asmcomp/printcmm.ml(99):3335-3366
+                 (after asmcomp/printcmm.ml(99):3335-3366
+                   (apply (field 12 (global Stdlib__format!)) ppf "()")))))))
+     operation =
+       (function d param
+         (funct-body asmcomp/printcmm.ml(102)<ghost>:3448-4761
+           (switch* param
+            case int 0:
+             (before asmcomp/printcmm.ml(108):3774-3805
+               (after asmcomp/printcmm.ml(108):3774-3805
+                 (apply (field 27 (global Stdlib!)) "alloc"
+                   (after asmcomp/printcmm.ml(108):3784-3805
+                     (apply (field 2 (global Debuginfo!)) d)))))
+            case int 1: (before asmcomp/printcmm.ml(117):4070-4073 "+")
+            case int 2: (before asmcomp/printcmm.ml(118):4087-4090 "-")
+            case int 3: (before asmcomp/printcmm.ml(119):4104-4107 "*")
+            case int 4: (before asmcomp/printcmm.ml(120):4122-4126 "*h")
+            case int 5: (before asmcomp/printcmm.ml(121):4140-4143 "/")
+            case int 6: (before asmcomp/printcmm.ml(122):4157-4162 "mod")
+            case int 7: (before asmcomp/printcmm.ml(123):4175-4180 "and")
+            case int 8: (before asmcomp/printcmm.ml(124):4192-4196 "or")
+            case int 9: (before asmcomp/printcmm.ml(125):4209-4214 "xor")
+            case int 10: (before asmcomp/printcmm.ml(126):4227-4231 "<<")
+            case int 11: (before asmcomp/printcmm.ml(127):4244-4249 ">>u")
+            case int 12: (before asmcomp/printcmm.ml(128):4262-4267 ">>s")
+            case int 13: (before asmcomp/printcmm.ml(130):4317-4321 "+v")
+            case int 14: (before asmcomp/printcmm.ml(131):4335-4339 "+a")
+            case int 15: (before asmcomp/printcmm.ml(133):4412-4416 "~f")
+            case int 16: (before asmcomp/printcmm.ml(134):4430-4436 "absf")
+            case int 17: (before asmcomp/printcmm.ml(135):4450-4454 "+f")
+            case int 18: (before asmcomp/printcmm.ml(136):4468-4472 "-f")
+            case int 19: (before asmcomp/printcmm.ml(137):4486-4490 "*f")
+            case int 20: (before asmcomp/printcmm.ml(138):4504-4508 "/f")
+            case int 21:
+             (before asmcomp/printcmm.ml(139):4528-4540 "floatofint")
+            case int 22:
+             (before asmcomp/printcmm.ml(140):4560-4572 "intoffloat")
+            case int 23:
+             (before asmcomp/printcmm.ml(143):4725-4761
+               (after asmcomp/printcmm.ml(143):4725-4761
+                 (apply (field 27 (global Stdlib!)) "checkbound"
+                   (after asmcomp/printcmm.ml(143):4740-4761
+                     (apply (field 2 (global Debuginfo!)) d)))))
+            case tag 0:
+             (before asmcomp/printcmm.ml(103):3479-3508
+               (after asmcomp/printcmm.ml(103):3479-3508
+                 (apply (field 27 (global Stdlib!)) "app"
+                   (after asmcomp/printcmm.ml(103):3487-3508
+                     (apply (field 2 (global Debuginfo!)) d)))))
+            case tag 1:
+             (let (lbl =a (field 0 param))
+               (before asmcomp/printcmm.ml(105):3552-3613
+                 (after asmcomp/printcmm.ml(105):3552-3613
+                   (apply (field 3 (global Stdlib__printf!))
+                     [0:
+                      [11: "extcall \"" [2: 0a [12: '"' [2: 0a 0a]]]]
+                      "extcall \"%s\"%s"]
+                     lbl
+                     (after asmcomp/printcmm.ml(105):3590-3613
+                       (apply (field 2 (global Debuginfo!)) d))))))
+            case tag 2:
+             (let (*match* =a (field 1 param) c =a (field 0 param))
+               (if *match*
+                 (let (c =a c)
+                   (before asmcomp/printcmm.ml(107):3721-3759
+                     (after asmcomp/printcmm.ml(107):3721-3759
+                       (apply (field 3 (global Stdlib__printf!))
+                         [0: [11: "load_mut " [2: 0a 0a]] "load_mut %s"]
+                         (after asmcomp/printcmm.ml(107):3750-3759
+                           (apply chunk c))))))
+                 (before asmcomp/printcmm.ml(106):3651-3685
+                   (after asmcomp/printcmm.ml(106):3651-3685
+                     (apply (field 3 (global Stdlib__printf!))
+                       [0: [11: "load " [2: 0a 0a]] "load %s"]
+                       (after asmcomp/printcmm.ml(106):3676-3685
+                         (apply chunk c)))))))
+            case tag 3:
+             (let (init =a (field 1 param) c =a (field 0 param))
+               (before asmcomp/printcmm.ml(110):3834-4056
+                 (let
+                   (init =
+                      (switch* init
+                       case int 0:
+                        (before asmcomp/printcmm.ml(114):4000-4002 "")
+                       case int 1:
+                        (before asmcomp/printcmm.ml(112):3905-3918
+                          "(heap-init)")
+                       case int 2:
+                        (before asmcomp/printcmm.ml(113):3957-3970
+                          "(root-init)")))
+                   (before asmcomp/printcmm.ml(116):4014-4056
+                     (after asmcomp/printcmm.ml(116):4014-4056
+                       (apply (field 3 (global Stdlib__printf!))
+                         [0: [11: "store " [2: 0a [2: 0a 0a]]] "store %s%s"]
+                         (after asmcomp/printcmm.ml(116):4042-4051
+                           (apply chunk c))
+                         init))))))
+            case tag 4:
+             (let (c =a (field 0 param))
+               (before asmcomp/printcmm.ml(129):4283-4303
+                 (after asmcomp/printcmm.ml(129):4283-4303
+                   (apply integer_comparison c))))
+            case tag 5:
+             (let (c =a (field 0 param))
+               (before asmcomp/printcmm.ml(132):4355-4398
+                 (after asmcomp/printcmm.ml(132):4355-4398
+                   (apply (field 3 (global Stdlib__printf!))
+                     [0: [2: 0a [12: 'a' 0a]] "%sa"]
+                     (after asmcomp/printcmm.ml(132):4376-4398
+                       (apply integer_comparison c))))))
+            case tag 6:
+             (let (c =a (field 0 param))
+               (before asmcomp/printcmm.ml(141):4588-4629
+                 (after asmcomp/printcmm.ml(141):4588-4629
+                   (apply (field 3 (global Stdlib__printf!))
+                     [0: [2: 0a [12: 'f' 0a]] "%sf"]
+                     (after asmcomp/printcmm.ml(141):4609-4629
+                       (apply float_comparison c))))))
+            case tag 7:
+             (let (k =a (field 0 param))
+               (before asmcomp/printcmm.ml(142):4646-4705
+                 (after asmcomp/printcmm.ml(142):4646-4705
+                   (apply (field 126 (global Stdlib__format!))
+                     [0: [15: [2: 0a 0a]] "%a%s"] raise_kind k
+                     (after asmcomp/printcmm.ml(142):4682-4705
+                       (apply (field 2 (global Debuginfo!)) d))))))))))
+    (letrec
+      (expr
+         (function ppf param
+           (funct-body asmcomp/printcmm.ml(145)<ghost>:4776-8746
+             (switch* param
+              case tag 0:
+               (let (n =a (field 0 param))
+                 (before asmcomp/printcmm.ml(146):4819-4837
+                   (after asmcomp/printcmm.ml(146):4819-4837
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [4: 3a 0a 0a 0a] "%i"] n))))
+              case tag 1:
+               (let (n =a (field 0 param))
+                 (before asmcomp/printcmm.ml(148):4873-4913
+                   (after asmcomp/printcmm.ml(148):4873-4913
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [2: 0a 0a] "%s"]
+                       (after asmcomp/printcmm.ml(148):4890-4913
+                         (apply (field 14 (global Stdlib__nativeint!)) n))))))
+              case tag 2:
+               (let (n =a (field 0 param))
+                 (before asmcomp/printcmm.ml(152):5058-5076
+                   (after asmcomp/printcmm.ml(152):5058-5076
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [8: [0: 0a 5a] 0a 0a 0a] "%F"] n))))
+              case tag 3:
+               (let (s =a (field 0 param))
+                 (before asmcomp/printcmm.ml(153):5108-5130
+                   (after asmcomp/printcmm.ml(153):5108-5130
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [12: '"' [2: 0a [12: '"' 0a]]] "\"%s\""] s))))
+              case tag 4:
+               (let (n =a (field 0 param))
+                 (before asmcomp/printcmm.ml(154):5163-5182
+                   (after asmcomp/printcmm.ml(154):5163-5182
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [4: 3a 0a 0a [12: 'a' 0a]] "%ia"] n))))
+              case tag 5:
+               (let (n =a (field 0 param))
+                 (before asmcomp/printcmm.ml(155):5218-5259
+                   (after asmcomp/printcmm.ml(155):5218-5259
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [2: 0a [12: 'a' 0a]] "%sa"]
+                       (after asmcomp/printcmm.ml(155):5236-5259
+                         (apply (field 14 (global Stdlib__nativeint!)) n))))))
+              case tag 6:
+               (let (d =a (field 1 param) n =a (field 0 param))
+                 (before asmcomp/printcmm.ml(150):4944-5027
+                   (after asmcomp/printcmm.ml(150):4944-5027
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [11: "block-hdr(" [2: 0a [12: ')' [2: 0a 0a]]]]
+                        "block-hdr(%s)%s"]
+                       (after asmcomp/printcmm.ml(151):4980-5003
+                         (apply (field 14 (global Stdlib__nativeint!)) n))
+                       (after asmcomp/printcmm.ml(151):5004-5027
+                         (apply (field 2 (global Debuginfo!)) d))))))
+              case tag 7:
+               (let (id =a (field 0 param))
+                 (before asmcomp/printcmm.ml(156):5275-5289
+                   (after asmcomp/printcmm.ml(156):5275-5289
+                     (apply (field 3 (global Backend_var!)) ppf id))))
+              case tag 8:
+               (let
+                 (body =a (field 2 param)
+                  def =a (field 1 param)
+                  id =a (field 0 param))
+                 (switch body
+                  case tag 8:
+                   (before asmcomp/printcmm.ml(158):5342-5764
+                     (let
+                       (print_binding =
+                          (function id ppf def
+                            (funct-body asmcomp/printcmm.ml(158)<ghost>:5360-5439
+                              (before asmcomp/printcmm.ml(159):5381-5439
+                                (after asmcomp/printcmm.ml(159):5381-5439
+                                  (apply (field 122 (global Stdlib__format!))
+                                    ppf
+                                    [0:
+                                     [18:
+                                      [1: [0: [11: "<2>" 0a] "<2>"]]
+                                      [15:
+                                       [17: [0: "@ " 1 0] [15: [17: 0a 0a]]]]]
+                                     "@[<2>%a@ %a@]"]
+                                    (field 0
+                                      (field 33 (global Backend_var!)))
+                                    id expr def))))))
+                       (before asmcomp/printcmm.ml(161):5449-5764
+                         (letrec
+                           (in_part
+                              (function ppf exp
+                                (funct-body asmcomp/printcmm.ml(161)<ghost>:5465-5617
+                                  (switch exp
+                                   case tag 8:
+                                    (let
+                                      (body =a (field 2 exp)
+                                       def =a (field 1 exp)
+                                       id =a (field 0 exp))
+                                      (before asmcomp/printcmm.ml(163):5525-5596
+                                        (seq
+                                          (after asmcomp/printcmm.ml(163):5525-5566
+                                            (apply
+                                              (field 122
+                                                (global Stdlib__format!))
+                                              ppf
+                                              [0:
+                                               [17: [0: "@ " 1 0] [15: 0a]]
+                                               "@ %a"]
+                                              (after asmcomp/printcmm.ml(163):5544-5562
+                                                (apply print_binding id))
+                                              def))
+                                          (before asmcomp/printcmm.ml(164):5580-5596
+                                            (after asmcomp/printcmm.ml(164):5580-5596
+                                              (apply in_part ppf body))))))
+                                   default:
+                                    (before asmcomp/printcmm.ml(165):5614-5617
+                                      exp)))))
+                           (before asmcomp/printcmm.ml(166):5627-5764
+                             (seq
+                               (after asmcomp/printcmm.ml(166):5627-5683
+                                 (apply (field 122 (global Stdlib__format!))
+                                   ppf
+                                   [0:
+                                    [18:
+                                     [1: [0: [11: "<2>" 0a] "<2>"]]
+                                     [11:
+                                      "(let"
+                                      [17:
+                                       [0: "@ " 1 0]
+                                       [18:
+                                        [1: [0: [11: "<1>" 0a] "<1>"]]
+                                        [12: '(' [15: 0a]]]]]]
+                                    "@[<2>(let@ @[<1>(%a"]
+                                   (after asmcomp/printcmm.ml(166):5661-5679
+                                     (apply print_binding id))
+                                   def))
+                               (before asmcomp/printcmm.ml(167):5691-5764
+                                 (let
+                                   (exp =
+                                      (after asmcomp/printcmm.ml(167):5701-5717
+                                        (apply in_part ppf body)))
+                                   (before asmcomp/printcmm.ml(168):5727-5764
+                                     (after asmcomp/printcmm.ml(168):5727-5764
+                                       (apply
+                                         (field 122 (global Stdlib__format!))
+                                         ppf
+                                         [0:
+                                          [12:
+                                           ')'
+                                           [17:
+                                            0a
+                                            [17:
+                                             [0: "@ " 1 0]
+                                             [15: [12: ')' [17: 0a 0a]]]]]]
+                                          ")@]@ %a)@]"]
+                                         sequence exp)))))))))))
+                  default:
+                   (let (body =a body def =a def id =a id)
+                     (before asmcomp/printcmm.ml(170):5797-5889
+                       (after asmcomp/printcmm.ml(170):5797-5889
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [18:
+                             [1: [0: [11: "<2>" 0a] "<2>"]]
+                             [11:
+                              "(let"
+                              [17:
+                               [0: "@ " 1 0]
+                               [18:
+                                [1: [0: [11: "<2>" 0a] "<2>"]]
+                                [15:
+                                 [17:
+                                  [0: "@ " 1 0]
+                                  [15:
+                                   [17:
+                                    0a
+                                    [17:
+                                     [0: "@ " 1 0]
+                                     [15: [12: ')' [17: 0a 0a]]]]]]]]]]]]
+                            "@[<2>(let@ @[<2>%a@ %a@]@ %a)@]"]
+                           (field 0 (field 33 (global Backend_var!))) id expr
+                           def sequence body))))))
+              case tag 9:
+               (let
+                 (body =a (field 2 param)
+                  def =a (field 1 param)
+                  var =a (field 0 param))
+                 (switch body
+                  case tag 9:
+                   (before asmcomp/printcmm.ml(174):5959-6422
+                     (let
+                       (print_binding =
+                          (function var ppf def
+                            (funct-body asmcomp/printcmm.ml(174)<ghost>:5977-6079
+                              (before asmcomp/printcmm.ml(175):5999-6079
+                                (after asmcomp/printcmm.ml(175):5999-6079
+                                  (apply (field 122 (global Stdlib__format!))
+                                    ppf
+                                    [0:
+                                     [18:
+                                      [1: [0: [11: "<2>" 0a] "<2>"]]
+                                      [15:
+                                       [17: [0: "@ " 1 0] [15: [17: 0a 0a]]]]]
+                                     "@[<2>%a@ %a@]"]
+                                    (field 0
+                                      (field 33 (global Backend_var!)))
+                                    var phantom_defining_expr_opt def))))))
+                       (before asmcomp/printcmm.ml(178):6095-6422
+                         (letrec
+                           (in_part
+                              (function ppf exp
+                                (funct-body asmcomp/printcmm.ml(178)<ghost>:6111-6273
+                                  (switch exp
+                                   case tag 9:
+                                    (let
+                                      (body =a (field 2 exp)
+                                       def =a (field 1 exp)
+                                       var =a (field 0 exp))
+                                      (before asmcomp/printcmm.ml(180):6180-6252
+                                        (seq
+                                          (after asmcomp/printcmm.ml(180):6180-6222
+                                            (apply
+                                              (field 122
+                                                (global Stdlib__format!))
+                                              ppf
+                                              [0:
+                                               [17: [0: "@ " 1 0] [15: 0a]]
+                                               "@ %a"]
+                                              (after asmcomp/printcmm.ml(180):6199-6218
+                                                (apply print_binding var))
+                                              def))
+                                          (before asmcomp/printcmm.ml(181):6236-6252
+                                            (after asmcomp/printcmm.ml(181):6236-6252
+                                              (apply in_part ppf body))))))
+                                   default:
+                                    (before asmcomp/printcmm.ml(182):6270-6273
+                                      exp)))))
+                           (before asmcomp/printcmm.ml(183):6283-6422
+                             (seq
+                               (after asmcomp/printcmm.ml(183):6283-6341
+                                 (apply (field 122 (global Stdlib__format!))
+                                   ppf
+                                   [0:
+                                    [18:
+                                     [1: [0: [11: "<2>" 0a] "<2>"]]
+                                     [11:
+                                      "(let?"
+                                      [17:
+                                       [0: "@ " 1 0]
+                                       [18:
+                                        [1: [0: [11: "<1>" 0a] "<1>"]]
+                                        [12: '(' [15: 0a]]]]]]
+                                    "@[<2>(let?@ @[<1>(%a"]
+                                   (after asmcomp/printcmm.ml(183):6318-6337
+                                     (apply print_binding var))
+                                   def))
+                               (before asmcomp/printcmm.ml(184):6349-6422
+                                 (let
+                                   (exp =
+                                      (after asmcomp/printcmm.ml(184):6359-6375
+                                        (apply in_part ppf body)))
+                                   (before asmcomp/printcmm.ml(185):6385-6422
+                                     (after asmcomp/printcmm.ml(185):6385-6422
+                                       (apply
+                                         (field 122 (global Stdlib__format!))
+                                         ppf
+                                         [0:
+                                          [12:
+                                           ')'
+                                           [17:
+                                            0a
+                                            [17:
+                                             [0: "@ " 1 0]
+                                             [15: [12: ')' [17: 0a 0a]]]]]]
+                                          ")@]@ %a)@]"]
+                                         sequence exp)))))))))))
+                  default:
+                   (let (body =a body def =a def var =a var)
+                     (before asmcomp/printcmm.ml(187):6463-6590
+                       (after asmcomp/printcmm.ml(187):6463-6590
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [18:
+                             [1: [0: [11: "<2>" 0a] "<2>"]]
+                             [11:
+                              "(let?"
+                              [17:
+                               [0: "@ " 1 0]
+                               [18:
+                                [1: [0: [11: "<2>" 0a] "<2>"]]
+                                [15:
+                                 [17:
+                                  [0: "@ " 1 0]
+                                  [15:
+                                   [17:
+                                    0a
+                                    [17:
+                                     [0: "@ " 1 0]
+                                     [15: [12: ')' [17: 0a 0a]]]]]]]]]]]]
+                            "@[<2>(let?@ @[<2>%a@ %a@]@ %a)@]"]
+                           (field 0 (field 33 (global Backend_var!))) var
+                           phantom_defining_expr_opt def sequence body))))))
+              case tag 10:
+               (let (exp =a (field 1 param) id =a (field 0 param))
+                 (before asmcomp/printcmm.ml(193):6621-6684
+                   (after asmcomp/printcmm.ml(193):6621-6684
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [18:
+                         [1: [0: [11: "<2>" 0a] "<2>"]]
+                         [11:
+                          "(assign "
+                          [18:
+                           [1: [0: [11: "<2>" 0a] "<2>"]]
+                           [15:
+                            [17:
+                             [0: "@ " 1 0]
+                             [15: [17: 0a [12: ')' [17: 0a 0a]]]]]]]]]
+                        "@[<2>(assign @[<2>%a@ %a@])@]"]
+                       (field 3 (global Backend_var!)) id expr exp))))
+              case tag 11:
+               (let (el =a (field 0 param))
+                 (before asmcomp/printcmm.ml(195):6708-6932
+                   (let
+                     (tuple =
+                        (function ppf el
+                          (funct-body asmcomp/printcmm.ml(195)<ghost>:6718-6888
+                            (before asmcomp/printcmm.ml(196):6734-6888
+                              (let (first = (makemutable 0 1a))
+                                (before asmcomp/printcmm.ml(197):6765-6888
+                                  (after asmcomp/printcmm.ml(197):6765-6888
+                                    (apply (field 14 (global Stdlib__list!))
+                                      (function e
+                                        (funct-body asmcomp/printcmm.ml(198):6783-6877
+                                          (before asmcomp/printcmm.ml(199):6803-6876
+                                            (seq
+                                              (if (field 0 first)
+                                                (before asmcomp/printcmm.ml(199):6818-6832
+                                                  (setfield_imm 0 first 0a))
+                                                (before asmcomp/printcmm.ml(199):6838-6854
+                                                  (after asmcomp/printcmm.ml(199):6838-6854
+                                                    (apply
+                                                      (field 122
+                                                        (global Stdlib__format!))
+                                                      ppf
+                                                      [0:
+                                                       [17: [0: "@ " 1 0] 0a]
+                                                       "@ "]))))
+                                              (before asmcomp/printcmm.ml(200):6866-6876
+                                                (after asmcomp/printcmm.ml(200):6866-6876
+                                                  (apply expr ppf e)))))))
+                                      el))))))))
+                     (before asmcomp/printcmm.ml(202):6898-6932
+                       (after asmcomp/printcmm.ml(202):6898-6932
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [18:
+                             [1: [0: [11: "<1>" 0a] "<1>"]]
+                             [12: '[' [15: [12: ']' [17: 0a 0a]]]]]
+                            "@[<1>[%a]@]"]
+                           tuple el))))))
+              case tag 12:
+               (let
+                 (dbg =a (field 2 param)
+                  el =a (field 1 param)
+                  op =a (field 0 param))
+                 (before asmcomp/printcmm.ml(204):6963-7259
+                   (seq
+                     (after asmcomp/printcmm.ml(204):6963-7004
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [18:
+                           [1: [0: [11: "<2>" 0a] "<2>"]]
+                           [12: '(' [2: 0a 0a]]]
+                          "@[<2>(%s"]
+                         (after asmcomp/printcmm.ml(204):6986-7004
+                           (apply operation dbg op))))
+                     (before asmcomp/printcmm.ml(205):7012-7259
+                       (seq
+                         (after asmcomp/printcmm.ml(205):7012-7061
+                           (apply (field 14 (global Stdlib__list!))
+                             (function e
+                               (funct-body asmcomp/printcmm.ml(205):7022-7058
+                                 (before asmcomp/printcmm.ml(205):7032-7057
+                                   (after asmcomp/printcmm.ml(205):7032-7057
+                                     (apply
+                                       (field 122 (global Stdlib__format!))
+                                       ppf
+                                       [0:
+                                        [17: [0: "@ " 1 0] [15: 0a]] "@ %a"]
+                                       expr e)))))
+                             el))
+                         (before asmcomp/printcmm.ml(206):7069-7259
+                           (seq
+                             (catch
+                               (switch op
+                                case tag 0:
+                                 (let (mty =a (field 0 op))
+                                   (before asmcomp/printcmm.ml(207):7111-7142
+                                     (after asmcomp/printcmm.ml(207):7111-7142
+                                       (apply
+                                         (field 122 (global Stdlib__format!))
+                                         ppf
+                                         [0:
+                                          [17: [0: "@ " 1 0] [15: 0a]] "@ %a"]
+                                         machtype mty))))
+                                case tag 1:
+                                 (let (mty =a (field 1 op))
+                                   (before asmcomp/printcmm.ml(208):7177-7208
+                                     (after asmcomp/printcmm.ml(208):7177-7208
+                                       (apply
+                                         (field 122 (global Stdlib__format!))
+                                         ppf
+                                         [0:
+                                          [17: [0: "@ " 1 0] [15: 0a]] "@ %a"]
+                                         machtype mty))))
+                                default: (exit 4))
+                              with (4)
+                               (before asmcomp/printcmm.ml(209):7222-7224 0a))
+                             (before asmcomp/printcmm.ml(211):7242-7259
+                               (after asmcomp/printcmm.ml(211):7242-7259
+                                 (apply (field 122 (global Stdlib__format!))
+                                   ppf [0: [12: ')' [17: 0a 0a]] ")@]"]))))))))))
+              case tag 13:
+               (let (e2 =a (field 1 param) e1 =a (field 0 param))
+                 (before asmcomp/printcmm.ml(213):7291-7349
+                   (after asmcomp/printcmm.ml(213):7291-7349
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [18:
+                         [1: [0: [11: "<2>" 0a] "<2>"]]
+                         [11:
+                          "(seq"
+                          [17:
+                           [0: "@ " 1 0]
+                           [15:
+                            [17: [0: "@ " 1 0] [15: [12: ')' [17: 0a 0a]]]]]]]]
+                        "@[<2>(seq@ %a@ %a)@]"]
+                       sequence e1 sequence e2))))
+              case tag 14:
+               (let
+                 (e3 =a (field 4 param)
+                  e2 =a (field 2 param)
+                  e1 =a (field 0 param))
+                 (before asmcomp/printcmm.ml(215):7411-7472
+                   (after asmcomp/printcmm.ml(215):7411-7472
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [18:
+                         [1: [0: [11: "<2>" 0a] "<2>"]]
+                         [11:
+                          "(if"
+                          [17:
+                           [0: "@ " 1 0]
+                           [15:
+                            [17:
+                             [0: "@ " 1 0]
+                             [15:
+                              [17: [0: "@ " 1 0] [15: [12: ')' [17: 0a 0a]]]]]]]]]]
+                        "@[<2>(if@ %a@ %a@ %a)@]"]
+                       expr e1 expr e2 expr e3))))
+              case tag 15:
+               (let
+                 (cases =a (field 2 param)
+                  index =a (field 1 param)
+                  e1 =a (field 0 param))
+                 (before asmcomp/printcmm.ml(217):7518-7900
+                   (let
+                     (print_case =
+                        (function i[int] ppf
+                          (funct-body asmcomp/printcmm.ml(217)<ghost>:7533-7657
+                            (before asmcomp/printcmm.ml(218):7549-7657
+                              (for j 0 to (- (array.length[int] index) 1)
+                                (before asmcomp/printcmm.ml(219):7598-7644
+                                  (if
+                                    (==
+                                      (after asmcomp/printcmm.ml(219):7601-7610
+                                        (array.get[int] index j))
+                                      i)
+                                    (before asmcomp/printcmm.ml(219):7620-7644
+                                      (after asmcomp/printcmm.ml(219):7620-7644
+                                        (apply
+                                          (field 122
+                                            (global Stdlib__format!))
+                                          ppf
+                                          [0:
+                                           [11:
+                                            "case "
+                                            [4: 3a 0a 0a [12: ':' 0a]]]
+                                           "case %i:"]
+                                          j)))
+                                    0a)))))))
+                     (before asmcomp/printcmm.ml(221):7667-7900
+                       (let
+                         (print_cases =
+                            (function ppf
+                              (funct-body asmcomp/printcmm.ml(221)<ghost>:7683-7824
+                                (before asmcomp/printcmm.ml(222):7696-7824
+                                  (for i 0 to
+                                    (- (array.length[addr] cases) 1)
+                                    (before asmcomp/printcmm.ml(223):7743-7812
+                                      (after asmcomp/printcmm.ml(223):7743-7812
+                                        (apply
+                                          (field 122
+                                            (global Stdlib__format!))
+                                          ppf
+                                          [0:
+                                           [17:
+                                            [0: "@ " 1 0]
+                                            [18:
+                                             [1: [0: [11: "<2>" 0a] "<2>"]]
+                                             [16:
+                                              [17:
+                                               [0: "@ " 1 0]
+                                               [15: [17: 0a 0a]]]]]]
+                                           "@ @[<2>%t@ %a@]"]
+                                          (after asmcomp/printcmm.ml(223):7773-7787
+                                            (apply print_case i))
+                                          sequence
+                                          (field 0
+                                            (after asmcomp/printcmm.ml(223):7802-7811
+                                              (array.get[addr] cases i)))))))))))
+                         (before asmcomp/printcmm.ml(225):7834-7900
+                           (after asmcomp/printcmm.ml(225):7834-7900
+                             (apply (field 122 (global Stdlib__format!)) ppf
+                               [0:
+                                [18:
+                                 [1: [0: [11: "<v 0>" 0a] "<v 0>"]]
+                                 [18:
+                                  [1: [0: [11: "<2>" 0a] "<2>"]]
+                                  [11:
+                                   "(switch"
+                                   [17:
+                                    [0: "@ " 1 0]
+                                    [15:
+                                     [17:
+                                      [0: "@ " 1 0]
+                                      [17: 0a [16: [12: ')' [17: 0a 0a]]]]]]]]]]
+                                "@[<v 0>@[<2>(switch@ %a@ @]%t)@]"]
+                               expr e1 print_cases))))))))
+              case tag 16:
+               (let
+                 (e1 =a (field 2 param)
+                  handlers =a (field 1 param)
+                  flag =a (field 0 param))
+                 (before asmcomp/printcmm.ml(227):7941-8467
+                   (let
+                     (print_handler =
+                        (function ppf param
+                          (funct-body asmcomp/printcmm.ml(227)<ghost>:7959-8239
+                            (let
+                              (e2 =a (field 2 param)
+                               ids =a (field 1 param)
+                               i =a (field 0 param))
+                              (before asmcomp/printcmm.ml(228):7992-8239
+                                (after asmcomp/printcmm.ml(228):7992-8239
+                                  (apply (field 122 (global Stdlib__format!))
+                                    ppf
+                                    [0:
+                                     [12:
+                                      '('
+                                      [4:
+                                       0a 0a 0a
+                                       [15:
+                                        [12:
+                                         ')' [17: [0: "@ " 1 0] [15: 0a]]]]]]
+                                     "(%d%a)@ %a"]
+                                    i
+                                    (function ppf ids
+                                      (funct-body asmcomp/printcmm.ml(230):8039-8213
+                                        (before asmcomp/printcmm.ml(231):8068-8212
+                                          (after asmcomp/printcmm.ml(231):8068-8212
+                                            (apply
+                                              (field 14
+                                                (global Stdlib__list!))
+                                              (function param
+                                                (funct-body asmcomp/printcmm.ml(232):8093-8193
+                                                  (let
+                                                    (ty =a (field 1 param)
+                                                     id =a (field 0 param))
+                                                    (before asmcomp/printcmm.ml(233):8127-8192
+                                                      (after asmcomp/printcmm.ml(233):8127-8192
+                                                        (apply
+                                                          (field 122
+                                                            (global Stdlib__format!))
+                                                          ppf
+                                                          [0:
+                                                           [17:
+                                                            [0: "@ " 1 0]
+                                                            [15:
+                                                             [11:
+                                                              ": " [15: 0a]]]]
+                                                           "@ %a: %a"]
+                                                          (field 0
+                                                            (field 33
+                                                              (global Backend_var!)))
+                                                          id machtype ty))))))
+                                              ids)))))
+                                    ids sequence e2)))))))
+                     (before asmcomp/printcmm.ml(238):8255-8467
+                       (let
+                         (print_handlers =
+                            (function ppf l
+                              (funct-body asmcomp/printcmm.ml(238)<ghost>:8274-8321
+                                (before asmcomp/printcmm.ml(239):8290-8321
+                                  (after asmcomp/printcmm.ml(239):8290-8321
+                                    (apply (field 14 (global Stdlib__list!))
+                                      (after asmcomp/printcmm.ml(239):8300-8319
+                                        (apply print_handler ppf))
+                                      l))))))
+                         (before asmcomp/printcmm.ml(241):8337-8467
+                           (after asmcomp/printcmm.ml(241):8337-8467
+                             (apply (field 122 (global Stdlib__format!)) ppf
+                               [0:
+                                [18:
+                                 [1: [0: [11: "<2>" 0a] "<2>"]]
+                                 [11:
+                                  "(catch"
+                                  [15:
+                                   [17:
+                                    [0: "@ " 1 0]
+                                    [15:
+                                     [17:
+                                      [0: "@;<1 -2>" 1 -2]
+                                      [11:
+                                       "with" [15: [12: ')' [17: 0a 0a]]]]]]]]]]
+                                "@[<2>(catch%a@ %a@;<1 -2>with%a)@]"]
+                               rec_flag flag sequence e1 print_handlers
+                               handlers))))))))
+              case tag 17:
+               (let (el =a (field 1 param) i =a (field 0 param))
+                 (before asmcomp/printcmm.ml(247):8495-8606
+                   (seq
+                     (after asmcomp/printcmm.ml(247):8495-8524
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [18:
+                           [1: [0: [11: "<2>" 0a] "<2>"]]
+                           [11: "(exit " [4: 0a 0a 0a 0a]]]
+                          "@[<2>(exit %d"]
+                         i))
+                     (before asmcomp/printcmm.ml(248):8532-8606
+                       (seq
+                         (after asmcomp/printcmm.ml(248):8532-8581
+                           (apply (field 14 (global Stdlib__list!))
+                             (function e
+                               (funct-body asmcomp/printcmm.ml(248):8542-8578
+                                 (before asmcomp/printcmm.ml(248):8552-8577
+                                   (after asmcomp/printcmm.ml(248):8552-8577
+                                     (apply
+                                       (field 122 (global Stdlib__format!))
+                                       ppf
+                                       [0:
+                                        [17: [0: "@ " 1 0] [15: 0a]] "@ %a"]
+                                       expr e)))))
+                             el))
+                         (before asmcomp/printcmm.ml(249):8589-8606
+                           (after asmcomp/printcmm.ml(249):8589-8606
+                             (apply (field 122 (global Stdlib__format!)) ppf
+                               [0: [12: ')' [17: 0a 0a]] ")@]"]))))))))
+              case tag 18:
+               (let
+                 (e2 =a (field 2 param)
+                  id =a (field 1 param)
+                  e1 =a (field 0 param))
+                 (before asmcomp/printcmm.ml(251):8647-8746
+                   (after asmcomp/printcmm.ml(251):8647-8746
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [18:
+                         [1: [0: [11: "<2>" 0a] "<2>"]]
+                         [11:
+                          "(try"
+                          [17:
+                           [0: "@ " 1 0]
+                           [15:
+                            [17:
+                             [0: "@;<1 -2>" 1 -2]
+                             [11:
+                              "with"
+                              [17:
+                               [0: "@ " 1 0]
+                               [15:
+                                [17:
+                                 [0: "@ " 1 0] [15: [12: ')' [17: 0a 0a]]]]]]]]]]]]
+                        "@[<2>(try@ %a@;<1 -2>with@ %a@ %a)@]"]
+                       sequence e1 (field 0 (field 33 (global Backend_var!)))
+                       id sequence e2)))))))
+        sequence
+          (function ppf e
+            (funct-body asmcomp/printcmm.ml(254)<ghost>:8761-8871
+              (switch e
+               case tag 13:
+                (let (e2 =a (field 1 e) e1 =a (field 0 e))
+                  (before asmcomp/printcmm.ml(255):8801-8845
+                    (after asmcomp/printcmm.ml(255):8801-8845
+                      (apply (field 122 (global Stdlib__format!)) ppf
+                        [0: [15: [17: [0: "@ " 1 0] [15: 0a]]] "%a@ %a"]
+                        sequence e1 sequence e2))))
+               default:
+                (before asmcomp/printcmm.ml(256):8855-8871
+                  (after asmcomp/printcmm.ml(256):8855-8871
+                    (apply expression ppf e))))))
+        expression
+          (function ppf e
+            (funct-body asmcomp/printcmm.ml(258)<ghost>:8888-8919
+              (before asmcomp/printcmm.ml(258):8896-8919
+                (after asmcomp/printcmm.ml(258):8896-8919
+                  (apply (field 122 (global Stdlib__format!)) ppf
+                    [0: [15: 0a] "%a"] expr e))))))
+      (let
+        (fundecl =
+           (function ppf f
+             (funct-body asmcomp/printcmm.ml(260)<ghost>:8933-9332
+               (before asmcomp/printcmm.ml(261):8943-9332
+                 (let
+                   (print_cases =
+                      (function ppf cases
+                        (funct-body asmcomp/printcmm.ml(261)<ghost>:8959-9158
+                          (before asmcomp/printcmm.ml(262):8975-9158
+                            (let (first = (makemutable 0 1a))
+                              (before asmcomp/printcmm.ml(263):9003-9158
+                                (after asmcomp/printcmm.ml(263):9003-9158
+                                  (apply (field 14 (global Stdlib__list!))
+                                    (function param
+                                      (funct-body asmcomp/printcmm.ml(264):9018-9147
+                                        (let
+                                          (ty =a (field 1 param)
+                                           id =a (field 0 param))
+                                          (before asmcomp/printcmm.ml(265):9042-9146
+                                            (seq
+                                              (if (field 0 first)
+                                                (before asmcomp/printcmm.ml(265):9057-9071
+                                                  (setfield_imm 0 first 0a))
+                                                (before asmcomp/printcmm.ml(265):9077-9093
+                                                  (after asmcomp/printcmm.ml(265):9077-9093
+                                                    (apply
+                                                      (field 122
+                                                        (global Stdlib__format!))
+                                                      ppf
+                                                      [0:
+                                                       [17: [0: "@ " 1 0] 0a]
+                                                       "@ "]))))
+                                              (before asmcomp/printcmm.ml(266):9102-9146
+                                                (after asmcomp/printcmm.ml(266):9102-9146
+                                                  (apply
+                                                    (field 122
+                                                      (global Stdlib__format!))
+                                                    ppf
+                                                    [0:
+                                                     [15:
+                                                      [11: ": " [15: 0a]]]
+                                                     "%a: %a"]
+                                                    (field 0
+                                                      (field 33
+                                                        (global Backend_var!)))
+                                                    id machtype ty))))))))
+                                    cases))))))))
+                   (before asmcomp/printcmm.ml(268):9164-9332
+                     (after asmcomp/printcmm.ml(268):9164-9332
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [18:
+                           [1: [0: [11: "<1>" 0a] "<1>"]]
+                           [11:
+                            "(function"
+                            [2:
+                             0a
+                             [12:
+                              ' '
+                              [2:
+                               0a
+                               [17:
+                                [0: "@;<1 4>" 1 4]
+                                [18:
+                                 [1: [0: [11: "<1>" 0a] "<1>"]]
+                                 [12:
+                                  '('
+                                  [15:
+                                   [12:
+                                    ')'
+                                    [17:
+                                     0a
+                                     [17:
+                                      [0: "@ " 1 0]
+                                      [18:
+                                       [1: [0: 0a ""]]
+                                       [15:
+                                        [17:
+                                         0a [12: ')' [17: 0a [17: 4a 0a]]]]]]]]]]]]]]]]]]
+                          "@[<1>(function%s %s@;<1 4>@[<1>(%a)@]@ @[%a@])@]@."]
+                         (after asmcomp/printcmm.ml(269):9238-9269
+                           (apply (field 2 (global Debuginfo!)) (field 4 f)))
+                         (field 0 f) print_cases (field 1 f) sequence
+                         (field 2 f))))))))
+         data_item =
+           (function ppf param
+             (funct-body asmcomp/printcmm.ml(272)<ghost>:9348-9932
+               (switch* param
+                case tag 0:
+                 (let (s =a (field 0 param))
+                   (before asmcomp/printcmm.ml(273):9387-9410
+                     (after asmcomp/printcmm.ml(273):9387-9410
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [12: '"' [2: 0a [11: "\":" 0a]]] "\"%s\":"] s))))
+                case tag 1:
+                 (let (s =a (field 0 param))
+                   (before asmcomp/printcmm.ml(274):9435-9464
+                     (after asmcomp/printcmm.ml(274):9435-9464
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [11: "global \"" [2: 0a [12: '"' 0a]]]
+                          "global \"%s\""]
+                         s))))
+                case tag 2:
+                 (let (n =a (field 0 param))
+                   (before asmcomp/printcmm.ml(275):9480-9503
+                     (after asmcomp/printcmm.ml(275):9480-9503
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [11: "byte " [4: 3a 0a 0a 0a]] "byte %i"] n))))
+                case tag 3:
+                 (let (n =a (field 0 param))
+                   (before asmcomp/printcmm.ml(276):9520-9544
+                     (after asmcomp/printcmm.ml(276):9520-9544
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [11: "int16 " [4: 3a 0a 0a 0a]] "int16 %i"] n))))
+                case tag 4:
+                 (let (n =a (field 0 param))
+                   (before asmcomp/printcmm.ml(277):9561-9607
+                     (after asmcomp/printcmm.ml(277):9561-9607
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [11: "int32 " [2: 0a 0a]] "int32 %s"]
+                         (after asmcomp/printcmm.ml(277):9584-9607
+                           (apply (field 14 (global Stdlib__nativeint!)) n))))))
+                case tag 5:
+                 (let (n =a (field 0 param))
+                   (before asmcomp/printcmm.ml(278):9622-9666
+                     (after asmcomp/printcmm.ml(278):9622-9666
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [11: "int " [2: 0a 0a]] "int %s"]
+                         (after asmcomp/printcmm.ml(278):9643-9666
+                           (apply (field 14 (global Stdlib__nativeint!)) n))))))
+                case tag 6:
+                 (let (f =a (field 0 param))
+                   (before asmcomp/printcmm.ml(279):9684-9709
+                     (after asmcomp/printcmm.ml(279):9684-9709
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [11: "single " [8: [0: 0a 5a] 0a 0a 0a]]
+                          "single %F"]
+                         f))))
+                case tag 7:
+                 (let (f =a (field 0 param))
+                   (before asmcomp/printcmm.ml(280):9727-9752
+                     (after asmcomp/printcmm.ml(280):9727-9752
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [11: "double " [8: [0: 0a 5a] 0a 0a 0a]]
+                          "double %F"]
+                         f))))
+                case tag 8:
+                 (let (s =a (field 0 param))
+                   (before asmcomp/printcmm.ml(281):9778-9805
+                     (after asmcomp/printcmm.ml(281):9778-9805
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [11: "addr \"" [2: 0a [12: '"' 0a]]] "addr \"%s\""]
+                         s))))
+                case tag 9:
+                 (let (s =a (field 0 param))
+                   (before asmcomp/printcmm.ml(282):9823-9852
+                     (after asmcomp/printcmm.ml(282):9823-9852
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [11: "string \"" [2: 0a [12: '"' 0a]]]
+                          "string \"%s\""]
+                         s))))
+                case tag 10:
+                 (let (n =a (field 0 param))
+                   (before asmcomp/printcmm.ml(283):9868-9891
+                     (after asmcomp/printcmm.ml(283):9868-9891
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [11: "skip " [4: 3a 0a 0a 0a]] "skip %i"] n))))
+                case tag 11:
+                 (let (n =a (field 0 param))
+                   (before asmcomp/printcmm.ml(284):9908-9932
+                     (after asmcomp/printcmm.ml(284):9908-9932
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [11: "align " [4: 3a 0a 0a 0a]] "align %i"] n)))))))
+         data =
+           (function ppf dl
+             (funct-body asmcomp/printcmm.ml(286)<ghost>:9943-10068
+               (before asmcomp/printcmm.ml(287):9954-10068
+                 (let
+                   (items =
+                      (function ppf
+                        (funct-body asmcomp/printcmm.ml(287)<ghost>:9964-10024
+                          (before asmcomp/printcmm.ml(287):9970-10024
+                            (after asmcomp/printcmm.ml(287):9970-10024
+                              (apply (field 14 (global Stdlib__list!))
+                                (function d
+                                  (funct-body asmcomp/printcmm.ml(287):9980-10021
+                                    (before asmcomp/printcmm.ml(287):9990-10020
+                                      (after asmcomp/printcmm.ml(287):9990-10020
+                                        (apply
+                                          (field 122
+                                            (global Stdlib__format!))
+                                          ppf
+                                          [0:
+                                           [17: [0: "@ " 1 0] [15: 0a]]
+                                           "@ %a"]
+                                          data_item d)))))
+                                dl))))))
+                   (before asmcomp/printcmm.ml(288):10030-10068
+                     (after asmcomp/printcmm.ml(288):10030-10068
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [18:
+                           [1: [0: [11: "<hv 1>" 0a] "<hv 1>"]]
+                           [11: "(data" [16: [12: ')' [17: 0a 0a]]]]]
+                          "@[<hv 1>(data%t)@]"]
+                         items)))))))
+         phrase =
+           (function ppf param
+             (funct-body asmcomp/printcmm.ml(290)<ghost>:10081-10156
+               (switch* param
+                case tag 0:
+                 (let (f =a (field 0 param))
+                   (before asmcomp/printcmm.ml(291):10115-10128
+                     (after asmcomp/printcmm.ml(291):10115-10128
+                       (apply fundecl ppf f))))
+                case tag 1:
+                 (let (dl =a (field 0 param))
+                   (before asmcomp/printcmm.ml(292):10145-10156
+                     (after asmcomp/printcmm.ml(292):10145-10156
+                       (apply data ppf dl))))))))
+        (pseudo _none_(0)<ghost>:-1--1
+          (makeblock 0 rec_flag machtype_component machtype
+            integer_comparison float_comparison chunk operation expression
+            fundecl data phrase raise_kind))))))

@@ -1,0 +1,2614 @@
+(setglobal Location!
+  (let
+    (in_file =
+       (function name
+         (funct-body parsing/location.ml(21)<ghost>:1193-1305
+           (before parsing/location.ml(22):1202-1305
+             (let
+               (loc =
+                  (let (init = (field 0 (global Stdlib__lexing!)))
+                    (makeblock 0 (*,int,int,int) name (field 1 init)
+                      (field 2 init) (field 3 init))))
+               (before parsing/location.ml(23):1253-1305
+                 (makeblock 0 loc loc 1a))))))
+     none =
+       (after parsing/location.ml(26):1321-1337 (apply in_file "_none_"))
+     curr =
+       (function lexbuf
+         (funct-body parsing/location.ml(28)<ghost>:1350-1447
+           (before parsing/location.ml(28):1359-1447
+             (makeblock 0 (field 10 lexbuf) (field 11 lexbuf) 0a))))
+     init =
+       (function lexbuf fname
+         (funct-body parsing/location.ml(34)<ghost>:1460-1579
+           (before parsing/location.ml(35):1477-1579
+             (setfield_ptr 11 lexbuf
+               (makeblock 0 (*,int,int,int) fname 1 0 0)))))
+     symbol_rloc =
+       (function param
+         (funct-body parsing/location.ml(43)<ghost>:1600-1711
+           (before parsing/location.ml(43):1605-1711
+             (makeblock 0
+               (after parsing/location.ml(44):1621-1648
+                 (apply (field 4 (global Stdlib__parsing!)) 0a))
+               (after parsing/location.ml(45):1662-1687
+                 (apply (field 5 (global Stdlib__parsing!)) 0a))
+               0a))))
+     symbol_gloc =
+       (function param
+         (funct-body parsing/location.ml(49)<ghost>:1731-1841
+           (before parsing/location.ml(49):1736-1841
+             (makeblock 0
+               (after parsing/location.ml(50):1752-1779
+                 (apply (field 4 (global Stdlib__parsing!)) 0a))
+               (after parsing/location.ml(51):1793-1818
+                 (apply (field 5 (global Stdlib__parsing!)) 0a))
+               1a))))
+     rhs_loc =
+       (function n[int]
+         (funct-body parsing/location.ml(55)<ghost>:1857-1959
+           (before parsing/location.ml(55):1861-1959
+             (makeblock 0
+               (after parsing/location.ml(56):1877-1900
+                 (apply (field 6 (global Stdlib__parsing!)) n))
+               (after parsing/location.ml(57):1914-1935
+                 (apply (field 7 (global Stdlib__parsing!)) n))
+               0a))))
+     rhs_interval =
+       (function m[int] n[int]
+         (funct-body parsing/location.ml(61)<ghost>:1980-2084
+           (before parsing/location.ml(61):1986-2084
+             (makeblock 0
+               (after parsing/location.ml(62):2002-2025
+                 (apply (field 6 (global Stdlib__parsing!)) m))
+               (after parsing/location.ml(63):2039-2060
+                 (apply (field 7 (global Stdlib__parsing!)) n))
+               0a))))
+     get_pos_info =
+       (function pos
+         (funct-body parsing/location.ml(68)<ghost>:2159-2224
+           (before parsing/location.ml(69):2167-2224
+             (makeblock 0 (*,int,int) (field 0 pos) (field 1 pos)
+               (- (field 3 pos) (field 2 pos))))))
+     mkloc =
+       (function txt loc
+         (funct-body parsing/location.ml(77)<ghost>:2281-2304
+           (before parsing/location.ml(77):2291-2304 (makeblock 0 txt loc))))
+     mknoloc =
+       (function txt
+         (funct-body parsing/location.ml(78)<ghost>:2317-2337
+           (before parsing/location.ml(78):2323-2337
+             (after parsing/location.ml(78):2323-2337 (apply mkloc txt none)))))
+     input_name = (makemutable 0 "_none_")
+     input_lexbuf = (makemutable 0 0a)
+     status = (makemutable 0 0a)
+     setup_terminal =
+       (function param
+         (funct-body parsing/location.ml(91)<ghost>:2677-2760
+           (before parsing/location.ml(92):2684-2760
+             (if (== (field 0 status) 0a)
+               (before parsing/location.ml(93):2729-2760
+                 (setfield_imm 0 status
+                   (after parsing/location.ml(93):2739-2760
+                     (apply (field 0 (global Terminfo!))
+                       (field 38 (global Stdlib!))))))
+               0a))))
+     num_loc_lines = (makemutable 0 (int) 0)
+     reset =
+       (function param
+         (funct-body parsing/location.ml(105)<ghost>:3203-3228
+           (before parsing/location.ml(106):3210-3228
+             (setfield_imm 0 num_loc_lines 0))))
+     echo_eof =
+       (function param
+         (funct-body parsing/location.ml(109)<ghost>:3278-3323
+           (before parsing/location.ml(110):3285-3323
+             (seq
+               (after parsing/location.ml(110):3285-3301
+                 (apply (field 46 (global Stdlib!)) 0a))
+               (before parsing/location.ml(111):3305-3323
+                 (+:=1 num_loc_lines))))))
+     print_updating_num_loc_lines =
+       (function ppf f arg
+         (funct-body parsing/location.ml(118)<ghost>:3602-4151
+           (before parsing/location.ml(119):3616-4151
+             (let
+               (out_functions =
+                  (after parsing/location.ml(120):3657-3694
+                    (apply (field 97 (global Stdlib__format!)) ppf 0a)))
+               (before parsing/location.ml(121):3700-4151
+                 (let
+                   (out_string =
+                      (function str start[int] len[int]
+                        (funct-body parsing/location.ml(121)<ghost>:3715-3981
+                          (before parsing/location.ml(122):3735-3981
+                            (letrec
+                              (count
+                                 (function i[int] c[int] : int
+                                   (funct-body parsing/location.ml(122)<ghost>:3749-3881
+                                     (before parsing/location.ml(123):3761-3881
+                                       (if (== i (+ start len))
+                                         (before parsing/location.ml(123):3785-3786
+                                           c)
+                                         (before parsing/location.ml(124):3798-3881
+                                           (if
+                                             (==
+                                               (after parsing/location.ml(124):3801-3817
+                                                 (string.get str i))
+                                               '\n')
+                                             (before parsing/location.ml(124):3830-3853
+                                               (after parsing/location.ml(124):3830-3853
+                                                 (apply count (1+ i) (1+ c))))
+                                             (before parsing/location.ml(125):3865-3881
+                                               (after parsing/location.ml(125):3865-3881
+                                                 (apply count (1+ i) c))))))))))
+                              (before parsing/location.ml(126):3889-3981
+                                (seq
+                                  (setfield_imm 0 num_loc_lines
+                                    (+ (field 0 num_loc_lines)
+                                      (after parsing/location.ml(126):3923-3936
+                                        (apply count start 0))))
+                                  (before parsing/location.ml(127):3943-3981
+                                    (after parsing/location.ml(127):3943-3981
+                                      (apply (field 0 out_functions) str
+                                        start len))))))))))
+                   (before parsing/location.ml(128):3987-4151
+                     (seq
+                       (after parsing/location.ml(128):3987-4059
+                         (apply (field 95 (global Stdlib__format!)) ppf
+                           (let (init = out_functions)
+                             (makeblock 0 out_string (field 1 init)
+                               (field 2 init) (field 3 init) (field 4 init)))))
+                       (before parsing/location.ml(130):4064-4151
+                         (seq
+                           (after parsing/location.ml(130):4064-4073
+                             (apply f ppf arg))
+                           (before parsing/location.ml(131):4078-4151
+                             (seq
+                               (after parsing/location.ml(131):4078-4099
+                                 (apply (field 35 (global Stdlib__format!))
+                                   ppf 0a))
+                               (before parsing/location.ml(132):4103-4151
+                                 (after parsing/location.ml(132):4103-4151
+                                   (apply (field 95 (global Stdlib__format!))
+                                     ppf out_functions)))))))))))))))
+     setup_colors =
+       (function param
+         (funct-body parsing/location.ml(134)<ghost>:4170-4208
+           (before parsing/location.ml(135):4177-4208
+             (after parsing/location.ml(135):4177-4208
+               (apply (field 5 (field 49 (global Misc!)))
+                 (field 0 (field 151 (global Clflags!))))))))
+     rewrite_absolute_path =
+       (function path
+         (funct-body parsing/location.ml(140)<ghost>:4391-4516
+           (before parsing/location.ml(141):4400-4516
+             (let
+               (*match* =
+                  (after parsing/location.ml(141):4406-4439
+                    (apply (field 56 (global Misc!)) 0a)))
+               (if *match*
+                 (let (map =a (field 0 *match*))
+                   (before parsing/location.ml(143):4478-4516
+                     (after parsing/location.ml(143):4478-4516
+                       (apply (field 7 (global Build_path_prefix_map!)) map
+                         path))))
+                 (before parsing/location.ml(142):4457-4461 path))))))
+     absolute_path =
+       (function s
+         (funct-body parsing/location.ml(145)<ghost>:4536-5004
+           (before parsing/location.ml(146):4585-5004
+             (let
+               (s =
+                  (if
+                    (not
+                      (after parsing/location.ml(148):4627-4642
+                        (apply (field 4 (global Stdlib__filename!)) s)))
+                    (before parsing/location.ml(148):4648-4649 s)
+                    (before parsing/location.ml(149):4659-4709
+                      (after parsing/location.ml(149):4659-4709
+                        (apply rewrite_absolute_path
+                          (after parsing/location.ml(149):4682-4708
+                            (apply (field 3 (global Stdlib__filename!))
+                              (after parsing/location.ml(149):4690-4705
+                                (caml_sys_getcwd 0a))
+                              s)))))))
+               (before parsing/location.ml(152):4758-5004
+                 (letrec
+                   (aux
+                      (function s
+                        (funct-body parsing/location.ml(152)<ghost>:4770-4991
+                          (before parsing/location.ml(153):4778-4991
+                            (let
+                              (base =
+                                 (after parsing/location.ml(153):4789-4799
+                                   (apply
+                                     (field 12 (global Stdlib__filename!)) s)))
+                              (before parsing/location.ml(154):4807-4991
+                                (let
+                                  (dir =
+                                     (after parsing/location.ml(154):4817-4826
+                                       (apply
+                                         (field 13
+                                           (global Stdlib__filename!))
+                                         s)))
+                                  (before parsing/location.ml(155):4834-4991
+                                    (if
+                                      (after parsing/location.ml(155):4837-4844
+                                        (caml_string_equal dir s))
+                                      (before parsing/location.ml(155):4850-4853
+                                        dir)
+                                      (before parsing/location.ml(156):4863-4991
+                                        (if
+                                          (after parsing/location.ml(156):4866-4889
+                                            (caml_string_equal base
+                                              (field 0
+                                                (global Stdlib__filename!))))
+                                          (before parsing/location.ml(156):4895-4902
+                                            (after parsing/location.ml(156):4895-4902
+                                              (apply aux dir)))
+                                          (before parsing/location.ml(157):4912-4991
+                                            (if
+                                              (after parsing/location.ml(157):4915-4937
+                                                (caml_string_equal base
+                                                  (field 1
+                                                    (global Stdlib__filename!))))
+                                              (before parsing/location.ml(157):4943-4960
+                                                (after parsing/location.ml(157):4943-4960
+                                                  (apply
+                                                    (field 13
+                                                      (global Stdlib__filename!))
+                                                    (after parsing/location.ml(157):4951-4960
+                                                      (apply aux dir)))))
+                                              (before parsing/location.ml(158):4970-4991
+                                                (after parsing/location.ml(158):4970-4991
+                                                  (apply
+                                                    (field 3
+                                                      (global Stdlib__filename!))
+                                                    (after parsing/location.ml(158):4977-4986
+                                                      (apply aux dir))
+                                                    base))))))))))))))))
+                   (before parsing/location.ml(160):4999-5004
+                     (after parsing/location.ml(160):4999-5004 (apply aux s)))))))))
+     show_filename =
+       (function file
+         (funct-body parsing/location.ml(162)<ghost>:5024-5086
+           (before parsing/location.ml(163):5033-5086
+             (if (field 0 (field 33 (global Clflags!)))
+               (before parsing/location.ml(163):5058-5076
+                 (after parsing/location.ml(163):5058-5076
+                   (apply absolute_path file)))
+               (before parsing/location.ml(163):5082-5086 file)))))
+     print_filename =
+       (function ppf file
+         (funct-body parsing/location.ml(165)<ghost>:5107-5167
+           (before parsing/location.ml(166):5120-5167
+             (after parsing/location.ml(166):5120-5167
+               (apply (field 12 (global Stdlib__format!)) ppf
+                 (after parsing/location.ml(166):5147-5167
+                   (apply show_filename file)))))))
+     print_loc =
+       (function ppf loc
+         (funct-body parsing/location.ml(174)<ghost>:5449-7283
+           (before parsing/location.ml(175):5461-7283
+             (seq
+               (after parsing/location.ml(175):5461-5476
+                 (apply setup_colors 0a))
+               (before parsing/location.ml(176):5480-7283
+                 (let
+                   (file_valid =
+                      (function param
+                        (funct-body parsing/location.ml(176):5497-5735
+                          (catch
+                            (catch
+                              (stringswitch param
+                               case "": (exit 1)
+                               case "//toplevel//": (exit 1)
+                               case "_none_":
+                                (before parsing/location.ml(180):5680-5684
+                                  1a)
+                               default: (exit 2))
+                             with (2)
+                              (before parsing/location.ml(182):5731-5735 1a))
+                           with (1)
+                            (before parsing/location.ml(181):5714-5719 0a)))))
+                   (before parsing/location.ml(184):5743-7283
+                     (let
+                       (line_valid =
+                          (function line[int]
+                            (funct-body parsing/location.ml(184)<ghost>:5758-5773
+                              (before parsing/location.ml(184):5765-5773
+                                (> line 0)))))
+                       (before parsing/location.ml(185):5779-7283
+                         (let
+                           (chars_valid =
+                              (function startchar[int] endchar[int]
+                                (funct-body parsing/location.ml(185)<ghost>:5795-5849
+                                  (before parsing/location.ml(185):5817-5849
+                                    (&& (!= startchar -1) (!= endchar -1))))))
+                           (before parsing/location.ml(187):5856-7283
+                             (let
+                               (file =
+                                  (if
+                                    (after parsing/location.ml(190):5982-6010
+                                      (caml_string_equal
+                                        (field 0 (field 0 loc)) ""))
+                                    (before parsing/location.ml(190):6016-6027
+                                      (field 0 input_name))
+                                    (before parsing/location.ml(191):6037-6060
+                                      (field 0 (field 0 loc)))))
+                               (before parsing/location.ml(193):6068-7283
+                                 (let
+                                   (startline =[int] (field 1 (field 0 loc)))
+                                   (before parsing/location.ml(194):6112-7283
+                                     (let
+                                       (endline =[int]
+                                          (field 1 (field 1 loc)))
+                                       (before parsing/location.ml(195):6152-7283
+                                         (let
+                                           (startchar =[int]
+                                              (- (field 3 (field 0 loc))
+                                                (field 2 (field 0 loc))))
+                                           (before parsing/location.ml(196):6220-7283
+                                             (let
+                                               (endchar =[int]
+                                                  (- (field 3 (field 1 loc))
+                                                    (field 2 (field 1 loc))))
+                                               (before parsing/location.ml(198):6283-7283
+                                                 (let
+                                                   (first =
+                                                      (makemutable 0 1a))
+                                                   (before parsing/location.ml(199):6309-7283
+                                                     (let
+                                                       (capitalize =
+                                                          (function s
+                                                            (funct-body parsing/location.ml(199)<ghost>:6324-6401
+                                                              (before parsing/location.ml(200):6332-6401
+                                                                (if
+                                                                  (field 0
+                                                                    first)
+                                                                  (before parsing/location.ml(200):6347-6390
+                                                                    (seq
+                                                                    (setfield_imm 0
+                                                                    first 0a)
+                                                                    (before parsing/location.ml(200):6364-6389
+                                                                    (after parsing/location.ml(200):6364-6389
+                                                                    (apply
+                                                                    (field 30
+                                                                    (global Stdlib__string!))
+                                                                    s)))))
+                                                                  (before parsing/location.ml(201):6400-6401
+                                                                    s))))))
+                                                       (before parsing/location.ml(202):6407-7283
+                                                         (let
+                                                           (comma =
+                                                              (function param
+                                                                (funct-body parsing/location.ml(202)<ghost>:6417-6472
+                                                                  (before parsing/location.ml(203):6426-6472
+                                                                    (if
+                                                                    (field 0
+                                                                    first)
+                                                                    (before parsing/location.ml(203):6441-6443
+                                                                    0a)
+                                                                    (before parsing/location.ml(203):6449-6472
+                                                                    (after parsing/location.ml(203):6449-6472
+                                                                    (apply
+                                                                    (field 122
+                                                                    (global Stdlib__format!))
+                                                                    ppf
+                                                                    [0:
+                                                                    [11:
+                                                                    ", " 0a]
+                                                                    ", "]))))))))
+                                                           (before parsing/location.ml(205):6479-7283
+                                                             (seq
+                                                               (after parsing/location.ml(205):6479-6507
+                                                                 (apply
+                                                                   (field 122
+                                                                    (global Stdlib__format!))
+                                                                   ppf
+                                                                   [0:
+                                                                    [18:
+                                                                    [0:
+                                                                    [0:
+                                                                    [11:
+                                                                    "<loc>"
+                                                                    0a]
+                                                                    "<loc>"]]
+                                                                    0a]
+                                                                    "@{<loc>"]))
+                                                               (before parsing/location.ml(207):6512-7283
+                                                                 (seq
+                                                                   (if
+                                                                    (after parsing/location.ml(207):6515-6530
+                                                                    (apply
+                                                                    file_valid
+                                                                    file))
+                                                                    (before parsing/location.ml(208):6540-6610
+                                                                    (after parsing/location.ml(208):6540-6610
+                                                                    (apply
+                                                                    (field 122
+                                                                    (global Stdlib__format!))
+                                                                    ppf
+                                                                    [0:
+                                                                    [2:
+                                                                    0a
+                                                                    [11:
+                                                                    " \""
+                                                                    [15:
+                                                                    [12:
+                                                                    '"' 0a]]]]
+                                                                    "%s \"%a\""]
+                                                                    (after parsing/location.ml(208):6571-6590
+                                                                    (apply
+                                                                    capitalize
+                                                                    "file"))
+                                                                    print_filename
+                                                                    file)))
+                                                                    0a)
+                                                                   (before parsing/location.ml(213):6785-7283
+                                                                    (seq
+                                                                    (after parsing/location.ml(213):6785-6793
+                                                                    (apply
+                                                                    comma 0a))
+                                                                    (before parsing/location.ml(214):6797-7283
+                                                                    (let
+                                                                    (startline =[int]
+                                                                    (if
+                                                                    (after parsing/location.ml(214):6816-6836
+                                                                    (apply
+                                                                    line_valid
+                                                                    startline))
+                                                                    (before parsing/location.ml(214):6842-6851
+                                                                    startline)
+                                                                    (before parsing/location.ml(214):6857-6858
+                                                                    1)))
+                                                                    (before parsing/location.ml(215):6864-7283
+                                                                    (let
+                                                                    (endline =[int]
+                                                                    (if
+                                                                    (after parsing/location.ml(215):6881-6899
+                                                                    (apply
+                                                                    line_valid
+                                                                    endline))
+                                                                    (before parsing/location.ml(215):6905-6912
+                                                                    endline)
+                                                                    (before parsing/location.ml(215):6918-6927
+                                                                    startline)))
+                                                                    (before parsing/location.ml(216):6933-7283
+                                                                    (seq
+                                                                    (if
+                                                                    (==
+                                                                    startline
+                                                                    endline)
+                                                                    (before parsing/location.ml(217):6971-7027
+                                                                    (after parsing/location.ml(217):6971-7027
+                                                                    (apply
+                                                                    (field 122
+                                                                    (global Stdlib__format!))
+                                                                    ppf
+                                                                    [0:
+                                                                    [2:
+                                                                    0a
+                                                                    [12:
+                                                                    ' '
+                                                                    [4:
+                                                                    3a 0a 0a
+                                                                    0a]]]
+                                                                    "%s %i"]
+                                                                    (after parsing/location.ml(217):6998-7017
+                                                                    (apply
+                                                                    capitalize
+                                                                    "line"))
+                                                                    startline)))
+                                                                    (before parsing/location.ml(219):7039-7107
+                                                                    (after parsing/location.ml(219):7039-7107
+                                                                    (apply
+                                                                    (field 122
+                                                                    (global Stdlib__format!))
+                                                                    ppf
+                                                                    [0:
+                                                                    [2:
+                                                                    0a
+                                                                    [12:
+                                                                    ' '
+                                                                    [4:
+                                                                    3a 0a 0a
+                                                                    [12:
+                                                                    '-'
+                                                                    [4:
+                                                                    3a 0a 0a
+                                                                    0a]]]]]
+                                                                    "%s %i-%i"]
+                                                                    (after parsing/location.ml(219):7069-7089
+                                                                    (apply
+                                                                    capitalize
+                                                                    "lines"))
+                                                                    startline
+                                                                    endline))))
+                                                                    (before parsing/location.ml(222):7118-7283
+                                                                    (seq
+                                                                    (if
+                                                                    (after parsing/location.ml(222):7121-7152
+                                                                    (apply
+                                                                    chars_valid
+                                                                    startchar
+                                                                    endchar))
+                                                                    (before parsing/location.ml(222):7158-7255
+                                                                    (seq
+                                                                    (after parsing/location.ml(223):7164-7172
+                                                                    (apply
+                                                                    comma 0a))
+                                                                    (before parsing/location.ml(224):7178-7251
+                                                                    (after parsing/location.ml(224):7178-7251
+                                                                    (apply
+                                                                    (field 122
+                                                                    (global Stdlib__format!))
+                                                                    ppf
+                                                                    [0:
+                                                                    [2:
+                                                                    0a
+                                                                    [12:
+                                                                    ' '
+                                                                    [4:
+                                                                    3a 0a 0a
+                                                                    [12:
+                                                                    '-'
+                                                                    [4:
+                                                                    3a 0a 0a
+                                                                    0a]]]]]
+                                                                    "%s %i-%i"]
+                                                                    (after parsing/location.ml(224):7208-7233
+                                                                    (apply
+                                                                    capitalize
+                                                                    "characters"))
+                                                                    startchar
+                                                                    endchar)))))
+                                                                    0a)
+                                                                    (before parsing/location.ml(227):7260-7283
+                                                                    (after parsing/location.ml(227):7260-7283
+                                                                    (apply
+                                                                    (field 122
+                                                                    (global Stdlib__format!))
+                                                                    ppf
+                                                                    [0:
+                                                                    [17:
+                                                                    1a 0a]
+                                                                    "@}"])))))))))))))))))))))))))))))))))))))))))))
+     print_locs =
+       (function ppf locs
+         (funct-body parsing/location.ml(230)<ghost>:7348-7453
+           (before parsing/location.ml(231):7361-7453
+             (after parsing/location.ml(231):7361-7453
+               (apply (field 118 (global Stdlib__format!))
+                 (makeblock 0
+                   (function ppf param
+                     (funct-body parsing/location.ml(231):7390-7430
+                       (before parsing/location.ml(231):7405-7429
+                         (after parsing/location.ml(231):7405-7429
+                           (apply (field 122 (global Stdlib__format!)) ppf
+                             [0: [12: ',' [17: [0: "@ " 1 0] 0a]] ",@ "]))))))
+                 print_loc ppf locs)))))
+     ISet =
+       (module-defn(ISet) parsing/location.ml(246):7915-10007
+         (let
+           (of_intervals =
+              (function intervals
+                (funct-body parsing/location.ml(267)<ghost>:8441-9306
+                  (before parsing/location.ml(268):8457-9306
+                    (let
+                      (pos =
+                         (after parsing/location.ml(269):8473-8858
+                           (apply (field 48 (global Stdlib__list!))
+                             (function param param : int
+                               (funct-body parsing/location.ml(273):8625-8858
+                                 (let
+                                   (k' =a (field 1 param)
+                                    *match* =a (field 0 param)
+                                    y =a (field 1 *match*)
+                                    k =a (field 1 param)
+                                    *match* =a (field 0 param)
+                                    x =a (field 1 *match*))
+                                   (before parsing/location.ml(276):8782-8857
+                                     (let
+                                       (kn =
+                                          (function param : int
+                                            (funct-body parsing/location.ml(276):8791-8817
+                                              (if (>= param 83)
+                                                (before parsing/location.ml(276):8806-8807
+                                                  0)
+                                                (before parsing/location.ml(276):8816-8817
+                                                  1)))))
+                                       (before parsing/location.ml(277):8829-8857
+                                         (after parsing/location.ml(277):8829-8857
+                                           (caml_compare
+                                             (makeblock 0 (*,int) x
+                                               (after parsing/location.ml(277):8841-8845
+                                                 (apply kn k)))
+                                             (makeblock 0 (*,int) y
+                                               (after parsing/location.ml(277):8851-8856
+                                                 (apply kn k')))))))))))
+                             (after parsing/location.ml(269):8473-8605
+                               (apply (field 13 (global Stdlib__list!))
+                                 (after parsing/location.ml(269):8473-8583
+                                   (apply (field 16 (global Stdlib__list!))
+                                     (function param
+                                       (funct-body parsing/location.ml(269):8482-8573
+                                         (let
+                                           (*match* =a (field 1 param)
+                                            y =a (field 1 *match*)
+                                            b =a (field 0 *match*)
+                                            *match* =a (field 0 param)
+                                            x =a (field 1 *match*)
+                                            a =a (field 0 *match*))
+                                           (before parsing/location.ml(270):8515-8565
+                                             (if
+                                               (after parsing/location.ml(270):8518-8523
+                                                 (caml_greaterthan x y))
+                                               (before parsing/location.ml(270):8529-8531
+                                                 0a)
+                                               (before parsing/location.ml(270):8537-8565
+                                                 (makeblock 0
+                                                   (makeblock 0
+                                                     (makeblock 0 a x) 83a)
+                                                   (makeblock 0
+                                                     (makeblock 0
+                                                       (makeblock 0 b y) 69a)
+                                                     0a))))))))
+                                     intervals)))))))
+                      (before parsing/location.ml(279):8870-9306
+                        (let
+                          (*match* =
+                             (after parsing/location.ml(280):8895-9253
+                               (apply (field 20 (global Stdlib__list!))
+                                 (function param param
+                                   (funct-body parsing/location.ml(280):8910-9234
+                                     (let
+                                       (kind =a (field 1 param)
+                                        a =a (field 0 param)
+                                        acc =a (field 1 param)
+                                        nesting =a (field 0 param))
+                                       (before parsing/location.ml(281):8951-9226
+                                         (let
+                                           (*match* = kind *match* = nesting)
+                                           (if (>= *match* 83)
+                                             (if (isint *match*)
+                                               (before parsing/location.ml(282):9002-9021
+                                                 (makeblock 0
+                                                   (makeblock 0 -764103652
+                                                     (makeblock 0 (*,int) a
+                                                       0))
+                                                   acc))
+                                               (let
+                                                 (*match* =a
+                                                    (field 1 *match*)
+                                                  n =a (field 1 *match*)
+                                                  s =a (field 0 *match*))
+                                                 (before parsing/location.ml(283):9054-9075
+                                                   (makeblock 0
+                                                     (makeblock 0 -764103652
+                                                       (makeblock 0 (*,int) s
+                                                         (+ n 1)))
+                                                     acc))))
+                                             (if (isint *match*)
+                                               (before parsing/location.ml(284):9102-9114
+                                                 (raise
+                                                   (after parsing/location.ml(284):9102-9114
+                                                     (makeblock 0
+                                                       (global Assert_failure!)
+                                                       [0:
+                                                        "parsing/location.ml"
+                                                        284 26]))))
+                                               (let
+                                                 (*match* =a
+                                                    (field 1 *match*)
+                                                  n =a (field 1 *match*)
+                                                  s =a (field 0 *match*))
+                                                 (if (!= n 0)
+                                                   (let (s =a s)
+                                                     (before parsing/location.ml(286):9205-9226
+                                                       (makeblock 0
+                                                         (makeblock 0
+                                                           -764103652
+                                                           (makeblock 0 (*,int)
+                                                             s (- n 1)))
+                                                         acc)))
+                                                   (before parsing/location.ml(285):9147-9172
+                                                     (makeblock 0 867153157a
+                                                       (makeblock 0
+                                                         (makeblock 0 s a)
+                                                         acc))))))))))))
+                                 [0: 867153157a 0a] pos))
+                           acc =a (field 1 *match*)
+                           nesting =a (field 0 *match*))
+                          (before parsing/location.ml(288):9261-9306
+                            (seq
+                              (if (== nesting 867153157a) 0a
+                                (raise
+                                  (after parsing/location.ml(288):9261-9288
+                                    (makeblock 0 (global Assert_failure!)
+                                      [0: "parsing/location.ml" 288 4]))))
+                              (before parsing/location.ml(289):9294-9306
+                                (after parsing/location.ml(289):9294-9306
+                                  (apply (field 8 (global Stdlib__list!))
+                                    acc)))))))))))
+            mem =
+              (function iset pos
+                (funct-body parsing/location.ml(291)<ghost>:9318-9397
+                  (before parsing/location.ml(292):9334-9397
+                    (after parsing/location.ml(292):9334-9397
+                      (apply (field 28 (global Stdlib__list!))
+                        (function param
+                          (funct-body parsing/location.ml(292):9346-9392
+                            (let
+                              (*match* =a (field 1 param)
+                               e =a (field 1 *match*)
+                               *match* =a (field 0 param)
+                               s =a (field 1 *match*))
+                              (before parsing/location.ml(292):9371-9391
+                                (&&
+                                  (after parsing/location.ml(292):9371-9379
+                                    (caml_lessequal s pos))
+                                  (after parsing/location.ml(292):9383-9391
+                                    (caml_lessequal pos e)))))))
+                        iset)))))
+            find_bound_in =
+              (function iset param
+                (funct-body parsing/location.ml(294)<ghost>:9419-9634
+                  (let (end_ =a (field 1 param) start =a (field 0 param))
+                    (before parsing/location.ml(295):9452-9634
+                      (after parsing/location.ml(295):9452-9634
+                        (apply (field 2 (field 0 (field 11 (global Misc!))))
+                          (function param
+                            (funct-body parsing/location.ml(295):9478-9629
+                              (let
+                                (*match* =a (field 1 param)
+                                 y =a (field 1 *match*)
+                                 b =a (field 0 *match*)
+                                 *match* =a (field 0 param)
+                                 x =a (field 1 *match*)
+                                 a =a (field 0 *match*))
+                                (before parsing/location.ml(296):9509-9623
+                                  (if
+                                    (&&
+                                      (after parsing/location.ml(296):9512-9522
+                                        (caml_lessequal start x))
+                                      (after parsing/location.ml(296):9526-9535
+                                        (caml_lessequal x end_)))
+                                    (before parsing/location.ml(296):9541-9552
+                                      (makeblock 0 (makeblock 0 a x)))
+                                    (before parsing/location.ml(297):9564-9623
+                                      (if
+                                        (&&
+                                          (after parsing/location.ml(297):9567-9577
+                                            (caml_lessequal start y))
+                                          (after parsing/location.ml(297):9581-9590
+                                            (caml_lessequal y end_)))
+                                        (before parsing/location.ml(297):9596-9607
+                                          (makeblock 0 (makeblock 0 b y)))
+                                        (before parsing/location.ml(298):9619-9623
+                                          0a))))))))
+                          iset))))))
+            is_start =
+              (function iset pos
+                (funct-body parsing/location.ml(301)<ghost>:9651-9762
+                  (before parsing/location.ml(302):9667-9762
+                    (after parsing/location.ml(302):9667-9762
+                      (apply (field 2 (field 0 (field 11 (global Misc!))))
+                        (function param
+                          (funct-body parsing/location.ml(302):9693-9757
+                            (let
+                              (*match* =a (field 0 param)
+                               x =a (field 1 *match*)
+                               a =a (field 0 *match*))
+                              (before parsing/location.ml(303):9719-9751
+                                (if
+                                  (after parsing/location.ml(303):9722-9729
+                                    (caml_equal pos x))
+                                  (before parsing/location.ml(303):9735-9741
+                                    (makeblock 0 a))
+                                  (before parsing/location.ml(303):9747-9751
+                                    0a))))))
+                        iset)))))
+            is_end =
+              (function iset pos
+                (funct-body parsing/location.ml(306)<ghost>:9777-9888
+                  (before parsing/location.ml(307):9793-9888
+                    (after parsing/location.ml(307):9793-9888
+                      (apply (field 2 (field 0 (field 11 (global Misc!))))
+                        (function param
+                          (funct-body parsing/location.ml(307):9819-9883
+                            (let
+                              (*match* =a (field 1 param)
+                               y =a (field 1 *match*)
+                               b =a (field 0 *match*))
+                              (before parsing/location.ml(308):9845-9877
+                                (if
+                                  (after parsing/location.ml(308):9848-9855
+                                    (caml_equal pos y))
+                                  (before parsing/location.ml(308):9861-9867
+                                    (makeblock 0 b))
+                                  (before parsing/location.ml(308):9873-9877
+                                    0a))))))
+                        iset)))))
+            extrema =
+              (function iset
+                (funct-body parsing/location.ml(311)<ghost>:9904-10003
+                  (before parsing/location.ml(312):9915-10003
+                    (if (== iset 0a)
+                      (before parsing/location.ml(312):9933-9937 0a)
+                      (before parsing/location.ml(313):9947-10003
+                        (makeblock 0
+                          (makeblock 0
+                            (field 0
+                              (after parsing/location.ml(313):9957-9971
+                                (apply (field 4 (global Stdlib__list!)) iset)))
+                            (field 1
+                              (after parsing/location.ml(313):9977-10002
+                                (apply (field 4 (global Stdlib__list!))
+                                  (after parsing/location.ml(313):9986-10001
+                                    (apply (field 8 (global Stdlib__list!))
+                                      iset)))))))))))))
+           (pseudo parsing/location.ml(261):8311-10007
+             (makeblock 0 of_intervals mem find_bound_in is_start is_end
+               extrema))))
+     highlight_terminfo =
+       (function lb ppf locs
+         (funct-body parsing/location.ml(323)<ghost>:10266-11626
+           (before parsing/location.ml(324):10282-11626
+             (seq
+               (after parsing/location.ml(324):10282-10310
+                 (apply (field 35 (global Stdlib__format!)) ppf 0a))
+               (before parsing/location.ml(326):10421-11626
+                 (let (pos0 =[int] (~ (field 3 lb)))
+                   (before parsing/location.ml(328):10521-11626
+                     (seq
+                       (if (< pos0 0)
+                         (before parsing/location.ml(328):10538-10548
+                           (raise
+                             (after parsing/location.ml(328):10544-10548
+                               (field 2 (global Stdlib!)))))
+                         0a)
+                       (before parsing/location.ml(330):10592-11626
+                         (let
+                           (lines =
+                              (makemutable 0 (int) (field 0 num_loc_lines)))
+                           (before parsing/location.ml(331):10628-11626
+                             (seq
+                               (for i pos0 to (- (field 2 lb) 1)
+                                 (before parsing/location.ml(332):10673-10724
+                                   (if
+                                     (==
+                                       (after parsing/location.ml(332):10676-10701
+                                         (bytes.get (field 1 lb) i))
+                                       '\n')
+                                     (before parsing/location.ml(332):10714-10724
+                                       (+:=1 lines))
+                                     0a)))
+                               (before parsing/location.ml(335):10770-11626
+                                 (seq
+                                   (if
+                                     (>= (field 0 lines)
+                                       (-
+                                         (after parsing/location.ml(335):10783-10808
+                                           (apply
+                                             (field 1 (global Terminfo!))
+                                             (field 38 (global Stdlib!))))
+                                         2))
+                                     (before parsing/location.ml(335):10818-10828
+                                       (raise
+                                         (after parsing/location.ml(335):10824-10828
+                                           (field 2 (global Stdlib!)))))
+                                     0a)
+                                   (before parsing/location.ml(337):10876-11626
+                                     (seq
+                                       (after parsing/location.ml(337):10876-10888
+                                         (apply (field 62 (global Stdlib!))
+                                           (field 38 (global Stdlib!))))
+                                       (before parsing/location.ml(337):10890-11626
+                                         (seq
+                                           (after parsing/location.ml(337):10890-10919
+                                             (apply
+                                               (field 2 (global Terminfo!))
+                                               (field 38 (global Stdlib!))
+                                               (field 0 lines)))
+                                           (before parsing/location.ml(339):10987-11626
+                                             (let (bol = (makemutable 0 0a))
+                                               (before parsing/location.ml(340):11012-11626
+                                                 (seq
+                                                   (after parsing/location.ml(340):11012-11029
+                                                     (apply
+                                                       (field 41
+                                                         (global Stdlib!))
+                                                       "# "))
+                                                   (before parsing/location.ml(341):11033-11626
+                                                     (seq
+                                                       (for pos 0 to
+                                                         (-
+                                                           (- (field 2 lb)
+                                                             pos0)
+                                                           1)
+                                                         (before parsing/location.ml(342):11084-11438
+                                                           (seq
+                                                             (if
+                                                               (field 0 bol)
+                                                               (before parsing/location.ml(342):11097-11130
+                                                                 (seq
+                                                                   (after parsing/location.ml(342):11098-11115
+                                                                    (apply
+                                                                    (field 41
+                                                                    (global Stdlib!))
+                                                                    "  "))
+                                                                   (before parsing/location.ml(342):11117-11129
+                                                                    (setfield_imm 0
+                                                                    bol 0a))))
+                                                               0a)
+                                                             (before parsing/location.ml(343):11136-11438
+                                                               (seq
+                                                                 (if
+                                                                   (after parsing/location.ml(343):11139-11197
+                                                                    (apply
+                                                                    (field 28
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    loc
+                                                                    (funct-body parsing/location.ml(343):11151-11192
+                                                                    (before parsing/location.ml(343):11163-11191
+                                                                    (== pos
+                                                                    (field 3
+                                                                    (field 0
+                                                                    loc))))))
+                                                                    locs))
+                                                                   (before parsing/location.ml(344):11209-11238
+                                                                    (after parsing/location.ml(344):11209-11238
+                                                                    (apply
+                                                                    (field 3
+                                                                    (global Terminfo!))
+                                                                    (field 38
+                                                                    (global Stdlib!))
+                                                                    1a)))
+                                                                   0a)
+                                                                 (before parsing/location.ml(345):11244-11438
+                                                                   (seq
+                                                                    (if
+                                                                    (after parsing/location.ml(345):11247-11303
+                                                                    (apply
+                                                                    (field 28
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    loc
+                                                                    (funct-body parsing/location.ml(345):11259-11298
+                                                                    (before parsing/location.ml(345):11271-11297
+                                                                    (== pos
+                                                                    (field 3
+                                                                    (field 1
+                                                                    loc))))))
+                                                                    locs))
+                                                                    (before parsing/location.ml(346):11315-11345
+                                                                    (after parsing/location.ml(346):11315-11345
+                                                                    (apply
+                                                                    (field 3
+                                                                    (global Terminfo!))
+                                                                    (field 38
+                                                                    (global Stdlib!))
+                                                                    0a))) 0a)
+                                                                    (before parsing/location.ml(347):11351-11438
+                                                                    (let
+                                                                    (c =[int]
+                                                                    (after parsing/location.ml(347):11359-11395
+                                                                    (bytes.get
+                                                                    (field 1
+                                                                    lb)
+                                                                    (+ pos
+                                                                    pos0))))
+                                                                    (before parsing/location.ml(348):11403-11438
+                                                                    (seq
+                                                                    (after parsing/location.ml(348):11403-11415
+                                                                    (apply
+                                                                    (field 40
+                                                                    (global Stdlib!))
+                                                                    c))
+                                                                    (before parsing/location.ml(349):11421-11438
+                                                                    (setfield_imm 0
+                                                                    bol
+                                                                    (== c
+                                                                    '\n'))))))))))))))
+                                                       (before parsing/location.ml(352):11489-11626
+                                                         (seq
+                                                           (after parsing/location.ml(352):11489-11519
+                                                             (apply
+                                                               (field 3
+                                                                 (global Terminfo!))
+                                                               (field 38
+                                                                 (global Stdlib!))
+                                                               0a))
+                                                           (before parsing/location.ml(354):11573-11626
+                                                             (seq
+                                                               (after parsing/location.ml(354):11573-11610
+                                                                 (apply
+                                                                   (field 4
+                                                                    (global Terminfo!))
+                                                                   (field 38
+                                                                    (global Stdlib!))
+                                                                   (field 0
+                                                                    num_loc_lines)))
+                                                               (before parsing/location.ml(355):11614-11626
+                                                                 (after parsing/location.ml(355):11614-11626
+                                                                   (apply
+                                                                    (field 62
+                                                                    (global Stdlib!))
+                                                                    (field 38
+                                                                    (global Stdlib!)))))))))))))))))))))))))))))))))
+     highlight_terminfo =
+       (function lb ppf locs
+         (funct-body parsing/location.ml(357)<ghost>:11651-11719
+           (before parsing/location.ml(358):11667-11719
+             (try
+               (after parsing/location.ml(358):11671-11701
+                 (apply highlight_terminfo lb ppf locs))
+              with exn
+               (if (== exn (field 2 (global Stdlib!)))
+                 (before parsing/location.ml(359):11717-11719 0a)
+                 (reraise exn))))))
+     infer_line_numbers =
+       (function lines
+         (funct-body parsing/location.ml(405)<ghost>:12746-13285
+           (before parsing/location.ml(408):12826-13285
+             (let
+               (*match* =
+                  (after parsing/location.ml(409):12860-13140
+                    (apply (field 20 (global Stdlib__list!))
+                      (function param param
+                        (funct-body parsing/location.ml(409):12875-13118
+                          (let
+                            (lnum =a (field 0 param)
+                             consistent =a (field 2 param)
+                             offset =a (field 1 param)
+                             i =a (field 0 param))
+                            (before parsing/location.ml(410):12923-13112
+                              (let (*match* = lnum *match* = offset)
+                                (if *match*
+                                  (let (n =a (field 0 *match*))
+                                    (if *match*
+                                      (let
+                                        (n =a[int] n m =a (field 0 *match*))
+                                        (before parsing/location.ml(413):13074-13112
+                                          (makeblock 0 (int,*,*) (+ i 1)
+                                            offset
+                                            (&& consistent (== n (+ m i))))))
+                                      (before parsing/location.ml(412):13016-13047
+                                        (makeblock 0 (int,*,*) (+ i 1)
+                                          (makeblock 0 (int) (- n i))
+                                          consistent))))
+                                  (before parsing/location.ml(411):12966-12991
+                                    (makeblock 0 (int,*,*) (+ i 1) offset
+                                      consistent))))))))
+                      [0: 0 0a 1a] lines))
+                consistent =a (field 2 *match*)
+                offset =a (field 1 *match*))
+               (before parsing/location.ml(416):13148-13285
+                 (let (*match* = offset *match* = consistent)
+                   (catch
+                     (if *match*
+                       (if *match*
+                         (let (m =a (field 0 *match*))
+                           (before parsing/location.ml(418):13204-13261
+                             (after parsing/location.ml(418):13204-13261
+                               (apply (field 17 (global Stdlib__list!))
+                                 (function i[int] param
+                                   (funct-body parsing/location.ml(418):13214-13255
+                                     (let (line =a (field 1 param))
+                                       (before parsing/location.ml(418):13234-13254
+                                         (makeblock 0
+                                           (makeblock 0 (int) (+ m i)) line)))))
+                                 lines))))
+                         (exit 8))
+                       (exit 8))
+                    with (8)
+                     (before parsing/location.ml(420):13280-13285 lines))))))))
+     highlight_quote =
+       (function ppf get_lines *opt* highlight_tag locs
+         (funct-body parsing/location.ml(428)<ghost>:13523-15636
+           (before parsing/location.ml(434):13658-15636
+             (let
+               (max_lines =[int]
+                  (if *opt*
+                    (let (*sth* =a (field 0 *opt*))
+                      (before parsing/location.ml(430):13621-13623 *sth*))
+                    (before parsing/location.ml(430):13621-13623 10)))
+               (before parsing/location.ml(434):13658-15636
+                 (let
+                   (iset =
+                      (after parsing/location.ml(434):13669-13876
+                        (apply (field 0 ISet)
+                          (after parsing/location.ml(434):13690-13876
+                            (apply (field 19 (global Stdlib__list!))
+                              (function loc
+                                (funct-body parsing/location.ml(434):13706-13871
+                                  (before parsing/location.ml(435):13722-13867
+                                    (let
+                                      (e = (field 1 loc)
+                                       s = (field 0 loc)
+                                       e = e
+                                       s = s)
+                                      (before parsing/location.ml(436):13767-13867
+                                        (if
+                                          (|| (== (field 3 s) -1)
+                                            (== (field 3 e) -1))
+                                          (before parsing/location.ml(436):13810-13814
+                                            0a)
+                                          (before parsing/location.ml(437):13824-13867
+                                            (makeblock 0
+                                              (makeblock 0
+                                                (makeblock 0 (*,int) s
+                                                  (field 3 s))
+                                                (makeblock 0 (*,int) e
+                                                  (- (field 3 e) 1)))))))))))
+                              locs)))))
+                   (before parsing/location.ml(439):13882-15636
+                     (let
+                       (*match* =
+                          (after parsing/location.ml(439):13888-13905
+                            (apply (field 5 ISet) iset)))
+                       (if *match*
+                         (let
+                           (*match* =a (field 0 *match*)
+                            *match* =a (field 1 *match*)
+                            rightmost =a (field 0 *match*)
+                            *match* =a (field 0 *match*)
+                            leftmost =a (field 0 *match*))
+                           (before parsing/location.ml(442):13976-15636
+                             (let
+                               (lines =
+                                  (after parsing/location.ml(443):13996-14559
+                                    (apply (field 16 (global Stdlib__list!))
+                                      (function param
+                                        (funct-body parsing/location.ml(453):14426-14559
+                                          (let
+                                            (*match* =a (field 1 param)
+                                             start_pos =a (field 1 *match*)
+                                             text =a (field 0 *match*)
+                                             lnum =a (field 0 param))
+                                            (before parsing/location.ml(454):14472-14558
+                                              (makeblock 0 (*,*,int) text
+                                                (after parsing/location.ml(455):14490-14535
+                                                  (apply
+                                                    (field 7
+                                                      (global Stdlib__option!))
+                                                    ""
+                                                    (field 9
+                                                      (global Stdlib__int!))
+                                                    lnum))
+                                                start_pos)))))
+                                      (after parsing/location.ml(443):13996-14405
+                                        (apply infer_line_numbers
+                                          (after parsing/location.ml(443):13996-14375
+                                            (apply
+                                              (field 16
+                                                (global Stdlib__list!))
+                                              (function line
+                                                (funct-body parsing/location.ml(444):14065-14375
+                                                  (let
+                                                    (start_pos =a
+                                                       (field 1 line)
+                                                     text =a (field 0 line))
+                                                    (before parsing/location.ml(445):14113-14374
+                                                      (let
+                                                        (end_pos =[int]
+                                                           (-
+                                                             (+ start_pos
+                                                               (string.length
+                                                                 text))
+                                                             1))
+                                                        (before parsing/location.ml(446):14175-14374
+                                                          (let
+                                                            (line_nb =
+                                                               (let
+                                                                 (*match* =
+                                                                    (after parsing/location.ml(447):14207-14258
+                                                                    (apply
+                                                                    (field 2
+                                                                    ISet)
+                                                                    iset
+                                                                    (makeblock 0 (int,int)
+                                                                    start_pos
+                                                                    end_pos))))
+                                                                 (if *match*
+                                                                   (let
+                                                                    (*match* =a
+                                                                    (field 0
+                                                                    *match*)
+                                                                    p =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before parsing/location.ml(449):14320-14335
+                                                                    (makeblock 0 (int)
+                                                                    (field 1
+                                                                    p))))
+                                                                   (before parsing/location.ml(448):14286-14290
+                                                                    0a))))
+                                                            (before parsing/location.ml(451):14359-14374
+                                                              (makeblock 0
+                                                                line_nb line)))))))))
+                                              (after parsing/location.ml(443):13996-14044
+                                                (apply get_lines leftmost
+                                                  rightmost)))))))))
+                               (before parsing/location.ml(458):14573-15636
+                                 (seq
+                                   (after parsing/location.ml(458):14573-14599
+                                     (apply
+                                       (field 122 (global Stdlib__format!))
+                                       ppf
+                                       [0:
+                                        [18:
+                                         [1: [0: [11: "<v>" 0a] "<v>"]] 0a]
+                                        "@[<v>"]))
+                                   (before parsing/location.ml(459):14605-15636
+                                     (seq
+                                       (catch
+                                         (catch
+                                           (if lines
+                                             (let
+                                               (*match* =a (field 0 lines)
+                                                line =a (field 0 *match*))
+                                               (stringswitch line
+                                                case "":
+                                                 (let
+                                                   (*match* =a
+                                                      (field 1 lines))
+                                                   (if *match* (exit 13)
+                                                     (exit 12)))
+                                                default:
+                                                 (let
+                                                   (*match* =a
+                                                      (field 1 lines))
+                                                   (if *match* (exit 13)
+                                                     (let
+                                                       (line_start_cnum =a
+                                                          (field 2 *match*)
+                                                        line_nb =a
+                                                          (field 1 *match*))
+                                                       (before parsing/location.ml(463):14742-15261
+                                                         (seq
+                                                           (after parsing/location.ml(463):14742-14785
+                                                             (apply
+                                                               (field 122
+                                                                 (global Stdlib__format!))
+                                                               ppf
+                                                               [0:
+                                                                [2:
+                                                                 0a
+                                                                 [11:
+                                                                  " | "
+                                                                  [2:
+                                                                   0a
+                                                                   [17:
+                                                                    [0:
+                                                                    "@," 0 0]
+                                                                    0a]]]]
+                                                                "%s | %s@,"]
+                                                               line_nb line))
+                                                           (before parsing/location.ml(464):14795-15261
+                                                             (seq
+                                                               (after parsing/location.ml(464):14795-14849
+                                                                 (apply
+                                                                   (field 122
+                                                                    (global Stdlib__format!))
+                                                                   ppf
+                                                                   [0:
+                                                                    [2:
+                                                                    [1: 1a]
+                                                                    [11:
+                                                                    "   " 0a]]
+                                                                    "%*s   "]
+                                                                   (string.length
+                                                                    line_nb)
+                                                                   ""))
+                                                               (before parsing/location.ml(465):14859-15261
+                                                                 (seq
+                                                                   (for pos
+                                                                    line_start_cnum
+                                                                    to
+                                                                    (-
+                                                                    (field 3
+                                                                    rightmost)
+                                                                    1)
+                                                                    (before parsing/location.ml(466):14924-15213
+                                                                    (seq
+                                                                    (if
+                                                                    (!=
+                                                                    (after parsing/location.ml(466):14927-14950
+                                                                    (apply
+                                                                    (field 3
+                                                                    ISet)
+                                                                    iset pos))
+                                                                    0a)
+                                                                    (before parsing/location.ml(467):14976-15017
+                                                                    (after parsing/location.ml(467):14976-15017
+                                                                    (apply
+                                                                    (field 122
+                                                                    (global Stdlib__format!))
+                                                                    ppf
+                                                                    [0:
+                                                                    [18:
+                                                                    [0:
+                                                                    [0:
+                                                                    [12:
+                                                                    '<'
+                                                                    [2:
+                                                                    0a
+                                                                    [12:
+                                                                    '>' 0a]]]
+                                                                    "<%s>"]]
+                                                                    0a]
+                                                                    "@{<%s>"]
+                                                                    highlight_tag)))
+                                                                    0a)
+                                                                    (before parsing/location.ml(468):15029-15213
+                                                                    (seq
+                                                                    (if
+                                                                    (after parsing/location.ml(468):15032-15050
+                                                                    (apply
+                                                                    (field 1
+                                                                    ISet)
+                                                                    iset pos))
+                                                                    (before parsing/location.ml(468):15056-15084
+                                                                    (after parsing/location.ml(468):15056-15084
+                                                                    (apply
+                                                                    (field 20
+                                                                    (global Stdlib__format!))
+                                                                    ppf '^')))
+                                                                    (before parsing/location.ml(469):15100-15128
+                                                                    (after parsing/location.ml(469):15100-15128
+                                                                    (apply
+                                                                    (field 20
+                                                                    (global Stdlib__format!))
+                                                                    ppf ' '))))
+                                                                    (before parsing/location.ml(470):15140-15213
+                                                                    (if
+                                                                    (!=
+                                                                    (after parsing/location.ml(470):15143-15164
+                                                                    (apply
+                                                                    (field 4
+                                                                    ISet)
+                                                                    iset pos))
+                                                                    0a)
+                                                                    (before parsing/location.ml(471):15190-15213
+                                                                    (after parsing/location.ml(471):15190-15213
+                                                                    (apply
+                                                                    (field 122
+                                                                    (global Stdlib__format!))
+                                                                    ppf
+                                                                    [0:
+                                                                    [17:
+                                                                    1a 0a]
+                                                                    "@}"])))
+                                                                    0a)))))))
+                                                                   (before parsing/location.ml(473):15236-15261
+                                                                    (after parsing/location.ml(473):15236-15261
+                                                                    (apply
+                                                                    (field 122
+                                                                    (global Stdlib__format!))
+                                                                    ppf
+                                                                    [0:
+                                                                    [17:
+                                                                    1a
+                                                                    [17:
+                                                                    [0:
+                                                                    "@," 0 0]
+                                                                    0a]]
+                                                                    "@}@,"]))))))))))))))
+                                             (exit 12))
+                                          with (13)
+                                           (before parsing/location.ml(476):15312-15599
+                                             (after parsing/location.ml(476):15312-15599
+                                               (apply
+                                                 (field 53 (global Misc!))
+                                                 [0: "|"]
+                                                 (makeblock 0 (int)
+                                                   max_lines)
+                                                 ppf
+                                                 (after parsing/location.ml(477):15367-15599
+                                                   (apply
+                                                     (field 16
+                                                       (global Stdlib__list!))
+                                                     (function param
+                                                       (funct-body parsing/location.ml(477):15376-15593
+                                                         (let
+                                                           (line_start_cnum =a
+                                                              (field 2 param)
+                                                            line_nb =a
+                                                              (field 1 param)
+                                                            line =a
+                                                              (field 0 param))
+                                                           (before parsing/location.ml(478):15427-15583
+                                                             (let
+                                                               (line =
+                                                                  (after parsing/location.ml(478):15438-15554
+                                                                    (apply
+                                                                    (field 10
+                                                                    (global Stdlib__string!))
+                                                                    (function
+                                                                    i[int]
+                                                                    car[int]
+                                                                    : int
+                                                                    (funct-body parsing/location.ml(478):15450-15549
+                                                                    (before parsing/location.ml(479):15476-15537
+                                                                    (if
+                                                                    (after parsing/location.ml(479):15479-15519
+                                                                    (apply
+                                                                    (field 1
+                                                                    ISet)
+                                                                    iset
+                                                                    (+
+                                                                    line_start_cnum
+                                                                    i)))
+                                                                    (before parsing/location.ml(479):15525-15528
+                                                                    car)
+                                                                    (before parsing/location.ml(479):15534-15537
+                                                                    '.')))))
+                                                                    line)))
+                                                               (before parsing/location.ml(481):15568-15583
+                                                                 (makeblock 0
+                                                                   line_nb
+                                                                   line)))))))
+                                                     lines))))))
+                                        with (12)
+                                         (before parsing/location.ml(460):14655-14657
+                                           0a))
+                                       (before parsing/location.ml(484):15613-15636
+                                         (after parsing/location.ml(484):15613-15636
+                                           (apply
+                                             (field 122
+                                               (global Stdlib__format!))
+                                             ppf [0: [17: 0a 0a] "@]"]))))))))))
+                         (before parsing/location.ml(440):13923-13925 0a))))))))))
+     lines_around =
+       (function start_pos end_pos seek read_char
+         (funct-body parsing/location.ml(489)<ghost>:15661-16528
+           (before parsing/location.ml(494):15793-16528
+             (seq
+               (after parsing/location.ml(494):15793-15815
+                 (apply seek (field 2 start_pos)))
+               (before parsing/location.ml(495):15819-16528
+                 (let (lines = (makemutable 0 0a))
+                   (before parsing/location.ml(496):15843-16528
+                     (let (bol = (makemutable 0 (int) (field 2 start_pos)))
+                       (before parsing/location.ml(497):15880-16528
+                         (let
+                           (cur = (makemutable 0 (int) (field 2 start_pos)))
+                           (before parsing/location.ml(498):15917-16528
+                             (let
+                               (b =
+                                  (after parsing/location.ml(498):15925-15941
+                                    (apply (field 0 (global Stdlib__buffer!))
+                                      80)))
+                               (before parsing/location.ml(499):15947-16528
+                                 (let
+                                   (add_line =
+                                      (function param
+                                        (funct-body parsing/location.ml(499)<ghost>:15960-16133
+                                          (before parsing/location.ml(500):15969-16133
+                                            (if
+                                              (< (field 0 bol) (field 0 cur))
+                                              (before parsing/location.ml(500):15989-16133
+                                                (let
+                                                  (text =
+                                                     (after parsing/location.ml(501):16012-16029
+                                                       (apply
+                                                         (field 1
+                                                           (global Stdlib__buffer!))
+                                                         b)))
+                                                  (before parsing/location.ml(502):16039-16125
+                                                    (seq
+                                                      (after parsing/location.ml(502):16039-16053
+                                                        (apply
+                                                          (field 7
+                                                            (global Stdlib__buffer!))
+                                                          b))
+                                                      (before parsing/location.ml(503):16061-16125
+                                                        (seq
+                                                          (setfield_ptr 0
+                                                            lines
+                                                            (makeblock 0
+                                                              (makeblock 0 (*,int)
+                                                                text
+                                                                (field 0 bol))
+                                                              (field 0 lines)))
+                                                          (before parsing/location.ml(504):16114-16125
+                                                            (setfield_imm 0
+                                                              bol
+                                                              (field 0 cur)))))))))
+                                              0a)))))
+                                   (before parsing/location.ml(507):16141-16528
+                                     (letrec
+                                       (loop
+                                          (function param
+                                            (funct-body parsing/location.ml(507)<ghost>:16154-16494
+                                              (before parsing/location.ml(508):16163-16494
+                                                (if
+                                                  (>= (field 0 bol)
+                                                    (field 3 end_pos))
+                                                  (before parsing/location.ml(508):16196-16198
+                                                    0a)
+                                                  (before parsing/location.ml(509):16208-16494
+                                                    (let
+                                                      (*match* =
+                                                         (after parsing/location.ml(510):16226-16238
+                                                           (apply read_char
+                                                             0a)))
+                                                      (if *match*
+                                                        (let
+                                                          (c =a
+                                                             (field 0
+                                                               *match*))
+                                                          (before parsing/location.ml(515):16339-16486
+                                                            (seq (+:=1 cur)
+                                                              (before parsing/location.ml(516):16359-16486
+                                                                (if (!= c 10)
+                                                                  (if
+                                                                    (!= c 13)
+                                                                    (before parsing/location.ml(519):16458-16486
+                                                                    (seq
+                                                                    (after parsing/location.ml(519):16458-16477
+                                                                    (apply
+                                                                    (field 9
+                                                                    (global Stdlib__buffer!))
+                                                                    b c))
+                                                                    (before parsing/location.ml(519):16479-16486
+                                                                    (after parsing/location.ml(519):16479-16486
+                                                                    (apply
+                                                                    loop 0a)))))
+                                                                    (before parsing/location.ml(517):16392-16399
+                                                                    (after parsing/location.ml(517):16392-16399
+                                                                    (apply
+                                                                    loop 0a))))
+                                                                  (before parsing/location.ml(518):16420-16440
+                                                                    (seq
+                                                                    (after parsing/location.ml(518):16420-16431
+                                                                    (apply
+                                                                    add_line
+                                                                    0a))
+                                                                    (before parsing/location.ml(518):16433-16440
+                                                                    (after parsing/location.ml(518):16433-16440
+                                                                    (apply
+                                                                    loop 0a))))))))))
+                                                        (before parsing/location.ml(513):16299-16310
+                                                          (after parsing/location.ml(513):16299-16310
+                                                            (apply add_line
+                                                              0a)))))))))))
+                                       (before parsing/location.ml(522):16502-16528
+                                         (seq
+                                           (after parsing/location.ml(522):16502-16509
+                                             (apply loop 0a))
+                                           (before parsing/location.ml(523):16513-16528
+                                             (after parsing/location.ml(523):16513-16528
+                                               (apply
+                                                 (field 8
+                                                   (global Stdlib__list!))
+                                                 (field 0 lines))))))))))))))))))))))
+     lines_around_from_lexbuf =
+       (function start_pos end_pos lb
+         (funct-body parsing/location.ml(527)<ghost>:16600-17300
+           (before parsing/location.ml(532):16766-17300
+             (let
+               (rel =
+                  (function n[int] : int
+                    (funct-body parsing/location.ml(532)<ghost>:16774-16796
+                      (before parsing/location.ml(532):16778-16796
+                        (- n (field 3 lb))))))
+               (before parsing/location.ml(533):16802-17300
+                 (if
+                   (<
+                     (after parsing/location.ml(533):16805-16826
+                       (apply rel (field 2 start_pos)))
+                     0)
+                   (before parsing/location.ml(533):16836-16970 0a)
+                   (before parsing/location.ml(537):16976-17300
+                     (let (pos = (makemutable 0 (int) 0))
+                       (before parsing/location.ml(539):17033-17294
+                         (let
+                           (seek =
+                              (function n[int]
+                                (funct-body parsing/location.ml(539)<ghost>:17042-17058
+                                  (before parsing/location.ml(539):17046-17058
+                                    (setfield_imm 0 pos
+                                      (after parsing/location.ml(539):17053-17058
+                                        (apply rel n)))))))
+                           (before parsing/location.ml(540):17066-17294
+                             (let
+                               (read_char =
+                                  (function param
+                                    (funct-body parsing/location.ml(540)<ghost>:17080-17233
+                                      (before parsing/location.ml(541):17091-17233
+                                        (if (>= (field 0 pos) (field 2 lb))
+                                          (before parsing/location.ml(541):17145-17149
+                                            0a)
+                                          (before parsing/location.ml(543):17169-17233
+                                            (let
+                                              (c =[int]
+                                                 (after parsing/location.ml(543):17177-17205
+                                                   (bytes.get (field 1 lb)
+                                                     (field 0 pos))))
+                                              (before parsing/location.ml(544):17217-17233
+                                                (seq (+:=1 pos)
+                                                  (before parsing/location.ml(544):17227-17233
+                                                    (makeblock 0 (int) c)))))))))))
+                               (before parsing/location.ml(546):17245-17294
+                                 (after parsing/location.ml(546):17245-17294
+                                   (apply lines_around start_pos end_pos seek
+                                     read_char)))))))))))))))
+     lines_around_from_file =
+       (function start_pos end_pos filename
+         (funct-body parsing/location.ml(551)<ghost>:17361-17727
+           (before parsing/location.ml(555):17453-17727
+             (try
+               (let
+                 (cin =
+                    (after parsing/location.ml(556):17471-17491
+                      (apply (field 79 (global Stdlib!)) filename)))
+                 (before parsing/location.ml(557):17499-17702
+                   (let
+                     (read_char =
+                        (function param
+                          (funct-body parsing/location.ml(557)<ghost>:17513-17574
+                            (before parsing/location.ml(558):17524-17574
+                              (try
+                                (makeblock 0 (int)
+                                  (after parsing/location.ml(558):17533-17549
+                                    (apply (field 81 (global Stdlib!)) cin)))
+                               with exn
+                                (if (== exn (field 11 (global Stdlib!)))
+                                  (before parsing/location.ml(558):17570-17574
+                                    0a)
+                                  (reraise exn)))))))
+                     (before parsing/location.ml(560):17586-17702
+                       (let
+                         (lines =
+                            (after parsing/location.ml(561):17604-17667
+                              (apply lines_around start_pos end_pos
+                                (after parsing/location.ml(561):17643-17656
+                                  (apply (field 89 (global Stdlib!)) cin))
+                                read_char)))
+                         (before parsing/location.ml(563):17679-17702
+                           (seq
+                             (after parsing/location.ml(563):17679-17691
+                               (apply (field 92 (global Stdlib!)) cin))
+                             (before parsing/location.ml(564):17697-17702
+                               lines))))))))
+              with exn
+               (let (tag =a (field 0 exn))
+                 (if (== tag (field 10 (global Stdlib!)))
+                   (before parsing/location.ml(565):17725-17727 0a)
+                   (reraise exn)))))))
+     lines_around_from_current_input =
+       (function start_pos end_pos
+         (funct-body parsing/location.ml(573)<ghost>:18024-18697
+           (before parsing/location.ml(576):18189-18697
+             (let
+               (file_valid =
+                  (function param
+                    (funct-body parsing/location.ml(576):18206-18276
+                      (catch
+                        (catch
+                          (stringswitch param
+                           case "": (exit 22)
+                           case "//toplevel//": (exit 22)
+                           case "_none_": (exit 22)
+                           default: (exit 23))
+                         with (23)
+                          (before parsing/location.ml(578):18272-18276 1a))
+                       with (22)
+                        (before parsing/location.ml(577):18255-18260 0a)))))
+               (before parsing/location.ml(580):18284-18697
+                 (let
+                   (from_file =
+                      (function param
+                        (funct-body parsing/location.ml(580)<ghost>:18298-18416
+                          (before parsing/location.ml(581):18307-18416
+                            (if
+                              (after parsing/location.ml(581):18310-18332
+                                (apply file_valid (field 0 input_name)))
+                              (before parsing/location.ml(582):18344-18398
+                                (after parsing/location.ml(582):18344-18398
+                                  (apply lines_around_from_file start_pos
+                                    end_pos (field 0 input_name))))
+                              (before parsing/location.ml(584):18414-18416
+                                0a))))))
+                   (before parsing/location.ml(586):18424-18697
+                     (let (*match* = (field 0 input_lexbuf))
+                       (if *match*
+                         (let (lb =a (field 0 *match*))
+                           (before parsing/location.ml(588):18470-18666
+                             (let
+                               (lines =
+                                  (after parsing/location.ml(588):18482-18529
+                                    (apply lines_around_from_lexbuf start_pos
+                                      end_pos lb)))
+                               (if lines
+                                 (before parsing/location.ml(592):18651-18656
+                                   lines)
+                                 (before parsing/location.ml(590):18611-18623
+                                   (after parsing/location.ml(590):18611-18623
+                                     (apply from_file 0a)))))))
+                         (before parsing/location.ml(595):18685-18697
+                           (after parsing/location.ml(595):18685-18697
+                             (apply from_file 0a))))))))))))
+     msg =
+       (function *opt* fmt
+         (funct-body parsing/location.ml(602)<ghost>:18868-18935
+           (before parsing/location.ml(603):18890-18935
+             (let
+               (loc =
+                  (if *opt*
+                    (let (*sth* =a (field 0 *opt*))
+                      (before parsing/location.ml(602):18876-18880 *sth*))
+                    (before parsing/location.ml(602):18876-18880 none)))
+               (before parsing/location.ml(603):18890-18935
+                 (after parsing/location.ml(603):18890-18935
+                   (apply (field 130 (global Stdlib__format!))
+                     (function txt
+                       (funct-body parsing/location.ml(603):18906-18931
+                         (before parsing/location.ml(603):18918-18930
+                           (makeblock 0 txt loc))))
+                     fmt)))))))
+     is_dummy_loc =
+       (function loc
+         (funct-body parsing/location.ml(639)<ghost>:19937-20331
+           (before parsing/location.ml(645):20275-20331
+             (|| (== (field 3 (field 0 loc)) -1)
+               (== (field 3 (field 1 loc)) -1)))))
+     is_quotable_loc =
+       (function loc
+         (funct-body parsing/location.ml(663)<ghost>:21067-21181
+           (before parsing/location.ml(664):21075-21181
+             (&&
+               (not
+                 (after parsing/location.ml(664):21079-21097
+                   (apply is_dummy_loc loc)))
+               (&&
+                 (after parsing/location.ml(665):21103-21140
+                   (caml_string_equal (field 0 (field 0 loc))
+                     (field 0 input_name)))
+                 (after parsing/location.ml(666):21146-21181
+                   (caml_string_equal (field 0 (field 1 loc))
+                     (field 0 input_name))))))))
+     error_style =
+       (function param
+         (funct-body parsing/location.ml(668)<ghost>:21199-21310
+           (before parsing/location.ml(669):21206-21310
+             (let (*match* = (field 0 (field 153 (global Clflags!))))
+               (if *match*
+                 (let (setting =a (field 0 *match*))
+                   (before parsing/location.ml(670):21258-21265 setting))
+                 (before parsing/location.ml(671):21278-21310
+                   (field 0 (field 50 (global Misc!)))))))))
+     batch_mode_printer =
+       (let
+         (pp_loc =
+            (function _self report ppf loc
+              (funct-body parsing/location.ml(674)<ghost>:21367-21964
+                (before parsing/location.ml(675):21394-21964
+                  (let
+                    (tag =
+                       (let (*match* = (field 0 report))
+                         (catch
+                           (catch
+                             (switch *match*
+                              case tag 0: (exit 25)
+                              case tag 2: (exit 25)
+                              default: (exit 24))
+                            with (24)
+                             (before parsing/location.ml(678):21517-21524
+                               "error"))
+                          with (25)
+                           (before parsing/location.ml(680):21576-21585
+                             "warning"))))
+                    (before parsing/location.ml(682):21597-21964
+                      (let
+                        (highlight =
+                           (function ppf loc
+                             (funct-body parsing/location.ml(682)<ghost>:21611-21889
+                               (before parsing/location.ml(683):21627-21889
+                                 (let
+                                   (*match* =
+                                      (after parsing/location.ml(683):21633-21647
+                                        (apply error_style 0a)))
+                                   (if *match*
+                                     (before parsing/location.ml(690):21887-21889
+                                       0a)
+                                     (before parsing/location.ml(685):21702-21842
+                                       (if
+                                         (after parsing/location.ml(685):21705-21724
+                                           (apply is_quotable_loc loc))
+                                         (before parsing/location.ml(686):21742-21842
+                                           (after parsing/location.ml(686):21742-21842
+                                             (apply highlight_quote ppf
+                                               lines_around_from_current_input
+                                               0a tag (makeblock 0 loc 0a))))
+                                         0a))))))))
+                        (before parsing/location.ml(692):21901-21964
+                          (after parsing/location.ml(692):21901-21964
+                            (apply (field 122 (global Stdlib__format!)) ppf
+                              [0:
+                               [18:
+                                [1: [0: [11: "<v>" 0a] "<v>"]]
+                                [15:
+                                 [12:
+                                  ':' [17: [0: "@ " 1 0] [15: [17: 0a 0a]]]]]]
+                               "@[<v>%a:@ %a@]"]
+                              print_loc loc highlight loc))))))))))
+         (before parsing/location.ml(694):21972-23622
+           (let
+             (pp_txt =
+                (function ppf txt
+                  (funct-body parsing/location.ml(694)<ghost>:21983-22024
+                    (before parsing/location.ml(694):21993-22024
+                      (after parsing/location.ml(694):21993-22024
+                        (apply (field 122 (global Stdlib__format!)) ppf
+                          [0:
+                           [18: [1: [0: 0a ""]] [16: [17: 0a 0a]]] "@[%t@]"]
+                          txt))))))
+             (before parsing/location.ml(695):22030-23622
+               (let
+                 (pp =
+                    (function self ppf report
+                      (funct-body parsing/location.ml(695)<ghost>:22037-22441
+                        (before parsing/location.ml(696):22059-22441
+                          (seq
+                            (after parsing/location.ml(696):22059-22074
+                              (apply setup_colors 0a))
+                            (before parsing/location.ml(698):22133-22441
+                              (after parsing/location.ml(698):22133-22441
+                                (apply print_updating_num_loc_lines ppf
+                                  (function ppf param
+                                    (funct-body parsing/location.ml(698):22166-22438
+                                      (before parsing/location.ml(699):22187-22432
+                                        (after parsing/location.ml(699):22187-22432
+                                          (apply
+                                            (field 122
+                                              (global Stdlib__format!))
+                                            ppf
+                                            [0:
+                                             [18:
+                                              [1: [0: [11: "<v>" 0a] "<v>"]]
+                                              [15:
+                                               [15:
+                                                [11:
+                                                 ": "
+                                                 [15:
+                                                  [15: [17: 0a [17: 4a 0a]]]]]]]]
+                                             "@[<v>%a%a: %a%a@]@."]
+                                            (after parsing/location.ml(700):22234-22264
+                                              (apply (field 2 self) self
+                                                report))
+                                            (field 1 (field 1 report))
+                                            (after parsing/location.ml(701):22287-22320
+                                              (apply (field 1 self) self
+                                                report))
+                                            (field 0 report)
+                                            (after parsing/location.ml(702):22339-22369
+                                              (apply (field 3 self) self
+                                                report))
+                                            (field 0 (field 1 report))
+                                            (after parsing/location.ml(703):22392-22421
+                                              (apply (field 4 self) self
+                                                report))
+                                            (field 2 report))))))
+                                  0a))))))))
+                 (before parsing/location.ml(706):22449-23622
+                   (let
+                     (pp_report_kind =
+                        (function _self param ppf param
+                          (funct-body parsing/location.ml(706)<ghost>:22468-22880
+                            (switch* param
+                             case int 0:
+                              (before parsing/location.ml(707):22513-22550
+                                (after parsing/location.ml(707):22513-22550
+                                  (apply (field 122 (global Stdlib__format!))
+                                    ppf
+                                    [0:
+                                     [18:
+                                      [0: [0: [11: "<error>" 0a] "<error>"]]
+                                      [11: "Error" [17: 1a 0a]]]
+                                     "@{<error>Error@}"])))
+                             case tag 0:
+                              (let (w =a (field 0 param))
+                                (before parsing/location.ml(708):22577-22623
+                                  (after parsing/location.ml(708):22577-22623
+                                    (apply
+                                      (field 122 (global Stdlib__format!))
+                                      ppf
+                                      [0:
+                                       [18:
+                                        [0:
+                                         [0:
+                                          [11: "<warning>" 0a] "<warning>"]]
+                                        [11:
+                                         "Warning"
+                                         [17: 1a [12: ' ' [2: 0a 0a]]]]]
+                                       "@{<warning>Warning@} %s"]
+                                      w))))
+                             case tag 1:
+                              (let (w =a (field 0 param))
+                                (before parsing/location.ml(710):22667-22719
+                                  (after parsing/location.ml(710):22667-22719
+                                    (apply
+                                      (field 122 (global Stdlib__format!))
+                                      ppf
+                                      [0:
+                                       [18:
+                                        [0:
+                                         [0: [11: "<error>" 0a] "<error>"]]
+                                        [11:
+                                         "Error"
+                                         [17:
+                                          1a
+                                          [11:
+                                           " (warning " [2: 0a [12: ')' 0a]]]]]]
+                                       "@{<error>Error@} (warning %s)"]
+                                      w))))
+                             case tag 2:
+                              (let (w =a (field 0 param))
+                                (before parsing/location.ml(711):22744-22788
+                                  (after parsing/location.ml(711):22744-22788
+                                    (apply
+                                      (field 122 (global Stdlib__format!))
+                                      ppf
+                                      [0:
+                                       [18:
+                                        [0:
+                                         [0:
+                                          [11: "<warning>" 0a] "<warning>"]]
+                                        [11:
+                                         "Alert"
+                                         [17: 1a [12: ' ' [2: 0a 0a]]]]]
+                                       "@{<warning>Alert@} %s"]
+                                      w))))
+                             case tag 3:
+                              (let (w =a (field 0 param))
+                                (before parsing/location.ml(713):22830-22880
+                                  (after parsing/location.ml(713):22830-22880
+                                    (apply
+                                      (field 122 (global Stdlib__format!))
+                                      ppf
+                                      [0:
+                                       [18:
+                                        [0:
+                                         [0: [11: "<error>" 0a] "<error>"]]
+                                        [11:
+                                         "Error"
+                                         [17:
+                                          1a
+                                          [11:
+                                           " (alert " [2: 0a [12: ')' 0a]]]]]]
+                                       "@{<error>Error@} (alert %s)"]
+                                      w))))))))
+                     (before parsing/location.ml(715):22888-23622
+                       (let
+                         (pp_main_loc =
+                            (function self report ppf loc
+                              (funct-body parsing/location.ml(715)<ghost>:22904-22956
+                                (before parsing/location.ml(716):22930-22956
+                                  (after parsing/location.ml(716):22930-22956
+                                    (apply pp_loc self report ppf loc))))))
+                         (before parsing/location.ml(718):22964-23622
+                           (let
+                             (pp_main_txt =
+                                (function _self param ppf txt
+                                  (funct-body parsing/location.ml(718)<ghost>:22980-23016
+                                    (before parsing/location.ml(719):23002-23016
+                                      (after parsing/location.ml(719):23002-23016
+                                        (apply pp_txt ppf txt))))))
+                             (before parsing/location.ml(721):23024-23622
+                               (let
+                                 (pp_submsgs =
+                                    (function self report ppf msgs
+                                      (funct-body parsing/location.ml(721)<ghost>:23039-23163
+                                        (before parsing/location.ml(722):23066-23163
+                                          (after parsing/location.ml(722):23066-23163
+                                            (apply
+                                              (field 14
+                                                (global Stdlib__list!))
+                                              (function msg
+                                                (funct-body parsing/location.ml(722):23076-23158
+                                                  (before parsing/location.ml(723):23094-23152
+                                                    (after parsing/location.ml(723):23094-23152
+                                                      (apply
+                                                        (field 122
+                                                          (global Stdlib__format!))
+                                                        ppf
+                                                        [0:
+                                                         [17:
+                                                          [0: "@," 0 0]
+                                                          [15: 0a]]
+                                                         "@,%a"]
+                                                        (after parsing/location.ml(723):23120-23148
+                                                          (apply
+                                                            (field 5 self)
+                                                            self report))
+                                                        msg)))))
+                                              msgs))))))
+                                 (before parsing/location.ml(726):23171-23622
+                                   (let
+                                     (pp_submsg =
+                                        (function self report ppf param
+                                          (funct-body parsing/location.ml(726)<ghost>:23185-23337
+                                            (let
+                                              (loc =a (field 1 param)
+                                               txt =a (field 0 param))
+                                              (before parsing/location.ml(727):23220-23337
+                                                (after parsing/location.ml(727):23220-23337
+                                                  (apply
+                                                    (field 122
+                                                      (global Stdlib__format!))
+                                                    ppf
+                                                    [0:
+                                                     [18:
+                                                      [1: [0: 0a ""]]
+                                                      [15:
+                                                       [11:
+                                                        "  "
+                                                        [15: [17: 0a 0a]]]]]
+                                                     "@[%a  %a@]"]
+                                                    (after parsing/location.ml(728):23258-23290
+                                                      (apply (field 6 self)
+                                                        self report))
+                                                    loc
+                                                    (after parsing/location.ml(729):23301-23333
+                                                      (apply (field 7 self)
+                                                        self report))
+                                                    txt)))))))
+                                     (before parsing/location.ml(731):23345-23622
+                                       (let
+                                         (pp_submsg_loc =
+                                            (function self report ppf loc
+                                              (funct-body parsing/location.ml(731)<ghost>:23363-23447
+                                                (before parsing/location.ml(732):23389-23447
+                                                  (if (not (field 2 loc))
+                                                    (before parsing/location.ml(733):23421-23447
+                                                      (after parsing/location.ml(733):23421-23447
+                                                        (apply pp_loc self
+                                                          report ppf loc)))
+                                                    0a)))))
+                                         (before parsing/location.ml(735):23455-23622
+                                           (let
+                                             (pp_submsg_txt =
+                                                (function _self param ppf loc
+                                                  (funct-body parsing/location.ml(735)<ghost>:23473-23509
+                                                    (before parsing/location.ml(736):23495-23509
+                                                      (after parsing/location.ml(736):23495-23509
+                                                        (apply pp_txt ppf
+                                                          loc))))))
+                                             (before parsing/location.ml(738):23517-23622
+                                               (makeblock 0 pp pp_report_kind
+                                                 pp_main_loc pp_main_txt
+                                                 pp_submsgs pp_submsg
+                                                 pp_submsg_loc pp_submsg_txt)))))))))))))))))))))
+     terminfo_toplevel_printer =
+       (function lb
+         (funct-body parsing/location.ml(741)<ghost>:23654-24363
+           (before parsing/location.ml(742):23687-24363
+             (let
+               (pp =
+                  (function self ppf err
+                    (funct-body parsing/location.ml(742)<ghost>:23694-24181
+                      (before parsing/location.ml(743):23713-24181
+                        (seq
+                          (after parsing/location.ml(743):23713-23728
+                            (apply setup_colors 0a))
+                          (before parsing/location.ml(747):23922-24181
+                            (let
+                              (sub_locs =
+                                 (after parsing/location.ml(747):23937-23977
+                                   (apply (field 16 (global Stdlib__list!))
+                                     (function param
+                                       (funct-body parsing/location.ml(747):23946-23969
+                                         (let (loc =a (field 1 param))
+                                           (before parsing/location.ml(747):23965-23968
+                                             loc))))
+                                     (field 2 err))))
+                              (before parsing/location.ml(748):23985-24181
+                                (let
+                                  (all_locs =
+                                     (makeblock 0 (field 1 (field 1 err))
+                                       sub_locs))
+                                  (before parsing/location.ml(749):24032-24181
+                                    (let
+                                      (locs_highlighted =
+                                         (after parsing/location.ml(749):24055-24091
+                                           (apply
+                                             (field 35
+                                               (global Stdlib__list!))
+                                             is_quotable_loc all_locs)))
+                                      (before parsing/location.ml(750):24099-24181
+                                        (seq
+                                          (after parsing/location.ml(750):24099-24141
+                                            (apply highlight_terminfo lb ppf
+                                              locs_highlighted))
+                                          (before parsing/location.ml(751):24147-24181
+                                            (after parsing/location.ml(751):24147-24181
+                                              (apply
+                                                (field 0 batch_mode_printer)
+                                                self ppf err))))))))))))))))
+               (before parsing/location.ml(753):24189-24363
+                 (let
+                   (pp_main_loc =
+                      (function param param param param
+                        (funct-body parsing/location.ml(753)<ghost>:24205-24217
+                          (before parsing/location.ml(753):24215-24217 0a))))
+                   (before parsing/location.ml(754):24223-24363
+                     (let
+                       (pp_submsg_loc =
+                          (function param param ppf loc
+                            (funct-body parsing/location.ml(754)<ghost>:24241-24299
+                              (before parsing/location.ml(755):24259-24299
+                                (after parsing/location.ml(755):24259-24299
+                                  (apply (field 122 (global Stdlib__format!))
+                                    ppf
+                                    [0:
+                                     [15: [12: ':' [17: [0: "@ " 1 0] 0a]]]
+                                     "%a:@ "]
+                                    print_loc loc))))))
+                       (before parsing/location.ml(756):24305-24363
+                         (let (init = batch_mode_printer)
+                           (makeblock 0 pp (field 1 init) pp_main_loc
+                             (field 3 init) (field 4 init) (field 5 init)
+                             pp_submsg_loc (field 7 init))))))))))))
+     best_toplevel_printer =
+       (function param
+         (funct-body parsing/location.ml(758)<ghost>:24391-24559
+           (before parsing/location.ml(759):24398-24559
+             (seq
+               (after parsing/location.ml(759):24398-24415
+                 (apply setup_terminal 0a))
+               (before parsing/location.ml(760):24419-24559
+                 (let
+                   (*match* = (field 0 status)
+                    *match* = (field 0 input_lexbuf)
+                    *match* = *match*
+                    *match* = *match*)
+                   (catch
+                     (if (>= *match* 2)
+                       (if *match*
+                         (let (lb =a (field 0 *match*))
+                           (before parsing/location.ml(762):24494-24522
+                             (after parsing/location.ml(762):24494-24522
+                               (apply terminfo_toplevel_printer lb))))
+                         (exit 26))
+                       (exit 26))
+                    with (26)
+                     (before parsing/location.ml(764):24541-24559
+                       batch_mode_printer))))))))
+     default_report_printer =
+       (function param
+         (funct-body parsing/location.ml(767)<ghost>:24634-24753
+           (before parsing/location.ml(768):24658-24753
+             (if
+               (after parsing/location.ml(768):24661-24689
+                 (caml_string_equal (field 0 input_name) "//toplevel//"))
+               (before parsing/location.ml(769):24699-24723
+                 (after parsing/location.ml(769):24699-24723
+                   (apply best_toplevel_printer 0a)))
+               (before parsing/location.ml(771):24735-24753
+                 batch_mode_printer)))))
+     report_printer = (makemutable 0 default_report_printer)
+     print_report =
+       (function ppf report
+         (funct-body parsing/location.ml(775)<ghost>:24821-24903
+           (before parsing/location.ml(776):24836-24903
+             (let
+               (printer =
+                  (after parsing/location.ml(776):24850-24868
+                    (apply (field 0 report_printer) 0a)))
+               (before parsing/location.ml(777):24874-24903
+                 (after parsing/location.ml(777):24874-24903
+                   (apply (field 0 printer) printer ppf report)))))))
+     report_error =
+       (function ppf err
+         (funct-body parsing/location.ml(784)<ghost>:25048-25080
+           (before parsing/location.ml(785):25060-25080
+             (after parsing/location.ml(785):25060-25080
+               (apply print_report ppf err)))))
+     mkerror =
+       (function loc sub txt
+         (funct-body parsing/location.ml(787)<ghost>:25094-25159
+           (before parsing/location.ml(788):25110-25159
+             (makeblock 0 0a (makeblock 0 txt loc) sub))))
+     errorf =
+       (function *opt* *opt*
+         (funct-body parsing/location.ml(790)<ghost>:25172-25235
+           (before parsing/location.ml(790)<ghost>:25186-25235
+             (let
+               (loc =
+                  (if *opt*
+                    (let (*sth* =a (field 0 *opt*))
+                      (before parsing/location.ml(790):25180-25184 *sth*))
+                    (before parsing/location.ml(790):25180-25184 none)))
+               (before parsing/location.ml(790)<ghost>:25186-25235
+                 (let
+                   (sub =
+                      (if *opt*
+                        (let (*sth* =a (field 0 *opt*))
+                          (before parsing/location.ml(790):25194-25196 *sth*))
+                        (before parsing/location.ml(790):25194-25196 0a)))
+                   (before parsing/location.ml(791):25202-25235
+                     (after parsing/location.ml(791):25202-25235
+                       (apply (field 130 (global Stdlib__format!))
+                         (after parsing/location.ml(791):25218-25235
+                           (apply mkerror loc sub)))))))))))
+     error =
+       (function *opt* *opt* msg_str
+         (funct-body parsing/location.ml(793)<ghost>:25247-25348
+           (before parsing/location.ml(794):25285-25348
+             (let
+               (loc =
+                  (if *opt*
+                    (let (*sth* =a (field 0 *opt*))
+                      (before parsing/location.ml(793):25255-25259 *sth*))
+                    (before parsing/location.ml(793):25255-25259 none)))
+               (before parsing/location.ml(794):25285-25348
+                 (let
+                   (sub =
+                      (if *opt*
+                        (let (*sth* =a (field 0 *opt*))
+                          (before parsing/location.ml(793):25269-25271 *sth*))
+                        (before parsing/location.ml(793):25269-25271 0a)))
+                   (before parsing/location.ml(794):25285-25348
+                     (after parsing/location.ml(794):25285-25348
+                       (apply mkerror loc sub
+                         (function ppf
+                           (funct-body parsing/location.ml(794):25301-25348
+                             (before parsing/location.ml(794):25313-25347
+                               (after parsing/location.ml(794):25313-25347
+                                 (apply (field 12 (global Stdlib__format!))
+                                   ppf msg_str))))))))))))))
+     error_of_printer =
+       (function *opt* *opt* pp x
+         (funct-body parsing/location.ml(796)<ghost>:25371-25443
+           (before parsing/location.ml(797):25406-25443
+             (let
+               (loc =
+                  (if *opt*
+                    (let (*sth* =a (field 0 *opt*))
+                      (before parsing/location.ml(796):25379-25383 *sth*))
+                    (before parsing/location.ml(796):25379-25383 none)))
+               (before parsing/location.ml(797):25406-25443
+                 (let
+                   (sub =
+                      (if *opt*
+                        (let (*sth* =a (field 0 *opt*))
+                          (before parsing/location.ml(796):25393-25395 *sth*))
+                        (before parsing/location.ml(796):25393-25395 0a)))
+                   (before parsing/location.ml(797):25406-25443
+                     (after parsing/location.ml(797):25406-25443
+                       (apply mkerror loc sub
+                         (function ppf
+                           (funct-body parsing/location.ml(797):25422-25443
+                             (before parsing/location.ml(797):25434-25442
+                               (after parsing/location.ml(797):25434-25442
+                                 (apply pp ppf x))))))))))))))
+     error_of_printer_file =
+       (function print x
+         (funct-body parsing/location.ml(799)<ghost>:25471-25534
+           (before parsing/location.ml(800):25483-25534
+             (after parsing/location.ml(800):25483-25534
+               (apply error_of_printer
+                 (makeblock 0
+                   (after parsing/location.ml(800):25505-25526
+                     (apply in_file (field 0 input_name))))
+                 0a print x)))))
+     default_warning_alert_reporter =
+       (function report mk loc w
+         (funct-body parsing/location.ml(806)<ghost>:25785-26237
+           (before parsing/location.ml(807):25826-26237
+             (let
+               (*match* =
+                  (after parsing/location.ml(807):25832-25840
+                    (apply report w)))
+               (if (isint *match*)
+                 (before parsing/location.ml(808):25863-25867 0a)
+                 (let
+                   (*match* =a (field 1 *match*)
+                    sub_locs =a (field 3 *match*)
+                    is_error =a (field 2 *match*)
+                    message =a (field 1 *match*)
+                    id =a (field 0 *match*))
+                   (before parsing/location.ml(810):25934-26237
+                     (let
+                       (msg_of_str =
+                          (function str ppf
+                            (funct-body parsing/location.ml(810)<ghost>:25949-25996
+                              (before parsing/location.ml(810):25966-25996
+                                (after parsing/location.ml(810):25966-25996
+                                  (apply (field 12 (global Stdlib__format!))
+                                    ppf str))))))
+                       (before parsing/location.ml(811):26006-26237
+                         (let
+                           (kind =
+                              (after parsing/location.ml(811):26017-26031
+                                (apply mk is_error id)))
+                           (before parsing/location.ml(812):26041-26237
+                             (let
+                               (main =
+                                  (makeblock 0
+                                    (after parsing/location.ml(812):26065-26083
+                                      (apply msg_of_str message))
+                                    loc))
+                               (before parsing/location.ml(813):26095-26237
+                                 (let
+                                   (sub =
+                                      (after parsing/location.ml(813):26105-26203
+                                        (apply
+                                          (field 16 (global Stdlib__list!))
+                                          (function param
+                                            (funct-body parsing/location.ml(813):26114-26194
+                                              (let
+                                                (sub_message =a
+                                                   (field 1 param)
+                                                 loc =a (field 0 param))
+                                                (before parsing/location.ml(814):26149-26186
+                                                  (makeblock 0
+                                                    (after parsing/location.ml(814):26162-26184
+                                                      (apply msg_of_str
+                                                        sub_message))
+                                                    loc)))))
+                                          sub_locs)))
+                                   (before parsing/location.ml(816):26213-26237
+                                     (makeblock 0
+                                       (makeblock 0 kind main sub)))))))))))))))))
+     default_warning_reporter =
+       (after parsing/location.ml(820):26273-26434
+         (apply default_warning_alert_reporter (field 7 (global Warnings!))
+           (function is_error id
+             (funct-body parsing/location.ml(822):26328-26434
+               (before parsing/location.ml(823):26355-26428
+                 (if is_error
+                   (before parsing/location.ml(823):26372-26398
+                     (makeblock 1 id))
+                   (before parsing/location.ml(824):26411-26428
+                     (makeblock 0 id))))))))
+     warning_reporter = (makemutable 0 default_warning_reporter)
+     report_warning =
+       (function loc w
+         (funct-body parsing/location.ml(828)<ghost>:26507-26538
+           (before parsing/location.ml(828):26515-26538
+             (after parsing/location.ml(828):26515-26538
+               (apply (field 0 warning_reporter) loc w)))))
+     formatter_for_warnings =
+       (makemutable 0 (field 105 (global Stdlib__format!)))
+     print_warning =
+       (function loc ppf w
+         (funct-body parsing/location.ml(832)<ghost>:26613-26716
+           (before parsing/location.ml(833):26627-26716
+             (let
+               (*match* =
+                  (after parsing/location.ml(833):26633-26653
+                    (apply report_warning loc w)))
+               (if *match*
+                 (let (report =a (field 0 *match*))
+                   (before parsing/location.ml(835):26693-26716
+                     (after parsing/location.ml(835):26693-26716
+                       (apply print_report ppf report))))
+                 (before parsing/location.ml(834):26671-26673 0a))))))
+     prerr_warning =
+       (function loc w
+         (funct-body parsing/location.ml(837)<ghost>:26736-26787
+           (before parsing/location.ml(837):26744-26787
+             (after parsing/location.ml(837):26744-26787
+               (apply print_warning loc (field 0 formatter_for_warnings) w)))))
+     default_alert_reporter =
+       (after parsing/location.ml(840):26820-26983
+         (apply default_warning_alert_reporter (field 8 (global Warnings!))
+           (function is_error id
+             (funct-body parsing/location.ml(842):26881-26983
+               (before parsing/location.ml(843):26908-26977
+                 (if is_error
+                   (before parsing/location.ml(843):26925-26949
+                     (makeblock 3 id))
+                   (before parsing/location.ml(844):26962-26977
+                     (makeblock 2 id))))))))
+     alert_reporter = (makemutable 0 default_alert_reporter)
+     report_alert =
+       (function loc w
+         (funct-body parsing/location.ml(848)<ghost>:27050-27079
+           (before parsing/location.ml(848):27058-27079
+             (after parsing/location.ml(848):27058-27079
+               (apply (field 0 alert_reporter) loc w)))))
+     print_alert =
+       (function loc ppf w
+         (funct-body parsing/location.ml(850)<ghost>:27097-27198
+           (before parsing/location.ml(851):27111-27198
+             (let
+               (*match* =
+                  (after parsing/location.ml(851):27117-27135
+                    (apply report_alert loc w)))
+               (if *match*
+                 (let (report =a (field 0 *match*))
+                   (before parsing/location.ml(853):27175-27198
+                     (after parsing/location.ml(853):27175-27198
+                       (apply print_report ppf report))))
+                 (before parsing/location.ml(852):27153-27155 0a))))))
+     prerr_alert =
+       (function loc w
+         (funct-body parsing/location.ml(855)<ghost>:27216-27265
+           (before parsing/location.ml(855):27224-27265
+             (after parsing/location.ml(855):27224-27265
+               (apply print_alert loc (field 0 formatter_for_warnings) w)))))
+     alert =
+       (function *opt* *opt* kind loc message
+         (funct-body parsing/location.ml(857)<ghost>:27277-27377
+           (before parsing/location.ml(858):27327-27377
+             (let
+               (def =
+                  (if *opt*
+                    (let (*sth* =a (field 0 *opt*))
+                      (before parsing/location.ml(857):27285-27289 *sth*))
+                    (before parsing/location.ml(857):27285-27289 none)))
+               (before parsing/location.ml(858):27327-27377
+                 (let
+                   (use =
+                      (if *opt*
+                        (let (*sth* =a (field 0 *opt*))
+                          (before parsing/location.ml(857):27299-27303 *sth*))
+                        (before parsing/location.ml(857):27299-27303 none)))
+                   (before parsing/location.ml(858):27327-27377
+                     (after parsing/location.ml(858):27327-27377
+                       (apply prerr_alert loc
+                         (makeblock 0 kind message def use))))))))))
+     deprecated =
+       (function def use loc message
+         (funct-body parsing/location.ml(860)<ghost>:27394-27466
+           (before parsing/location.ml(861):27420-27466
+             (after parsing/location.ml(861):27420-27466
+               (apply alert def use "deprecated" loc message)))))
+     error_of_exn = (makemutable 0 0a)
+     register_error_of_exn =
+       (function f
+         (funct-body parsing/location.ml(868)<ghost>:27673-27711
+           (before parsing/location.ml(868):27677-27711
+             (setfield_ptr 0 error_of_exn
+               (makeblock 0 f (field 0 error_of_exn))))))
+     Already_displayed_error = (field 9 (global Warnings!))
+     error_of_exn =
+       (function exn
+         (funct-body parsing/location.ml(872)<ghost>:27783-28072
+           (before parsing/location.ml(873):27791-28072
+             (if (== exn Already_displayed_error)
+               (before parsing/location.ml(874):27837-27860 [0: 301815898a])
+               (before parsing/location.ml(876):27875-28072
+                 (letrec
+                   (loop
+                      (function param
+                        (funct-body parsing/location.ml(876):27890-28040
+                          (if param
+                            (let
+                              (rest =a (field 1 param) f =a (field 0 param))
+                              (before parsing/location.ml(879):27951-28040
+                                (let
+                                  (*match* =
+                                     (after parsing/location.ml(879):27957-27962
+                                       (apply f exn)))
+                                  (if *match*
+                                    (let (error =a (field 0 *match*))
+                                      (before parsing/location.ml(880):27994-28010
+                                        (makeblock 0
+                                          (makeblock 0 17724 error))))
+                                    (before parsing/location.ml(881):28031-28040
+                                      (after parsing/location.ml(881):28031-28040
+                                        (apply loop rest)))))))
+                            (before parsing/location.ml(877):27914-27918 0a)))))
+                   (before parsing/location.ml(883):28054-28072
+                     (after parsing/location.ml(883):28054-28072
+                       (apply loop (field 0 error_of_exn))))))))))
+     *match* =
+       (after parsing/location.ml(886):28085-28240
+         (apply register_error_of_exn
+           (function param
+             (funct-body parsing/location.ml(887):28111-28240
+               (let (tag =a (field 0 param))
+                 (if (== tag (field 10 (global Stdlib!)))
+                   (let (msg =a (field 1 param))
+                     (before parsing/location.ml(889):28156-28216
+                       (makeblock 0
+                         (after parsing/location.ml(889):28161-28216
+                           (apply errorf
+                             (makeblock 0
+                               (after parsing/location.ml(889):28174-28195
+                                 (apply in_file (field 0 input_name))))
+                             0a
+                             [0:
+                              [11: "I/O error: " [2: 0a 0a]] "I/O error: %s"]
+                             msg)))))
+                   (before parsing/location.ml(890):28230-28234 0a)))))))
+     report_exception =
+       (function ppf exn
+         (funct-body parsing/location.ml(895)<ghost>:28306-28544
+           (before parsing/location.ml(896):28318-28544
+             (letrec
+               (loop
+                  (function n[int] exn
+                    (funct-body parsing/location.ml(896)<ghost>:28331-28526
+                      (before parsing/location.ml(897):28343-28526
+                        (catch
+                          (try
+                            (exit 29
+                              (after parsing/location.ml(897):28349-28365
+                                (apply error_of_exn exn)))
+                           with exn
+                            (before parsing/location.ml(901):28503-28508
+                              (if (> n 0)
+                                (before parsing/location.ml(901):28512-28526
+                                  (after parsing/location.ml(901):28512-28526
+                                    (apply loop (- n 1) exn)))
+                                (reraise exn))))
+                         with (29 val)
+                          (if val
+                            (let (*match* =a (field 0 val))
+                              (if (isint *match*)
+                                (before parsing/location.ml(899):28430-28432
+                                  0a)
+                                (let (err =a (field 1 *match*))
+                                  (before parsing/location.ml(900):28457-28477
+                                    (after parsing/location.ml(900):28457-28477
+                                      (apply report_error ppf err))))))
+                            (before parsing/location.ml(898):28385-28396
+                              (reraise
+                                (after parsing/location.ml(898):28393-28396
+                                  exn)))))))))
+               (before parsing/location.ml(903):28534-28544
+                 (after parsing/location.ml(903):28534-28544
+                   (apply loop 5 exn)))))))
+     Error = (makeblock 248 "Location.Error" (caml_fresh_oo_id 0))
+     *match* =
+       (after parsing/location.ml(908):28583-28668
+         (apply register_error_of_exn
+           (function param
+             (funct-body parsing/location.ml(909):28609-28668
+               (let (tag =a (field 0 param))
+                 (if (== tag Error)
+                   (let (e =a (field 1 param))
+                     (before parsing/location.ml(910):28638-28644
+                       (makeblock 0 e)))
+                   (before parsing/location.ml(911):28658-28662 0a)))))))
+     raise_errorf =
+       (function *opt* *opt*
+         (funct-body parsing/location.ml(914)<ghost>:28687-28781
+           (before parsing/location.ml(914)<ghost>:28701-28781
+             (let
+               (loc =
+                  (if *opt*
+                    (let (*sth* =a (field 0 *opt*))
+                      (before parsing/location.ml(914):28695-28699 *sth*))
+                    (before parsing/location.ml(914):28695-28699 none)))
+               (before parsing/location.ml(914)<ghost>:28701-28781
+                 (let
+                   (sub =
+                      (if *opt*
+                        (let (*sth* =a (field 0 *opt*))
+                          (before parsing/location.ml(914):28709-28711 *sth*))
+                        (before parsing/location.ml(914):28709-28711 0a)))
+                   (before parsing/location.ml(915):28717-28781
+                     (after parsing/location.ml(915):28717-28781
+                       (apply (field 130 (global Stdlib__format!))
+                         (function txt
+                           (funct-body parsing/location.ml(915):28733-28781
+                             (before parsing/location.ml(915):28745-28780
+                               (raise
+                                 (after parsing/location.ml(915):28751-28780
+                                   (makeblock 0 Error
+                                     (after parsing/location.ml(915):28758-28779
+                                       (apply mkerror loc sub txt))))))))))))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 none in_file init curr symbol_rloc symbol_gloc rhs_loc
+        rhs_interval get_pos_info mknoloc mkloc input_name input_lexbuf
+        echo_eof reset rewrite_absolute_path absolute_path show_filename
+        print_filename print_loc print_locs highlight_terminfo msg
+        batch_mode_printer terminfo_toplevel_printer best_toplevel_printer
+        print_report report_printer default_report_printer report_warning
+        warning_reporter default_warning_reporter formatter_for_warnings
+        print_warning prerr_warning report_alert alert_reporter
+        default_alert_reporter print_alert prerr_alert deprecated alert error
+        errorf error_of_printer error_of_printer_file register_error_of_exn
+        error_of_exn Error Already_displayed_error raise_errorf
+        report_exception))))

@@ -1,0 +1,751 @@
+(setglobal Ccomp!
+  (let
+    (command =
+       (function cmdline : int
+         (funct-body utils/ccomp.ml(18)<ghost>:1141-1347
+           (before utils/ccomp.ml(19):1153-1347
+             (seq
+               (if (field 0 (field 38 (global Clflags!)))
+                 (before utils/ccomp.ml(19):1178-1258
+                   (seq
+                     (after utils/ccomp.ml(20):1188-1205
+                       (apply (field 48 (global Stdlib!)) "+ "))
+                     (before utils/ccomp.ml(21):1211-1252
+                       (seq
+                         (after utils/ccomp.ml(21):1211-1231
+                           (apply (field 48 (global Stdlib!)) cmdline))
+                         (before utils/ccomp.ml(22):1237-1252
+                           (after utils/ccomp.ml(22):1237-1252
+                             (apply (field 53 (global Stdlib!)) 0a)))))))
+                 0a)
+               (before utils/ccomp.ml(24):1262-1347
+                 (let
+                   (res =[int]
+                      (after utils/ccomp.ml(24):1272-1291
+                        (caml_sys_system_command cmdline)))
+                   (before utils/ccomp.ml(25):1297-1347
+                     (seq
+                       (if (== res 127)
+                         (before utils/ccomp.ml(25):1315-1340
+                           (raise
+                             (after utils/ccomp.ml(25):1321-1340
+                               (makeblock 0 (field 10 (global Stdlib!))
+                                 cmdline))))
+                         0a)
+                       (before utils/ccomp.ml(26):1344-1347 res)))))))))
+     run_command =
+       (function cmdline
+         (funct-body utils/ccomp.ml(28)<ghost>:1365-1398
+           (before utils/ccomp.ml(28):1375-1398
+             (ignore
+               (after utils/ccomp.ml(28):1381-1398 (apply command cmdline))))))
+     build_diversion =
+       (function lst
+         (funct-body utils/ccomp.ml(32)<ghost>:1507-1725
+           (before utils/ccomp.ml(33):1515-1725
+             (let
+               (*match* =
+                  (after utils/ccomp.ml(33):1540-1577
+                    (apply (field 15 (global Stdlib__filename!)) 0a 0a 0a
+                      "camlresp" ""))
+                oc =a (field 1 *match*)
+                responsefile =a (field 0 *match*))
+               (before utils/ccomp.ml(34):1583-1725
+                 (seq
+                   (after utils/ccomp.ml(34):1583-1634
+                     (apply (field 14 (global Stdlib__list!))
+                       (function f
+                         (funct-body utils/ccomp.ml(34):1593-1630
+                           (before utils/ccomp.ml(34):1603-1629
+                             (after utils/ccomp.ml(34):1603-1629
+                               (apply (field 0 (global Stdlib__printf!)) oc
+                                 [0: [2: 0a [12: '\n' 0a]] "%s\n"] f)))))
+                       lst))
+                   (before utils/ccomp.ml(35):1638-1725
+                     (seq
+                       (after utils/ccomp.ml(35):1638-1650
+                         (apply (field 75 (global Stdlib!)) oc))
+                       (before utils/ccomp.ml(36):1654-1725
+                         (seq
+                           (after utils/ccomp.ml(36):1654-1703
+                             (apply (field 99 (global Stdlib!))
+                               (function param
+                                 (funct-body utils/ccomp.ml(36):1662-1703
+                                   (before utils/ccomp.ml(36):1673-1702
+                                     (after utils/ccomp.ml(36):1673-1702
+                                       (apply (field 15 (global Misc!))
+                                         responsefile)))))))
+                           (before utils/ccomp.ml(37):1707-1725
+                             (after utils/ccomp.ml(37):1707-1725
+                               (apply (field 27 (global Stdlib!)) "@"
+                                 responsefile)))))))))))))
+     quote_files =
+       (function lst
+         (funct-body utils/ccomp.ml(39)<ghost>:1743-1975
+           (before utils/ccomp.ml(40):1751-1975
+             (let
+               (lst =
+                  (after utils/ccomp.ml(40):1761-1795
+                    (apply (field 35 (global Stdlib__list!))
+                      (function f
+                        (funct-body utils/ccomp.ml(40):1773-1791
+                          (before utils/ccomp.ml(40):1783-1790
+                            (after utils/ccomp.ml(40):1783-1790
+                              (caml_string_notequal f "")))))
+                      lst)))
+               (before utils/ccomp.ml(41):1801-1975
+                 (let
+                   (quoted =
+                      (after utils/ccomp.ml(41):1814-1841
+                        (apply (field 16 (global Stdlib__list!))
+                          (field 19 (global Stdlib__filename!)) lst)))
+                   (before utils/ccomp.ml(42):1847-1975
+                     (let
+                       (s =
+                          (after utils/ccomp.ml(42):1855-1879
+                            (apply (field 6 (global Stdlib__string!)) " "
+                              quoted)))
+                       (before utils/ccomp.ml(43):1885-1975
+                         (if
+                           (&& (>= (string.length s) 4096)
+                             (after utils/ccomp.ml(43):1915-1936
+                               (caml_string_equal
+                                 (field 3 (global Stdlib__sys!)) "Win32")))
+                           (before utils/ccomp.ml(44):1944-1966
+                             (after utils/ccomp.ml(44):1944-1966
+                               (apply build_diversion quoted)))
+                           (before utils/ccomp.ml(45):1974-1975 s)))))))))))
+     quote_prefixed =
+       (function pr lst
+         (funct-body utils/ccomp.ml(47)<ghost>:1996-2118
+           (before utils/ccomp.ml(48):2007-2118
+             (let
+               (lst =
+                  (after utils/ccomp.ml(48):2017-2051
+                    (apply (field 35 (global Stdlib__list!))
+                      (function f
+                        (funct-body utils/ccomp.ml(48):2029-2047
+                          (before utils/ccomp.ml(48):2039-2046
+                            (after utils/ccomp.ml(48):2039-2046
+                              (caml_string_notequal f "")))))
+                      lst)))
+               (before utils/ccomp.ml(49):2057-2118
+                 (let
+                   (lst =
+                      (after utils/ccomp.ml(49):2067-2097
+                        (apply (field 16 (global Stdlib__list!))
+                          (function f
+                            (funct-body utils/ccomp.ml(49):2076-2093
+                              (before utils/ccomp.ml(49):2086-2092
+                                (after utils/ccomp.ml(49):2086-2092
+                                  (apply (field 27 (global Stdlib!)) pr f)))))
+                          lst)))
+                   (before utils/ccomp.ml(50):2103-2118
+                     (after utils/ccomp.ml(50):2103-2118
+                       (apply quote_files lst)))))))))
+     quote_optfile =
+       (function param
+         (funct-body utils/ccomp.ml(52):2140-2194
+           (if param
+             (let (f =a (field 0 param))
+               (before utils/ccomp.ml(54):2178-2194
+                 (after utils/ccomp.ml(54):2178-2194
+                   (apply (field 19 (global Stdlib__filename!)) f))))
+             (before utils/ccomp.ml(53):2161-2163 ""))))
+     display_msvc_output =
+       (function file name
+         (funct-body utils/ccomp.ml(56)<ghost>:2220-2474
+           (before utils/ccomp.ml(57):2234-2474
+             (let
+               (c =
+                  (after utils/ccomp.ml(57):2242-2254
+                    (apply (field 78 (global Stdlib!)) file)))
+               (before utils/ccomp.ml(58):2260-2474
+                 (try
+                   (let
+                     (first =
+                        (after utils/ccomp.ml(59):2280-2292
+                          (apply (field 82 (global Stdlib!)) c)))
+                     (before utils/ccomp.ml(60):2300-2426
+                       (seq
+                         (if
+                           (after utils/ccomp.ml(60):2303-2334
+                             (caml_string_notequal first
+                               (after utils/ccomp.ml(60):2312-2334
+                                 (apply (field 12 (global Stdlib__filename!))
+                                   name))))
+                           (before utils/ccomp.ml(61):2346-2364
+                             (after utils/ccomp.ml(61):2346-2364
+                               (apply (field 41 (global Stdlib!)) first)))
+                           0a)
+                         (before utils/ccomp.ml(62):2370-2426
+                           (while 1a
+                             (before utils/ccomp.ml(63):2390-2417
+                               (after utils/ccomp.ml(63):2390-2417
+                                 (apply (field 41 (global Stdlib!))
+                                   (after utils/ccomp.ml(63):2403-2417
+                                     (apply (field 82 (global Stdlib!)) c))))))))))
+                  with exn
+                   (before utils/ccomp.ml(66):2443-2474
+                     (seq
+                       (after utils/ccomp.ml(66):2443-2453
+                         (apply (field 92 (global Stdlib!)) c))
+                       (before utils/ccomp.ml(67):2459-2474
+                         (after utils/ccomp.ml(67):2459-2474
+                           (caml_sys_remove file)))))))))))
+     compile_file =
+       (function output *opt* stable_name name : int
+         (funct-body utils/ccomp.ml(69)<ghost>:2493-4503
+           (before utils/ccomp.ml(70):2533-4503
+             (let
+               (opt =
+                  (if *opt*
+                    (let (*sth* =a (field 0 *opt*))
+                      (before utils/ccomp.ml(69):2507-2509 *sth*))
+                    (before utils/ccomp.ml(69):2507-2509 "")))
+               (before utils/ccomp.ml(70):2533-4503
+                 (catch
+                   (if
+                     (&&
+                       (after utils/ccomp.ml(71):2559-2585
+                         (caml_string_equal (field 2 (global Config!))
+                           "msvc"))
+                       (not (field 0 (field 38 (global Clflags!)))))
+                     (before utils/ccomp.ml(72):2621-2797
+                       (try
+                         (let
+                           (*match* =
+                              (after utils/ccomp.ml(73):2646-2685
+                                (apply (field 15 (global Stdlib__filename!))
+                                  0a 0a 0a "msvc" "stdout"))
+                            c =a (field 1 *match*)
+                            t =a (field 0 *match*))
+                           (before utils/ccomp.ml(74):2697-2764
+                             (seq
+                               (after utils/ccomp.ml(74):2697-2708
+                                 (apply (field 75 (global Stdlib!)) c))
+                               (before utils/ccomp.ml(75):2718-2764
+                                 (let
+                                   (file =a t
+                                    pipe =
+                                      (after utils/ccomp.ml(75):2719-2760
+                                        (apply
+                                          (field 3 (global Stdlib__printf!))
+                                          [0: [11: " > " [2: 0a 0a]] " > %s"]
+                                          (after utils/ccomp.ml(75):2742-2760
+                                            (apply
+                                              (field 19
+                                                (global Stdlib__filename!))
+                                              t)))))
+                                   (exit 15 file pipe))))))
+                        with exn
+                         (before utils/ccomp.ml(77):2789-2797
+                           (let (file = "" pipe = "") (exit 15 file pipe)))))
+                     (before utils/ccomp.ml(79):2813-2821
+                       (let (file = "" pipe = "") (exit 15 file pipe))))
+                  with (15 file pipe)
+                   (before utils/ccomp.ml(80):2827-4503
+                     (let
+                       (debug_prefix_map =
+                          (catch
+                            (if stable_name
+                              (let (stable =a (field 0 stable_name))
+                                (before utils/ccomp.ml(82):2900-2929
+                                  (if (field 5 (global Config!))
+                                    (before utils/ccomp.ml(83):2939-2993
+                                      (after utils/ccomp.ml(83):2939-2993
+                                        (apply
+                                          (field 3 (global Stdlib__printf!))
+                                          [0:
+                                           [11:
+                                            " -fdebug-prefix-map="
+                                            [2: 0a [12: '=' [2: 0a 0a]]]]
+                                           " -fdebug-prefix-map=%s=%s"]
+                                          name stable)))
+                                    (exit 10))))
+                              (exit 10))
+                           with (10)
+                            (before utils/ccomp.ml(84):3017-3019 "")))
+                       (before utils/ccomp.ml(85):3025-4503
+                         (let
+                           (exit =[int]
+                              (after utils/ccomp.ml(86):3040-4439
+                                (apply command
+                                  (after utils/ccomp.ml(87):3054-4439
+                                    (apply (field 3 (global Stdlib__printf!))
+                                      [0:
+                                       [2:
+                                        0a
+                                        [2:
+                                         0a
+                                         [12:
+                                          ' '
+                                          [2:
+                                           0a
+                                           [12:
+                                            ' '
+                                            [2:
+                                             0a
+                                             [11:
+                                              " -c "
+                                              [2:
+                                               0a
+                                               [12:
+                                                ' '
+                                                [2:
+                                                 0a
+                                                 [12:
+                                                  ' '
+                                                  [2:
+                                                   0a
+                                                   [12:
+                                                    ' '
+                                                    [2:
+                                                     0a
+                                                     [12:
+                                                      ' ' [2: 0a [2: 0a 0a]]]]]]]]]]]]]]]]]
+                                       "%s%s %s %s -c %s %s %s %s %s%s"]
+                                      (let
+                                        (*match* =
+                                           (field 0
+                                             (field 54 (global Clflags!))))
+                                        (if *match*
+                                          (let (cc =a (field 0 *match*))
+                                            (before utils/ccomp.ml(90):3176-3178
+                                              cc))
+                                          (before utils/ccomp.ml(92):3213-3498
+                                            (catch
+                                              (if
+                                                (field 0
+                                                  (field 94
+                                                    (global Clflags!)))
+                                                (before utils/ccomp.ml(94):3303-3353
+                                                  (let
+                                                    (cppflags =
+                                                       (field 10
+                                                         (global Config!))
+                                                     cflags =
+                                                       (field 9
+                                                         (global Config!)))
+                                                    (exit 5 cppflags cflags)))
+                                                (before utils/ccomp.ml(95):3377-3423
+                                                  (let
+                                                    (cppflags =
+                                                       (field 8
+                                                         (global Config!))
+                                                     cflags =
+                                                       (field 7
+                                                         (global Config!)))
+                                                    (exit 5 cppflags cflags))))
+                                             with (5 cppflags cflags)
+                                              (before utils/ccomp.ml(96):3441-3498
+                                                (after utils/ccomp.ml(96):3441-3498
+                                                  (apply
+                                                    (field 6
+                                                      (global Stdlib__string!))
+                                                    " "
+                                                    (makeblock 0
+                                                      (field 3
+                                                        (global Config!))
+                                                      (makeblock 0 cflags
+                                                        (makeblock 0 cppflags
+                                                          0a))))))))))
+                                      debug_prefix_map
+                                      (if output
+                                        (let (o =a (field 0 output))
+                                          (before utils/ccomp.ml(100):3599-3642
+                                            (after utils/ccomp.ml(100):3599-3642
+                                              (apply
+                                                (field 3
+                                                  (global Stdlib__printf!))
+                                                [0:
+                                                 [2: 0a [2: 0a 0a]] "%s%s"]
+                                                (field 4 (global Config!)) o))))
+                                        (before utils/ccomp.ml(99):3574-3576
+                                          ""))
+                                      opt
+                                      (if
+                                        (&&
+                                          (field 0
+                                            (field 16 (global Clflags!)))
+                                          (after utils/ccomp.ml(102):3688-3715
+                                            (caml_string_notequal
+                                              (field 2 (global Config!))
+                                              "msvc")))
+                                        (before utils/ccomp.ml(102):3721-3725
+                                          "-g")
+                                        (before utils/ccomp.ml(102):3731-3733
+                                          ""))
+                                      (after utils/ccomp.ml(103):3744-3794
+                                        (apply
+                                          (field 6 (global Stdlib__string!))
+                                          " "
+                                          (after utils/ccomp.ml(103):3763-3793
+                                            (apply
+                                              (field 8
+                                                (global Stdlib__list!))
+                                              (field 0
+                                                (field 26 (global Clflags!)))))))
+                                      (after utils/ccomp.ml(104):3804-3944
+                                        (apply quote_prefixed "-I"
+                                          (after utils/ccomp.ml(105):3837-3943
+                                            (apply
+                                              (field 16
+                                                (global Stdlib__list!))
+                                              (after utils/ccomp.ml(105):3847-3894
+                                                (apply
+                                                  (field 16 (global Misc!))
+                                                  (field 1 (global Config!))))
+                                              (after utils/ccomp.ml(106):3910-3942
+                                                (apply
+                                                  (field 8
+                                                    (global Stdlib__list!))
+                                                  (field 0
+                                                    (field 12
+                                                      (global Clflags!)))))))))
+                                      (after utils/ccomp.ml(107):3954-3985
+                                        (apply (field 120 (global Clflags!))
+                                          "-I"))
+                                      (after utils/ccomp.ml(108):3995-4016
+                                        (apply
+                                          (field 19
+                                            (global Stdlib__filename!))
+                                          name))
+                                      pipe)))))
+                           (before utils/ccomp.ml(116):4445-4503
+                             (seq
+                               (if
+                                 (after utils/ccomp.ml(116):4448-4458
+                                   (caml_string_notequal pipe ""))
+                                 (before utils/ccomp.ml(117):4466-4495
+                                   (after utils/ccomp.ml(117):4466-4495
+                                     (apply display_msvc_output file name)))
+                                 0a)
+                               (before utils/ccomp.ml(118):4499-4503 exit)))))))))))))
+     macos_create_empty_archive =
+       (function quoted_archive : int
+         (funct-body utils/ccomp.ml(120)<ghost>:4536-4905
+           (before utils/ccomp.ml(121):4556-4905
+             (let
+               (result =[int]
+                  (after utils/ccomp.ml(122):4573-4643
+                    (apply command
+                      (after utils/ccomp.ml(122):4581-4643
+                        (apply (field 3 (global Stdlib__printf!))
+                          [0:
+                           [2: 0a [11: " rc " [2: 0a [11: " /dev/null" 0a]]]]
+                           "%s rc %s /dev/null"]
+                          (field 18 (global Config!)) quoted_archive)))))
+               (before utils/ccomp.ml(124):4651-4905
+                 (if (!= result 0)
+                   (before utils/ccomp.ml(124):4671-4677 result)
+                   (before utils/ccomp.ml(126):4689-4905
+                     (let
+                       (result =[int]
+                          (after utils/ccomp.ml(127):4708-4782
+                            (apply command
+                              (after utils/ccomp.ml(127):4716-4782
+                                (apply (field 3 (global Stdlib__printf!))
+                                  [0:
+                                   [2:
+                                    0a
+                                    [12:
+                                     ' ' [2: 0a [11: " 2> /dev/null" 0a]]]]
+                                   "%s %s 2> /dev/null"]
+                                  (field 17 (global Config!)) quoted_archive)))))
+                       (before utils/ccomp.ml(129):4794-4905
+                         (if (!= result 0)
+                           (before utils/ccomp.ml(129):4814-4820 result)
+                           (before utils/ccomp.ml(131):4836-4905
+                             (after utils/ccomp.ml(131):4836-4905
+                               (apply command
+                                 (after utils/ccomp.ml(131):4844-4905
+                                   (apply (field 3 (global Stdlib__printf!))
+                                     [0:
+                                      [2:
+                                       0a
+                                       [11:
+                                        " d " [2: 0a [11: " /dev/null" 0a]]]]
+                                      "%s d %s /dev/null"]
+                                     (field 18 (global Config!))
+                                     quoted_archive)))))))))))))))
+     create_archive =
+       (function archive file_list : int
+         (funct-body utils/ccomp.ml(133)<ghost>:4926-5743
+           (before utils/ccomp.ml(134):4948-5743
+             (seq
+               (after utils/ccomp.ml(134):4948-4972
+                 (apply (field 15 (global Misc!)) archive))
+               (before utils/ccomp.ml(135):4976-5743
+                 (let
+                   (quoted_archive =
+                      (after utils/ccomp.ml(135):4997-5019
+                        (apply (field 19 (global Stdlib__filename!)) archive)))
+                   (before utils/ccomp.ml(136):5025-5743
+                     (let (*match* = (field 2 (global Config!)))
+                       (stringswitch *match*
+                        case "msvc":
+                         (before utils/ccomp.ml(138):5074-5196
+                           (after utils/ccomp.ml(138):5074-5196
+                             (apply command
+                               (after utils/ccomp.ml(138):5081-5196
+                                 (apply (field 3 (global Stdlib__printf!))
+                                   [0:
+                                    [11:
+                                     "link /lib /nologo /out:"
+                                     [2: 0a [12: ' ' [2: 0a 0a]]]]
+                                    "link /lib /nologo /out:%s %s"]
+                                   quoted_archive
+                                   (after utils/ccomp.ml(139):5172-5195
+                                     (apply quote_files file_list)))))))
+                        default:
+                         (before utils/ccomp.ml(141):5212-5743
+                           (seq
+                             (if
+                               (> (string.length (field 18 (global Config!)))
+                                 0)
+                               0a
+                               (raise
+                                 (after utils/ccomp.ml(141):5212-5247
+                                   (makeblock 0 (global Assert_failure!)
+                                     [0: "utils/ccomp.ml" 141 6]))))
+                             (before utils/ccomp.ml(142):5255-5743
+                               (let
+                                 (is_macosx =
+                                    (let
+                                      (*match* = (field 37 (global Config!)))
+                                      (stringswitch *match*
+                                       case "macosx":
+                                        (before utils/ccomp.ml(144):5326-5330
+                                          1a)
+                                       default:
+                                        (before utils/ccomp.ml(145):5346-5351
+                                          0a))))
+                                 (before utils/ccomp.ml(147):5367-5743
+                                   (if (&& is_macosx (== file_list 0a))
+                                     (before utils/ccomp.ml(148):5426-5468
+                                       (after utils/ccomp.ml(148):5426-5468
+                                         (apply macos_create_empty_archive
+                                           quoted_archive)))
+                                     (before utils/ccomp.ml(150):5488-5743
+                                       (let
+                                         (r1 =[int]
+                                            (after utils/ccomp.ml(151):5507-5611
+                                              (apply command
+                                                (after utils/ccomp.ml(151):5514-5611
+                                                  (apply
+                                                    (field 3
+                                                      (global Stdlib__printf!))
+                                                    [0:
+                                                     [2:
+                                                      0a
+                                                      [11:
+                                                       " rc "
+                                                       [2:
+                                                        0a
+                                                        [12: ' ' [2: 0a 0a]]]]]
+                                                     "%s rc %s %s"]
+                                                    (field 18
+                                                      (global Config!))
+                                                    quoted_archive
+                                                    (after utils/ccomp.ml(152):5587-5610
+                                                      (apply quote_files
+                                                        file_list)))))))
+                                         (before utils/ccomp.ml(153):5623-5743
+                                           (if
+                                             (|| (!= r1 0)
+                                               (==
+                                                 (string.length
+                                                   (field 17
+                                                     (global Config!)))
+                                                 0))
+                                             (before utils/ccomp.ml(154):5682-5684
+                                               r1)
+                                             (before utils/ccomp.ml(155):5698-5743
+                                               (after utils/ccomp.ml(155):5698-5743
+                                                 (apply command
+                                                   (after utils/ccomp.ml(155):5705-5743
+                                                     (apply
+                                                       (field 27
+                                                         (global Stdlib!))
+                                                       (field 17
+                                                         (global Config!))
+                                                       (after utils/ccomp.ml(155):5722-5742
+                                                         (apply
+                                                           (field 27
+                                                             (global Stdlib!))
+                                                           " "
+                                                           quoted_archive))))))))))))))))))))))))))
+     expand_libname =
+       (function name
+         (funct-body utils/ccomp.ml(157)<ghost>:5764-6028
+           (before utils/ccomp.ml(158):5773-6028
+             (if
+               (|| (< (string.length name) 2)
+                 (after utils/ccomp.ml(158):5802-5829
+                   (caml_string_notequal
+                     (after utils/ccomp.ml(158):5802-5821
+                       (apply (field 3 (global Stdlib__string!)) name 0 2))
+                     "-l")))
+               (before utils/ccomp.ml(159):5837-5841 name)
+               (before utils/ccomp.ml(160):5849-6028
+                 (let
+                   (libname =
+                      (after utils/ccomp.ml(162):5879-5946
+                        (apply (field 27 (global Stdlib!)) "lib"
+                          (after utils/ccomp.ml(162):5887-5946
+                            (apply (field 27 (global Stdlib!))
+                              (after utils/ccomp.ml(162):5887-5929
+                                (apply (field 3 (global Stdlib__string!))
+                                  name 2 (- (string.length name) 2)))
+                              (field 43 (global Config!)))))))
+                   (before utils/ccomp.ml(163):5954-6022
+                     (try
+                       (after utils/ccomp.ml(164):5964-5986
+                         (apply (field 5 (global Load_path!)) libname))
+                      with exn
+                       (if (== exn (field 7 (global Stdlib!)))
+                         (before utils/ccomp.ml(166):6015-6022 libname)
+                         (reraise exn))))))))))
+     remove_Wl =
+       (function cclibs
+         (funct-body utils/ccomp.ml(175)<ghost>:6102-6378
+           (before utils/ccomp.ml(176):6113-6378
+             (after utils/ccomp.ml(176):6113-6378
+               (apply (field 16 (global Stdlib__list!))
+                 (function cclib
+                   (funct-body utils/ccomp.ml(176):6132-6378
+                     (before utils/ccomp.ml(178):6185-6377
+                       (if
+                         (&& (>= (string.length cclib) 4)
+                           (after utils/ccomp.ml(178):6216-6245
+                             (caml_string_equal "-Wl,"
+                               (after utils/ccomp.ml(178):6225-6245
+                                 (apply (field 3 (global Stdlib__string!))
+                                   cclib 0 4)))))
+                         (before utils/ccomp.ml(179):6257-6362
+                           (after utils/ccomp.ml(179):6257-6362
+                             (apply (field 9 (global Stdlib__string!))
+                               (function c[int] : int
+                                 (funct-body utils/ccomp.ml(179):6268-6298
+                                   (if (!= c 44)
+                                     (before utils/ccomp.ml(179):6296-6297 c)
+                                     (before utils/ccomp.ml(179):6285-6288
+                                       ' '))))
+                               (after utils/ccomp.ml(180):6316-6362
+                                 (apply (field 3 (global Stdlib__string!))
+                                   cclib 4 (- (string.length cclib) 4))))))
+                         (before utils/ccomp.ml(181):6372-6377 cclib)))))
+                 cclibs)))))
+     call_linker =
+       (function mode output_name files extra
+         (funct-body utils/ccomp.ml(183)<ghost>:6396-7364
+           (before utils/ccomp.ml(184):6429-7364
+             (let
+               (cmd =
+                  (if (== mode 3a)
+                    (before utils/ccomp.ml(186):6472-6805
+                      (let
+                        (l_prefix =
+                           (let (*match* = (field 2 (global Config!)))
+                             (stringswitch *match*
+                              case "msvc":
+                               (before utils/ccomp.ml(188):6544-6555
+                                 "/libpath:")
+                              default:
+                               (before utils/ccomp.ml(189):6571-6575 "-L"))))
+                        (before utils/ccomp.ml(191):6591-6805
+                          (after utils/ccomp.ml(191):6591-6805
+                            (apply (field 3 (global Stdlib__printf!))
+                              [0:
+                               [2:
+                                0a
+                                [2:
+                                 0a
+                                 [12:
+                                  ' '
+                                  [2:
+                                   0a [12: ' ' [2: 0a [12: ' ' [2: 0a 0a]]]]]]]]
+                               "%s%s %s %s %s"]
+                              (field 13 (global Config!))
+                              (after utils/ccomp.ml(193):6664-6692
+                                (apply (field 19 (global Stdlib__filename!))
+                                  output_name))
+                              (after utils/ccomp.ml(194):6701-6751
+                                (apply quote_prefixed l_prefix
+                                  (after utils/ccomp.ml(194):6726-6750
+                                    (apply (field 4 (global Load_path!)) 0a))))
+                              (after utils/ccomp.ml(195):6760-6791
+                                (apply quote_files
+                                  (after utils/ccomp.ml(195):6773-6790
+                                    (apply remove_Wl files))))
+                              extra)))))
+                    (before utils/ccomp.ml(198):6821-7341
+                      (after utils/ccomp.ml(198):6821-7341
+                        (apply (field 3 (global Stdlib__printf!))
+                          [0:
+                           [2:
+                            0a
+                            [11:
+                             " -o "
+                             [2:
+                              0a
+                              [12:
+                               ' '
+                               [2:
+                                0a
+                                [12:
+                                 ' '
+                                 [2:
+                                  0a
+                                  [12:
+                                   ' '
+                                   [2:
+                                    0a [12: ' ' [2: 0a [12: ' ' [2: 0a 0a]]]]]]]]]]]]]
+                           "%s -o %s %s %s %s %s %s"]
+                          (let
+                            (*match* = (field 0 (field 54 (global Clflags!)))
+                             *match* = *match*
+                             *match* = mode)
+                            (if *match*
+                              (let (cc =a (field 0 *match*))
+                                (before utils/ccomp.ml(200):6932-6934 cc))
+                              (switch* *match*
+                               case int 0:
+                                (before utils/ccomp.ml(201):6958-6970
+                                  (field 15 (global Config!)))
+                               case int 1:
+                                (before utils/ccomp.ml(202):6994-7006
+                                  (field 14 (global Config!)))
+                               case int 2:
+                                (before utils/ccomp.ml(203):7034-7050
+                                  (field 16 (global Config!)))
+                               case int 3:
+                                (before utils/ccomp.ml(204):7078-7090
+                                  (raise
+                                    (after utils/ccomp.ml(204):7078-7090
+                                      (makeblock 0 (global Assert_failure!)
+                                        [0: "utils/ccomp.ml" 204 27])))))))
+                          (after utils/ccomp.ml(206):7109-7137
+                            (apply (field 19 (global Stdlib__filename!))
+                              output_name))
+                          ""
+                          (after utils/ccomp.ml(208):7194-7240
+                            (apply quote_prefixed "-L"
+                              (after utils/ccomp.ml(208):7215-7239
+                                (apply (field 4 (global Load_path!)) 0a))))
+                          (after utils/ccomp.ml(209):7249-7299
+                            (apply (field 6 (global Stdlib__string!)) " "
+                              (after utils/ccomp.ml(209):7268-7298
+                                (apply (field 8 (global Stdlib__list!))
+                                  (field 0 (field 26 (global Clflags!)))))))
+                          (after utils/ccomp.ml(210):7308-7327
+                            (apply quote_files files))
+                          extra)))))
+               (before utils/ccomp.ml(213):7349-7364
+                 (==
+                   (after utils/ccomp.ml(213):7349-7360 (apply command cmd))
+                   0)))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 command run_command compile_file create_archive
+        expand_libname quote_files quote_optfile call_linker))))

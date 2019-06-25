@@ -1,0 +1,244 @@
+(setglobal Clambda!
+  (let
+    (compare_floats =
+       (function x1[float] x2[float] : int
+         (funct-body middle_end/clambda.ml(145)<ghost>:5161-5234
+           (before middle_end/clambda.ml(146):5171-5234
+             (after middle_end/clambda.ml(146):5171-5234
+               (apply (field 14 (global Stdlib__int64!))
+                 (after middle_end/clambda.ml(146):5185-5209
+                   (caml_int64_bits_of_float x1))
+                 (after middle_end/clambda.ml(146):5210-5234
+                   (caml_int64_bits_of_float x2))))))))
+    (letrec
+      (compare_float_lists
+         (function l1 l2 : int
+           (funct-body middle_end/clambda.ml(148)<ghost>:5264-5458
+             (before middle_end/clambda.ml(149):5274-5458
+               (let (*match* = l1 *match* = l2)
+                 (if *match*
+                   (let (t1 =a (field 1 *match*) h1 =a (field 0 *match*))
+                     (if *match*
+                       (let (t2 =a (field 1 *match*) h2 =a (field 0 *match*))
+                         (before middle_end/clambda.ml(154):5373-5458
+                           (let
+                             (c =[int]
+                                (after middle_end/clambda.ml(154):5381-5401
+                                  (apply compare_floats h1 h2)))
+                             (before middle_end/clambda.ml(155):5411-5458
+                               (if (!= c 0)
+                                 (before middle_end/clambda.ml(155):5426-5427
+                                   c)
+                                 (before middle_end/clambda.ml(155):5433-5458
+                                   (after middle_end/clambda.ml(155):5433-5458
+                                     (apply compare_float_lists t1 t2))))))))
+                       (before middle_end/clambda.ml(152):5343-5344 1)))
+                   (if *match*
+                     (before middle_end/clambda.ml(151):5324-5326 -1)
+                     (before middle_end/clambda.ml(150):5306-5307 0))))))))
+      (let
+        (compare_constants =
+           (function c1 c2 : int
+             (funct-body middle_end/clambda.ml(157)<ghost>:5482-6022
+               (before middle_end/clambda.ml(158):5492-6022
+                 (let (*match* = c1 *match* = c2)
+                   (switch* *match*
+                    case tag 0:
+                     (let (lbl1 =a (field 0 *match*))
+                       (catch
+                         (switch* *match*
+                          case tag 0:
+                           (let (lbl2 =a (field 0 *match*))
+                             (before middle_end/clambda.ml(159):5562-5586
+                               (after middle_end/clambda.ml(159):5562-5586
+                                 (apply (field 32 (global Stdlib__string!))
+                                   lbl1 lbl2))))
+                          case tag 1: (exit 1)
+                          case tag 2: (exit 1))
+                        with (1)
+                         (before middle_end/clambda.ml(166):5922-5924 -1)))
+                    case tag 1:
+                     (let (n1 =a (field 0 *match*))
+                       (switch* *match*
+                        case tag 0:
+                         (before middle_end/clambda.ml(167):5959-5960 1)
+                        case tag 1:
+                         (let (n2 =a (field 0 *match*))
+                           (before middle_end/clambda.ml(164):5821-5841
+                             (after middle_end/clambda.ml(164):5821-5841
+                               (caml_int_compare n1 n2))))
+                        case tag 2:
+                         (before middle_end/clambda.ml(168):5995-5997 -1)))
+                    case tag 2:
+                     (let (n1 =a (field 0 *match*))
+                       (catch
+                         (switch* *match*
+                          case tag 0: (exit 2)
+                          case tag 1: (exit 2)
+                          case tag 2:
+                           (let (n2 =a (field 0 *match*))
+                             (before middle_end/clambda.ml(165):5878-5898
+                               (after middle_end/clambda.ml(165):5878-5898
+                                 (caml_int_compare n1 n2)))))
+                        with (2)
+                         (before middle_end/clambda.ml(169):6021-6022 1)))))))))
+        (letrec
+          (compare_constant_lists
+             (function l1 l2 : int
+               (funct-body middle_end/clambda.ml(171)<ghost>:6055-6255
+                 (before middle_end/clambda.ml(172):6065-6255
+                   (let (*match* = l1 *match* = l2)
+                     (if *match*
+                       (let (t1 =a (field 1 *match*) h1 =a (field 0 *match*))
+                         (if *match*
+                           (let
+                             (t2 =a (field 1 *match*)
+                              h2 =a (field 0 *match*))
+                             (before middle_end/clambda.ml(177):6164-6255
+                               (let
+                                 (c =[int]
+                                    (after middle_end/clambda.ml(177):6172-6195
+                                      (apply compare_constants h1 h2)))
+                                 (before middle_end/clambda.ml(178):6205-6255
+                                   (if (!= c 0)
+                                     (before middle_end/clambda.ml(178):6220-6221
+                                       c)
+                                     (before middle_end/clambda.ml(178):6227-6255
+                                       (after middle_end/clambda.ml(178):6227-6255
+                                         (apply compare_constant_lists t1 t2))))))))
+                           (before middle_end/clambda.ml(175):6134-6135 1)))
+                       (if *match*
+                         (before middle_end/clambda.ml(174):6115-6117 -1)
+                         (before middle_end/clambda.ml(173):6097-6098 0))))))))
+          (let
+            (rank_structured_constant =
+               (function param : int
+                 (funct-body middle_end/clambda.ml(180):6288-6501
+                   (switch* param
+                    case tag 0:
+                     (before middle_end/clambda.ml(181):6319-6320 0)
+                    case tag 1:
+                     (before middle_end/clambda.ml(182):6343-6344 1)
+                    case tag 2:
+                     (before middle_end/clambda.ml(183):6367-6368 2)
+                    case tag 3:
+                     (before middle_end/clambda.ml(184):6395-6396 3)
+                    case tag 4:
+                     (before middle_end/clambda.ml(185):6419-6420 4)
+                    case tag 5:
+                     (before middle_end/clambda.ml(186):6449-6450 5)
+                    case tag 6:
+                     (before middle_end/clambda.ml(187):6474-6475 6)
+                    case tag 7:
+                     (before middle_end/clambda.ml(188):6500-6501 7))))
+             compare_structured_constants =
+               (function c1 c2 : int
+                 (funct-body middle_end/clambda.ml(190)<ghost>:6536-7328
+                   (before middle_end/clambda.ml(191):6546-7328
+                     (let (*match* = c1 *match* = c2)
+                       (catch
+                         (switch* *match*
+                          case tag 0:
+                           (switch *match*
+                            case tag 0:
+                             (let
+                               (x2 =a (field 0 *match*)
+                                x1 =a (field 0 *match*))
+                               (before middle_end/clambda.ml(192):6604-6624
+                                 (after middle_end/clambda.ml(192):6604-6624
+                                   (apply compare_floats x1 x2))))
+                            default: (exit 3))
+                          case tag 1:
+                           (switch *match*
+                            case tag 1:
+                             (let
+                               (x2 =a (field 0 *match*)
+                                x1 =a (field 0 *match*))
+                               (before middle_end/clambda.ml(193):6665-6684
+                                 (after middle_end/clambda.ml(193):6665-6684
+                                   (apply (field 14 (global Stdlib__int32!))
+                                     x1 x2))))
+                            default: (exit 3))
+                          case tag 2:
+                           (switch *match*
+                            case tag 2:
+                             (let
+                               (x2 =a (field 0 *match*)
+                                x1 =a (field 0 *match*))
+                               (before middle_end/clambda.ml(194):6725-6744
+                                 (after middle_end/clambda.ml(194):6725-6744
+                                   (apply (field 14 (global Stdlib__int64!))
+                                     x1 x2))))
+                            default: (exit 3))
+                          case tag 3:
+                           (switch *match*
+                            case tag 3:
+                             (let
+                               (x2 =a (field 0 *match*)
+                                x1 =a (field 0 *match*))
+                               (before middle_end/clambda.ml(195):6793-6816
+                                 (after middle_end/clambda.ml(195):6793-6816
+                                   (apply
+                                     (field 15 (global Stdlib__nativeint!))
+                                     x1 x2))))
+                            default: (exit 3))
+                          case tag 4:
+                           (switch *match*
+                            case tag 4:
+                             (let
+                               (l2 =a (field 1 *match*)
+                                t2 =a (field 0 *match*)
+                                l1 =a (field 1 *match*)
+                                t1 =a (field 0 *match*))
+                               (before middle_end/clambda.ml(197):6873-6980
+                                 (let (c =[int] (- t1 t2))
+                                   (before middle_end/clambda.ml(198):6930-6980
+                                     (if (!= c 0)
+                                       (before middle_end/clambda.ml(198):6945-6946
+                                         c)
+                                       (before middle_end/clambda.ml(198):6952-6980
+                                         (after middle_end/clambda.ml(198):6952-6980
+                                           (apply compare_constant_lists l1
+                                             l2))))))))
+                            default: (exit 3))
+                          case tag 5:
+                           (switch *match*
+                            case tag 5:
+                             (let
+                               (l2 =a (field 0 *match*)
+                                l1 =a (field 0 *match*))
+                               (before middle_end/clambda.ml(200):7039-7064
+                                 (after middle_end/clambda.ml(200):7039-7064
+                                   (apply compare_float_lists l1 l2))))
+                            default: (exit 3))
+                          case tag 6:
+                           (switch *match*
+                            case tag 6:
+                             (let
+                               (s2 =a (field 0 *match*)
+                                s1 =a (field 0 *match*))
+                               (before middle_end/clambda.ml(201):7107-7127
+                                 (after middle_end/clambda.ml(201):7107-7127
+                                   (apply (field 32 (global Stdlib__string!))
+                                     s1 s2))))
+                            default: (exit 3))
+                          case tag 7:
+                           (switch *match*
+                            case tag 7:
+                             (let
+                               (lbl2 =a (field 1 *match*)
+                                lbl1 =a (field 1 *match*))
+                               (before middle_end/clambda.ml(203):7194-7218
+                                 (after middle_end/clambda.ml(203):7194-7218
+                                   (apply (field 32 (global Stdlib__string!))
+                                     lbl1 lbl2))))
+                            default: (exit 3)))
+                        with (3)
+                         (before middle_end/clambda.ml(206):7271-7328
+                           (-
+                             (after middle_end/clambda.ml(206):7271-7298
+                               (apply rank_structured_constant c1))
+                             (after middle_end/clambda.ml(206):7301-7328
+                               (apply rank_structured_constant c2))))))))))
+            (pseudo _none_(0)<ghost>:-1--1
+              (makeblock 0 compare_structured_constants compare_constants))))))))

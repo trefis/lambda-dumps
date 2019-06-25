@@ -1,0 +1,1013 @@
+(setglobal Bytepackager!
+  (let
+    (Error = (makeblock 248 "Bytepackager.Error" (caml_fresh_oo_id 0))
+     relocs = (makemutable 0 0a)
+     events = (makemutable 0 0a)
+     debug_dirs =
+       (makemutable 0
+         (field 0 (field 38 (field 3 (field 11 (global Misc!))))))
+     primitives = (makemutable 0 0a)
+     force_link = (makemutable 0 0a)
+     rename_relocation =
+       (function packagename objfile mapping defined base[int] param
+         (funct-body bytecomp/bytepackager.ml(45)<ghost>:1940-3191
+           (let (ofs =a (field 1 param) rel =a (field 0 param))
+             (before bytecomp/bytepackager.ml(46):1996-3191
+               (let
+                 (rel' =
+                    (catch
+                      (switch* rel
+                       case tag 0: (exit 3)
+                       case tag 1:
+                        (let (id =a (field 0 rel))
+                          (before bytecomp/bytepackager.ml(49):2062-2637
+                            (try
+                              (let
+                                (id' =
+                                   (after bytecomp/bytepackager.ml(50):2092-2113
+                                     (apply (field 38 (global Stdlib__list!))
+                                       id mapping)))
+                                (before bytecomp/bytepackager.ml(51):2127-2244
+                                  (if
+                                    (after bytecomp/bytepackager.ml(51):2130-2149
+                                      (apply
+                                        (field 31 (global Stdlib__list!)) id
+                                        defined))
+                                    (before bytecomp/bytepackager.ml(52):2165-2184
+                                      (makeblock 1 id'))
+                                    (before bytecomp/bytepackager.ml(53):2200-2244
+                                      (raise
+                                        (after bytecomp/bytepackager.ml(53):2205-2244
+                                          (makeblock 0 Error
+                                            (makeblock 0 objfile id))))))))
+                             with exn
+                              (if (== exn (field 7 (global Stdlib!)))
+                                (before bytecomp/bytepackager.ml(58):2443-2625
+                                  (let
+                                    (name =
+                                       (after bytecomp/bytepackager.ml(58):2454-2467
+                                         (apply (field 14 (global Ident!))
+                                           id)))
+                                    (before bytecomp/bytepackager.ml(59):2481-2625
+                                      (if
+                                        (after bytecomp/bytepackager.ml(59):2484-2508
+                                          (apply
+                                            (field 21
+                                              (field 3
+                                                (field 11 (global Misc!))))
+                                            name '.'))
+                                        (before bytecomp/bytepackager.ml(60):2526-2594
+                                          (makeblock 1
+                                            (after bytecomp/bytepackager.ml(60):2542-2594
+                                              (apply
+                                                (field 11 (global Ident!))
+                                                (after bytecomp/bytepackager.ml(60):2567-2593
+                                                  (apply
+                                                    (field 27
+                                                      (global Stdlib!))
+                                                    packagename
+                                                    (after bytecomp/bytepackager.ml(60):2582-2592
+                                                      (apply
+                                                        (field 27
+                                                          (global Stdlib!))
+                                                        "." name))))))))
+                                        (before bytecomp/bytepackager.ml(62):2622-2625
+                                          rel)))))
+                                (reraise exn)))))
+                       case tag 2:
+                        (let (id =a (field 0 rel))
+                          (before bytecomp/bytepackager.ml(65):2674-3123
+                            (try
+                              (let
+                                (id' =
+                                   (after bytecomp/bytepackager.ml(66):2704-2725
+                                     (apply (field 38 (global Stdlib__list!))
+                                       id mapping)))
+                                (before bytecomp/bytepackager.ml(67):2739-2858
+                                  (if
+                                    (after bytecomp/bytepackager.ml(67):2742-2761
+                                      (apply
+                                        (field 31 (global Stdlib__list!)) id
+                                        defined))
+                                    (before bytecomp/bytepackager.ml(68):2777-2823
+                                      (raise
+                                        (after bytecomp/bytepackager.ml(68):2782-2823
+                                          (makeblock 0 Error
+                                            (makeblock 1 objfile id)))))
+                                    (before bytecomp/bytepackager.ml(69):2839-2858
+                                      (makeblock 2 id')))))
+                             with exn
+                              (if (== exn (field 7 (global Stdlib!)))
+                                (before bytecomp/bytepackager.ml(72):2929-3111
+                                  (let
+                                    (name =
+                                       (after bytecomp/bytepackager.ml(72):2940-2953
+                                         (apply (field 14 (global Ident!))
+                                           id)))
+                                    (before bytecomp/bytepackager.ml(73):2967-3111
+                                      (if
+                                        (after bytecomp/bytepackager.ml(73):2970-2994
+                                          (apply
+                                            (field 21
+                                              (field 3
+                                                (field 11 (global Misc!))))
+                                            name '.'))
+                                        (before bytecomp/bytepackager.ml(74):3012-3080
+                                          (makeblock 2
+                                            (after bytecomp/bytepackager.ml(74):3028-3080
+                                              (apply
+                                                (field 11 (global Ident!))
+                                                (after bytecomp/bytepackager.ml(74):3053-3079
+                                                  (apply
+                                                    (field 27
+                                                      (global Stdlib!))
+                                                    packagename
+                                                    (after bytecomp/bytepackager.ml(74):3068-3078
+                                                      (apply
+                                                        (field 27
+                                                          (global Stdlib!))
+                                                        "." name))))))))
+                                        (before bytecomp/bytepackager.ml(76):3108-3111
+                                          rel)))))
+                                (reraise exn)))))
+                       case tag 3: (exit 3))
+                     with (3)
+                      (before bytecomp/bytepackager.ml(79):3143-3146 rel)))
+                 (before bytecomp/bytepackager.ml(80):3152-3191
+                   (setfield_ptr 0 relocs
+                     (makeblock 0 (makeblock 0 (*,int) rel' (+ base ofs))
+                       (field 0 relocs)))))))))
+     relocate_debug =
+       (function base[int] prefix subst ev
+         (funct-body bytecomp/bytepackager.ml(84)<ghost>:3257-3494
+           (before bytecomp/bytepackager.ml(85):3282-3494
+             (let
+               (ev' =
+                  (let (init = ev)
+                    (makemutable 0 (int,*,*,*,*,*,*,*,int,*)
+                      (+ base (field 0 ev))
+                      (after bytecomp/bytepackager.ml(86):3363-3390
+                        (apply (field 27 (global Stdlib!)) prefix
+                          (after bytecomp/bytepackager.ml(86):3372-3390
+                            (apply (field 27 (global Stdlib!)) "."
+                              (field 1 ev)))))
+                      (field 2 init) (field 3 init) (field 4 init)
+                      (field 5 init)
+                      (after bytecomp/bytepackager.ml(87):3428-3462
+                        (apply (field 23 (global Subst!)) (field 6 ev) subst))
+                      (field 7 init) (field 8 init) (field 9 init))))
+               (before bytecomp/bytepackager.ml(88):3470-3494
+                 (setfield_ptr 0 events (makeblock 0 ev' (field 0 events))))))))
+     read_member_info =
+       (function file
+         (funct-body bytecomp/bytepackager.ml(99)<ghost>:3725-4635
+           (before bytecomp/bytepackager.ml(99):3732-4635
+             (let
+               (name =
+                  (after bytecomp/bytepackager.ml(101):3751-3815
+                    (apply (field 30 (field 3 (field 11 (global Misc!))))
+                      (after bytecomp/bytepackager.ml(101):3774-3815
+                        (apply (field 12 (global Stdlib__filename!))
+                          (after bytecomp/bytepackager.ml(101):3792-3814
+                            (apply (field 31 (global Misc!)) file)))))))
+               (before bytecomp/bytepackager.ml(102):3821-4633
+                 (let
+                   (kind =
+                      (if
+                        (after bytecomp/bytepackager.ml(104):3898-3931
+                          (apply (field 6 (global Stdlib__filename!)) file
+                            ".cmi"))
+                        (before bytecomp/bytepackager.ml(105):3943-3950 0a)
+                        (before bytecomp/bytepackager.ml(106):3960-4577
+                          (let
+                            (ic =
+                               (after bytecomp/bytepackager.ml(107):3981-3997
+                                 (apply (field 79 (global Stdlib!)) file)))
+                            (before bytecomp/bytepackager.ml(108):4007-4569
+                              (try
+                                (let
+                                  (buffer =
+                                     (after bytecomp/bytepackager.ml(110):4042-4104
+                                       (apply (field 85 (global Stdlib!)) ic
+                                         (string.length
+                                           (field 22 (global Config!))))))
+                                  (before bytecomp/bytepackager.ml(112):4124-4516
+                                    (seq
+                                      (if
+                                        (after bytecomp/bytepackager.ml(112):4127-4160
+                                          (caml_string_notequal buffer
+                                            (field 22 (global Config!))))
+                                        (before bytecomp/bytepackager.ml(113):4176-4213
+                                          (raise
+                                            (after bytecomp/bytepackager.ml(113):4181-4213
+                                              (makeblock 0 Error
+                                                (makeblock 2 file)))))
+                                        0a)
+                                      (before bytecomp/bytepackager.ml(114):4223-4516
+                                        (let
+                                          (compunit_pos =[int]
+                                             (after bytecomp/bytepackager.ml(114):4242-4261
+                                               (apply
+                                                 (field 87 (global Stdlib!))
+                                                 ic)))
+                                          (before bytecomp/bytepackager.ml(115):4273-4516
+                                            (seq
+                                              (after bytecomp/bytepackager.ml(115):4273-4296
+                                                (apply
+                                                  (field 89 (global Stdlib!))
+                                                  ic compunit_pos))
+                                              (before bytecomp/bytepackager.ml(116):4306-4516
+                                                (let
+                                                  (compunit =
+                                                     (after bytecomp/bytepackager.ml(116):4322-4336
+                                                       (apply
+                                                         (field 88
+                                                           (global Stdlib!))
+                                                         ic)))
+                                                  (before bytecomp/bytepackager.ml(117):4368-4516
+                                                    (seq
+                                                      (if
+                                                        (after bytecomp/bytepackager.ml(117):4371-4395
+                                                          (caml_string_notequal
+                                                            (field 0
+                                                              compunit)
+                                                            name))
+                                                        (before bytecomp/bytepackager.ml(118):4409-4469
+                                                          (raise
+                                                            (after bytecomp/bytepackager.ml(118):4414-4469
+                                                              (makeblock 0
+                                                                Error
+                                                                (makeblock 3
+                                                                  name file
+                                                                  (field 0
+                                                                    compunit))))))
+                                                        0a)
+                                                      (before bytecomp/bytepackager.ml(119):4479-4516
+                                                        (seq
+                                                          (after bytecomp/bytepackager.ml(119):4479-4490
+                                                            (apply
+                                                              (field 92
+                                                                (global Stdlib!))
+                                                              ic))
+                                                          (before bytecomp/bytepackager.ml(120):4500-4516
+                                                            (makeblock 0
+                                                              compunit)))))))))))))))
+                               with x
+                                (before bytecomp/bytepackager.ml(122):4541-4569
+                                  (seq
+                                    (after bytecomp/bytepackager.ml(122):4541-4552
+                                      (apply (field 92 (global Stdlib!)) ic))
+                                    (before bytecomp/bytepackager.ml(123):4562-4569
+                                      (reraise
+                                        (after bytecomp/bytepackager.ml(123):4568-4569
+                                          x)))))))))))
+                   (before bytecomp/bytepackager.ml(125):4583-4633
+                     (makeblock 0 file name kind))))))))
+     rename_append_bytecode =
+       (function packagename oc mapping defined ofs[int] prefix subst objfile
+         compunit : int
+         (funct-body bytecomp/bytepackager.ml(134)<ghost>:4868-5726
+           (before bytecomp/bytepackager.ml(136):4964-5726
+             (let
+               (ic =
+                  (after bytecomp/bytepackager.ml(136):4973-4992
+                    (apply (field 79 (global Stdlib!)) objfile)))
+               (before bytecomp/bytepackager.ml(137):4998-5726
+                 (try
+                   (seq
+                     (after bytecomp/bytepackager.ml(138):5006-5049
+                       (apply (field 2 (global Bytelink!)) objfile compunit))
+                     (before bytecomp/bytepackager.ml(139):5055-5685
+                       (seq
+                         (after bytecomp/bytepackager.ml(139):5055-5154
+                           (apply (field 14 (global Stdlib__list!))
+                             (after bytecomp/bytepackager.ml(140):5071-5130
+                               (apply rename_relocation packagename objfile
+                                 mapping defined ofs))
+                             (field 3 compunit)))
+                         (before bytecomp/bytepackager.ml(142):5160-5685
+                           (seq
+                             (setfield_ptr 0 primitives
+                               (after bytecomp/bytepackager.ml(142):5174-5210
+                                 (apply (field 36 (global Stdlib!))
+                                   (field 6 compunit) (field 0 primitives))))
+                             (before bytecomp/bytepackager.ml(143):5216-5685
+                               (seq
+                                 (if (field 7 compunit)
+                                   (before bytecomp/bytepackager.ml(143):5247-5265
+                                     (setfield_imm 0 force_link 1a))
+                                   0a)
+                                 (before bytecomp/bytepackager.ml(144):5271-5685
+                                   (seq
+                                     (after bytecomp/bytepackager.ml(144):5271-5297
+                                       (apply (field 89 (global Stdlib!)) ic
+                                         (field 1 compunit)))
+                                     (before bytecomp/bytepackager.ml(145):5303-5685
+                                       (seq
+                                         (after bytecomp/bytepackager.ml(145):5303-5350
+                                           (apply (field 20 (global Misc!))
+                                             ic oc (field 2 compunit)))
+                                         (before bytecomp/bytepackager.ml(146):5356-5685
+                                           (seq
+                                             (if
+                                               (&&
+                                                 (field 0
+                                                   (field 16
+                                                     (global Clflags!)))
+                                                 (> (field 8 compunit) 0))
+                                               (before bytecomp/bytepackager.ml(146):5404-5642
+                                                 (seq
+                                                   (after bytecomp/bytepackager.ml(147):5416-5444
+                                                     (apply
+                                                       (field 89
+                                                         (global Stdlib!))
+                                                       ic (field 8 compunit)))
+                                                   (before bytecomp/bytepackager.ml(148):5452-5634
+                                                     (seq
+                                                       (after bytecomp/bytepackager.ml(148):5452-5512
+                                                         (apply
+                                                           (field 14
+                                                             (global Stdlib__list!))
+                                                           (after bytecomp/bytepackager.ml(148):5462-5495
+                                                             (apply
+                                                               relocate_debug
+                                                               ofs prefix
+                                                               subst))
+                                                           (after bytecomp/bytepackager.ml(148):5496-5512
+                                                             (apply
+                                                               (field 88
+                                                                 (global Stdlib!))
+                                                               ic))))
+                                                       (before bytecomp/bytepackager.ml(149):5520-5633
+                                                         (setfield_ptr 0
+                                                           debug_dirs
+                                                           (after bytecomp/bytepackager.ml(149):5534-5633
+                                                             (apply
+                                                               (field 20
+                                                                 (global Stdlib__list!))
+                                                               (function s e
+                                                                 (funct-body bytecomp/bytepackager.ml(150):5557-5588
+                                                                   (before bytecomp/bytepackager.ml(150):5569-5587
+                                                                    (after bytecomp/bytepackager.ml(150):5569-5587
+                                                                    (apply
+                                                                    (field 3
+                                                                    (field 38
+                                                                    (field 3
+                                                                    (field 11
+                                                                    (global Misc!)))))
+                                                                    e s)))))
+                                                               (field 0
+                                                                 debug_dirs)
+                                                               (after bytecomp/bytepackager.ml(152):5617-5633
+                                                                 (apply
+                                                                   (field 88
+                                                                    (global Stdlib!))
+                                                                   ic))))))))))
+                                               0a)
+                                             (before bytecomp/bytepackager.ml(154):5648-5685
+                                               (seq
+                                                 (after bytecomp/bytepackager.ml(154):5648-5659
+                                                   (apply
+                                                     (field 92
+                                                       (global Stdlib!))
+                                                     ic))
+                                                 (before bytecomp/bytepackager.ml(155):5665-5685
+                                                   (field 2 compunit)))))))))))))))))
+                  with x
+                   (before bytecomp/bytepackager.ml(157):5702-5726
+                     (seq
+                       (after bytecomp/bytepackager.ml(157):5702-5713
+                         (apply (field 92 (global Stdlib!)) ic))
+                       (before bytecomp/bytepackager.ml(158):5719-5726
+                         (reraise
+                           (after bytecomp/bytepackager.ml(158):5725-5726 x))))))))))))
+    (letrec
+      (rename_append_bytecode_list
+         (function packagename oc mapping defined ofs[int] prefix subst param
+           : int
+           (funct-body bytecomp/bytepackager.ml(163)<ghost>:5846-6695
+             (if param
+               (let (rem =a (field 1 param) m =a (field 0 param))
+                 (before bytecomp/bytepackager.ml(169):5985-6695
+                   (let (*match* = (field 2 m))
+                     (if *match*
+                       (let (compunit =a (field 0 *match*))
+                         (before bytecomp/bytepackager.ml(174):6191-6695
+                           (let
+                             (size =[int]
+                                (after bytecomp/bytepackager.ml(175):6214-6338
+                                  (apply rename_append_bytecode packagename
+                                    oc mapping defined ofs prefix subst
+                                    (field 0 m) compunit)))
+                             (before bytecomp/bytepackager.ml(177):6352-6695
+                               (let
+                                 (id =
+                                    (after bytecomp/bytepackager.ml(177):6361-6394
+                                      (apply (field 11 (global Ident!))
+                                        (field 1 m))))
+                                 (before bytecomp/bytepackager.ml(178):6408-6695
+                                   (let
+                                     (root =
+                                        (makeblock 0
+                                          (after bytecomp/bytepackager.ml(178):6431-6463
+                                            (apply (field 11 (global Ident!))
+                                              prefix))))
+                                     (before bytecomp/bytepackager.ml(179):6477-6695
+                                       (after bytecomp/bytepackager.ml(179):6477-6695
+                                         (apply rename_append_bytecode_list
+                                           packagename oc mapping
+                                           (makeblock 0 id defined)
+                                           (+ ofs size) prefix
+                                           (after bytecomp/bytepackager.ml(181):6588-6679
+                                             (apply (field 4 (global Subst!))
+                                               id
+                                               (makeblock 1 root
+                                                 (after bytecomp/bytepackager.ml(181):6627-6640
+                                                   (apply
+                                                     (field 14
+                                                       (global Ident!))
+                                                     id)))
+                                               subst))
+                                           rem))))))))))
+                       (before bytecomp/bytepackager.ml(171):6035-6152
+                         (after bytecomp/bytepackager.ml(171):6035-6152
+                           (apply rename_append_bytecode_list packagename oc
+                             mapping defined ofs prefix subst rem)))))))
+               (before bytecomp/bytepackager.ml(167):5959-5962 ofs)))))
+      (let
+        (build_global_target =
+           (function ppf_dump oc target_name members mapping pos[int]
+             coercion
+             (funct-body bytecomp/bytepackager.ml(187)<ghost>:6800-7417
+               (before bytecomp/bytepackager.ml(188):6858-7417
+                 (let
+                   (components =
+                      (after bytecomp/bytepackager.ml(189):6879-7026
+                        (apply (field 23 (global Stdlib__list!))
+                          (function m param
+                            (funct-body bytecomp/bytepackager.ml(190):6895-7004
+                              (let (id2 =a (field 1 param))
+                                (before bytecomp/bytepackager.ml(191):6925-7003
+                                  (let (*match* = (field 2 m))
+                                    (if *match*
+                                      (before bytecomp/bytepackager.ml(193):6995-7003
+                                        (makeblock 0 id2))
+                                      (before bytecomp/bytepackager.ml(192):6967-6971
+                                        0a)))))))
+                          members mapping)))
+                   (before bytecomp/bytepackager.ml(195):7032-7417
+                     (let
+                       (lam =
+                          (after bytecomp/bytepackager.ml(196):7046-7134
+                            (apply (field 5 (global Translmod!)) components
+                              (after bytecomp/bytepackager.ml(197):7088-7125
+                                (apply (field 11 (global Ident!))
+                                  target_name))
+                              coercion)))
+                       (before bytecomp/bytepackager.ml(198):7140-7417
+                         (seq
+                           (if (field 0 (field 67 (global Clflags!)))
+                             (before bytecomp/bytepackager.ml(199):7173-7226
+                               (after bytecomp/bytepackager.ml(199):7173-7226
+                                 (apply (field 122 (global Stdlib__format!))
+                                   ppf_dump [0: [15: [17: 4a 0a]] "%a@."]
+                                   (field 3 (global Printlambda!)) lam)))
+                             0a)
+                           (before bytecomp/bytepackager.ml(200):7230-7417
+                             (let
+                               (instrs =
+                                  (after bytecomp/bytepackager.ml(201):7247-7293
+                                    (apply (field 0 (global Bytegen!))
+                                      target_name lam)))
+                               (before bytecomp/bytepackager.ml(202):7299-7417
+                                 (let
+                                   (rel =
+                                      (after bytecomp/bytepackager.ml(203):7313-7346
+                                        (apply (field 2 (global Emitcode!))
+                                          oc instrs)))
+                                   (before bytecomp/bytepackager.ml(204):7352-7417
+                                     (setfield_ptr 0 relocs
+                                       (after bytecomp/bytepackager.ml(204):7362-7417
+                                         (apply (field 36 (global Stdlib!))
+                                           (after bytecomp/bytepackager.ml(204):7362-7407
+                                             (apply
+                                               (field 16
+                                                 (global Stdlib__list!))
+                                               (function param
+                                                 (funct-body bytecomp/bytepackager.ml(204):7371-7403
+                                                   (let
+                                                     (ofs =a (field 1 param)
+                                                      r =a (field 0 param))
+                                                     (before bytecomp/bytepackager.ml(204):7388-7402
+                                                       (makeblock 0 (*,int) r
+                                                         (+ pos ofs))))))
+                                               rel))
+                                           (field 0 relocs)))))))))))))))))
+         package_object_files =
+           (function ppf_dump files targetfile targetname coercion
+             (funct-body bytecomp/bytepackager.ml(208)<ghost>:7515-10118
+               (before bytecomp/bytepackager.ml(209):7566-10118
+                 (let
+                   (members =
+                      (after bytecomp/bytepackager.ml(210):7584-7621
+                        (apply (field 5 (global Misc!)) read_member_info
+                          files)))
+                   (before bytecomp/bytepackager.ml(211):7627-10118
+                     (let
+                       (required_globals =
+                          (after bytecomp/bytepackager.ml(212):7654-8344
+                            (apply (field 21 (global Stdlib__list!))
+                              (function compunit required_globals
+                                (funct-body bytecomp/bytepackager.ml(212):7670-8314
+                                  (before bytecomp/bytepackager.ml(212):7704-8313
+                                    (let (*match* =a (field 2 compunit))
+                                      (if *match*
+                                        (let
+                                          (*match* =a (field 0 *match*)
+                                           cu_required_globals =a
+                                             (field 5 *match*)
+                                           cu_reloc =a (field 3 *match*))
+                                          (before bytecomp/bytepackager.ml(216):7869-8313
+                                            (let
+                                              (remove_required =
+                                                 (function param
+                                                   required_globals
+                                                   (funct-body bytecomp/bytepackager.ml(216)<ghost>:7889-8097
+                                                     (let
+                                                       (rel =a
+                                                          (field 0 param))
+                                                       (before bytecomp/bytepackager.ml(217):7934-8097
+                                                         (switch rel
+                                                          case tag 2:
+                                                           (let
+                                                             (id =a
+                                                                (field 0 rel))
+                                                             (before bytecomp/bytepackager.ml(219):8005-8041
+                                                               (after bytecomp/bytepackager.ml(219):8005-8041
+                                                                 (apply
+                                                                   (field 5
+                                                                    (field 5
+                                                                    (global Ident!)))
+                                                                   id
+                                                                   required_globals))))
+                                                          default:
+                                                           (before bytecomp/bytepackager.ml(221):8081-8097
+                                                             required_globals)))))))
+                                              (before bytecomp/bytepackager.ml(223):8125-8313
+                                                (let
+                                                  (required_globals =
+                                                     (after bytecomp/bytepackager.ml(224):8162-8219
+                                                       (apply
+                                                         (field 21
+                                                           (global Stdlib__list!))
+                                                         remove_required
+                                                         cu_reloc
+                                                         required_globals)))
+                                                  (before bytecomp/bytepackager.ml(226):8247-8313
+                                                    (after bytecomp/bytepackager.ml(226):8247-8313
+                                                      (apply
+                                                        (field 21
+                                                          (global Stdlib__list!))
+                                                        (field 3
+                                                          (field 5
+                                                            (global Ident!)))
+                                                        cu_required_globals
+                                                        required_globals))))))))
+                                        (before bytecomp/bytepackager.ml(214):7771-7787
+                                          required_globals))))))
+                              members (field 0 (field 5 (global Ident!))))))
+                       (before bytecomp/bytepackager.ml(229):8352-10118
+                         (let
+                           (unit_names =
+                              (after bytecomp/bytepackager.ml(230):8373-8410
+                                (apply (field 16 (global Stdlib__list!))
+                                  (function m
+                                    (funct-body bytecomp/bytepackager.ml(230):8382-8402
+                                      (before bytecomp/bytepackager.ml(230):8392-8401
+                                        (field 1 m))))
+                                  members)))
+                           (before bytecomp/bytepackager.ml(231):8416-10118
+                             (let
+                               (mapping =
+                                  (after bytecomp/bytepackager.ml(232):8434-8581
+                                    (apply (field 16 (global Stdlib__list!))
+                                      (function name
+                                        (funct-body bytecomp/bytepackager.ml(233):8449-8564
+                                          (before bytecomp/bytepackager.ml(234):8472-8563
+                                            (makeblock 0
+                                              (after bytecomp/bytepackager.ml(234):8473-8501
+                                                (apply
+                                                  (field 11 (global Ident!))
+                                                  name))
+                                              (after bytecomp/bytepackager.ml(235):8514-8562
+                                                (apply
+                                                  (field 11 (global Ident!))
+                                                  (after bytecomp/bytepackager.ml(235):8537-8562
+                                                    (apply
+                                                      (field 27
+                                                        (global Stdlib!))
+                                                      targetname
+                                                      (after bytecomp/bytepackager.ml(235):8551-8561
+                                                        (apply
+                                                          (field 27
+                                                            (global Stdlib!))
+                                                          "." name))))))))))
+                                      unit_names)))
+                               (before bytecomp/bytepackager.ml(237):8587-10118
+                                 (let
+                                   (oc =
+                                      (after bytecomp/bytepackager.ml(237):8596-8619
+                                        (apply (field 60 (global Stdlib!))
+                                          targetfile)))
+                                   (before bytecomp/bytepackager.ml(238):8625-10118
+                                     (try
+                                       (seq
+                                         (after bytecomp/bytepackager.ml(239):8633-8673
+                                           (apply (field 65 (global Stdlib!))
+                                             oc (field 22 (global Config!))))
+                                         (before bytecomp/bytepackager.ml(240):8679-10076
+                                           (let
+                                             (pos_depl =[int]
+                                                (after bytecomp/bytepackager.ml(240):8694-8704
+                                                  (apply
+                                                    (field 73
+                                                      (global Stdlib!))
+                                                    oc)))
+                                             (before bytecomp/bytepackager.ml(241):8712-10076
+                                               (seq
+                                                 (after bytecomp/bytepackager.ml(241):8712-8734
+                                                   (apply
+                                                     (field 70
+                                                       (global Stdlib!))
+                                                     oc 0))
+                                                 (before bytecomp/bytepackager.ml(242):8740-10076
+                                                   (let
+                                                     (pos_code =[int]
+                                                        (after bytecomp/bytepackager.ml(242):8755-8765
+                                                          (apply
+                                                            (field 73
+                                                              (global Stdlib!))
+                                                            oc)))
+                                                     (before bytecomp/bytepackager.ml(243):8773-10076
+                                                       (let
+                                                         (ofs =[int]
+                                                            (after bytecomp/bytepackager.ml(243):8783-8913
+                                                              (apply
+                                                                rename_append_bytecode_list
+                                                                targetname oc
+                                                                mapping 0a 0
+                                                                targetname
+                                                                (field 0
+                                                                  (global Subst!))
+                                                                members)))
+                                                         (before bytecomp/bytepackager.ml(245):8921-10076
+                                                           (seq
+                                                             (after bytecomp/bytepackager.ml(245):8921-8993
+                                                               (apply
+                                                                 build_global_target
+                                                                 ppf_dump oc
+                                                                 targetname
+                                                                 members
+                                                                 mapping ofs
+                                                                 coercion))
+                                                             (before bytecomp/bytepackager.ml(246):8999-10076
+                                                               (let
+                                                                 (pos_debug =[int]
+                                                                    (after bytecomp/bytepackager.ml(246):9015-9025
+                                                                    (apply
+                                                                    (field 73
+                                                                    (global Stdlib!))
+                                                                    oc)))
+                                                                 (before bytecomp/bytepackager.ml(247):9033-10076
+                                                                   (seq
+                                                                    (if
+                                                                    (&&
+                                                                    (field 0
+                                                                    (field 16
+                                                                    (global Clflags!)))
+                                                                    (!=
+                                                                    (field 0
+                                                                    events)
+                                                                    0a))
+                                                                    (before bytecomp/bytepackager.ml(247):9073-9185
+                                                                    (seq
+                                                                    (after bytecomp/bytepackager.ml(248):9085-9119
+                                                                    (apply
+                                                                    (field 71
+                                                                    (global Stdlib!))
+                                                                    oc
+                                                                    (after bytecomp/bytepackager.ml(248):9101-9119
+                                                                    (apply
+                                                                    (field 8
+                                                                    (global Stdlib__list!))
+                                                                    (field 0
+                                                                    events)))))
+                                                                    (before bytecomp/bytepackager.ml(249):9127-9176
+                                                                    (after bytecomp/bytepackager.ml(249):9127-9176
+                                                                    (apply
+                                                                    (field 71
+                                                                    (global Stdlib!))
+                                                                    oc
+                                                                    (after bytecomp/bytepackager.ml(249):9143-9176
+                                                                    (apply
+                                                                    (field 21
+                                                                    (field 38
+                                                                    (field 3
+                                                                    (field 11
+                                                                    (global Misc!)))))
+                                                                    (field 0
+                                                                    debug_dirs))))))))
+                                                                    0a)
+                                                                    (before bytecomp/bytepackager.ml(251):9191-10076
+                                                                    (let
+                                                                    (pos_final =[int]
+                                                                    (after bytecomp/bytepackager.ml(251):9207-9217
+                                                                    (apply
+                                                                    (field 73
+                                                                    (global Stdlib!))
+                                                                    oc)))
+                                                                    (before bytecomp/bytepackager.ml(252):9225-10076
+                                                                    (let
+                                                                    (imports =
+                                                                    (after bytecomp/bytepackager.ml(253):9245-9361
+                                                                    (apply
+                                                                    (field 35
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    param
+                                                                    (funct-body bytecomp/bytepackager.ml(254):9265-9317
+                                                                    (let
+                                                                    (name =a
+                                                                    (field 0
+                                                                    param))
+                                                                    (before bytecomp/bytepackager.ml(254):9286-9316
+                                                                    (not
+                                                                    (after bytecomp/bytepackager.ml(254):9290-9316
+                                                                    (apply
+                                                                    (field 31
+                                                                    (global Stdlib__list!))
+                                                                    name
+                                                                    unit_names)))))))
+                                                                    (after bytecomp/bytepackager.ml(255):9326-9361
+                                                                    (apply
+                                                                    (field 3
+                                                                    (global Bytelink!))
+                                                                    0a)))))
+                                                                    (before bytecomp/bytepackager.ml(256):9369-10076
+                                                                    (let
+                                                                    (compunit =
+                                                                    (makemutable 0 (*,int,int,*,*,*,*,*,int,int)
+                                                                    targetname
+                                                                    pos_code
+                                                                    (-
+                                                                    pos_debug
+                                                                    pos_code)
+                                                                    (after bytecomp/bytepackager.ml(260):9504-9520
+                                                                    (apply
+                                                                    (field 8
+                                                                    (global Stdlib__list!))
+                                                                    (field 0
+                                                                    relocs)))
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    targetname
+                                                                    (makeblock 0
+                                                                    (after bytecomp/bytepackager.ml(262):9571-9599
+                                                                    (apply
+                                                                    (field 79
+                                                                    (global Env!))
+                                                                    targetname))))
+                                                                    imports)
+                                                                    (after bytecomp/bytepackager.ml(264):9680-9715
+                                                                    (apply
+                                                                    (field 20
+                                                                    (field 5
+                                                                    (global Ident!)))
+                                                                    required_globals))
+                                                                    (field 0
+                                                                    primitives)
+                                                                    (field 0
+                                                                    force_link)
+                                                                    (if
+                                                                    (>
+                                                                    pos_final
+                                                                    pos_debug)
+                                                                    (before bytecomp/bytepackager.ml(266):9803-9812
+                                                                    pos_debug)
+                                                                    (before bytecomp/bytepackager.ml(266):9818-9819
+                                                                    0))
+                                                                    (-
+                                                                    pos_final
+                                                                    pos_debug)))
+                                                                    (before bytecomp/bytepackager.ml(268):9875-10076
+                                                                    (seq
+                                                                    (after bytecomp/bytepackager.ml(268):9875-9996
+                                                                    (apply
+                                                                    (field 4
+                                                                    (global Emitcode!))
+                                                                    targetfile
+                                                                    "bytecode unit"
+                                                                    oc
+                                                                    compunit))
+                                                                    (before bytecomp/bytepackager.ml(271):10002-10076
+                                                                    (seq
+                                                                    (after bytecomp/bytepackager.ml(271):10002-10022
+                                                                    (apply
+                                                                    (field 72
+                                                                    (global Stdlib!))
+                                                                    oc
+                                                                    pos_depl))
+                                                                    (before bytecomp/bytepackager.ml(272):10028-10076
+                                                                    (seq
+                                                                    (after bytecomp/bytepackager.ml(272):10028-10058
+                                                                    (apply
+                                                                    (field 70
+                                                                    (global Stdlib!))
+                                                                    oc
+                                                                    pos_final))
+                                                                    (before bytecomp/bytepackager.ml(273):10064-10076
+                                                                    (after bytecomp/bytepackager.ml(273):10064-10076
+                                                                    (apply
+                                                                    (field 75
+                                                                    (global Stdlib!))
+                                                                    oc))))))))))))))))))))))))))))))
+                                      with x
+                                       (before bytecomp/bytepackager.ml(275):10093-10118
+                                         (seq
+                                           (after bytecomp/bytepackager.ml(275):10093-10105
+                                             (apply
+                                               (field 75 (global Stdlib!))
+                                               oc))
+                                           (before bytecomp/bytepackager.ml(276):10111-10118
+                                             (reraise
+                                               (after bytecomp/bytepackager.ml(276):10117-10118
+                                                 x)))))))))))))))))))
+         package_files =
+           (function ppf_dump initial_env files targetfile
+             (funct-body bytecomp/bytepackager.ml(280)<ghost>:10161-10781
+               (before bytecomp/bytepackager.ml(281):10206-10781
+                 (let
+                   (files =
+                      (after bytecomp/bytepackager.ml(282):10222-10349
+                        (apply (field 16 (global Stdlib__list!))
+                          (function f
+                            (funct-body bytecomp/bytepackager.ml(283):10239-10335
+                              (before bytecomp/bytepackager.ml(284):10257-10334
+                                (try
+                                  (after bytecomp/bytepackager.ml(284):10261-10277
+                                    (apply (field 5 (global Load_path!)) f))
+                                 with exn
+                                  (if (== exn (field 7 (global Stdlib!)))
+                                    (before bytecomp/bytepackager.ml(285):10304-10334
+                                      (raise
+                                        (after bytecomp/bytepackager.ml(285):10309-10334
+                                          (makeblock 0 Error (makeblock 4 f)))))
+                                    (reraise exn))))))
+                          files)))
+                   (before bytecomp/bytepackager.ml(287):10357-10781
+                     (let
+                       (prefix =
+                          (after bytecomp/bytepackager.ml(287):10370-10396
+                            (apply (field 31 (global Misc!)) targetfile)))
+                       (before bytecomp/bytepackager.ml(288):10404-10781
+                         (let
+                           (targetcmi =
+                              (after bytecomp/bytepackager.ml(288):10420-10435
+                                (apply (field 27 (global Stdlib!)) prefix
+                                  ".cmi")))
+                           (before bytecomp/bytepackager.ml(289):10443-10781
+                             (let
+                               (targetname =
+                                  (after bytecomp/bytepackager.ml(289):10460-10509
+                                    (apply
+                                      (field 30
+                                        (field 3 (field 11 (global Misc!))))
+                                      (after bytecomp/bytepackager.ml(289):10483-10509
+                                        (apply
+                                          (field 12
+                                            (global Stdlib__filename!))
+                                          prefix)))))
+                               (before bytecomp/bytepackager.ml(290):10517-10781
+                                 (after bytecomp/bytepackager.ml(290):10517-10781
+                                   (apply (field 3 (global Misc!)) 0a
+                                     (makeblock 0
+                                       (function param
+                                         (funct-body bytecomp/bytepackager.ml(295):10747-10781
+                                           (before bytecomp/bytepackager.ml(295):10758-10780
+                                             (after bytecomp/bytepackager.ml(295):10758-10780
+                                               (apply
+                                                 (field 15 (global Misc!))
+                                                 targetfile))))))
+                                     (function param
+                                       (funct-body bytecomp/bytepackager.ml(290):10534-10725
+                                         (before bytecomp/bytepackager.ml(291):10553-10717
+                                           (let
+                                             (coercion =
+                                                (after bytecomp/bytepackager.ml(292):10578-10638
+                                                  (apply
+                                                    (field 11
+                                                      (global Typemod!))
+                                                    initial_env files
+                                                    targetcmi targetname)))
+                                             (before bytecomp/bytepackager.ml(293):10650-10717
+                                               (after bytecomp/bytepackager.ml(293):10650-10717
+                                                 (apply package_object_files
+                                                   ppf_dump files targetfile
+                                                   targetname coercion))))))))))))))))))))
+         report_error =
+           (function ppf param
+             (funct-body bytecomp/bytepackager.ml(301)<ghost>:10833-11528
+               (switch* param
+                case tag 0:
+                 (let (ident =a (field 1 param) file =a (field 0 param))
+                   (before bytecomp/bytepackager.ml(303):10892-10996
+                     (after bytecomp/bytepackager.ml(303):10892-10996
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [11:
+                           "Forward reference to "
+                           [2: 0a [11: " in file " [15: 0a]]]]
+                          "Forward reference to %s in file %a"]
+                         (after bytecomp/bytepackager.ml(303):10941-10959
+                           (apply (field 14 (global Ident!)) ident))
+                         (field 18 (global Location!)) file))))
+                case tag 1:
+                 (let (ident =a (field 1 param) file =a (field 0 param))
+                   (before bytecomp/bytepackager.ml(306):11043-11141
+                     (after bytecomp/bytepackager.ml(306):11043-11141
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [11: "File " [15: [11: " redefines " [2: 0a 0a]]]]
+                          "File %a redefines %s"]
+                         (field 18 (global Location!)) file
+                         (after bytecomp/bytepackager.ml(308):11123-11141
+                           (apply (field 14 (global Ident!)) ident))))))
+                case tag 2:
+                 (let (file =a (field 0 param))
+                   (before bytecomp/bytepackager.ml(310):11179-11262
+                     (after bytecomp/bytepackager.ml(310):11179-11262
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [15: [11: " is not a bytecode object file" 0a]]
+                          "%a is not a bytecode object file"]
+                         (field 18 (global Location!)) file))))
+                case tag 3:
+                 (let
+                   (id =a (field 2 param)
+                    file =a (field 1 param)
+                    name =a (field 0 param))
+                   (before bytecomp/bytepackager.ml(313):11309-11458
+                     (after bytecomp/bytepackager.ml(313):11309-11458
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [11:
+                           "Wrong file naming: "
+                           [15:
+                            [17:
+                             [0: "@ " 1 0]
+                             [11:
+                              "contains the code for"
+                              [17:
+                               [0: "@ " 1 0]
+                               [2:
+                                0a
+                                [11:
+                                 " when " [2: 0a [11: " was expected" 0a]]]]]]]]]
+                          "Wrong file naming: %a@ contains the code for@ %s when %s was expected"]
+                         (field 18 (global Location!)) file name id))))
+                case tag 4:
+                 (let (file =a (field 0 param))
+                   (before bytecomp/bytepackager.ml(317):11492-11528
+                     (after bytecomp/bytepackager.ml(317):11492-11528
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [11: "File " [2: 0a [11: " not found" 0a]]]
+                          "File %s not found"]
+                         file)))))))
+         *match* =
+           (after bytecomp/bytepackager.ml(320):11541-11685
+             (apply (field 46 (global Location!))
+               (function param
+                 (funct-body bytecomp/bytepackager.ml(321):11576-11685
+                   (let (tag =a (field 0 param))
+                     (if (== tag Error)
+                       (let (err =a (field 1 param))
+                         (before bytecomp/bytepackager.ml(322):11607-11661
+                           (makeblock 0
+                             (after bytecomp/bytepackager.ml(322):11612-11661
+                               (apply (field 45 (global Location!))
+                                 report_error err)))))
+                       (before bytecomp/bytepackager.ml(323):11675-11679 0a)))))))
+         reset =
+           (function param
+             (funct-body bytecomp/bytepackager.ml(326)<ghost>:11697-11775
+               (before bytecomp/bytepackager.ml(327):11704-11775
+                 (seq (setfield_ptr 0 relocs 0a)
+                   (before bytecomp/bytepackager.ml(328):11720-11775
+                     (seq (setfield_ptr 0 events 0a)
+                       (before bytecomp/bytepackager.ml(329):11736-11775
+                         (seq (setfield_ptr 0 primitives 0a)
+                           (before bytecomp/bytepackager.ml(330):11756-11775
+                             (setfield_imm 0 force_link 0a)))))))))))
+        (pseudo _none_(0)<ghost>:-1--1
+          (makeblock 0 package_files Error report_error reset))))))

@@ -1,0 +1,2707 @@
+(setglobal Translprim!
+  (let
+    (Error = (makeblock 248 "Translprim.Error" (caml_fresh_oo_id 0))
+     event_before =
+       (function exp lam
+         (funct-body lambda/translprim.ml(34)<ghost>:1394-1679
+           (before lambda/translprim.ml(34):1404-1679
+             (switch lam
+              case tag 9: (before lambda/translprim.ml(35):1443-1446 lam)
+              default:
+               (before lambda/translprim.ml(37):1456-1679
+                 (if
+                   (&& (field 0 (field 16 (global Clflags!)))
+                     (not (field 0 (field 94 (global Clflags!)))))
+                   (before lambda/translprim.ml(38):1509-1668
+                     (makeblock 18 lam
+                       (makeblock 0 (field 1 exp) 0a 0a (field 4 exp))))
+                   (before lambda/translprim.ml(42):1676-1679 lam)))))))
+     event_after =
+       (function exp lam
+         (funct-body lambda/translprim.ml(44)<ghost>:1697-1944
+           (before lambda/translprim.ml(45):1709-1944
+             (if
+               (&& (field 0 (field 16 (global Clflags!)))
+                 (not (field 0 (field 94 (global Clflags!)))))
+               (before lambda/translprim.ml(46):1762-1933
+                 (makeblock 18 lam
+                   (makeblock 0 (field 1 exp) (makeblock 0 (field 3 exp)) 0a
+                     (field 4 exp))))
+               (before lambda/translprim.ml(50):1941-1944 lam)))))
+     used_primitives =
+       (after lambda/translprim.ml(90):2615-2631
+         (apply (field 0 (global Stdlib__hashtbl!)) 0a 7))
+     add_used_primitive =
+       (function loc env path
+         (funct-body lambda/translprim.ml(91)<ghost>:2655-2951
+           (before lambda/translprim.ml(92):2672-2951
+             (catch
+               (if path
+                 (let (path =a (field 0 path))
+                   (switch* path
+                    case tag 0: (exit 2)
+                    case tag 1:
+                     (before lambda/translprim.ml(94):2728-2939
+                       (let
+                         (path =
+                            (after lambda/translprim.ml(94):2739-2784
+                              (apply (field 29 (global Env!))
+                                (makeblock 0 loc) env path)))
+                         (before lambda/translprim.ml(95):2794-2939
+                           (let
+                             (unit =
+                                (after lambda/translprim.ml(95):2805-2819
+                                  (apply (field 7 (global Path!)) path)))
+                             (before lambda/translprim.ml(96):2829-2939
+                               (if
+                                 (&&
+                                   (after lambda/translprim.ml(96):2832-2849
+                                     (apply (field 20 (global Ident!)) unit))
+                                   (not
+                                     (after lambda/translprim.ml(96):2857-2891
+                                       (apply
+                                         (field 8 (global Stdlib__hashtbl!))
+                                         used_primitives path))))
+                                 (before lambda/translprim.ml(97):2903-2939
+                                   (after lambda/translprim.ml(97):2903-2939
+                                     (apply
+                                       (field 4 (global Stdlib__hashtbl!))
+                                       used_primitives path loc)))
+                                 0a))))))
+                    case tag 2: (exit 2)))
+                 (exit 2))
+              with (2) (before lambda/translprim.ml(98):2949-2951 0a)))))
+     clear_used_primitives =
+       (function param
+         (funct-body lambda/translprim.ml(100)<ghost>:2979-3013
+           (before lambda/translprim.ml(100):2984-3013
+             (after lambda/translprim.ml(100):2984-3013
+               (apply (field 1 (global Stdlib__hashtbl!)) used_primitives)))))
+     get_used_primitives =
+       (function param
+         (funct-body lambda/translprim.ml(101)<ghost>:3038-3108
+           (before lambda/translprim.ml(102):3045-3108
+             (after lambda/translprim.ml(102):3045-3108
+               (apply (field 13 (global Stdlib__hashtbl!))
+                 (function path param acc
+                   (funct-body lambda/translprim.ml(102):3058-3089
+                     (before lambda/translprim.ml(102):3077-3088
+                       (makeblock 0 path acc))))
+                 used_primitives 0a)))))
+     gen_array_kind =
+       (if (field 60 (global Config!))
+         (before lambda/translprim.ml(105):3165-3174 0a)
+         (before lambda/translprim.ml(105):3180-3190 1a))
+     prim_sys_argv =
+       (after lambda/translprim.ml(108):3214-3273
+         (apply (field 0 (global Primitive!)) "caml_sys_argv" 1 1a))
+     primitives_table =
+       (after lambda/translprim.ml(111):3300-15740
+         (apply (field 18 (global Misc!)) 57
+           (makeblock 0 [0: "%identity" [0: 0a 1]]
+             (makeblock 0 [0: "%bytes_to_string" [0: 1a 1]]
+               (makeblock 0 [0: "%bytes_of_string" [0: 2a 1]]
+                 (makeblock 0 [0: "%ignore" [0: 3a 1]]
+                   (makeblock 0 [0: "%revapply" [0: 4a 2]]
+                     (makeblock 0 [0: "%apply" [0: 5a 2]]
+                       (makeblock 0 [0: "%loc_LOC" [4: 3a]]
+                         (makeblock 0 [0: "%loc_FILE" [4: 0a]]
+                           (makeblock 0 [0: "%loc_LINE" [4: 1a]]
+                             (makeblock 0 [0: "%loc_POS" [4: 4a]]
+                               (makeblock 0 [0: "%loc_MODULE" [4: 2a]]
+                                 (makeblock 0 [0: "%field0" [0: [3: 0] 1]]
+                                   (makeblock 0 [0: "%field1" [0: [3: 1] 1]]
+                                     (makeblock 0
+                                       [0: "%setfield0" [0: [4: 0 1a 0a] 2]]
+                                       (makeblock 0
+                                         [0:
+                                          "%makeblock" [0: [2: 0 0a 0a] 1]]
+                                         (makeblock 0
+                                           [0:
+                                            "%makemutable"
+                                            [0: [2: 0 1a 0a] 1]]
+                                           (makeblock 0 [0: "%raise" [3: 0a]]
+                                             (makeblock 0
+                                               [0: "%reraise" [3: 1a]]
+                                               (makeblock 0
+                                                 [0:
+                                                  "%raise_notrace" [3: 2a]]
+                                                 (makeblock 0
+                                                   [0:
+                                                    "%raise_with_backtrace"
+                                                    0a]
+                                                   (makeblock 0
+                                                     [0:
+                                                      "%sequand" [0: 7a 2]]
+                                                     (makeblock 0
+                                                       [0:
+                                                        "%sequor" [0: 8a 2]]
+                                                       (makeblock 0
+                                                         [0:
+                                                          "%boolnot"
+                                                          [0: 9a 1]]
+                                                         (makeblock 0
+                                                           [0:
+                                                            "%big_endian"
+                                                            [0: [58: 0a] 1]]
+                                                           (makeblock 0
+                                                             [0:
+                                                              "%backend_type"
+                                                              [0: [58: 7a] 1]]
+                                                             (makeblock 0
+                                                               [0:
+                                                                "%word_size"
+                                                                [0:
+                                                                 [58: 1a] 1]]
+                                                               (makeblock 0
+                                                                 [0:
+                                                                  "%int_size"
+                                                                  [0:
+                                                                   [58: 2a] 1]]
+                                                                 (makeblock 0
+                                                                   [0:
+                                                                    "%max_wosize"
+                                                                    [0:
+                                                                    [58: 3a]
+                                                                    1]]
+                                                                   (makeblock 0
+                                                                    [0:
+                                                                    "%ostype_unix"
+                                                                    [0:
+                                                                    [58: 4a]
+                                                                    1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%ostype_win32"
+                                                                    [0:
+                                                                    [58: 5a]
+                                                                    1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%ostype_cygwin"
+                                                                    [0:
+                                                                    [58: 6a]
+                                                                    1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%negint"
+                                                                    [0:
+                                                                    10a 1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%succint"
+                                                                    [0:
+                                                                    [14: 1] 1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%predint"
+                                                                    [0:
+                                                                    [14: -1]
+                                                                    1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%addint"
+                                                                    [0:
+                                                                    11a 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%subint"
+                                                                    [0:
+                                                                    12a 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%mulint"
+                                                                    [0:
+                                                                    13a 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%divint"
+                                                                    [0:
+                                                                    [11: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%modint"
+                                                                    [0:
+                                                                    [12: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%andint"
+                                                                    [0:
+                                                                    14a 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%orint"
+                                                                    [0:
+                                                                    15a 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%xorint"
+                                                                    [0:
+                                                                    16a 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%lslint"
+                                                                    [0:
+                                                                    17a 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%lsrint"
+                                                                    [0:
+                                                                    18a 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%asrint"
+                                                                    [0:
+                                                                    19a 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%eq"
+                                                                    [0:
+                                                                    [13: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%noteq"
+                                                                    [0:
+                                                                    [13: 1a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%ltint"
+                                                                    [0:
+                                                                    [13: 2a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%leint"
+                                                                    [0:
+                                                                    [13: 4a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%gtint"
+                                                                    [0:
+                                                                    [13: 3a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%geint"
+                                                                    [0:
+                                                                    [13: 5a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%incr"
+                                                                    [0:
+                                                                    [15: 1] 1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%decr"
+                                                                    [0:
+                                                                    [15: -1]
+                                                                    1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%intoffloat"
+                                                                    [0:
+                                                                    20a 1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%floatofint"
+                                                                    [0:
+                                                                    21a 1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%negfloat"
+                                                                    [0:
+                                                                    22a 1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%absfloat"
+                                                                    [0:
+                                                                    23a 1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%addfloat"
+                                                                    [0:
+                                                                    24a 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%subfloat"
+                                                                    [0:
+                                                                    25a 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%mulfloat"
+                                                                    [0:
+                                                                    26a 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%divfloat"
+                                                                    [0:
+                                                                    27a 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%eqfloat"
+                                                                    [0:
+                                                                    [16: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%noteqfloat"
+                                                                    [0:
+                                                                    [16: 1a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%ltfloat"
+                                                                    [0:
+                                                                    [16: 2a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%lefloat"
+                                                                    [0:
+                                                                    [16: 6a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%gtfloat"
+                                                                    [0:
+                                                                    [16: 4a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%gefloat"
+                                                                    [0:
+                                                                    [16: 8a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%string_length"
+                                                                    [0:
+                                                                    28a 1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%string_safe_get"
+                                                                    [0:
+                                                                    30a 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%string_safe_set"
+                                                                    [0:
+                                                                    35a 3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%string_unsafe_get"
+                                                                    [0:
+                                                                    29a 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%string_unsafe_set"
+                                                                    [0:
+                                                                    33a 3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%bytes_length"
+                                                                    [0:
+                                                                    31a 1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%bytes_safe_get"
+                                                                    [0:
+                                                                    34a 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%bytes_safe_set"
+                                                                    [0:
+                                                                    35a 3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%bytes_unsafe_get"
+                                                                    [0:
+                                                                    32a 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%bytes_unsafe_set"
+                                                                    [0:
+                                                                    33a 3]]
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "%array_length"
+                                                                    (makeblock 0 (*,int)
+                                                                    (makeblock 19
+                                                                    gen_array_kind)
+                                                                    1))
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "%array_safe_get"
+                                                                    (makeblock 0 (*,int)
+                                                                    (makeblock 22
+                                                                    gen_array_kind)
+                                                                    2))
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "%array_safe_set"
+                                                                    (makeblock 0 (*,int)
+                                                                    (makeblock 23
+                                                                    gen_array_kind)
+                                                                    3))
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "%array_unsafe_get"
+                                                                    (makeblock 0 (*,int)
+                                                                    (makeblock 20
+                                                                    gen_array_kind)
+                                                                    2))
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "%array_unsafe_set"
+                                                                    (makeblock 0 (*,int)
+                                                                    (makeblock 21
+                                                                    gen_array_kind)
+                                                                    3))
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "%obj_size"
+                                                                    (makeblock 0 (*,int)
+                                                                    (makeblock 19
+                                                                    gen_array_kind)
+                                                                    1))
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "%obj_field"
+                                                                    (makeblock 0 (*,int)
+                                                                    (makeblock 20
+                                                                    gen_array_kind)
+                                                                    2))
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "%obj_set_field"
+                                                                    (makeblock 0 (*,int)
+                                                                    (makeblock 21
+                                                                    gen_array_kind)
+                                                                    3))
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%floatarray_length"
+                                                                    [0:
+                                                                    [19: 3a]
+                                                                    1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%floatarray_safe_get"
+                                                                    [0:
+                                                                    [22: 3a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%floatarray_safe_set"
+                                                                    [0:
+                                                                    [23: 3a]
+                                                                    3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%floatarray_unsafe_get"
+                                                                    [0:
+                                                                    [20: 3a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%floatarray_unsafe_set"
+                                                                    [0:
+                                                                    [21: 3a]
+                                                                    3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%obj_is_int"
+                                                                    [0:
+                                                                    36a 1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%lazy_force"
+                                                                    1a]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%nativeint_of_int"
+                                                                    [0:
+                                                                    [24: 0a]
+                                                                    1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%nativeint_to_int"
+                                                                    [0:
+                                                                    [25: 0a]
+                                                                    1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%nativeint_neg"
+                                                                    [0:
+                                                                    [27: 0a]
+                                                                    1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%nativeint_add"
+                                                                    [0:
+                                                                    [28: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%nativeint_sub"
+                                                                    [0:
+                                                                    [29: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%nativeint_mul"
+                                                                    [0:
+                                                                    [30: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%nativeint_div"
+                                                                    [0:
+                                                                    [31:
+                                                                    0a 0a] 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%nativeint_mod"
+                                                                    [0:
+                                                                    [32:
+                                                                    0a 0a] 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%nativeint_and"
+                                                                    [0:
+                                                                    [33: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%nativeint_or"
+                                                                    [0:
+                                                                    [34: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%nativeint_xor"
+                                                                    [0:
+                                                                    [35: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%nativeint_lsl"
+                                                                    [0:
+                                                                    [36: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%nativeint_lsr"
+                                                                    [0:
+                                                                    [37: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%nativeint_asr"
+                                                                    [0:
+                                                                    [38: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int32_of_int"
+                                                                    [0:
+                                                                    [24: 1a]
+                                                                    1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int32_to_int"
+                                                                    [0:
+                                                                    [25: 1a]
+                                                                    1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int32_neg"
+                                                                    [0:
+                                                                    [27: 1a]
+                                                                    1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int32_add"
+                                                                    [0:
+                                                                    [28: 1a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int32_sub"
+                                                                    [0:
+                                                                    [29: 1a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int32_mul"
+                                                                    [0:
+                                                                    [30: 1a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int32_div"
+                                                                    [0:
+                                                                    [31:
+                                                                    1a 0a] 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int32_mod"
+                                                                    [0:
+                                                                    [32:
+                                                                    1a 0a] 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int32_and"
+                                                                    [0:
+                                                                    [33: 1a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int32_or"
+                                                                    [0:
+                                                                    [34: 1a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int32_xor"
+                                                                    [0:
+                                                                    [35: 1a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int32_lsl"
+                                                                    [0:
+                                                                    [36: 1a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int32_lsr"
+                                                                    [0:
+                                                                    [37: 1a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int32_asr"
+                                                                    [0:
+                                                                    [38: 1a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int64_of_int"
+                                                                    [0:
+                                                                    [24: 2a]
+                                                                    1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int64_to_int"
+                                                                    [0:
+                                                                    [25: 2a]
+                                                                    1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int64_neg"
+                                                                    [0:
+                                                                    [27: 2a]
+                                                                    1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int64_add"
+                                                                    [0:
+                                                                    [28: 2a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int64_sub"
+                                                                    [0:
+                                                                    [29: 2a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int64_mul"
+                                                                    [0:
+                                                                    [30: 2a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int64_div"
+                                                                    [0:
+                                                                    [31:
+                                                                    2a 0a] 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int64_mod"
+                                                                    [0:
+                                                                    [32:
+                                                                    2a 0a] 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int64_and"
+                                                                    [0:
+                                                                    [33: 2a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int64_or"
+                                                                    [0:
+                                                                    [34: 2a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int64_xor"
+                                                                    [0:
+                                                                    [35: 2a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int64_lsl"
+                                                                    [0:
+                                                                    [36: 2a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int64_lsr"
+                                                                    [0:
+                                                                    [37: 2a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int64_asr"
+                                                                    [0:
+                                                                    [38: 2a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%nativeint_of_int32"
+                                                                    [0:
+                                                                    [26:
+                                                                    1a 0a] 1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%nativeint_to_int32"
+                                                                    [0:
+                                                                    [26:
+                                                                    0a 1a] 1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int64_of_int32"
+                                                                    [0:
+                                                                    [26:
+                                                                    1a 2a] 1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int64_to_int32"
+                                                                    [0:
+                                                                    [26:
+                                                                    2a 1a] 1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int64_of_nativeint"
+                                                                    [0:
+                                                                    [26:
+                                                                    0a 2a] 1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int64_to_nativeint"
+                                                                    [0:
+                                                                    [26:
+                                                                    2a 0a] 1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_ba_ref_1"
+                                                                    [0:
+                                                                    [40:
+                                                                    0a 1 0a
+                                                                    0a] 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_ba_ref_2"
+                                                                    [0:
+                                                                    [40:
+                                                                    0a 2 0a
+                                                                    0a] 3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_ba_ref_3"
+                                                                    [0:
+                                                                    [40:
+                                                                    0a 3 0a
+                                                                    0a] 4]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_ba_set_1"
+                                                                    [0:
+                                                                    [41:
+                                                                    0a 1 0a
+                                                                    0a] 3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_ba_set_2"
+                                                                    [0:
+                                                                    [41:
+                                                                    0a 2 0a
+                                                                    0a] 4]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_ba_set_3"
+                                                                    [0:
+                                                                    [41:
+                                                                    0a 3 0a
+                                                                    0a] 5]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_ba_unsafe_ref_1"
+                                                                    [0:
+                                                                    [40:
+                                                                    1a 1 0a
+                                                                    0a] 2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_ba_unsafe_ref_2"
+                                                                    [0:
+                                                                    [40:
+                                                                    1a 2 0a
+                                                                    0a] 3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_ba_unsafe_ref_3"
+                                                                    [0:
+                                                                    [40:
+                                                                    1a 3 0a
+                                                                    0a] 4]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_ba_unsafe_set_1"
+                                                                    [0:
+                                                                    [41:
+                                                                    1a 1 0a
+                                                                    0a] 3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_ba_unsafe_set_2"
+                                                                    [0:
+                                                                    [41:
+                                                                    1a 2 0a
+                                                                    0a] 4]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_ba_unsafe_set_3"
+                                                                    [0:
+                                                                    [41:
+                                                                    1a 3 0a
+                                                                    0a] 5]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_ba_dim_1"
+                                                                    [0:
+                                                                    [42: 1] 1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_ba_dim_2"
+                                                                    [0:
+                                                                    [42: 2] 1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_ba_dim_3"
+                                                                    [0:
+                                                                    [42: 3] 1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_string_get16"
+                                                                    [0:
+                                                                    [43: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_string_get16u"
+                                                                    [0:
+                                                                    [43: 1a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_string_get32"
+                                                                    [0:
+                                                                    [44: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_string_get32u"
+                                                                    [0:
+                                                                    [44: 1a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_string_get64"
+                                                                    [0:
+                                                                    [45: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_string_get64u"
+                                                                    [0:
+                                                                    [45: 1a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_string_set16"
+                                                                    [0:
+                                                                    [49: 0a]
+                                                                    3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_string_set16u"
+                                                                    [0:
+                                                                    [49: 1a]
+                                                                    3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_string_set32"
+                                                                    [0:
+                                                                    [50: 0a]
+                                                                    3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_string_set32u"
+                                                                    [0:
+                                                                    [50: 1a]
+                                                                    3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_string_set64"
+                                                                    [0:
+                                                                    [51: 0a]
+                                                                    3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_string_set64u"
+                                                                    [0:
+                                                                    [51: 1a]
+                                                                    3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bytes_get16"
+                                                                    [0:
+                                                                    [46: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bytes_get16u"
+                                                                    [0:
+                                                                    [46: 1a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bytes_get32"
+                                                                    [0:
+                                                                    [47: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bytes_get32u"
+                                                                    [0:
+                                                                    [47: 1a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bytes_get64"
+                                                                    [0:
+                                                                    [48: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bytes_get64u"
+                                                                    [0:
+                                                                    [48: 1a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bytes_set16"
+                                                                    [0:
+                                                                    [49: 0a]
+                                                                    3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bytes_set16u"
+                                                                    [0:
+                                                                    [49: 1a]
+                                                                    3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bytes_set32"
+                                                                    [0:
+                                                                    [50: 0a]
+                                                                    3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bytes_set32u"
+                                                                    [0:
+                                                                    [50: 1a]
+                                                                    3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bytes_set64"
+                                                                    [0:
+                                                                    [51: 0a]
+                                                                    3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bytes_set64u"
+                                                                    [0:
+                                                                    [51: 1a]
+                                                                    3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bigstring_get16"
+                                                                    [0:
+                                                                    [52: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bigstring_get16u"
+                                                                    [0:
+                                                                    [52: 1a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bigstring_get32"
+                                                                    [0:
+                                                                    [53: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bigstring_get32u"
+                                                                    [0:
+                                                                    [53: 1a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bigstring_get64"
+                                                                    [0:
+                                                                    [54: 0a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bigstring_get64u"
+                                                                    [0:
+                                                                    [54: 1a]
+                                                                    2]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bigstring_set16"
+                                                                    [0:
+                                                                    [55: 0a]
+                                                                    3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bigstring_set16u"
+                                                                    [0:
+                                                                    [55: 1a]
+                                                                    3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bigstring_set32"
+                                                                    [0:
+                                                                    [56: 0a]
+                                                                    3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bigstring_set32u"
+                                                                    [0:
+                                                                    [56: 1a]
+                                                                    3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bigstring_set64"
+                                                                    [0:
+                                                                    [57: 0a]
+                                                                    3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%caml_bigstring_set64u"
+                                                                    [0:
+                                                                    [57: 1a]
+                                                                    3]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%bswap16"
+                                                                    [0:
+                                                                    38a 1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%bswap_int32"
+                                                                    [0:
+                                                                    [59: 1a]
+                                                                    1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%bswap_int64"
+                                                                    [0:
+                                                                    [59: 2a]
+                                                                    1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%bswap_native"
+                                                                    [0:
+                                                                    [59: 0a]
+                                                                    1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%int_as_pointer"
+                                                                    [0:
+                                                                    39a 1]]
+                                                                    (makeblock 0
+                                                                    [0:
+                                                                    "%opaque"
+                                                                    [0:
+                                                                    40a 1]]
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "%sys_argv"
+                                                                    (makeblock 1
+                                                                    prim_sys_argv))
+                                                                    [0:
+                                                                    [0:
+                                                                    "%send"
+                                                                    2a]
+                                                                    [0:
+                                                                    [0:
+                                                                    "%sendself"
+                                                                    3a]
+                                                                    [0:
+                                                                    [0:
+                                                                    "%sendcache"
+                                                                    4a]
+                                                                    [0:
+                                                                    [0:
+                                                                    "%equal"
+                                                                    [2:
+                                                                    0a 0a]]
+                                                                    [0:
+                                                                    [0:
+                                                                    "%notequal"
+                                                                    [2:
+                                                                    1a 0a]]
+                                                                    [0:
+                                                                    [0:
+                                                                    "%lessequal"
+                                                                    [2:
+                                                                    2a 0a]]
+                                                                    [0:
+                                                                    [0:
+                                                                    "%lessthan"
+                                                                    [2:
+                                                                    3a 0a]]
+                                                                    [0:
+                                                                    [0:
+                                                                    "%greaterequal"
+                                                                    [2:
+                                                                    4a 0a]]
+                                                                    [0:
+                                                                    [0:
+                                                                    "%greaterthan"
+                                                                    [2:
+                                                                    5a 0a]]
+                                                                    [0:
+                                                                    [0:
+                                                                    "%compare"
+                                                                    [2:
+                                                                    6a 0a]]
+                                                                    0a]]]]]]]]]]))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+     lookup_primitive =
+       (function loc p
+         (funct-body lambda/translprim.ml(361)<ghost>:15764-16022
+           (before lambda/translprim.ml(362):15774-16022
+             (catch
+               (try
+                 (exit 3
+                   (after lambda/translprim.ml(362):15780-15821
+                     (apply (field 5 (global Stdlib__hashtbl!))
+                       primitives_table (field 0 p))))
+                with exn
+                 (if (== exn (field 7 (global Stdlib!)))
+                   (before lambda/translprim.ml(365):15877-16022
+                     (seq
+                       (if
+                         (&& (> (string.length (field 0 p)) 0)
+                           (==
+                             (after lambda/translprim.ml(365):15913-15928
+                               (string.get (field 0 p) 0))
+                             '%'))
+                         (before lambda/translprim.ml(366):15948-16004
+                           (raise
+                             (after lambda/translprim.ml(366):15953-16004
+                               (makeblock 0 Error loc
+                                 (makeblock 0 (field 0 p))))))
+                         0a)
+                       (before lambda/translprim.ml(367):16012-16022
+                         (makeblock 1 p))))
+                   (reraise exn)))
+              with (3 prim)
+               (before lambda/translprim.ml(363):15839-15843 prim)))))
+     lookup_primitive_and_mark_used =
+       (function loc p env path
+         (funct-body lambda/translprim.ml(369)<ghost>:16059-16180
+           (before lambda/translprim.ml(370):16078-16180
+             (let
+               (e =
+                  (after lambda/translprim.ml(370):16084-16106
+                    (apply lookup_primitive loc p)))
+               (catch
+                 (switch e
+                  case tag 1:
+                   (before lambda/translprim.ml(371):16135-16169
+                     (seq
+                       (after lambda/translprim.ml(371):16135-16166
+                         (apply add_used_primitive loc env path))
+                       (before lambda/translprim.ml(371):16168-16169 e)))
+                  default: (exit 5))
+                with (5)
+                 (let (x =a e)
+                   (before lambda/translprim.ml(372):16179-16180 x)))))))
+     simplify_constant_constructor =
+       (function param
+         (funct-body lambda/translprim.ml(374):16218-16387
+           (switch* param
+            case int 0: (before lambda/translprim.ml(375):16240-16244 1a)
+            case int 1: (before lambda/translprim.ml(376):16262-16266 1a)
+            case int 2: (before lambda/translprim.ml(377):16285-16290 0a)
+            case int 3: (before lambda/translprim.ml(378):16308-16313 0a)
+            case int 4: (before lambda/translprim.ml(379):16335-16340 0a)
+            case int 5: (before lambda/translprim.ml(380):16361-16366 0a)
+            case int 6: (before lambda/translprim.ml(381):16382-16387 0a))))
+     glb_array_type =
+       (function t1 t2
+         (funct-body lambda/translprim.ml(395)<ghost>:16816-17092
+           (before lambda/translprim.ml(396):16826-17092
+             (let (*match* = t1 *match* = t2)
+               (catch
+                 (catch
+                   (catch
+                     (catch
+                       (catch
+                         (switch* *match*
+                          case int 0: (let (x =a *match*) (exit 7 x))
+                          case int 1: (exit 13)
+                          case int 2:
+                           (if (>= *match* 3) (exit 11)
+                             (switch* *match*
+                              case int 0: (exit 13)
+                              case int 1: (exit 11)
+                              case int 2:
+                               (before lambda/translprim.ml(402):17039-17048
+                                 2a)))
+                          case int 3:
+                           (if *match*
+                             (if (>= *match* 3)
+                               (before lambda/translprim.ml(403):17081-17092
+                                 3a)
+                               (exit 6))
+                             (exit 13)))
+                        with (13)
+                         (if *match* (exit 11)
+                           (let (x =a *match*) (exit 7 x))))
+                      with (11)
+                       (if (>= *match* 3) (exit 6)
+                         (if (>= *match* 2) (let (x =a *match*) (exit 8 x))
+                           (let (x =a *match*) (exit 8 x)))))
+                    with (6)
+                     (before lambda/translprim.ml(398):16931-16933 t1))
+                  with (7 x)
+                   (before lambda/translprim.ml(400):16970-16971 x))
+                with (8 x) (before lambda/translprim.ml(401):17009-17010 x))))))
+     specialize_primitive =
+       (function env ty has_constant_constructor prim
+         (funct-body lambda/translprim.ml(407)<ghost>:17182-20922
+           (before lambda/translprim.ml(408):17224-20922
+             (let
+               (param_tys =
+                  (let
+                    (*match* =
+                       (after lambda/translprim.ml(409):17250-17273
+                         (apply (field 0 (global Typeopt!)) env ty)))
+                    (if *match*
+                      (let
+                        (*match* =a (field 0 *match*)
+                         rhs =a (field 1 *match*)
+                         p1 =a (field 0 *match*))
+                        (before lambda/translprim.ml(412):17326-17414
+                          (let
+                            (*match* =
+                               (after lambda/translprim.ml(412):17332-17356
+                                 (apply (field 0 (global Typeopt!)) env rhs)))
+                            (if *match*
+                              (let
+                                (*match* =a (field 0 *match*)
+                                 p2 =a (field 0 *match*))
+                                (before lambda/translprim.ml(414):17407-17414
+                                  (makeblock 0 p1 (makeblock 0 p2 0a))))
+                              (before lambda/translprim.ml(413):17378-17382
+                                (makeblock 0 p1 0a))))))
+                      (before lambda/translprim.ml(410):17293-17295 0a))))
+               (before lambda/translprim.ml(416):17422-20922
+                 (let (*match* = prim *match* = param_tys)
+                   (catch
+                     (switch *match*
+                      case tag 0:
+                       (let (*match* =a (field 0 *match*))
+                         (switch *match*
+                          case tag 2:
+                           (let (*match* =a (field 2 *match*))
+                             (if *match* (exit 23)
+                               (let
+                                 (fields =a *match*
+                                  arity =a (field 1 *match*)
+                                  mut =a (field 1 *match*)
+                                  tag =a (field 0 *match*))
+                                 (before lambda/translprim.ml(461):19563-19802
+                                   (let
+                                     (shape =
+                                        (after lambda/translprim.ml(462):19587-19627
+                                          (apply
+                                            (field 16 (global Stdlib__list!))
+                                            (after lambda/translprim.ml(462):19596-19620
+                                              (apply
+                                                (field 8 (global Typeopt!))
+                                                env))
+                                            fields)))
+                                     (before lambda/translprim.ml(463):19637-19794
+                                       (let
+                                         (useful =
+                                            (after lambda/translprim.ml(463):19650-19695
+                                              (apply
+                                                (field 28
+                                                  (global Stdlib__list!))
+                                                (function knd
+                                                  (funct-body lambda/translprim.ml(463):19662-19689
+                                                    (before lambda/translprim.ml(463):19674-19688
+                                                      (!= knd 0a))))
+                                                shape)))
+                                         (before lambda/translprim.ml(464):19705-19794
+                                           (if useful
+                                             (before lambda/translprim.ml(464):19720-19778
+                                               (makeblock 0
+                                                 (makeblock 0 (*,int)
+                                                   (makeblock 2 (int,*,*) tag
+                                                     mut (makeblock 0 shape))
+                                                   arity)))
+                                             (before lambda/translprim.ml(465):19790-19794
+                                               0a))))))))))
+                          case tag 4:
+                           (let (*match* =a (field 1 *match*))
+                             (if *match*
+                               (if *match*
+                                 (let (*match* =a (field 1 *match*))
+                                   (if *match*
+                                     (let (*match* =a (field 1 *match*))
+                                       (if *match* (exit 23)
+                                         (let
+                                           (p2 =a (field 0 *match*)
+                                            arity =a (field 1 *match*)
+                                            init =a (field 2 *match*)
+                                            n =a (field 0 *match*))
+                                           (before lambda/translprim.ml(417):17512-17669
+                                             (let
+                                               (*match* =
+                                                  (after lambda/translprim.ml(418):17530-17555
+                                                    (apply
+                                                      (field 2
+                                                        (global Typeopt!))
+                                                      env p2)))
+                                               (if *match*
+                                                 (before lambda/translprim.ml(419):17580-17584
+                                                   0a)
+                                                 (before lambda/translprim.ml(420):17606-17661
+                                                   (makeblock 0
+                                                     (makeblock 0 (*,int)
+                                                       (makeblock 4 (int,*,*)
+                                                         n 0a init)
+                                                       arity)))))))))
+                                     (exit 23)))
+                                 (exit 23))
+                               (exit 23)))
+                          case tag 19:
+                           (if *match*
+                             (let (*match* =a (field 1 *match*))
+                               (if *match* (exit 23)
+                                 (let
+                                   (p =a (field 0 *match*)
+                                    arity =a (field 1 *match*)
+                                    t =a (field 0 *match*))
+                                   (before lambda/translprim.ml(422):17716-17891
+                                     (let
+                                       (array_type =
+                                          (after lambda/translprim.ml(423):17745-17785
+                                            (apply glb_array_type t
+                                              (after lambda/translprim.ml(423):17762-17785
+                                                (apply
+                                                  (field 4 (global Typeopt!))
+                                                  env p)))))
+                                       (before lambda/translprim.ml(424):17795-17883
+                                         (if (== t array_type)
+                                           (before lambda/translprim.ml(424):17818-17822
+                                             0a)
+                                           (before lambda/translprim.ml(425):17834-17883
+                                             (makeblock 0
+                                               (makeblock 0 (*,int)
+                                                 (makeblock 19 array_type)
+                                                 arity))))))))))
+                             (exit 23))
+                          case tag 20:
+                           (if *match*
+                             (let
+                               (p1 =a (field 0 *match*)
+                                arity =a (field 1 *match*)
+                                t =a (field 0 *match*))
+                               (before lambda/translprim.ml(427):17940-18114
+                                 (let
+                                   (array_type =
+                                      (after lambda/translprim.ml(428):17969-18010
+                                        (apply glb_array_type t
+                                          (after lambda/translprim.ml(428):17986-18010
+                                            (apply
+                                              (field 4 (global Typeopt!)) env
+                                              p1)))))
+                                   (before lambda/translprim.ml(429):18020-18106
+                                     (if (== t array_type)
+                                       (before lambda/translprim.ml(429):18043-18047
+                                         0a)
+                                       (before lambda/translprim.ml(430):18059-18106
+                                         (makeblock 0
+                                           (makeblock 0 (*,int)
+                                             (makeblock 20 array_type) arity))))))))
+                             (exit 23))
+                          case tag 21:
+                           (if *match*
+                             (let
+                               (p1 =a (field 0 *match*)
+                                arity =a (field 1 *match*)
+                                t =a (field 0 *match*))
+                               (before lambda/translprim.ml(432):18163-18337
+                                 (let
+                                   (array_type =
+                                      (after lambda/translprim.ml(433):18192-18233
+                                        (apply glb_array_type t
+                                          (after lambda/translprim.ml(433):18209-18233
+                                            (apply
+                                              (field 4 (global Typeopt!)) env
+                                              p1)))))
+                                   (before lambda/translprim.ml(434):18243-18329
+                                     (if (== t array_type)
+                                       (before lambda/translprim.ml(434):18266-18270
+                                         0a)
+                                       (before lambda/translprim.ml(435):18282-18329
+                                         (makeblock 0
+                                           (makeblock 0 (*,int)
+                                             (makeblock 21 array_type) arity))))))))
+                             (exit 23))
+                          case tag 22:
+                           (if *match*
+                             (let
+                               (p1 =a (field 0 *match*)
+                                arity =a (field 1 *match*)
+                                t =a (field 0 *match*))
+                               (before lambda/translprim.ml(437):18386-18560
+                                 (let
+                                   (array_type =
+                                      (after lambda/translprim.ml(438):18415-18456
+                                        (apply glb_array_type t
+                                          (after lambda/translprim.ml(438):18432-18456
+                                            (apply
+                                              (field 4 (global Typeopt!)) env
+                                              p1)))))
+                                   (before lambda/translprim.ml(439):18466-18552
+                                     (if (== t array_type)
+                                       (before lambda/translprim.ml(439):18489-18493
+                                         0a)
+                                       (before lambda/translprim.ml(440):18505-18552
+                                         (makeblock 0
+                                           (makeblock 0 (*,int)
+                                             (makeblock 22 array_type) arity))))))))
+                             (exit 23))
+                          case tag 23:
+                           (if *match*
+                             (let
+                               (p1 =a (field 0 *match*)
+                                arity =a (field 1 *match*)
+                                t =a (field 0 *match*))
+                               (before lambda/translprim.ml(442):18609-18783
+                                 (let
+                                   (array_type =
+                                      (after lambda/translprim.ml(443):18638-18679
+                                        (apply glb_array_type t
+                                          (after lambda/translprim.ml(443):18655-18679
+                                            (apply
+                                              (field 4 (global Typeopt!)) env
+                                              p1)))))
+                                   (before lambda/translprim.ml(444):18689-18775
+                                     (if (== t array_type)
+                                       (before lambda/translprim.ml(444):18712-18716
+                                         0a)
+                                       (before lambda/translprim.ml(445):18728-18775
+                                         (makeblock 0
+                                           (makeblock 0 (*,int)
+                                             (makeblock 23 array_type) arity))))))))
+                             (exit 23))
+                          case tag 40:
+                           (let (*match* =a (field 2 *match*))
+                             (if *match* (exit 23)
+                               (let (*match* =a (field 3 *match*))
+                                 (if *match* (exit 23)
+                                   (if *match*
+                                     (let
+                                       (p1 =a (field 0 *match*)
+                                        arity =a (field 1 *match*)
+                                        n =a (field 1 *match*)
+                                        unsafe =a (field 0 *match*))
+                                       (before lambda/translprim.ml(448):18916-19142
+                                         (let
+                                           (*match* =
+                                              (after lambda/translprim.ml(449):18941-18977
+                                                (apply
+                                                  (field 7 (global Typeopt!))
+                                                  env p1))
+                                            l =a (field 1 *match*)
+                                            k =a (field 0 *match*))
+                                           (before lambda/translprim.ml(450):18987-19134
+                                             (let (*match* = k *match* = l)
+                                               (catch
+                                                 (if *match* (exit 15)
+                                                   (if *match* (exit 15)
+                                                     (before lambda/translprim.ml(451):19058-19062
+                                                       0a)))
+                                                with (15)
+                                                 (before lambda/translprim.ml(452):19079-19134
+                                                   (makeblock 0
+                                                     (makeblock 0 (*,int)
+                                                       (makeblock 40 (*,int,*,*)
+                                                         unsafe n k l)
+                                                       arity)))))))))
+                                     (exit 23))))))
+                          case tag 41:
+                           (let (*match* =a (field 2 *match*))
+                             (if *match* (exit 23)
+                               (let (*match* =a (field 3 *match*))
+                                 (if *match* (exit 23)
+                                   (if *match*
+                                     (let
+                                       (p1 =a (field 0 *match*)
+                                        arity =a (field 1 *match*)
+                                        n =a (field 1 *match*)
+                                        unsafe =a (field 0 *match*))
+                                       (before lambda/translprim.ml(455):19275-19501
+                                         (let
+                                           (*match* =
+                                              (after lambda/translprim.ml(456):19300-19336
+                                                (apply
+                                                  (field 7 (global Typeopt!))
+                                                  env p1))
+                                            l =a (field 1 *match*)
+                                            k =a (field 0 *match*))
+                                           (before lambda/translprim.ml(457):19346-19493
+                                             (let (*match* = k *match* = l)
+                                               (catch
+                                                 (if *match* (exit 19)
+                                                   (if *match* (exit 19)
+                                                     (before lambda/translprim.ml(458):19417-19421
+                                                       0a)))
+                                                with (19)
+                                                 (before lambda/translprim.ml(459):19438-19493
+                                                   (makeblock 0
+                                                     (makeblock 0 (*,int)
+                                                       (makeblock 41 (*,int,*,*)
+                                                         unsafe n k l)
+                                                       arity)))))))))
+                                     (exit 23))))))
+                          default: (exit 23)))
+                      case tag 2:
+                       (let (*match* =a (field 1 *match*))
+                         (if *match* (exit 23)
+                           (if *match*
+                             (let
+                               (p1 =a (field 0 *match*)
+                                comp =a (field 0 *match*))
+                               (before lambda/translprim.ml(468):19857-20908
+                                 (if
+                                   (&& has_constant_constructor
+                                     (after lambda/translprim.ml(469):19897-19931
+                                       (apply simplify_constant_constructor
+                                         comp)))
+                                   (before lambda/translprim.ml(469):19938-19995
+                                     (makeblock 0 (makeblock 2 comp 1a)))
+                                   (before lambda/translprim.ml(471):20001-20908
+                                     (if
+                                       (||
+                                         (after lambda/translprim.ml(471):20005-20040
+                                           (apply (field 1 (global Typeopt!))
+                                             env p1
+                                             (field 17 (global Predef!))))
+                                         (||
+                                           (after lambda/translprim.ml(472):20052-20088
+                                             (apply
+                                               (field 1 (global Typeopt!))
+                                               env p1
+                                               (field 18 (global Predef!))))
+                                           (==
+                                             (after lambda/translprim.ml(473):20101-20126
+                                               (apply
+                                                 (field 2 (global Typeopt!))
+                                                 env p1))
+                                             0a)))
+                                       (before lambda/translprim.ml(473):20146-20203
+                                         (makeblock 0 (makeblock 2 comp 1a)))
+                                       (before lambda/translprim.ml(475):20209-20908
+                                         (if
+                                           (after lambda/translprim.ml(475):20212-20249
+                                             (apply
+                                               (field 1 (global Typeopt!))
+                                               env p1
+                                               (field 21 (global Predef!))))
+                                           (before lambda/translprim.ml(475):20255-20314
+                                             (makeblock 0
+                                               (makeblock 2 comp 2a)))
+                                           (before lambda/translprim.ml(477):20320-20908
+                                             (if
+                                               (after lambda/translprim.ml(477):20323-20361
+                                                 (apply
+                                                   (field 1
+                                                     (global Typeopt!))
+                                                   env p1
+                                                   (field 19
+                                                     (global Predef!))))
+                                               (before lambda/translprim.ml(477):20367-20427
+                                                 (makeblock 0
+                                                   (makeblock 2 comp 3a)))
+                                               (before lambda/translprim.ml(479):20433-20908
+                                                 (if
+                                                   (after lambda/translprim.ml(479):20436-20473
+                                                     (apply
+                                                       (field 1
+                                                         (global Typeopt!))
+                                                       env p1
+                                                       (field 20
+                                                         (global Predef!))))
+                                                   (before lambda/translprim.ml(479):20479-20537
+                                                     (makeblock 0
+                                                       (makeblock 2 comp 4a)))
+                                                   (before lambda/translprim.ml(481):20543-20908
+                                                     (if
+                                                       (after lambda/translprim.ml(481):20546-20587
+                                                         (apply
+                                                           (field 1
+                                                             (global Typeopt!))
+                                                           env p1
+                                                           (field 28
+                                                             (global Predef!))))
+                                                       (before lambda/translprim.ml(481):20593-20656
+                                                         (makeblock 0
+                                                           (makeblock 2 comp
+                                                             5a)))
+                                                       (before lambda/translprim.ml(483):20662-20908
+                                                         (if
+                                                           (after lambda/translprim.ml(483):20665-20702
+                                                             (apply
+                                                               (field 1
+                                                                 (global Typeopt!))
+                                                               env p1
+                                                               (field 29
+                                                                 (global Predef!))))
+                                                           (before lambda/translprim.ml(483):20708-20767
+                                                             (makeblock 0
+                                                               (makeblock 2
+                                                                 comp 6a)))
+                                                           (before lambda/translprim.ml(485):20773-20908
+                                                             (if
+                                                               (after lambda/translprim.ml(485):20776-20813
+                                                                 (apply
+                                                                   (field 1
+                                                                    (global Typeopt!))
+                                                                   env p1
+                                                                   (field 30
+                                                                    (global Predef!))))
+                                                               (before lambda/translprim.ml(485):20819-20878
+                                                                 (makeblock 0
+                                                                   (makeblock 2
+                                                                    comp 7a)))
+                                                               (before lambda/translprim.ml(487):20884-20908
+                                                                 0a))))))))))))))))))
+                             (exit 23))))
+                      default: (exit 23))
+                    with (23)
+                     (before lambda/translprim.ml(490):20918-20922 0a))))))))
+     unboxed_compare =
+       (function name native_repr
+         (funct-body lambda/translprim.ml(492)<ghost>:20944-21107
+           (before lambda/translprim.ml(493):20965-21107
+             (after lambda/translprim.ml(493):20965-21107
+               (apply (field 1 (global Primitive!)) name 0a
+                 (after lambda/translprim.ml(493):21012-21029
+                   (apply (field 27 (global Stdlib!)) name "_unboxed"))
+                 (makeblock 0 native_repr (makeblock 0 native_repr 0a)) 2a)))))
+     caml_equal =
+       (after lambda/translprim.ml(497):21128-21184
+         (apply (field 0 (global Primitive!)) "caml_equal" 2 1a))
+     caml_string_equal =
+       (after lambda/translprim.ml(499):21211-21275
+         (apply (field 0 (global Primitive!)) "caml_string_equal" 2 0a))
+     caml_bytes_equal =
+       (after lambda/translprim.ml(501):21301-21364
+         (apply (field 0 (global Primitive!)) "caml_bytes_equal" 2 0a))
+     caml_notequal =
+       (after lambda/translprim.ml(503):21387-21446
+         (apply (field 0 (global Primitive!)) "caml_notequal" 2 1a))
+     caml_string_notequal =
+       (after lambda/translprim.ml(505):21476-21543
+         (apply (field 0 (global Primitive!)) "caml_string_notequal" 2 0a))
+     caml_bytes_notequal =
+       (after lambda/translprim.ml(507):21572-21638
+         (apply (field 0 (global Primitive!)) "caml_bytes_notequal" 2 0a))
+     caml_lessequal =
+       (after lambda/translprim.ml(509):21662-21722
+         (apply (field 0 (global Primitive!)) "caml_lessequal" 2 1a))
+     caml_string_lessequal =
+       (after lambda/translprim.ml(511):21753-21821
+         (apply (field 0 (global Primitive!)) "caml_string_lessequal" 2 0a))
+     caml_bytes_lessequal =
+       (after lambda/translprim.ml(513):21851-21918
+         (apply (field 0 (global Primitive!)) "caml_bytes_lessequal" 2 0a))
+     caml_lessthan =
+       (after lambda/translprim.ml(515):21941-22000
+         (apply (field 0 (global Primitive!)) "caml_lessthan" 2 1a))
+     caml_string_lessthan =
+       (after lambda/translprim.ml(517):22030-22097
+         (apply (field 0 (global Primitive!)) "caml_string_lessthan" 2 0a))
+     caml_bytes_lessthan =
+       (after lambda/translprim.ml(519):22126-22192
+         (apply (field 0 (global Primitive!)) "caml_bytes_lessthan" 2 0a))
+     caml_greaterequal =
+       (after lambda/translprim.ml(521):22219-22282
+         (apply (field 0 (global Primitive!)) "caml_greaterequal" 2 1a))
+     caml_string_greaterequal =
+       (after lambda/translprim.ml(523):22316-22387
+         (apply (field 0 (global Primitive!)) "caml_string_greaterequal" 2
+           0a))
+     caml_bytes_greaterequal =
+       (after lambda/translprim.ml(525):22420-22490
+         (apply (field 0 (global Primitive!)) "caml_bytes_greaterequal" 2 0a))
+     caml_greaterthan =
+       (after lambda/translprim.ml(527):22516-22578
+         (apply (field 0 (global Primitive!)) "caml_greaterthan" 2 1a))
+     caml_string_greaterthan =
+       (after lambda/translprim.ml(529):22611-22682
+         (apply (field 0 (global Primitive!)) "caml_string_greaterthan" 2 0a))
+     caml_bytes_greaterthan =
+       (after lambda/translprim.ml(531):22714-22784
+         (apply (field 0 (global Primitive!)) "caml_bytes_greaterthan" 2 0a))
+     caml_compare =
+       (after lambda/translprim.ml(533):22806-22864
+         (apply (field 0 (global Primitive!)) "caml_compare" 2 1a))
+     caml_int_compare =
+       (after lambda/translprim.ml(536):22962-23025
+         (apply (field 0 (global Primitive!)) "caml_int_compare" 2 0a))
+     caml_float_compare =
+       (after lambda/translprim.ml(538):23053-23103
+         (apply unboxed_compare "caml_float_compare" 1a))
+     caml_string_compare =
+       (after lambda/translprim.ml(540):23132-23198
+         (apply (field 0 (global Primitive!)) "caml_string_compare" 2 0a))
+     caml_bytes_compare =
+       (after lambda/translprim.ml(542):23226-23291
+         (apply (field 0 (global Primitive!)) "caml_bytes_compare" 2 0a))
+     caml_nativeint_compare =
+       (after lambda/translprim.ml(544):23323-23392
+         (apply unboxed_compare "caml_nativeint_compare" [0: 0a]))
+     caml_int32_compare =
+       (after lambda/translprim.ml(546):23420-23481
+         (apply unboxed_compare "caml_int32_compare" [0: 1a]))
+     caml_int64_compare =
+       (after lambda/translprim.ml(548):23509-23570
+         (apply unboxed_compare "caml_int64_compare" [0: 2a]))
+     comparison_primitive =
+       (function comparison comparison_kind
+         (funct-body lambda/translprim.ml(550)<ghost>:23597-26840
+           (before lambda/translprim.ml(551):23628-26840
+             (let (*match* = comparison *match* = comparison_kind)
+               (switch* *match*
+                case int 0:
+                 (switch* *match*
+                  case int 0:
+                   (before lambda/translprim.ml(552):23697-23714
+                     (makeblock 9 caml_equal))
+                  case int 1:
+                   (before lambda/translprim.ml(553):23742-23754 [13: 0a])
+                  case int 2:
+                   (before lambda/translprim.ml(554):23784-23799 [16: 0a])
+                  case int 3:
+                   (before lambda/translprim.ml(555):23830-23854
+                     (makeblock 9 caml_string_equal))
+                  case int 4:
+                   (before lambda/translprim.ml(556):23883-23906
+                     (makeblock 9 caml_bytes_equal))
+                  case int 5:
+                   (before lambda/translprim.ml(557):23940-23966 [39: 0a 0a])
+                  case int 6:
+                   (before lambda/translprim.ml(558):23996-24018 [39: 1a 0a])
+                  case int 7:
+                   (before lambda/translprim.ml(559):24048-24070 [39: 2a 0a]))
+                case int 1:
+                 (switch* *match*
+                  case int 0:
+                   (before lambda/translprim.ml(560):24105-24125
+                     (makeblock 9 caml_notequal))
+                  case int 1:
+                   (before lambda/translprim.ml(561):24157-24169 [13: 1a])
+                  case int 2:
+                   (before lambda/translprim.ml(562):24203-24219 [16: 1a])
+                  case int 3:
+                   (before lambda/translprim.ml(563):24254-24281
+                     (makeblock 9 caml_string_notequal))
+                  case int 4:
+                   (before lambda/translprim.ml(564):24314-24340
+                     (makeblock 9 caml_bytes_notequal))
+                  case int 5:
+                   (before lambda/translprim.ml(565):24378-24404 [39: 0a 1a])
+                  case int 6:
+                   (before lambda/translprim.ml(566):24438-24460 [39: 1a 1a])
+                  case int 7:
+                   (before lambda/translprim.ml(567):24494-24516 [39: 2a 1a]))
+                case int 2:
+                 (switch* *match*
+                  case int 0:
+                   (before lambda/translprim.ml(568):24552-24573
+                     (makeblock 9 caml_lessequal))
+                  case int 1:
+                   (before lambda/translprim.ml(569):24606-24618 [13: 4a])
+                  case int 2:
+                   (before lambda/translprim.ml(570):24653-24668 [16: 6a])
+                  case int 3:
+                   (before lambda/translprim.ml(571):24704-24732
+                     (makeblock 9 caml_string_lessequal))
+                  case int 4:
+                   (before lambda/translprim.ml(572):24766-24793
+                     (makeblock 9 caml_bytes_lessequal))
+                  case int 5:
+                   (before lambda/translprim.ml(573):24832-24858 [39: 0a 4a])
+                  case int 6:
+                   (before lambda/translprim.ml(574):24893-24915 [39: 1a 4a])
+                  case int 7:
+                   (before lambda/translprim.ml(575):24950-24972 [39: 2a 4a]))
+                case int 3:
+                 (switch* *match*
+                  case int 0:
+                   (before lambda/translprim.ml(576):25007-25027
+                     (makeblock 9 caml_lessthan))
+                  case int 1:
+                   (before lambda/translprim.ml(577):25059-25071 [13: 2a])
+                  case int 2:
+                   (before lambda/translprim.ml(578):25105-25120 [16: 2a])
+                  case int 3:
+                   (before lambda/translprim.ml(579):25155-25182
+                     (makeblock 9 caml_string_lessthan))
+                  case int 4:
+                   (before lambda/translprim.ml(580):25215-25241
+                     (makeblock 9 caml_bytes_lessthan))
+                  case int 5:
+                   (before lambda/translprim.ml(581):25279-25305 [39: 0a 2a])
+                  case int 6:
+                   (before lambda/translprim.ml(582):25339-25361 [39: 1a 2a])
+                  case int 7:
+                   (before lambda/translprim.ml(583):25395-25417 [39: 2a 2a]))
+                case int 4:
+                 (switch* *match*
+                  case int 0:
+                   (before lambda/translprim.ml(584):25456-25480
+                     (makeblock 9 caml_greaterequal))
+                  case int 1:
+                   (before lambda/translprim.ml(585):25516-25528 [13: 5a])
+                  case int 2:
+                   (before lambda/translprim.ml(586):25566-25581 [16: 8a])
+                  case int 3:
+                   (before lambda/translprim.ml(587):25620-25651
+                     (makeblock 9 caml_string_greaterequal))
+                  case int 4:
+                   (before lambda/translprim.ml(588):25688-25718
+                     (makeblock 9 caml_bytes_greaterequal))
+                  case int 5:
+                   (before lambda/translprim.ml(589):25760-25786 [39: 0a 5a])
+                  case int 6:
+                   (before lambda/translprim.ml(590):25824-25846 [39: 1a 5a])
+                  case int 7:
+                   (before lambda/translprim.ml(591):25884-25906 [39: 2a 5a]))
+                case int 5:
+                 (switch* *match*
+                  case int 0:
+                   (before lambda/translprim.ml(592):25944-25967
+                     (makeblock 9 caml_greaterthan))
+                  case int 1:
+                   (before lambda/translprim.ml(593):26002-26014 [13: 3a])
+                  case int 2:
+                   (before lambda/translprim.ml(594):26051-26066 [16: 4a])
+                  case int 3:
+                   (before lambda/translprim.ml(595):26104-26134
+                     (makeblock 9 caml_string_greaterthan))
+                  case int 4:
+                   (before lambda/translprim.ml(596):26170-26199
+                     (makeblock 9 caml_bytes_greaterthan))
+                  case int 5:
+                   (before lambda/translprim.ml(597):26240-26266 [39: 0a 3a])
+                  case int 6:
+                   (before lambda/translprim.ml(598):26303-26325 [39: 1a 3a])
+                  case int 7:
+                   (before lambda/translprim.ml(599):26362-26384 [39: 2a 3a]))
+                case int 6:
+                 (switch* *match*
+                  case int 0:
+                   (before lambda/translprim.ml(600):26417-26436
+                     (makeblock 9 caml_compare))
+                  case int 1:
+                   (before lambda/translprim.ml(601):26466-26489
+                     (makeblock 9 caml_int_compare))
+                  case int 2:
+                   (before lambda/translprim.ml(602):26521-26546
+                     (makeblock 9 caml_float_compare))
+                  case int 3:
+                   (before lambda/translprim.ml(603):26579-26605
+                     (makeblock 9 caml_string_compare))
+                  case int 4:
+                   (before lambda/translprim.ml(604):26636-26661
+                     (makeblock 9 caml_bytes_compare))
+                  case int 5:
+                   (before lambda/translprim.ml(605):26697-26726
+                     (makeblock 9 caml_nativeint_compare))
+                  case int 6:
+                   (before lambda/translprim.ml(606):26758-26783
+                     (makeblock 9 caml_int32_compare))
+                  case int 7:
+                   (before lambda/translprim.ml(607):26815-26840
+                     (makeblock 9 caml_int64_compare))))))))
+     lambda_of_loc =
+       (function kind loc
+         (funct-body lambda/translprim.ml(609)<ghost>:26860-27869
+           (before lambda/translprim.ml(610):26873-27869
+             (let (loc_start = (field 0 loc))
+               (before lambda/translprim.ml(611):26917-27869
+                 (let
+                   (*match* =
+                      (after lambda/translprim.ml(611):26942-26973
+                        (apply (field 8 (global Location!)) loc_start))
+                    cnum =a (field 2 *match*)
+                    lnum =a (field 1 *match*)
+                    file =a (field 0 *match*))
+                   (before lambda/translprim.ml(612):26979-27869
+                     (let
+                       (file =
+                          (if
+                            (after lambda/translprim.ml(613):26997-27022
+                              (apply (field 4 (global Stdlib__filename!))
+                                file))
+                            (before lambda/translprim.ml(614):27034-27038
+                              file)
+                            (before lambda/translprim.ml(616):27054-27089
+                              (after lambda/translprim.ml(616):27054-27089
+                                (apply (field 15 (global Location!)) file)))))
+                       (before lambda/translprim.ml(617):27095-27869
+                         (let
+                           (enum =[int]
+                              (+
+                                (- (field 3 (field 1 loc))
+                                  (field 3 loc_start))
+                                cnum))
+                           (before lambda/translprim.ml(619):27189-27869
+                             (switch* kind
+                              case int 0:
+                               (before lambda/translprim.ml(627):27427-27456
+                                 (makeblock 1 (makeblock 4 file)))
+                              case int 1:
+                               (before lambda/translprim.ml(637):27833-27869
+                                 (makeblock 1
+                                   (makeblock 0 (makeblock 0 (int) lnum))))
+                              case int 2:
+                               (before lambda/translprim.ml(629):27479-27671
+                                 (let
+                                   (filename =
+                                      (after lambda/translprim.ml(629):27494-27516
+                                        (apply
+                                          (field 12
+                                            (global Stdlib__filename!))
+                                          file)))
+                                   (before lambda/translprim.ml(630):27524-27671
+                                     (let
+                                       (name =
+                                          (after lambda/translprim.ml(630):27535-27555
+                                            (apply (field 75 (global Env!))
+                                              0a)))
+                                       (before lambda/translprim.ml(631):27563-27671
+                                         (let
+                                           (module_name =
+                                              (if
+                                                (after lambda/translprim.ml(631):27584-27593
+                                                  (caml_string_equal name ""))
+                                                (before lambda/translprim.ml(631):27599-27617
+                                                  (after lambda/translprim.ml(631):27599-27617
+                                                    (apply
+                                                      (field 27
+                                                        (global Stdlib!))
+                                                      "//"
+                                                      (after lambda/translprim.ml(631):27604-27617
+                                                        (apply
+                                                          (field 27
+                                                            (global Stdlib!))
+                                                          filename "//")))))
+                                                (before lambda/translprim.ml(631):27623-27627
+                                                  name)))
+                                           (before lambda/translprim.ml(632):27635-27671
+                                             (makeblock 1
+                                               (makeblock 4 module_name)))))))))
+                              case int 3:
+                               (before lambda/translprim.ml(634):27691-27816
+                                 (let
+                                   (loc =
+                                      (after lambda/translprim.ml(634):27701-27780
+                                        (apply
+                                          (field 3 (global Stdlib__printf!))
+                                          [0:
+                                           [11:
+                                            "File "
+                                            [3:
+                                             0a
+                                             [11:
+                                              ", line "
+                                              [4:
+                                               0a 0a 0a
+                                               [11:
+                                                ", characters "
+                                                [4:
+                                                 0a 0a 0a
+                                                 [12: '-' [4: 0a 0a 0a 0a]]]]]]]]
+                                           "File %S, line %d, characters %d-%d"]
+                                          file lnum cnum enum)))
+                                   (before lambda/translprim.ml(636):27788-27816
+                                     (makeblock 1 (makeblock 4 loc)))))
+                              case int 4:
+                               (before lambda/translprim.ml(621):27224-27410
+                                 (makeblock 1
+                                   (makeblock 2 (int,*) 0
+                                     (makeblock 0 (makeblock 4 file)
+                                       (makeblock 0
+                                         (makeblock 0
+                                           (makeblock 0 (int) lnum))
+                                         (makeblock 0
+                                           (makeblock 0
+                                             (makeblock 0 (int) cnum))
+                                           (makeblock 0
+                                             (makeblock 0
+                                               (makeblock 0 (int) enum))
+                                             0a)))))))))))))))))))
+     caml_restore_raw_backtrace =
+       (after lambda/translprim.ml(640):27906-27979
+         (apply (field 0 (global Primitive!)) "caml_restore_raw_backtrace" 2
+           0a))
+     try_ids =
+       (after lambda/translprim.ml(642):27995-28011
+         (apply (field 0 (global Stdlib__hashtbl!)) 0a 8))
+     add_exception_ident =
+       (function id
+         (funct-body lambda/translprim.ml(644)<ghost>:28037-28073
+           (before lambda/translprim.ml(645):28044-28073
+             (after lambda/translprim.ml(645):28044-28073
+               (apply (field 10 (global Stdlib__hashtbl!)) try_ids id 0a)))))
+     remove_exception_ident =
+       (function id
+         (funct-body lambda/translprim.ml(647)<ghost>:28102-28134
+           (before lambda/translprim.ml(648):28109-28134
+             (after lambda/translprim.ml(648):28109-28134
+               (apply (field 9 (global Stdlib__hashtbl!)) try_ids id)))))
+     lambda_of_prim =
+       (function prim_name prim loc args arg_exps
+         (funct-body lambda/translprim.ml(650)<ghost>:28155-30209
+           (before lambda/translprim.ml(651):28192-30209
+             (let (*match* = prim *match* = args)
+               (catch
+                 (switch* *match*
+                  case int 0:
+                   (if *match*
+                     (let (*match* =a (field 1 *match*))
+                       (if *match*
+                         (let (*match* =a (field 1 *match*))
+                           (if *match* (exit 30)
+                             (let
+                               (bt =a (field 0 *match*)
+                                exn =a (field 0 *match*))
+                               (before lambda/translprim.ml(677):29066-29534
+                                 (let
+                                   (vexn =
+                                      (after lambda/translprim.ml(677):29077-29101
+                                        (apply (field 10 (global Ident!))
+                                          "exn")))
+                                   (before lambda/translprim.ml(678):29111-29534
+                                     (let
+                                       (raise_arg =
+                                          (if arg_exps
+                                            (let
+                                              (*match* =a (field 0 arg_exps))
+                                              (catch
+                                                (if *match*
+                                                  (let
+                                                    (*match* =a
+                                                       (field 1 *match*))
+                                                    (if *match*
+                                                      (let
+                                                        (*match* =a
+                                                           (field 1 *match*))
+                                                        (if *match* (exit 29)
+                                                          (let
+                                                            (exn_exp =a
+                                                               (field 0
+                                                                 *match*))
+                                                            (before lambda/translprim.ml(681):29214-29245
+                                                              (after lambda/translprim.ml(681):29214-29245
+                                                                (apply
+                                                                  event_after
+                                                                  exn_exp
+                                                                  (makeblock 0
+                                                                    vexn)))))))
+                                                      (exit 29)))
+                                                  (exit 29))
+                                               with (29)
+                                                (before lambda/translprim.ml(682):29266-29278
+                                                  (raise
+                                                    (after lambda/translprim.ml(682):29266-29278
+                                                      (makeblock 0
+                                                        (global Assert_failure!)
+                                                        [0:
+                                                         "lambda/translprim.ml"
+                                                         682 20]))))))
+                                            (before lambda/translprim.ml(680):29173-29182
+                                              (makeblock 0 vexn))))
+                                       (before lambda/translprim.ml(684):29294-29534
+                                         (makeblock 4 0a 0a vexn exn
+                                           (makeblock 13
+                                             (makeblock 6
+                                               (makeblock 9
+                                                 caml_restore_raw_backtrace)
+                                               (makeblock 0
+                                                 (makeblock 0 vexn)
+                                                 (makeblock 0 bt 0a))
+                                               loc)
+                                             (makeblock 6 [10: 1a]
+                                               (makeblock 0 raise_arg 0a)
+                                               loc)))))))))))
+                         (exit 30)))
+                     (exit 30))
+                  case int 1:
+                   (if *match*
+                     (let (*match* =a (field 1 *match*))
+                       (if *match* (exit 30)
+                         (let (arg =a (field 0 *match*))
+                           (before lambda/translprim.ml(690):29566-29610
+                             (after lambda/translprim.ml(690):29566-29610
+                               (apply (field 8 (global Matching!)) arg
+                                 (field 0 (global Location!))))))))
+                     (exit 30))
+                  case int 2:
+                   (if *match*
+                     (let (*match* =a (field 1 *match*))
+                       (if *match*
+                         (let (*match* =a (field 1 *match*))
+                           (if *match* (exit 30)
+                             (let
+                               (meth =a (field 0 *match*)
+                                obj =a (field 0 *match*))
+                               (before lambda/translprim.ml(697):29817-29850
+                                 (makeblock 17 1a meth obj 0a loc)))))
+                         (exit 30)))
+                     (exit 30))
+                  case int 3:
+                   (if *match*
+                     (let (*match* =a (field 1 *match*))
+                       (if *match*
+                         (let (*match* =a (field 1 *match*))
+                           (if *match* (exit 30)
+                             (let
+                               (meth =a (field 0 *match*)
+                                obj =a (field 0 *match*))
+                               (before lambda/translprim.ml(699):29887-29918
+                                 (makeblock 17 0a meth obj 0a loc)))))
+                         (exit 30)))
+                     (exit 30))
+                  case int 4:
+                   (if *match*
+                     (let (*match* =a (field 1 *match*))
+                       (if *match*
+                         (let (*match* =a (field 1 *match*))
+                           (if *match*
+                             (let (*match* =a (field 1 *match*))
+                               (if *match*
+                                 (let (*match* =a (field 1 *match*))
+                                   (if *match* (exit 30)
+                                     (let
+                                       (pos =a (field 0 *match*)
+                                        cache =a (field 0 *match*)
+                                        meth =a (field 0 *match*)
+                                        obj =a (field 0 *match*))
+                                       (before lambda/translprim.ml(701):29968-30011
+                                         (makeblock 17 2a meth obj
+                                           (makeblock 0 cache
+                                             (makeblock 0 pos 0a))
+                                           loc)))))
+                                 (exit 30)))
+                             (exit 30)))
+                         (exit 30)))
+                     (exit 30))
+                  case tag 0:
+                   (let
+                     (args =a *match*
+                      arity =a (field 1 *match*)
+                      prim =a (field 0 *match*))
+                     (before lambda/translprim.ml(652):28253-28277
+                       (if
+                         (== arity
+                           (after lambda/translprim.ml(652):28261-28277
+                             (apply (field 0 (global Stdlib__list!)) args)))
+                         (before lambda/translprim.ml(653):28287-28309
+                           (makeblock 6 prim args loc))
+                         (exit 30))))
+                  case tag 1:
+                   (let (args =a *match* prim =a (field 0 *match*))
+                     (before lambda/translprim.ml(654):28339-28359
+                       (if
+                         (after lambda/translprim.ml(654):28339-28359
+                           (caml_equal prim prim_sys_argv))
+                         (before lambda/translprim.ml(655):28369-28426
+                           (makeblock 6 (makeblock 9 prim)
+                             (makeblock 0 [1: [1: 0]] args) loc))
+                         (let (args =a *match* prim =a prim)
+                           (before lambda/translprim.ml(657):28460-28489
+                             (makeblock 6 (makeblock 9 prim) args loc))))))
+                  case tag 2:
+                   (let (knd =a (field 1 *match*) comp =a (field 0 *match*))
+                     (if *match*
+                       (let (*match* =a (field 1 *match*))
+                         (if *match*
+                           (let (*match* =a (field 1 *match*))
+                             (if *match* (exit 30)
+                               (let (args =a *match*)
+                                 (before lambda/translprim.ml(659):28542-28614
+                                   (let
+                                     (prim =
+                                        (after lambda/translprim.ml(659):28553-28582
+                                          (apply comparison_primitive comp
+                                            knd)))
+                                     (before lambda/translprim.ml(660):28592-28614
+                                       (makeblock 6 prim args loc)))))))
+                           (exit 30)))
+                       (exit 30)))
+                  case tag 3:
+                   (let (kind =a (field 0 *match*))
+                     (if *match*
+                       (let (*match* =a (field 1 *match*))
+                         (if *match* (exit 30)
+                           (let (arg =a (field 0 *match*))
+                             (before lambda/translprim.ml(662):28646-29020
+                               (let
+                                 (kind =
+                                    (let (*match* = kind *match* = arg)
+                                      (catch
+                                        (if *match* (exit 28)
+                                          (switch *match*
+                                           case tag 0:
+                                            (let (argv =a (field 0 *match*))
+                                              (before lambda/translprim.ml(664):28726-28750
+                                                (if
+                                                  (after lambda/translprim.ml(664):28726-28750
+                                                    (apply
+                                                      (field 8
+                                                        (global Stdlib__hashtbl!))
+                                                      try_ids argv))
+                                                  (before lambda/translprim.ml(665):28766-28779
+                                                    1a)
+                                                  (exit 28))))
+                                           default: (exit 28)))
+                                       with (28)
+                                        (before lambda/translprim.ml(667):28810-28814
+                                          kind))))
+                                 (before lambda/translprim.ml(669):28830-29020
+                                   (let
+                                     (arg =
+                                        (if arg_exps
+                                          (let
+                                            (*match* =a (field 0 arg_exps))
+                                            (catch
+                                              (if *match*
+                                                (let
+                                                  (*match* =a
+                                                     (field 1 *match*))
+                                                  (if *match* (exit 27)
+                                                    (let
+                                                      (arg_exp =a
+                                                         (field 0 *match*))
+                                                      (before lambda/translprim.ml(672):28918-28941
+                                                        (after lambda/translprim.ml(672):28918-28941
+                                                          (apply event_after
+                                                            arg_exp arg))))))
+                                                (exit 27))
+                                             with (27)
+                                              (before lambda/translprim.ml(673):28962-28974
+                                                (raise
+                                                  (after lambda/translprim.ml(673):28962-28974
+                                                    (makeblock 0
+                                                      (global Assert_failure!)
+                                                      [0:
+                                                       "lambda/translprim.ml"
+                                                       673 20]))))))
+                                          (before lambda/translprim.ml(671):28886-28889
+                                            arg)))
+                                     (before lambda/translprim.ml(675):28990-29020
+                                       (makeblock 6 (makeblock 10 kind)
+                                         (makeblock 0 arg 0a) loc)))))))))
+                       (exit 30)))
+                  case tag 4:
+                   (let (kind =a (field 0 *match*))
+                     (if *match*
+                       (let (*match* =a (field 1 *match*))
+                         (if *match* (exit 30)
+                           (let (kind =a kind arg =a (field 0 *match*))
+                             (before lambda/translprim.ml(694):29689-29785
+                               (let
+                                 (lam =
+                                    (after lambda/translprim.ml(694):29699-29721
+                                      (apply lambda_of_loc kind loc)))
+                                 (before lambda/translprim.ml(695):29731-29785
+                                   (makeblock 6 [2: 0 0a 0a]
+                                     (makeblock 0 lam (makeblock 0 arg 0a))
+                                     loc)))))))
+                       (before lambda/translprim.ml(692):29637-29659
+                         (after lambda/translprim.ml(692):29637-29659
+                           (apply lambda_of_loc kind loc))))))
+                with (30)
+                 (before lambda/translprim.ml(705):30151-30209
+                   (raise
+                     (after lambda/translprim.ml(705):30156-30209
+                       (makeblock 0 Error loc (makeblock 1 prim_name))))))))))
+     check_primitive_arity =
+       (function loc p
+         (funct-body lambda/translprim.ml(707)<ghost>:30237-30761
+           (before lambda/translprim.ml(708):30247-30761
+             (let
+               (prim =
+                  (after lambda/translprim.ml(708):30258-30280
+                    (apply lookup_primitive loc p)))
+               (before lambda/translprim.ml(709):30286-30761
+                 (let
+                   (ok =
+                      (catch
+                        (switch* prim
+                         case int 0:
+                          (before lambda/translprim.ml(715):30493-30509
+                            (== (field 1 p) 2))
+                         case int 1:
+                          (before lambda/translprim.ml(716):30530-30546
+                            (== (field 1 p) 1))
+                         case int 2: (exit 39)
+                         case int 3: (exit 39)
+                         case int 4:
+                          (before lambda/translprim.ml(719):30662-30678
+                            (== (field 1 p) 4))
+                         case tag 0:
+                          (let (arity =a (field 1 prim))
+                            (before lambda/translprim.ml(711):30344-30364
+                              (== arity (field 1 p))))
+                         case tag 1:
+                          (before lambda/translprim.ml(712):30385-30389 1a)
+                         case tag 2:
+                          (before lambda/translprim.ml(713):30412-30428
+                            (== (field 1 p) 2))
+                         case tag 3:
+                          (before lambda/translprim.ml(714):30446-30462
+                            (== (field 1 p) 1))
+                         case tag 4:
+                          (before lambda/translprim.ml(717):30562-30598
+                            (|| (== (field 1 p) 1) (== (field 1 p) 0))))
+                       with (39)
+                        (before lambda/translprim.ml(718):30625-30641
+                          (== (field 1 p) 2))))
+                   (before lambda/translprim.ml(721):30686-30761
+                     (if (not ok)
+                       (before lambda/translprim.ml(721):30701-30761
+                         (raise
+                           (after lambda/translprim.ml(721):30706-30761
+                             (makeblock 0 Error loc
+                               (makeblock 1 (field 0 p))))))
+                       0a))))))))
+     transl_primitive =
+       (function loc p env ty path
+         (funct-body lambda/translprim.ml(725)<ghost>:30814-31599
+           (before lambda/translprim.ml(726):30836-31599
+             (let
+               (prim =
+                  (after lambda/translprim.ml(726):30847-30892
+                    (apply lookup_primitive_and_mark_used loc p env path)))
+               (before lambda/translprim.ml(727):30898-31599
+                 (let (has_constant_constructor = 0a)
+                   (before lambda/translprim.ml(728):30940-31599
+                     (let
+                       (prim =
+                          (let
+                            (*match* =
+                               (after lambda/translprim.ml(729):30961-31019
+                                 (apply specialize_primitive env ty
+                                   has_constant_constructor prim)))
+                            (if *match*
+                              (let (prim =a (field 0 *match*))
+                                (before lambda/translprim.ml(731):31063-31067
+                                  prim))
+                              (before lambda/translprim.ml(730):31039-31043
+                                prim))))
+                       (before lambda/translprim.ml(733):31075-31599
+                         (letrec
+                           (make_params
+                              (function n[int]
+                                (funct-body lambda/translprim.ml(733)<ghost>:31095-31187
+                                  (before lambda/translprim.ml(734):31103-31187
+                                    (if (<= n 0)
+                                      (before lambda/translprim.ml(734):31118-31120
+                                        0a)
+                                      (before lambda/translprim.ml(735):31130-31187
+                                        (makeblock 0
+                                          (makeblock 0
+                                            (after lambda/translprim.ml(735):31131-31156
+                                              (apply
+                                                (field 10 (global Ident!))
+                                                "prim"))
+                                            0a)
+                                          (after lambda/translprim.ml(735):31170-31187
+                                            (apply make_params (- n 1))))))))))
+                           (before lambda/translprim.ml(737):31195-31599
+                             (let
+                               (params =
+                                  (after lambda/translprim.ml(737):31208-31232
+                                    (apply make_params (field 1 p))))
+                               (before lambda/translprim.ml(738):31238-31599
+                                 (let
+                                   (args =
+                                      (after lambda/translprim.ml(738):31249-31289
+                                        (apply
+                                          (field 16 (global Stdlib__list!))
+                                          (function param
+                                            (funct-body lambda/translprim.ml(738):31258-31282
+                                              (let (id =a (field 0 param))
+                                                (before lambda/translprim.ml(738):31274-31281
+                                                  (makeblock 0 id)))))
+                                          params)))
+                                   (before lambda/translprim.ml(739):31295-31599
+                                     (let
+                                       (body =
+                                          (after lambda/translprim.ml(739):31306-31351
+                                            (apply lambda_of_prim (field 0 p)
+                                              prim loc args 0a)))
+                                       (before lambda/translprim.ml(740):31357-31599
+                                         (if params
+                                           (before lambda/translprim.ml(743):31405-31599
+                                             (makeblock 3
+                                               (makeblock 0 0a params 0a body
+                                                 (field 31 (global Lambda!))
+                                                 loc)))
+                                           (before lambda/translprim.ml(741):31385-31389
+                                             body)))))))))))))))))))
+     primitive_is_ccall =
+       (function param
+         (funct-body lambda/translprim.ml(752):31747-31943
+           (catch
+             (catch
+               (switch param
+                case int 4: (exit 41)
+                case int 5: (exit 41)
+                case int 30: (exit 41)
+                case int 34: (exit 41)
+                case int 35: (exit 41)
+                case tag 8: (exit 41)
+                case tag 9: (exit 41)
+                case tag 22: (exit 41)
+                case tag 23: (exit 41)
+                case tag 40: (exit 41)
+                case tag 41: (exit 41)
+                default: (exit 42))
+              with (42) (before lambda/translprim.ml(756):31938-31943 0a))
+            with (41) (before lambda/translprim.ml(755):31924-31928 1a))))
+     primitive_needs_event_after =
+       (function param
+         (funct-body lambda/translprim.ml(759):32057-32331
+           (catch
+             (switch param
+              case int 0: (exit 44)
+              case tag 0:
+               (let (prim =a (field 0 param))
+                 (before lambda/translprim.ml(760):32092-32115
+                   (after lambda/translprim.ml(760):32092-32115
+                     (apply primitive_is_ccall prim))))
+              case tag 1: (before lambda/translprim.ml(761):32134-32138 1a)
+              case tag 2:
+               (let (knd =a (field 1 param) comp =a (field 0 param))
+                 (before lambda/translprim.ml(763):32174-32224
+                   (after lambda/translprim.ml(763):32174-32224
+                     (apply primitive_is_ccall
+                       (after lambda/translprim.ml(763):32193-32224
+                         (apply comparison_primitive comp knd))))))
+              case tag 3: (exit 44)
+              case tag 4: (exit 44)
+              default: (before lambda/translprim.ml(764):32275-32279 1a))
+            with (44) (before lambda/translprim.ml(765):32326-32331 0a))))
+     transl_primitive_application =
+       (function loc p env ty path exp args arg_exps
+         (funct-body lambda/translprim.ml(767)<ghost>:32366-33200
+           (before lambda/translprim.ml(768):32406-33200
+             (let
+               (prim =
+                  (after lambda/translprim.ml(768):32417-32469
+                    (apply lookup_primitive_and_mark_used loc p env
+                      (makeblock 0 path))))
+               (before lambda/translprim.ml(769):32475-33200
+                 (let
+                   (has_constant_constructor =
+                      (catch
+                        (catch
+                          (if arg_exps
+                            (let
+                              (*match* =a (field 0 arg_exps)
+                               *match* =a (field 0 *match*))
+                              (catch
+                                (let (*match* =a (field 1 arg_exps))
+                                  (if *match*
+                                    (let
+                                      (*match* =a (field 0 *match*)
+                                       *match* =a (field 0 *match*))
+                                      (switch *match*
+                                       case tag 8:
+                                        (let
+                                          (*match* =a (field 1 *match*)
+                                           *match* =a (field 5 *match*))
+                                          (switch *match*
+                                           case tag 0:
+                                            (let
+                                              (*match* =a (field 1 *match*))
+                                              (if *match* (exit 46)
+                                                (exit 45)))
+                                           default: (exit 47)))
+                                       case tag 9:
+                                        (let (*match* =a (field 1 *match*))
+                                          (if *match* (exit 47)
+                                            (let
+                                              (*match* =a (field 1 *match*))
+                                              (if *match* (exit 46)
+                                                (exit 45)))))
+                                       default: (exit 47)))
+                                    (exit 46)))
+                               with (47)
+                                (switch *match*
+                                 case tag 8:
+                                  (let
+                                    (*match* =a (field 1 *match*)
+                                     *match* =a (field 5 *match*))
+                                    (switch *match*
+                                     case tag 0:
+                                      (let
+                                        (*match* =a (field 1 arg_exps)
+                                         *match* =a (field 1 *match*))
+                                        (if *match* (exit 46) (exit 45)))
+                                     default: (exit 46)))
+                                 case tag 9:
+                                  (let (*match* =a (field 1 *match*))
+                                    (if *match* (exit 46)
+                                      (let
+                                        (*match* =a (field 1 arg_exps)
+                                         *match* =a (field 1 *match*))
+                                        (if *match* (exit 46) (exit 45)))))
+                                 default: (exit 46))))
+                            (exit 46))
+                         with (46)
+                          (before lambda/translprim.ml(775):32791-32796 0a))
+                       with (45)
+                        (before lambda/translprim.ml(774):32775-32779 1a)))
+                   (before lambda/translprim.ml(777):32804-33200
+                     (let
+                       (prim =
+                          (let
+                            (*match* =
+                               (after lambda/translprim.ml(778):32825-32883
+                                 (apply specialize_primitive env ty
+                                   has_constant_constructor prim)))
+                            (if *match*
+                              (let (prim =a (field 0 *match*))
+                                (before lambda/translprim.ml(780):32927-32931
+                                  prim))
+                              (before lambda/translprim.ml(779):32903-32907
+                                prim))))
+                       (before lambda/translprim.ml(782):32939-33200
+                         (let
+                           (lam =
+                              (after lambda/translprim.ml(782):32949-33005
+                                (apply lambda_of_prim (field 0 p) prim loc
+                                  args (makeblock 0 arg_exps))))
+                           (before lambda/translprim.ml(783):33011-33200
+                             (let
+                               (lam =
+                                  (if
+                                    (after lambda/translprim.ml(784):33028-33060
+                                      (apply primitive_needs_event_after
+                                        prim))
+                                    (before lambda/translprim.ml(784):33066-33160
+                                      (if exp
+                                        (let (exp =a (field 0 exp))
+                                          (before lambda/translprim.ml(787):33133-33152
+                                            (after lambda/translprim.ml(787):33133-33152
+                                              (apply event_after exp lam))))
+                                        (before lambda/translprim.ml(786):33109-33112
+                                          lam)))
+                                    (before lambda/translprim.ml(788):33166-33189
+                                      lam)))
+                               (before lambda/translprim.ml(792):33197-33200
+                                 lam)))))))))))))
+     report_error =
+       (function ppf param
+         (funct-body lambda/translprim.ml(798)<ghost>:33252-33490
+           (switch* param
+            case tag 0:
+             (let (prim_name =a (field 0 param))
+               (before lambda/translprim.ml(800):33316-33372
+                 (after lambda/translprim.ml(800):33316-33372
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11:
+                       "Unknown builtin primitive \"" [2: 0a [12: '"' 0a]]]
+                      "Unknown builtin primitive \"%s\""]
+                     prim_name))))
+            case tag 1:
+             (let (prim_name =a (field 0 param))
+               (before lambda/translprim.ml(802):33426-33490
+                 (after lambda/translprim.ml(802):33426-33490
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11:
+                       "Wrong arity for builtin primitive \""
+                       [2: 0a [12: '"' 0a]]]
+                      "Wrong arity for builtin primitive \"%s\""]
+                     prim_name)))))))
+     *match* =
+       (after lambda/translprim.ml(805):33503-33672
+         (apply (field 46 (global Location!))
+           (function param
+             (funct-body lambda/translprim.ml(806):33538-33672
+               (let (tag =a (field 0 param))
+                 (if (== tag Error)
+                   (let (err =a (field 2 param) loc =a (field 1 param))
+                     (before lambda/translprim.ml(808):33586-33640
+                       (makeblock 0
+                         (after lambda/translprim.ml(808):33591-33640
+                           (apply (field 44 (global Location!))
+                             (makeblock 0 loc) 0a report_error err)))))
+                   (before lambda/translprim.ml(810):33662-33666 0a))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 event_before event_after add_exception_ident
+        remove_exception_ident clear_used_primitives get_used_primitives
+        check_primitive_arity transl_primitive transl_primitive_application
+        Error report_error))))

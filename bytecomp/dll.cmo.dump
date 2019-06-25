@@ -1,0 +1,322 @@
+(setglobal Dll!
+  (let
+    (search_path = (makemutable 0 0a)
+     opened_dlls = (makemutable 0 0a)
+     names_of_opened_dlls = (makemutable 0 0a)
+     add_path =
+       (function dirs
+         (funct-body bytecomp/dll.ml(41)<ghost>:2015-2058
+           (before bytecomp/dll.ml(42):2024-2058
+             (setfield_ptr 0 search_path
+               (after bytecomp/dll.ml(42):2039-2058
+                 (apply (field 36 (global Stdlib!)) dirs
+                   (field 0 search_path)))))))
+     remove_path =
+       (function dirs
+         (funct-body bytecomp/dll.ml(44)<ghost>:2076-2157
+           (before bytecomp/dll.ml(45):2085-2157
+             (setfield_ptr 0 search_path
+               (after bytecomp/dll.ml(45):2100-2157
+                 (apply (field 35 (global Stdlib__list!))
+                   (function d
+                     (funct-body bytecomp/dll.ml(45):2112-2144
+                       (before bytecomp/dll.ml(45):2122-2143
+                         (not
+                           (after bytecomp/dll.ml(45):2126-2143
+                             (apply (field 31 (global Stdlib__list!)) d dirs))))))
+                   (field 0 search_path)))))))
+     extract_dll_name =
+       (function file
+         (funct-body bytecomp/dll.ml(49)<ghost>:2255-2498
+           (before bytecomp/dll.ml(50):2264-2498
+             (if
+               (after bytecomp/dll.ml(50):2267-2308
+                 (apply (field 6 (global Stdlib__filename!)) file
+                   (field 44 (global Config!))))
+               (before bytecomp/dll.ml(51):2318-2358
+                 (after bytecomp/dll.ml(51):2318-2358
+                   (apply (field 7 (global Stdlib__filename!)) file
+                     (field 44 (global Config!)))))
+               (before bytecomp/dll.ml(52):2366-2498
+                 (if
+                   (&& (>= (string.length file) 2)
+                     (after bytecomp/dll.ml(52):2396-2422
+                       (caml_string_equal
+                         (after bytecomp/dll.ml(52):2396-2415
+                           (apply (field 3 (global Stdlib__string!)) file 0
+                             2))
+                         "-l")))
+                   (before bytecomp/dll.ml(53):2432-2482
+                     (after bytecomp/dll.ml(53):2432-2482
+                       (apply (field 27 (global Stdlib!)) "dll"
+                         (after bytecomp/dll.ml(53):2440-2482
+                           (apply (field 3 (global Stdlib__string!)) file 2
+                             (- (string.length file) 2))))))
+                   (before bytecomp/dll.ml(55):2494-2498 file)))))))
+     open_dll =
+       (function mode name
+         (funct-body bytecomp/dll.ml(60)<ghost>:2639-3213
+           (before bytecomp/dll.ml(61):2653-3213
+             (let
+               (name =
+                  (after bytecomp/dll.ml(61):2664-2685
+                    (apply (field 27 (global Stdlib!)) name
+                      (field 44 (global Config!)))))
+               (before bytecomp/dll.ml(62):2691-3213
+                 (let
+                   (fullname =
+                      (try
+                        (let
+                          (fullname =
+                             (after bytecomp/dll.ml(64):2735-2770
+                               (apply (field 12 (global Misc!))
+                                 (field 0 search_path) name)))
+                          (before bytecomp/dll.ml(65):2780-2896
+                            (if
+                              (after bytecomp/dll.ml(65):2783-2812
+                                (apply (field 5 (global Stdlib__filename!))
+                                  fullname))
+                              (before bytecomp/dll.ml(66):2826-2876
+                                (after bytecomp/dll.ml(66):2826-2876
+                                  (apply (field 3 (global Stdlib__filename!))
+                                    (field 0 (global Stdlib__filename!))
+                                    fullname)))
+                              (before bytecomp/dll.ml(67):2888-2896 fullname))))
+                       with exn
+                        (if (== exn (field 7 (global Stdlib!)))
+                          (before bytecomp/dll.ml(68):2919-2923 name)
+                          (reraise exn))))
+                   (before bytecomp/dll.ml(69):2929-3213
+                     (if
+                       (not
+                         (after bytecomp/dll.ml(69):2936-2977
+                           (apply (field 31 (global Stdlib__list!)) fullname
+                             (field 0 names_of_opened_dlls))))
+                       (before bytecomp/dll.ml(69):2983-3213
+                         (try
+                           (let
+                             (dll =
+                                (after bytecomp/dll.ml(71):3013-3035
+                                  (caml_dynlink_open_lib mode fullname)))
+                             (before bytecomp/dll.ml(72):3045-3144
+                               (seq
+                                 (setfield_ptr 0 names_of_opened_dlls
+                                   (makeblock 0 fullname
+                                     (field 0 names_of_opened_dlls)))
+                                 (before bytecomp/dll.ml(73):3110-3144
+                                   (setfield_ptr 0 opened_dlls
+                                     (makeblock 0 dll (field 0 opened_dlls)))))))
+                          with exn
+                           (let (tag =a (field 0 exn))
+                             (if (== tag (field 6 (global Stdlib!)))
+                               (let (msg =a (field 1 exn))
+                                 (before bytecomp/dll.ml(75):3175-3207
+                                   (after bytecomp/dll.ml(75):3175-3207
+                                     (apply (field 1 (global Stdlib!))
+                                       (after bytecomp/dll.ml(75):3184-3207
+                                         (apply (field 27 (global Stdlib!))
+                                           fullname
+                                           (after bytecomp/dll.ml(75):3196-3206
+                                             (apply
+                                               (field 27 (global Stdlib!))
+                                               ": " msg))))))))
+                               (reraise exn)))))
+                       0a))))))))
+     open_dlls =
+       (function mode names
+         (funct-body bytecomp/dll.ml(78)<ghost>:3229-3275
+           (before bytecomp/dll.ml(79):3244-3275
+             (after bytecomp/dll.ml(79):3244-3275
+               (apply (field 14 (global Stdlib__list!))
+                 (after bytecomp/dll.ml(79):3254-3269 (apply open_dll mode))
+                 names)))))
+     close_all_dlls =
+       (function param
+         (funct-body bytecomp/dll.ml(83)<ghost>:3318-3408
+           (before bytecomp/dll.ml(84):3325-3408
+             (seq
+               (after bytecomp/dll.ml(84):3325-3357
+                 (apply (field 14 (global Stdlib__list!))
+                   (function prim stub (caml_dynlink_close_lib prim))
+                   (field 0 opened_dlls)))
+               (before bytecomp/dll.ml(85):3361-3408
+                 (seq (setfield_ptr 0 opened_dlls 0a)
+                   (before bytecomp/dll.ml(86):3382-3408
+                     (setfield_ptr 0 names_of_opened_dlls 0a))))))))
+     find_primitive =
+       (function prim_name
+         (funct-body bytecomp/dll.ml(91)<ghost>:3518-3845
+           (before bytecomp/dll.ml(92):3532-3845
+             (letrec
+               (find
+                  (function seen param
+                    (funct-body bytecomp/dll.ml(92)<ghost>:3545-3819
+                      (if param
+                        (let (rem =a (field 1 param) dll =a (field 0 param))
+                          (before bytecomp/dll.ml(96):3617-3819
+                            (let
+                              (addr =
+                                 (after bytecomp/dll.ml(96):3628-3649
+                                   (caml_dynlink_lookup_symbol dll prim_name)))
+                              (before bytecomp/dll.ml(97):3659-3819
+                                (if (== addr 0a)
+                                  (before bytecomp/dll.ml(97):3688-3710
+                                    (after bytecomp/dll.ml(97):3688-3710
+                                      (apply find (makeblock 0 dll seen) rem)))
+                                  (before bytecomp/dll.ml(97):3716-3819
+                                    (seq
+                                      (if (!= seen 0a)
+                                        (before bytecomp/dll.ml(98):3749-3795
+                                          (setfield_ptr 0 opened_dlls
+                                            (makeblock 0 dll
+                                              (after bytecomp/dll.ml(98):3771-3795
+                                                (apply
+                                                  (field 11
+                                                    (global Stdlib__list!))
+                                                  seen rem)))))
+                                        0a)
+                                      (before bytecomp/dll.ml(99):3805-3809
+                                        addr))))))))
+                        (before bytecomp/dll.ml(94):3577-3592
+                          (raise
+                            (after bytecomp/dll.ml(94):3583-3592
+                              (field 7 (global Stdlib!)))))))))
+               (before bytecomp/dll.ml(101):3825-3845
+                 (after bytecomp/dll.ml(101):3825-3845
+                   (apply find 0a (field 0 opened_dlls))))))))
+     linking_in_core = (makemutable 0 0a)
+     synchronize_primitive =
+       (function num[int] symb
+         (funct-body bytecomp/dll.ml(110)<ghost>:4133-4255
+           (before bytecomp/dll.ml(111):4146-4255
+             (if (field 0 linking_in_core)
+               (before bytecomp/dll.ml(111):4171-4255
+                 (let
+                   (actual_num =[int]
+                      (after bytecomp/dll.ml(112):4198-4216
+                        (caml_dynlink_add_primitive symb)))
+                   (before bytecomp/dll.ml(113):4224-4249
+                     (if (== actual_num num) 0a
+                       (raise
+                         (after bytecomp/dll.ml(113):4224-4249
+                           (makeblock 0 (global Assert_failure!)
+                             [0: "bytecomp/dll.ml" 113 4])))))))
+               0a))))
+     ld_conf_contents =
+       (function param
+         (funct-body bytecomp/dll.ml(118)<ghost>:4358-4658
+           (before bytecomp/dll.ml(119):4365-4658
+             (let (path = (makemutable 0 0a))
+               (before bytecomp/dll.ml(120):4388-4658
+                 (seq
+                   (try
+                     (let
+                       (ic =
+                          (after bytecomp/dll.ml(121):4411-4470
+                            (apply (field 78 (global Stdlib!))
+                              (after bytecomp/dll.ml(121):4419-4470
+                                (apply (field 3 (global Stdlib__filename!))
+                                  (field 1 (global Config!)) "ld.conf")))))
+                       (before bytecomp/dll.ml(122):4478-4609
+                         (seq
+                           (try
+                             (while 1a
+                               (before bytecomp/dll.ml(124):4516-4546
+                                 (setfield_ptr 0 path
+                                   (makeblock 0
+                                     (after bytecomp/dll.ml(124):4524-4537
+                                       (apply (field 82 (global Stdlib!)) ic))
+                                     (field 0 path)))))
+                            with exn
+                             (if (== exn (field 11 (global Stdlib!)))
+                               (before bytecomp/dll.ml(126):4582-4584 0a)
+                               (reraise exn)))
+                           (before bytecomp/dll.ml(128):4598-4609
+                             (after bytecomp/dll.ml(128):4598-4609
+                               (apply (field 92 (global Stdlib!)) ic))))))
+                    with exn
+                     (let (tag =a (field 0 exn))
+                       (if (== tag (field 10 (global Stdlib!)))
+                         (before bytecomp/dll.ml(129):4632-4634 0a)
+                         (reraise exn))))
+                   (before bytecomp/dll.ml(131):4644-4658
+                     (after bytecomp/dll.ml(131):4644-4658
+                       (apply (field 8 (global Stdlib__list!))
+                         (field 0 path))))))))))
+     ld_library_path_contents =
+       (function param
+         (funct-body bytecomp/dll.ml(135)<ghost>:4801-4930
+           (before bytecomp/dll.ml(136):4808-4930
+             (catch
+               (try
+                 (exit 5
+                   (after bytecomp/dll.ml(136):4814-4847
+                     (caml_sys_getenv "CAML_LD_LIBRARY_PATH")))
+                with exn
+                 (if (== exn (field 7 (global Stdlib!)))
+                   (before bytecomp/dll.ml(138):4886-4888 0a) (reraise exn)))
+              with (5 s)
+               (before bytecomp/dll.ml(140):4904-4930
+                 (after bytecomp/dll.ml(140):4904-4930
+                   (apply (field 17 (global Misc!)) 0a s)))))))
+     split_dll_path =
+       (function path
+         (funct-body bytecomp/dll.ml(142)<ghost>:4951-5001
+           (before bytecomp/dll.ml(143):4960-5001
+             (after bytecomp/dll.ml(143):4960-5001
+               (apply (field 17 (global Misc!)) [0: '\000'] path)))))
+     init_compile =
+       (function nostdlib
+         (funct-body bytecomp/dll.ml(147)<ghost>:5067-5177
+           (before bytecomp/dll.ml(148):5080-5177
+             (setfield_ptr 0 search_path
+               (after bytecomp/dll.ml(149):5099-5177
+                 (apply (field 36 (global Stdlib!))
+                   (after bytecomp/dll.ml(149):5099-5125
+                     (apply ld_library_path_contents 0a))
+                   (if nostdlib (before bytecomp/dll.ml(150):5150-5152 0a)
+                     (before bytecomp/dll.ml(150):5158-5176
+                       (after bytecomp/dll.ml(150):5158-5176
+                         (apply ld_conf_contents 0a))))))))))
+     init_toplevel =
+       (function dllpath
+         (funct-body bytecomp/dll.ml(154)<ghost>:5261-5482
+           (before bytecomp/dll.ml(155):5273-5482
+             (seq
+               (setfield_ptr 0 search_path
+                 (after bytecomp/dll.ml(156):5292-5372
+                   (apply (field 36 (global Stdlib!))
+                     (after bytecomp/dll.ml(156):5292-5318
+                       (apply ld_library_path_contents 0a))
+                     (after bytecomp/dll.ml(157):5325-5372
+                       (apply (field 36 (global Stdlib!))
+                         (after bytecomp/dll.ml(157):5325-5347
+                           (apply split_dll_path dllpath))
+                         (after bytecomp/dll.ml(158):5354-5372
+                           (apply ld_conf_contents 0a)))))))
+               (before bytecomp/dll.ml(159):5376-5482
+                 (seq
+                   (setfield_ptr 0 opened_dlls
+                     (after bytecomp/dll.ml(159):5391-5425
+                       (apply (field 10 (global Stdlib__array!))
+                         (after bytecomp/dll.ml(159):5405-5425
+                           (caml_dynlink_get_current_libs 0a)))))
+                   (before bytecomp/dll.ml(160):5429-5482
+                     (seq (setfield_ptr 0 names_of_opened_dlls 0a)
+                       (before bytecomp/dll.ml(161):5459-5482
+                         (setfield_imm 0 linking_in_core 1a))))))))))
+     reset =
+       (function param
+         (funct-body bytecomp/dll.ml(163)<ghost>:5494-5596
+           (before bytecomp/dll.ml(164):5501-5596
+             (seq (setfield_ptr 0 search_path 0a)
+               (before bytecomp/dll.ml(165):5522-5596
+                 (seq (setfield_ptr 0 opened_dlls 0a)
+                   (before bytecomp/dll.ml(166):5542-5596
+                     (seq (setfield_ptr 0 names_of_opened_dlls 0a)
+                       (before bytecomp/dll.ml(167):5572-5596
+                         (setfield_imm 0 linking_in_core 0a)))))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 extract_dll_name open_dlls close_all_dlls find_primitive
+        synchronize_primitive add_path remove_path init_compile init_toplevel
+        reset))))

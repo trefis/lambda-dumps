@@ -1,0 +1,239 @@
+(setglobal Variable!
+  (let
+    (include =
+       (apply (field 1 (global Identifiable!))
+         (let
+           (compare =
+              (function t1 t2 : int
+                (funct-body middle_end/variable.ml(30)<ghost>:1468-1653
+                  (before middle_end/variable.ml(31):1480-1653
+                    (if (== t1 t2)
+                      (before middle_end/variable.ml(31):1497-1498 0)
+                      (before middle_end/variable.ml(33):1514-1653
+                        (let (c =[int] (- (field 2 t1) (field 2 t2)))
+                          (before middle_end/variable.ml(34):1561-1653
+                            (if
+                              (after middle_end/variable.ml(34):1564-1570
+                                (apply
+                                  (field 1
+                                    (global Int_replace_polymorphic_compare!))
+                                  c 0))
+                              (before middle_end/variable.ml(34):1576-1577 c)
+                              (before middle_end/variable.ml(35):1589-1653
+                                (after middle_end/variable.ml(35):1589-1653
+                                  (apply (field 3 (global Compilation_unit!))
+                                    (field 0 t1) (field 0 t2))))))))))))
+            equal =
+              (function t1 t2
+                (funct-body middle_end/variable.ml(37)<ghost>:1667-1819
+                  (before middle_end/variable.ml(38):1679-1819
+                    (if (== t1 t2)
+                      (before middle_end/variable.ml(38):1696-1700 1a)
+                      (before middle_end/variable.ml(40):1716-1819
+                        (&&
+                          (after middle_end/variable.ml(40):1716-1745
+                            (apply
+                              (field 0
+                                (global Int_replace_polymorphic_compare!))
+                              (field 2 t1) (field 2 t2)))
+                          (after middle_end/variable.ml(41):1757-1819
+                            (apply (field 1 (global Compilation_unit!))
+                              (field 0 t1) (field 0 t2)))))))))
+            output =
+              (function chan t
+                (funct-body middle_end/variable.ml(43)<ghost>:1834-1953
+                  (before middle_end/variable.ml(44):1847-1953
+                    (seq
+                      (after middle_end/variable.ml(44):1847-1872
+                        (apply (field 65 (global Stdlib!)) chan (field 1 t)))
+                      (before middle_end/variable.ml(45):1878-1953
+                        (seq
+                          (after middle_end/variable.ml(45):1878-1900
+                            (apply (field 65 (global Stdlib!)) chan "_"))
+                          (before middle_end/variable.ml(46):1906-1953
+                            (after middle_end/variable.ml(46):1906-1953
+                              (apply (field 65 (global Stdlib!)) chan
+                                (after middle_end/variable.ml(46):1925-1953
+                                  (apply (field 9 (global Stdlib__int!))
+                                    (field 2 t))))))))))))
+            hash =
+              (function t : int
+                (funct-body middle_end/variable.ml(48)<ghost>:1966-2030
+                  (before middle_end/variable.ml(48):1970-2030
+                    (xor (field 2 t)
+                      (after middle_end/variable.ml(48):1988-2030
+                        (apply (field 2 (global Compilation_unit!))
+                          (field 0 t)))))))
+            print =
+              (function ppf t
+                (funct-body middle_end/variable.ml(50)<ghost>:2044-2363
+                  (before middle_end/variable.ml(51):2056-2363
+                    (if
+                      (after middle_end/variable.ml(51):2059-2146
+                        (apply (field 1 (global Compilation_unit!))
+                          (field 0 t)
+                          (after middle_end/variable.ml(52):2109-2146
+                            (apply (field 15 (global Compilation_unit!)) 0a))))
+                      (before middle_end/variable.ml(53):2156-2230
+                        (after middle_end/variable.ml(53):2156-2230
+                          (apply (field 122 (global Stdlib__format!)) ppf
+                            [0: [2: 0a [12: '/' [4: 0a 0a 0a 0a]]] "%s/%d"]
+                            (field 1 t) (field 2 t))))
+                      (before middle_end/variable.ml(56):2236-2363
+                        (after middle_end/variable.ml(56):2236-2363
+                          (apply (field 122 (global Stdlib__format!)) ppf
+                            [0:
+                             [15:
+                              [12: '.' [2: 0a [12: '/' [4: 0a 0a 0a 0a]]]]]
+                             "%a.%s/%d"]
+                            (field 5 (global Compilation_unit!)) (field 0 t)
+                            (field 1 t) (field 2 t)))))))))
+           (pseudo middle_end/variable.ml(27):1426-2367
+             (makeblock 0 equal hash compare output print))))
+     T =a (field 0 include)
+     equal =a (field 1 include)
+     hash =a (field 2 include)
+     compare =a (field 3 include)
+     output =a (field 4 include)
+     print =a (field 5 include)
+     Set =a (field 6 include)
+     Map =a (field 7 include)
+     Tbl =a (field 8 include)
+     previous_name_stamp = (makemutable 0 (int) -1)
+     create_with_name_string =
+       (function current_compilation_unit name
+         (funct-body middle_end/variable.ml(65)<ghost>:2434-2765
+           (before middle_end/variable.ml(66):2469-2765
+             (let
+               (compilation_unit =
+                  (if current_compilation_unit
+                    (let
+                      (compilation_unit =a (field 0 current_compilation_unit))
+                      (before middle_end/variable.ml(68):2563-2579
+                        compilation_unit))
+                    (before middle_end/variable.ml(69):2594-2629
+                      (after middle_end/variable.ml(69):2594-2629
+                        (apply (field 15 (global Compilation_unit!)) 0a)))))
+               (before middle_end/variable.ml(71):2637-2765
+                 (let
+                   (name_stamp =[int]
+                      (seq (+:=1 previous_name_stamp)
+                        (before middle_end/variable.ml(73):2688-2708
+                          (field 0 previous_name_stamp))))
+                   (before middle_end/variable.ml(75):2716-2765
+                     (makeblock 0 (*,*,int) compilation_unit name name_stamp))))))))
+     create =
+       (function current_compilation_unit name
+         (funct-body middle_end/variable.ml(80)<ghost>:2778-2928
+           (before middle_end/variable.ml(81):2813-2928
+             (let (name =a name)
+               (before middle_end/variable.ml(82):2874-2928
+                 (after middle_end/variable.ml(82):2874-2928
+                   (apply create_with_name_string current_compilation_unit
+                     name)))))))
+     create_with_same_name_as_ident =
+       (function ident
+         (funct-body middle_end/variable.ml(84)<ghost>:2965-3017
+           (before middle_end/variable.ml(85):2975-3017
+             (after middle_end/variable.ml(85):2975-3017
+               (apply create_with_name_string 0a
+                 (after middle_end/variable.ml(85):2999-3017
+                   (apply (field 14 (global Ident!)) ident)))))))
+     rename =
+       (function current_compilation_unit t
+         (funct-body middle_end/variable.ml(87)<ghost>:3030-3118
+           (before middle_end/variable.ml(88):3062-3118
+             (after middle_end/variable.ml(88):3062-3118
+               (apply create_with_name_string current_compilation_unit
+                 (field 1 t))))))
+     in_compilation_unit =
+       (function t cu
+         (funct-body middle_end/variable.ml(90)<ghost>:3144-3197
+           (before middle_end/variable.ml(91):3153-3197
+             (after middle_end/variable.ml(91):3153-3197
+               (apply (field 1 (global Compilation_unit!)) cu (field 0 t))))))
+     get_compilation_unit =
+       (function t
+         (funct-body middle_end/variable.ml(93)<ghost>:3224-3246
+           (before middle_end/variable.ml(93):3228-3246 (field 0 t))))
+     name =
+       (function t
+         (funct-body middle_end/variable.ml(95)<ghost>:3257-3267
+           (before middle_end/variable.ml(95):3261-3267 (field 1 t))))
+     unique_name =
+       (function t
+         (funct-body middle_end/variable.ml(97)<ghost>:3285-3334
+           (before middle_end/variable.ml(98):3291-3334
+             (after middle_end/variable.ml(98):3291-3334
+               (apply (field 27 (global Stdlib!)) (field 1 t)
+                 (after middle_end/variable.ml(98):3300-3334
+                   (apply (field 27 (global Stdlib!)) "_"
+                     (after middle_end/variable.ml(98):3306-3334
+                       (apply (field 9 (global Stdlib__int!)) (field 2 t))))))))))
+     print_list =
+       (function ppf ts
+         (funct-body middle_end/variable.ml(100)<ghost>:3351-3419
+           (before middle_end/variable.ml(101):3362-3419
+             (after middle_end/variable.ml(101):3362-3419
+               (apply (field 14 (global Stdlib__list!))
+                 (function t
+                   (funct-body middle_end/variable.ml(101):3372-3416
+                     (before middle_end/variable.ml(101):3382-3415
+                       (after middle_end/variable.ml(101):3382-3415
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0: [17: [0: "@ " 1 0] [15: 0a]] "@ %a"] print t)))))
+                 ts)))))
+     debug_when_stamp_matches =
+       (function t stamp[int] f
+         (funct-body middle_end/variable.ml(103)<ghost>:3450-3499
+           (before middle_end/variable.ml(104):3466-3499
+             (if
+               (after middle_end/variable.ml(104):3469-3489
+                 (apply (field 0 (global Int_replace_polymorphic_compare!))
+                   (field 2 t) stamp))
+               (before middle_end/variable.ml(104):3495-3499
+                 (after middle_end/variable.ml(104):3495-3499 (apply f 0a)))
+               0a))))
+     print_opt =
+       (function ppf param
+         (funct-body middle_end/variable.ml(106)<ghost>:3515-3597
+           (if param
+             (let (t =a (field 0 param))
+               (before middle_end/variable.ml(108):3586-3597
+                 (after middle_end/variable.ml(108):3586-3597
+                   (apply print ppf t))))
+             (before middle_end/variable.ml(107):3542-3571
+               (after middle_end/variable.ml(107):3542-3571
+                 (apply (field 122 (global Stdlib__format!)) ppf
+                   [0: [11: "<no var>" 0a] "<no var>"]))))))
+     Pair =
+       (module-defn(Pair) middle_end/variable.ml(111):3617-3676
+         (apply (field 1 (global Identifiable!))
+           (apply (apply (field 0 (global Identifiable!)) T) T)))
+     compare_lists =
+       (function l1 l2 : int
+         (funct-body middle_end/variable.ml(113)<ghost>:3696-3744
+           (before middle_end/variable.ml(114):3706-3744
+             (after middle_end/variable.ml(114):3706-3744
+               (apply (field 0 (field 0 (field 11 (global Misc!)))) compare
+                 l1 l2)))))
+     output_full =
+       (function chan t
+         (funct-body middle_end/variable.ml(116)<ghost>:3762-3863
+           (before middle_end/variable.ml(117):3773-3863
+             (seq
+               (after middle_end/variable.ml(117):3773-3820
+                 (apply (field 4 (global Compilation_unit!)) chan
+                   (field 0 t)))
+               (before middle_end/variable.ml(118):3824-3863
+                 (seq
+                   (after middle_end/variable.ml(118):3824-3846
+                     (apply (field 65 (global Stdlib!)) chan "."))
+                   (before middle_end/variable.ml(119):3850-3863
+                     (after middle_end/variable.ml(119):3850-3863
+                       (apply output chan t))))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 T equal hash compare output print Set Map Tbl create
+        create_with_same_name_as_ident rename in_compilation_unit name
+        unique_name get_compilation_unit print_list print_opt
+        debug_when_stamp_matches Pair compare_lists output_full))))

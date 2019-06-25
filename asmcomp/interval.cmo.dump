@@ -1,0 +1,524 @@
+(setglobal Interval!
+  (let
+    (interval_list = (makemutable 0 0a)
+     fixed_interval_list = (makemutable 0 0a)
+     all_intervals =
+       (function param
+         (funct-body asmcomp/interval.ml(43)<ghost>:1577-1596
+           (before asmcomp/interval.ml(43):1582-1596 (field 0 interval_list))))
+     all_fixed_intervals =
+       (function param
+         (funct-body asmcomp/interval.ml(44)<ghost>:1620-1645
+           (before asmcomp/interval.ml(44):1625-1645
+             (field 0 fixed_interval_list))))
+     overlap =
+       (function i0 i1
+         (funct-body asmcomp/interval.ml(48)<ghost>:1697-2082
+           (before asmcomp/interval.ml(49):1707-2082
+             (letrec
+               (overlap_ranges
+                  (function rl0 rl1
+                    (funct-body asmcomp/interval.ml(49)<ghost>:1730-2042
+                      (before asmcomp/interval.ml(50):1744-2042
+                        (let (*match* = rl0 *match* = rl1)
+                          (catch
+                            (if *match*
+                              (if *match*
+                                (let
+                                  (rl1' =a (field 1 *match*)
+                                   r1 =a (field 0 *match*)
+                                   rl0' =a (field 1 *match*)
+                                   r0 =a (field 0 *match*))
+                                  (before asmcomp/interval.ml(52):1804-2025
+                                    (if
+                                      (&& (>= (field 1 r0) (field 0 r1))
+                                        (>= (field 1 r1) (field 0 r0)))
+                                      (before asmcomp/interval.ml(52):1857-1861
+                                        1a)
+                                      (before asmcomp/interval.ml(53):1875-2025
+                                        (if (< (field 1 r0) (field 1 r1))
+                                          (before asmcomp/interval.ml(53):1901-1924
+                                            (after asmcomp/interval.ml(53):1901-1924
+                                              (apply overlap_ranges rl0' rl1)))
+                                          (before asmcomp/interval.ml(54):1938-2025
+                                            (if (> (field 1 r0) (field 1 r1))
+                                              (before asmcomp/interval.ml(54):1964-1987
+                                                (after asmcomp/interval.ml(54):1964-1987
+                                                  (apply overlap_ranges rl0
+                                                    rl1')))
+                                              (before asmcomp/interval.ml(55):2001-2025
+                                                (after asmcomp/interval.ml(55):2001-2025
+                                                  (apply overlap_ranges rl0'
+                                                    rl1'))))))))))
+                                (exit 1))
+                              (exit 1))
+                           with (1)
+                            (before asmcomp/interval.ml(56):2037-2042 0a)))))))
+               (before asmcomp/interval.ml(57):2048-2082
+                 (after asmcomp/interval.ml(57):2048-2082
+                   (apply overlap_ranges (field 3 i0) (field 3 i1))))))))
+     is_live =
+       (function i pos[int]
+         (funct-body asmcomp/interval.ml(59)<ghost>:2096-2322
+           (before asmcomp/interval.ml(60):2106-2322
+             (letrec
+               (is_live_in_ranges
+                  (function param
+                    (funct-body asmcomp/interval.ml(60):2134-2290
+                      (if param
+                        (let (rl =a (field 1 param) r =a (field 0 param))
+                          (before asmcomp/interval.ml(62):2174-2290
+                            (if (< pos (field 0 r))
+                              (before asmcomp/interval.ml(62):2197-2202 0a)
+                              (before asmcomp/interval.ml(63):2223-2290
+                                (if (<= pos (field 1 r))
+                                  (before asmcomp/interval.ml(63):2245-2249
+                                    1a)
+                                  (before asmcomp/interval.ml(64):2270-2290
+                                    (after asmcomp/interval.ml(64):2270-2290
+                                      (apply is_live_in_ranges rl))))))))
+                        (before asmcomp/interval.ml(61):2153-2158 0a)))))
+               (before asmcomp/interval.ml(65):2296-2322
+                 (after asmcomp/interval.ml(65):2296-2322
+                   (apply is_live_in_ranges (field 3 i))))))))
+     remove_expired_ranges =
+       (function i pos[int]
+         (funct-body asmcomp/interval.ml(67)<ghost>:2350-2508
+           (before asmcomp/interval.ml(68):2360-2508
+             (letrec
+               (filter
+                  (function rl
+                    (funct-body asmcomp/interval.ml(68):2377-2475
+                      (if rl
+                        (let (rl' =a (field 1 rl) r =a (field 0 rl))
+                          (before asmcomp/interval.ml(70):2421-2475
+                            (if (< pos (field 1 r))
+                              (before asmcomp/interval.ml(70):2442-2444 rl)
+                              (before asmcomp/interval.ml(71):2465-2475
+                                (after asmcomp/interval.ml(71):2465-2475
+                                  (apply filter rl'))))))
+                        (before asmcomp/interval.ml(69):2396-2398 0a)))))
+               (before asmcomp/interval.ml(72):2481-2508
+                 (setfield_ptr 3 i
+                   (after asmcomp/interval.ml(72):2493-2508
+                     (apply filter (field 3 i)))))))))
+     update_interval_position =
+       (function intervals pos[int] kind reg
+         (funct-body asmcomp/interval.ml(74)<ghost>:2539-3105
+           (before asmcomp/interval.ml(75):2566-3105
+             (let
+               (i =
+                  (after asmcomp/interval.ml(75):2574-2595
+                    (array.get[addr] intervals (field 1 reg))))
+               (before asmcomp/interval.ml(76):2601-3105
+                 (let (on =[int] (lsl pos 1))
+                   (before asmcomp/interval.ml(77):2625-3105
+                     (let (off =[int] (+ on 1))
+                       (before asmcomp/interval.ml(78):2647-3105
+                         (let
+                           (rbegin =[int]
+                              (if kind
+                                (before asmcomp/interval.ml(78):2698-2700 on)
+                                (before asmcomp/interval.ml(78):2687-2690
+                                  off)))
+                           (before asmcomp/interval.ml(79):2707-3105
+                             (let
+                               (rend =[int]
+                                  (if (!= kind 1)
+                                    (before asmcomp/interval.ml(79):2757-2760
+                                      off)
+                                    (before asmcomp/interval.ml(79):2747-2749
+                                      on)))
+                               (before asmcomp/interval.ml(80):2767-3105
+                                 (seq
+                                   (if (== (field 2 i) 0)
+                                     (before asmcomp/interval.ml(80):2786-2888
+                                       (seq (setfield_imm 1 i rbegin)
+                                         (before asmcomp/interval.ml(82):2820-2882
+                                           (seq (setfield_ptr 0 i reg)
+                                             (before asmcomp/interval.ml(83):2838-2882
+                                               (setfield_ptr 3 i
+                                                 (makeblock 0
+                                                   (makemutable 0 (int,int)
+                                                     rbegin rend)
+                                                   0a)))))))
+                                     (before asmcomp/interval.ml(84):2894-3087
+                                       (let
+                                         (r =
+                                            (after asmcomp/interval.ml(85):2912-2928
+                                              (apply
+                                                (field 4
+                                                  (global Stdlib__list!))
+                                                (field 3 i))))
+                                         (before asmcomp/interval.ml(86):2936-3081
+                                           (let
+                                             (ridx =[int] (asr (field 1 r) 1))
+                                             (before asmcomp/interval.ml(87):2967-3081
+                                               (if (<= (- pos ridx) 1)
+                                                 (before asmcomp/interval.ml(88):2997-3011
+                                                   (setfield_imm 1 r rend))
+                                                 (before asmcomp/interval.ml(90):3027-3081
+                                                   (setfield_ptr 3 i
+                                                     (makeblock 0
+                                                       (makemutable 0 (int,int)
+                                                         rbegin rend)
+                                                       (field 3 i)))))))))))
+                                   (before asmcomp/interval.ml(92):3091-3105
+                                     (setfield_imm 2 i rend))))))))))))))))
+     update_interval_position_by_array =
+       (function intervals regs pos[int] kind
+         (funct-body asmcomp/interval.ml(94)<ghost>:3145-3234
+           (before asmcomp/interval.ml(95):3173-3234
+             (after asmcomp/interval.ml(95):3173-3234
+               (apply (field 12 (global Stdlib__array!))
+                 (after asmcomp/interval.ml(95):3184-3229
+                   (apply update_interval_position intervals pos kind))
+                 regs)))))
+     update_interval_position_by_set =
+       (function intervals regs pos[int] kind
+         (funct-body asmcomp/interval.ml(97)<ghost>:3272-3359
+           (before asmcomp/interval.ml(98):3300-3359
+             (after asmcomp/interval.ml(98):3300-3359
+               (apply (field 13 (field 9 (global Reg!)))
+                 (after asmcomp/interval.ml(98):3309-3354
+                   (apply update_interval_position intervals pos kind))
+                 regs)))))
+     update_interval_position_by_instr =
+       (function intervals instr pos[int]
+         (funct-body asmcomp/interval.ml(100)<ghost>:3399-3622
+           (before asmcomp/interval.ml(101):3423-3622
+             (seq
+               (after asmcomp/interval.ml(101):3423-3489
+                 (apply update_interval_position_by_array intervals
+                   (field 2 instr) pos 1a))
+               (before asmcomp/interval.ml(102):3493-3622
+                 (seq
+                   (after asmcomp/interval.ml(102):3493-3557
+                     (apply update_interval_position_by_array intervals
+                       (field 3 instr) pos 0a))
+                   (before asmcomp/interval.ml(103):3561-3622
+                     (after asmcomp/interval.ml(103):3561-3622
+                       (apply update_interval_position_by_set intervals
+                         (field 5 instr) pos 2a)))))))))
+     insert_destroyed_at_oper =
+       (function intervals instr pos[int]
+         (funct-body asmcomp/interval.ml(105)<ghost>:3653-3835
+           (before asmcomp/interval.ml(106):3677-3835
+             (let
+               (destroyed =
+                  (after asmcomp/interval.ml(106):3693-3726
+                    (apply (field 18 (global Proc!)) (field 0 instr))))
+               (before asmcomp/interval.ml(107):3732-3835
+                 (if (> (array.length[addr] destroyed) 0)
+                   (before asmcomp/interval.ml(108):3771-3835
+                     (after asmcomp/interval.ml(108):3771-3835
+                       (apply update_interval_position_by_array intervals
+                         destroyed pos 0a)))
+                   0a))))))
+     insert_destroyed_at_raise =
+       (function intervals pos[int]
+         (funct-body asmcomp/interval.ml(110)<ghost>:3867-4033
+           (before asmcomp/interval.ml(111):3885-4033
+             (let (destroyed = (field 19 (global Proc!)))
+               (before asmcomp/interval.ml(112):3930-4033
+                 (if (> (array.length[addr] destroyed) 0)
+                   (before asmcomp/interval.ml(113):3969-4033
+                     (after asmcomp/interval.ml(113):3969-4033
+                       (apply update_interval_position_by_array intervals
+                         destroyed pos 0a)))
+                   0a))))))
+     build_intervals =
+       (function fd
+         (funct-body asmcomp/interval.ml(119)<ghost>:4171-6471
+           (before asmcomp/interval.ml(120):4178-6471
+             (let
+               (intervals =
+                  (after asmcomp/interval.ml(120):4194-4421
+                    (apply (field 1 (global Stdlib__array!))
+                      (after asmcomp/interval.ml(121):4225-4246
+                        (apply (field 18 (global Reg!)) 0a))
+                      (function param[int]
+                        (funct-body asmcomp/interval.ml(122):4267-4421
+                          (before asmcomp/interval.ml(122):4277-4420
+                            (makemutable 0 (*,int,int,*)
+                              (field 1 (global Reg!)) 0 0 0a)))))))
+               (before asmcomp/interval.ml(127):4427-6471
+                 (let (pos = (makemutable 0 (int) 0))
+                   (before asmcomp/interval.ml(128):4448-6471
+                     (letrec
+                       (walk_instruction
+                          (function i
+                            (funct-body asmcomp/interval.ml(128)<ghost>:4473-5872
+                              (before asmcomp/interval.ml(129):4481-5872
+                                (seq (+:=1 pos)
+                                  (before asmcomp/interval.ml(130):4495-5872
+                                    (seq
+                                      (after asmcomp/interval.ml(130):4495-4545
+                                        (apply
+                                          update_interval_position_by_instr
+                                          intervals i (field 0 pos)))
+                                      (before asmcomp/interval.ml(131):4551-5872
+                                        (let (*match* = (field 0 i))
+                                          (switch* *match*
+                                           case int 0:
+                                            (before asmcomp/interval.ml(132):4589-4591
+                                              0a)
+                                           case int 1:
+                                            (before asmcomp/interval.ml(140):4861-4935
+                                              (seq
+                                                (after asmcomp/interval.ml(140):4861-4902
+                                                  (apply
+                                                    insert_destroyed_at_oper
+                                                    intervals i
+                                                    (field 0 pos)))
+                                                (before asmcomp/interval.ml(141):4912-4935
+                                                  (after asmcomp/interval.ml(141):4912-4935
+                                                    (apply walk_instruction
+                                                      (field 1 i))))))
+                                           case tag 0:
+                                            (let
+                                              (*match* =a (field 0 *match*))
+                                              (catch
+                                                (catch
+                                                  (switch *match*
+                                                   case tag 3: (exit 5)
+                                                   case tag 4: (exit 5)
+                                                   case tag 5: (exit 5)
+                                                   case tag 6: (exit 5)
+                                                   case tag 7:
+                                                    (let
+                                                      (*match* =a
+                                                         (field 1 *match*))
+                                                      (if *match* (exit 5)
+                                                        (exit 6)))
+                                                   default: (exit 6))
+                                                 with (6)
+                                                  (before asmcomp/interval.ml(137):4761-4835
+                                                    (seq
+                                                      (after asmcomp/interval.ml(137):4761-4802
+                                                        (apply
+                                                          insert_destroyed_at_oper
+                                                          intervals i
+                                                          (field 0 pos)))
+                                                      (before asmcomp/interval.ml(138):4812-4835
+                                                        (after asmcomp/interval.ml(138):4812-4835
+                                                          (apply
+                                                            walk_instruction
+                                                            (field 1 i)))))))
+                                               with (5)
+                                                (before asmcomp/interval.ml(135):4714-4737
+                                                  (after asmcomp/interval.ml(135):4714-4737
+                                                    (apply walk_instruction
+                                                      (field 1 i))))))
+                                           case tag 1:
+                                            (let
+                                              (ifnot =a (field 2 *match*)
+                                               ifso =a (field 1 *match*))
+                                              (before asmcomp/interval.ml(143):4981-5118
+                                                (seq
+                                                  (after asmcomp/interval.ml(143):4981-5022
+                                                    (apply
+                                                      insert_destroyed_at_oper
+                                                      intervals i
+                                                      (field 0 pos)))
+                                                  (before asmcomp/interval.ml(144):5032-5118
+                                                    (seq
+                                                      (after asmcomp/interval.ml(144):5032-5053
+                                                        (apply
+                                                          walk_instruction
+                                                          ifso))
+                                                      (before asmcomp/interval.ml(145):5063-5118
+                                                        (seq
+                                                          (after asmcomp/interval.ml(145):5063-5085
+                                                            (apply
+                                                              walk_instruction
+                                                              ifnot))
+                                                          (before asmcomp/interval.ml(146):5095-5118
+                                                            (after asmcomp/interval.ml(146):5095-5118
+                                                              (apply
+                                                                walk_instruction
+                                                                (field 1 i)))))))))))
+                                           case tag 2:
+                                            (let (cases =a (field 1 *match*))
+                                              (before asmcomp/interval.ml(148):5154-5271
+                                                (seq
+                                                  (after asmcomp/interval.ml(148):5154-5195
+                                                    (apply
+                                                      insert_destroyed_at_oper
+                                                      intervals i
+                                                      (field 0 pos)))
+                                                  (before asmcomp/interval.ml(149):5205-5271
+                                                    (seq
+                                                      (after asmcomp/interval.ml(149):5205-5238
+                                                        (apply
+                                                          (field 12
+                                                            (global Stdlib__array!))
+                                                          walk_instruction
+                                                          cases))
+                                                      (before asmcomp/interval.ml(150):5248-5271
+                                                        (after asmcomp/interval.ml(150):5248-5271
+                                                          (apply
+                                                            walk_instruction
+                                                            (field 1 i)))))))))
+                                           case tag 3:
+                                            (let
+                                              (body =a (field 2 *match*)
+                                               handlers =a (field 1 *match*))
+                                              (before asmcomp/interval.ml(152):5315-5483
+                                                (seq
+                                                  (after asmcomp/interval.ml(152):5315-5356
+                                                    (apply
+                                                      insert_destroyed_at_oper
+                                                      intervals i
+                                                      (field 0 pos)))
+                                                  (before asmcomp/interval.ml(153):5366-5483
+                                                    (seq
+                                                      (after asmcomp/interval.ml(153):5366-5419
+                                                        (apply
+                                                          (field 14
+                                                            (global Stdlib__list!))
+                                                          (function param
+                                                            (funct-body asmcomp/interval.ml(153):5376-5410
+                                                              (let
+                                                                (i =a
+                                                                   (field 1
+                                                                    param))
+                                                                (before asmcomp/interval.ml(153):5391-5409
+                                                                  (after asmcomp/interval.ml(153):5391-5409
+                                                                    (apply
+                                                                    walk_instruction
+                                                                    i))))))
+                                                          handlers))
+                                                      (before asmcomp/interval.ml(154):5429-5483
+                                                        (seq
+                                                          (after asmcomp/interval.ml(154):5429-5450
+                                                            (apply
+                                                              walk_instruction
+                                                              body))
+                                                          (before asmcomp/interval.ml(155):5460-5483
+                                                            (after asmcomp/interval.ml(155):5460-5483
+                                                              (apply
+                                                                walk_instruction
+                                                                (field 1 i)))))))))))
+                                           case tag 4:
+                                            (before asmcomp/interval.ml(157):5509-5583
+                                              (seq
+                                                (after asmcomp/interval.ml(157):5509-5550
+                                                  (apply
+                                                    insert_destroyed_at_oper
+                                                    intervals i
+                                                    (field 0 pos)))
+                                                (before asmcomp/interval.ml(158):5560-5583
+                                                  (after asmcomp/interval.ml(158):5560-5583
+                                                    (apply walk_instruction
+                                                      (field 1 i))))))
+                                           case tag 5:
+                                            (let
+                                              (handler =a (field 1 *match*)
+                                               body =a (field 0 *match*))
+                                              (before asmcomp/interval.ml(160):5625-5814
+                                                (seq
+                                                  (after asmcomp/interval.ml(160):5625-5666
+                                                    (apply
+                                                      insert_destroyed_at_oper
+                                                      intervals i
+                                                      (field 0 pos)))
+                                                  (before asmcomp/interval.ml(161):5676-5814
+                                                    (seq
+                                                      (after asmcomp/interval.ml(161):5676-5697
+                                                        (apply
+                                                          walk_instruction
+                                                          body))
+                                                      (before asmcomp/interval.ml(162):5707-5814
+                                                        (seq
+                                                          (after asmcomp/interval.ml(162):5707-5747
+                                                            (apply
+                                                              insert_destroyed_at_raise
+                                                              intervals
+                                                              (field 0 pos)))
+                                                          (before asmcomp/interval.ml(163):5757-5814
+                                                            (seq
+                                                              (after asmcomp/interval.ml(163):5757-5781
+                                                                (apply
+                                                                  walk_instruction
+                                                                  handler))
+                                                              (before asmcomp/interval.ml(164):5791-5814
+                                                                (after asmcomp/interval.ml(164):5791-5814
+                                                                  (apply
+                                                                    walk_instruction
+                                                                    (field 1
+                                                                    i)))))))))))))
+                                           case tag 6:
+                                            (before asmcomp/interval.ml(166):5841-5864
+                                              (after asmcomp/interval.ml(166):5841-5864
+                                                (apply walk_instruction
+                                                  (field 1 i))))))))))))))
+                       (before asmcomp/interval.ml(168):5878-6471
+                         (seq
+                           (after asmcomp/interval.ml(168):5878-5906
+                             (apply walk_instruction (field 2 fd)))
+                           (before asmcomp/interval.ml(170):5965-6471
+                             (seq (setfield_ptr 0 interval_list 0a)
+                               (before asmcomp/interval.ml(171):5988-6471
+                                 (seq (setfield_ptr 0 fixed_interval_list 0a)
+                                   (before asmcomp/interval.ml(172):6017-6471
+                                     (seq
+                                       (after asmcomp/interval.ml(172):6017-6328
+                                         (apply
+                                           (field 12 (global Stdlib__array!))
+                                           (function i
+                                             (funct-body asmcomp/interval.ml(173):6032-6314
+                                               (before asmcomp/interval.ml(174):6048-6313
+                                                 (if (!= (field 2 i) 0)
+                                                   (before asmcomp/interval.ml(174):6068-6313
+                                                     (seq
+                                                       (setfield_ptr 3 i
+                                                         (after asmcomp/interval.ml(175):6094-6111
+                                                           (apply
+                                                             (field 8
+                                                               (global Stdlib__list!))
+                                                             (field 3 i))))
+                                                       (before asmcomp/interval.ml(176):6121-6303
+                                                         (let
+                                                           (*match* =
+                                                              (field 3
+                                                                (field 0 i)))
+                                                           (catch
+                                                             (switch* *match*
+                                                              case int 0:
+                                                               (exit 4)
+                                                              case tag 0:
+                                                               (before asmcomp/interval.ml(178):6179-6227
+                                                                 (setfield_ptr 0
+                                                                   fixed_interval_list
+                                                                   (makeblock 0
+                                                                    i
+                                                                    (field 0
+                                                                    fixed_interval_list))))
+                                                              case tag 1:
+                                                               (exit 4))
+                                                            with (4)
+                                                             (before asmcomp/interval.ml(180):6255-6291
+                                                               (setfield_ptr 0
+                                                                 interval_list
+                                                                 (makeblock 0
+                                                                   i
+                                                                   (field 0
+                                                                    interval_list)))))))))
+                                                   0a))))
+                                           intervals))
+                                       (before asmcomp/interval.ml(185):6393-6471
+                                         (setfield_ptr 0 interval_list
+                                           (after asmcomp/interval.ml(185):6410-6471
+                                             (apply
+                                               (field 48
+                                                 (global Stdlib__list!))
+                                               (function i0 i1 : int
+                                                 (funct-body asmcomp/interval.ml(185):6420-6456
+                                                   (before asmcomp/interval.ml(185):6434-6455
+                                                     (- (field 1 i0)
+                                                       (field 1 i1)))))
+                                               (field 0 interval_list))))))))))))))))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 all_intervals all_fixed_intervals overlap is_live
+        remove_expired_ranges build_intervals))))

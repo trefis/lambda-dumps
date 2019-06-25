@@ -1,0 +1,448 @@
+(setglobal Lift_code!
+  (let
+    (rebuild_let =
+       (function defs body
+         (funct-body middle_end/flambda/lift_code.ml(23)<ghost>:1308-1563
+           (before middle_end/flambda/lift_code.ml(25):1408-1563
+             (after middle_end/flambda/lift_code.ml(26):1456-1563
+               (apply (field 20 (global Stdlib__list!))
+                 (function body param
+                   (funct-body middle_end/flambda/lift_code.ml(26):1471-1549
+                     (let (def =a (field 1 param) var =a (field 0 param))
+                       (before middle_end/flambda/lift_code.ml(27):1501-1548
+                         (after middle_end/flambda/lift_code.ml(27):1501-1548
+                           (apply (field 4 (field 13 (global Flambda!))) var
+                             def body))))))
+                 body defs))))))
+    (letrec
+      (extract_lets
+         (function acc let_expr
+           (funct-body middle_end/flambda/lift_code.ml(31)<ghost>:1590-2236
+             (before middle_end/flambda/lift_code.ml(35):1808-2236
+               (let (*match* =a (field 1 let_expr) v1 =a (field 0 let_expr))
+                 (catch
+                   (switch *match*
+                    case tag 10:
+                     (let (*match* =a (field 0 *match*))
+                       (switch *match*
+                        case tag 1:
+                         (let (let2 =a (field 0 *match*))
+                           (before middle_end/flambda/lift_code.ml(38):1936-2085
+                             (let
+                               (*match* =
+                                  (after middle_end/flambda/lift_code.ml(38):1953-1974
+                                    (apply extract_lets acc let2))
+                                body2 =a (field 1 *match*)
+                                acc =a (field 0 *match*))
+                               (before middle_end/flambda/lift_code.ml(39):1982-2085
+                                 (let
+                                   (acc =
+                                      (makeblock 0
+                                        (makeblock 0 v1
+                                          (after middle_end/flambda/lift_code.ml(39):1997-2009
+                                            (apply
+                                              (field 7
+                                                (field 13 (global Flambda!)))
+                                              body2)))
+                                        acc))
+                                   (before middle_end/flambda/lift_code.ml(40):2025-2085
+                                     (let
+                                       (body =
+                                          (after middle_end/flambda/lift_code.ml(40):2036-2061
+                                            (apply
+                                              (field 1
+                                                (field 13 (global Flambda!)))
+                                              let_expr)))
+                                       (before middle_end/flambda/lift_code.ml(41):2069-2085
+                                         (after middle_end/flambda/lift_code.ml(41):2069-2085
+                                           (apply extract acc body))))))))))
+                        default: (exit 4)))
+                    default: (exit 4))
+                  with (4)
+                   (let (v =a v1)
+                     (before middle_end/flambda/lift_code.ml(43):2112-2236
+                       (let
+                         (acc =
+                            (makeblock 0
+                              (makeblock 0 v
+                                (after middle_end/flambda/lift_code.ml(43):2126-2160
+                                  (apply
+                                    (field 0 (field 13 (global Flambda!)))
+                                    let_expr)))
+                              acc))
+                         (before middle_end/flambda/lift_code.ml(44):2176-2236
+                           (let
+                             (body =
+                                (after middle_end/flambda/lift_code.ml(44):2187-2212
+                                  (apply
+                                    (field 1 (field 13 (global Flambda!)))
+                                    let_expr)))
+                             (before middle_end/flambda/lift_code.ml(45):2220-2236
+                               (after middle_end/flambda/lift_code.ml(45):2220-2236
+                                 (apply extract acc body)))))))))))))
+        extract
+          (function acc expr
+            (funct-body middle_end/flambda/lift_code.ml(47)<ghost>:2250-2454
+              (before middle_end/flambda/lift_code.ml(48):2307-2454
+                (let
+                  (*match* =
+                     (after middle_end/flambda/lift_code.ml(49):2361-2376
+                       (apply (field 8 (field 13 (global Flambda!))) expr)))
+                  (catch
+                    (switch *match*
+                     case tag 1:
+                      (let (let_expr =a (field 0 *match*))
+                        (before middle_end/flambda/lift_code.ml(51):2406-2431
+                          (after middle_end/flambda/lift_code.ml(51):2406-2431
+                            (apply extract_lets acc let_expr))))
+                     default: (exit 5))
+                   with (5)
+                    (before middle_end/flambda/lift_code.ml(53):2445-2454
+                      (makeblock 0 acc expr))))))))
+      (letrec
+        (lift_lets_expr
+           (function expr toplevel
+             (funct-body middle_end/flambda/lift_code.ml(55)<ghost>:2479-2979
+               (before middle_end/flambda/lift_code.ml(56):2522-2979
+                 (catch
+                   (switch expr
+                    case tag 1:
+                     (let (let_expr =a (field 0 expr))
+                       (before middle_end/flambda/lift_code.ml(59):2610-2854
+                         (let
+                           (*match* =
+                              (after middle_end/flambda/lift_code.ml(59):2627-2651
+                                (apply extract_lets 0a let_expr))
+                            body =a (field 1 *match*)
+                            defs =a (field 0 *match*))
+                           (before middle_end/flambda/lift_code.ml(60):2659-2854
+                             (let
+                               (rev_defs =
+                                  (after middle_end/flambda/lift_code.ml(61):2680-2745
+                                    (apply (field 18 (global Stdlib__list!))
+                                      (after middle_end/flambda/lift_code.ml(61):2693-2740
+                                        (function param stub
+                                          (apply
+                                            lift_lets_named_with_free_variables
+                                            param toplevel)))
+                                      defs)))
+                               (before middle_end/flambda/lift_code.ml(63):2757-2854
+                                 (let
+                                   (body =
+                                      (after middle_end/flambda/lift_code.ml(63):2768-2810
+                                        (apply lift_lets_expr
+                                          (after middle_end/flambda/lift_code.ml(63):2783-2800
+                                            (apply
+                                              (field 8
+                                                (field 13 (global Flambda!)))
+                                              body))
+                                          toplevel)))
+                                   (before middle_end/flambda/lift_code.ml(64):2818-2854
+                                     (after middle_end/flambda/lift_code.ml(64):2818-2854
+                                       (apply rebuild_let
+                                         (after middle_end/flambda/lift_code.ml(64):2830-2849
+                                           (apply
+                                             (field 8 (global Stdlib__list!))
+                                             rev_defs))
+                                         body))))))))))
+                    default: (exit 9))
+                  with (9)
+                   (let (e =a expr)
+                     (before middle_end/flambda/lift_code.ml(66):2868-2979
+                       (after middle_end/flambda/lift_code.ml(66):2868-2979
+                         (apply (field 1 (global Flambda_iterators!))
+                           (after middle_end/flambda/lift_code.ml(67):2911-2937
+                             (function param stub
+                               (apply lift_lets_expr param toplevel)))
+                           (after middle_end/flambda/lift_code.ml(68):2944-2971
+                             (function param stub
+                               (let (func = (apply lift_lets_named param))
+                                 (function param stub
+                                   (apply func param toplevel)))))
+                           e))))))))
+          lift_lets_named_with_free_variables
+            (function param toplevel
+              (funct-body middle_end/flambda/lift_code.ml(72)<ghost>:3025-3716
+                (let (named =a (field 1 param) var =a (field 0 param))
+                  (before middle_end/flambda/lift_code.ml(74):3176-3716
+                    (let
+                      (*match* =
+                         (after middle_end/flambda/lift_code.ml(75):3230-3246
+                           (apply (field 8 (field 13 (global Flambda!)))
+                             named)))
+                      (catch
+                        (switch *match*
+                         case tag 5:
+                          (let (set =a (field 0 *match*))
+                            (before middle_end/flambda/lift_code.ml(78):3352-3364
+                              (if (not toplevel)
+                                (before middle_end/flambda/lift_code.ml(79):3372-3510
+                                  (makeblock 0 var
+                                    (after middle_end/flambda/lift_code.ml(80):3381-3510
+                                      (apply
+                                        (field 3
+                                          (field 13 (global Flambda!)))
+                                        (makeblock 5
+                                          (after middle_end/flambda/lift_code.ml(82):3424-3509
+                                            (apply
+                                              (field 27
+                                                (global Flambda_iterators!))
+                                              set
+                                              (after middle_end/flambda/lift_code.ml(83):3478-3504
+                                                (function param stub
+                                                  (apply lift_lets_expr param
+                                                    toplevel))))))))))
+                                (exit 10))))
+                         case tag 10:
+                          (let (e =a (field 0 *match*))
+                            (before middle_end/flambda/lift_code.ml(77):3270-3322
+                              (makeblock 0 var
+                                (after middle_end/flambda/lift_code.ml(77):3275-3322
+                                  (apply
+                                    (field 7 (field 13 (global Flambda!)))
+                                    (after middle_end/flambda/lift_code.ml(77):3282-3322
+                                      (apply
+                                        (field 2
+                                          (field 13 (global Flambda!)))
+                                        (after middle_end/flambda/lift_code.ml(77):3293-3321
+                                          (apply lift_lets_expr e toplevel)))))))))
+                         default: (exit 10))
+                       with (10)
+                        (before middle_end/flambda/lift_code.ml(87):3706-3716
+                          (makeblock 0 var named))))))))
+          lift_lets_named
+            (function _var named toplevel
+              (funct-body middle_end/flambda/lift_code.ml(89)<ghost>:3738-4257
+                (before middle_end/flambda/lift_code.ml(90):3795-4257
+                  (catch
+                    (switch named
+                     case tag 5:
+                      (let (set =a (field 0 named))
+                        (before middle_end/flambda/lift_code.ml(94):3941-3953
+                          (if (not toplevel)
+                            (before middle_end/flambda/lift_code.ml(95):3961-4056
+                              (makeblock 5
+                                (after middle_end/flambda/lift_code.ml(96):3983-4056
+                                  (apply
+                                    (field 27 (global Flambda_iterators!))
+                                    set
+                                    (after middle_end/flambda/lift_code.ml(96):4025-4051
+                                      (function param stub
+                                        (apply lift_lets_expr param toplevel)))))))
+                            (exit 11))))
+                     case tag 10:
+                      (let (e =a (field 0 named))
+                        (before middle_end/flambda/lift_code.ml(93):3878-3911
+                          (makeblock 10
+                            (after middle_end/flambda/lift_code.ml(93):3883-3911
+                              (apply lift_lets_expr e toplevel)))))
+                     default: (exit 11))
+                   with (11)
+                    (before middle_end/flambda/lift_code.ml(100):4252-4257
+                      named))))))
+        (let
+          (Sort_lets =
+             (module-defn(Sort_lets) middle_end/flambda/lift_code.ml(102):4259-4323
+               (apply (field 0 (global Strongly_connected_components!))
+                 (let (let = (global Variable!))
+                   (makeblock 0 (field 0 let) (field 1 let) (field 2 let)
+                     (field 3 let) (field 4 let) (field 5 let) (field 6 let)
+                     (field 7 let) (field 8 let)))))
+           rebuild_let_rec =
+             (function defs body
+               (funct-body middle_end/flambda/lift_code.ml(104)<ghost>:4345-5055
+                 (before middle_end/flambda/lift_code.ml(105):4395-5055
+                   (let
+                     (map =
+                        (after middle_end/flambda/lift_code.ml(105):4405-4430
+                          (apply (field 39 (field 7 (global Variable!)))
+                            defs)))
+                     (before middle_end/flambda/lift_code.ml(106):4436-5055
+                       (let
+                         (graph =
+                            (after middle_end/flambda/lift_code.ml(107):4452-4610
+                              (apply (field 32 (field 7 (global Variable!)))
+                                (function named
+                                  (funct-body middle_end/flambda/lift_code.ml(108):4475-4600
+                                    (before middle_end/flambda/lift_code.ml(109):4498-4599
+                                      (after middle_end/flambda/lift_code.ml(109):4498-4599
+                                        (apply
+                                          (field 17
+                                            (field 6 (global Variable!)))
+                                          (function v
+                                            (funct-body middle_end/flambda/lift_code.ml(109):4518-4551
+                                              (before middle_end/flambda/lift_code.ml(109):4528-4550
+                                                (after middle_end/flambda/lift_code.ml(109):4528-4550
+                                                  (apply
+                                                    (field 2
+                                                      (field 7
+                                                        (global Variable!)))
+                                                    v map)))))
+                                          (after middle_end/flambda/lift_code.ml(110):4563-4599
+                                            (apply
+                                              (field 2 (global Flambda!)) 0a
+                                              named)))))))
+                                map)))
+                         (before middle_end/flambda/lift_code.ml(113):4618-5055
+                           (let
+                             (components =
+                                (after middle_end/flambda/lift_code.ml(114):4639-4701
+                                  (apply (field 0 Sort_lets) graph)))
+                             (before middle_end/flambda/lift_code.ml(116):4709-5055
+                               (after middle_end/flambda/lift_code.ml(116):4709-5055
+                                 (apply (field 16 (global Stdlib__array!))
+                                   (function body component
+                                     (funct-body middle_end/flambda/lift_code.ml(116):4725-5035
+                                       (before middle_end/flambda/lift_code.ml(117):4776-5034
+                                         (switch* component
+                                          case tag 0:
+                                           (let (l =a (field 0 component))
+                                             (before middle_end/flambda/lift_code.ml(122):4937-5034
+                                               (makeblock 3
+                                                 (after middle_end/flambda/lift_code.ml(123):4966-5014
+                                                   (apply
+                                                     (field 16
+                                                       (global Stdlib__list!))
+                                                     (function v
+                                                       (funct-body middle_end/flambda/lift_code.ml(123):4975-5012
+                                                         (before middle_end/flambda/lift_code.ml(123):4985-5011
+                                                           (makeblock 0 v
+                                                             (after middle_end/flambda/lift_code.ml(123):4988-5011
+                                                               (apply
+                                                                 (field 26
+                                                                   (field 7
+                                                                    (global Variable!)))
+                                                                 v map))))))
+                                                     l))
+                                                 body)))
+                                          case tag 1:
+                                           (let (v =a (field 0 component))
+                                             (before middle_end/flambda/lift_code.ml(119):4828-4904
+                                               (let
+                                                 (def =
+                                                    (after middle_end/flambda/lift_code.ml(119):4838-4861
+                                                      (apply
+                                                        (field 26
+                                                          (field 7
+                                                            (global Variable!)))
+                                                        v map)))
+                                                 (before middle_end/flambda/lift_code.ml(120):4875-4904
+                                                   (after middle_end/flambda/lift_code.ml(120):4875-4904
+                                                     (apply
+                                                       (field 11
+                                                         (global Flambda!))
+                                                       v def body))))))))))
+                                   body components)))))))))))
+           lift_let_rec =
+             (function program
+               (funct-body middle_end/flambda/lift_code.ml(127)<ghost>:5074-5330
+                 (before middle_end/flambda/lift_code.ml(128):5086-5330
+                   (after middle_end/flambda/lift_code.ml(128):5086-5330
+                     (apply (field 32 (global Flambda_iterators!)) program
+                       (after middle_end/flambda/lift_code.ml(129):5152-5330
+                         (apply (field 18 (global Flambda_iterators!))
+                           (function expr
+                             (funct-body middle_end/flambda/lift_code.ml(130):5190-5329
+                               (before middle_end/flambda/lift_code.ml(130):5203-5328
+                                 (catch
+                                   (switch expr
+                                    case tag 3:
+                                     (let
+                                       (body =a (field 1 expr)
+                                        defs =a (field 0 expr))
+                                       (before middle_end/flambda/lift_code.ml(132):5275-5300
+                                         (after middle_end/flambda/lift_code.ml(132):5275-5300
+                                           (apply rebuild_let_rec defs body))))
+                                    default: (exit 12))
+                                  with (12)
+                                   (let (expr =a expr)
+                                     (before middle_end/flambda/lift_code.ml(133):5324-5328
+                                       expr)))))))))))))
+           lift_lets =
+             (function program
+               (funct-body middle_end/flambda/lift_code.ml(135)<ghost>:5346-5496
+                 (before middle_end/flambda/lift_code.ml(136):5358-5496
+                   (let
+                     (program =
+                        (after middle_end/flambda/lift_code.ml(136):5372-5392
+                          (apply lift_let_rec program)))
+                     (before middle_end/flambda/lift_code.ml(137):5398-5496
+                       (after middle_end/flambda/lift_code.ml(137):5398-5496
+                         (apply (field 32 (global Flambda_iterators!))
+                           program
+                           (after middle_end/flambda/lift_code.ml(138):5464-5496
+                             (function param stub
+                               (apply lift_lets_expr param 0a))))))))))
+           lifting_helper =
+             (function exprs evaluation_order create_body name
+               (funct-body middle_end/flambda/lift_code.ml(140)<ghost>:5517-6315
+                 (before middle_end/flambda/lift_code.ml(141):5564-6315
+                   (let
+                     (*match* =
+                        (after middle_end/flambda/lift_code.ml(143):5662-6080
+                          (apply (field 21 (global Stdlib__list!))
+                            (function flam param
+                              (funct-body middle_end/flambda/lift_code.ml(143):5678-6059
+                                (let
+                                  (lets =a (field 1 param)
+                                   vars =a (field 0 param))
+                                  (before middle_end/flambda/lift_code.ml(144):5726-6058
+                                    (catch
+                                      (switch flam
+                                       case tag 0:
+                                        (let (v =a (field 0 flam))
+                                          (before middle_end/flambda/lift_code.ml(147):5847-5860
+                                            (makeblock 0 (makeblock 0 v vars)
+                                              lets)))
+                                       default: (exit 13))
+                                     with (13)
+                                      (let (expr =a flam)
+                                        (before middle_end/flambda/lift_code.ml(149):5889-6058
+                                          (let
+                                            (v =
+                                               (after middle_end/flambda/lift_code.ml(150):5909-6010
+                                                 (apply
+                                                   (field 9
+                                                     (global Variable!))
+                                                   (makeblock 0
+                                                     (after middle_end/flambda/lift_code.ml(151):5973-6010
+                                                       (apply
+                                                         (field 15
+                                                           (global Compilation_unit!))
+                                                         0a)))
+                                                   name)))
+                                            (before middle_end/flambda/lift_code.ml(153):6034-6058
+                                              (makeblock 0
+                                                (makeblock 0 v vars)
+                                                (makeblock 0
+                                                  (makeblock 0 v expr) lets)))))))))))
+                            exprs [0: 0a 0a]))
+                      lets =a (field 1 *match*)
+                      vars =a (field 0 *match*))
+                     (before middle_end/flambda/lift_code.ml(156):6088-6315
+                       (let
+                         (lets =
+                            (if (>= evaluation_order 1066667312)
+                              (before middle_end/flambda/lift_code.ml(159):6184-6197
+                                (after middle_end/flambda/lift_code.ml(159):6184-6197
+                                  (apply (field 8 (global Stdlib__list!))
+                                    lets)))
+                              (before middle_end/flambda/lift_code.ml(158):6155-6159
+                                lets)))
+                         (before middle_end/flambda/lift_code.ml(161):6205-6315
+                           (after middle_end/flambda/lift_code.ml(161):6205-6315
+                             (apply (field 20 (global Stdlib__list!))
+                               (function body param
+                                 (funct-body middle_end/flambda/lift_code.ml(161):6220-6287
+                                   (let
+                                     (expr =a (field 1 param)
+                                      v =a (field 0 param))
+                                     (before middle_end/flambda/lift_code.ml(162):6249-6286
+                                       (after middle_end/flambda/lift_code.ml(162):6249-6286
+                                         (apply (field 11 (global Flambda!))
+                                           v (makeblock 10 expr) body))))))
+                               (after middle_end/flambda/lift_code.ml(163):6292-6310
+                                 (apply create_body vars))
+                               lets))))))))))
+          (pseudo _none_(0)<ghost>:-1--1
+            (makeblock 0 lift_lets lift_lets_expr lifting_helper)))))))

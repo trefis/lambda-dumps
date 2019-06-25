@@ -1,0 +1,368 @@
+(setglobal Debuginfo!
+  (let
+    (none = 0a
+     is_none =
+       (function param
+         (funct-body lambda/debuginfo.ml(34):1368-1411
+           (if param (before lambda/debuginfo.ml(36):1406-1411 0a)
+             (before lambda/debuginfo.ml(35):1387-1391 1a))))
+     to_string =
+       (function dbg
+         (funct-body lambda/debuginfo.ml(38)<ghost>:1427-1695
+           (before lambda/debuginfo.ml(39):1435-1695
+             (if dbg
+               (let (ds =a dbg)
+                 (before lambda/debuginfo.ml(42):1477-1695
+                   (let
+                     (items =
+                        (after lambda/debuginfo.ml(43):1495-1648
+                          (apply (field 16 (global Stdlib__list!))
+                            (function d
+                              (funct-body lambda/debuginfo.ml(44):1512-1637
+                                (before lambda/debuginfo.ml(45):1533-1636
+                                  (after lambda/debuginfo.ml(45):1533-1636
+                                    (apply (field 3 (global Stdlib__printf!))
+                                      [0:
+                                       [2:
+                                        0a
+                                        [12:
+                                         ':'
+                                         [4:
+                                          0a 0a 0a
+                                          [12:
+                                           ','
+                                           [4:
+                                            0a 0a 0a
+                                            [12: '-' [4: 0a 0a 0a 0a]]]]]]]
+                                       "%s:%d,%d-%d"]
+                                      (field 0 d) (field 1 d) (field 2 d)
+                                      (field 3 d))))))
+                            ds)))
+                     (before lambda/debuginfo.ml(49):1660-1695
+                       (after lambda/debuginfo.ml(49):1660-1695
+                         (apply (field 27 (global Stdlib!)) "{"
+                           (after lambda/debuginfo.ml(49):1666-1695
+                             (apply (field 27 (global Stdlib!))
+                               (after lambda/debuginfo.ml(49):1666-1689
+                                 (apply (field 6 (global Stdlib__string!))
+                                   ";" items))
+                               "}"))))))))
+               (before lambda/debuginfo.ml(40):1460-1462 "")))))
+     item_from_location =
+       (function loc
+         (funct-body lambda/debuginfo.ml(51)<ghost>:1720-2378
+           (before lambda/debuginfo.ml(52):1728-2378
+             (let
+               (valid_endpos =
+                  (after lambda/debuginfo.ml(53):1751-1809
+                    (apply (field 33 (global Stdlib__string!))
+                      (field 0 (field 1 loc)) (field 0 (field 0 loc)))))
+               (before lambda/debuginfo.ml(54):1815-2378
+                 (makeblock 0 (*,int,int,int,int,int,int)
+                   (field 0 (field 0 loc)) (field 1 (field 0 loc))
+                   (- (field 3 (field 0 loc)) (field 2 (field 0 loc)))
+                   (if valid_endpos
+                     (before lambda/debuginfo.ml(59):2021-2065
+                       (- (field 3 (field 1 loc)) (field 2 (field 0 loc))))
+                     (before lambda/debuginfo.ml(60):2077-2123
+                       (- (field 3 (field 0 loc)) (field 2 (field 0 loc)))))
+                   (field 2 (field 0 loc))
+                   (if valid_endpos
+                     (before lambda/debuginfo.ml(63):2217-2236
+                       (field 2 (field 1 loc)))
+                     (before lambda/debuginfo.ml(64):2248-2269
+                       (field 2 (field 0 loc))))
+                   (if valid_endpos
+                     (before lambda/debuginfo.ml(66):2319-2339
+                       (field 1 (field 1 loc)))
+                     (before lambda/debuginfo.ml(67):2351-2373
+                       (field 1 (field 0 loc))))))))))
+     from_location =
+       (function loc
+         (funct-body lambda/debuginfo.ml(70)<ghost>:2398-2467
+           (before lambda/debuginfo.ml(71):2406-2467
+             (if (== loc (field 0 (global Location!)))
+               (before lambda/debuginfo.ml(71):2435-2437 0a)
+               (before lambda/debuginfo.ml(71):2443-2467
+                 (makeblock 0
+                   (after lambda/debuginfo.ml(71):2444-2466
+                     (apply item_from_location loc))
+                   0a))))))
+     to_location =
+       (function param
+         (funct-body lambda/debuginfo.ml(73):2487-2966
+           (if param
+             (let (d =a (field 0 param))
+               (before lambda/debuginfo.ml(76):2538-2966
+                 (let
+                   (loc_start =
+                      (makeblock 0 (*,int,int,int) (field 0 d) (field 1 d)
+                        (field 4 d) (+ (field 4 d) (field 2 d))))
+                   (before lambda/debuginfo.ml(82):2732-2966
+                     (let
+                       (loc_end =
+                          (makeblock 0 (*,int,int,int) (field 0 d)
+                            (field 6 d) (field 5 d)
+                            (+ (field 4 d) (field 3 d))))
+                       (before lambda/debuginfo.ml(88):2924-2966
+                         (makeblock 0 loc_start loc_end 0a)))))))
+             (before lambda/debuginfo.ml(74):2506-2519
+               (field 0 (global Location!))))))
+     inline =
+       (function loc t
+         (funct-body lambda/debuginfo.ml(90)<ghost>:2979-3056
+           (before lambda/debuginfo.ml(91):2989-3056
+             (if (== loc (field 0 (global Location!)))
+               (before lambda/debuginfo.ml(91):3018-3019 t)
+               (before lambda/debuginfo.ml(92):3027-3056
+                 (makeblock 0
+                   (after lambda/debuginfo.ml(92):3027-3051
+                     (apply item_from_location loc))
+                   t))))))
+     concat =
+       (function dbg1 dbg2
+         (funct-body lambda/debuginfo.ml(94)<ghost>:3069-3094
+           (before lambda/debuginfo.ml(95):3083-3094
+             (after lambda/debuginfo.ml(95):3083-3094
+               (apply (field 36 (global Stdlib!)) dbg1 dbg2)))))
+     compare =
+       (function dbg1 dbg2 : int
+         (funct-body lambda/debuginfo.ml(102)<ghost>:3435-4269
+           (before lambda/debuginfo.ml(103):3449-4269
+             (letrec
+               (loop
+                  (function ds1 ds2 : int
+                    (funct-body lambda/debuginfo.ml(103)<ghost>:3462-4225
+                      (before lambda/debuginfo.ml(104):3476-4225
+                        (let (*match* = ds1 *match* = ds2)
+                          (if *match*
+                            (let
+                              (ds1 =a (field 1 *match*)
+                               d1 =a (field 0 *match*))
+                              (if *match*
+                                (let
+                                  (ds2 =a (field 1 *match*)
+                                   d2 =a (field 0 *match*))
+                                  (before lambda/debuginfo.ml(109):3595-4225
+                                    (let
+                                      (c =[int]
+                                         (after lambda/debuginfo.ml(109):3603-3645
+                                           (apply
+                                             (field 32
+                                               (global Stdlib__string!))
+                                             (field 0 d1) (field 0 d2))))
+                                      (before lambda/debuginfo.ml(110):3655-4225
+                                        (if
+                                          (after lambda/debuginfo.ml(110):3658-3664
+                                            (apply
+                                              (field 1
+                                                (global Int_replace_polymorphic_compare!))
+                                              c 0))
+                                          (before lambda/debuginfo.ml(110):3670-3671
+                                            c)
+                                          (before lambda/debuginfo.ml(111):3683-4225
+                                            (let
+                                              (c =[int]
+                                                 (after lambda/debuginfo.ml(111):3691-3726
+                                                   (apply
+                                                     (field 6
+                                                       (global Int_replace_polymorphic_compare!))
+                                                     (field 1 d1)
+                                                     (field 1 d2))))
+                                              (before lambda/debuginfo.ml(112):3736-4225
+                                                (if
+                                                  (after lambda/debuginfo.ml(112):3739-3745
+                                                    (apply
+                                                      (field 1
+                                                        (global Int_replace_polymorphic_compare!))
+                                                      c 0))
+                                                  (before lambda/debuginfo.ml(112):3751-3752
+                                                    c)
+                                                  (before lambda/debuginfo.ml(113):3764-4225
+                                                    (let
+                                                      (c =[int]
+                                                         (after lambda/debuginfo.ml(113):3772-3815
+                                                           (apply
+                                                             (field 6
+                                                               (global Int_replace_polymorphic_compare!))
+                                                             (field 3 d1)
+                                                             (field 3 d2))))
+                                                      (before lambda/debuginfo.ml(114):3825-4225
+                                                        (if
+                                                          (after lambda/debuginfo.ml(114):3828-3834
+                                                            (apply
+                                                              (field 1
+                                                                (global Int_replace_polymorphic_compare!))
+                                                              c 0))
+                                                          (before lambda/debuginfo.ml(114):3840-3841
+                                                            c)
+                                                          (before lambda/debuginfo.ml(115):3853-4225
+                                                            (let
+                                                              (c =[int]
+                                                                 (after lambda/debuginfo.ml(115):3861-3908
+                                                                   (apply
+                                                                    (field 6
+                                                                    (global Int_replace_polymorphic_compare!))
+                                                                    (field 2
+                                                                    d1)
+                                                                    (field 2
+                                                                    d2))))
+                                                              (before lambda/debuginfo.ml(116):3918-4225
+                                                                (if
+                                                                  (after lambda/debuginfo.ml(116):3921-3927
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Int_replace_polymorphic_compare!))
+                                                                    c 0))
+                                                                  (before lambda/debuginfo.ml(116):3933-3934
+                                                                    c)
+                                                                  (before lambda/debuginfo.ml(117):3946-4225
+                                                                    (let
+                                                                    (c =[int]
+                                                                    (after lambda/debuginfo.ml(117):3954-3999
+                                                                    (apply
+                                                                    (field 6
+                                                                    (global Int_replace_polymorphic_compare!))
+                                                                    (field 4
+                                                                    d1)
+                                                                    (field 4
+                                                                    d2))))
+                                                                    (before lambda/debuginfo.ml(118):4009-4225
+                                                                    (if
+                                                                    (after lambda/debuginfo.ml(118):4012-4018
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Int_replace_polymorphic_compare!))
+                                                                    c 0))
+                                                                    (before lambda/debuginfo.ml(118):4024-4025
+                                                                    c)
+                                                                    (before lambda/debuginfo.ml(119):4037-4225
+                                                                    (let
+                                                                    (c =[int]
+                                                                    (after lambda/debuginfo.ml(119):4045-4086
+                                                                    (apply
+                                                                    (field 6
+                                                                    (global Int_replace_polymorphic_compare!))
+                                                                    (field 5
+                                                                    d1)
+                                                                    (field 5
+                                                                    d2))))
+                                                                    (before lambda/debuginfo.ml(120):4096-4225
+                                                                    (if
+                                                                    (after lambda/debuginfo.ml(120):4099-4105
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Int_replace_polymorphic_compare!))
+                                                                    c 0))
+                                                                    (before lambda/debuginfo.ml(120):4111-4112
+                                                                    c)
+                                                                    (before lambda/debuginfo.ml(121):4124-4225
+                                                                    (let
+                                                                    (c =[int]
+                                                                    (after lambda/debuginfo.ml(121):4132-4175
+                                                                    (apply
+                                                                    (field 6
+                                                                    (global Int_replace_polymorphic_compare!))
+                                                                    (field 6
+                                                                    d1)
+                                                                    (field 6
+                                                                    d2))))
+                                                                    (before lambda/debuginfo.ml(122):4185-4225
+                                                                    (if
+                                                                    (after lambda/debuginfo.ml(122):4188-4194
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Int_replace_polymorphic_compare!))
+                                                                    c 0))
+                                                                    (before lambda/debuginfo.ml(122):4200-4201
+                                                                    c)
+                                                                    (before lambda/debuginfo.ml(123):4213-4225
+                                                                    (after lambda/debuginfo.ml(123):4213-4225
+                                                                    (apply
+                                                                    loop ds1
+                                                                    ds2))))))))))))))))))))))))))))))))
+                                (before lambda/debuginfo.ml(106):3534-3535 1)))
+                            (if *match*
+                              (before lambda/debuginfo.ml(107):3556-3558 -1)
+                              (before lambda/debuginfo.ml(105):3512-3513 0))))))))
+               (before lambda/debuginfo.ml(125):4233-4269
+                 (after lambda/debuginfo.ml(125):4233-4269
+                   (apply loop
+                     (after lambda/debuginfo.ml(125):4238-4253
+                       (apply (field 8 (global Stdlib__list!)) dbg1))
+                     (after lambda/debuginfo.ml(125):4254-4269
+                       (apply (field 8 (global Stdlib__list!)) dbg2)))))))))
+     hash =
+       (function t : int
+         (funct-body lambda/debuginfo.ml(127)<ghost>:4280-4349
+           (before lambda/debuginfo.ml(128):4286-4349
+             (after lambda/debuginfo.ml(128):4286-4349
+               (apply (field 20 (global Stdlib__list!))
+                 (function hash[int] item : int
+                   (funct-body lambda/debuginfo.ml(128):4301-4345
+                     (before lambda/debuginfo.ml(128):4319-4344
+                       (after lambda/debuginfo.ml(128):4319-4344
+                         (apply (field 26 (global Stdlib__hashtbl!))
+                           (makeblock 0 (int,*) hash item))))))
+                 0 t))))))
+    (letrec
+      (print_compact
+         (function ppf t
+           (funct-body lambda/debuginfo.ml(130)<ghost>:4373-4785
+             (before lambda/debuginfo.ml(131):4383-4785
+               (let
+                 (print_item =
+                    (function item
+                      (funct-body lambda/debuginfo.ml(131)<ghost>:4398-4634
+                        (before lambda/debuginfo.ml(132):4409-4634
+                          (seq
+                            (after lambda/debuginfo.ml(132):4409-4503
+                              (apply (field 122 (global Stdlib__format!)) ppf
+                                [0: [15: [12: ':' [4: 3a 0a 0a 0a]]] "%a:%i"]
+                                (field 18 (global Location!)) (field 0 item)
+                                (field 1 item)))
+                            (before lambda/debuginfo.ml(135):4509-4634
+                              (if
+                                (after lambda/debuginfo.ml(135):4512-4538
+                                  (apply
+                                    (field 5
+                                      (global Int_replace_polymorphic_compare!))
+                                    (field 2 item) 0))
+                                (before lambda/debuginfo.ml(135):4544-4634
+                                  (after lambda/debuginfo.ml(135):4544-4634
+                                    (apply
+                                      (field 122 (global Stdlib__format!))
+                                      ppf
+                                      [0:
+                                       [12:
+                                        ','
+                                        [4:
+                                         3a 0a 0a [11: "--" [4: 3a 0a 0a 0a]]]]
+                                       ",%i--%i"]
+                                      (field 2 item) (field 3 item))))
+                                0a)))))))
+                 (before lambda/debuginfo.ml(139):4642-4785
+                   (if t
+                     (let (t =a (field 1 t) item =a (field 0 t))
+                       (if t
+                         (let (item =a item)
+                           (before lambda/debuginfo.ml(143):4717-4785
+                             (seq
+                               (after lambda/debuginfo.ml(143):4717-4732
+                                 (apply print_item item))
+                               (before lambda/debuginfo.ml(144):4738-4785
+                                 (seq
+                                   (after lambda/debuginfo.ml(144):4738-4760
+                                     (apply
+                                       (field 122 (global Stdlib__format!))
+                                       ppf [0: [12: ';' 0a] ";"]))
+                                   (before lambda/debuginfo.ml(145):4766-4785
+                                     (after lambda/debuginfo.ml(145):4766-4785
+                                       (apply print_compact ppf t))))))))
+                         (before lambda/debuginfo.ml(141):4682-4697
+                           (after lambda/debuginfo.ml(141):4682-4697
+                             (apply print_item item)))))
+                     (before lambda/debuginfo.ml(140):4665-4667 0a))))))))
+      (pseudo _none_(0)<ghost>:-1--1
+        (makeblock 0 none is_none to_string from_location to_location concat
+          inline compare hash print_compact)))))

@@ -1,0 +1,349 @@
+(setglobal Share_constants!
+  (let
+    (update_constant_for_sharing =
+       (function sharing_symbol_tbl const
+         (funct-body middle_end/flambda/share_constants.ml(22)<ghost>:1336-2236
+           (before middle_end/flambda/share_constants.ml(24):1405-2236
+             (let
+               (substitute_symbol =
+                  (function sym
+                    (funct-body middle_end/flambda/share_constants.ml(24)<ghost>:1427-1542
+                      (before middle_end/flambda/share_constants.ml(25):1437-1542
+                        (catch
+                          (try
+                            (exit 1
+                              (after middle_end/flambda/share_constants.ml(25):1443-1481
+                                (apply (field 6 (field 8 (global Symbol!)))
+                                  sharing_symbol_tbl sym)))
+                           with exn
+                            (if (== exn (field 7 (global Stdlib!)))
+                              (before middle_end/flambda/share_constants.ml(26):1516-1519
+                                sym)
+                              (reraise exn)))
+                         with (1 symbol)
+                          (before middle_end/flambda/share_constants.ml(27):1536-1542
+                            symbol))))))
+               (before middle_end/flambda/share_constants.ml(29):1550-2236
+                 (switch* const
+                  case tag 0:
+                   (before middle_end/flambda/share_constants.ml(30):1626-1631
+                     const)
+                  case tag 1:
+                   (let (fields =a (field 1 const) tag =a (field 0 const))
+                     (before middle_end/flambda/share_constants.ml(32):1663-1972
+                       (let
+                         (subst_field =
+                            (function field
+                              (funct-body middle_end/flambda/share_constants.ml(32)<ghost>:1679-1893
+                                (before middle_end/flambda/share_constants.ml(34):1791-1893
+                                  (switch* field
+                                   case tag 0:
+                                    (let (sym =a (field 0 field))
+                                      (before middle_end/flambda/share_constants.ml(37):1863-1893
+                                        (makeblock 0
+                                          (after middle_end/flambda/share_constants.ml(37):1870-1893
+                                            (apply substitute_symbol sym)))))
+                                   case tag 1:
+                                    (before middle_end/flambda/share_constants.ml(35):1827-1832
+                                      field))))))
+                         (before middle_end/flambda/share_constants.ml(39):1905-1972
+                           (let
+                             (fields =
+                                (after middle_end/flambda/share_constants.ml(39):1918-1945
+                                  (apply (field 16 (global Stdlib__list!))
+                                    subst_field fields)))
+                             (before middle_end/flambda/share_constants.ml(40):1953-1972
+                               (makeblock 1 tag fields)))))))
+                  case tag 2:
+                   (let (set_of_closures =a (field 0 const))
+                     (before middle_end/flambda/share_constants.ml(42):2016-2139
+                       (makeblock 2
+                         (after middle_end/flambda/share_constants.ml(42):2032-2139
+                           (apply (field 24 (global Flambda_iterators!))
+                             set_of_closures substitute_symbol)))))
+                  case tag 3:
+                   (let
+                     (closure_id =a (field 1 const) sym =a (field 0 const))
+                     (before middle_end/flambda/share_constants.ml(47):2185-2236
+                       (makeblock 3
+                         (after middle_end/flambda/share_constants.ml(47):2202-2223
+                           (apply substitute_symbol sym))
+                         closure_id)))))))))
+     cannot_share =
+       (function const
+         (funct-body middle_end/flambda/share_constants.ml(49)<ghost>:2255-2528
+           (before middle_end/flambda/share_constants.ml(50):2301-2528
+             (catch
+               (switch const
+                case tag 0:
+                 (let (*match* =a (field 0 const))
+                   (catch
+                     (switch *match*
+                      case tag 4: (exit 4)
+                      case tag 6: (exit 4)
+                      default: (exit 3))
+                    with (4)
+                     (before middle_end/flambda/share_constants.ml(52):2439-2443
+                       1a)))
+                default: (exit 3))
+              with (3)
+               (before middle_end/flambda/share_constants.ml(54):2523-2528
+                 0a)))))
+     share_definition =
+       (function constant_to_symbol_tbl sharing_symbol_tbl symbol def
+         end_symbol
+         (funct-body middle_end/flambda/share_constants.ml(56)<ghost>:2551-3212
+           (before middle_end/flambda/share_constants.ml(58):2623-3212
+             (let
+               (def =
+                  (after middle_end/flambda/share_constants.ml(58):2633-2683
+                    (apply update_constant_for_sharing sharing_symbol_tbl
+                      def)))
+               (before middle_end/flambda/share_constants.ml(59):2689-3212
+                 (if
+                   (||
+                     (after middle_end/flambda/share_constants.ml(59):2692-2708
+                       (apply cannot_share def))
+                     (after middle_end/flambda/share_constants.ml(59):2712-2742
+                       (apply (field 1 (global Symbol!)) symbol end_symbol)))
+                   (before middle_end/flambda/share_constants.ml(62):2897-2905
+                     (makeblock 0 def))
+                   (before middle_end/flambda/share_constants.ml(64):2917-3212
+                     (catch
+                       (try
+                         (exit 6
+                           (after middle_end/flambda/share_constants.ml(64):2929-2988
+                             (apply
+                               (field 6
+                                 (field 8 (field 0 (global Flambda!))))
+                               constant_to_symbol_tbl def)))
+                        with exn
+                         (if (== exn (field 7 (global Stdlib!)))
+                           (before middle_end/flambda/share_constants.ml(66):3029-3110
+                             (seq
+                               (after middle_end/flambda/share_constants.ml(66):3029-3094
+                                 (apply
+                                   (field 4
+                                     (field 8 (field 0 (global Flambda!))))
+                                   constant_to_symbol_tbl def symbol))
+                               (before middle_end/flambda/share_constants.ml(67):3102-3110
+                                 (makeblock 0 def))))
+                           (reraise exn)))
+                      with (6 equal_symbol)
+                       (before middle_end/flambda/share_constants.ml(69):3139-3204
+                         (seq
+                           (after middle_end/flambda/share_constants.ml(69):3139-3192
+                             (apply (field 4 (field 8 (global Symbol!)))
+                               sharing_symbol_tbl symbol equal_symbol))
+                           (before middle_end/flambda/share_constants.ml(70):3200-3204
+                             0a))))))))))))
+    (letrec
+      (end_symbol
+         (function program
+           (funct-body middle_end/flambda/share_constants.ml(73)<ghost>:3233-3467
+             (before middle_end/flambda/share_constants.ml(74):3270-3467
+               (catch
+                 (catch
+                   (switch* program
+                    case tag 0:
+                     (let (program =a (field 2 program)) (exit 8 program))
+                    case tag 1: (exit 9)
+                    case tag 2:
+                     (let (program =a (field 3 program)) (exit 8 program))
+                    case tag 3: (exit 9)
+                    case tag 4:
+                     (let (symbol =a (field 0 program))
+                       (before middle_end/flambda/share_constants.ml(75):3307-3313
+                         symbol)))
+                  with (9)
+                   (let (program =a (field 1 program)) (exit 8 program)))
+                with (8 program)
+                 (before middle_end/flambda/share_constants.ml(80):3449-3467
+                   (after middle_end/flambda/share_constants.ml(80):3449-3467
+                     (apply end_symbol program))))))))
+      (let
+        (share_constants =
+           (function program
+             (funct-body middle_end/flambda/share_constants.ml(82)<ghost>:3489-5102
+               (before middle_end/flambda/share_constants.ml(83):3521-5102
+                 (let
+                   (end_symbol =
+                      (after middle_end/flambda/share_constants.ml(83):3538-3569
+                        (apply end_symbol (field 1 program))))
+                   (before middle_end/flambda/share_constants.ml(84):3575-5102
+                     (let
+                       (sharing_symbol_tbl =
+                          (after middle_end/flambda/share_constants.ml(84):3600-3620
+                            (apply (field 0 (field 8 (global Symbol!))) 42)))
+                       (before middle_end/flambda/share_constants.ml(85):3626-5102
+                         (let
+                           (constant_to_symbol_tbl =
+                              (after middle_end/flambda/share_constants.ml(85):3655-3692
+                                (apply
+                                  (field 0
+                                    (field 8 (field 0 (global Flambda!))))
+                                  42)))
+                           (before middle_end/flambda/share_constants.ml(86):3698-5102
+                             (letrec
+                               (loop
+                                  (function program
+                                    (funct-body middle_end/flambda/share_constants.ml(86)<ghost>:3711-5030
+                                      (before middle_end/flambda/share_constants.ml(87):3773-5030
+                                        (switch* program
+                                         case tag 0:
+                                          (let
+                                            (program =a (field 2 program)
+                                             def =a (field 1 program)
+                                             symbol =a (field 0 program))
+                                            (before middle_end/flambda/share_constants.ml(89):3839-4074
+                                              (let
+                                                (*match* =
+                                                   (after middle_end/flambda/share_constants.ml(90):3859-3949
+                                                     (apply share_definition
+                                                       constant_to_symbol_tbl
+                                                       sharing_symbol_tbl
+                                                       symbol def end_symbol)))
+                                                (if *match*
+                                                  (let
+                                                    (def' =a
+                                                       (field 0 *match*))
+                                                    (before middle_end/flambda/share_constants.ml(96):4027-4064
+                                                      (makeblock 0 symbol
+                                                        def'
+                                                        (after middle_end/flambda/share_constants.ml(96):4051-4063
+                                                          (apply loop
+                                                            program)))))
+                                                  (before middle_end/flambda/share_constants.ml(94):3985-3997
+                                                    (after middle_end/flambda/share_constants.ml(94):3985-3997
+                                                      (apply loop program)))))))
+                                         case tag 1:
+                                          (let
+                                            (program =a (field 1 program)
+                                             defs =a (field 0 program))
+                                            (before middle_end/flambda/share_constants.ml(99):4120-4336
+                                              (let
+                                                (defs =
+                                                   (after middle_end/flambda/share_constants.ml(100):4139-4285
+                                                     (apply
+                                                       (field 16
+                                                         (global Stdlib__list!))
+                                                       (function param
+                                                         (funct-body middle_end/flambda/share_constants.ml(100):4148-4270
+                                                           (let
+                                                             (def =a
+                                                                (field 1
+                                                                  param)
+                                                              symbol =a
+                                                                (field 0
+                                                                  param))
+                                                             (before middle_end/flambda/share_constants.ml(101):4182-4269
+                                                               (let
+                                                                 (def =
+                                                                    (after middle_end/flambda/share_constants.ml(101):4192-4242
+                                                                    (apply
+                                                                    update_constant_for_sharing
+                                                                    sharing_symbol_tbl
+                                                                    def)))
+                                                                 (before middle_end/flambda/share_constants.ml(102):4258-4269
+                                                                   (makeblock 0
+                                                                    symbol
+                                                                    def)))))))
+                                                       defs)))
+                                                (before middle_end/flambda/share_constants.ml(105):4301-4336
+                                                  (makeblock 1 defs
+                                                    (after middle_end/flambda/share_constants.ml(105):4323-4335
+                                                      (apply loop program)))))))
+                                         case tag 2:
+                                          (let
+                                            (program =a (field 3 program)
+                                             fields =a (field 2 program)
+                                             tag =a (field 1 program)
+                                             symbol =a (field 0 program))
+                                            (before middle_end/flambda/share_constants.ml(107):4398-4729
+                                              (let
+                                                (fields =
+                                                   (after middle_end/flambda/share_constants.ml(108):4419-4663
+                                                     (apply
+                                                       (field 16
+                                                         (global Stdlib__list!))
+                                                       (function field
+                                                         (funct-body middle_end/flambda/share_constants.ml(108):4428-4646
+                                                           (before middle_end/flambda/share_constants.ml(109):4454-4645
+                                                             (after middle_end/flambda/share_constants.ml(109):4454-4645
+                                                               (apply
+                                                                 (field 23
+                                                                   (global Flambda_iterators!))
+                                                                 field
+                                                                 (function
+                                                                   symbol
+                                                                   (funct-body middle_end/flambda/share_constants.ml(110):4501-4625
+                                                                    (before middle_end/flambda/share_constants.ml(111):4534-4624
+                                                                    (try
+                                                                    (after middle_end/flambda/share_constants.ml(111):4538-4579
+                                                                    (apply
+                                                                    (field 6
+                                                                    (field 8
+                                                                    (global Symbol!)))
+                                                                    sharing_symbol_tbl
+                                                                    symbol))
+                                                                    with exn
+                                                                    (if
+                                                                    (== exn
+                                                                    (field 7
+                                                                    (global Stdlib!)))
+                                                                    (before middle_end/flambda/share_constants.ml(112):4618-4624
+                                                                    symbol)
+                                                                    (reraise
+                                                                    exn)))))))))))
+                                                       fields)))
+                                                (before middle_end/flambda/share_constants.ml(116):4679-4729
+                                                  (makeblock 2 symbol tag
+                                                    fields
+                                                    (after middle_end/flambda/share_constants.ml(116):4716-4728
+                                                      (apply loop program)))))))
+                                         case tag 3:
+                                          (let
+                                            (program =a (field 1 program)
+                                             expr =a (field 0 program))
+                                            (before middle_end/flambda/share_constants.ml(118):4767-5003
+                                              (let
+                                                (expr =
+                                                   (after middle_end/flambda/share_constants.ml(119):4786-4960
+                                                     (apply
+                                                       (field 23
+                                                         (global Flambda_iterators!))
+                                                       expr
+                                                       (function symbol
+                                                         (funct-body middle_end/flambda/share_constants.ml(120):4829-4945
+                                                           (before middle_end/flambda/share_constants.ml(121):4858-4944
+                                                             (try
+                                                               (after middle_end/flambda/share_constants.ml(121):4862-4903
+                                                                 (apply
+                                                                   (field 6
+                                                                    (field 8
+                                                                    (global Symbol!)))
+                                                                   sharing_symbol_tbl
+                                                                   symbol))
+                                                              with exn
+                                                               (if
+                                                                 (== exn
+                                                                   (field 7
+                                                                    (global Stdlib!)))
+                                                                 (before middle_end/flambda/share_constants.ml(122):4938-4944
+                                                                   symbol)
+                                                                 (reraise
+                                                                   exn)))))))))
+                                                (before middle_end/flambda/share_constants.ml(125):4976-5003
+                                                  (makeblock 3 expr
+                                                    (after middle_end/flambda/share_constants.ml(125):4990-5002
+                                                      (apply loop program)))))))
+                                         case tag 4:
+                                          (let (root =a (field 0 program))
+                                            (before middle_end/flambda/share_constants.ml(126):5022-5030
+                                              (makeblock 4 root))))))))
+                               (before middle_end/flambda/share_constants.ml(128):5038-5102
+                                 (let (init = program)
+                                   (makeblock 0 (field 0 init)
+                                     (after middle_end/flambda/share_constants.ml(129):5072-5097
+                                       (apply loop (field 1 program)))))))))))))))))
+        (pseudo _none_(0)<ghost>:-1--1 (makeblock 0 share_constants))))))

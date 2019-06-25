@@ -1,0 +1,1958 @@
+(setglobal Build_export_info!
+  (let
+    (Env =
+       (module-defn(Env) middle_end/flambda/build_export_info.ml(19):1197-6690
+         (let
+           (fresh_id =
+              (function param
+                (funct-body middle_end/flambda/build_export_info.ml(58)<ghost>:2452-2501
+                  (before middle_end/flambda/build_export_info.ml(58):2457-2501
+                    (after middle_end/flambda/build_export_info.ml(58):2457-2501
+                      (apply (field 9 (global Export_id!)) 0a
+                        (after middle_end/flambda/build_export_info.ml(58):2474-2501
+                          (apply (field 6 (global Compilenv!)) 0a)))))))
+            Global =
+              (module-defn(Global) middle_end/flambda/build_export_info.ml(60):2505-3475
+                (let
+                  (create_empty =
+                     (function param
+                       (funct-body middle_end/flambda/build_export_info.ml(69)<ghost>:2829-2967
+                         (before middle_end/flambda/build_export_info.ml(70):2840-2967
+                           (makeblock 0 (field 0 (field 7 (global Symbol!)))
+                             (makemutable 0
+                               (field 0 (field 7 (global Export_id!))))
+                             (makemutable 0
+                               (field 0 (field 7 (global Closure_id!))))))))
+                   add_symbol =
+                     (function t sym export_id
+                       (funct-body middle_end/flambda/build_export_info.ml(75)<ghost>:2988-3268
+                         (before middle_end/flambda/build_export_info.ml(76):3012-3268
+                           (seq
+                             (if
+                               (after middle_end/flambda/build_export_info.ml(76):3015-3039
+                                 (apply (field 2 (field 7 (global Symbol!)))
+                                   sym (field 0 t)))
+                               (before middle_end/flambda/build_export_info.ml(76):3045-3209
+                                 (after middle_end/flambda/build_export_info.ml(76):3045-3209
+                                   (apply (field 1 (global Misc!))
+                                     [0:
+                                      [11:
+                                       "Build_export_info.Env.Global.add_symbol: cannot rebind symbol "
+                                       [15: [11: " in environment" 0a]]]
+                                      "Build_export_info.Env.Global.add_symbol: cannot rebind symbol %a in environment"]
+                                     (field 5 (global Symbol!)) sym)))
+                               0a)
+                             (before middle_end/flambda/build_export_info.ml(81):3217-3268
+                               (let (init = t)
+                                 (makeblock 0
+                                   (after middle_end/flambda/build_export_info.ml(81):3232-3266
+                                     (apply
+                                       (field 3 (field 7 (global Symbol!)))
+                                       sym export_id (field 0 t)))
+                                   (field 1 init) (field 2 init))))))))
+                   new_symbol =
+                     (function t sym
+                       (funct-body middle_end/flambda/build_export_info.ml(83)<ghost>:3289-3377
+                         (before middle_end/flambda/build_export_info.ml(84):3303-3377
+                           (let
+                             (export_id =
+                                (after middle_end/flambda/build_export_info.ml(84):3319-3330
+                                  (apply fresh_id 0a)))
+                             (before middle_end/flambda/build_export_info.ml(85):3340-3377
+                               (makeblock 0 export_id
+                                 (after middle_end/flambda/build_export_info.ml(85):3351-3377
+                                   (apply add_symbol t sym export_id))))))))
+                   symbol_to_export_id_map =
+                     (function t
+                       (funct-body middle_end/flambda/build_export_info.ml(87)<ghost>:3411-3420
+                         (before middle_end/flambda/build_export_info.ml(87):3415-3420
+                           (field 0 t))))
+                   export_id_to_descr_map =
+                     (function t
+                       (funct-body middle_end/flambda/build_export_info.ml(88)<ghost>:3452-3469
+                         (before middle_end/flambda/build_export_info.ml(88):3456-3469
+                           (field 0 (field 1 t))))))
+                  (pseudo middle_end/flambda/build_export_info.ml(60):2521-3475
+                    (makeblock 0 create_empty add_symbol new_symbol
+                      symbol_to_export_id_map export_id_to_descr_map))))
+            empty_of_global =
+              (function env
+                (funct-body middle_end/flambda/build_export_info.ml(100)<ghost>:3859-4008
+                  (before middle_end/flambda/build_export_info.ml(101):3882-4008
+                    (makeblock 0 (field 0 (field 7 (global Variable!)))
+                      (field 0 env) (field 1 env) (field 2 env)))))
+            extern_id_descr =
+              (function export_id
+                (funct-body middle_end/flambda/build_export_info.ml(107)<ghost>:4032-4175
+                  (before middle_end/flambda/build_export_info.ml(108):4048-4175
+                    (let
+                      (export =
+                         (after middle_end/flambda/build_export_info.ml(108):4061-4084
+                           (apply (field 18 (global Compilenv!)) 0a)))
+                      (before middle_end/flambda/build_export_info.ml(109):4092-4175
+                        (try
+                          (makeblock 0
+                            (after middle_end/flambda/build_export_info.ml(109):4101-4148
+                              (apply (field 6 (global Export_info!)) export
+                                export_id)))
+                         with exn
+                          (if (== exn (field 7 (global Stdlib!)))
+                            (before middle_end/flambda/build_export_info.ml(110):4171-4175
+                              0a)
+                            (reraise exn))))))))
+            extern_symbol_descr =
+              (function sym
+                (funct-body middle_end/flambda/build_export_info.ml(112)<ghost>:4203-4606
+                  (before middle_end/flambda/build_export_info.ml(113):4213-4606
+                    (if
+                      (after middle_end/flambda/build_export_info.ml(113):4216-4253
+                        (apply (field 10 (global Compilenv!)) sym))
+                      (before middle_end/flambda/build_export_info.ml(114):4263-4267
+                        0a)
+                      (before middle_end/flambda/build_export_info.ml(116):4283-4606
+                        (let
+                          (*match* =
+                             (after middle_end/flambda/build_export_info.ml(117):4297-4354
+                               (apply (field 19 (global Compilenv!))
+                                 (after middle_end/flambda/build_export_info.ml(117):4325-4354
+                                   (apply (field 12 (global Symbol!)) sym)))))
+                          (if *match*
+                            (let (export =a (field 0 *match*))
+                              (before middle_end/flambda/build_export_info.ml(121):4418-4606
+                                (try
+                                  (let
+                                    (id =
+                                       (after middle_end/flambda/build_export_info.ml(122):4441-4477
+                                         (apply
+                                           (field 26
+                                             (field 7 (global Symbol!)))
+                                           sym (field 2 export))))
+                                    (before middle_end/flambda/build_export_info.ml(123):4491-4565
+                                      (let
+                                        (descr =
+                                           (after middle_end/flambda/build_export_info.ml(123):4503-4541
+                                             (apply
+                                               (field 6
+                                                 (global Export_info!))
+                                               export id)))
+                                        (before middle_end/flambda/build_export_info.ml(124):4555-4565
+                                          (makeblock 0 descr)))))
+                                 with exn
+                                  (if (== exn (field 7 (global Stdlib!)))
+                                    (before middle_end/flambda/build_export_info.ml(126):4602-4606
+                                      0a)
+                                    (reraise exn)))))
+                            (before middle_end/flambda/build_export_info.ml(119):4382-4386
+                              0a))))))))
+            get_id_descr =
+              (function t export_id
+                (funct-body middle_end/flambda/build_export_info.ml(128)<ghost>:4627-4746
+                  (before middle_end/flambda/build_export_info.ml(129):4645-4746
+                    (try
+                      (makeblock 0
+                        (after middle_end/flambda/build_export_info.ml(129):4654-4698
+                          (apply (field 26 (field 7 (global Export_id!)))
+                            export_id (field 0 (field 2 t)))))
+                     with exn
+                      (if (== exn (field 7 (global Stdlib!)))
+                        (before middle_end/flambda/build_export_info.ml(130):4721-4746
+                          (after middle_end/flambda/build_export_info.ml(130):4721-4746
+                            (apply extern_id_descr export_id)))
+                        (reraise exn))))))
+            get_symbol_descr =
+              (function t sym
+                (funct-body middle_end/flambda/build_export_info.ml(132)<ghost>:4771-4945
+                  (before middle_end/flambda/build_export_info.ml(133):4783-4945
+                    (try
+                      (let
+                        (export_id =
+                           (after middle_end/flambda/build_export_info.ml(134):4809-4834
+                             (apply (field 26 (field 7 (global Symbol!))) sym
+                               (field 1 t))))
+                        (before middle_end/flambda/build_export_info.ml(135):4844-4893
+                          (makeblock 0
+                            (after middle_end/flambda/build_export_info.ml(135):4849-4893
+                              (apply (field 26 (field 7 (global Export_id!)))
+                                export_id (field 0 (field 2 t)))))))
+                     with exn
+                      (if (== exn (field 7 (global Stdlib!)))
+                        (before middle_end/flambda/build_export_info.ml(137):4922-4945
+                          (after middle_end/flambda/build_export_info.ml(137):4922-4945
+                            (apply extern_symbol_descr sym)))
+                        (reraise exn))))))
+            get_descr =
+              (function t approx
+                (funct-body middle_end/flambda/build_export_info.ml(139)<ghost>:4963-5148
+                  (before middle_end/flambda/build_export_info.ml(140):5001-5148
+                    (switch* approx
+                     case int 0:
+                      (before middle_end/flambda/build_export_info.ml(141):5042-5046
+                        0a)
+                     case tag 0:
+                      (let (export_id =a (field 0 approx))
+                        (before middle_end/flambda/build_export_info.ml(142):5075-5099
+                          (after middle_end/flambda/build_export_info.ml(142):5075-5099
+                            (apply get_id_descr t export_id))))
+                     case tag 1:
+                      (let (sym =a (field 0 approx))
+                        (before middle_end/flambda/build_export_info.ml(143):5126-5148
+                          (after middle_end/flambda/build_export_info.ml(143):5126-5148
+                            (apply get_symbol_descr t sym))))))))
+            record_descr =
+              (function t id descr
+                (funct-body middle_end/flambda/build_export_info.ml(145)<ghost>:5169-5467
+                  (before middle_end/flambda/build_export_info.ml(146):5208-5467
+                    (seq
+                      (if
+                        (after middle_end/flambda/build_export_info.ml(146):5211-5245
+                          (apply (field 2 (field 7 (global Export_id!))) id
+                            (field 0 (field 2 t))))
+                        (before middle_end/flambda/build_export_info.ml(146):5251-5407
+                          (after middle_end/flambda/build_export_info.ml(146):5251-5407
+                            (apply (field 1 (global Misc!))
+                              [0:
+                               [11:
+                                "Build_export_info.Env.record_descr: cannot rebind export ID "
+                                [15: [11: " in environment" 0a]]]
+                               "Build_export_info.Env.record_descr: cannot rebind export ID %a in environment"]
+                              (field 5 (global Export_id!)) id)))
+                        0a)
+                      (before middle_end/flambda/build_export_info.ml(151):5413-5467
+                        (setfield_ptr 0 (field 2 t)
+                          (after middle_end/flambda/build_export_info.ml(151):5427-5467
+                            (apply (field 3 (field 7 (global Export_id!))) id
+                              descr (field 0 (field 2 t))))))))))
+            new_descr =
+              (function t descr
+                (funct-body middle_end/flambda/build_export_info.ml(153)<ghost>:5485-5580
+                  (before middle_end/flambda/build_export_info.ml(154):5521-5580
+                    (let
+                      (id =
+                         (after middle_end/flambda/build_export_info.ml(154):5530-5541
+                           (apply fresh_id 0a)))
+                      (before middle_end/flambda/build_export_info.ml(155):5549-5580
+                        (seq
+                          (after middle_end/flambda/build_export_info.ml(155):5549-5572
+                            (apply record_descr t id descr))
+                          (before middle_end/flambda/build_export_info.ml(156):5578-5580
+                            id)))))))
+            new_value_closure_descr =
+              (function t closure_id set_of_closures
+                (funct-body middle_end/flambda/build_export_info.ml(158)<ghost>:5612-5975
+                  (before middle_end/flambda/build_export_info.ml(159):5649-5975
+                    (catch
+                      (try
+                        (exit 5
+                          (after middle_end/flambda/build_export_info.ml(159):5655-5704
+                            (apply (field 26 (field 7 (global Closure_id!)))
+                              closure_id (field 0 (field 3 t)))))
+                       with exn
+                        (if (== exn (field 7 (global Stdlib!)))
+                          (before middle_end/flambda/build_export_info.ml(161):5745-5946
+                            (let
+                              (export_id =
+                                 (after middle_end/flambda/build_export_info.ml(162):5769-5828
+                                   (apply new_descr t
+                                     (makeblock 9
+                                       (makeblock 0 closure_id
+                                         set_of_closures)))))
+                              (before middle_end/flambda/build_export_info.ml(164):5844-5946
+                                (seq
+                                  (setfield_ptr 0 (field 3 t)
+                                    (after middle_end/flambda/build_export_info.ml(165):5871-5929
+                                      (apply
+                                        (field 3
+                                          (field 7 (global Closure_id!)))
+                                        closure_id export_id
+                                        (field 0 (field 3 t)))))
+                                  (before middle_end/flambda/build_export_info.ml(166):5937-5946
+                                    export_id)))))
+                          (reraise exn)))
+                     with (5 export_id)
+                      (before middle_end/flambda/build_export_info.ml(167):5966-5975
+                        export_id)))))
+            new_unit_descr =
+              (function t
+                (funct-body middle_end/flambda/build_export_info.ml(169)<ghost>:5998-6036
+                  (before middle_end/flambda/build_export_info.ml(170):6006-6036
+                    (after middle_end/flambda/build_export_info.ml(170):6006-6036
+                      (apply new_descr t [4: 0])))))
+            add_approx =
+              (function t var approx
+                (funct-body middle_end/flambda/build_export_info.ml(172)<ghost>:6055-6319
+                  (before middle_end/flambda/build_export_info.ml(173):6074-6319
+                    (seq
+                      (if
+                        (after middle_end/flambda/build_export_info.ml(173):6077-6103
+                          (apply (field 2 (field 7 (global Variable!))) var
+                            (field 0 t)))
+                        (before middle_end/flambda/build_export_info.ml(173):6109-6262
+                          (after middle_end/flambda/build_export_info.ml(173):6109-6262
+                            (apply (field 1 (global Misc!))
+                              [0:
+                               [11:
+                                "Build_export_info.Env.add_approx: cannot rebind variable "
+                                [15: [11: " in environment" 0a]]]
+                               "Build_export_info.Env.add_approx: cannot rebind variable %a in environment"]
+                              (field 5 (global Variable!)) var)))
+                        0a)
+                      (before middle_end/flambda/build_export_info.ml(178):6268-6319
+                        (let (init = t)
+                          (makeblock 0
+                            (after middle_end/flambda/build_export_info.ml(178):6283-6316
+                              (apply (field 3 (field 7 (global Variable!)))
+                                var approx (field 0 t)))
+                            (field 1 init) (field 2 init) (field 3 init))))))))
+            add_approx_map =
+              (function t vars_to_approxs
+                (funct-body middle_end/flambda/build_export_info.ml(180)<ghost>:6342-6459
+                  (before middle_end/flambda/build_export_info.ml(181):6366-6459
+                    (after middle_end/flambda/build_export_info.ml(181):6366-6459
+                      (apply (field 12 (field 7 (global Variable!)))
+                        (function var approx t
+                          (funct-body middle_end/flambda/build_export_info.ml(181):6384-6429
+                            (before middle_end/flambda/build_export_info.ml(181):6405-6428
+                              (after middle_end/flambda/build_export_info.ml(181):6405-6428
+                                (apply add_approx t var approx)))))
+                        vars_to_approxs t)))))
+            add_approx_maps =
+              (function t vars_to_approxs_list
+                (funct-body middle_end/flambda/build_export_info.ml(185)<ghost>:6483-6564
+                  (before middle_end/flambda/build_export_info.ml(186):6512-6564
+                    (after middle_end/flambda/build_export_info.ml(186):6512-6564
+                      (apply (field 20 (global Stdlib__list!)) add_approx_map
+                        t vars_to_approxs_list)))))
+            find_approx =
+              (function t var
+                (funct-body middle_end/flambda/build_export_info.ml(188)<ghost>:6584-6686
+                  (before middle_end/flambda/build_export_info.ml(189):6617-6686
+                    (try
+                      (after middle_end/flambda/build_export_info.ml(189):6621-6648
+                        (apply (field 26 (field 7 (global Variable!))) var
+                          (field 0 t)))
+                     with exn
+                      (if (== exn (field 7 (global Stdlib!)))
+                        (before middle_end/flambda/build_export_info.ml(190):6673-6686
+                          0a)
+                        (reraise exn)))))))
+           (pseudo middle_end/flambda/build_export_info.ml(57):2430-6690
+             (makeblock 0 new_descr record_descr new_value_closure_descr
+               get_descr add_approx add_approx_maps find_approx
+               get_symbol_descr new_unit_descr Global empty_of_global))))
+     descr_of_constant =
+       (function c
+         (funct-body middle_end/flambda/build_export_info.ml(193)<ghost>:6714-7031
+           (before middle_end/flambda/build_export_info.ml(194):6758-7031
+             (switch* c
+              case tag 0:
+               (let (i =a (field 0 c))
+                 (before middle_end/flambda/build_export_info.ml(198):6953-6964
+                   (makeblock 2 (int) i)))
+              case tag 1:
+               (let (c =a (field 0 c))
+                 (before middle_end/flambda/build_export_info.ml(199):6979-6991
+                   (makeblock 3 (int) c)))
+              case tag 2:
+               (let (i =a (field 0 c))
+                 (before middle_end/flambda/build_export_info.ml(200):7015-7031
+                   (makeblock 4 (int) i)))))))
+     descr_of_allocated_constant =
+       (function c
+         (funct-body middle_end/flambda/build_export_info.ml(202)<ghost>:7065-7895
+           (before middle_end/flambda/build_export_info.ml(203):7113-7895
+             (switch* c
+              case tag 0:
+               (let (f =a (field 0 c))
+                 (before middle_end/flambda/build_export_info.ml(204):7141-7154
+                   (makeblock 5 (float) f)))
+              case tag 1:
+               (let (i =a (field 0 c))
+                 (before middle_end/flambda/build_export_info.ml(205):7170-7196
+                   (makeblock 7 (*,int32) 0a i)))
+              case tag 2:
+               (let (i =a (field 0 c))
+                 (before middle_end/flambda/build_export_info.ml(206):7212-7238
+                   (makeblock 7 (*,int64) 1a i)))
+              case tag 3:
+               (let (i =a (field 0 c))
+                 (before middle_end/flambda/build_export_info.ml(207):7258-7288
+                   (makeblock 7 (*,nativeint) 2a i)))
+              case tag 4:
+               (let (fs =a (field 0 c))
+                 (before middle_end/flambda/build_export_info.ml(224):7804-7895
+                   (makeblock 6
+                     (makeblock 0 (*,int) 0a
+                       (after middle_end/flambda/build_export_info.ml(226):7874-7888
+                         (apply (field 0 (global Stdlib__list!)) fs))))))
+              case tag 5:
+               (let (fs =a (field 0 c))
+                 (before middle_end/flambda/build_export_info.ml(219):7647-7777
+                   (makeblock 6
+                     (makeblock 0 (*,int)
+                       (makeblock 0
+                         (after middle_end/flambda/build_export_info.ml(220):7693-7741
+                           (apply (field 14 (global Stdlib__array!))
+                             (function x[float]
+                               (funct-body middle_end/flambda/build_export_info.ml(220):7704-7721
+                                 (before middle_end/flambda/build_export_info.ml(220):7714-7720
+                                   (makeblock 0 (float) x))))
+                             (after middle_end/flambda/build_export_info.ml(220):7722-7740
+                               (apply (field 11 (global Stdlib__array!)) fs)))))
+                       (after middle_end/flambda/build_export_info.ml(221):7756-7770
+                         (apply (field 0 (global Stdlib__list!)) fs))))))
+              case tag 6:
+               (let (s =a (field 0 c))
+                 (before middle_end/flambda/build_export_info.ml(209):7309-7448
+                   (let
+                     (v_string = (makeblock 0 (*,int) 0a (string.length s)))
+                     (before middle_end/flambda/build_export_info.ml(212):7427-7448
+                       (makeblock 8 v_string)))))
+              case tag 7:
+               (let (s =a (field 0 c))
+                 (before middle_end/flambda/build_export_info.ml(214):7479-7610
+                   (let
+                     (v_string =
+                        (makeblock 0 (*,int) (makeblock 0 s)
+                          (string.length s)))
+                     (before middle_end/flambda/build_export_info.ml(217):7589-7610
+                       (makeblock 8 v_string))))))))))
+    (letrec
+      (approx_of_expr
+         (function env flam
+           (funct-body middle_end/flambda/build_export_info.ml(229)<ghost>:7920-9268
+             (before middle_end/flambda/build_export_info.ml(230):7978-9268
+               (catch
+                 (switch flam
+                  case tag 0:
+                   (let (var =a (field 0 flam))
+                     (before middle_end/flambda/build_export_info.ml(231):8009-8032
+                       (after middle_end/flambda/build_export_info.ml(231):8009-8032
+                         (apply (field 6 Env) env var))))
+                  case tag 1:
+                   (let
+                     (*match* =a (field 0 flam)
+                      body =a (field 2 *match*)
+                      defining_expr =a (field 1 *match*)
+                      var =a (field 0 *match*))
+                     (before middle_end/flambda/build_export_info.ml(233):8080-8203
+                       (let
+                         (approx =
+                            (after middle_end/flambda/build_export_info.ml(233):8093-8125
+                              (apply descr_of_named env defining_expr)))
+                         (before middle_end/flambda/build_export_info.ml(234):8133-8203
+                           (let
+                             (env =
+                                (after middle_end/flambda/build_export_info.ml(234):8143-8172
+                                  (apply (field 4 Env) env var approx)))
+                             (before middle_end/flambda/build_export_info.ml(235):8180-8203
+                               (after middle_end/flambda/build_export_info.ml(235):8180-8203
+                                 (apply approx_of_expr env body))))))))
+                  case tag 2:
+                   (let (*match* =a (field 0 flam) body =a (field 3 *match*))
+                     (before middle_end/flambda/build_export_info.ml(237):8236-8259
+                       (after middle_end/flambda/build_export_info.ml(237):8236-8259
+                         (apply approx_of_expr env body))))
+                  case tag 3:
+                   (let (body =a (field 1 flam) defs =a (field 0 flam))
+                     (before middle_end/flambda/build_export_info.ml(239):8292-8507
+                       (let
+                         (env =
+                            (after middle_end/flambda/build_export_info.ml(240):8308-8472
+                              (apply (field 20 (global Stdlib__list!))
+                                (function env param
+                                  (funct-body middle_end/flambda/build_export_info.ml(240):8323-8455
+                                    (let
+                                      (defining_expr =a (field 1 param)
+                                       var =a (field 0 param))
+                                      (before middle_end/flambda/build_export_info.ml(241):8366-8454
+                                        (let
+                                          (approx =
+                                             (after middle_end/flambda/build_export_info.ml(241):8379-8411
+                                               (apply descr_of_named env
+                                                 defining_expr)))
+                                          (before middle_end/flambda/build_export_info.ml(242):8425-8454
+                                            (after middle_end/flambda/build_export_info.ml(242):8425-8454
+                                              (apply (field 4 Env) env var
+                                                approx))))))))
+                                env defs)))
+                         (before middle_end/flambda/build_export_info.ml(245):8484-8507
+                           (after middle_end/flambda/build_export_info.ml(245):8484-8507
+                             (apply approx_of_expr env body))))))
+                  case tag 4:
+                   (let
+                     (*match* =a (field 0 flam)
+                      kind =a (field 2 *match*)
+                      func =a (field 0 *match*))
+                     (before middle_end/flambda/build_export_info.ml(247):8543-8974
+                       (if kind
+                         (let (closure_id' =a (field 0 kind))
+                           (before middle_end/flambda/build_export_info.ml(250):8631-8966
+                             (let
+                               (*match* =
+                                  (after middle_end/flambda/build_export_info.ml(250):8637-8681
+                                    (apply (field 3 Env) env
+                                      (after middle_end/flambda/build_export_info.ml(250):8655-8681
+                                        (apply (field 6 Env) env func)))))
+                               (catch
+                                 (if *match*
+                                   (let (*match* =a (field 0 *match*))
+                                     (switch *match*
+                                      case tag 9:
+                                       (let
+                                         (*match* =a (field 0 *match*)
+                                          *match* =a (field 1 *match*)
+                                          results =a (field 3 *match*)
+                                          closure_id =a (field 0 *match*))
+                                         (before middle_end/flambda/build_export_info.ml(253):8787-8939
+                                           (seq
+                                             (if
+                                               (after middle_end/flambda/build_export_info.ml(253):8794-8835
+                                                 (apply
+                                                   (field 1
+                                                     (global Closure_id!))
+                                                   closure_id closure_id'))
+                                               0a
+                                               (raise
+                                                 (after middle_end/flambda/build_export_info.ml(253):8787-8835
+                                                   (makeblock 0
+                                                     (global Assert_failure!)
+                                                     [0:
+                                                      "middle_end/flambda/build_export_info.ml"
+                                                      253 8]))))
+                                             (before middle_end/flambda/build_export_info.ml(254):8845-8939
+                                               (seq
+                                                 (if
+                                                   (after middle_end/flambda/build_export_info.ml(254):8852-8891
+                                                     (apply
+                                                       (field 2
+                                                         (field 7
+                                                           (global Closure_id!)))
+                                                       closure_id results))
+                                                   0a
+                                                   (raise
+                                                     (after middle_end/flambda/build_export_info.ml(254):8845-8891
+                                                       (makeblock 0
+                                                         (global Assert_failure!)
+                                                         [0:
+                                                          "middle_end/flambda/build_export_info.ml"
+                                                          254 8]))))
+                                                 (before middle_end/flambda/build_export_info.ml(255):8901-8939
+                                                   (after middle_end/flambda/build_export_info.ml(255):8901-8939
+                                                     (apply
+                                                       (field 26
+                                                         (field 7
+                                                           (global Closure_id!)))
+                                                       closure_id results))))))))
+                                      default: (exit 8)))
+                                   (exit 8))
+                                with (8)
+                                 (before middle_end/flambda/build_export_info.ml(256):8953-8966
+                                   0a)))))
+                         (before middle_end/flambda/build_export_info.ml(248):8583-8596
+                           0a))))
+                  case tag 6:
+                   (before middle_end/flambda/build_export_info.ml(258):8991-9024
+                     (makeblock 0
+                       (after middle_end/flambda/build_export_info.ml(258):9000-9024
+                         (apply (field 8 Env) env))))
+                  case tag 13:
+                   (before middle_end/flambda/build_export_info.ml(260):9087-9120
+                     (makeblock 0
+                       (after middle_end/flambda/build_export_info.ml(260):9096-9120
+                         (apply (field 8 Env) env))))
+                  case tag 14:
+                   (before middle_end/flambda/build_export_info.ml(259):9038-9071
+                     (makeblock 0
+                       (after middle_end/flambda/build_export_info.ml(259):9047-9071
+                         (apply (field 8 Env) env))))
+                  default: (exit 9))
+                with (9)
+                 (before middle_end/flambda/build_export_info.ml(263):9255-9268
+                   0a)))))
+        descr_of_named
+          (function env named
+            (funct-body middle_end/flambda/build_export_info.ml(265)<ghost>:9289-12520
+              (before middle_end/flambda/build_export_info.ml(267):9358-12520
+                (switch* named
+                 case tag 0:
+                  (let (sym =a (field 0 named))
+                    (before middle_end/flambda/build_export_info.ml(269):9434-9450
+                      (makeblock 1 sym)))
+                 case tag 1:
+                  (let (const =a (field 0 named))
+                    (before middle_end/flambda/build_export_info.ml(277):9707-9761
+                      (makeblock 0
+                        (after middle_end/flambda/build_export_info.ml(277):9716-9761
+                          (apply (field 0 Env) env
+                            (after middle_end/flambda/build_export_info.ml(277):9735-9760
+                              (apply descr_of_constant const)))))))
+                 case tag 2:
+                  (let (const =a (field 0 named))
+                    (before middle_end/flambda/build_export_info.ml(279):9795-9859
+                      (makeblock 0
+                        (after middle_end/flambda/build_export_info.ml(279):9804-9859
+                          (apply (field 0 Env) env
+                            (after middle_end/flambda/build_export_info.ml(279):9823-9858
+                              (apply descr_of_allocated_constant const)))))))
+                 case tag 3:
+                  (before middle_end/flambda/build_export_info.ml(270):9473-9486
+                    0a)
+                 case tag 4:
+                  (let (i =a (field 1 named) sym =a (field 0 named))
+                    (before middle_end/flambda/build_export_info.ml(272):9525-9683
+                      (let
+                        (*match* =
+                           (after middle_end/flambda/build_export_info.ml(272):9537-9565
+                             (apply (field 7 Env) env sym)))
+                        (catch
+                          (if *match*
+                            (let (*match* =a (field 0 *match*))
+                              (switch *match*
+                               case tag 0:
+                                (let (fields =a (field 1 *match*))
+                                  (before middle_end/flambda/build_export_info.ml(273):9613-9636
+                                    (if (> (array.length[addr] fields) i)
+                                      (before middle_end/flambda/build_export_info.ml(273):9640-9650
+                                        (after middle_end/flambda/build_export_info.ml(273):9640-9650
+                                          (array.get[addr] fields i)))
+                                      (exit 10))))
+                               default: (exit 10)))
+                            (exit 10))
+                         with (10)
+                          (before middle_end/flambda/build_export_info.ml(274):9662-9675
+                            0a)))))
+                 case tag 5:
+                  (let (set =a (field 0 named))
+                    (before middle_end/flambda/build_export_info.ml(293):10398-10538
+                      (let
+                        (descr =
+                           (makeblock 10
+                             (after middle_end/flambda/build_export_info.ml(294):10458-10492
+                               (apply describe_set_of_closures env set))))
+                        (before middle_end/flambda/build_export_info.ml(296):10504-10538
+                          (makeblock 0
+                            (after middle_end/flambda/build_export_info.ml(296):10513-10538
+                              (apply (field 0 Env) env descr)))))))
+                 case tag 6:
+                  (let
+                    (*match* =a (field 0 named)
+                     closure_id =a (field 1 *match*)
+                     set_of_closures =a (field 0 *match*))
+                    (before middle_end/flambda/build_export_info.ml(298):10599-11330
+                      (let
+                        (*match* =
+                           (after middle_end/flambda/build_export_info.ml(298):10611-10666
+                             (apply (field 3 Env) env
+                               (after middle_end/flambda/build_export_info.ml(298):10629-10666
+                                 (apply (field 6 Env) env set_of_closures)))))
+                        (catch
+                          (if *match*
+                            (let (*match* =a (field 0 *match*))
+                              (switch *match*
+                               case tag 10:
+                                (let (set_of_closures =a (field 0 *match*))
+                                  (before middle_end/flambda/build_export_info.ml(300):10732-11085
+                                    (seq
+                                      (if
+                                        (not
+                                          (after middle_end/flambda/build_export_info.ml(300):10739-10794
+                                            (apply
+                                              (field 2
+                                                (field 7
+                                                  (global Closure_id!)))
+                                              closure_id
+                                              (field 3 set_of_closures))))
+                                        (before middle_end/flambda/build_export_info.ml(300):10800-10990
+                                          (after middle_end/flambda/build_export_info.ml(300):10800-10990
+                                            (apply (field 1 (global Misc!))
+                                              [0:
+                                               [11:
+                                                "Could not build export description for [Project_closure]: closure ID "
+                                                [15:
+                                                 [11:
+                                                  " not in set of closures"
+                                                  0a]]]
+                                               "Could not build export description for [Project_closure]: closure ID %a not in set of closures"]
+                                              (field 5 (global Closure_id!))
+                                              closure_id)))
+                                        0a)
+                                      (before middle_end/flambda/build_export_info.ml(305):10998-11085
+                                        (makeblock 0
+                                          (after middle_end/flambda/build_export_info.ml(305):11007-11085
+                                            (apply (field 2 Env) env
+                                              closure_id set_of_closures)))))))
+                               default: (exit 12)))
+                            (exit 12))
+                         with (12)
+                          (before middle_end/flambda/build_export_info.ml(312):11309-11322
+                            0a)))))
+                 case tag 7:
+                  (let
+                    (*match* =a (field 0 named)
+                     move_to =a (field 2 *match*)
+                     start_from =a (field 1 *match*)
+                     closure =a (field 0 *match*))
+                    (before middle_end/flambda/build_export_info.ml(315):11404-11721
+                      (let
+                        (*match* =
+                           (after middle_end/flambda/build_export_info.ml(315):11416-11463
+                             (apply (field 3 Env) env
+                               (after middle_end/flambda/build_export_info.ml(315):11434-11463
+                                 (apply (field 6 Env) env closure)))))
+                        (catch
+                          (if *match*
+                            (let (*match* =a (field 0 *match*))
+                              (switch *match*
+                               case tag 9:
+                                (let
+                                  (*match* =a (field 0 *match*)
+                                   set_of_closures =a (field 1 *match*)
+                                   closure_id =a (field 0 *match*))
+                                  (before middle_end/flambda/build_export_info.ml(317):11538-11688
+                                    (seq
+                                      (if
+                                        (after middle_end/flambda/build_export_info.ml(317):11545-11585
+                                          (apply
+                                            (field 1 (global Closure_id!))
+                                            closure_id start_from))
+                                        0a
+                                        (raise
+                                          (after middle_end/flambda/build_export_info.ml(317):11538-11585
+                                            (makeblock 0
+                                              (global Assert_failure!)
+                                              [0:
+                                               "middle_end/flambda/build_export_info.ml"
+                                               317 6]))))
+                                      (before middle_end/flambda/build_export_info.ml(318):11593-11688
+                                        (makeblock 0
+                                          (after middle_end/flambda/build_export_info.ml(318):11602-11688
+                                            (apply (field 2 Env) env move_to
+                                              set_of_closures)))))))
+                               default: (exit 13)))
+                            (exit 13))
+                         with (13)
+                          (before middle_end/flambda/build_export_info.ml(321):11700-11713
+                            0a)))))
+                 case tag 8:
+                  (let
+                    (*match* =a (field 0 named)
+                     var =a (field 2 *match*)
+                     closure_id' =a (field 1 *match*)
+                     closure =a (field 0 *match*))
+                    (before middle_end/flambda/build_export_info.ml(324):11789-12520
+                      (let
+                        (*match* =
+                           (after middle_end/flambda/build_export_info.ml(324):11801-11848
+                             (apply (field 3 Env) env
+                               (after middle_end/flambda/build_export_info.ml(324):11819-11848
+                                 (apply (field 6 Env) env closure)))))
+                        (catch
+                          (if *match*
+                            (let (*match* =a (field 0 *match*))
+                              (switch *match*
+                               case tag 9:
+                                (let
+                                  (*match* =a (field 0 *match*)
+                                   *match* =a (field 1 *match*)
+                                   bound_vars =a (field 1 *match*)
+                                   closure_id =a (field 0 *match*))
+                                  (before middle_end/flambda/build_export_info.ml(327):11951-12487
+                                    (seq
+                                      (if
+                                        (after middle_end/flambda/build_export_info.ml(327):11958-11999
+                                          (apply
+                                            (field 1 (global Closure_id!))
+                                            closure_id closure_id'))
+                                        0a
+                                        (raise
+                                          (after middle_end/flambda/build_export_info.ml(327):11951-11999
+                                            (makeblock 0
+                                              (global Assert_failure!)
+                                              [0:
+                                               "middle_end/flambda/build_export_info.ml"
+                                               327 6]))))
+                                      (before middle_end/flambda/build_export_info.ml(328):12007-12487
+                                        (seq
+                                          (if
+                                            (not
+                                              (after middle_end/flambda/build_export_info.ml(328):12014-12057
+                                                (apply
+                                                  (field 2
+                                                    (field 7
+                                                      (global Var_within_closure!)))
+                                                  var bound_vars)))
+                                            (before middle_end/flambda/build_export_info.ml(328):12063-12437
+                                              (after middle_end/flambda/build_export_info.ml(328):12063-12437
+                                                (apply
+                                                  (field 1 (global Misc!))
+                                                  [0:
+                                                   [11:
+                                                    "Project_var from "
+                                                    [15:
+                                                     [11:
+                                                      " (closure ID "
+                                                      [15:
+                                                       [11:
+                                                        ") of variable "
+                                                        [15:
+                                                         [11:
+                                                          " that is not bound by the closure.  Variables bound by the closure are: "
+                                                          [15: 0a]]]]]]]]
+                                                   "Project_var from %a (closure ID %a) of variable %a that is not bound by the closure.  Variables bound by the closure are: %a"]
+                                                  (field 5
+                                                    (global Variable!))
+                                                  closure
+                                                  (field 5
+                                                    (global Closure_id!))
+                                                  closure_id
+                                                  (field 5
+                                                    (global Var_within_closure!))
+                                                  var
+                                                  (after middle_end/flambda/build_export_info.ml(335):12370-12416
+                                                    (apply
+                                                      (field 51
+                                                        (field 7
+                                                          (global Var_within_closure!)))
+                                                      (function param param
+                                                        (funct-body middle_end/flambda/build_export_info.ml(335):12400-12415
+                                                          (before middle_end/flambda/build_export_info.ml(335):12412-12414
+                                                            0a)))))
+                                                  bound_vars)))
+                                            0a)
+                                          (before middle_end/flambda/build_export_info.ml(337):12445-12487
+                                            (after middle_end/flambda/build_export_info.ml(337):12445-12487
+                                              (apply
+                                                (field 26
+                                                  (field 7
+                                                    (global Var_within_closure!)))
+                                                var bound_vars))))))))
+                               default: (exit 14)))
+                            (exit 14))
+                         with (14)
+                          (before middle_end/flambda/build_export_info.ml(338):12499-12512
+                            0a)))))
+                 case tag 9:
+                  (let (*match* =a (field 0 named))
+                    (catch
+                      (switch *match*
+                       case tag 1:
+                        (let (*match* =a (field 1 *match*))
+                          (if *match* (exit 15)
+                            (let
+                              (args =a (field 1 named)
+                               tag =a (field 0 *match*))
+                              (before middle_end/flambda/build_export_info.ml(281):9931-10127
+                                (let
+                                  (approxs =
+                                     (after middle_end/flambda/build_export_info.ml(281):9945-9980
+                                       (apply
+                                         (field 16 (global Stdlib__list!))
+                                         (after middle_end/flambda/build_export_info.ml(281):9954-9975
+                                           (apply (field 6 Env) env))
+                                         args)))
+                                  (before middle_end/flambda/build_export_info.ml(282):9988-10127
+                                    (let
+                                      (descr =
+                                         (makeblock 0
+                                           (after middle_end/flambda/build_export_info.ml(283):10039-10057
+                                             (apply (field 8 (global Tag!))
+                                               tag))
+                                           (after middle_end/flambda/build_export_info.ml(283):10059-10080
+                                             (apply
+                                               (field 11
+                                                 (global Stdlib__array!))
+                                               approxs))))
+                                      (before middle_end/flambda/build_export_info.ml(285):10093-10127
+                                        (makeblock 0
+                                          (after middle_end/flambda/build_export_info.ml(285):10102-10127
+                                            (apply (field 0 Env) env descr)))))))))))
+                       case tag 2:
+                        (let (*match* =a (field 1 named))
+                          (if *match*
+                            (let (*match* =a (field 1 *match*))
+                              (if *match* (exit 15)
+                                (let
+                                  (arg =a (field 0 *match*)
+                                   i =a (field 0 *match*))
+                                  (before middle_end/flambda/build_export_info.ml(287):10165-10338
+                                    (let
+                                      (*match* =
+                                         (after middle_end/flambda/build_export_info.ml(287):10177-10220
+                                           (apply (field 3 Env) env
+                                             (after middle_end/flambda/build_export_info.ml(287):10195-10220
+                                               (apply (field 6 Env) env arg)))))
+                                      (catch
+                                        (if *match*
+                                          (let (*match* =a (field 0 *match*))
+                                            (switch *match*
+                                             case tag 0:
+                                              (let
+                                                (fields =a (field 1 *match*))
+                                                (before middle_end/flambda/build_export_info.ml(288):10268-10291
+                                                  (if
+                                                    (>
+                                                      (array.length[addr]
+                                                        fields)
+                                                      i)
+                                                    (before middle_end/flambda/build_export_info.ml(288):10295-10305
+                                                      (after middle_end/flambda/build_export_info.ml(288):10295-10305
+                                                        (array.get[addr]
+                                                          fields i)))
+                                                    (exit 11))))
+                                             default: (exit 11)))
+                                          (exit 11))
+                                       with (11)
+                                        (before middle_end/flambda/build_export_info.ml(289):10317-10330
+                                          0a)))))))
+                            (exit 15)))
+                       default: (exit 15))
+                     with (15)
+                      (before middle_end/flambda/build_export_info.ml(291):10353-10366
+                        0a)))
+                 case tag 10:
+                  (let (expr =a (field 0 named))
+                    (before middle_end/flambda/build_export_info.ml(268):9392-9415
+                      (after middle_end/flambda/build_export_info.ml(268):9392-9415
+                        (apply approx_of_expr env expr))))))))
+        describe_set_of_closures
+          (function env set
+            (funct-body middle_end/flambda/build_export_info.ml(341)<ghost>:12551-14846
+              (before middle_end/flambda/build_export_info.ml(343):12633-14846
+                (let
+                  (bound_vars_approx =
+                     (after middle_end/flambda/build_export_info.ml(344):12661-12791
+                       (apply (field 32 (field 7 (global Variable!)))
+                         (function external_var
+                           (funct-body middle_end/flambda/build_export_info.ml(344):12678-12771
+                             (before middle_end/flambda/build_export_info.ml(345):12734-12770
+                               (after middle_end/flambda/build_export_info.ml(345):12734-12770
+                                 (apply (field 6 Env) env
+                                   (field 0 external_var))))))
+                         (field 1 set))))
+                  (before middle_end/flambda/build_export_info.ml(348):12799-14846
+                    (let
+                      (specialised_args_approx =
+                         (after middle_end/flambda/build_export_info.ml(349):12833-12960
+                           (apply (field 32 (field 7 (global Variable!)))
+                             (function spec_to
+                               (funct-body middle_end/flambda/build_export_info.ml(349):12850-12933
+                                 (before middle_end/flambda/build_export_info.ml(350):12901-12932
+                                   (after middle_end/flambda/build_export_info.ml(350):12901-12932
+                                     (apply (field 6 Env) env
+                                       (field 0 spec_to))))))
+                             (field 2 set))))
+                      (before middle_end/flambda/build_export_info.ml(353):12968-14846
+                        (let
+                          (closures_approx =
+                             (let
+                               (initial_value_set_of_closures =
+                                  (makeblock 0 (field 1 (field 0 set))
+                                    (after middle_end/flambda/build_export_info.ml(367):13641-13686
+                                      (apply
+                                        (field 11
+                                          (global Var_within_closure!))
+                                        bound_vars_approx))
+                                    (field 1 set)
+                                    (after middle_end/flambda/build_export_info.ml(370):13751-13876
+                                      (apply (field 11 (global Closure_id!))
+                                        (after middle_end/flambda/build_export_info.ml(371):13783-13876
+                                          (apply
+                                            (field 32
+                                              (field 7 (global Variable!)))
+                                            (function param
+                                              (funct-body middle_end/flambda/build_export_info.ml(371):13801-13837
+                                                (before middle_end/flambda/build_export_info.ml(371):13811-13836
+                                                  0a)))
+                                            (field 3 (field 0 set))))))
+                                    0a))
+                               (before middle_end/flambda/build_export_info.ml(376):13928-14271
+                                 (after middle_end/flambda/build_export_info.ml(376):13928-14271
+                                   (apply
+                                     (field 33 (field 7 (global Variable!)))
+                                     (function fun_var _function_decl
+                                       (funct-body middle_end/flambda/build_export_info.ml(376):13946-14241
+                                         (before middle_end/flambda/build_export_info.ml(377):13985-14240
+                                           (let
+                                             (export_id =
+                                                (let
+                                                  (closure_id =
+                                                     (after middle_end/flambda/build_export_info.ml(378):14028-14051
+                                                       (apply
+                                                         (field 9
+                                                           (global Closure_id!))
+                                                         fun_var)))
+                                                  (before middle_end/flambda/build_export_info.ml(379):14065-14190
+                                                    (let
+                                                      (set_of_closures =
+                                                         initial_value_set_of_closures)
+                                                      (before middle_end/flambda/build_export_info.ml(380):14130-14190
+                                                        (after middle_end/flambda/build_export_info.ml(380):14130-14190
+                                                          (apply
+                                                            (field 2 Env) env
+                                                            closure_id
+                                                            set_of_closures)))))))
+                                             (before middle_end/flambda/build_export_info.ml(382):14210-14240
+                                               (makeblock 0 export_id))))))
+                                     (field 3 (field 0 set)))))))
+                          (before middle_end/flambda/build_export_info.ml(385):14279-14846
+                            (let
+                              (closure_env =
+                                 (after middle_end/flambda/build_export_info.ml(386):14301-14392
+                                   (apply (field 5 Env) env
+                                     (makeblock 0 closures_approx
+                                       (makeblock 0 bound_vars_approx
+                                         (makeblock 0 specialised_args_approx
+                                           0a))))))
+                              (before middle_end/flambda/build_export_info.ml(389):14400-14846
+                                (let
+                                  (results =
+                                     (let
+                                       (result_approx =
+                                          (function _var function_decl
+                                            (funct-body middle_end/flambda/build_export_info.ml(390)<ghost>:14436-14541
+                                              (before middle_end/flambda/build_export_info.ml(391):14496-14541
+                                                (after middle_end/flambda/build_export_info.ml(391):14496-14541
+                                                  (apply approx_of_expr
+                                                    closure_env
+                                                    (field 2 function_decl)))))))
+                                       (before middle_end/flambda/build_export_info.ml(393):14553-14608
+                                         (after middle_end/flambda/build_export_info.ml(393):14553-14608
+                                           (apply
+                                             (field 33
+                                               (field 7 (global Variable!)))
+                                             result_approx
+                                             (field 3 (field 0 set)))))))
+                                  (before middle_end/flambda/build_export_info.ml(395):14616-14846
+                                    (makeblock 0 (field 1 (field 0 set))
+                                      (after middle_end/flambda/build_export_info.ml(396):14695-14740
+                                        (apply
+                                          (field 11
+                                            (global Var_within_closure!))
+                                          bound_vars_approx))
+                                      (field 1 set)
+                                      (after middle_end/flambda/build_export_info.ml(398):14787-14814
+                                        (apply
+                                          (field 11 (global Closure_id!))
+                                          results))
+                                      0a)))))))))))))))
+      (let
+        (approx_of_constant_defining_value_block_field =
+           (function env c
+             (funct-body middle_end/flambda/build_export_info.ml(402)<ghost>:14898-15092
+               (before middle_end/flambda/build_export_info.ml(404):14983-15092
+                 (switch* c
+                  case tag 0:
+                   (let (s =a (field 0 c))
+                     (before middle_end/flambda/build_export_info.ml(405):15012-15026
+                       (makeblock 1 s)))
+                  case tag 1:
+                   (let (c =a (field 0 c))
+                     (before middle_end/flambda/build_export_info.ml(406):15042-15092
+                       (makeblock 0
+                         (after middle_end/flambda/build_export_info.ml(406):15051-15092
+                           (apply (field 0 Env) env
+                             (after middle_end/flambda/build_export_info.ml(406):15070-15091
+                               (apply descr_of_constant c)))))))))))
+         describe_constant_defining_value =
+           (function env export_id symbol const
+             (funct-body middle_end/flambda/build_export_info.ml(408)<ghost>:15131-17227
+               (before middle_end/flambda/build_export_info.ml(410):15204-17227
+                 (let
+                   (env =
+                      (after middle_end/flambda/build_export_info.ml(413):15317-15340
+                        (apply (field 10 Env) env)))
+                   (before middle_end/flambda/build_export_info.ml(415):15348-17227
+                     (switch* const
+                      case tag 0:
+                       (let (alloc_const =a (field 0 const))
+                         (before middle_end/flambda/build_export_info.ml(417):15404-15499
+                           (let
+                             (descr =
+                                (after middle_end/flambda/build_export_info.ml(417):15416-15455
+                                  (apply descr_of_allocated_constant
+                                    alloc_const)))
+                             (before middle_end/flambda/build_export_info.ml(418):15463-15499
+                               (after middle_end/flambda/build_export_info.ml(418):15463-15499
+                                 (apply (field 1 Env) env export_id descr))))))
+                      case tag 1:
+                       (let
+                         (fields =a (field 1 const) tag =a (field 0 const))
+                         (before middle_end/flambda/build_export_info.ml(420):15531-15703
+                           (let
+                             (approxs =
+                                (after middle_end/flambda/build_export_info.ml(421):15551-15618
+                                  (apply (field 16 (global Stdlib__list!))
+                                    (after middle_end/flambda/build_export_info.ml(421):15560-15611
+                                      (apply
+                                        approx_of_constant_defining_value_block_field
+                                        env))
+                                    fields)))
+                             (before middle_end/flambda/build_export_info.ml(423):15630-15703
+                               (after middle_end/flambda/build_export_info.ml(423):15630-15703
+                                 (apply (field 1 Env) env export_id
+                                   (makeblock 0 tag
+                                     (after middle_end/flambda/build_export_info.ml(423):15680-15701
+                                       (apply
+                                         (field 11 (global Stdlib__array!))
+                                         approxs)))))))))
+                      case tag 2:
+                       (let (set_of_closures =a (field 0 const))
+                         (before middle_end/flambda/build_export_info.ml(425):15747-15966
+                           (let
+                             (descr =
+                                (makeblock 10
+                                  (let
+                                    (init =
+                                       (after middle_end/flambda/build_export_info.ml(427):15817-15863
+                                         (apply describe_set_of_closures env
+                                           set_of_closures)))
+                                    (makeblock 0 (field 0 init)
+                                      (field 1 init) (field 2 init)
+                                      (field 3 init) (makeblock 0 symbol)))))
+                             (before middle_end/flambda/build_export_info.ml(431):15930-15966
+                               (after middle_end/flambda/build_export_info.ml(431):15930-15966
+                                 (apply (field 1 Env) env export_id descr))))))
+                      case tag 3:
+                       (let
+                         (closure_id =a (field 1 const)
+                          sym =a (field 0 const))
+                         (before middle_end/flambda/build_export_info.ml(433):16012-17227
+                           (let
+                             (*match* =
+                                (after middle_end/flambda/build_export_info.ml(433):16024-16052
+                                  (apply (field 7 Env) env sym)))
+                             (if *match*
+                               (let (*match* =a (field 0 *match*))
+                                 (catch
+                                   (switch *match*
+                                    case tag 9:
+                                     (before middle_end/flambda/build_export_info.ml(453):16813-17013
+                                       (after middle_end/flambda/build_export_info.ml(453):16813-17013
+                                         (apply (field 1 (global Misc!))
+                                           [0:
+                                            [11:
+                                             "Cannot project symbol "
+                                             [15:
+                                              [11:
+                                               " to closure_id "
+                                               [15:
+                                                [11:
+                                                 ".  The symbol is a closure instead of a set of closures."
+                                                 [17: 4a 0a]]]]]]
+                                            "Cannot project symbol %a to closure_id %a.  The symbol is a closure instead of a set of closures.@."]
+                                           (field 5 (global Symbol!)) sym
+                                           (field 5 (global Closure_id!))
+                                           closure_id)))
+                                    case tag 10:
+                                     (let
+                                       (set_of_closures =a (field 0 *match*))
+                                       (before middle_end/flambda/build_export_info.ml(435):16118-16575
+                                         (seq
+                                           (if
+                                             (not
+                                               (after middle_end/flambda/build_export_info.ml(435):16125-16180
+                                                 (apply
+                                                   (field 2
+                                                     (field 7
+                                                       (global Closure_id!)))
+                                                   closure_id
+                                                   (field 3 set_of_closures))))
+                                             (before middle_end/flambda/build_export_info.ml(435):16186-16414
+                                               (after middle_end/flambda/build_export_info.ml(435):16186-16414
+                                                 (apply
+                                                   (field 1 (global Misc!))
+                                                   [0:
+                                                    [11:
+                                                     "Could not build export description for [Project_closure] constant defining value: closure ID "
+                                                     [15:
+                                                      [11:
+                                                       " not in set of closures"
+                                                       0a]]]
+                                                    "Could not build export description for [Project_closure] constant defining value: closure ID %a not in set of closures"]
+                                                   (field 5
+                                                     (global Closure_id!))
+                                                   closure_id)))
+                                             0a)
+                                           (before middle_end/flambda/build_export_info.ml(441):16422-16575
+                                             (let
+                                               (descr =
+                                                  (makeblock 9
+                                                    (makeblock 0 closure_id
+                                                      set_of_closures)))
+                                               (before middle_end/flambda/build_export_info.ml(445):16539-16575
+                                                 (after middle_end/flambda/build_export_info.ml(445):16539-16575
+                                                   (apply (field 1 Env) env
+                                                     export_id descr))))))))
+                                    default: (exit 16))
+                                  with (16)
+                                   (before middle_end/flambda/build_export_info.ml(459):17036-17219
+                                     (after middle_end/flambda/build_export_info.ml(459):17036-17219
+                                       (apply (field 1 (global Misc!))
+                                         [0:
+                                          [11:
+                                           "Cannot project symbol "
+                                           [15:
+                                            [11:
+                                             " to closure_id "
+                                             [15:
+                                              [11:
+                                               ".  The symbol is not a set of closures."
+                                               [17: 4a 0a]]]]]]
+                                          "Cannot project symbol %a to closure_id %a.  The symbol is not a set of closures.@."]
+                                         (field 5 (global Symbol!)) sym
+                                         (field 5 (global Closure_id!))
+                                         closure_id)))))
+                               (before middle_end/flambda/build_export_info.ml(447):16596-16774
+                                 (after middle_end/flambda/build_export_info.ml(447):16596-16774
+                                   (apply (field 1 (global Misc!))
+                                     [0:
+                                      [11:
+                                       "Cannot project symbol "
+                                       [15:
+                                        [11:
+                                         " to closure_id "
+                                         [15:
+                                          [11:
+                                           ".  No available export description"
+                                           [17: 4a 0a]]]]]]
+                                      "Cannot project symbol %a to closure_id %a.  No available export description@."]
+                                     (field 5 (global Symbol!)) sym
+                                     (field 5 (global Closure_id!))
+                                     closure_id)))))))))))))
+         describe_program =
+           (function env program
+             (funct-body middle_end/flambda/build_export_info.ml(466)<ghost>:17250-19137
+               (before middle_end/flambda/build_export_info.ml(467):17303-19137
+                 (letrec
+                   (loop
+                      (function env program
+                        (funct-body middle_end/flambda/build_export_info.ml(467)<ghost>:17316-19100
+                          (before middle_end/flambda/build_export_info.ml(468):17359-19100
+                            (switch* program
+                             case tag 0:
+                              (let
+                                (program =a (field 2 program)
+                                 constant_defining_value =a (field 1 program)
+                                 symbol =a (field 0 program))
+                                (before middle_end/flambda/build_export_info.ml(470):17447-17597
+                                  (let
+                                    (*match* =
+                                       (after middle_end/flambda/build_export_info.ml(470):17461-17493
+                                         (apply (field 2 (field 9 Env)) env
+                                           symbol))
+                                     env =a (field 1 *match*)
+                                     id =a (field 0 *match*))
+                                    (before middle_end/flambda/build_export_info.ml(471):17503-17597
+                                      (seq
+                                        (after middle_end/flambda/build_export_info.ml(471):17503-17573
+                                          (apply
+                                            describe_constant_defining_value
+                                            env id symbol
+                                            constant_defining_value))
+                                        (before middle_end/flambda/build_export_info.ml(472):17581-17597
+                                          (after middle_end/flambda/build_export_info.ml(472):17581-17597
+                                            (apply loop env program))))))))
+                             case tag 1:
+                              (let
+                                (program =a (field 1 program)
+                                 defs =a (field 0 program))
+                                (before middle_end/flambda/build_export_info.ml(474):17644-18467
+                                  (let
+                                    (*match* =
+                                       (after middle_end/flambda/build_export_info.ml(475):17668-17849
+                                         (apply
+                                           (field 20 (global Stdlib__list!))
+                                           (function param param
+                                             (funct-body middle_end/flambda/build_export_info.ml(475):17683-17824
+                                               (let
+                                                 (def =a (field 1 param)
+                                                  symbol =a (field 0 param)
+                                                  defs =a (field 1 param)
+                                                  env =a (field 0 param))
+                                                 (before middle_end/flambda/build_export_info.ml(476):17729-17823
+                                                   (let
+                                                     (*match* =
+                                                        (after middle_end/flambda/build_export_info.ml(476):17743-17775
+                                                          (apply
+                                                            (field 2
+                                                              (field 9 Env))
+                                                            env symbol))
+                                                      env =a
+                                                        (field 1 *match*)
+                                                      id =a (field 0 *match*))
+                                                     (before middle_end/flambda/build_export_info.ml(477):17791-17823
+                                                       (makeblock 0 env
+                                                         (makeblock 0
+                                                           (makeblock 0 id
+                                                             symbol def)
+                                                           defs))))))))
+                                           (makeblock 0 env 0a) defs))
+                                     defs =a (field 1 *match*)
+                                     env =a (field 0 *match*))
+                                    (before middle_end/flambda/build_export_info.ml(482):18009-18467
+                                      (let
+                                        (*match* =
+                                           (after middle_end/flambda/build_export_info.ml(483):18057-18176
+                                             (apply
+                                               (field 37
+                                                 (global Stdlib__list!))
+                                               (function param
+                                                 (funct-body middle_end/flambda/build_export_info.ml(483):18072-18161
+                                                   (let
+                                                     (*match* =a
+                                                        (field 2 param))
+                                                     (switch *match*
+                                                      case tag 3:
+                                                       (before middle_end/flambda/build_export_info.ml(484):18131-18135
+                                                         1a)
+                                                      default:
+                                                       (before middle_end/flambda/build_export_info.ml(485):18155-18160
+                                                         0a)))))
+                                               defs))
+                                         other_constants =a (field 1 *match*)
+                                         project_closures =a
+                                           (field 0 *match*))
+                                        (before middle_end/flambda/build_export_info.ml(488):18192-18467
+                                          (seq
+                                            (after middle_end/flambda/build_export_info.ml(488):18192-18313
+                                              (apply
+                                                (field 14
+                                                  (global Stdlib__list!))
+                                                (function param
+                                                  (funct-body middle_end/flambda/build_export_info.ml(488):18202-18289
+                                                    (let
+                                                      (def =a (field 2 param)
+                                                       symbol =a
+                                                         (field 1 param)
+                                                       id =a (field 0 param))
+                                                      (before middle_end/flambda/build_export_info.ml(489):18238-18288
+                                                        (after middle_end/flambda/build_export_info.ml(489):18238-18288
+                                                          (apply
+                                                            describe_constant_defining_value
+                                                            env id symbol
+                                                            def))))))
+                                                other_constants))
+                                            (before middle_end/flambda/build_export_info.ml(491):18321-18467
+                                              (seq
+                                                (after middle_end/flambda/build_export_info.ml(491):18321-18443
+                                                  (apply
+                                                    (field 14
+                                                      (global Stdlib__list!))
+                                                    (function param
+                                                      (funct-body middle_end/flambda/build_export_info.ml(491):18331-18418
+                                                        (let
+                                                          (def =a
+                                                             (field 2 param)
+                                                           symbol =a
+                                                             (field 1 param)
+                                                           id =a
+                                                             (field 0 param))
+                                                          (before middle_end/flambda/build_export_info.ml(492):18367-18417
+                                                            (after middle_end/flambda/build_export_info.ml(492):18367-18417
+                                                              (apply
+                                                                describe_constant_defining_value
+                                                                env id symbol
+                                                                def))))))
+                                                    project_closures))
+                                                (before middle_end/flambda/build_export_info.ml(494):18451-18467
+                                                  (after middle_end/flambda/build_export_info.ml(494):18451-18467
+                                                    (apply loop env program))))))))))))
+                             case tag 2:
+                              (let
+                                (program =a (field 3 program)
+                                 fields =a (field 2 program)
+                                 tag =a (field 1 program)
+                                 symbol =a (field 0 program))
+                                (before middle_end/flambda/build_export_info.ml(496):18532-19018
+                                  (let
+                                    (id =
+                                       (let
+                                         (env =
+                                            (after middle_end/flambda/build_export_info.ml(500):18689-18712
+                                              (apply (field 10 Env) env)))
+                                         (before middle_end/flambda/build_export_info.ml(502):18732-18931
+                                           (let
+                                             (field_approxs =
+                                                (after middle_end/flambda/build_export_info.ml(502):18752-18788
+                                                  (apply
+                                                    (field 16
+                                                      (global Stdlib__list!))
+                                                    (after middle_end/flambda/build_export_info.ml(502):18761-18781
+                                                      (apply approx_of_expr
+                                                        env))
+                                                    fields)))
+                                             (before middle_end/flambda/build_export_info.ml(503):18800-18931
+                                               (let
+                                                 (descr =
+                                                    (makeblock 0 tag
+                                                      (after middle_end/flambda/build_export_info.ml(504):18860-18887
+                                                        (apply
+                                                          (field 11
+                                                            (global Stdlib__array!))
+                                                          field_approxs))))
+                                                 (before middle_end/flambda/build_export_info.ml(506):18908-18931
+                                                   (after middle_end/flambda/build_export_info.ml(506):18908-18931
+                                                     (apply (field 0 Env) env
+                                                       descr)))))))))
+                                    (before middle_end/flambda/build_export_info.ml(508):18947-19018
+                                      (let
+                                        (env =
+                                           (after middle_end/flambda/build_export_info.ml(508):18957-18992
+                                             (apply (field 1 (field 9 Env))
+                                               env symbol id)))
+                                        (before middle_end/flambda/build_export_info.ml(509):19002-19018
+                                          (after middle_end/flambda/build_export_info.ml(509):19002-19018
+                                            (apply loop env program))))))))
+                             case tag 3:
+                              (let (program =a (field 1 program))
+                                (before middle_end/flambda/build_export_info.ml(510):19052-19068
+                                  (after middle_end/flambda/build_export_info.ml(510):19052-19068
+                                    (apply loop env program))))
+                             case tag 4:
+                              (let (symbol =a (field 0 program))
+                                (before middle_end/flambda/build_export_info.ml(511):19089-19100
+                                  (makeblock 0 symbol env))))))))
+                   (before middle_end/flambda/build_export_info.ml(513):19108-19137
+                     (after middle_end/flambda/build_export_info.ml(513):19108-19137
+                       (apply loop env (field 1 program))))))))
+         build_transient =
+           (function backend program
+             (funct-body middle_end/flambda/build_export_info.ml(516)<ghost>:19160-26422
+               (before middle_end/flambda/build_export_info.ml(518):19259-26422
+                 (if (field 0 (field 131 (global Clflags!)))
+                   (before middle_end/flambda/build_export_info.ml(519):19287-19460
+                     (let
+                       (compilation_unit =
+                          (after middle_end/flambda/build_export_info.ml(519):19310-19335
+                            (apply (field 6 (global Compilenv!)) 0a)))
+                       (before middle_end/flambda/build_export_info.ml(520):19343-19460
+                         (let
+                           (root_symbol =
+                              (after middle_end/flambda/build_export_info.ml(520):19361-19393
+                                (apply (field 7 (global Compilenv!)) 0a)))
+                           (before middle_end/flambda/build_export_info.ml(521):19401-19460
+                             (after middle_end/flambda/build_export_info.ml(521):19401-19460
+                               (apply (field 1 (global Export_info!))
+                                 compilation_unit root_symbol)))))))
+                   (before middle_end/flambda/build_export_info.ml(528):19773-26422
+                     (let
+                       (*match* =
+                          (after middle_end/flambda/build_export_info.ml(529):19805-19858
+                            (apply describe_program
+                              (after middle_end/flambda/build_export_info.ml(529):19822-19850
+                                (apply (field 0 (field 9 Env)) 0a))
+                              program))
+                        env =a (field 1 *match*))
+                       (before middle_end/flambda/build_export_info.ml(531):19870-26422
+                         (let
+                           (sets_of_closures_map =
+                              (after middle_end/flambda/build_export_info.ml(532):19903-19949
+                                (apply (field 25 (global Flambda_utils!))
+                                  program)))
+                           (before middle_end/flambda/build_export_info.ml(534):19961-26422
+                             (let
+                               (function_declarations_map =
+                                  (let
+                                    (set_of_closures_approx =
+                                       (function param
+                                         (funct-body middle_end/flambda/build_export_info.ml(535)<ghost>:20026-20460
+                                           (let
+                                             (function_decls =a
+                                                (field 0 param))
+                                             (before middle_end/flambda/build_export_info.ml(536):20067-20460
+                                               (let
+                                                 (recursive =
+                                                    (makemutable 246
+                                                      (function param
+                                                        (after middle_end/flambda/build_export_info.ml(538):20110-20200
+                                                          (apply
+                                                            (field 0
+                                                              (global Find_recursive_functions!))
+                                                            function_decls
+                                                            backend)))))
+                                                 (before middle_end/flambda/build_export_info.ml(541):20220-20460
+                                                   (let
+                                                     (keep_body =
+                                                        (after middle_end/flambda/build_export_info.ml(542):20246-20356
+                                                          (apply
+                                                            (field 6
+                                                              (global Inline_and_simplify_aux!))
+                                                            (field 0
+                                                              function_decls)
+                                                            recursive)))
+                                                     (before middle_end/flambda/build_export_info.ml(545):20376-20460
+                                                       (after middle_end/flambda/build_export_info.ml(545):20376-20460
+                                                         (apply
+                                                           (field 6
+                                                             (global Simple_value_approx!))
+                                                           keep_body
+                                                           function_decls)))))))))))
+                                    (before middle_end/flambda/build_export_info.ml(548):20476-20546
+                                      (after middle_end/flambda/build_export_info.ml(548):20476-20546
+                                        (apply
+                                          (field 32
+                                            (field 7
+                                              (global Set_of_closures_id!)))
+                                          set_of_closures_approx
+                                          sets_of_closures_map)))))
+                               (before middle_end/flambda/build_export_info.ml(550):20558-26422
+                                 (let
+                                   (unnested_values =
+                                      (after middle_end/flambda/build_export_info.ml(551):20586-20623
+                                        (apply (field 4 (field 9 Env)) env)))
+                                   (before middle_end/flambda/build_export_info.ml(553):20635-26422
+                                     (let
+                                       (invariant_params =
+                                          (let
+                                            (invariant_params =
+                                               (after middle_end/flambda/build_export_info.ml(555):20695-21070
+                                                 (apply
+                                                   (field 32
+                                                     (field 7
+                                                       (global Set_of_closures_id!)))
+                                                   (function param
+                                                     (funct-body middle_end/flambda/build_export_info.ml(556):20732-21011
+                                                       (let
+                                                         (function_decls =a
+                                                            (field 0 param))
+                                                         (before middle_end/flambda/build_export_info.ml(557):20784-21010
+                                                           (if
+                                                             (field 0
+                                                               function_decls)
+                                                             (before middle_end/flambda/build_export_info.ml(557):20823-20879
+                                                               (field 0
+                                                                 (field 7
+                                                                   (global Variable!))))
+                                                             (before middle_end/flambda/build_export_info.ml(559):20885-21010
+                                                               (after middle_end/flambda/build_export_info.ml(559):20885-21010
+                                                                 (apply
+                                                                   (field 0
+                                                                    (global Invariant_params!))
+                                                                   function_decls
+                                                                   backend))))))))
+                                                   (after middle_end/flambda/build_export_info.ml(563):21022-21070
+                                                     (apply
+                                                       (field 25
+                                                         (global Flambda_utils!))
+                                                       program)))))
+                                            (before middle_end/flambda/build_export_info.ml(565):21086-22188
+                                              (let
+                                                (export =
+                                                   (after middle_end/flambda/build_export_info.ml(565):21099-21122
+                                                     (apply
+                                                       (field 18
+                                                         (global Compilenv!))
+                                                       0a)))
+                                                (before middle_end/flambda/build_export_info.ml(566):21132-22188
+                                                  (after middle_end/flambda/build_export_info.ml(566):21132-22188
+                                                    (apply
+                                                      (field 12
+                                                        (field 7
+                                                          (global Export_id!)))
+                                                      (function _eid descr
+                                                        invariant_params
+                                                        (funct-body middle_end/flambda/build_export_info.ml(567):21159-22147
+                                                          (before middle_end/flambda/build_export_info.ml(568):21225-22146
+                                                            (catch
+                                                              (catch
+                                                                (switch descr
+                                                                 case tag 9:
+                                                                  (let
+                                                                    (*match* =a
+                                                                    (field 0
+                                                                    descr)
+                                                                    set_of_closures =a
+                                                                    (field 1
+                                                                    *match*))
+                                                                    (exit 45
+                                                                    set_of_closures))
+                                                                 case tag 10:
+                                                                  (let
+                                                                    (set_of_closures =a
+                                                                    (field 0
+                                                                    descr))
+                                                                    (exit 45
+                                                                    set_of_closures))
+                                                                 default:
+                                                                  (exit 46))
+                                                               with (45 set_of_closures)
+                                                                (before middle_end/flambda/build_export_info.ml(571):21375-21812
+                                                                  (let
+                                                                    (set_of_closures_id =a
+                                                                    (field 0
+                                                                    set_of_closures))
+                                                                    (before middle_end/flambda/build_export_info.ml(572):21447-21812
+                                                                    (catch
+                                                                    (try
+                                                                    (exit 40
+                                                                    (after middle_end/flambda/build_export_info.ml(573):21473-21559
+                                                                    (apply
+                                                                    (field 26
+                                                                    (field 7
+                                                                    (global Set_of_closures_id!)))
+                                                                    set_of_closures_id
+                                                                    (field 6
+                                                                    export))))
+                                                                    with exn
+                                                                    (if
+                                                                    (== exn
+                                                                    (field 7
+                                                                    (global Stdlib!)))
+                                                                    (before middle_end/flambda/build_export_info.ml(577):21628-21644
+                                                                    invariant_params)
+                                                                    (reraise
+                                                                    exn)))
+                                                                    with (40 set)
+                                                                    (before middle_end/flambda/build_export_info.ml(579):21714-21796
+                                                                    (after middle_end/flambda/build_export_info.ml(579):21714-21796
+                                                                    (apply
+                                                                    (field 3
+                                                                    (field 7
+                                                                    (global Set_of_closures_id!)))
+                                                                    set_of_closures_id
+                                                                    set
+                                                                    invariant_params))))))))
+                                                             with (46)
+                                                              (before middle_end/flambda/build_export_info.ml(592):22130-22146
+                                                                invariant_params)))))
+                                                      unnested_values
+                                                      invariant_params)))))))
+                                       (before middle_end/flambda/build_export_info.ml(595):22200-26422
+                                         (let
+                                           (recursive =
+                                              (let
+                                                (recursive =
+                                                   (after middle_end/flambda/build_export_info.ml(597):22246-22624
+                                                     (apply
+                                                       (field 32
+                                                         (field 7
+                                                           (global Set_of_closures_id!)))
+                                                       (function param
+                                                         (funct-body middle_end/flambda/build_export_info.ml(598):22283-22565
+                                                           (let
+                                                             (function_decls =a
+                                                                (field 0
+                                                                  param))
+                                                             (before middle_end/flambda/build_export_info.ml(599):22335-22564
+                                                               (if
+                                                                 (field 0
+                                                                   function_decls)
+                                                                 (before middle_end/flambda/build_export_info.ml(599):22374-22430
+                                                                   (field 0
+                                                                    (field 6
+                                                                    (global Variable!))))
+                                                                 (before middle_end/flambda/build_export_info.ml(601):22436-22564
+                                                                   (after middle_end/flambda/build_export_info.ml(601):22436-22564
+                                                                    (apply
+                                                                    (field 0
+                                                                    (global Find_recursive_functions!))
+                                                                    function_decls
+                                                                    backend))))))))
+                                                       (after middle_end/flambda/build_export_info.ml(605):22576-22624
+                                                         (apply
+                                                           (field 25
+                                                             (global Flambda_utils!))
+                                                           program)))))
+                                                (before middle_end/flambda/build_export_info.ml(607):22640-23685
+                                                  (let
+                                                    (export =
+                                                       (after middle_end/flambda/build_export_info.ml(607):22653-22676
+                                                         (apply
+                                                           (field 18
+                                                             (global Compilenv!))
+                                                           0a)))
+                                                    (before middle_end/flambda/build_export_info.ml(608):22686-23685
+                                                      (after middle_end/flambda/build_export_info.ml(608):22686-23685
+                                                        (apply
+                                                          (field 12
+                                                            (field 7
+                                                              (global Export_id!)))
+                                                          (function _eid
+                                                            descr recursive
+                                                            (funct-body middle_end/flambda/build_export_info.ml(609):22713-23651
+                                                              (before middle_end/flambda/build_export_info.ml(610):22772-23650
+                                                                (catch
+                                                                  (catch
+                                                                    (switch descr
+                                                                    case tag 9:
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 0
+                                                                    descr)
+                                                                    set_of_closures =a
+                                                                    (field 1
+                                                                    *match*))
+                                                                    (exit 38
+                                                                    set_of_closures))
+                                                                    case tag 10:
+                                                                    (let
+                                                                    (set_of_closures =a
+                                                                    (field 0
+                                                                    descr))
+                                                                    (exit 38
+                                                                    set_of_closures))
+                                                                    default:
+                                                                    (exit 39))
+                                                                   with (38 set_of_closures)
+                                                                    (before middle_end/flambda/build_export_info.ml(613):22922-23323
+                                                                    (let
+                                                                    (set_of_closures_id =a
+                                                                    (field 0
+                                                                    set_of_closures))
+                                                                    (before middle_end/flambda/build_export_info.ml(614):22994-23323
+                                                                    (catch
+                                                                    (try
+                                                                    (exit 33
+                                                                    (after middle_end/flambda/build_export_info.ml(615):23020-23099
+                                                                    (apply
+                                                                    (field 26
+                                                                    (field 7
+                                                                    (global Set_of_closures_id!)))
+                                                                    set_of_closures_id
+                                                                    (field 7
+                                                                    export))))
+                                                                    with exn
+                                                                    (if
+                                                                    (== exn
+                                                                    (field 7
+                                                                    (global Stdlib!)))
+                                                                    (before middle_end/flambda/build_export_info.ml(619):23168-23177
+                                                                    recursive)
+                                                                    (reraise
+                                                                    exn)))
+                                                                    with (33 set)
+                                                                    (before middle_end/flambda/build_export_info.ml(621):23232-23307
+                                                                    (after middle_end/flambda/build_export_info.ml(621):23232-23307
+                                                                    (apply
+                                                                    (field 3
+                                                                    (field 7
+                                                                    (global Set_of_closures_id!)))
+                                                                    set_of_closures_id
+                                                                    set
+                                                                    recursive))))))))
+                                                                 with (39)
+                                                                  (before middle_end/flambda/build_export_info.ml(634):23641-23650
+                                                                    recursive)))))
+                                                          unnested_values
+                                                          recursive)))))))
+                                           (before middle_end/flambda/build_export_info.ml(637):23697-26422
+                                             (let
+                                               (values =
+                                                  (after middle_end/flambda/build_export_info.ml(637):23710-23750
+                                                    (apply
+                                                      (field 7
+                                                        (global Export_info!))
+                                                      unnested_values)))
+                                               (before middle_end/flambda/build_export_info.ml(638):23758-26422
+                                                 (let
+                                                   (symbol_id =
+                                                      (after middle_end/flambda/build_export_info.ml(638):23774-23812
+                                                        (apply
+                                                          (field 3
+                                                            (field 9 Env))
+                                                          env)))
+                                                   (before middle_end/flambda/build_export_info.ml(639):23820-26422
+                                                     (let
+                                                       (*match* =
+                                                          (let
+                                                            (closure_id_to_set_of_closures_id =
+                                                               (after middle_end/flambda/build_export_info.ml(651):24338-24831
+                                                                 (apply
+                                                                   (field 12
+                                                                    (field 7
+                                                                    (global Set_of_closures_id!)))
+                                                                   (function
+                                                                    set_of_closure_id
+                                                                    function_declarations
+                                                                    acc
+                                                                    (funct-body middle_end/flambda/build_export_info.ml(652):24376-24764
+                                                                    (before middle_end/flambda/build_export_info.ml(655):24512-24763
+                                                                    (after middle_end/flambda/build_export_info.ml(655):24512-24763
+                                                                    (apply
+                                                                    (field 12
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    (function
+                                                                    fun_var
+                                                                    param acc
+                                                                    (funct-body middle_end/flambda/build_export_info.ml(656):24546-24700
+                                                                    (before middle_end/flambda/build_export_info.ml(657):24586-24699
+                                                                    (let
+                                                                    (closure_id =
+                                                                    (after middle_end/flambda/build_export_info.ml(657):24603-24626
+                                                                    (apply
+                                                                    (field 9
+                                                                    (global Closure_id!))
+                                                                    fun_var)))
+                                                                    (before middle_end/flambda/build_export_info.ml(658):24648-24699
+                                                                    (after middle_end/flambda/build_export_info.ml(658):24648-24699
+                                                                    (apply
+                                                                    (field 3
+                                                                    (field 7
+                                                                    (global Closure_id!)))
+                                                                    closure_id
+                                                                    set_of_closure_id
+                                                                    acc)))))))
+                                                                    (field 3
+                                                                    function_declarations)
+                                                                    acc)))))
+                                                                   function_declarations_map
+                                                                   (field 0
+                                                                    (field 7
+                                                                    (global Closure_id!))))))
+                                                            (before middle_end/flambda/build_export_info.ml(664):24847-25146
+                                                              (after middle_end/flambda/build_export_info.ml(664):24847-25146
+                                                                (apply
+                                                                  (field 0
+                                                                    (global Traverse_for_exported_symbols!))
+                                                                  sets_of_closures_map
+                                                                  closure_id_to_set_of_closures_id
+                                                                  function_declarations_map
+                                                                  (after middle_end/flambda/build_export_info.ml(668):25009-25071
+                                                                    (apply
+                                                                    (field 26
+                                                                    (field 7
+                                                                    (global Compilation_unit!)))
+                                                                    (after middle_end/flambda/build_export_info.ml(668):25036-25063
+                                                                    (apply
+                                                                    (field 6
+                                                                    (global Compilenv!))
+                                                                    0a))
+                                                                    values))
+                                                                  symbol_id
+                                                                  (after middle_end/flambda/build_export_info.ml(670):25112-25146
+                                                                    (apply
+                                                                    (field 7
+                                                                    (global Compilenv!))
+                                                                    0a))))))
+                                                        relevant_local_vars_within_closure =a
+                                                          (field 7 *match*)
+                                                        relevant_imported_vars_within_closure =a
+                                                          (field 6 *match*)
+                                                        relevant_local_closure_ids =a
+                                                          (field 5 *match*)
+                                                        relevant_imported_closure_ids =a
+                                                          (field 4 *match*)
+                                                        relevant_set_of_closures_declaration_only =a
+                                                          (field 3 *match*)
+                                                        relevant_set_of_closures =a
+                                                          (field 2 *match*)
+                                                        relevant_export_ids =a
+                                                          (field 1 *match*)
+                                                        relevant_symbols =a
+                                                          (field 0 *match*))
+                                                       (before middle_end/flambda/build_export_info.ml(672):25158-26422
+                                                         (let
+                                                           (sets_of_closures =
+                                                              (after middle_end/flambda/build_export_info.ml(673):25187-25804
+                                                                (apply
+                                                                  (field 38
+                                                                    (field 7
+                                                                    (global Set_of_closures_id!)))
+                                                                  function_declarations_map
+                                                                  (function
+                                                                    key
+                                                                    fun_decls
+                                                                    (funct-body middle_end/flambda/build_export_info.ml(675):25266-25804
+                                                                    (before middle_end/flambda/build_export_info.ml(676):25344-25803
+                                                                    (if
+                                                                    (after middle_end/flambda/build_export_info.ml(676):25347-25402
+                                                                    (apply
+                                                                    (field 2
+                                                                    (field 6
+                                                                    (global Set_of_closures_id!)))
+                                                                    key
+                                                                    relevant_set_of_closures))
+                                                                    (before middle_end/flambda/build_export_info.ml(677):25420-25434
+                                                                    (makeblock 0
+                                                                    fun_decls))
+                                                                    (before middle_end/flambda/build_export_info.ml(678):25450-25803
+                                                                    (if
+                                                                    (after middle_end/flambda/build_export_info.ml(678):25453-25571
+                                                                    (apply
+                                                                    (field 2
+                                                                    (field 6
+                                                                    (global Set_of_closures_id!)))
+                                                                    key
+                                                                    relevant_set_of_closures_declaration_only))
+                                                                    (before middle_end/flambda/build_export_info.ml(681):25577-25761
+                                                                    (if
+                                                                    (field 0
+                                                                    fun_decls)
+                                                                    (before middle_end/flambda/build_export_info.ml(683):25643-25701
+                                                                    (makeblock 0
+                                                                    (after middle_end/flambda/build_export_info.ml(683):25648-25701
+                                                                    (apply
+                                                                    (field 74
+                                                                    (global Simple_value_approx!))
+                                                                    fun_decls))))
+                                                                    (before middle_end/flambda/build_export_info.ml(685):25733-25747
+                                                                    (makeblock 0
+                                                                    fun_decls))))
+                                                                    (before middle_end/flambda/build_export_info.ml(686):25767-25803
+                                                                    0a))))))))))
+                                                           (before middle_end/flambda/build_export_info.ml(691):25817-26422
+                                                             (let
+                                                               (values =
+                                                                  (after middle_end/flambda/build_export_info.ml(692):25836-26006
+                                                                    (apply
+                                                                    (field 32
+                                                                    (field 7
+                                                                    (global Compilation_unit!)))
+                                                                    (function
+                                                                    map
+                                                                    (funct-body middle_end/flambda/build_export_info.ml(692):25861-25991
+                                                                    (before middle_end/flambda/build_export_info.ml(693):25883-25990
+                                                                    (after middle_end/flambda/build_export_info.ml(693):25883-25990
+                                                                    (apply
+                                                                    (field 15
+                                                                    (field 7
+                                                                    (global Export_id!)))
+                                                                    (function
+                                                                    key param
+                                                                    (funct-body middle_end/flambda/build_export_info.ml(693):25904-25974
+                                                                    (before middle_end/flambda/build_export_info.ml(694):25932-25973
+                                                                    (after middle_end/flambda/build_export_info.ml(694):25932-25973
+                                                                    (apply
+                                                                    (field 2
+                                                                    (field 6
+                                                                    (global Export_id!)))
+                                                                    key
+                                                                    relevant_export_ids)))))
+                                                                    map)))))
+                                                                    values)))
+                                                               (before middle_end/flambda/build_export_info.ml(698):26018-26422
+                                                                 (let
+                                                                   (symbol_id =
+                                                                    (after middle_end/flambda/build_export_info.ml(699):26040-26134
+                                                                    (apply
+                                                                    (field 15
+                                                                    (field 7
+                                                                    (global Symbol!)))
+                                                                    (function
+                                                                    key param
+                                                                    (funct-body middle_end/flambda/build_export_info.ml(700):26066-26116
+                                                                    (before middle_end/flambda/build_export_info.ml(700):26080-26115
+                                                                    (after middle_end/flambda/build_export_info.ml(700):26080-26115
+                                                                    (apply
+                                                                    (field 2
+                                                                    (field 6
+                                                                    (global Symbol!)))
+                                                                    key
+                                                                    relevant_symbols)))))
+                                                                    symbol_id)))
+                                                                   (before middle_end/flambda/build_export_info.ml(703):26146-26422
+                                                                    (after middle_end/flambda/build_export_info.ml(703):26146-26422
+                                                                    (apply
+                                                                    (field 3
+                                                                    (global Export_info!))
+                                                                    sets_of_closures
+                                                                    values
+                                                                    symbol_id
+                                                                    invariant_params
+                                                                    recursive
+                                                                    relevant_local_closure_ids
+                                                                    relevant_imported_closure_ids
+                                                                    relevant_local_vars_within_closure
+                                                                    relevant_imported_vars_within_closure))))))))))))))))))))))))))))))))
+        (pseudo _none_(0)<ghost>:-1--1 (makeblock 0 build_transient))))))

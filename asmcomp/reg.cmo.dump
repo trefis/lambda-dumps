@@ -1,0 +1,421 @@
+(setglobal Reg!
+  (let
+    (Raw_name =
+       (module-defn(Raw_name) asmcomp/reg.ml(20):1113-1408
+         (let
+           (create_from_var =
+              (function var
+                (funct-body asmcomp/reg.ml(26)<ghost>:1208-1221
+                  (before asmcomp/reg.ml(26):1214-1221 (makeblock 0 var))))
+            to_string =
+              (function t
+                (funct-body asmcomp/reg.ml(28)<ghost>:1239-1404
+                  (before asmcomp/reg.ml(29):1247-1404
+                    (if (isint t)
+                      (if t (before asmcomp/reg.ml(31):1290-1298 [0: "R"])
+                        (before asmcomp/reg.ml(30):1274-1278 0a))
+                      (let (var =a (field 0 t))
+                        (before asmcomp/reg.ml(33):1322-1404
+                          (let
+                            (name =
+                               (after asmcomp/reg.ml(33):1333-1343
+                                 (apply (field 10 (global Backend_var!)) var)))
+                            (before asmcomp/reg.ml(34):1353-1404
+                              (if (<= (string.length name) 0)
+                                (before asmcomp/reg.ml(34):1385-1389 0a)
+                                (before asmcomp/reg.ml(34):1395-1404
+                                  (makeblock 0 name))))))))))))
+           (pseudo asmcomp/reg.ml(20):1131-1408
+             (makeblock 0 create_from_var to_string))))
+     dummy =
+       (makemutable 0 (*,int,*,*,*,*,*,*,int,int,*) 0a 0 2a 0a 0a 0a 0a 0a 0
+         0 0a)
+     currstamp = (makemutable 0 (int) 0)
+     reg_list = (makemutable 0 0a)
+     create =
+       (function ty
+         (funct-body asmcomp/reg.ml(71)<ghost>:2160-2427
+           (before asmcomp/reg.ml(72):2167-2427
+             (let
+               (r =
+                  (makemutable 0 (*,int,*,*,*,*,*,*,int,int,*) 0a
+                    (field 0 currstamp) ty 0a 0a 0a 0a 0a 0 0 0a))
+               (before asmcomp/reg.ml(75):2378-2427
+                 (seq
+                   (setfield_ptr 0 reg_list
+                     (makeblock 0 r (field 0 reg_list)))
+                   (before asmcomp/reg.ml(76):2408-2427
+                     (seq (+:=1 currstamp)
+                       (before asmcomp/reg.ml(77):2426-2427 r)))))))))
+     createv =
+       (function tyv
+         (funct-body asmcomp/reg.ml(79)<ghost>:2441-2567
+           (before asmcomp/reg.ml(80):2449-2567
+             (let (n =[int] (array.length[int] tyv))
+               (before asmcomp/reg.ml(81):2479-2567
+                 (let
+                   (rv =
+                      (after asmcomp/reg.ml(81):2488-2506
+                        (caml_make_vect n dummy)))
+                   (before asmcomp/reg.ml(82):2512-2567
+                     (seq
+                       (for i 0 to (- n 1)
+                         (before asmcomp/reg.ml(82):2532-2556
+                           (after asmcomp/reg.ml(82):2532-2556
+                             (array.set[addr] rv i
+                               (after asmcomp/reg.ml(82):2542-2556
+                                 (apply create
+                                   (after asmcomp/reg.ml(82):2549-2556
+                                     (array.get[int] tyv i))))))))
+                       (before asmcomp/reg.ml(83):2565-2567 rv)))))))))
+     createv_like =
+       (function rv
+         (funct-body asmcomp/reg.ml(85)<ghost>:2586-2716
+           (before asmcomp/reg.ml(86):2593-2716
+             (let (n =[int] (array.length[addr] rv))
+               (before asmcomp/reg.ml(87):2622-2716
+                 (let
+                   (rv' =
+                      (after asmcomp/reg.ml(87):2632-2650
+                        (caml_make_vect n dummy)))
+                   (before asmcomp/reg.ml(88):2656-2716
+                     (seq
+                       (for i 0 to (- n 1)
+                         (before asmcomp/reg.ml(88):2676-2704
+                           (after asmcomp/reg.ml(88):2676-2704
+                             (array.set[addr] rv' i
+                               (after asmcomp/reg.ml(88):2687-2704
+                                 (apply create
+                                   (field 2
+                                     (after asmcomp/reg.ml(88):2694-2700
+                                       (array.get[addr] rv i)))))))))
+                       (before asmcomp/reg.ml(89):2713-2716 rv')))))))))
+     clone =
+       (function r
+         (funct-body asmcomp/reg.ml(91)<ghost>:2728-2792
+           (before asmcomp/reg.ml(92):2734-2792
+             (let
+               (nr =
+                  (after asmcomp/reg.ml(92):2743-2755
+                    (apply create (field 2 r))))
+               (before asmcomp/reg.ml(93):2761-2792
+                 (seq (setfield_ptr 0 nr (field 0 r))
+                   (before asmcomp/reg.ml(94):2790-2792 nr)))))))
+     at_location =
+       (function ty loc
+         (funct-body asmcomp/reg.ml(96)<ghost>:2810-3038
+           (before asmcomp/reg.ml(97):2821-3038
+             (let
+               (r =
+                  (makemutable 0 (*,int,*,*,*,*,*,*,int,int,*) 1a
+                    (field 0 currstamp) ty loc 0a 0a 0a 0a 0 0 0a))
+               (before asmcomp/reg.ml(100):3019-3038
+                 (seq (+:=1 currstamp)
+                   (before asmcomp/reg.ml(101):3037-3038 r)))))))
+     anonymous =
+       (function t
+         (funct-body asmcomp/reg.ml(103)<ghost>:3054-3145
+           (before asmcomp/reg.ml(104):3060-3145
+             (let
+               (*match* =
+                  (after asmcomp/reg.ml(104):3066-3095
+                    (apply (field 1 Raw_name) (field 0 t))))
+               (if *match* (before asmcomp/reg.ml(106):3140-3145 0a)
+                 (before asmcomp/reg.ml(105):3113-3117 1a))))))
+     name =
+       (function t
+         (funct-body asmcomp/reg.ml(108)<ghost>:3156-3456
+           (before asmcomp/reg.ml(109):3162-3456
+             (let
+               (*match* =
+                  (after asmcomp/reg.ml(109):3168-3197
+                    (apply (field 1 Raw_name) (field 0 t))))
+               (if *match*
+                 (let (raw_name =a (field 0 *match*))
+                   (before asmcomp/reg.ml(112):3243-3456
+                     (let
+                       (with_spilled =
+                          (if (field 4 t)
+                            (before asmcomp/reg.ml(114):3292-3313
+                              (after asmcomp/reg.ml(114):3292-3313
+                                (apply (field 27 (global Stdlib!)) "spilled-"
+                                  raw_name)))
+                            (before asmcomp/reg.ml(116):3333-3341 raw_name)))
+                       (before asmcomp/reg.ml(118):3353-3456
+                         (let (*match* = (field 5 t))
+                           (if *match*
+                             (let (part =a (field 0 *match*))
+                               (before asmcomp/reg.ml(120):3417-3456
+                                 (after asmcomp/reg.ml(120):3417-3456
+                                   (apply (field 27 (global Stdlib!))
+                                     with_spilled
+                                     (after asmcomp/reg.ml(120):3432-3456
+                                       (apply (field 27 (global Stdlib!)) "#"
+                                         (after asmcomp/reg.ml(120):3438-3456
+                                           (apply
+                                             (field 9 (global Stdlib__int!))
+                                             part))))))))
+                             (before asmcomp/reg.ml(119):3385-3397
+                               with_spilled)))))))
+                 (before asmcomp/reg.ml(110):3215-3217 ""))))))
+     first_virtual_reg_stamp = (makemutable 0 (int) -1)
+     reset =
+       (function param
+         (funct-body asmcomp/reg.ml(124)<ghost>:3507-3882
+           (before asmcomp/reg.ml(129):3748-3882
+             (seq
+               (if (== (field 0 first_virtual_reg_stamp) -1)
+                 (before asmcomp/reg.ml(129):3786-3823
+                   (setfield_imm 0 first_virtual_reg_stamp
+                     (field 0 currstamp)))
+                 0a)
+               (before asmcomp/reg.ml(130):3827-3882
+                 (seq
+                   (setfield_imm 0 currstamp
+                     (field 0 first_virtual_reg_stamp))
+                   (before asmcomp/reg.ml(131):3868-3882
+                     (setfield_ptr 0 reg_list 0a))))))))
+     all_registers =
+       (function param
+         (funct-body asmcomp/reg.ml(133)<ghost>:3901-3915
+           (before asmcomp/reg.ml(133):3906-3915 (field 0 reg_list))))
+     num_registers =
+       (function param : int
+         (funct-body asmcomp/reg.ml(134)<ghost>:3933-3948
+           (before asmcomp/reg.ml(134):3938-3948 (field 0 currstamp))))
+     reinit_reg =
+       (function r
+         (funct-body asmcomp/reg.ml(136)<ghost>:3965-4200
+           (before asmcomp/reg.ml(137):3971-4200
+             (seq (setfield_ptr 3 r 0a)
+               (before asmcomp/reg.ml(138):3991-4200
+                 (seq (setfield_ptr 6 r 0a)
+                   (before asmcomp/reg.ml(139):4009-4200
+                     (seq (setfield_ptr 7 r 0a)
+                       (before asmcomp/reg.ml(140):4027-4200
+                         (seq (setfield_imm 8 r 0)
+                           (before asmcomp/reg.ml(142):4120-4200
+                             (if (>= (field 9 r) 100000)
+                               (before asmcomp/reg.ml(143):4153-4175
+                                 (setfield_imm 9 r 100000))
+                               (before asmcomp/reg.ml(144):4183-4200
+                                 (setfield_imm 9 r 0))))))))))))))
+     reinit =
+       (function param
+         (funct-body asmcomp/reg.ml(146)<ghost>:4212-4249
+           (before asmcomp/reg.ml(147):4219-4249
+             (after asmcomp/reg.ml(147):4219-4249
+               (apply (field 14 (global Stdlib__list!)) reinit_reg
+                 (field 0 reg_list))))))
+     RegOrder =
+       (module-defn(RegOrder) asmcomp/reg.ml(149):4251-4344
+         (let
+           (compare =
+              (function r1 r2 : int
+                (funct-body asmcomp/reg.ml(152)<ghost>:4311-4338
+                  (before asmcomp/reg.ml(152):4319-4338
+                    (- (field 1 r1) (field 1 r2))))))
+           (pseudo asmcomp/reg.ml(150):4271-4344 (makeblock 0 compare))))
+     Set =
+       (module-defn(Set) asmcomp/reg.ml(155):4346-4377
+         (apply
+           (let (let = (field 0 (global Stdlib__set!)))
+             (field 0 (global Stdlib__set!)))
+           RegOrder))
+     Map =
+       (module-defn(Map) asmcomp/reg.ml(156):4378-4409
+         (apply
+           (let (let = (field 0 (global Stdlib__map!)))
+             (field 0 (global Stdlib__map!)))
+           RegOrder))
+     add_set_array =
+       (function s v
+         (funct-body asmcomp/reg.ml(158)<ghost>:4429-4611
+           (before asmcomp/reg.ml(159):4437-4611
+             (let (n = (array.length[addr] v))
+               (if (!= n 0)
+                 (if (!= n 1)
+                   (before asmcomp/reg.ml(162):4508-4611
+                     (letrec
+                       (add_all
+                          (function i[int]
+                            (funct-body asmcomp/reg.ml(162)<ghost>:4524-4589
+                              (before asmcomp/reg.ml(163):4539-4589
+                                (if (>= i n)
+                                  (before asmcomp/reg.ml(163):4554-4555 s)
+                                  (before asmcomp/reg.ml(163):4561-4589
+                                    (after asmcomp/reg.ml(163):4561-4589
+                                      (apply (field 3 Set)
+                                        (after asmcomp/reg.ml(163):4569-4574
+                                          (array.get[addr] v i))
+                                        (after asmcomp/reg.ml(163):4575-4589
+                                          (apply add_all (+ i 1)))))))))))
+                       (before asmcomp/reg.ml(164):4602-4611
+                         (after asmcomp/reg.ml(164):4602-4611
+                           (apply add_all 0)))))
+                   (before asmcomp/reg.ml(161):4483-4498
+                     (after asmcomp/reg.ml(161):4483-4498
+                       (apply (field 3 Set)
+                         (after asmcomp/reg.ml(161):4491-4496
+                           (array.get[addr] v 0))
+                         s))))
+                 (before asmcomp/reg.ml(160):4472-4473 s))))))
+     diff_set_array =
+       (function s v
+         (funct-body asmcomp/reg.ml(166)<ghost>:4632-4829
+           (before asmcomp/reg.ml(167):4640-4829
+             (let (n = (array.length[addr] v))
+               (if (!= n 0)
+                 (if (!= n 1)
+                   (before asmcomp/reg.ml(170):4714-4829
+                     (letrec
+                       (remove_all
+                          (function i[int]
+                            (funct-body asmcomp/reg.ml(170)<ghost>:4733-4804
+                              (before asmcomp/reg.ml(171):4748-4804
+                                (if (>= i n)
+                                  (before asmcomp/reg.ml(171):4763-4764 s)
+                                  (before asmcomp/reg.ml(171):4770-4804
+                                    (after asmcomp/reg.ml(171):4770-4804
+                                      (apply (field 5 Set)
+                                        (after asmcomp/reg.ml(171):4781-4786
+                                          (array.get[addr] v i))
+                                        (after asmcomp/reg.ml(171):4787-4804
+                                          (apply remove_all (+ i 1)))))))))))
+                       (before asmcomp/reg.ml(172):4817-4829
+                         (after asmcomp/reg.ml(172):4817-4829
+                           (apply remove_all 0)))))
+                   (before asmcomp/reg.ml(169):4686-4704
+                     (after asmcomp/reg.ml(169):4686-4704
+                       (apply (field 5 Set)
+                         (after asmcomp/reg.ml(169):4697-4702
+                           (array.get[addr] v 0))
+                         s))))
+                 (before asmcomp/reg.ml(168):4675-4676 s))))))
+     inter_set_array =
+       (function s v
+         (funct-body asmcomp/reg.ml(174)<ghost>:4851-5186
+           (before asmcomp/reg.ml(175):4859-5186
+             (let (n = (array.length[addr] v))
+               (if (!= n 0)
+                 (if (!= n 1)
+                   (before asmcomp/reg.ml(180):5003-5186
+                     (letrec
+                       (inter_all
+                          (function i[int]
+                            (funct-body asmcomp/reg.ml(180)<ghost>:5021-5162
+                              (before asmcomp/reg.ml(181):5036-5162
+                                (if (>= i n)
+                                  (before asmcomp/reg.ml(181):5051-5060
+                                    (field 0 Set))
+                                  (before asmcomp/reg.ml(182):5077-5162
+                                    (if
+                                      (after asmcomp/reg.ml(182):5080-5095
+                                        (apply (field 2 Set)
+                                          (after asmcomp/reg.ml(182):5088-5093
+                                            (array.get[addr] v i))
+                                          s))
+                                      (before asmcomp/reg.ml(182):5101-5131
+                                        (after asmcomp/reg.ml(182):5101-5131
+                                          (apply (field 3 Set)
+                                            (after asmcomp/reg.ml(182):5109-5114
+                                              (array.get[addr] v i))
+                                            (after asmcomp/reg.ml(182):5115-5131
+                                              (apply inter_all (+ i 1))))))
+                                      (before asmcomp/reg.ml(183):5148-5162
+                                        (after asmcomp/reg.ml(183):5148-5162
+                                          (apply inter_all (+ i 1)))))))))))
+                       (before asmcomp/reg.ml(184):5175-5186
+                         (after asmcomp/reg.ml(184):5175-5186
+                           (apply inter_all 0)))))
+                   (before asmcomp/reg.ml(177):4913-4993
+                     (if
+                       (after asmcomp/reg.ml(177):4916-4931
+                         (apply (field 2 Set)
+                           (after asmcomp/reg.ml(177):4924-4929
+                             (array.get[addr] v 0))
+                           s))
+                       (before asmcomp/reg.ml(178):4946-4969
+                         (after asmcomp/reg.ml(178):4946-4969
+                           (apply (field 3 Set)
+                             (after asmcomp/reg.ml(178):4954-4959
+                               (array.get[addr] v 0))
+                             (field 0 Set))))
+                       (before asmcomp/reg.ml(179):4984-4993 (field 0 Set)))))
+                 (before asmcomp/reg.ml(176):4894-4903 (field 0 Set)))))))
+     disjoint_set_array =
+       (function s v
+         (funct-body asmcomp/reg.ml(186)<ghost>:5211-5462
+           (before asmcomp/reg.ml(187):5219-5462
+             (let (n = (array.length[addr] v))
+               (if (!= n 0)
+                 (if (!= n 1)
+                   (before asmcomp/reg.ml(190):5299-5462
+                     (letrec
+                       (disjoint_all
+                          (function i[int]
+                            (funct-body asmcomp/reg.ml(190)<ghost>:5320-5435
+                              (before asmcomp/reg.ml(191):5335-5435
+                                (if (>= i n)
+                                  (before asmcomp/reg.ml(191):5350-5354 1a)
+                                  (before asmcomp/reg.ml(192):5371-5435
+                                    (if
+                                      (after asmcomp/reg.ml(192):5374-5389
+                                        (apply (field 2 Set)
+                                          (after asmcomp/reg.ml(192):5382-5387
+                                            (array.get[addr] v i))
+                                          s))
+                                      (before asmcomp/reg.ml(192):5395-5400
+                                        0a)
+                                      (before asmcomp/reg.ml(193):5417-5435
+                                        (after asmcomp/reg.ml(193):5417-5435
+                                          (apply disjoint_all (+ i 1)))))))))))
+                       (before asmcomp/reg.ml(194):5448-5462
+                         (after asmcomp/reg.ml(194):5448-5462
+                           (apply disjoint_all 0)))))
+                   (before asmcomp/reg.ml(189):5268-5289
+                     (not
+                       (after asmcomp/reg.ml(189):5272-5289
+                         (apply (field 2 Set)
+                           (after asmcomp/reg.ml(189):5281-5286
+                             (array.get[addr] v 0))
+                           s)))))
+                 (before asmcomp/reg.ml(188):5254-5258 1a))))))
+     set_of_array =
+       (function v
+         (funct-body asmcomp/reg.ml(196)<ghost>:5481-5685
+           (before asmcomp/reg.ml(197):5487-5685
+             (let (n = (array.length[addr] v))
+               (if (!= n 0)
+                 (if (!= n 1)
+                   (before asmcomp/reg.ml(200):5574-5685
+                     (letrec
+                       (add_all
+                          (function i[int]
+                            (funct-body asmcomp/reg.ml(200)<ghost>:5590-5663
+                              (before asmcomp/reg.ml(201):5605-5663
+                                (if (>= i n)
+                                  (before asmcomp/reg.ml(201):5620-5629
+                                    (field 0 Set))
+                                  (before asmcomp/reg.ml(201):5635-5663
+                                    (after asmcomp/reg.ml(201):5635-5663
+                                      (apply (field 3 Set)
+                                        (after asmcomp/reg.ml(201):5643-5648
+                                          (array.get[addr] v i))
+                                        (after asmcomp/reg.ml(201):5649-5663
+                                          (apply add_all (+ i 1)))))))))))
+                       (before asmcomp/reg.ml(202):5676-5685
+                         (after asmcomp/reg.ml(202):5676-5685
+                           (apply add_all 0)))))
+                   (before asmcomp/reg.ml(199):5541-5564
+                     (after asmcomp/reg.ml(199):5541-5564
+                       (apply (field 3 Set)
+                         (after asmcomp/reg.ml(199):5549-5554
+                           (array.get[addr] v 0))
+                         (field 0 Set)))))
+                 (before asmcomp/reg.ml(198):5522-5531 (field 0 Set))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 (makeblock 0 (field 0 Raw_name)) dummy create createv
+        createv_like clone at_location anonymous name Set Map add_set_array
+        diff_set_array inter_set_array disjoint_set_array set_of_array reset
+        all_registers num_registers reinit))))

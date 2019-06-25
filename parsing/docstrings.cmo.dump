@@ -1,0 +1,901 @@
+(setglobal Docstrings!
+  (let
+    (docstrings = (makemutable 0 0a)
+     warn_bad_docstrings =
+       (function param
+         (funct-body parsing/docstrings.ml(46)<ghost>:2072-2538
+           (before parsing/docstrings.ml(47):2079-2538
+             (if
+               (after parsing/docstrings.ml(47):2082-2130
+                 (apply (field 3 (global Warnings!)) [33: 1a]))
+               (before parsing/docstrings.ml(47):2136-2538
+                 (after parsing/docstrings.ml(47):2136-2538
+                   (apply (field 14 (global Stdlib__list!))
+                     (function ds
+                       (funct-body parsing/docstrings.ml(49):2162-2505
+                         (before parsing/docstrings.ml(50):2182-2504
+                           (let (*match* = (field 2 ds))
+                             (switch* *match*
+                              case int 0:
+                               (before parsing/docstrings.ml(53):2266-2319
+                                 (after parsing/docstrings.ml(53):2266-2319
+                                   (apply (field 34 (global Location!))
+                                     (field 1 ds) [33: 1a])))
+                              case int 1:
+                               (before parsing/docstrings.ml(51):2227-2229
+                                 0a)
+                              case int 2:
+                               (before parsing/docstrings.ml(55):2352-2504
+                                 (let (*match* = (field 3 ds))
+                                   (if (>= *match* 2)
+                                     (before parsing/docstrings.ml(58):2450-2504
+                                       (after parsing/docstrings.ml(58):2450-2504
+                                         (apply (field 34 (global Location!))
+                                           (field 1 ds) [33: 0a])))
+                                     (before parsing/docstrings.ml(56):2409-2411
+                                       0a)))))))))
+                     (after parsing/docstrings.ml(59):2512-2534
+                       (apply (field 8 (global Stdlib__list!))
+                         (field 0 docstrings))))))
+               0a))))
+     docstring =
+       (function body loc
+         (funct-body parsing/docstrings.ml(64)<ghost>:2600-2735
+           (before parsing/docstrings.ml(65):2613-2735
+             (let (ds = (makemutable 0 body loc 0a 0a))
+               (before parsing/docstrings.ml(71):2733-2735 ds)))))
+     register =
+       (function ds
+         (funct-body parsing/docstrings.ml(73)<ghost>:2750-2788
+           (before parsing/docstrings.ml(74):2757-2788
+             (setfield_ptr 0 docstrings
+               (makeblock 0 ds (field 0 docstrings))))))
+     docstring_body =
+       (function ds
+         (funct-body parsing/docstrings.ml(76)<ghost>:2809-2824
+           (before parsing/docstrings.ml(76):2814-2824 (field 0 ds))))
+     docstring_loc =
+       (function ds
+         (funct-body parsing/docstrings.ml(78)<ghost>:2844-2858
+           (before parsing/docstrings.ml(78):2849-2858 (field 1 ds))))
+     empty_docs = [0: 0a 0a]
+     doc_loc = (makeblock 0 "ocaml.doc" (field 0 (global Location!)))
+     docs_attr =
+       (function ds
+         (funct-body parsing/docstrings.ml(90)<ghost>:3102-3470
+           (before parsing/docstrings.ml(91):3109-3470
+             (let
+               (exp =
+                  (makeblock 0 (makeblock 1 (makeblock 2 (field 0 ds) 0a))
+                    (field 1 ds) 0a 0a))
+               (before parsing/docstrings.ml(98):3302-3470
+                 (let
+                   (item = (makeblock 0 (makeblock 0 exp 0a) (field 1 exp)))
+                   (before parsing/docstrings.ml(101):3385-3470
+                     (makeblock 0 doc_loc (makeblock 0 (makeblock 0 item 0a))
+                       (field 0 (global Location!))))))))))
+     add_docs_attrs =
+       (function docs attrs
+         (funct-body parsing/docstrings.ml(105)<ghost>:3491-3777
+           (before parsing/docstrings.ml(106):3506-3777
+             (let
+               (attrs =
+                  (let (*match* = (field 0 docs))
+                    (catch
+                      (if *match*
+                        (let
+                          (ds =a (field 0 *match*) *match* =a (field 0 ds))
+                          (stringswitch *match*
+                           case "": (exit 4)
+                           default:
+                            (before parsing/docstrings.ml(109):3609-3630
+                              (makeblock 0
+                                (after parsing/docstrings.ml(109):3609-3621
+                                  (apply docs_attr ds))
+                                attrs))))
+                        (exit 4))
+                     with (4)
+                      (before parsing/docstrings.ml(108):3586-3591 attrs))))
+               (before parsing/docstrings.ml(111):3638-3777
+                 (let
+                   (attrs =
+                      (let (*match* = (field 1 docs))
+                        (catch
+                          (if *match*
+                            (let
+                              (ds =a (field 0 *match*)
+                               *match* =a (field 0 ds))
+                              (stringswitch *match*
+                               case "": (exit 2)
+                               default:
+                                (before parsing/docstrings.ml(114):3742-3764
+                                  (after parsing/docstrings.ml(114):3742-3764
+                                    (apply (field 36 (global Stdlib!)) attrs
+                                      (makeblock 0
+                                        (after parsing/docstrings.ml(114):3751-3763
+                                          (apply docs_attr ds))
+                                        0a))))))
+                            (exit 2))
+                         with (2)
+                          (before parsing/docstrings.ml(113):3719-3724 attrs))))
+                   (before parsing/docstrings.ml(116):3772-3777 attrs)))))))
+     empty_info = 0a
+     info_attr = docs_attr
+     add_info_attrs =
+       (function info attrs
+         (funct-body parsing/docstrings.ml(126)<ghost>:3931-4040
+           (before parsing/docstrings.ml(127):3946-4040
+             (catch
+               (if info
+                 (let (ds =a (field 0 info) *match* =a (field 0 ds))
+                   (stringswitch *match*
+                    case "": (exit 6)
+                    default:
+                     (before parsing/docstrings.ml(129):4018-4040
+                       (after parsing/docstrings.ml(129):4018-4040
+                         (apply (field 36 (global Stdlib!)) attrs
+                           (makeblock 0
+                             (after parsing/docstrings.ml(129):4027-4039
+                               (apply info_attr ds))
+                             0a))))))
+                 (exit 6))
+              with (6) (before parsing/docstrings.ml(128):3997-4002 attrs)))))
+     empty_text = 0a
+     empty_text_lazy = 0a
+     text_loc = (makeblock 0 "ocaml.text" (field 0 (global Location!)))
+     text_attr =
+       (function ds
+         (funct-body parsing/docstrings.ml(140)<ghost>:4243-4612
+           (before parsing/docstrings.ml(141):4250-4612
+             (let
+               (exp =
+                  (makeblock 0 (makeblock 1 (makeblock 2 (field 0 ds) 0a))
+                    (field 1 ds) 0a 0a))
+               (before parsing/docstrings.ml(148):4443-4612
+                 (let
+                   (item = (makeblock 0 (makeblock 0 exp 0a) (field 1 exp)))
+                   (before parsing/docstrings.ml(151):4526-4612
+                     (makeblock 0 text_loc
+                       (makeblock 0 (makeblock 0 item 0a))
+                       (field 0 (global Location!))))))))))
+     add_text_attrs =
+       (function dsl attrs
+         (funct-body parsing/docstrings.ml(155)<ghost>:4633-4755
+           (before parsing/docstrings.ml(156):4647-4755
+             (let
+               (fdsl =
+                  (after parsing/docstrings.ml(156):4658-4716
+                    (apply (field 35 (global Stdlib__list!))
+                      (function param
+                        (funct-body parsing/docstrings.ml(156):4670-4712
+                          (let (*match* =a (field 0 param))
+                            (stringswitch *match*
+                             case "":
+                              (before parsing/docstrings.ml(156):4696-4701
+                                0a)
+                             default:
+                              (before parsing/docstrings.ml(156):4707-4711
+                                1a)))))
+                      dsl)))
+               (before parsing/docstrings.ml(157):4722-4755
+                 (after parsing/docstrings.ml(157):4722-4755
+                   (apply (field 36 (global Stdlib!))
+                     (after parsing/docstrings.ml(157):4722-4747
+                       (apply (field 16 (global Stdlib__list!)) text_attr
+                         fdsl))
+                     attrs)))))))
+     get_docstring =
+       (function info dsl
+         (funct-body parsing/docstrings.ml(160)<ghost>:4850-5059
+           (before parsing/docstrings.ml(161):4864-5059
+             (letrec
+               (loop
+                  (function param
+                    (funct-body parsing/docstrings.ml(161):4879-5043
+                      (if param
+                        (let (ds =a (field 0 param) *match* =o (field 2 ds))
+                          (if (!= *match* 1)
+                            (before parsing/docstrings.ml(165):4981-5043
+                              (seq
+                                (setfield_imm 2 ds
+                                  (if info
+                                    (before parsing/docstrings.ml(165):5012-5016
+                                      1a)
+                                    (before parsing/docstrings.ml(165):5022-5026
+                                      2a)))
+                                (before parsing/docstrings.ml(166):5036-5043
+                                  (makeblock 0 ds))))
+                            (let (rest =a (field 1 param))
+                              (before parsing/docstrings.ml(163):4946-4955
+                                (after parsing/docstrings.ml(163):4946-4955
+                                  (apply loop rest))))))
+                        (before parsing/docstrings.ml(162):4900-4904 0a)))))
+               (before parsing/docstrings.ml(168):5051-5059
+                 (after parsing/docstrings.ml(168):5051-5059
+                   (apply loop dsl)))))))
+     get_docstrings =
+       (function dsl
+         (funct-body parsing/docstrings.ml(171)<ghost>:5158-5376
+           (before parsing/docstrings.ml(172):5166-5376
+             (letrec
+               (loop
+                  (function acc param
+                    (funct-body parsing/docstrings.ml(172)<ghost>:5179-5355
+                      (if param
+                        (let (ds =a (field 0 param) *match* =o (field 2 ds))
+                          (if (!= *match* 1)
+                            (let (rest =a (field 1 param))
+                              (before parsing/docstrings.ml(176):5302-5355
+                                (seq (setfield_imm 2 ds 2a)
+                                  (before parsing/docstrings.ml(177):5334-5355
+                                    (after parsing/docstrings.ml(177):5334-5355
+                                      (apply loop (makeblock 0 ds acc) rest))))))
+                            (let (rest =a (field 1 param))
+                              (before parsing/docstrings.ml(174):5260-5273
+                                (after parsing/docstrings.ml(174):5260-5273
+                                  (apply loop acc rest))))))
+                        (before parsing/docstrings.ml(173):5206-5218
+                          (after parsing/docstrings.ml(173):5206-5218
+                            (apply (field 8 (global Stdlib__list!)) acc)))))))
+               (before parsing/docstrings.ml(179):5365-5376
+                 (after parsing/docstrings.ml(179):5365-5376
+                   (apply loop 0a dsl)))))))
+     associate_docstrings =
+       (function dsl
+         (funct-body parsing/docstrings.ml(182)<ghost>:5450-5617
+           (before parsing/docstrings.ml(183):5458-5617
+             (after parsing/docstrings.ml(183):5458-5617
+               (apply (field 14 (global Stdlib__list!))
+                 (function ds
+                   (funct-body parsing/docstrings.ml(184):5472-5609
+                     (before parsing/docstrings.ml(185):5490-5608
+                       (let (*match* = (field 3 ds))
+                         (if *match*
+                           (before parsing/docstrings.ml(187):5584-5608
+                             (setfield_imm 3 ds 2a))
+                           (before parsing/docstrings.ml(186):5535-5558
+                             (setfield_imm 3 ds 1a)))))))
+                 dsl)))))
+     pre_table =
+       (after parsing/docstrings.ml(193):5727-5744
+         (apply (field 0 (global Stdlib__hashtbl!)) 0a 50))
+     set_pre_docstrings =
+       (function pos dsl
+         (funct-body parsing/docstrings.ml(195)<ghost>:5769-5828
+           (before parsing/docstrings.ml(196):5781-5828
+             (if (!= dsl 0a)
+               (before parsing/docstrings.ml(196):5799-5828
+                 (after parsing/docstrings.ml(196):5799-5828
+                   (apply (field 4 (global Stdlib__hashtbl!)) pre_table pos
+                     dsl)))
+               0a))))
+     get_pre_docs =
+       (function pos
+         (funct-body parsing/docstrings.ml(198)<ghost>:5847-5995
+           (before parsing/docstrings.ml(199):5855-5995
+             (try
+               (let
+                 (dsl =
+                    (after parsing/docstrings.ml(200):5873-5899
+                      (apply (field 5 (global Stdlib__hashtbl!)) pre_table
+                        pos)))
+                 (before parsing/docstrings.ml(201):5909-5970
+                   (seq
+                     (after parsing/docstrings.ml(201):5909-5933
+                       (apply associate_docstrings dsl))
+                     (before parsing/docstrings.ml(202):5941-5970
+                       (after parsing/docstrings.ml(202):5941-5970
+                         (apply get_docstring 0a dsl))))))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before parsing/docstrings.ml(203):5991-5995 0a)
+                 (reraise exn))))))
+     mark_pre_docs =
+       (function pos
+         (funct-body parsing/docstrings.ml(205)<ghost>:6015-6124
+           (before parsing/docstrings.ml(206):6023-6124
+             (try
+               (let
+                 (dsl =
+                    (after parsing/docstrings.ml(207):6041-6067
+                      (apply (field 5 (global Stdlib__hashtbl!)) pre_table
+                        pos)))
+                 (before parsing/docstrings.ml(208):6077-6101
+                   (after parsing/docstrings.ml(208):6077-6101
+                     (apply associate_docstrings dsl))))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before parsing/docstrings.ml(209):6122-6124 0a)
+                 (reraise exn))))))
+     post_table =
+       (after parsing/docstrings.ml(214):6236-6253
+         (apply (field 0 (global Stdlib__hashtbl!)) 0a 50))
+     set_post_docstrings =
+       (function pos dsl
+         (funct-body parsing/docstrings.ml(216)<ghost>:6279-6339
+           (before parsing/docstrings.ml(217):6291-6339
+             (if (!= dsl 0a)
+               (before parsing/docstrings.ml(217):6309-6339
+                 (after parsing/docstrings.ml(217):6309-6339
+                   (apply (field 4 (global Stdlib__hashtbl!)) post_table pos
+                     dsl)))
+               0a))))
+     get_post_docs =
+       (function pos
+         (funct-body parsing/docstrings.ml(219)<ghost>:6359-6508
+           (before parsing/docstrings.ml(220):6367-6508
+             (try
+               (let
+                 (dsl =
+                    (after parsing/docstrings.ml(221):6385-6412
+                      (apply (field 5 (global Stdlib__hashtbl!)) post_table
+                        pos)))
+                 (before parsing/docstrings.ml(222):6422-6483
+                   (seq
+                     (after parsing/docstrings.ml(222):6422-6446
+                       (apply associate_docstrings dsl))
+                     (before parsing/docstrings.ml(223):6454-6483
+                       (after parsing/docstrings.ml(223):6454-6483
+                         (apply get_docstring 0a dsl))))))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before parsing/docstrings.ml(224):6504-6508 0a)
+                 (reraise exn))))))
+     mark_post_docs =
+       (function pos
+         (funct-body parsing/docstrings.ml(226)<ghost>:6529-6639
+           (before parsing/docstrings.ml(227):6537-6639
+             (try
+               (let
+                 (dsl =
+                    (after parsing/docstrings.ml(228):6555-6582
+                      (apply (field 5 (global Stdlib__hashtbl!)) post_table
+                        pos)))
+                 (before parsing/docstrings.ml(229):6592-6616
+                   (after parsing/docstrings.ml(229):6592-6616
+                     (apply associate_docstrings dsl))))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before parsing/docstrings.ml(230):6637-6639 0a)
+                 (reraise exn))))))
+     get_info =
+       (function pos
+         (funct-body parsing/docstrings.ml(232)<ghost>:6654-6770
+           (before parsing/docstrings.ml(233):6662-6770
+             (try
+               (let
+                 (dsl =
+                    (after parsing/docstrings.ml(234):6680-6707
+                      (apply (field 5 (global Stdlib__hashtbl!)) post_table
+                        pos)))
+                 (before parsing/docstrings.ml(235):6717-6745
+                   (after parsing/docstrings.ml(235):6717-6745
+                     (apply get_docstring 1a dsl))))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before parsing/docstrings.ml(236):6766-6770 0a)
+                 (reraise exn))))))
+     floating_table =
+       (after parsing/docstrings.ml(241):6890-6907
+         (apply (field 0 (global Stdlib__hashtbl!)) 0a 50))
+     set_floating_docstrings =
+       (function pos dsl
+         (funct-body parsing/docstrings.ml(243)<ghost>:6937-7001
+           (before parsing/docstrings.ml(244):6949-7001
+             (if (!= dsl 0a)
+               (before parsing/docstrings.ml(244):6967-7001
+                 (after parsing/docstrings.ml(244):6967-7001
+                   (apply (field 4 (global Stdlib__hashtbl!)) floating_table
+                     pos dsl)))
+               0a))))
+     get_text =
+       (function pos
+         (funct-body parsing/docstrings.ml(246)<ghost>:7016-7124
+           (before parsing/docstrings.ml(247):7024-7124
+             (try
+               (let
+                 (dsl =
+                    (after parsing/docstrings.ml(248):7042-7073
+                      (apply (field 5 (global Stdlib__hashtbl!))
+                        floating_table pos)))
+                 (before parsing/docstrings.ml(249):7083-7101
+                   (after parsing/docstrings.ml(249):7083-7101
+                     (apply get_docstrings dsl))))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before parsing/docstrings.ml(250):7122-7124 0a)
+                 (reraise exn))))))
+     get_post_text =
+       (function pos
+         (funct-body parsing/docstrings.ml(252)<ghost>:7144-7248
+           (before parsing/docstrings.ml(253):7152-7248
+             (try
+               (let
+                 (dsl =
+                    (after parsing/docstrings.ml(254):7170-7197
+                      (apply (field 5 (global Stdlib__hashtbl!)) post_table
+                        pos)))
+                 (before parsing/docstrings.ml(255):7207-7225
+                   (after parsing/docstrings.ml(255):7207-7225
+                     (apply get_docstrings dsl))))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before parsing/docstrings.ml(256):7246-7248 0a)
+                 (reraise exn))))))
+     pre_extra_table =
+       (after parsing/docstrings.ml(261):7367-7384
+         (apply (field 0 (global Stdlib__hashtbl!)) 0a 50))
+     set_pre_extra_docstrings =
+       (function pos dsl
+         (funct-body parsing/docstrings.ml(263)<ghost>:7415-7480
+           (before parsing/docstrings.ml(264):7427-7480
+             (if (!= dsl 0a)
+               (before parsing/docstrings.ml(264):7445-7480
+                 (after parsing/docstrings.ml(264):7445-7480
+                   (apply (field 4 (global Stdlib__hashtbl!)) pre_extra_table
+                     pos dsl)))
+               0a))))
+     get_pre_extra_text =
+       (function pos
+         (funct-body parsing/docstrings.ml(266)<ghost>:7505-7614
+           (before parsing/docstrings.ml(267):7513-7614
+             (try
+               (let
+                 (dsl =
+                    (after parsing/docstrings.ml(268):7531-7563
+                      (apply (field 5 (global Stdlib__hashtbl!))
+                        pre_extra_table pos)))
+                 (before parsing/docstrings.ml(269):7573-7591
+                   (after parsing/docstrings.ml(269):7573-7591
+                     (apply get_docstrings dsl))))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before parsing/docstrings.ml(270):7612-7614 0a)
+                 (reraise exn))))))
+     post_extra_table =
+       (after parsing/docstrings.ml(273):7687-7704
+         (apply (field 0 (global Stdlib__hashtbl!)) 0a 50))
+     set_post_extra_docstrings =
+       (function pos dsl
+         (funct-body parsing/docstrings.ml(275)<ghost>:7736-7802
+           (before parsing/docstrings.ml(276):7748-7802
+             (if (!= dsl 0a)
+               (before parsing/docstrings.ml(276):7766-7802
+                 (after parsing/docstrings.ml(276):7766-7802
+                   (apply (field 4 (global Stdlib__hashtbl!))
+                     post_extra_table pos dsl)))
+               0a))))
+     get_post_extra_text =
+       (function pos
+         (funct-body parsing/docstrings.ml(278)<ghost>:7828-7938
+           (before parsing/docstrings.ml(279):7836-7938
+             (try
+               (let
+                 (dsl =
+                    (after parsing/docstrings.ml(280):7854-7887
+                      (apply (field 5 (global Stdlib__hashtbl!))
+                        post_extra_table pos)))
+                 (before parsing/docstrings.ml(281):7897-7915
+                   (after parsing/docstrings.ml(281):7897-7915
+                     (apply get_docstrings dsl))))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before parsing/docstrings.ml(282):7936-7938 0a)
+                 (reraise exn))))))
+     WithParsing =
+       (module-defn(WithParsing) parsing/docstrings.ml(285):7977-9732
+         (let
+           (symbol_docs =
+              (function param
+                (funct-body parsing/docstrings.ml(286)<ghost>:8021-8145
+                  (before parsing/docstrings.ml(287):8028-8145
+                    (makeblock 0
+                      (after parsing/docstrings.ml(287):8041-8083
+                        (apply get_pre_docs
+                          (after parsing/docstrings.ml(287):8054-8083
+                            (apply (field 4 (global Stdlib__parsing!)) 0a))))
+                      (after parsing/docstrings.ml(288):8101-8142
+                        (apply get_post_docs
+                          (after parsing/docstrings.ml(288):8115-8142
+                            (apply (field 5 (global Stdlib__parsing!)) 0a))))))))
+            symbol_docs_lazy =
+              (function param
+                (funct-body parsing/docstrings.ml(290)<ghost>:8168-8336
+                  (before parsing/docstrings.ml(291):8175-8336
+                    (let
+                      (p1 =
+                         (after parsing/docstrings.ml(291):8184-8211
+                           (apply (field 4 (global Stdlib__parsing!)) 0a)))
+                      (before parsing/docstrings.ml(292):8217-8336
+                        (let
+                          (p2 =
+                             (after parsing/docstrings.ml(292):8226-8251
+                               (apply (field 5 (global Stdlib__parsing!)) 0a)))
+                          (before parsing/docstrings.ml(293):8259-8336
+                            (makemutable 246
+                              (function param
+                                (makeblock 0
+                                  (after parsing/docstrings.ml(293):8277-8292
+                                    (apply get_pre_docs p1))
+                                  (after parsing/docstrings.ml(294):8317-8333
+                                    (apply get_post_docs p2))))))))))))
+            rhs_docs =
+              (function pos1[int] pos2[int]
+                (funct-body parsing/docstrings.ml(296)<ghost>:8351-8480
+                  (before parsing/docstrings.ml(297):8365-8480
+                    (makeblock 0
+                      (after parsing/docstrings.ml(297):8378-8419
+                        (apply get_pre_docs
+                          (after parsing/docstrings.ml(297):8391-8419
+                            (apply (field 6 (global Stdlib__parsing!)) pos1))))
+                      (after parsing/docstrings.ml(298):8437-8477
+                        (apply get_post_docs
+                          (after parsing/docstrings.ml(298):8451-8477
+                            (apply (field 7 (global Stdlib__parsing!)) pos2))))))))
+            rhs_docs_lazy =
+              (function pos1[int] pos2[int]
+                (funct-body parsing/docstrings.ml(300)<ghost>:8500-8673
+                  (before parsing/docstrings.ml(301):8514-8673
+                    (let
+                      (p1 =
+                         (after parsing/docstrings.ml(301):8523-8549
+                           (apply (field 6 (global Stdlib__parsing!)) pos1)))
+                      (before parsing/docstrings.ml(302):8555-8673
+                        (let
+                          (p2 =
+                             (after parsing/docstrings.ml(302):8564-8588
+                               (apply (field 7 (global Stdlib__parsing!))
+                                 pos2)))
+                          (before parsing/docstrings.ml(303):8596-8673
+                            (makemutable 246
+                              (function param
+                                (makeblock 0
+                                  (after parsing/docstrings.ml(303):8614-8629
+                                    (apply get_pre_docs p1))
+                                  (after parsing/docstrings.ml(304):8654-8670
+                                    (apply get_post_docs p2))))))))))))
+            mark_symbol_docs =
+              (function param
+                (funct-body parsing/docstrings.ml(306)<ghost>:8696-8792
+                  (before parsing/docstrings.ml(307):8703-8792
+                    (seq
+                      (after parsing/docstrings.ml(307):8703-8746
+                        (apply mark_pre_docs
+                          (after parsing/docstrings.ml(307):8717-8746
+                            (apply (field 4 (global Stdlib__parsing!)) 0a))))
+                      (before parsing/docstrings.ml(308):8750-8792
+                        (after parsing/docstrings.ml(308):8750-8792
+                          (apply mark_post_docs
+                            (after parsing/docstrings.ml(308):8765-8792
+                              (apply (field 5 (global Stdlib__parsing!)) 0a)))))))))
+            mark_rhs_docs =
+              (function pos1[int] pos2[int]
+                (funct-body parsing/docstrings.ml(310)<ghost>:8812-8913
+                  (before parsing/docstrings.ml(311):8826-8913
+                    (seq
+                      (after parsing/docstrings.ml(311):8826-8868
+                        (apply mark_pre_docs
+                          (after parsing/docstrings.ml(311):8840-8868
+                            (apply (field 6 (global Stdlib__parsing!)) pos1))))
+                      (before parsing/docstrings.ml(312):8872-8913
+                        (after parsing/docstrings.ml(312):8872-8913
+                          (apply mark_post_docs
+                            (after parsing/docstrings.ml(312):8887-8913
+                              (apply (field 7 (global Stdlib__parsing!))
+                                pos2)))))))))
+            symbol_info =
+              (function param
+                (funct-body parsing/docstrings.ml(314)<ghost>:8931-8974
+                  (before parsing/docstrings.ml(315):8938-8974
+                    (after parsing/docstrings.ml(315):8938-8974
+                      (apply get_info
+                        (after parsing/docstrings.ml(315):8947-8974
+                          (apply (field 5 (global Stdlib__parsing!)) 0a)))))))
+            rhs_info =
+              (function pos[int]
+                (funct-body parsing/docstrings.ml(317)<ghost>:8989-9031
+                  (before parsing/docstrings.ml(318):8997-9031
+                    (after parsing/docstrings.ml(318):8997-9031
+                      (apply get_info
+                        (after parsing/docstrings.ml(318):9006-9031
+                          (apply (field 7 (global Stdlib__parsing!)) pos)))))))
+            symbol_text =
+              (function param
+                (funct-body parsing/docstrings.ml(320)<ghost>:9049-9094
+                  (before parsing/docstrings.ml(321):9056-9094
+                    (after parsing/docstrings.ml(321):9056-9094
+                      (apply get_text
+                        (after parsing/docstrings.ml(321):9065-9094
+                          (apply (field 4 (global Stdlib__parsing!)) 0a)))))))
+            symbol_text_lazy =
+              (function param
+                (funct-body parsing/docstrings.ml(323)<ghost>:9117-9188
+                  (before parsing/docstrings.ml(324):9124-9188
+                    (let
+                      (pos =
+                         (after parsing/docstrings.ml(324):9134-9161
+                           (apply (field 4 (global Stdlib__parsing!)) 0a)))
+                      (before parsing/docstrings.ml(325):9169-9188
+                        (makemutable 246
+                          (function param
+                            (after parsing/docstrings.ml(325):9174-9188
+                              (apply get_text pos)))))))))
+            rhs_text =
+              (function pos[int]
+                (funct-body parsing/docstrings.ml(327)<ghost>:9203-9247
+                  (before parsing/docstrings.ml(328):9211-9247
+                    (after parsing/docstrings.ml(328):9211-9247
+                      (apply get_text
+                        (after parsing/docstrings.ml(328):9220-9247
+                          (apply (field 6 (global Stdlib__parsing!)) pos)))))))
+            rhs_post_text =
+              (function pos[int]
+                (funct-body parsing/docstrings.ml(330)<ghost>:9267-9314
+                  (before parsing/docstrings.ml(331):9275-9314
+                    (after parsing/docstrings.ml(331):9275-9314
+                      (apply get_post_text
+                        (after parsing/docstrings.ml(331):9289-9314
+                          (apply (field 7 (global Stdlib__parsing!)) pos)))))))
+            rhs_text_lazy =
+              (function pos[int]
+                (funct-body parsing/docstrings.ml(333)<ghost>:9334-9404
+                  (before parsing/docstrings.ml(334):9342-9404
+                    (let
+                      (pos =
+                         (after parsing/docstrings.ml(334):9352-9377
+                           (apply (field 6 (global Stdlib__parsing!)) pos)))
+                      (before parsing/docstrings.ml(335):9385-9404
+                        (makemutable 246
+                          (function param
+                            (after parsing/docstrings.ml(335):9390-9404
+                              (apply get_text pos)))))))))
+            symbol_pre_extra_text =
+              (function param
+                (funct-body parsing/docstrings.ml(337)<ghost>:9432-9487
+                  (before parsing/docstrings.ml(338):9439-9487
+                    (after parsing/docstrings.ml(338):9439-9487
+                      (apply get_pre_extra_text
+                        (after parsing/docstrings.ml(338):9458-9487
+                          (apply (field 4 (global Stdlib__parsing!)) 0a)))))))
+            symbol_post_extra_text =
+              (function param
+                (funct-body parsing/docstrings.ml(340)<ghost>:9516-9570
+                  (before parsing/docstrings.ml(341):9523-9570
+                    (after parsing/docstrings.ml(341):9523-9570
+                      (apply get_post_extra_text
+                        (after parsing/docstrings.ml(341):9543-9570
+                          (apply (field 5 (global Stdlib__parsing!)) 0a)))))))
+            rhs_pre_extra_text =
+              (function pos[int]
+                (funct-body parsing/docstrings.ml(343)<ghost>:9595-9649
+                  (before parsing/docstrings.ml(344):9603-9649
+                    (after parsing/docstrings.ml(344):9603-9649
+                      (apply get_pre_extra_text
+                        (after parsing/docstrings.ml(344):9622-9649
+                          (apply (field 6 (global Stdlib__parsing!)) pos)))))))
+            rhs_post_extra_text =
+              (function pos[int]
+                (funct-body parsing/docstrings.ml(346)<ghost>:9675-9728
+                  (before parsing/docstrings.ml(347):9683-9728
+                    (after parsing/docstrings.ml(347):9683-9728
+                      (apply get_post_extra_text
+                        (after parsing/docstrings.ml(347):9703-9728
+                          (apply (field 7 (global Stdlib__parsing!)) pos))))))))
+           (pseudo parsing/docstrings.ml(285):7998-9732
+             (makeblock 0 symbol_docs symbol_docs_lazy rhs_docs rhs_docs_lazy
+               mark_symbol_docs mark_rhs_docs symbol_info rhs_info
+               symbol_text symbol_text_lazy rhs_text rhs_post_text
+               rhs_text_lazy symbol_pre_extra_text symbol_post_extra_text
+               rhs_pre_extra_text rhs_post_extra_text))))
+     include =a WithParsing
+     symbol_docs =a (field 0 include)
+     symbol_docs_lazy =a (field 1 include)
+     rhs_docs =a (field 2 include)
+     rhs_docs_lazy =a (field 3 include)
+     mark_symbol_docs =a (field 4 include)
+     mark_rhs_docs =a (field 5 include)
+     symbol_info =a (field 6 include)
+     rhs_info =a (field 7 include)
+     symbol_text =a (field 8 include)
+     symbol_text_lazy =a (field 9 include)
+     rhs_text =a (field 10 include)
+     rhs_post_text =a (field 11 include)
+     rhs_text_lazy =a (field 12 include)
+     symbol_pre_extra_text =a (field 13 include)
+     symbol_post_extra_text =a (field 14 include)
+     rhs_pre_extra_text =a (field 15 include)
+     rhs_post_extra_text =a (field 16 include)
+     WithMenhir =
+       (module-defn(WithMenhir) parsing/docstrings.ml(352):9755-10964
+         (let
+           (symbol_docs =
+              (function param
+                (funct-body parsing/docstrings.ml(353)<ghost>:9798-9896
+                  (let
+                    (endpos =a (field 1 param) startpos =a (field 0 param))
+                    (before parsing/docstrings.ml(354):9821-9896
+                      (makeblock 0
+                        (after parsing/docstrings.ml(354):9834-9855
+                          (apply get_pre_docs startpos))
+                        (after parsing/docstrings.ml(355):9873-9893
+                          (apply get_post_docs endpos)))))))
+            symbol_docs_lazy =
+              (function param
+                (funct-body parsing/docstrings.ml(357)<ghost>:9919-10007
+                  (let (p2 =a (field 1 param) p1 =a (field 0 param))
+                    (before parsing/docstrings.ml(358):9932-10007
+                      (makemutable 246
+                        (function param
+                          (makeblock 0
+                            (after parsing/docstrings.ml(358):9950-9965
+                              (apply get_pre_docs p1))
+                            (after parsing/docstrings.ml(359):9988-10004
+                              (apply get_post_docs p2)))))))))
+            rhs_docs =
+              (function pos1 pos2
+                (funct-body parsing/docstrings.ml(361)<ghost>:10022-10105
+                  (before parsing/docstrings.ml(362):10036-10105
+                    (makeblock 0
+                      (after parsing/docstrings.ml(362):10049-10066
+                        (apply get_pre_docs pos1))
+                      (after parsing/docstrings.ml(363):10084-10102
+                        (apply get_post_docs pos2))))))
+            rhs_docs_lazy =
+              (function p1 p2
+                (funct-body parsing/docstrings.ml(365)<ghost>:10125-10214
+                  (before parsing/docstrings.ml(366):10137-10214
+                    (makemutable 246
+                      (function param
+                        (makeblock 0
+                          (after parsing/docstrings.ml(366):10155-10170
+                            (apply get_pre_docs p1))
+                          (after parsing/docstrings.ml(367):10195-10211
+                            (apply get_post_docs p2))))))))
+            mark_symbol_docs =
+              (function param
+                (funct-body parsing/docstrings.ml(369)<ghost>:10237-10313
+                  (let
+                    (endpos =a (field 1 param) startpos =a (field 0 param))
+                    (before parsing/docstrings.ml(370):10260-10313
+                      (seq
+                        (after parsing/docstrings.ml(370):10260-10282
+                          (apply mark_pre_docs startpos))
+                        (before parsing/docstrings.ml(371):10286-10313
+                          (seq
+                            (after parsing/docstrings.ml(371):10286-10307
+                              (apply mark_post_docs endpos))
+                            (before parsing/docstrings.ml(372):10311-10313
+                              0a))))))))
+            mark_rhs_docs =
+              (function pos1 pos2
+                (funct-body parsing/docstrings.ml(374)<ghost>:10333-10394
+                  (before parsing/docstrings.ml(375):10347-10394
+                    (seq
+                      (after parsing/docstrings.ml(375):10347-10365
+                        (apply mark_pre_docs pos1))
+                      (before parsing/docstrings.ml(376):10369-10394
+                        (seq
+                          (after parsing/docstrings.ml(376):10369-10388
+                            (apply mark_post_docs pos2))
+                          (before parsing/docstrings.ml(377):10392-10394 0a)))))))
+            symbol_info =
+              (function endpos
+                (funct-body parsing/docstrings.ml(379)<ghost>:10412-10438
+                  (before parsing/docstrings.ml(380):10423-10438
+                    (after parsing/docstrings.ml(380):10423-10438
+                      (apply get_info endpos)))))
+            rhs_info =
+              (function endpos
+                (funct-body parsing/docstrings.ml(382)<ghost>:10453-10479
+                  (before parsing/docstrings.ml(383):10464-10479
+                    (after parsing/docstrings.ml(383):10464-10479
+                      (apply get_info endpos)))))
+            symbol_text =
+              (function startpos
+                (funct-body parsing/docstrings.ml(385)<ghost>:10497-10527
+                  (before parsing/docstrings.ml(386):10510-10527
+                    (after parsing/docstrings.ml(386):10510-10527
+                      (apply get_text startpos)))))
+            symbol_text_lazy =
+              (function startpos
+                (funct-body parsing/docstrings.ml(388)<ghost>:10550-10587
+                  (before parsing/docstrings.ml(389):10563-10587
+                    (makemutable 246
+                      (function param
+                        (after parsing/docstrings.ml(389):10568-10587
+                          (apply get_text startpos)))))))
+            rhs_text =
+              (function pos
+                (funct-body parsing/docstrings.ml(391)<ghost>:10602-10622
+                  (before parsing/docstrings.ml(392):10610-10622
+                    (after parsing/docstrings.ml(392):10610-10622
+                      (apply get_text pos)))))
+            rhs_post_text =
+              (function pos
+                (funct-body parsing/docstrings.ml(394)<ghost>:10642-10667
+                  (before parsing/docstrings.ml(395):10650-10667
+                    (after parsing/docstrings.ml(395):10650-10667
+                      (apply get_post_text pos)))))
+            rhs_text_lazy =
+              (function pos
+                (funct-body parsing/docstrings.ml(397)<ghost>:10687-10714
+                  (before parsing/docstrings.ml(398):10695-10714
+                    (makemutable 246
+                      (function param
+                        (after parsing/docstrings.ml(398):10700-10714
+                          (apply get_text pos)))))))
+            symbol_pre_extra_text =
+              (function startpos
+                (funct-body parsing/docstrings.ml(400)<ghost>:10742-10782
+                  (before parsing/docstrings.ml(401):10755-10782
+                    (after parsing/docstrings.ml(401):10755-10782
+                      (apply get_pre_extra_text startpos)))))
+            symbol_post_extra_text =
+              (function endpos
+                (funct-body parsing/docstrings.ml(403)<ghost>:10811-10848
+                  (before parsing/docstrings.ml(404):10822-10848
+                    (after parsing/docstrings.ml(404):10822-10848
+                      (apply get_post_extra_text endpos)))))
+            rhs_pre_extra_text =
+              (function pos
+                (funct-body parsing/docstrings.ml(406)<ghost>:10873-10903
+                  (before parsing/docstrings.ml(407):10881-10903
+                    (after parsing/docstrings.ml(407):10881-10903
+                      (apply get_pre_extra_text pos)))))
+            rhs_post_extra_text =
+              (function pos
+                (funct-body parsing/docstrings.ml(409)<ghost>:10929-10960
+                  (before parsing/docstrings.ml(410):10937-10960
+                    (after parsing/docstrings.ml(410):10937-10960
+                      (apply get_post_extra_text pos))))))
+           (pseudo parsing/docstrings.ml(352):9775-10964
+             (makeblock 0 symbol_docs symbol_docs_lazy rhs_docs rhs_docs_lazy
+               mark_symbol_docs mark_rhs_docs symbol_info rhs_info
+               symbol_text symbol_text_lazy rhs_text rhs_post_text
+               rhs_text_lazy symbol_pre_extra_text symbol_post_extra_text
+               rhs_pre_extra_text rhs_post_extra_text))))
+     init =
+       (function param
+         (funct-body parsing/docstrings.ml(415)<ghost>:11015-11192
+           (before parsing/docstrings.ml(416):11022-11192
+             (seq (setfield_ptr 0 docstrings 0a)
+               (before parsing/docstrings.ml(417):11042-11192
+                 (seq
+                   (after parsing/docstrings.ml(417):11042-11065
+                     (apply (field 2 (global Stdlib__hashtbl!)) pre_table))
+                   (before parsing/docstrings.ml(418):11069-11192
+                     (seq
+                       (after parsing/docstrings.ml(418):11069-11093
+                         (apply (field 2 (global Stdlib__hashtbl!))
+                           post_table))
+                       (before parsing/docstrings.ml(419):11097-11192
+                         (seq
+                           (after parsing/docstrings.ml(419):11097-11125
+                             (apply (field 2 (global Stdlib__hashtbl!))
+                               floating_table))
+                           (before parsing/docstrings.ml(420):11129-11192
+                             (seq
+                               (after parsing/docstrings.ml(420):11129-11158
+                                 (apply (field 2 (global Stdlib__hashtbl!))
+                                   pre_extra_table))
+                               (before parsing/docstrings.ml(421):11162-11192
+                                 (after parsing/docstrings.ml(421):11162-11192
+                                   (apply (field 2 (global Stdlib__hashtbl!))
+                                     post_extra_table))))))))))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 init warn_bad_docstrings docstring register docstring_body
+        docstring_loc set_pre_docstrings set_post_docstrings
+        set_floating_docstrings set_pre_extra_docstrings
+        set_post_extra_docstrings empty_docs docs_attr add_docs_attrs
+        symbol_docs symbol_docs_lazy rhs_docs rhs_docs_lazy mark_symbol_docs
+        mark_rhs_docs empty_info info_attr add_info_attrs symbol_info
+        rhs_info empty_text empty_text_lazy text_attr add_text_attrs
+        symbol_text symbol_text_lazy rhs_text rhs_text_lazy
+        symbol_pre_extra_text symbol_post_extra_text rhs_pre_extra_text
+        rhs_post_extra_text rhs_post_text
+        (makeblock 0 (field 0 WithMenhir) (field 1 WithMenhir)
+          (field 2 WithMenhir) (field 3 WithMenhir) (field 4 WithMenhir)
+          (field 5 WithMenhir) (field 6 WithMenhir) (field 7 WithMenhir)
+          (field 8 WithMenhir) (field 9 WithMenhir) (field 10 WithMenhir)
+          (field 12 WithMenhir) (field 13 WithMenhir) (field 14 WithMenhir)
+          (field 15 WithMenhir) (field 16 WithMenhir) (field 11 WithMenhir))))))

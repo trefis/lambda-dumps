@@ -1,0 +1,519 @@
+(setglobal Stypes!
+  (let
+    (output_int =
+       (function oc i[int]
+         (funct-body typing/stypes.ml(30)<ghost>:1439-1480
+           (before typing/stypes.ml(30):1446-1480
+             (after typing/stypes.ml(30):1446-1480
+               (apply (field 65 (global Stdlib!)) oc
+                 (after typing/stypes.ml(30):1463-1480
+                   (apply (field 9 (global Stdlib__int!)) i)))))))
+     get_location =
+       (function ti
+         (funct-body typing/stypes.ml(41)<ghost>:1716-1902
+           (before typing/stypes.ml(42):1723-1902
+             (switch* ti
+              case tag 0:
+               (let (p =a (field 0 ti))
+                 (before typing/stypes.ml(43):1755-1764 (field 1 p)))
+              case tag 1:
+               (let (e =a (field 0 ti))
+                 (before typing/stypes.ml(44):1783-1792 (field 1 e)))
+              case tag 2:
+               (let (c =a (field 0 ti))
+                 (before typing/stypes.ml(45):1811-1819 (field 1 c)))
+              case tag 3:
+               (let (m =a (field 0 ti))
+                 (before typing/stypes.ml(46):1838-1847 (field 1 m)))
+              case tag 4:
+               (let (l =a (field 0 ti))
+                 (before typing/stypes.ml(47):1871-1872 l))
+              case tag 5:
+               (let (l =a (field 0 ti))
+                 (before typing/stypes.ml(48):1901-1902 l))))))
+     annotations = (makemutable 0 0a)
+     phrases = (makemutable 0 0a)
+     record =
+       (function ti
+         (funct-body typing/stypes.ml(54)<ghost>:2009-2126
+           (before typing/stypes.ml(55):2016-2126
+             (if
+               (&& (field 0 (field 34 (global Clflags!)))
+                 (not
+                   (field 2
+                     (after typing/stypes.ml(55):2047-2064
+                       (apply get_location ti)))))
+               (before typing/stypes.ml(56):2093-2126
+                 (setfield_ptr 0 annotations
+                   (makeblock 0 ti (field 0 annotations))))
+               0a))))
+     record_phrase =
+       (function loc
+         (funct-body typing/stypes.ml(59)<ghost>:2149-2213
+           (before typing/stypes.ml(60):2157-2212
+             (if (field 0 (field 34 (global Clflags!)))
+               (before typing/stypes.ml(60):2186-2212
+                 (setfield_ptr 0 phrases (makeblock 0 loc (field 0 phrases))))
+               0a))))
+     cmp_loc_inner_first =
+       (function loc1 loc2 : int
+         (funct-body typing/stypes.ml(67)<ghost>:2385-2537
+           (before typing/stypes.ml(68):2399-2537
+             (let
+               (x =
+                  (after typing/stypes.ml(68):2405-2456
+                    (caml_int_compare (field 3 (field 1 loc1))
+                      (field 3 (field 1 loc2)))))
+               (if (!= x 0) (before typing/stypes.ml(70):2536-2537 x)
+                 (before typing/stypes.ml(69):2471-2526
+                   (after typing/stypes.ml(69):2471-2526
+                     (caml_int_compare (field 3 (field 0 loc2))
+                       (field 3 (field 0 loc1))))))))))
+     cmp_ti_inner_first =
+       (function ti1 ti2 : int
+         (funct-body typing/stypes.ml(72)<ghost>:2564-2633
+           (before typing/stypes.ml(73):2576-2633
+             (after typing/stypes.ml(73):2576-2633
+               (apply cmp_loc_inner_first
+                 (after typing/stypes.ml(73):2596-2614
+                   (apply get_location ti1))
+                 (after typing/stypes.ml(73):2615-2633
+                   (apply get_location ti2)))))))
+     print_position =
+       (function pp pos
+         (funct-body typing/stypes.ml(76)<ghost>:2657-2985
+           (before typing/stypes.ml(77):2668-2985
+             (if
+               (after typing/stypes.ml(77):2671-2686
+                 (caml_equal pos (field 0 (global Stdlib__lexing!))))
+               (before typing/stypes.ml(78):2696-2717
+                 (after typing/stypes.ml(78):2696-2717
+                   (apply (field 65 (global Stdlib!)) pp "--")))
+               (before typing/stypes.ml(79):2725-2985
+                 (seq
+                   (after typing/stypes.ml(80):2735-2754
+                     (apply (field 64 (global Stdlib!)) pp '"'))
+                   (before typing/stypes.ml(81):2760-2979
+                     (seq
+                       (after typing/stypes.ml(81):2760-2807
+                         (apply (field 65 (global Stdlib!)) pp
+                           (after typing/stypes.ml(81):2777-2807
+                             (apply (field 12 (global Stdlib__string!))
+                               (field 0 pos)))))
+                       (before typing/stypes.ml(82):2813-2979
+                         (seq
+                           (after typing/stypes.ml(82):2813-2835
+                             (apply (field 65 (global Stdlib!)) pp "\" "))
+                           (before typing/stypes.ml(83):2841-2979
+                             (seq
+                               (after typing/stypes.ml(83):2841-2867
+                                 (apply output_int pp (field 1 pos)))
+                               (before typing/stypes.ml(84):2873-2979
+                                 (seq
+                                   (after typing/stypes.ml(84):2873-2891
+                                     (apply (field 64 (global Stdlib!)) pp
+                                       ' '))
+                                   (before typing/stypes.ml(85):2897-2979
+                                     (seq
+                                       (after typing/stypes.ml(85):2897-2922
+                                         (apply output_int pp (field 2 pos)))
+                                       (before typing/stypes.ml(86):2928-2979
+                                         (seq
+                                           (after typing/stypes.ml(86):2928-2946
+                                             (apply
+                                               (field 64 (global Stdlib!)) pp
+                                               ' '))
+                                           (before typing/stypes.ml(87):2952-2978
+                                             (after typing/stypes.ml(87):2952-2978
+                                               (apply output_int pp
+                                                 (field 3 pos))))))))))))))))))))))
+     print_location =
+       (function pp loc
+         (funct-body typing/stypes.ml(91)<ghost>:3009-3107
+           (before typing/stypes.ml(92):3020-3107
+             (seq
+               (after typing/stypes.ml(92):3020-3051
+                 (apply print_position pp (field 0 loc)))
+               (before typing/stypes.ml(93):3055-3107
+                 (seq
+                   (after typing/stypes.ml(93):3055-3073
+                     (apply (field 64 (global Stdlib!)) pp ' '))
+                   (before typing/stypes.ml(94):3077-3106
+                     (after typing/stypes.ml(94):3077-3106
+                       (apply print_position pp (field 1 loc))))))))))
+     sort_filter_phrases =
+       (function param
+         (funct-body typing/stypes.ml(97)<ghost>:3136-3516
+           (before typing/stypes.ml(98):3143-3516
+             (let
+               (ph =
+                  (after typing/stypes.ml(98):3152-3207
+                    (apply (field 48 (global Stdlib__list!))
+                      (function x y : int
+                        (funct-body typing/stypes.ml(98):3162-3198
+                          (before typing/stypes.ml(98):3174-3197
+                            (after typing/stypes.ml(98):3174-3197
+                              (apply cmp_loc_inner_first y x)))))
+                      (field 0 phrases))))
+               (before typing/stypes.ml(99):3213-3516
+                 (letrec
+                   (loop
+                      (function accu cur l
+                        (funct-body typing/stypes.ml(99)<ghost>:3226-3472
+                          (before typing/stypes.ml(100):3243-3472
+                            (if l
+                              (let (t =a (field 1 l) loc =a (field 0 l))
+                                (before typing/stypes.ml(103):3298-3472
+                                  (if
+                                    (&&
+                                      (<= (field 3 (field 0 cur))
+                                        (field 3 (field 0 loc)))
+                                      (>= (field 3 (field 1 cur))
+                                        (field 3 (field 1 loc))))
+                                    (before typing/stypes.ml(105):3420-3435
+                                      (after typing/stypes.ml(105):3420-3435
+                                        (apply loop accu cur t)))
+                                    (before typing/stypes.ml(106):3448-3472
+                                      (after typing/stypes.ml(106):3448-3472
+                                        (apply loop (makeblock 0 loc accu)
+                                          loc t))))))
+                              (before typing/stypes.ml(101):3268-3272 accu))))))
+                   (before typing/stypes.ml(108):3480-3515
+                     (setfield_ptr 0 phrases
+                       (after typing/stypes.ml(108):3491-3515
+                         (apply loop 0a (field 0 (global Location!)) ph)))))))))))
+    (letrec
+      (printtyp_reset_maybe
+         (function loc
+           (funct-body typing/stypes.ml(111)<ghost>:3550-3733
+             (before typing/stypes.ml(112):3558-3733
+               (let (*match* = (field 0 phrases))
+                 (catch
+                   (if *match*
+                     (let (t =a (field 1 *match*) cur =a (field 0 *match*))
+                       (before typing/stypes.ml(113):3596-3644
+                         (if
+                           (<= (field 3 (field 0 cur))
+                             (field 3 (field 0 loc)))
+                           (before typing/stypes.ml(114):3653-3721
+                             (seq
+                               (after typing/stypes.ml(114):3653-3670
+                                 (apply (field 12 (global Printtyp!)) 0a))
+                               (before typing/stypes.ml(115):3677-3721
+                                 (seq (setfield_ptr 0 phrases t)
+                                   (before typing/stypes.ml(116):3696-3720
+                                     (after typing/stypes.ml(116):3696-3720
+                                       (apply printtyp_reset_maybe loc)))))))
+                           (exit 2))))
+                     (exit 2))
+                  with (2) (before typing/stypes.ml(117):3731-3733 0a)))))))
+      (let
+        (call_kind_string =
+           (function k
+             (funct-body typing/stypes.ml(120)<ghost>:3759-3840
+               (before typing/stypes.ml(121):3765-3840
+                 (switch* k
+                  case int 0: (before typing/stypes.ml(122):3790-3796 "tail")
+                  case int 1:
+                   (before typing/stypes.ml(123):3810-3817 "stack")
+                  case int 2:
+                   (before typing/stypes.ml(124):3832-3840 "inline")))))
+         print_ident_annot =
+           (function pp str k
+             (funct-body typing/stypes.ml(127)<ghost>:3867-4319
+               (before typing/stypes.ml(128):3880-4319
+                 (switch* k
+                  case int 0:
+                   (before typing/stypes.ml(142):4237-4319
+                     (seq
+                       (after typing/stypes.ml(142):4237-4264
+                         (apply (field 65 (global Stdlib!)) pp "ext_ref "))
+                       (before typing/stypes.ml(143):4272-4319
+                         (seq
+                           (after typing/stypes.ml(143):4272-4292
+                             (apply (field 65 (global Stdlib!)) pp str))
+                           (before typing/stypes.ml(144):4300-4319
+                             (after typing/stypes.ml(144):4300-4319
+                               (apply (field 64 (global Stdlib!)) pp '\n')))))))
+                  case tag 0:
+                   (let (l =a (field 0 k))
+                     (before typing/stypes.ml(136):4074-4209
+                       (seq
+                         (after typing/stypes.ml(136):4074-4101
+                           (apply (field 65 (global Stdlib!)) pp "int_ref "))
+                         (before typing/stypes.ml(137):4109-4209
+                           (seq
+                             (after typing/stypes.ml(137):4109-4129
+                               (apply (field 65 (global Stdlib!)) pp str))
+                             (before typing/stypes.ml(138):4137-4209
+                               (seq
+                                 (after typing/stypes.ml(138):4137-4155
+                                   (apply (field 64 (global Stdlib!)) pp ' '))
+                                 (before typing/stypes.ml(139):4163-4209
+                                   (seq
+                                     (after typing/stypes.ml(139):4163-4182
+                                       (apply print_location pp l))
+                                     (before typing/stypes.ml(140):4190-4209
+                                       (after typing/stypes.ml(140):4190-4209
+                                         (apply (field 64 (global Stdlib!))
+                                           pp '\n'))))))))))))
+                  case tag 1:
+                   (let (l =a (field 0 k))
+                     (before typing/stypes.ml(130):3913-4044
+                       (seq
+                         (after typing/stypes.ml(130):3913-3936
+                           (apply (field 65 (global Stdlib!)) pp "def "))
+                         (before typing/stypes.ml(131):3944-4044
+                           (seq
+                             (after typing/stypes.ml(131):3944-3964
+                               (apply (field 65 (global Stdlib!)) pp str))
+                             (before typing/stypes.ml(132):3972-4044
+                               (seq
+                                 (after typing/stypes.ml(132):3972-3990
+                                   (apply (field 64 (global Stdlib!)) pp ' '))
+                                 (before typing/stypes.ml(133):3998-4044
+                                   (seq
+                                     (after typing/stypes.ml(133):3998-4017
+                                       (apply print_location pp l))
+                                     (before typing/stypes.ml(134):4025-4044
+                                       (after typing/stypes.ml(134):4025-4044
+                                         (apply (field 64 (global Stdlib!))
+                                           pp '\n'))))))))))))))))
+         print_info =
+           (function pp prev_loc ti
+             (funct-body typing/stypes.ml(149)<ghost>:4418-5665
+               (before typing/stypes.ml(150):4437-5665
+                 (catch
+                   (catch
+                     (switch* ti
+                      case tag 0:
+                       (let
+                         (*match* =a (field 0 ti)
+                          typ =a (field 3 *match*)
+                          loc =a (field 1 *match*)
+                          env =o (field 4 *match*))
+                         (exit 4 env typ loc))
+                      case tag 1:
+                       (let
+                         (*match* =a (field 0 ti)
+                          env =a (field 4 *match*)
+                          typ =a (field 3 *match*)
+                          loc =a (field 1 *match*))
+                         (exit 4 env typ loc))
+                      case tag 2: (exit 3)
+                      case tag 3: (exit 3)
+                      case tag 4:
+                       (let (k =a (field 1 ti) loc =a (field 0 ti))
+                         (before typing/stypes.ml(170):5196-5418
+                           (seq
+                             (if
+                               (after typing/stypes.ml(170):5199-5214
+                                 (caml_notequal loc prev_loc))
+                               (before typing/stypes.ml(170):5220-5294
+                                 (seq
+                                   (after typing/stypes.ml(171):5234-5255
+                                     (apply print_location pp loc))
+                                   (before typing/stypes.ml(172):5265-5284
+                                     (after typing/stypes.ml(172):5265-5284
+                                       (apply (field 64 (global Stdlib!)) pp
+                                         '\n')))))
+                               0a)
+                             (before typing/stypes.ml(174):5302-5418
+                               (seq
+                                 (after typing/stypes.ml(174):5302-5330
+                                   (apply (field 65 (global Stdlib!)) pp
+                                     "call(\n  "))
+                                 (before typing/stypes.ml(175):5338-5418
+                                   (seq
+                                     (after typing/stypes.ml(175):5338-5375
+                                       (apply (field 65 (global Stdlib!)) pp
+                                         (after typing/stypes.ml(175):5355-5375
+                                           (apply call_kind_string k))))
+                                     (before typing/stypes.ml(176):5383-5418
+                                       (seq
+                                         (after typing/stypes.ml(176):5383-5407
+                                           (apply (field 65 (global Stdlib!))
+                                             pp "\n)\n"))
+                                         (before typing/stypes.ml(177):5415-5418
+                                           loc))))))))))
+                      case tag 5:
+                       (let
+                         (k =a (field 2 ti)
+                          str =a (field 1 ti)
+                          loc =a (field 0 ti))
+                         (before typing/stypes.ml(179):5455-5665
+                           (seq
+                             (if
+                               (after typing/stypes.ml(179):5458-5473
+                                 (caml_notequal loc prev_loc))
+                               (before typing/stypes.ml(179):5479-5553
+                                 (seq
+                                   (after typing/stypes.ml(180):5493-5514
+                                     (apply print_location pp loc))
+                                   (before typing/stypes.ml(181):5524-5543
+                                     (after typing/stypes.ml(181):5524-5543
+                                       (apply (field 64 (global Stdlib!)) pp
+                                         '\n')))))
+                               0a)
+                             (before typing/stypes.ml(183):5561-5665
+                               (seq
+                                 (after typing/stypes.ml(183):5561-5590
+                                   (apply (field 65 (global Stdlib!)) pp
+                                     "ident(\n  "))
+                                 (before typing/stypes.ml(184):5598-5665
+                                   (seq
+                                     (after typing/stypes.ml(184):5598-5624
+                                       (apply print_ident_annot pp str k))
+                                     (before typing/stypes.ml(185):5632-5665
+                                       (seq
+                                         (after typing/stypes.ml(185):5632-5654
+                                           (apply (field 65 (global Stdlib!))
+                                             pp ")\n"))
+                                         (before typing/stypes.ml(186):5662-5665
+                                           loc)))))))))))
+                    with (3)
+                     (before typing/stypes.ml(151):4480-4488 prev_loc))
+                  with (4 env typ loc)
+                   (before typing/stypes.ml(154):4616-5165
+                     (seq
+                       (if
+                         (after typing/stypes.ml(154):4619-4634
+                           (caml_notequal loc prev_loc))
+                         (before typing/stypes.ml(154):4640-4714
+                           (seq
+                             (after typing/stypes.ml(155):4654-4675
+                               (apply print_location pp loc))
+                             (before typing/stypes.ml(156):4685-4704
+                               (after typing/stypes.ml(156):4685-4704
+                                 (apply (field 64 (global Stdlib!)) pp '\n')))))
+                         0a)
+                       (before typing/stypes.ml(158):4722-5165
+                         (seq
+                           (after typing/stypes.ml(158):4722-4748
+                             (apply (field 65 (global Stdlib!)) pp "type(\n"))
+                           (before typing/stypes.ml(159):4756-5165
+                             (seq
+                               (after typing/stypes.ml(159):4756-4780
+                                 (apply printtyp_reset_maybe loc))
+                               (before typing/stypes.ml(160):4788-5165
+                                 (seq
+                                   (after typing/stypes.ml(160):4788-4811
+                                     (apply (field 13 (global Printtyp!))
+                                       typ))
+                                   (before typing/stypes.ml(161):4819-5165
+                                     (seq
+                                       (after typing/stypes.ml(161):4819-4867
+                                         (apply
+                                           (field 12
+                                             (global Stdlib__format!))
+                                           (field 108
+                                             (global Stdlib__format!))
+                                           "  "))
+                                       (before typing/stypes.ml(162):4875-5165
+                                         (seq
+                                           (after typing/stypes.ml(162):4875-4996
+                                             (apply
+                                               (field 9 (global Printtyp!))
+                                               0a env
+                                               (function param
+                                                 (funct-body typing/stypes.ml(163):4942-4996
+                                                   (before typing/stypes.ml(163):4953-4995
+                                                     (after typing/stypes.ml(163):4953-4995
+                                                       (apply
+                                                         (field 19
+                                                           (global Printtyp!))
+                                                         (field 108
+                                                           (global Stdlib__format!))
+                                                         typ)))))))
+                                           (before typing/stypes.ml(164):5004-5165
+                                             (seq
+                                               (after typing/stypes.ml(164):5004-5051
+                                                 (apply
+                                                   (field 37
+                                                     (global Stdlib__format!))
+                                                   (field 108
+                                                     (global Stdlib__format!))
+                                                   0a))
+                                               (before typing/stypes.ml(165):5059-5165
+                                                 (let
+                                                   (s =
+                                                      (after typing/stypes.ml(165):5067-5096
+                                                        (apply
+                                                          (field 109
+                                                            (global Stdlib__format!))
+                                                          0a)))
+                                                   (before typing/stypes.ml(166):5106-5165
+                                                     (seq
+                                                       (after typing/stypes.ml(166):5106-5124
+                                                         (apply
+                                                           (field 65
+                                                             (global Stdlib!))
+                                                           pp s))
+                                                       (before typing/stypes.ml(167):5132-5165
+                                                         (seq
+                                                           (after typing/stypes.ml(167):5132-5154
+                                                             (apply
+                                                               (field 65
+                                                                 (global Stdlib!))
+                                                               pp ")\n"))
+                                                           (before typing/stypes.ml(168):5162-5165
+                                                             loc)))))))))))))))))))))))))
+         get_info =
+           (function param
+             (funct-body typing/stypes.ml(189)<ghost>:5683-5778
+               (before typing/stypes.ml(190):5690-5778
+                 (let
+                   (info =
+                      (after typing/stypes.ml(190):5701-5747
+                        (apply (field 50 (global Stdlib__list!))
+                          cmp_ti_inner_first (field 0 annotations))))
+                   (before typing/stypes.ml(191):5753-5778
+                     (seq (setfield_ptr 0 annotations 0a)
+                       (before typing/stypes.ml(192):5774-5778 info)))))))
+         dump =
+           (function filename
+             (funct-body typing/stypes.ml(195)<ghost>:5792-6242
+               (before typing/stypes.ml(196):5805-6241
+                 (if (field 0 (field 34 (global Clflags!)))
+                   (before typing/stypes.ml(196):5834-6201
+                     (let
+                       (do_dump =
+                          (function _temp_filename pp
+                            (funct-body typing/stypes.ml(197)<ghost>:5856-6002
+                              (before typing/stypes.ml(198):5882-6002
+                                (let
+                                  (info =
+                                     (after typing/stypes.ml(198):5893-5904
+                                       (apply get_info 0a)))
+                                  (before typing/stypes.ml(199):5914-6002
+                                    (seq
+                                      (after typing/stypes.ml(199):5914-5936
+                                        (apply sort_filter_phrases 0a))
+                                      (before typing/stypes.ml(200):5944-6002
+                                        (ignore
+                                          (after typing/stypes.ml(200):5951-6002
+                                            (apply
+                                              (field 20
+                                                (global Stdlib__list!))
+                                              (after typing/stypes.ml(200):5967-5982
+                                                (apply print_info pp))
+                                              (field 0 (global Location!))
+                                              info)))))))))))
+                       (before typing/stypes.ml(201):6010-6195
+                         (seq
+                           (if filename
+                             (let (filename =a (field 0 filename))
+                               (before typing/stypes.ml(204):6099-6167
+                                 (after typing/stypes.ml(204):6099-6167
+                                   (apply (field 22 (global Misc!))
+                                     [0: [0: 7a 0a]] filename do_dump))))
+                             (before typing/stypes.ml(202):6050-6067
+                               (after typing/stypes.ml(202):6050-6067
+                                 (apply do_dump ""
+                                   (field 38 (global Stdlib!))))))
+                           (before typing/stypes.ml(206):6181-6194
+                             (setfield_ptr 0 phrases 0a))))))
+                   (before typing/stypes.ml(207):6207-6241
+                     (setfield_ptr 0 annotations 0a)))))))
+        (pseudo _none_(0)<ghost>:-1--1
+          (makeblock 0 record record_phrase dump get_location get_info))))))

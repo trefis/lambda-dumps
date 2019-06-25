@@ -1,0 +1,2921 @@
+(setglobal Ast_helper!
+  (let
+    (default_loc = (makemutable 0 (field 0 (global Location!)))
+     with_default_loc =
+       (function l f
+         (funct-body parsing/ast_helper.ml(31)<ghost>:1376-1429
+           (before parsing/ast_helper.ml(32):1384-1429
+             (after parsing/ast_helper.ml(32):1384-1429
+               (apply (field 10 (global Misc!))
+                 (makeblock 0 (makeblock 0 default_loc l) 0a) f)))))
+     Const =
+       (module-defn(Const) parsing/ast_helper.ml(34):1431-1926
+         (let
+           (integer =
+              (function suffix i
+                (funct-body parsing/ast_helper.ml(35)<ghost>:1467-1505
+                  (before parsing/ast_helper.ml(35):1479-1505
+                    (makeblock 0 i suffix))))
+            int =
+              (function suffix i[int]
+                (funct-body parsing/ast_helper.ml(36)<ghost>:1516-1561
+                  (before parsing/ast_helper.ml(36):1528-1561
+                    (after parsing/ast_helper.ml(36):1528-1561
+                      (apply integer suffix
+                        (after parsing/ast_helper.ml(36):1544-1561
+                          (apply (field 9 (global Stdlib__int!)) i)))))))
+            int32 =
+              (function *opt* i[int32]
+                (funct-body parsing/ast_helper.ml(37)<ghost>:1574-1627
+                  (before parsing/ast_helper.ml(37):1592-1627
+                    (let
+                      (suffix =[int]
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(37):1583-1586
+                               *sth*))
+                           (before parsing/ast_helper.ml(37):1583-1586 'l')))
+                      (before parsing/ast_helper.ml(37):1592-1627
+                        (after parsing/ast_helper.ml(37):1592-1627
+                          (apply integer (makeblock 0 (int) suffix)
+                            (after parsing/ast_helper.ml(37):1608-1627
+                              (apply (field 13 (global Stdlib__int32!)) i)))))))))
+            int64 =
+              (function *opt* i[int64]
+                (funct-body parsing/ast_helper.ml(38)<ghost>:1640-1693
+                  (before parsing/ast_helper.ml(38):1658-1693
+                    (let
+                      (suffix =[int]
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(38):1649-1652
+                               *sth*))
+                           (before parsing/ast_helper.ml(38):1649-1652 'L')))
+                      (before parsing/ast_helper.ml(38):1658-1693
+                        (after parsing/ast_helper.ml(38):1658-1693
+                          (apply integer (makeblock 0 (int) suffix)
+                            (after parsing/ast_helper.ml(38):1674-1693
+                              (apply (field 13 (global Stdlib__int64!)) i)))))))))
+            nativeint =
+              (function *opt* i[nativeint]
+                (funct-body parsing/ast_helper.ml(39)<ghost>:1710-1767
+                  (before parsing/ast_helper.ml(39):1728-1767
+                    (let
+                      (suffix =[int]
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(39):1719-1722
+                               *sth*))
+                           (before parsing/ast_helper.ml(39):1719-1722 'n')))
+                      (before parsing/ast_helper.ml(39):1728-1767
+                        (after parsing/ast_helper.ml(39):1728-1767
+                          (apply integer (makeblock 0 (int) suffix)
+                            (after parsing/ast_helper.ml(39):1744-1767
+                              (apply (field 14 (global Stdlib__nativeint!))
+                                i)))))))))
+            float =
+              (function suffix f
+                (funct-body parsing/ast_helper.ml(40)<ghost>:1780-1816
+                  (before parsing/ast_helper.ml(40):1792-1816
+                    (makeblock 3 f suffix))))
+            char =
+              (function c[int]
+                (funct-body parsing/ast_helper.ml(41)<ghost>:1828-1845
+                  (before parsing/ast_helper.ml(41):1832-1845
+                    (makeblock 1 (int) c))))
+            string =
+              (function quotation_delimiter s
+                (funct-body parsing/ast_helper.ml(42)<ghost>:1859-1922
+                  (before parsing/ast_helper.ml(42):1884-1922
+                    (makeblock 2 s quotation_delimiter)))))
+           (pseudo parsing/ast_helper.ml(34):1446-1926
+             (makeblock 0 integer int int32 int64 nativeint float char
+               string))))
+     Attr =
+       (module-defn(Attr) parsing/ast_helper.ml(45):1928-2074
+         (let
+           (mk =
+              (function *opt* name payload
+                (funct-body parsing/ast_helper.ml(46)<ghost>:1958-2070
+                  (before parsing/ast_helper.ml(47):1998-2070
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(46):1965-1977
+                               *sth*))
+                           (before parsing/ast_helper.ml(46):1965-1977
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(47):1998-2070
+                        (makeblock 0 name payload loc)))))))
+           (pseudo parsing/ast_helper.ml(45):1942-2074 (makeblock 0 mk))))
+     Typ =
+       (module-defn(Typ) parsing/ast_helper.ml(52):2076-5467
+         (let
+           (mk =
+              (function *opt* *opt* d
+                (funct-body parsing/ast_helper.ml(53)<ghost>:2105-2241
+                  (before parsing/ast_helper.ml(54):2149-2241
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(53):2113-2125
+                               *sth*))
+                           (before parsing/ast_helper.ml(53):2113-2125
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(54):2149-2241
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(53):2137-2139
+                                   *sth*))
+                               (before parsing/ast_helper.ml(53):2137-2139
+                                 0a)))
+                          (before parsing/ast_helper.ml(54):2149-2241
+                            (makeblock 0 d loc 0a attrs))))))))
+            attr =
+              (function d a
+                (funct-body parsing/ast_helper.ml(59)<ghost>:2254-2310
+                  (before parsing/ast_helper.ml(59):2260-2310
+                    (let (init = d)
+                      (makeblock 0 (field 0 init) (field 1 init)
+                        (field 2 init)
+                        (after parsing/ast_helper.ml(59):2286-2309
+                          (apply (field 36 (global Stdlib!)) (field 3 d)
+                            (makeblock 0 a 0a))))))))
+            any =
+              (function loc attrs param
+                (funct-body parsing/ast_helper.ml(61)<ghost>:2322-2362
+                  (before parsing/ast_helper.ml(61):2339-2362
+                    (after parsing/ast_helper.ml(61):2339-2362
+                      (apply mk loc attrs 0a)))))
+            var =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(62)<ghost>:2373-2416
+                  (before parsing/ast_helper.ml(62):2389-2416
+                    (after parsing/ast_helper.ml(62):2389-2416
+                      (apply mk loc attrs (makeblock 0 a))))))
+            arrow =
+              (function loc attrs a b c
+                (funct-body parsing/ast_helper.ml(63)<ghost>:2429-2486
+                  (before parsing/ast_helper.ml(63):2449-2486
+                    (after parsing/ast_helper.ml(63):2449-2486
+                      (apply mk loc attrs (makeblock 1 a b c))))))
+            tuple =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(64)<ghost>:2499-2544
+                  (before parsing/ast_helper.ml(64):2515-2544
+                    (after parsing/ast_helper.ml(64):2515-2544
+                      (apply mk loc attrs (makeblock 2 a))))))
+            constr =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(65)<ghost>:2558-2611
+                  (before parsing/ast_helper.ml(65):2576-2611
+                    (after parsing/ast_helper.ml(65):2576-2611
+                      (apply mk loc attrs (makeblock 3 a b))))))
+            object_ =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(66)<ghost>:2626-2679
+                  (before parsing/ast_helper.ml(66):2644-2679
+                    (after parsing/ast_helper.ml(66):2644-2679
+                      (apply mk loc attrs (makeblock 4 a b))))))
+            class_ =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(67)<ghost>:2693-2745
+                  (before parsing/ast_helper.ml(67):2711-2745
+                    (after parsing/ast_helper.ml(67):2711-2745
+                      (apply mk loc attrs (makeblock 5 a b))))))
+            alias =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(68)<ghost>:2758-2810
+                  (before parsing/ast_helper.ml(68):2776-2810
+                    (after parsing/ast_helper.ml(68):2776-2810
+                      (apply mk loc attrs (makeblock 6 a b))))))
+            variant =
+              (function loc attrs a b c
+                (funct-body parsing/ast_helper.ml(69)<ghost>:2825-2884
+                  (before parsing/ast_helper.ml(69):2845-2884
+                    (after parsing/ast_helper.ml(69):2845-2884
+                      (apply mk loc attrs (makeblock 7 a b c))))))
+            poly =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(70)<ghost>:2896-2947
+                  (before parsing/ast_helper.ml(70):2914-2947
+                    (after parsing/ast_helper.ml(70):2914-2947
+                      (apply mk loc attrs (makeblock 8 a b))))))
+            package =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(71)<ghost>:2962-3016
+                  (before parsing/ast_helper.ml(71):2980-3016
+                    (after parsing/ast_helper.ml(71):2980-3016
+                      (apply mk loc attrs (makeblock 9 (makeblock 0 a b)))))))
+            extension =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(72)<ghost>:3033-3082
+                  (before parsing/ast_helper.ml(72):3049-3082
+                    (after parsing/ast_helper.ml(72):3049-3082
+                      (apply mk loc attrs (makeblock 10 a))))))
+            force_poly =
+              (function t
+                (funct-body parsing/ast_helper.ml(74)<ghost>:3101-3191
+                  (before parsing/ast_helper.ml(75):3109-3191
+                    (let (*match* = (field 0 t))
+                      (catch
+                        (switch *match*
+                         case tag 8:
+                          (before parsing/ast_helper.ml(76):3153-3154 t)
+                         default: (exit 1))
+                       with (1)
+                        (before parsing/ast_helper.ml(77):3166-3191
+                          (after parsing/ast_helper.ml(77):3166-3191
+                            (apply poly (makeblock 0 (field 1 t)) 0a 0a t))))))))
+            varify_constructors =
+              (function var_names t
+                (funct-body parsing/ast_helper.ml(79)<ghost>:3235-5462
+                  (before parsing/ast_helper.ml(80):3253-5462
+                    (let
+                      (check_variable =
+                         (function vl loc v
+                           (funct-body parsing/ast_helper.ml(80)<ghost>:3272-3368
+                             (before parsing/ast_helper.ml(81):3289-3368
+                               (if
+                                 (after parsing/ast_helper.ml(81):3292-3305
+                                   (apply (field 31 (global Stdlib__list!)) v
+                                     vl))
+                                 (before parsing/ast_helper.ml(82):3319-3368
+                                   (raise
+                                     (after parsing/ast_helper.ml(82):3325-3368
+                                       (makeblock 0
+                                         (field 0 (global Syntaxerr!))
+                                         (makeblock 4 loc v)))))
+                                 0a)))))
+                      (before parsing/ast_helper.ml(83):3376-5462
+                        (let
+                          (var_names =
+                             (after parsing/ast_helper.ml(83):3392-3427
+                               (apply (field 16 (global Stdlib__list!))
+                                 (function v
+                                   (funct-body parsing/ast_helper.ml(83):3401-3417
+                                     (before parsing/ast_helper.ml(83):3411-3416
+                                       (field 0 v))))
+                                 var_names)))
+                          (before parsing/ast_helper.ml(84):3435-5462
+                            (letrec
+                              (loop
+                                 (function t
+                                   (funct-body parsing/ast_helper.ml(84)<ghost>:3448-4956
+                                     (before parsing/ast_helper.ml(85):3458-4956
+                                       (let
+                                         (desc =
+                                            (let (*match* = (field 0 t))
+                                              (switch* *match*
+                                               case int 0:
+                                                (before parsing/ast_helper.ml(87):3522-3530
+                                                  0a)
+                                               case tag 0:
+                                                (let (x =a (field 0 *match*))
+                                                  (before parsing/ast_helper.ml(89):3567-3628
+                                                    (seq
+                                                      (after parsing/ast_helper.ml(89):3567-3604
+                                                        (apply check_variable
+                                                          var_names
+                                                          (field 1 t) x))
+                                                      (before parsing/ast_helper.ml(90):3618-3628
+                                                        (makeblock 0 x)))))
+                                               case tag 1:
+                                                (let
+                                                  (core_type' =a
+                                                     (field 2 *match*)
+                                                   core_type =a
+                                                     (field 1 *match*)
+                                                   label =a (field 0 *match*))
+                                                  (before parsing/ast_helper.ml(92):3694-3744
+                                                    (makeblock 1 label
+                                                      (after parsing/ast_helper.ml(92):3712-3726
+                                                        (apply loop
+                                                          core_type))
+                                                      (after parsing/ast_helper.ml(92):3728-3743
+                                                        (apply loop
+                                                          core_type')))))
+                                               case tag 2:
+                                                (let
+                                                  (lst =a (field 0 *match*))
+                                                  (before parsing/ast_helper.ml(93):3773-3803
+                                                    (makeblock 2
+                                                      (after parsing/ast_helper.ml(93):3784-3803
+                                                        (apply
+                                                          (field 16
+                                                            (global Stdlib__list!))
+                                                          loop lst)))))
+                                               case tag 3:
+                                                (let
+                                                  (longident =a
+                                                     (field 0 *match*)
+                                                   *match* =a
+                                                     (field 0 longident))
+                                                  (catch
+                                                    (switch* *match*
+                                                     case tag 0:
+                                                      (let
+                                                        (*match* =a
+                                                           (field 1 *match*))
+                                                        (if *match* (exit 2)
+                                                          (let
+                                                            (s =a
+                                                               (field 0
+                                                                 *match*))
+                                                            (before parsing/ast_helper.ml(95):3876-3896
+                                                              (if
+                                                                (after parsing/ast_helper.ml(95):3876-3896
+                                                                  (apply
+                                                                    (field 31
+                                                                    (global Stdlib__list!))
+                                                                    s
+                                                                    var_names))
+                                                                (before parsing/ast_helper.ml(96):3912-3922
+                                                                  (makeblock 0
+                                                                    s))
+                                                                (exit 2))))))
+                                                     case tag 1: (exit 2)
+                                                     case tag 2: (exit 2))
+                                                   with (2)
+                                                    (let
+                                                      (lst =a
+                                                         (field 1 *match*))
+                                                      (before parsing/ast_helper.ml(98):3976-4017
+                                                        (makeblock 3
+                                                          longident
+                                                          (after parsing/ast_helper.ml(98):3999-4016
+                                                            (apply
+                                                              (field 16
+                                                                (global Stdlib__list!))
+                                                              loop lst)))))))
+                                               case tag 4:
+                                                (let
+                                                  (o =a (field 1 *match*)
+                                                   lst =a (field 0 *match*))
+                                                  (before parsing/ast_helper.ml(100):4064-4111
+                                                    (makeblock 4
+                                                      (after parsing/ast_helper.ml(100):4077-4107
+                                                        (apply
+                                                          (field 16
+                                                            (global Stdlib__list!))
+                                                          loop_object_field
+                                                          lst))
+                                                      o)))
+                                               case tag 5:
+                                                (let
+                                                  (lst =a (field 1 *match*)
+                                                   longident =a
+                                                     (field 0 *match*))
+                                                  (before parsing/ast_helper.ml(102):4165-4206
+                                                    (makeblock 5 longident
+                                                      (after parsing/ast_helper.ml(102):4188-4205
+                                                        (apply
+                                                          (field 16
+                                                            (global Stdlib__list!))
+                                                          loop lst)))))
+                                               case tag 6:
+                                                (let
+                                                  (string =a
+                                                     (field 1 *match*)
+                                                   core_type =a
+                                                     (field 0 *match*))
+                                                  (before parsing/ast_helper.ml(104):4262-4352
+                                                    (seq
+                                                      (after parsing/ast_helper.ml(104):4262-4304
+                                                        (apply check_variable
+                                                          var_names
+                                                          (field 1 t) string))
+                                                      (before parsing/ast_helper.ml(105):4318-4352
+                                                        (makeblock 6
+                                                          (after parsing/ast_helper.ml(105):4329-4343
+                                                            (apply loop
+                                                              core_type))
+                                                          string)))))
+                                               case tag 7:
+                                                (let
+                                                  (lbl_lst_option =a
+                                                     (field 2 *match*)
+                                                   flag =a (field 1 *match*)
+                                                   row_field_list =a
+                                                     (field 0 *match*))
+                                                  (before parsing/ast_helper.ml(107):4429-4528
+                                                    (makeblock 7
+                                                      (after parsing/ast_helper.ml(107):4442-4480
+                                                        (apply
+                                                          (field 16
+                                                            (global Stdlib__list!))
+                                                          loop_row_field
+                                                          row_field_list))
+                                                      flag lbl_lst_option)))
+                                               case tag 8:
+                                                (let
+                                                  (core_type =a
+                                                     (field 1 *match*)
+                                                   string_lst =a
+                                                     (field 0 *match*))
+                                                  (before parsing/ast_helper.ml(110):4585-4721
+                                                    (seq
+                                                      (after parsing/ast_helper.ml(110):4585-4670
+                                                        (apply
+                                                          (field 14
+                                                            (global Stdlib__list!))
+                                                          (function v
+                                                            (funct-body parsing/ast_helper.ml(110):4595-4659
+                                                              (before parsing/ast_helper.ml(111):4617-4658
+                                                                (after parsing/ast_helper.ml(111):4617-4658
+                                                                  (apply
+                                                                    check_variable
+                                                                    var_names
+                                                                    (field 1
+                                                                    t)
+                                                                    (field 0
+                                                                    v))))))
+                                                          string_lst))
+                                                      (before parsing/ast_helper.ml(112):4684-4721
+                                                        (makeblock 8
+                                                          string_lst
+                                                          (after parsing/ast_helper.ml(112):4706-4720
+                                                            (apply loop
+                                                              core_type)))))))
+                                               case tag 9:
+                                                (let
+                                                  (*match* =a
+                                                     (field 0 *match*)
+                                                   lst =a (field 1 *match*)
+                                                   longident =a
+                                                     (field 0 *match*))
+                                                  (before parsing/ast_helper.ml(114):4775-4842
+                                                    (makeblock 9
+                                                      (makeblock 0 longident
+                                                        (after parsing/ast_helper.ml(114):4798-4841
+                                                          (apply
+                                                            (field 16
+                                                              (global Stdlib__list!))
+                                                            (function param
+                                                              (funct-body parsing/ast_helper.ml(114):4807-4837
+                                                                (let
+                                                                  (typ =a
+                                                                    (field 1
+                                                                    param)
+                                                                   n =a
+                                                                    (field 0
+                                                                    param))
+                                                                  (before parsing/ast_helper.ml(114):4823-4835
+                                                                    (makeblock 0
+                                                                    n
+                                                                    (after parsing/ast_helper.ml(114):4826-4834
+                                                                    (apply
+                                                                    loop typ)))))))
+                                                            lst))))))
+                                               case tag 10:
+                                                (let
+                                                  (*match* =a
+                                                     (field 0 *match*)
+                                                   arg =a (field 1 *match*)
+                                                   s =a (field 0 *match*))
+                                                  (before parsing/ast_helper.ml(116):4892-4915
+                                                    (makeblock 10
+                                                      (makeblock 0 s arg)))))))
+                                         (before parsing/ast_helper.ml(118):4931-4956
+                                           (let (init = t)
+                                             (makeblock 0 desc (field 1 init)
+                                               (field 2 init) (field 3 init))))))))
+                                loop_row_field
+                                  (function field
+                                    (funct-body parsing/ast_helper.ml(119)<ghost>:4980-5209
+                                      (before parsing/ast_helper.ml(120):4994-5209
+                                        (let
+                                          (prf_desc =
+                                             (let (*match* = (field 0 field))
+                                               (switch* *match*
+                                                case tag 0:
+                                                 (let
+                                                   (lst =a (field 2 *match*)
+                                                    flag =a (field 1 *match*)
+                                                    label =a
+                                                      (field 0 *match*))
+                                                   (before parsing/ast_helper.ml(122):5081-5115
+                                                     (makeblock 0 label flag
+                                                       (after parsing/ast_helper.ml(122):5097-5114
+                                                         (apply
+                                                           (field 16
+                                                             (global Stdlib__list!))
+                                                           loop lst)))))
+                                                case tag 1:
+                                                 (let
+                                                   (t =a (field 0 *match*))
+                                                   (before parsing/ast_helper.ml(124):5152-5169
+                                                     (makeblock 1
+                                                       (after parsing/ast_helper.ml(124):5161-5169
+                                                         (apply loop t))))))))
+                                          (before parsing/ast_helper.ml(126):5185-5209
+                                            (let (init = field)
+                                              (makeblock 0 prf_desc
+                                                (field 1 init)
+                                                (field 2 init))))))))
+                                loop_object_field
+                                  (function field
+                                    (funct-body parsing/ast_helper.ml(127)<ghost>:5236-5444
+                                      (before parsing/ast_helper.ml(128):5250-5444
+                                        (let
+                                          (pof_desc =
+                                             (let (*match* = (field 0 field))
+                                               (switch* *match*
+                                                case tag 0:
+                                                 (let
+                                                   (t =a (field 1 *match*)
+                                                    label =a
+                                                      (field 0 *match*))
+                                                   (before parsing/ast_helper.ml(130):5331-5350
+                                                     (makeblock 0 label
+                                                       (after parsing/ast_helper.ml(130):5343-5349
+                                                         (apply loop t)))))
+                                                case tag 1:
+                                                 (let
+                                                   (t =a (field 0 *match*))
+                                                   (before parsing/ast_helper.ml(132):5387-5404
+                                                     (makeblock 1
+                                                       (after parsing/ast_helper.ml(132):5396-5404
+                                                         (apply loop t))))))))
+                                          (before parsing/ast_helper.ml(134):5420-5444
+                                            (let (init = field)
+                                              (makeblock 0 pof_desc
+                                                (field 1 init)
+                                                (field 2 init)))))))))
+                              (before parsing/ast_helper.ml(136):5456-5462
+                                (after parsing/ast_helper.ml(136):5456-5462
+                                  (apply loop t))))))))))))
+           (pseudo parsing/ast_helper.ml(52):2089-5467
+             (makeblock 0 mk attr any var arrow tuple constr object_ class_
+               alias variant poly package extension force_poly
+               varify_constructors))))
+     Pat =
+       (module-defn(Pat) parsing/ast_helper.ml(140):5469-6844
+         (let
+           (mk =
+              (function *opt* *opt* d
+                (funct-body parsing/ast_helper.ml(141)<ghost>:5498-5634
+                  (before parsing/ast_helper.ml(142):5542-5634
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(141):5506-5518
+                               *sth*))
+                           (before parsing/ast_helper.ml(141):5506-5518
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(142):5542-5634
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(141):5530-5532
+                                   *sth*))
+                               (before parsing/ast_helper.ml(141):5530-5532
+                                 0a)))
+                          (before parsing/ast_helper.ml(142):5542-5634
+                            (makeblock 0 d loc 0a attrs))))))))
+            attr =
+              (function d a
+                (funct-body parsing/ast_helper.ml(146)<ghost>:5646-5702
+                  (before parsing/ast_helper.ml(146):5652-5702
+                    (let (init = d)
+                      (makeblock 0 (field 0 init) (field 1 init)
+                        (field 2 init)
+                        (after parsing/ast_helper.ml(146):5678-5701
+                          (apply (field 36 (global Stdlib!)) (field 3 d)
+                            (makeblock 0 a 0a))))))))
+            any =
+              (function loc attrs param
+                (funct-body parsing/ast_helper.ml(148)<ghost>:5714-5754
+                  (before parsing/ast_helper.ml(148):5731-5754
+                    (after parsing/ast_helper.ml(148):5731-5754
+                      (apply mk loc attrs 0a)))))
+            var =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(149)<ghost>:5765-5808
+                  (before parsing/ast_helper.ml(149):5781-5808
+                    (after parsing/ast_helper.ml(149):5781-5808
+                      (apply mk loc attrs (makeblock 0 a))))))
+            alias =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(150)<ghost>:5821-5873
+                  (before parsing/ast_helper.ml(150):5839-5873
+                    (after parsing/ast_helper.ml(150):5839-5873
+                      (apply mk loc attrs (makeblock 1 a b))))))
+            constant =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(151)<ghost>:5889-5937
+                  (before parsing/ast_helper.ml(151):5905-5937
+                    (after parsing/ast_helper.ml(151):5905-5937
+                      (apply mk loc attrs (makeblock 2 a))))))
+            interval =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(152)<ghost>:5953-6008
+                  (before parsing/ast_helper.ml(152):5971-6008
+                    (after parsing/ast_helper.ml(152):5971-6008
+                      (apply mk loc attrs (makeblock 3 a b))))))
+            tuple =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(153)<ghost>:6021-6066
+                  (before parsing/ast_helper.ml(153):6037-6066
+                    (after parsing/ast_helper.ml(153):6037-6066
+                      (apply mk loc attrs (makeblock 4 a))))))
+            construct =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(154)<ghost>:6083-6139
+                  (before parsing/ast_helper.ml(154):6101-6139
+                    (after parsing/ast_helper.ml(154):6101-6139
+                      (apply mk loc attrs (makeblock 5 a b))))))
+            variant =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(155)<ghost>:6154-6208
+                  (before parsing/ast_helper.ml(155):6172-6208
+                    (after parsing/ast_helper.ml(155):6172-6208
+                      (apply mk loc attrs (makeblock 6 a b))))))
+            record =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(156)<ghost>:6222-6275
+                  (before parsing/ast_helper.ml(156):6240-6275
+                    (after parsing/ast_helper.ml(156):6240-6275
+                      (apply mk loc attrs (makeblock 7 a b))))))
+            array =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(157)<ghost>:6288-6333
+                  (before parsing/ast_helper.ml(157):6304-6333
+                    (after parsing/ast_helper.ml(157):6304-6333
+                      (apply mk loc attrs (makeblock 8 a))))))
+            or_ =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(158)<ghost>:6344-6393
+                  (before parsing/ast_helper.ml(158):6362-6393
+                    (after parsing/ast_helper.ml(158):6362-6393
+                      (apply mk loc attrs (makeblock 9 a b))))))
+            constraint_ =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(159)<ghost>:6412-6469
+                  (before parsing/ast_helper.ml(159):6430-6469
+                    (after parsing/ast_helper.ml(159):6430-6469
+                      (apply mk loc attrs (makeblock 10 a b))))))
+            type_ =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(160)<ghost>:6482-6526
+                  (before parsing/ast_helper.ml(160):6498-6526
+                    (after parsing/ast_helper.ml(160):6498-6526
+                      (apply mk loc attrs (makeblock 11 a))))))
+            lazy_ =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(161)<ghost>:6539-6583
+                  (before parsing/ast_helper.ml(161):6555-6583
+                    (after parsing/ast_helper.ml(161):6555-6583
+                      (apply mk loc attrs (makeblock 12 a))))))
+            unpack =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(162)<ghost>:6597-6643
+                  (before parsing/ast_helper.ml(162):6613-6643
+                    (after parsing/ast_helper.ml(162):6613-6643
+                      (apply mk loc attrs (makeblock 13 a))))))
+            open_ =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(163)<ghost>:6656-6707
+                  (before parsing/ast_helper.ml(163):6674-6707
+                    (after parsing/ast_helper.ml(163):6674-6707
+                      (apply mk loc attrs (makeblock 16 a b))))))
+            exception_ =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(164)<ghost>:6725-6774
+                  (before parsing/ast_helper.ml(164):6741-6774
+                    (after parsing/ast_helper.ml(164):6741-6774
+                      (apply mk loc attrs (makeblock 14 a))))))
+            extension =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(165)<ghost>:6791-6840
+                  (before parsing/ast_helper.ml(165):6807-6840
+                    (after parsing/ast_helper.ml(165):6807-6840
+                      (apply mk loc attrs (makeblock 15 a)))))))
+           (pseudo parsing/ast_helper.ml(140):5482-6844
+             (makeblock 0 mk attr any var alias constant interval tuple
+               construct variant record array or_ constraint_ type_ lazy_
+               unpack open_ exception_ extension))))
+     Exp =
+       (module-defn(Exp) parsing/ast_helper.ml(168):6846-9815
+         (let
+           (mk =
+              (function *opt* *opt* d
+                (funct-body parsing/ast_helper.ml(169)<ghost>:6875-7011
+                  (before parsing/ast_helper.ml(170):6919-7011
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(169):6883-6895
+                               *sth*))
+                           (before parsing/ast_helper.ml(169):6883-6895
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(170):6919-7011
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(169):6907-6909
+                                   *sth*))
+                               (before parsing/ast_helper.ml(169):6907-6909
+                                 0a)))
+                          (before parsing/ast_helper.ml(170):6919-7011
+                            (makeblock 0 d loc 0a attrs))))))))
+            attr =
+              (function d a
+                (funct-body parsing/ast_helper.ml(174)<ghost>:7023-7079
+                  (before parsing/ast_helper.ml(174):7029-7079
+                    (let (init = d)
+                      (makeblock 0 (field 0 init) (field 1 init)
+                        (field 2 init)
+                        (after parsing/ast_helper.ml(174):7055-7078
+                          (apply (field 36 (global Stdlib!)) (field 3 d)
+                            (makeblock 0 a 0a))))))))
+            ident =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(176)<ghost>:7093-7138
+                  (before parsing/ast_helper.ml(176):7109-7138
+                    (after parsing/ast_helper.ml(176):7109-7138
+                      (apply mk loc attrs (makeblock 0 a))))))
+            constant =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(177)<ghost>:7154-7202
+                  (before parsing/ast_helper.ml(177):7170-7202
+                    (after parsing/ast_helper.ml(177):7170-7202
+                      (apply mk loc attrs (makeblock 1 a))))))
+            let_ =
+              (function loc attrs a b c
+                (funct-body parsing/ast_helper.ml(178)<ghost>:7214-7269
+                  (before parsing/ast_helper.ml(178):7234-7269
+                    (after parsing/ast_helper.ml(178):7234-7269
+                      (apply mk loc attrs (makeblock 2 a b c))))))
+            fun_ =
+              (function loc attrs a b c d
+                (funct-body parsing/ast_helper.ml(179)<ghost>:7281-7341
+                  (before parsing/ast_helper.ml(179):7303-7341
+                    (after parsing/ast_helper.ml(179):7303-7341
+                      (apply mk loc attrs (makeblock 4 a b c d))))))
+            function_ =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(180)<ghost>:7358-7406
+                  (before parsing/ast_helper.ml(180):7374-7406
+                    (after parsing/ast_helper.ml(180):7374-7406
+                      (apply mk loc attrs (makeblock 3 a))))))
+            apply =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(181)<ghost>:7419-7471
+                  (before parsing/ast_helper.ml(181):7437-7471
+                    (after parsing/ast_helper.ml(181):7437-7471
+                      (apply mk loc attrs (makeblock 5 a b))))))
+            match_ =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(182)<ghost>:7485-7537
+                  (before parsing/ast_helper.ml(182):7503-7537
+                    (after parsing/ast_helper.ml(182):7503-7537
+                      (apply mk loc attrs (makeblock 6 a b))))))
+            try_ =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(183)<ghost>:7549-7599
+                  (before parsing/ast_helper.ml(183):7567-7599
+                    (after parsing/ast_helper.ml(183):7567-7599
+                      (apply mk loc attrs (makeblock 7 a b))))))
+            tuple =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(184)<ghost>:7612-7657
+                  (before parsing/ast_helper.ml(184):7628-7657
+                    (after parsing/ast_helper.ml(184):7628-7657
+                      (apply mk loc attrs (makeblock 8 a))))))
+            construct =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(185)<ghost>:7674-7730
+                  (before parsing/ast_helper.ml(185):7692-7730
+                    (after parsing/ast_helper.ml(185):7692-7730
+                      (apply mk loc attrs (makeblock 9 a b))))))
+            variant =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(186)<ghost>:7745-7799
+                  (before parsing/ast_helper.ml(186):7763-7799
+                    (after parsing/ast_helper.ml(186):7763-7799
+                      (apply mk loc attrs (makeblock 10 a b))))))
+            record =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(187)<ghost>:7813-7866
+                  (before parsing/ast_helper.ml(187):7831-7866
+                    (after parsing/ast_helper.ml(187):7831-7866
+                      (apply mk loc attrs (makeblock 11 a b))))))
+            field =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(188)<ghost>:7879-7931
+                  (before parsing/ast_helper.ml(188):7897-7931
+                    (after parsing/ast_helper.ml(188):7897-7931
+                      (apply mk loc attrs (makeblock 12 a b))))))
+            setfield =
+              (function loc attrs a b c
+                (funct-body parsing/ast_helper.ml(189)<ghost>:7947-8007
+                  (before parsing/ast_helper.ml(189):7967-8007
+                    (after parsing/ast_helper.ml(189):7967-8007
+                      (apply mk loc attrs (makeblock 13 a b c))))))
+            array =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(190)<ghost>:8020-8065
+                  (before parsing/ast_helper.ml(190):8036-8065
+                    (after parsing/ast_helper.ml(190):8036-8065
+                      (apply mk loc attrs (makeblock 14 a))))))
+            ifthenelse =
+              (function loc attrs a b c
+                (funct-body parsing/ast_helper.ml(191)<ghost>:8083-8145
+                  (before parsing/ast_helper.ml(191):8103-8145
+                    (after parsing/ast_helper.ml(191):8103-8145
+                      (apply mk loc attrs (makeblock 15 a b c))))))
+            sequence =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(192)<ghost>:8161-8216
+                  (before parsing/ast_helper.ml(192):8179-8216
+                    (after parsing/ast_helper.ml(192):8179-8216
+                      (apply mk loc attrs (makeblock 16 a b))))))
+            while_ =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(193)<ghost>:8230-8282
+                  (before parsing/ast_helper.ml(193):8248-8282
+                    (after parsing/ast_helper.ml(193):8248-8282
+                      (apply mk loc attrs (makeblock 17 a b))))))
+            for_ =
+              (function loc attrs a b c d e
+                (funct-body parsing/ast_helper.ml(194)<ghost>:8294-8359
+                  (before parsing/ast_helper.ml(194):8318-8359
+                    (after parsing/ast_helper.ml(194):8318-8359
+                      (apply mk loc attrs (makeblock 18 a b c d e))))))
+            constraint_ =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(195)<ghost>:8378-8435
+                  (before parsing/ast_helper.ml(195):8396-8435
+                    (after parsing/ast_helper.ml(195):8396-8435
+                      (apply mk loc attrs (makeblock 19 a b))))))
+            coerce =
+              (function loc attrs a b c
+                (funct-body parsing/ast_helper.ml(196)<ghost>:8449-8507
+                  (before parsing/ast_helper.ml(196):8469-8507
+                    (after parsing/ast_helper.ml(196):8469-8507
+                      (apply mk loc attrs (makeblock 20 a b c))))))
+            send =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(197)<ghost>:8519-8570
+                  (before parsing/ast_helper.ml(197):8537-8570
+                    (after parsing/ast_helper.ml(197):8537-8570
+                      (apply mk loc attrs (makeblock 21 a b))))))
+            new_ =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(198)<ghost>:8582-8625
+                  (before parsing/ast_helper.ml(198):8598-8625
+                    (after parsing/ast_helper.ml(198):8598-8625
+                      (apply mk loc attrs (makeblock 22 a))))))
+            setinstvar =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(199)<ghost>:8643-8700
+                  (before parsing/ast_helper.ml(199):8661-8700
+                    (after parsing/ast_helper.ml(199):8661-8700
+                      (apply mk loc attrs (makeblock 23 a b))))))
+            override =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(200)<ghost>:8716-8764
+                  (before parsing/ast_helper.ml(200):8732-8764
+                    (after parsing/ast_helper.ml(200):8732-8764
+                      (apply mk loc attrs (makeblock 24 a))))))
+            letmodule =
+              (function loc attrs a b c
+                (funct-body parsing/ast_helper.ml(201)<ghost>:8781-8841
+                  (before parsing/ast_helper.ml(201):8800-8841
+                    (after parsing/ast_helper.ml(201):8800-8841
+                      (apply mk loc attrs (makeblock 25 a b c))))))
+            letexception =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(202)<ghost>:8861-8920
+                  (before parsing/ast_helper.ml(202):8879-8920
+                    (after parsing/ast_helper.ml(202):8879-8920
+                      (apply mk loc attrs (makeblock 26 a b))))))
+            assert_ =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(203)<ghost>:8935-8981
+                  (before parsing/ast_helper.ml(203):8951-8981
+                    (after parsing/ast_helper.ml(203):8951-8981
+                      (apply mk loc attrs (makeblock 27 a))))))
+            lazy_ =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(204)<ghost>:8994-9038
+                  (before parsing/ast_helper.ml(204):9010-9038
+                    (after parsing/ast_helper.ml(204):9010-9038
+                      (apply mk loc attrs (makeblock 28 a))))))
+            poly =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(205)<ghost>:9050-9101
+                  (before parsing/ast_helper.ml(205):9068-9101
+                    (after parsing/ast_helper.ml(205):9068-9101
+                      (apply mk loc attrs (makeblock 29 a b))))))
+            object_ =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(206)<ghost>:9116-9162
+                  (before parsing/ast_helper.ml(206):9132-9162
+                    (after parsing/ast_helper.ml(206):9132-9162
+                      (apply mk loc attrs (makeblock 30 a))))))
+            newtype =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(207)<ghost>:9177-9231
+                  (before parsing/ast_helper.ml(207):9195-9231
+                    (after parsing/ast_helper.ml(207):9195-9231
+                      (apply mk loc attrs (makeblock 31 a b))))))
+            pack =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(208)<ghost>:9243-9287
+                  (before parsing/ast_helper.ml(208):9259-9287
+                    (after parsing/ast_helper.ml(208):9259-9287
+                      (apply mk loc attrs (makeblock 32 a))))))
+            open_ =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(209)<ghost>:9300-9351
+                  (before parsing/ast_helper.ml(209):9318-9351
+                    (after parsing/ast_helper.ml(209):9318-9351
+                      (apply mk loc attrs (makeblock 33 a b))))))
+            letop =
+              (function loc attrs let_ ands body
+                (funct-body parsing/ast_helper.ml(210)<ghost>:9364-9443
+                  (before parsing/ast_helper.ml(211):9397-9443
+                    (after parsing/ast_helper.ml(211):9397-9443
+                      (apply mk loc attrs
+                        (makeblock 34 (makeblock 0 let_ ands body)))))))
+            extension =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(212)<ghost>:9460-9509
+                  (before parsing/ast_helper.ml(212):9476-9509
+                    (after parsing/ast_helper.ml(212):9476-9509
+                      (apply mk loc attrs (makeblock 35 a))))))
+            unreachable =
+              (function loc attrs param
+                (funct-body parsing/ast_helper.ml(213)<ghost>:9528-9576
+                  (before parsing/ast_helper.ml(213):9545-9576
+                    (after parsing/ast_helper.ml(213):9545-9576
+                      (apply mk loc attrs 0a)))))
+            case =
+              (function lhs guard rhs
+                (funct-body parsing/ast_helper.ml(215)<ghost>:9589-9678
+                  (before parsing/ast_helper.ml(216):9610-9678
+                    (makeblock 0 lhs guard rhs))))
+            binding_op =
+              (function op pat exp loc
+                (funct-body parsing/ast_helper.ml(222)<ghost>:9697-9811
+                  (before parsing/ast_helper.ml(223):9718-9811
+                    (makeblock 0 op pat exp loc)))))
+           (pseudo parsing/ast_helper.ml(168):6859-9815
+             (makeblock 0 mk attr ident constant let_ fun_ function_ apply
+               match_ try_ tuple construct variant record field setfield
+               array ifthenelse sequence while_ for_ constraint_ coerce send
+               new_ setinstvar override letmodule letexception assert_ lazy_
+               poly object_ newtype pack open_ letop extension unreachable
+               case binding_op))))
+     Mty =
+       (module-defn(Mty) parsing/ast_helper.ml(231):9817-10467
+         (let
+           (mk =
+              (function *opt* *opt* d
+                (funct-body parsing/ast_helper.ml(232)<ghost>:9846-9946
+                  (before parsing/ast_helper.ml(233):9890-9946
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(232):9854-9866
+                               *sth*))
+                           (before parsing/ast_helper.ml(232):9854-9866
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(233):9890-9946
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(232):9878-9880
+                                   *sth*))
+                               (before parsing/ast_helper.ml(232):9878-9880
+                                 0a)))
+                          (before parsing/ast_helper.ml(233):9890-9946
+                            (makeblock 0 d loc attrs))))))))
+            attr =
+              (function d a
+                (funct-body parsing/ast_helper.ml(234)<ghost>:9958-10014
+                  (before parsing/ast_helper.ml(234):9964-10014
+                    (let (init = d)
+                      (makeblock 0 (field 0 init) (field 1 init)
+                        (after parsing/ast_helper.ml(234):9990-10013
+                          (apply (field 36 (global Stdlib!)) (field 2 d)
+                            (makeblock 0 a 0a))))))))
+            ident =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(236)<ghost>:10028-10073
+                  (before parsing/ast_helper.ml(236):10044-10073
+                    (after parsing/ast_helper.ml(236):10044-10073
+                      (apply mk loc attrs (makeblock 0 a))))))
+            alias =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(237)<ghost>:10086-10131
+                  (before parsing/ast_helper.ml(237):10102-10131
+                    (after parsing/ast_helper.ml(237):10102-10131
+                      (apply mk loc attrs (makeblock 6 a))))))
+            signature =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(238)<ghost>:10148-10197
+                  (before parsing/ast_helper.ml(238):10164-10197
+                    (after parsing/ast_helper.ml(238):10164-10197
+                      (apply mk loc attrs (makeblock 1 a))))))
+            functor_ =
+              (function loc attrs a b c
+                (funct-body parsing/ast_helper.ml(239)<ghost>:10213-10272
+                  (before parsing/ast_helper.ml(239):10233-10272
+                    (after parsing/ast_helper.ml(239):10233-10272
+                      (apply mk loc attrs (makeblock 2 a b c))))))
+            with_ =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(240)<ghost>:10285-10336
+                  (before parsing/ast_helper.ml(240):10303-10336
+                    (after parsing/ast_helper.ml(240):10303-10336
+                      (apply mk loc attrs (makeblock 3 a b))))))
+            typeof_ =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(241)<ghost>:10351-10397
+                  (before parsing/ast_helper.ml(241):10367-10397
+                    (after parsing/ast_helper.ml(241):10367-10397
+                      (apply mk loc attrs (makeblock 4 a))))))
+            extension =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(242)<ghost>:10414-10463
+                  (before parsing/ast_helper.ml(242):10430-10463
+                    (after parsing/ast_helper.ml(242):10430-10463
+                      (apply mk loc attrs (makeblock 5 a)))))))
+           (pseudo parsing/ast_helper.ml(231):9830-10467
+             (makeblock 0 mk attr ident alias signature functor_ with_
+               typeof_ extension))))
+     Mod =
+       (module-defn(Mod) parsing/ast_helper.ml(245):10469-11165
+         (let
+           (mk =
+              (function *opt* *opt* d
+                (funct-body parsing/ast_helper.ml(246)<ghost>:10496-10594
+                  (before parsing/ast_helper.ml(247):10538-10594
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(246):10504-10516
+                               *sth*))
+                           (before parsing/ast_helper.ml(246):10504-10516
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(247):10538-10594
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(246):10528-10530
+                                   *sth*))
+                               (before parsing/ast_helper.ml(246):10528-10530
+                                 0a)))
+                          (before parsing/ast_helper.ml(247):10538-10594
+                            (makeblock 0 d loc attrs))))))))
+            attr =
+              (function d a
+                (funct-body parsing/ast_helper.ml(248)<ghost>:10606-10662
+                  (before parsing/ast_helper.ml(248):10612-10662
+                    (let (init = d)
+                      (makeblock 0 (field 0 init) (field 1 init)
+                        (after parsing/ast_helper.ml(248):10638-10661
+                          (apply (field 36 (global Stdlib!)) (field 2 d)
+                            (makeblock 0 a 0a))))))))
+            ident =
+              (function loc attrs x
+                (funct-body parsing/ast_helper.ml(250)<ghost>:10676-10721
+                  (before parsing/ast_helper.ml(250):10692-10721
+                    (after parsing/ast_helper.ml(250):10692-10721
+                      (apply mk loc attrs (makeblock 0 x))))))
+            structure =
+              (function loc attrs x
+                (funct-body parsing/ast_helper.ml(251)<ghost>:10738-10787
+                  (before parsing/ast_helper.ml(251):10754-10787
+                    (after parsing/ast_helper.ml(251):10754-10787
+                      (apply mk loc attrs (makeblock 1 x))))))
+            functor_ =
+              (function loc attrs arg arg_ty body
+                (funct-body parsing/ast_helper.ml(252)<ghost>:10803-10886
+                  (before parsing/ast_helper.ml(253):10837-10886
+                    (after parsing/ast_helper.ml(253):10837-10886
+                      (apply mk loc attrs (makeblock 2 arg arg_ty body))))))
+            apply =
+              (function loc attrs m1 m2
+                (funct-body parsing/ast_helper.ml(254)<ghost>:10899-10955
+                  (before parsing/ast_helper.ml(254):10919-10955
+                    (after parsing/ast_helper.ml(254):10919-10955
+                      (apply mk loc attrs (makeblock 3 m1 m2))))))
+            constraint_ =
+              (function loc attrs m mty
+                (funct-body parsing/ast_helper.ml(255)<ghost>:10974-11035
+                  (before parsing/ast_helper.ml(255):10994-11035
+                    (after parsing/ast_helper.ml(255):10994-11035
+                      (apply mk loc attrs (makeblock 4 m mty))))))
+            unpack =
+              (function loc attrs e
+                (funct-body parsing/ast_helper.ml(256)<ghost>:11049-11095
+                  (before parsing/ast_helper.ml(256):11065-11095
+                    (after parsing/ast_helper.ml(256):11065-11095
+                      (apply mk loc attrs (makeblock 5 e))))))
+            extension =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(257)<ghost>:11112-11161
+                  (before parsing/ast_helper.ml(257):11128-11161
+                    (after parsing/ast_helper.ml(257):11128-11161
+                      (apply mk loc attrs (makeblock 6 a)))))))
+           (pseudo parsing/ast_helper.ml(245):10482-11165
+             (makeblock 0 mk attr ident structure functor_ apply constraint_
+               unpack extension))))
+     Sig =
+       (module-defn(Sig) parsing/ast_helper.ml(260):11167-12223
+         (let
+           (mk =
+              (function *opt* d
+                (funct-body parsing/ast_helper.ml(261)<ghost>:11196-11253
+                  (before parsing/ast_helper.ml(261):11222-11253
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(261):11204-11216
+                               *sth*))
+                           (before parsing/ast_helper.ml(261):11204-11216
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(261):11222-11253
+                        (makeblock 0 d loc))))))
+            value =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(263)<ghost>:11267-11298
+                  (before parsing/ast_helper.ml(263):11276-11298
+                    (after parsing/ast_helper.ml(263):11276-11298
+                      (apply mk loc (makeblock 0 a))))))
+            type_ =
+              (function loc rec_flag a
+                (funct-body parsing/ast_helper.ml(264)<ghost>:11311-11362
+                  (before parsing/ast_helper.ml(264):11329-11362
+                    (after parsing/ast_helper.ml(264):11329-11362
+                      (apply mk loc (makeblock 1 rec_flag a))))))
+            type_subst =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(265)<ghost>:11380-11415
+                  (before parsing/ast_helper.ml(265):11389-11415
+                    (after parsing/ast_helper.ml(265):11389-11415
+                      (apply mk loc (makeblock 2 a))))))
+            type_extension =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(266)<ghost>:11437-11469
+                  (before parsing/ast_helper.ml(266):11446-11469
+                    (after parsing/ast_helper.ml(266):11446-11469
+                      (apply mk loc (makeblock 3 a))))))
+            exception_ =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(267)<ghost>:11487-11522
+                  (before parsing/ast_helper.ml(267):11496-11522
+                    (after parsing/ast_helper.ml(267):11496-11522
+                      (apply mk loc (makeblock 4 a))))))
+            module_ =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(268)<ghost>:11537-11569
+                  (before parsing/ast_helper.ml(268):11546-11569
+                    (after parsing/ast_helper.ml(268):11546-11569
+                      (apply mk loc (makeblock 5 a))))))
+            mod_subst =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(269)<ghost>:11586-11620
+                  (before parsing/ast_helper.ml(269):11595-11620
+                    (after parsing/ast_helper.ml(269):11595-11620
+                      (apply mk loc (makeblock 6 a))))))
+            rec_module =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(270)<ghost>:11638-11673
+                  (before parsing/ast_helper.ml(270):11647-11673
+                    (after parsing/ast_helper.ml(270):11647-11673
+                      (apply mk loc (makeblock 7 a))))))
+            modtype =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(271)<ghost>:11688-11721
+                  (before parsing/ast_helper.ml(271):11697-11721
+                    (after parsing/ast_helper.ml(271):11697-11721
+                      (apply mk loc (makeblock 8 a))))))
+            open_ =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(272)<ghost>:11734-11764
+                  (before parsing/ast_helper.ml(272):11743-11764
+                    (after parsing/ast_helper.ml(272):11743-11764
+                      (apply mk loc (makeblock 9 a))))))
+            include_ =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(273)<ghost>:11780-11813
+                  (before parsing/ast_helper.ml(273):11789-11813
+                    (after parsing/ast_helper.ml(273):11789-11813
+                      (apply mk loc (makeblock 10 a))))))
+            class_ =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(274)<ghost>:11827-11858
+                  (before parsing/ast_helper.ml(274):11836-11858
+                    (after parsing/ast_helper.ml(274):11836-11858
+                      (apply mk loc (makeblock 11 a))))))
+            class_type =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(275)<ghost>:11876-11912
+                  (before parsing/ast_helper.ml(275):11885-11912
+                    (after parsing/ast_helper.ml(275):11885-11912
+                      (apply mk loc (makeblock 12 a))))))
+            extension =
+              (function loc *opt* a
+                (funct-body parsing/ast_helper.ml(276)<ghost>:11929-11987
+                  (before parsing/ast_helper.ml(276):11952-11987
+                    (let
+                      (attrs =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(276):11944-11946
+                               *sth*))
+                           (before parsing/ast_helper.ml(276):11944-11946 0a)))
+                      (before parsing/ast_helper.ml(276):11952-11987
+                        (after parsing/ast_helper.ml(276):11952-11987
+                          (apply mk loc (makeblock 14 a attrs))))))))
+            attribute =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(277)<ghost>:12004-12039
+                  (before parsing/ast_helper.ml(277):12013-12039
+                    (after parsing/ast_helper.ml(277):12013-12039
+                      (apply mk loc (makeblock 13 a))))))
+            text =
+              (function txt
+                (funct-body parsing/ast_helper.ml(278)<ghost>:12051-12219
+                  (before parsing/ast_helper.ml(279):12061-12219
+                    (let
+                      (f_txt =
+                         (after parsing/ast_helper.ml(279):12073-12124
+                           (apply (field 35 (global Stdlib__list!))
+                             (function ds
+                               (funct-body parsing/ast_helper.ml(279):12085-12120
+                                 (before parsing/ast_helper.ml(279):12096-12119
+                                   (after parsing/ast_helper.ml(279):12096-12119
+                                     (caml_string_notequal
+                                       (after parsing/ast_helper.ml(279):12096-12113
+                                         (apply
+                                           (field 4 (global Docstrings!)) ds))
+                                       "")))))
+                             txt)))
+                      (before parsing/ast_helper.ml(280):12132-12219
+                        (after parsing/ast_helper.ml(280):12132-12219
+                          (apply (field 16 (global Stdlib__list!))
+                            (function ds
+                              (funct-body parsing/ast_helper.ml(281):12147-12207
+                                (before parsing/ast_helper.ml(281):12158-12206
+                                  (after parsing/ast_helper.ml(281):12158-12206
+                                    (apply attribute
+                                      (makeblock 0
+                                        (after parsing/ast_helper.ml(281):12173-12191
+                                          (apply
+                                            (field 5 (global Docstrings!))
+                                            ds)))
+                                      (after parsing/ast_helper.ml(281):12192-12206
+                                        (apply
+                                          (field 27 (global Docstrings!)) ds)))))))
+                            f_txt))))))))
+           (pseudo parsing/ast_helper.ml(260):11180-12223
+             (makeblock 0 mk value type_ type_subst type_extension exception_
+               module_ mod_subst rec_module modtype open_ include_ class_
+               class_type extension attribute text))))
+     Str =
+       (module-defn(Str) parsing/ast_helper.ml(285):12225-13301
+         (let
+           (mk =
+              (function *opt* d
+                (funct-body parsing/ast_helper.ml(286)<ghost>:12254-12311
+                  (before parsing/ast_helper.ml(286):12280-12311
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(286):12262-12274
+                               *sth*))
+                           (before parsing/ast_helper.ml(286):12262-12274
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(286):12280-12311
+                        (makeblock 0 d loc))))))
+            eval =
+              (function loc *opt* a
+                (funct-body parsing/ast_helper.ml(288)<ghost>:12324-12377
+                  (before parsing/ast_helper.ml(288):12347-12377
+                    (let
+                      (attrs =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(288):12339-12341
+                               *sth*))
+                           (before parsing/ast_helper.ml(288):12339-12341 0a)))
+                      (before parsing/ast_helper.ml(288):12347-12377
+                        (after parsing/ast_helper.ml(288):12347-12377
+                          (apply mk loc (makeblock 0 a attrs))))))))
+            value =
+              (function loc a b
+                (funct-body parsing/ast_helper.ml(289)<ghost>:12390-12428
+                  (before parsing/ast_helper.ml(289):12401-12428
+                    (after parsing/ast_helper.ml(289):12401-12428
+                      (apply mk loc (makeblock 1 a b))))))
+            primitive =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(290)<ghost>:12445-12480
+                  (before parsing/ast_helper.ml(290):12454-12480
+                    (after parsing/ast_helper.ml(290):12454-12480
+                      (apply mk loc (makeblock 2 a))))))
+            type_ =
+              (function loc rec_flag a
+                (funct-body parsing/ast_helper.ml(291)<ghost>:12493-12544
+                  (before parsing/ast_helper.ml(291):12511-12544
+                    (after parsing/ast_helper.ml(291):12511-12544
+                      (apply mk loc (makeblock 3 rec_flag a))))))
+            type_extension =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(292)<ghost>:12566-12598
+                  (before parsing/ast_helper.ml(292):12575-12598
+                    (after parsing/ast_helper.ml(292):12575-12598
+                      (apply mk loc (makeblock 4 a))))))
+            exception_ =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(293)<ghost>:12616-12651
+                  (before parsing/ast_helper.ml(293):12625-12651
+                    (after parsing/ast_helper.ml(293):12625-12651
+                      (apply mk loc (makeblock 5 a))))))
+            module_ =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(294)<ghost>:12666-12698
+                  (before parsing/ast_helper.ml(294):12675-12698
+                    (after parsing/ast_helper.ml(294):12675-12698
+                      (apply mk loc (makeblock 6 a))))))
+            rec_module =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(295)<ghost>:12716-12751
+                  (before parsing/ast_helper.ml(295):12725-12751
+                    (after parsing/ast_helper.ml(295):12725-12751
+                      (apply mk loc (makeblock 7 a))))))
+            modtype =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(296)<ghost>:12766-12799
+                  (before parsing/ast_helper.ml(296):12775-12799
+                    (after parsing/ast_helper.ml(296):12775-12799
+                      (apply mk loc (makeblock 8 a))))))
+            open_ =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(297)<ghost>:12812-12842
+                  (before parsing/ast_helper.ml(297):12821-12842
+                    (after parsing/ast_helper.ml(297):12821-12842
+                      (apply mk loc (makeblock 9 a))))))
+            class_ =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(298)<ghost>:12856-12887
+                  (before parsing/ast_helper.ml(298):12865-12887
+                    (after parsing/ast_helper.ml(298):12865-12887
+                      (apply mk loc (makeblock 10 a))))))
+            class_type =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(299)<ghost>:12905-12941
+                  (before parsing/ast_helper.ml(299):12914-12941
+                    (after parsing/ast_helper.ml(299):12914-12941
+                      (apply mk loc (makeblock 11 a))))))
+            include_ =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(300)<ghost>:12957-12990
+                  (before parsing/ast_helper.ml(300):12966-12990
+                    (after parsing/ast_helper.ml(300):12966-12990
+                      (apply mk loc (makeblock 12 a))))))
+            extension =
+              (function loc *opt* a
+                (funct-body parsing/ast_helper.ml(301)<ghost>:13007-13065
+                  (before parsing/ast_helper.ml(301):13030-13065
+                    (let
+                      (attrs =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(301):13022-13024
+                               *sth*))
+                           (before parsing/ast_helper.ml(301):13022-13024 0a)))
+                      (before parsing/ast_helper.ml(301):13030-13065
+                        (after parsing/ast_helper.ml(301):13030-13065
+                          (apply mk loc (makeblock 14 a attrs))))))))
+            attribute =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(302)<ghost>:13082-13117
+                  (before parsing/ast_helper.ml(302):13091-13117
+                    (after parsing/ast_helper.ml(302):13091-13117
+                      (apply mk loc (makeblock 13 a))))))
+            text =
+              (function txt
+                (funct-body parsing/ast_helper.ml(303)<ghost>:13129-13297
+                  (before parsing/ast_helper.ml(304):13139-13297
+                    (let
+                      (f_txt =
+                         (after parsing/ast_helper.ml(304):13151-13202
+                           (apply (field 35 (global Stdlib__list!))
+                             (function ds
+                               (funct-body parsing/ast_helper.ml(304):13163-13198
+                                 (before parsing/ast_helper.ml(304):13174-13197
+                                   (after parsing/ast_helper.ml(304):13174-13197
+                                     (caml_string_notequal
+                                       (after parsing/ast_helper.ml(304):13174-13191
+                                         (apply
+                                           (field 4 (global Docstrings!)) ds))
+                                       "")))))
+                             txt)))
+                      (before parsing/ast_helper.ml(305):13210-13297
+                        (after parsing/ast_helper.ml(305):13210-13297
+                          (apply (field 16 (global Stdlib__list!))
+                            (function ds
+                              (funct-body parsing/ast_helper.ml(306):13225-13285
+                                (before parsing/ast_helper.ml(306):13236-13284
+                                  (after parsing/ast_helper.ml(306):13236-13284
+                                    (apply attribute
+                                      (makeblock 0
+                                        (after parsing/ast_helper.ml(306):13251-13269
+                                          (apply
+                                            (field 5 (global Docstrings!))
+                                            ds)))
+                                      (after parsing/ast_helper.ml(306):13270-13284
+                                        (apply
+                                          (field 27 (global Docstrings!)) ds)))))))
+                            f_txt))))))))
+           (pseudo parsing/ast_helper.ml(285):12238-13301
+             (makeblock 0 mk eval value primitive type_ type_extension
+               exception_ module_ rec_module modtype open_ class_ class_type
+               include_ extension attribute text))))
+     Cl =
+       (module-defn(Cl) parsing/ast_helper.ml(310):13303-14056
+         (let
+           (mk =
+              (function *opt* *opt* d
+                (funct-body parsing/ast_helper.ml(311)<ghost>:13331-13450
+                  (before parsing/ast_helper.ml(312):13375-13450
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(311):13339-13351
+                               *sth*))
+                           (before parsing/ast_helper.ml(311):13339-13351
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(312):13375-13450
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(311):13363-13365
+                                   *sth*))
+                               (before parsing/ast_helper.ml(311):13363-13365
+                                 0a)))
+                          (before parsing/ast_helper.ml(312):13375-13450
+                            (makeblock 0 d loc attrs))))))))
+            attr =
+              (function d a
+                (funct-body parsing/ast_helper.ml(317)<ghost>:13462-13516
+                  (before parsing/ast_helper.ml(317):13468-13516
+                    (let (init = d)
+                      (makeblock 0 (field 0 init) (field 1 init)
+                        (after parsing/ast_helper.ml(317):13493-13515
+                          (apply (field 36 (global Stdlib!)) (field 2 d)
+                            (makeblock 0 a 0a))))))))
+            constr =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(319)<ghost>:13531-13583
+                  (before parsing/ast_helper.ml(319):13549-13583
+                    (after parsing/ast_helper.ml(319):13549-13583
+                      (apply mk loc attrs (makeblock 0 a b))))))
+            structure =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(320)<ghost>:13600-13648
+                  (before parsing/ast_helper.ml(320):13616-13648
+                    (after parsing/ast_helper.ml(320):13616-13648
+                      (apply mk loc attrs (makeblock 1 a))))))
+            fun_ =
+              (function loc attrs a b c d
+                (funct-body parsing/ast_helper.ml(321)<ghost>:13660-13719
+                  (before parsing/ast_helper.ml(321):13682-13719
+                    (after parsing/ast_helper.ml(321):13682-13719
+                      (apply mk loc attrs (makeblock 2 a b c d))))))
+            apply =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(322)<ghost>:13732-13783
+                  (before parsing/ast_helper.ml(322):13750-13783
+                    (after parsing/ast_helper.ml(322):13750-13783
+                      (apply mk loc attrs (makeblock 3 a b))))))
+            let_ =
+              (function loc attrs a b c
+                (funct-body parsing/ast_helper.ml(323)<ghost>:13795-13849
+                  (before parsing/ast_helper.ml(323):13815-13849
+                    (after parsing/ast_helper.ml(323):13815-13849
+                      (apply mk loc attrs (makeblock 4 a b c))))))
+            constraint_ =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(324)<ghost>:13868-13924
+                  (before parsing/ast_helper.ml(324):13886-13924
+                    (after parsing/ast_helper.ml(324):13886-13924
+                      (apply mk loc attrs (makeblock 5 a b))))))
+            extension =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(325)<ghost>:13941-13989
+                  (before parsing/ast_helper.ml(325):13957-13989
+                    (after parsing/ast_helper.ml(325):13957-13989
+                      (apply mk loc attrs (makeblock 6 a))))))
+            open_ =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(326)<ghost>:14002-14052
+                  (before parsing/ast_helper.ml(326):14020-14052
+                    (after parsing/ast_helper.ml(326):14020-14052
+                      (apply mk loc attrs (makeblock 7 a b)))))))
+           (pseudo parsing/ast_helper.ml(310):13315-14056
+             (makeblock 0 mk attr constr structure fun_ apply let_
+               constraint_ extension open_))))
+     Cty =
+       (module-defn(Cty) parsing/ast_helper.ml(329):14058-14615
+         (let
+           (mk =
+              (function *opt* *opt* d
+                (funct-body parsing/ast_helper.ml(330)<ghost>:14087-14209
+                  (before parsing/ast_helper.ml(331):14131-14209
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(330):14095-14107
+                               *sth*))
+                           (before parsing/ast_helper.ml(330):14095-14107
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(331):14131-14209
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(330):14119-14121
+                                   *sth*))
+                               (before parsing/ast_helper.ml(330):14119-14121
+                                 0a)))
+                          (before parsing/ast_helper.ml(331):14131-14209
+                            (makeblock 0 d loc attrs))))))))
+            attr =
+              (function d a
+                (funct-body parsing/ast_helper.ml(336)<ghost>:14221-14277
+                  (before parsing/ast_helper.ml(336):14227-14277
+                    (let (init = d)
+                      (makeblock 0 (field 0 init) (field 1 init)
+                        (after parsing/ast_helper.ml(336):14253-14276
+                          (apply (field 36 (global Stdlib!)) (field 2 d)
+                            (makeblock 0 a 0a))))))))
+            constr =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(338)<ghost>:14292-14345
+                  (before parsing/ast_helper.ml(338):14310-14345
+                    (after parsing/ast_helper.ml(338):14310-14345
+                      (apply mk loc attrs (makeblock 0 a b))))))
+            signature =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(339)<ghost>:14362-14411
+                  (before parsing/ast_helper.ml(339):14378-14411
+                    (after parsing/ast_helper.ml(339):14378-14411
+                      (apply mk loc attrs (makeblock 1 a))))))
+            arrow =
+              (function loc attrs a b c
+                (funct-body parsing/ast_helper.ml(340)<ghost>:14424-14481
+                  (before parsing/ast_helper.ml(340):14444-14481
+                    (after parsing/ast_helper.ml(340):14444-14481
+                      (apply mk loc attrs (makeblock 2 a b c))))))
+            extension =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(341)<ghost>:14498-14547
+                  (before parsing/ast_helper.ml(341):14514-14547
+                    (after parsing/ast_helper.ml(341):14514-14547
+                      (apply mk loc attrs (makeblock 3 a))))))
+            open_ =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(342)<ghost>:14560-14611
+                  (before parsing/ast_helper.ml(342):14578-14611
+                    (after parsing/ast_helper.ml(342):14578-14611
+                      (apply mk loc attrs (makeblock 4 a b)))))))
+           (pseudo parsing/ast_helper.ml(329):14071-14615
+             (makeblock 0 mk attr constr signature arrow extension open_))))
+     Ctf =
+       (module-defn(Ctf) parsing/ast_helper.ml(345):14617-15482
+         (let
+           (mk =
+              (function *opt* *opt* *opt* d
+                (funct-body parsing/ast_helper.ml(346)<ghost>:14646-14820
+                  (before parsing/ast_helper.ml(348):14722-14820
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(346):14654-14666
+                               *sth*))
+                           (before parsing/ast_helper.ml(346):14654-14666
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(348):14722-14820
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(346):14678-14680
+                                   *sth*))
+                               (before parsing/ast_helper.ml(346):14678-14680
+                                 0a)))
+                          (before parsing/ast_helper.ml(348):14722-14820
+                            (let
+                              (docs =
+                                 (if *opt*
+                                   (let (*sth* =a (field 0 *opt*))
+                                     (before parsing/ast_helper.ml(347):14702-14712
+                                       *sth*))
+                                   (before parsing/ast_helper.ml(347):14702-14712
+                                     (field 11 (global Docstrings!)))))
+                              (before parsing/ast_helper.ml(348):14722-14820
+                                (makeblock 0 d loc
+                                  (after parsing/ast_helper.ml(351):14788-14813
+                                    (apply (field 13 (global Docstrings!))
+                                      docs attrs))))))))))))
+            inherit_ =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(354)<ghost>:14837-14884
+                  (before parsing/ast_helper.ml(354):14853-14884
+                    (after parsing/ast_helper.ml(354):14853-14884
+                      (apply mk loc attrs 0a (makeblock 0 a))))))
+            val_ =
+              (function loc attrs a b c d
+                (funct-body parsing/ast_helper.ml(355)<ghost>:14896-14956
+                  (before parsing/ast_helper.ml(355):14918-14956
+                    (after parsing/ast_helper.ml(355):14918-14956
+                      (apply mk loc attrs 0a
+                        (makeblock 1 (makeblock 0 a b c d)))))))
+            method_ =
+              (function loc attrs a b c d
+                (funct-body parsing/ast_helper.ml(356)<ghost>:14971-15034
+                  (before parsing/ast_helper.ml(356):14993-15034
+                    (after parsing/ast_helper.ml(356):14993-15034
+                      (apply mk loc attrs 0a
+                        (makeblock 2 (makeblock 0 a b c d)))))))
+            constraint_ =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(357)<ghost>:15053-15110
+                  (before parsing/ast_helper.ml(357):15071-15110
+                    (after parsing/ast_helper.ml(357):15071-15110
+                      (apply mk loc attrs 0a (makeblock 3 (makeblock 0 a b)))))))
+            extension =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(358)<ghost>:15127-15176
+                  (before parsing/ast_helper.ml(358):15143-15176
+                    (after parsing/ast_helper.ml(358):15143-15176
+                      (apply mk loc attrs 0a (makeblock 5 a))))))
+            attribute =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(359)<ghost>:15193-15228
+                  (before parsing/ast_helper.ml(359):15202-15228
+                    (after parsing/ast_helper.ml(359):15202-15228
+                      (apply mk loc 0a 0a (makeblock 4 a))))))
+            text =
+              (function txt
+                (funct-body parsing/ast_helper.ml(360)<ghost>:15240-15408
+                  (before parsing/ast_helper.ml(361):15249-15408
+                    (let
+                      (f_txt =
+                         (after parsing/ast_helper.ml(361):15261-15312
+                           (apply (field 35 (global Stdlib__list!))
+                             (function ds
+                               (funct-body parsing/ast_helper.ml(361):15273-15308
+                                 (before parsing/ast_helper.ml(361):15284-15307
+                                   (after parsing/ast_helper.ml(361):15284-15307
+                                     (caml_string_notequal
+                                       (after parsing/ast_helper.ml(361):15284-15301
+                                         (apply
+                                           (field 4 (global Docstrings!)) ds))
+                                       "")))))
+                             txt)))
+                      (before parsing/ast_helper.ml(362):15321-15408
+                        (after parsing/ast_helper.ml(362):15321-15408
+                          (apply (field 16 (global Stdlib__list!))
+                            (function ds
+                              (funct-body parsing/ast_helper.ml(363):15336-15396
+                                (before parsing/ast_helper.ml(363):15347-15395
+                                  (after parsing/ast_helper.ml(363):15347-15395
+                                    (apply attribute
+                                      (makeblock 0
+                                        (after parsing/ast_helper.ml(363):15362-15380
+                                          (apply
+                                            (field 5 (global Docstrings!))
+                                            ds)))
+                                      (after parsing/ast_helper.ml(363):15381-15395
+                                        (apply
+                                          (field 27 (global Docstrings!)) ds)))))))
+                            f_txt)))))))
+            attr =
+              (function d a
+                (funct-body parsing/ast_helper.ml(366)<ghost>:15421-15477
+                  (before parsing/ast_helper.ml(366):15427-15477
+                    (let (init = d)
+                      (makeblock 0 (field 0 init) (field 1 init)
+                        (after parsing/ast_helper.ml(366):15453-15476
+                          (apply (field 36 (global Stdlib!)) (field 2 d)
+                            (makeblock 0 a 0a)))))))))
+           (pseudo parsing/ast_helper.ml(345):14630-15482
+             (makeblock 0 mk inherit_ val_ method_ constraint_ extension
+               attribute text attr))))
+     Cf =
+       (module-defn(Cf) parsing/ast_helper.ml(370):15484-16483
+         (let
+           (mk =
+              (function *opt* *opt* *opt* d
+                (funct-body parsing/ast_helper.ml(371)<ghost>:15512-15680
+                  (before parsing/ast_helper.ml(373):15585-15680
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(371):15520-15532
+                               *sth*))
+                           (before parsing/ast_helper.ml(371):15520-15532
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(373):15585-15680
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(371):15544-15546
+                                   *sth*))
+                               (before parsing/ast_helper.ml(371):15544-15546
+                                 0a)))
+                          (before parsing/ast_helper.ml(373):15585-15680
+                            (let
+                              (docs =
+                                 (if *opt*
+                                   (let (*sth* =a (field 0 *opt*))
+                                     (before parsing/ast_helper.ml(372):15565-15575
+                                       *sth*))
+                                   (before parsing/ast_helper.ml(372):15565-15575
+                                     (field 11 (global Docstrings!)))))
+                              (before parsing/ast_helper.ml(373):15585-15680
+                                (makeblock 0 d loc
+                                  (after parsing/ast_helper.ml(376):15648-15673
+                                    (apply (field 13 (global Docstrings!))
+                                      docs attrs))))))))))))
+            inherit_ =
+              (function loc attrs a b c
+                (funct-body parsing/ast_helper.ml(379)<ghost>:15697-15755
+                  (before parsing/ast_helper.ml(379):15717-15755
+                    (after parsing/ast_helper.ml(379):15717-15755
+                      (apply mk loc attrs 0a (makeblock 0 a b c))))))
+            val_ =
+              (function loc attrs a b c
+                (funct-body parsing/ast_helper.ml(380)<ghost>:15767-15821
+                  (before parsing/ast_helper.ml(380):15787-15821
+                    (after parsing/ast_helper.ml(380):15787-15821
+                      (apply mk loc attrs 0a
+                        (makeblock 1 (makeblock 0 a b c)))))))
+            method_ =
+              (function loc attrs a b c
+                (funct-body parsing/ast_helper.ml(381)<ghost>:15836-15893
+                  (before parsing/ast_helper.ml(381):15856-15893
+                    (after parsing/ast_helper.ml(381):15856-15893
+                      (apply mk loc attrs 0a
+                        (makeblock 2 (makeblock 0 a b c)))))))
+            constraint_ =
+              (function loc attrs a b
+                (funct-body parsing/ast_helper.ml(382)<ghost>:15912-15968
+                  (before parsing/ast_helper.ml(382):15930-15968
+                    (after parsing/ast_helper.ml(382):15930-15968
+                      (apply mk loc attrs 0a (makeblock 3 (makeblock 0 a b)))))))
+            initializer_ =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(383)<ghost>:15988-16038
+                  (before parsing/ast_helper.ml(383):16004-16038
+                    (after parsing/ast_helper.ml(383):16004-16038
+                      (apply mk loc attrs 0a (makeblock 4 a))))))
+            extension =
+              (function loc attrs a
+                (funct-body parsing/ast_helper.ml(384)<ghost>:16055-16103
+                  (before parsing/ast_helper.ml(384):16071-16103
+                    (after parsing/ast_helper.ml(384):16071-16103
+                      (apply mk loc attrs 0a (makeblock 6 a))))))
+            attribute =
+              (function loc a
+                (funct-body parsing/ast_helper.ml(385)<ghost>:16120-16154
+                  (before parsing/ast_helper.ml(385):16129-16154
+                    (after parsing/ast_helper.ml(385):16129-16154
+                      (apply mk loc 0a 0a (makeblock 5 a))))))
+            text =
+              (function txt
+                (funct-body parsing/ast_helper.ml(386)<ghost>:16166-16334
+                  (before parsing/ast_helper.ml(387):16176-16334
+                    (let
+                      (f_txt =
+                         (after parsing/ast_helper.ml(387):16188-16239
+                           (apply (field 35 (global Stdlib__list!))
+                             (function ds
+                               (funct-body parsing/ast_helper.ml(387):16200-16235
+                                 (before parsing/ast_helper.ml(387):16211-16234
+                                   (after parsing/ast_helper.ml(387):16211-16234
+                                     (caml_string_notequal
+                                       (after parsing/ast_helper.ml(387):16211-16228
+                                         (apply
+                                           (field 4 (global Docstrings!)) ds))
+                                       "")))))
+                             txt)))
+                      (before parsing/ast_helper.ml(388):16247-16334
+                        (after parsing/ast_helper.ml(388):16247-16334
+                          (apply (field 16 (global Stdlib__list!))
+                            (function ds
+                              (funct-body parsing/ast_helper.ml(389):16262-16322
+                                (before parsing/ast_helper.ml(389):16273-16321
+                                  (after parsing/ast_helper.ml(389):16273-16321
+                                    (apply attribute
+                                      (makeblock 0
+                                        (after parsing/ast_helper.ml(389):16288-16306
+                                          (apply
+                                            (field 5 (global Docstrings!))
+                                            ds)))
+                                      (after parsing/ast_helper.ml(389):16307-16321
+                                        (apply
+                                          (field 27 (global Docstrings!)) ds)))))))
+                            f_txt)))))))
+            virtual_ =
+              (function ct
+                (funct-body parsing/ast_helper.ml(392)<ghost>:16351-16370
+                  (before parsing/ast_helper.ml(392):16356-16370
+                    (makeblock 0 ct))))
+            concrete =
+              (function o e
+                (funct-body parsing/ast_helper.ml(393)<ghost>:16386-16411
+                  (before parsing/ast_helper.ml(393):16392-16411
+                    (makeblock 1 o e))))
+            attr =
+              (function d a
+                (funct-body parsing/ast_helper.ml(395)<ghost>:16424-16478
+                  (before parsing/ast_helper.ml(395):16430-16478
+                    (let (init = d)
+                      (makeblock 0 (field 0 init) (field 1 init)
+                        (after parsing/ast_helper.ml(395):16455-16477
+                          (apply (field 36 (global Stdlib!)) (field 2 d)
+                            (makeblock 0 a 0a)))))))))
+           (pseudo parsing/ast_helper.ml(370):15496-16483
+             (makeblock 0 mk inherit_ val_ method_ constraint_ initializer_
+               extension attribute text virtual_ concrete attr))))
+     Val =
+       (module-defn(Val) parsing/ast_helper.ml(399):16485-16757
+         (let
+           (mk =
+              (function *opt* *opt* *opt* *opt* name typ
+                (funct-body parsing/ast_helper.ml(400)<ghost>:16514-16753
+                  (before parsing/ast_helper.ml(402):16607-16753
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(400):16522-16534
+                               *sth*))
+                           (before parsing/ast_helper.ml(400):16522-16534
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(402):16607-16753
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(400):16546-16548
+                                   *sth*))
+                               (before parsing/ast_helper.ml(400):16546-16548
+                                 0a)))
+                          (before parsing/ast_helper.ml(402):16607-16753
+                            (let
+                              (docs =
+                                 (if *opt*
+                                   (let (*sth* =a (field 0 *opt*))
+                                     (before parsing/ast_helper.ml(400):16559-16569
+                                       *sth*))
+                                   (before parsing/ast_helper.ml(400):16559-16569
+                                     (field 11 (global Docstrings!)))))
+                              (before parsing/ast_helper.ml(402):16607-16753
+                                (let
+                                  (prim =
+                                     (if *opt*
+                                       (let (*sth* =a (field 0 *opt*))
+                                         (before parsing/ast_helper.ml(401):16588-16590
+                                           *sth*))
+                                       (before parsing/ast_helper.ml(401):16588-16590
+                                         0a)))
+                                  (before parsing/ast_helper.ml(402):16607-16753
+                                    (makeblock 0 name typ prim
+                                      (after parsing/ast_helper.ml(405):16677-16702
+                                        (apply
+                                          (field 13 (global Docstrings!))
+                                          docs attrs))
+                                      loc)))))))))))))
+           (pseudo parsing/ast_helper.ml(399):16498-16757 (makeblock 0 mk))))
+     Md =
+       (module-defn(Md) parsing/ast_helper.ml(411):16759-17032
+         (let
+           (mk =
+              (function *opt* *opt* *opt* *opt* name typ
+                (funct-body parsing/ast_helper.ml(412)<ghost>:16787-17028
+                  (before parsing/ast_helper.ml(414):16880-17028
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(412):16795-16807
+                               *sth*))
+                           (before parsing/ast_helper.ml(412):16795-16807
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(414):16880-17028
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(412):16819-16821
+                                   *sth*))
+                               (before parsing/ast_helper.ml(412):16819-16821
+                                 0a)))
+                          (before parsing/ast_helper.ml(414):16880-17028
+                            (let
+                              (docs =
+                                 (if *opt*
+                                   (let (*sth* =a (field 0 *opt*))
+                                     (before parsing/ast_helper.ml(413):16840-16850
+                                       *sth*))
+                                   (before parsing/ast_helper.ml(413):16840-16850
+                                     (field 11 (global Docstrings!)))))
+                              (before parsing/ast_helper.ml(414):16880-17028
+                                (let
+                                  (text =
+                                     (if *opt*
+                                       (let (*sth* =a (field 0 *opt*))
+                                         (before parsing/ast_helper.ml(413):16861-16863
+                                           *sth*))
+                                       (before parsing/ast_helper.ml(413):16861-16863
+                                         0a)))
+                                  (before parsing/ast_helper.ml(414):16880-17028
+                                    (makeblock 0 name typ
+                                      (after parsing/ast_helper.ml(418):16954-17001
+                                        (apply
+                                          (field 28 (global Docstrings!))
+                                          text
+                                          (after parsing/ast_helper.ml(418):16974-17001
+                                            (apply
+                                              (field 13 (global Docstrings!))
+                                              docs attrs))))
+                                      loc)))))))))))))
+           (pseudo parsing/ast_helper.ml(411):16771-17032 (makeblock 0 mk))))
+     Ms =
+       (module-defn(Ms) parsing/ast_helper.ml(423):17034-17311
+         (let
+           (mk =
+              (function *opt* *opt* *opt* *opt* name syn
+                (funct-body parsing/ast_helper.ml(424)<ghost>:17062-17307
+                  (before parsing/ast_helper.ml(426):17155-17307
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(424):17070-17082
+                               *sth*))
+                           (before parsing/ast_helper.ml(424):17070-17082
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(426):17155-17307
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(424):17094-17096
+                                   *sth*))
+                               (before parsing/ast_helper.ml(424):17094-17096
+                                 0a)))
+                          (before parsing/ast_helper.ml(426):17155-17307
+                            (let
+                              (docs =
+                                 (if *opt*
+                                   (let (*sth* =a (field 0 *opt*))
+                                     (before parsing/ast_helper.ml(425):17115-17125
+                                       *sth*))
+                                   (before parsing/ast_helper.ml(425):17115-17125
+                                     (field 11 (global Docstrings!)))))
+                              (before parsing/ast_helper.ml(426):17155-17307
+                                (let
+                                  (text =
+                                     (if *opt*
+                                       (let (*sth* =a (field 0 *opt*))
+                                         (before parsing/ast_helper.ml(425):17136-17138
+                                           *sth*))
+                                       (before parsing/ast_helper.ml(425):17136-17138
+                                         0a)))
+                                  (before parsing/ast_helper.ml(426):17155-17307
+                                    (makeblock 0 name syn
+                                      (after parsing/ast_helper.ml(430):17233-17280
+                                        (apply
+                                          (field 28 (global Docstrings!))
+                                          text
+                                          (after parsing/ast_helper.ml(430):17253-17280
+                                            (apply
+                                              (field 13 (global Docstrings!))
+                                              docs attrs))))
+                                      loc)))))))))))))
+           (pseudo parsing/ast_helper.ml(423):17046-17311 (makeblock 0 mk))))
+     Mtd =
+       (module-defn(Mtd) parsing/ast_helper.ml(435):17313-17592
+         (let
+           (mk =
+              (function *opt* *opt* *opt* *opt* typ name
+                (funct-body parsing/ast_helper.ml(436)<ghost>:17342-17588
+                  (before parsing/ast_helper.ml(438):17436-17588
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(436):17350-17362
+                               *sth*))
+                           (before parsing/ast_helper.ml(436):17350-17362
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(438):17436-17588
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(436):17374-17376
+                                   *sth*))
+                               (before parsing/ast_helper.ml(436):17374-17376
+                                 0a)))
+                          (before parsing/ast_helper.ml(438):17436-17588
+                            (let
+                              (docs =
+                                 (if *opt*
+                                   (let (*sth* =a (field 0 *opt*))
+                                     (before parsing/ast_helper.ml(437):17395-17405
+                                       *sth*))
+                                   (before parsing/ast_helper.ml(437):17395-17405
+                                     (field 11 (global Docstrings!)))))
+                              (before parsing/ast_helper.ml(438):17436-17588
+                                (let
+                                  (text =
+                                     (if *opt*
+                                       (let (*sth* =a (field 0 *opt*))
+                                         (before parsing/ast_helper.ml(437):17416-17418
+                                           *sth*))
+                                       (before parsing/ast_helper.ml(437):17416-17418
+                                         0a)))
+                                  (before parsing/ast_helper.ml(438):17436-17588
+                                    (makeblock 0 name typ
+                                      (after parsing/ast_helper.ml(442):17513-17560
+                                        (apply
+                                          (field 28 (global Docstrings!))
+                                          text
+                                          (after parsing/ast_helper.ml(442):17533-17560
+                                            (apply
+                                              (field 13 (global Docstrings!))
+                                              docs attrs))))
+                                      loc)))))))))))))
+           (pseudo parsing/ast_helper.ml(435):17326-17592 (makeblock 0 mk))))
+     Mb =
+       (module-defn(Mb) parsing/ast_helper.ml(447):17594-17869
+         (let
+           (mk =
+              (function *opt* *opt* *opt* *opt* name expr
+                (funct-body parsing/ast_helper.ml(448)<ghost>:17622-17865
+                  (before parsing/ast_helper.ml(450):17716-17865
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(448):17630-17642
+                               *sth*))
+                           (before parsing/ast_helper.ml(448):17630-17642
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(450):17716-17865
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(448):17654-17656
+                                   *sth*))
+                               (before parsing/ast_helper.ml(448):17654-17656
+                                 0a)))
+                          (before parsing/ast_helper.ml(450):17716-17865
+                            (let
+                              (docs =
+                                 (if *opt*
+                                   (let (*sth* =a (field 0 *opt*))
+                                     (before parsing/ast_helper.ml(449):17675-17685
+                                       *sth*))
+                                   (before parsing/ast_helper.ml(449):17675-17685
+                                     (field 11 (global Docstrings!)))))
+                              (before parsing/ast_helper.ml(450):17716-17865
+                                (let
+                                  (text =
+                                     (if *opt*
+                                       (let (*sth* =a (field 0 *opt*))
+                                         (before parsing/ast_helper.ml(449):17696-17698
+                                           *sth*))
+                                       (before parsing/ast_helper.ml(449):17696-17698
+                                         0a)))
+                                  (before parsing/ast_helper.ml(450):17716-17865
+                                    (makeblock 0 name expr
+                                      (after parsing/ast_helper.ml(454):17791-17838
+                                        (apply
+                                          (field 28 (global Docstrings!))
+                                          text
+                                          (after parsing/ast_helper.ml(454):17811-17838
+                                            (apply
+                                              (field 13 (global Docstrings!))
+                                              docs attrs))))
+                                      loc)))))))))))))
+           (pseudo parsing/ast_helper.ml(447):17606-17869 (makeblock 0 mk))))
+     Opn =
+       (module-defn(Opn) parsing/ast_helper.ml(459):17871-18136
+         (let
+           (mk =
+              (function *opt* *opt* *opt* *opt* expr
+                (funct-body parsing/ast_helper.ml(460)<ghost>:17900-18132
+                  (before parsing/ast_helper.ml(462):17996-18132
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(460):17908-17920
+                               *sth*))
+                           (before parsing/ast_helper.ml(460):17908-17920
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(462):17996-18132
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(460):17932-17934
+                                   *sth*))
+                               (before parsing/ast_helper.ml(460):17932-17934
+                                 0a)))
+                          (before parsing/ast_helper.ml(462):17996-18132
+                            (let
+                              (docs =
+                                 (if *opt*
+                                   (let (*sth* =a (field 0 *opt*))
+                                     (before parsing/ast_helper.ml(460):17945-17955
+                                       *sth*))
+                                   (before parsing/ast_helper.ml(460):17945-17955
+                                     (field 11 (global Docstrings!)))))
+                              (before parsing/ast_helper.ml(462):17996-18132
+                                (let
+                                  (override =
+                                     (if *opt*
+                                       (let (*sth* =a (field 0 *opt*))
+                                         (before parsing/ast_helper.ml(461):17978-17983
+                                           *sth*))
+                                       (before parsing/ast_helper.ml(461):17978-17983
+                                         1a)))
+                                  (before parsing/ast_helper.ml(462):17996-18132
+                                    (makeblock 0 expr override loc
+                                      (after parsing/ast_helper.ml(466):18100-18125
+                                        (apply
+                                          (field 13 (global Docstrings!))
+                                          docs attrs)))))))))))))))
+           (pseudo parsing/ast_helper.ml(459):17884-18136 (makeblock 0 mk))))
+     Incl =
+       (module-defn(Incl) parsing/ast_helper.ml(470):18138-18346
+         (let
+           (mk =
+              (function *opt* *opt* *opt* mexpr
+                (funct-body parsing/ast_helper.ml(471)<ghost>:18168-18341
+                  (before parsing/ast_helper.ml(472):18237-18341
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(471):18176-18188
+                               *sth*))
+                           (before parsing/ast_helper.ml(471):18176-18188
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(472):18237-18341
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(471):18200-18202
+                                   *sth*))
+                               (before parsing/ast_helper.ml(471):18200-18202
+                                 0a)))
+                          (before parsing/ast_helper.ml(472):18237-18341
+                            (let
+                              (docs =
+                                 (if *opt*
+                                   (let (*sth* =a (field 0 *opt*))
+                                     (before parsing/ast_helper.ml(471):18213-18223
+                                       *sth*))
+                                   (before parsing/ast_helper.ml(471):18213-18223
+                                     (field 11 (global Docstrings!)))))
+                              (before parsing/ast_helper.ml(472):18237-18341
+                                (makeblock 0 mexpr loc
+                                  (after parsing/ast_helper.ml(475):18309-18334
+                                    (apply (field 13 (global Docstrings!))
+                                      docs attrs)))))))))))))
+           (pseudo parsing/ast_helper.ml(470):18152-18346 (makeblock 0 mk))))
+     Vb =
+       (module-defn(Vb) parsing/ast_helper.ml(480):18348-18620
+         (let
+           (mk =
+              (function *opt* *opt* *opt* *opt* pat expr
+                (funct-body parsing/ast_helper.ml(481)<ghost>:18376-18616
+                  (before parsing/ast_helper.ml(483):18469-18616
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(481):18384-18396
+                               *sth*))
+                           (before parsing/ast_helper.ml(481):18384-18396
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(483):18469-18616
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(481):18408-18410
+                                   *sth*))
+                               (before parsing/ast_helper.ml(481):18408-18410
+                                 0a)))
+                          (before parsing/ast_helper.ml(483):18469-18616
+                            (let
+                              (docs =
+                                 (if *opt*
+                                   (let (*sth* =a (field 0 *opt*))
+                                     (before parsing/ast_helper.ml(481):18421-18431
+                                       *sth*))
+                                   (before parsing/ast_helper.ml(481):18421-18431
+                                     (field 11 (global Docstrings!)))))
+                              (before parsing/ast_helper.ml(483):18469-18616
+                                (let
+                                  (text =
+                                     (if *opt*
+                                       (let (*sth* =a (field 0 *opt*))
+                                         (before parsing/ast_helper.ml(482):18450-18452
+                                           *sth*))
+                                       (before parsing/ast_helper.ml(482):18450-18452
+                                         0a)))
+                                  (before parsing/ast_helper.ml(483):18469-18616
+                                    (makeblock 0 pat expr
+                                      (after parsing/ast_helper.ml(487):18542-18589
+                                        (apply
+                                          (field 28 (global Docstrings!))
+                                          text
+                                          (after parsing/ast_helper.ml(487):18562-18589
+                                            (apply
+                                              (field 13 (global Docstrings!))
+                                              docs attrs))))
+                                      loc)))))))))))))
+           (pseudo parsing/ast_helper.ml(480):18360-18620 (makeblock 0 mk))))
+     Ci =
+       (module-defn(Ci) parsing/ast_helper.ml(492):18622-18987
+         (let
+           (mk =
+              (function *opt* *opt* *opt* *opt* *opt* *opt* name expr
+                (funct-body parsing/ast_helper.ml(493)<ghost>:18650-18983
+                  (before parsing/ast_helper.ml(496):18786-18983
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(493):18658-18670
+                               *sth*))
+                           (before parsing/ast_helper.ml(493):18658-18670
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(496):18786-18983
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(493):18682-18684
+                                   *sth*))
+                               (before parsing/ast_helper.ml(493):18682-18684
+                                 0a)))
+                          (before parsing/ast_helper.ml(496):18786-18983
+                            (let
+                              (docs =
+                                 (if *opt*
+                                   (let (*sth* =a (field 0 *opt*))
+                                     (before parsing/ast_helper.ml(494):18703-18713
+                                       *sth*))
+                                   (before parsing/ast_helper.ml(494):18703-18713
+                                     (field 11 (global Docstrings!)))))
+                              (before parsing/ast_helper.ml(496):18786-18983
+                                (let
+                                  (text =
+                                     (if *opt*
+                                       (let (*sth* =a (field 0 *opt*))
+                                         (before parsing/ast_helper.ml(494):18724-18726
+                                           *sth*))
+                                       (before parsing/ast_helper.ml(494):18724-18726
+                                         0a)))
+                                  (before parsing/ast_helper.ml(496):18786-18983
+                                    (let
+                                      (virt =
+                                         (if *opt*
+                                           (let (*sth* =a (field 0 *opt*))
+                                             (before parsing/ast_helper.ml(495):18745-18753
+                                               *sth*))
+                                           (before parsing/ast_helper.ml(495):18745-18753
+                                             1a)))
+                                      (before parsing/ast_helper.ml(496):18786-18983
+                                        (let
+                                          (params =
+                                             (if *opt*
+                                               (let
+                                                 (*sth* =a (field 0 *opt*))
+                                                 (before parsing/ast_helper.ml(495):18766-18768
+                                                   *sth*))
+                                               (before parsing/ast_helper.ml(495):18766-18768
+                                                 0a)))
+                                          (before parsing/ast_helper.ml(496):18786-18983
+                                            (makeblock 0 virt params name
+                                              expr loc
+                                              (after parsing/ast_helper.ml(502):18909-18956
+                                                (apply
+                                                  (field 28
+                                                    (global Docstrings!))
+                                                  text
+                                                  (after parsing/ast_helper.ml(502):18929-18956
+                                                    (apply
+                                                      (field 13
+                                                        (global Docstrings!))
+                                                      docs attrs)))))))))))))))))))))
+           (pseudo parsing/ast_helper.ml(492):18634-18987 (makeblock 0 mk))))
+     Type =
+       (module-defn(Type) parsing/ast_helper.ml(507):18989-20022
+         (let
+           (mk =
+              (function *opt* *opt* *opt* *opt* *opt* *opt* *opt* *opt*
+                manifest name
+                (funct-body parsing/ast_helper.ml(508)<ghost>:19019-19495
+                  (before parsing/ast_helper.ml(516):19225-19495
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(508):19027-19039
+                               *sth*))
+                           (before parsing/ast_helper.ml(508):19027-19039
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(516):19225-19495
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(508):19051-19053
+                                   *sth*))
+                               (before parsing/ast_helper.ml(508):19051-19053
+                                 0a)))
+                          (before parsing/ast_helper.ml(516):19225-19495
+                            (let
+                              (docs =
+                                 (if *opt*
+                                   (let (*sth* =a (field 0 *opt*))
+                                     (before parsing/ast_helper.ml(509):19072-19082
+                                       *sth*))
+                                   (before parsing/ast_helper.ml(509):19072-19082
+                                     (field 11 (global Docstrings!)))))
+                              (before parsing/ast_helper.ml(516):19225-19495
+                                (let
+                                  (text =
+                                     (if *opt*
+                                       (let (*sth* =a (field 0 *opt*))
+                                         (before parsing/ast_helper.ml(509):19093-19095
+                                           *sth*))
+                                       (before parsing/ast_helper.ml(509):19093-19095
+                                         0a)))
+                                  (before parsing/ast_helper.ml(516):19225-19495
+                                    (let
+                                      (params =
+                                         (if *opt*
+                                           (let (*sth* =a (field 0 *opt*))
+                                             (before parsing/ast_helper.ml(510):19114-19116
+                                               *sth*))
+                                           (before parsing/ast_helper.ml(510):19114-19116
+                                             0a)))
+                                      (before parsing/ast_helper.ml(516):19225-19495
+                                        (let
+                                          (cstrs =
+                                             (if *opt*
+                                               (let
+                                                 (*sth* =a (field 0 *opt*))
+                                                 (before parsing/ast_helper.ml(511):19134-19136
+                                                   *sth*))
+                                               (before parsing/ast_helper.ml(511):19134-19136
+                                                 0a)))
+                                          (before parsing/ast_helper.ml(516):19225-19495
+                                            (let
+                                              (kind =
+                                                 (if *opt*
+                                                   (let
+                                                     (*sth* =a
+                                                        (field 0 *opt*))
+                                                     (before parsing/ast_helper.ml(512):19153-19167
+                                                       *sth*))
+                                                   (before parsing/ast_helper.ml(512):19153-19167
+                                                     0a)))
+                                              (before parsing/ast_helper.ml(516):19225-19495
+                                                (let
+                                                  (priv =
+                                                     (if *opt*
+                                                       (let
+                                                         (*sth* =a
+                                                            (field 0 *opt*))
+                                                         (before parsing/ast_helper.ml(513):19184-19190
+                                                           *sth*))
+                                                       (before parsing/ast_helper.ml(513):19184-19190
+                                                         1a)))
+                                                  (before parsing/ast_helper.ml(516):19225-19495
+                                                    (makeblock 0 name params
+                                                      cstrs kind priv
+                                                      manifest
+                                                      (after parsing/ast_helper.ml(524):19419-19466
+                                                        (apply
+                                                          (field 28
+                                                            (global Docstrings!))
+                                                          text
+                                                          (after parsing/ast_helper.ml(524):19439-19466
+                                                            (apply
+                                                              (field 13
+                                                                (global Docstrings!))
+                                                              docs attrs))))
+                                                      loc))))))))))))))))))))
+            constructor =
+              (function *opt* *opt* *opt* *opt* res name
+                (funct-body parsing/ast_helper.ml(528)<ghost>:19515-19761
+                  (before parsing/ast_helper.ml(530):19621-19761
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(528):19523-19535
+                               *sth*))
+                           (before parsing/ast_helper.ml(528):19523-19535
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(530):19621-19761
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(528):19547-19549
+                                   *sth*))
+                               (before parsing/ast_helper.ml(528):19547-19549
+                                 0a)))
+                          (before parsing/ast_helper.ml(530):19621-19761
+                            (let
+                              (info =
+                                 (if *opt*
+                                   (let (*sth* =a (field 0 *opt*))
+                                     (before parsing/ast_helper.ml(528):19560-19570
+                                       *sth*))
+                                   (before parsing/ast_helper.ml(528):19560-19570
+                                     (field 20 (global Docstrings!)))))
+                              (before parsing/ast_helper.ml(530):19621-19761
+                                (let
+                                  (args =
+                                     (if *opt*
+                                       (let (*sth* =a (field 0 *opt*))
+                                         (before parsing/ast_helper.ml(529):19589-19603
+                                           *sth*))
+                                       (before parsing/ast_helper.ml(529):19589-19603
+                                         [0: 0a])))
+                                  (before parsing/ast_helper.ml(530):19621-19761
+                                    (makeblock 0 name args res loc
+                                      (after parsing/ast_helper.ml(535):19729-19754
+                                        (apply
+                                          (field 22 (global Docstrings!))
+                                          info attrs))))))))))))))
+            field =
+              (function *opt* *opt* *opt* *opt* name typ
+                (funct-body parsing/ast_helper.ml(538)<ghost>:19775-20017
+                  (before parsing/ast_helper.ml(540):19874-20017
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(538):19783-19795
+                               *sth*))
+                           (before parsing/ast_helper.ml(538):19783-19795
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(540):19874-20017
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(538):19807-19809
+                                   *sth*))
+                               (before parsing/ast_helper.ml(538):19807-19809
+                                 0a)))
+                          (before parsing/ast_helper.ml(540):19874-20017
+                            (let
+                              (info =
+                                 (if *opt*
+                                   (let (*sth* =a (field 0 *opt*))
+                                     (before parsing/ast_helper.ml(538):19820-19830
+                                       *sth*))
+                                   (before parsing/ast_helper.ml(538):19820-19830
+                                     (field 20 (global Docstrings!)))))
+                              (before parsing/ast_helper.ml(540):19874-20017
+                                (let
+                                  (mut =
+                                     (if *opt*
+                                       (let (*sth* =a (field 0 *opt*))
+                                         (before parsing/ast_helper.ml(539):19848-19857
+                                           *sth*))
+                                       (before parsing/ast_helper.ml(539):19848-19857
+                                         0a)))
+                                  (before parsing/ast_helper.ml(540):19874-20017
+                                    (makeblock 0 name mut typ loc
+                                      (after parsing/ast_helper.ml(545):19985-20010
+                                        (apply
+                                          (field 22 (global Docstrings!))
+                                          info attrs)))))))))))))))
+           (pseudo parsing/ast_helper.ml(507):19003-20022
+             (makeblock 0 mk constructor field))))
+     Te =
+       (module-defn(Te) parsing/ast_helper.ml(551):20047-21477
+         (let
+           (mk =
+              (function *opt* *opt* *opt* *opt* *opt* path constructors
+                (funct-body parsing/ast_helper.ml(552)<ghost>:20075-20401
+                  (before parsing/ast_helper.ml(554):20196-20401
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(552):20083-20095
+                               *sth*))
+                           (before parsing/ast_helper.ml(552):20083-20095
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(554):20196-20401
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(552):20107-20109
+                                   *sth*))
+                               (before parsing/ast_helper.ml(552):20107-20109
+                                 0a)))
+                          (before parsing/ast_helper.ml(554):20196-20401
+                            (let
+                              (docs =
+                                 (if *opt*
+                                   (let (*sth* =a (field 0 *opt*))
+                                     (before parsing/ast_helper.ml(552):20120-20130
+                                       *sth*))
+                                   (before parsing/ast_helper.ml(552):20120-20130
+                                     (field 11 (global Docstrings!)))))
+                              (before parsing/ast_helper.ml(554):20196-20401
+                                (let
+                                  (params =
+                                     (if *opt*
+                                       (let (*sth* =a (field 0 *opt*))
+                                         (before parsing/ast_helper.ml(553):20151-20153
+                                           *sth*))
+                                       (before parsing/ast_helper.ml(553):20151-20153
+                                         0a)))
+                                  (before parsing/ast_helper.ml(554):20196-20401
+                                    (let
+                                      (priv =
+                                         (if *opt*
+                                           (let (*sth* =a (field 0 *opt*))
+                                             (before parsing/ast_helper.ml(553):20164-20170
+                                               *sth*))
+                                           (before parsing/ast_helper.ml(553):20164-20170
+                                             1a)))
+                                      (before parsing/ast_helper.ml(554):20196-20401
+                                        (makeblock 0 path params constructors
+                                          priv loc
+                                          (after parsing/ast_helper.ml(560):20369-20394
+                                            (apply
+                                              (field 13 (global Docstrings!))
+                                              docs attrs))))))))))))))))
+            mk_exception =
+              (function *opt* *opt* *opt* constructor
+                (funct-body parsing/ast_helper.ml(563)<ghost>:20422-20624
+                  (before parsing/ast_helper.ml(565):20503-20624
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(563):20430-20442
+                               *sth*))
+                           (before parsing/ast_helper.ml(563):20430-20442
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(565):20503-20624
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(563):20454-20456
+                                   *sth*))
+                               (before parsing/ast_helper.ml(563):20454-20456
+                                 0a)))
+                          (before parsing/ast_helper.ml(565):20503-20624
+                            (let
+                              (docs =
+                                 (if *opt*
+                                   (let (*sth* =a (field 0 *opt*))
+                                     (before parsing/ast_helper.ml(563):20467-20477
+                                       *sth*))
+                                   (before parsing/ast_helper.ml(563):20467-20477
+                                     (field 11 (global Docstrings!)))))
+                              (before parsing/ast_helper.ml(565):20503-20624
+                                (makeblock 0 constructor loc
+                                  (after parsing/ast_helper.ml(568):20592-20617
+                                    (apply (field 13 (global Docstrings!))
+                                      docs attrs))))))))))))
+            constructor =
+              (function *opt* *opt* *opt* *opt* name kind
+                (funct-body parsing/ast_helper.ml(571)<ghost>:20644-20892
+                  (before parsing/ast_helper.ml(573):20746-20892
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(571):20652-20664
+                               *sth*))
+                           (before parsing/ast_helper.ml(571):20652-20664
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(573):20746-20892
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(571):20676-20678
+                                   *sth*))
+                               (before parsing/ast_helper.ml(571):20676-20678
+                                 0a)))
+                          (before parsing/ast_helper.ml(573):20746-20892
+                            (let
+                              (docs =
+                                 (if *opt*
+                                   (let (*sth* =a (field 0 *opt*))
+                                     (before parsing/ast_helper.ml(572):20697-20707
+                                       *sth*))
+                                   (before parsing/ast_helper.ml(572):20697-20707
+                                     (field 11 (global Docstrings!)))))
+                              (before parsing/ast_helper.ml(573):20746-20892
+                                (let
+                                  (info =
+                                     (if *opt*
+                                       (let (*sth* =a (field 0 *opt*))
+                                         (before parsing/ast_helper.ml(572):20718-20728
+                                           *sth*))
+                                       (before parsing/ast_helper.ml(572):20718-20728
+                                         (field 20 (global Docstrings!)))))
+                                  (before parsing/ast_helper.ml(573):20746-20892
+                                    (makeblock 0 name kind loc
+                                      (after parsing/ast_helper.ml(577):20838-20885
+                                        (apply
+                                          (field 13 (global Docstrings!))
+                                          docs
+                                          (after parsing/ast_helper.ml(577):20858-20885
+                                            (apply
+                                              (field 22 (global Docstrings!))
+                                              info attrs))))))))))))))))
+            decl =
+              (function *opt* *opt* *opt* *opt* *opt* res name
+                (funct-body parsing/ast_helper.ml(580)<ghost>:20905-21199
+                  (before parsing/ast_helper.ml(582):21037-21199
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(580):20913-20925
+                               *sth*))
+                           (before parsing/ast_helper.ml(580):20913-20925
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(582):21037-21199
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(580):20937-20939
+                                   *sth*))
+                               (before parsing/ast_helper.ml(580):20937-20939
+                                 0a)))
+                          (before parsing/ast_helper.ml(582):21037-21199
+                            (let
+                              (docs =
+                                 (if *opt*
+                                   (let (*sth* =a (field 0 *opt*))
+                                     (before parsing/ast_helper.ml(580):20950-20960
+                                       *sth*))
+                                   (before parsing/ast_helper.ml(580):20950-20960
+                                     (field 11 (global Docstrings!)))))
+                              (before parsing/ast_helper.ml(582):21037-21199
+                                (let
+                                  (info =
+                                     (if *opt*
+                                       (let (*sth* =a (field 0 *opt*))
+                                         (before parsing/ast_helper.ml(581):20984-20994
+                                           *sth*))
+                                       (before parsing/ast_helper.ml(581):20984-20994
+                                         (field 20 (global Docstrings!)))))
+                                  (before parsing/ast_helper.ml(582):21037-21199
+                                    (let
+                                      (args =
+                                         (if *opt*
+                                           (let (*sth* =a (field 0 *opt*))
+                                             (before parsing/ast_helper.ml(581):21005-21019
+                                               *sth*))
+                                           (before parsing/ast_helper.ml(581):21005-21019
+                                             [0: 0a])))
+                                      (before parsing/ast_helper.ml(582):21037-21199
+                                        (makeblock 0 name
+                                          (makeblock 0 args res) loc
+                                          (after parsing/ast_helper.ml(586):21145-21192
+                                            (apply
+                                              (field 13 (global Docstrings!))
+                                              docs
+                                              (after parsing/ast_helper.ml(586):21165-21192
+                                                (apply
+                                                  (field 22
+                                                    (global Docstrings!))
+                                                  info attrs))))))))))))))))))
+            rebind =
+              (function *opt* *opt* *opt* *opt* name lid
+                (funct-body parsing/ast_helper.ml(589)<ghost>:21214-21472
+                  (before parsing/ast_helper.ml(591):21315-21472
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(589):21222-21234
+                               *sth*))
+                           (before parsing/ast_helper.ml(589):21222-21234
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(591):21315-21472
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(589):21246-21248
+                                   *sth*))
+                               (before parsing/ast_helper.ml(589):21246-21248
+                                 0a)))
+                          (before parsing/ast_helper.ml(591):21315-21472
+                            (let
+                              (docs =
+                                 (if *opt*
+                                   (let (*sth* =a (field 0 *opt*))
+                                     (before parsing/ast_helper.ml(590):21267-21277
+                                       *sth*))
+                                   (before parsing/ast_helper.ml(590):21267-21277
+                                     (field 11 (global Docstrings!)))))
+                              (before parsing/ast_helper.ml(591):21315-21472
+                                (let
+                                  (info =
+                                     (if *opt*
+                                       (let (*sth* =a (field 0 *opt*))
+                                         (before parsing/ast_helper.ml(590):21288-21298
+                                           *sth*))
+                                       (before parsing/ast_helper.ml(590):21288-21298
+                                         (field 20 (global Docstrings!)))))
+                                  (before parsing/ast_helper.ml(591):21315-21472
+                                    (makeblock 0 name (makeblock 1 lid) loc
+                                      (after parsing/ast_helper.ml(595):21418-21465
+                                        (apply
+                                          (field 13 (global Docstrings!))
+                                          docs
+                                          (after parsing/ast_helper.ml(595):21438-21465
+                                            (apply
+                                              (field 22 (global Docstrings!))
+                                              info attrs)))))))))))))))))
+           (pseudo parsing/ast_helper.ml(551):20059-21477
+             (makeblock 0 mk mk_exception constructor decl rebind))))
+     Csig =
+       (module-defn(Csig) parsing/ast_helper.ml(600):21479-21590
+         (let
+           (mk =
+              (function self fields
+                (funct-body parsing/ast_helper.ml(601)<ghost>:21509-21586
+                  (before parsing/ast_helper.ml(602):21527-21586
+                    (makeblock 0 self fields)))))
+           (pseudo parsing/ast_helper.ml(600):21493-21590 (makeblock 0 mk))))
+     Cstr =
+       (module-defn(Cstr) parsing/ast_helper.ml(608):21592-21703
+         (let
+           (mk =
+              (function self fields
+                (funct-body parsing/ast_helper.ml(609)<ghost>:21622-21699
+                  (before parsing/ast_helper.ml(610):21640-21699
+                    (makeblock 0 self fields)))))
+           (pseudo parsing/ast_helper.ml(608):21606-21703 (makeblock 0 mk))))
+     Rf =
+       (module-defn(Rf) parsing/ast_helper.ml(617):21723-22007
+         (let
+           (mk =
+              (function *opt* *opt* desc
+                (funct-body parsing/ast_helper.ml(618)<ghost>:21751-21867
+                  (before parsing/ast_helper.ml(618):21794-21867
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(618):21759-21771
+                               *sth*))
+                           (before parsing/ast_helper.ml(618):21759-21771
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(618):21794-21867
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(618):21783-21785
+                                   *sth*))
+                               (before parsing/ast_helper.ml(618):21783-21785
+                                 0a)))
+                          (before parsing/ast_helper.ml(618):21794-21867
+                            (makeblock 0 desc loc attrs))))))))
+            tag =
+              (function loc attrs label const tys
+                (funct-body parsing/ast_helper.ml(623)<ghost>:21878-21953
+                  (before parsing/ast_helper.ml(624):21912-21953
+                    (after parsing/ast_helper.ml(624):21912-21953
+                      (apply mk loc attrs (makeblock 0 label const tys))))))
+            inherit_ =
+              (function loc ty
+                (funct-body parsing/ast_helper.ml(625)<ghost>:21968-22003
+                  (before parsing/ast_helper.ml(626):21982-22003
+                    (after parsing/ast_helper.ml(626):21982-22003
+                      (apply mk loc 0a (makeblock 1 ty)))))))
+           (pseudo parsing/ast_helper.ml(617):21735-22007
+             (makeblock 0 mk tag inherit_))))
+     Of =
+       (module-defn(Of) parsing/ast_helper.ml(630):22030-22298
+         (let
+           (mk =
+              (function *opt* *opt* desc
+                (funct-body parsing/ast_helper.ml(631)<ghost>:22058-22172
+                  (before parsing/ast_helper.ml(631):22099-22172
+                    (let
+                      (loc =
+                         (if *opt*
+                           (let (*sth* =a (field 0 *opt*))
+                             (before parsing/ast_helper.ml(631):22066-22078
+                               *sth*))
+                           (before parsing/ast_helper.ml(631):22066-22078
+                             (field 0 default_loc))))
+                      (before parsing/ast_helper.ml(631):22099-22172
+                        (let
+                          (attrs =
+                             (if *opt*
+                               (let (*sth* =a (field 0 *opt*))
+                                 (before parsing/ast_helper.ml(631):22088-22090
+                                   *sth*))
+                               (before parsing/ast_helper.ml(631):22088-22090
+                                 0a)))
+                          (before parsing/ast_helper.ml(631):22099-22172
+                            (makeblock 0 desc loc attrs))))))))
+            tag =
+              (function loc attrs label ty
+                (funct-body parsing/ast_helper.ml(636)<ghost>:22183-22243
+                  (before parsing/ast_helper.ml(637):22210-22243
+                    (after parsing/ast_helper.ml(637):22210-22243
+                      (apply mk loc attrs (makeblock 0 label ty))))))
+            inherit_ =
+              (function loc ty
+                (funct-body parsing/ast_helper.ml(638)<ghost>:22259-22294
+                  (before parsing/ast_helper.ml(639):22273-22294
+                    (after parsing/ast_helper.ml(639):22273-22294
+                      (apply mk loc 0a (makeblock 1 ty)))))))
+           (pseudo parsing/ast_helper.ml(630):22042-22298
+             (makeblock 0 mk tag inherit_)))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 default_loc with_default_loc
+        (makeblock 0 (field 6 Const) (field 7 Const) (field 0 Const)
+          (field 1 Const) (field 2 Const) (field 3 Const) (field 4 Const)
+          (field 5 Const))
+        Attr Typ Pat
+        (makeblock 0 (field 0 Exp) (field 1 Exp) (field 2 Exp) (field 3 Exp)
+          (field 4 Exp) (field 5 Exp) (field 6 Exp) (field 7 Exp)
+          (field 8 Exp) (field 9 Exp) (field 10 Exp) (field 11 Exp)
+          (field 12 Exp) (field 13 Exp) (field 14 Exp) (field 15 Exp)
+          (field 16 Exp) (field 17 Exp) (field 18 Exp) (field 19 Exp)
+          (field 20 Exp) (field 22 Exp) (field 21 Exp) (field 23 Exp)
+          (field 24 Exp) (field 25 Exp) (field 26 Exp) (field 27 Exp)
+          (field 28 Exp) (field 29 Exp) (field 30 Exp) (field 31 Exp)
+          (field 32 Exp) (field 33 Exp) (field 34 Exp) (field 35 Exp)
+          (field 36 Exp) (field 37 Exp) (field 38 Exp) (field 39 Exp)
+          (field 40 Exp))
+        Val Type Te Mty Mod Sig Str Md Ms Mtd Mb Opn Incl Vb Cty
+        (makeblock 0 (field 0 Ctf) (field 8 Ctf) (field 1 Ctf) (field 2 Ctf)
+          (field 3 Ctf) (field 4 Ctf) (field 5 Ctf) (field 6 Ctf)
+          (field 7 Ctf))
+        Cl
+        (makeblock 0 (field 0 Cf) (field 11 Cf) (field 1 Cf) (field 2 Cf)
+          (field 3 Cf) (field 4 Cf) (field 5 Cf) (field 6 Cf) (field 7 Cf)
+          (field 8 Cf) (field 9 Cf) (field 10 Cf))
+        Ci Csig Cstr Rf Of))))

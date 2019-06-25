@@ -1,0 +1,398 @@
+(setglobal Bytelibrarian!
+  (let
+    (Error = (makeblock 248 "Bytelibrarian.Error" (caml_fresh_oo_id 0))
+     copy_compunit =
+       (function ic oc compunit
+         (funct-body bytecomp/bytelibrarian.ml(29)<ghost>:1342-1710
+           (before bytecomp/bytelibrarian.ml(30):1361-1710
+             (seq
+               (after bytecomp/bytelibrarian.ml(30):1361-1387
+                 (apply (field 89 (global Stdlib!)) ic (field 1 compunit)))
+               (before bytecomp/bytelibrarian.ml(31):1391-1710
+                 (seq
+                   (setfield_imm 1 compunit
+                     (after bytecomp/bytelibrarian.ml(31):1410-1420
+                       (apply (field 73 (global Stdlib!)) oc)))
+                   (before bytecomp/bytelibrarian.ml(32):1424-1710
+                     (seq
+                       (setfield_imm 7 compunit
+                         (|| (field 7 compunit)
+                           (field 0 (field 20 (global Clflags!)))))
+                       (before bytecomp/bytelibrarian.ml(33):1504-1710
+                         (seq
+                           (after bytecomp/bytelibrarian.ml(33):1504-1546
+                             (apply (field 20 (global Misc!)) ic oc
+                               (field 2 compunit)))
+                           (before bytecomp/bytelibrarian.ml(34):1550-1710
+                             (if (> (field 8 compunit) 0)
+                               (before bytecomp/bytelibrarian.ml(34):1580-1710
+                                 (seq
+                                   (after bytecomp/bytelibrarian.ml(35):1590-1618
+                                     (apply (field 89 (global Stdlib!)) ic
+                                       (field 8 compunit)))
+                                   (before bytecomp/bytelibrarian.ml(36):1624-1704
+                                     (seq
+                                       (setfield_imm 8 compunit
+                                         (after bytecomp/bytelibrarian.ml(36):1645-1655
+                                           (apply (field 73 (global Stdlib!))
+                                             oc)))
+                                       (before bytecomp/bytelibrarian.ml(37):1661-1704
+                                         (after bytecomp/bytelibrarian.ml(37):1661-1704
+                                           (apply (field 20 (global Misc!))
+                                             ic oc (field 9 compunit))))))))
+                               0a))))))))))))
+     lib_ccobjs = (makemutable 0 0a)
+     lib_ccopts = (makemutable 0 0a)
+     lib_dllibs = (makemutable 0 0a)
+     add_ccobjs =
+       (function l
+         (funct-body bytecomp/bytelibrarian.ml(50)<ghost>:2076-2321
+           (before bytecomp/bytelibrarian.ml(51):2082-2321
+             (if (not (field 0 (field 55 (global Clflags!))))
+               (before bytecomp/bytelibrarian.ml(51):2116-2321
+                 (seq
+                   (if (field 1 l)
+                     (before bytecomp/bytelibrarian.ml(52):2147-2177
+                       (setfield_imm 0 (field 21 (global Clflags!)) 1a))
+                     0a)
+                   (before bytecomp/bytelibrarian.ml(53):2183-2315
+                     (seq
+                       (setfield_ptr 0 lib_ccobjs
+                         (after bytecomp/bytelibrarian.ml(53):2197-2223
+                           (apply (field 36 (global Stdlib!))
+                             (field 0 lib_ccobjs) (field 2 l))))
+                       (before bytecomp/bytelibrarian.ml(54):2229-2315
+                         (seq
+                           (setfield_ptr 0 lib_ccopts
+                             (after bytecomp/bytelibrarian.ml(54):2243-2269
+                               (apply (field 36 (global Stdlib!))
+                                 (field 0 lib_ccopts) (field 3 l))))
+                           (before bytecomp/bytelibrarian.ml(55):2275-2315
+                             (setfield_ptr 0 lib_dllibs
+                               (after bytecomp/bytelibrarian.ml(55):2289-2315
+                                 (apply (field 36 (global Stdlib!))
+                                   (field 0 lib_dllibs) (field 4 l)))))))))))
+               0a))))
+     copy_object_file =
+       (function oc name
+         (funct-body bytecomp/bytelibrarian.ml(58)<ghost>:2344-3426
+           (before bytecomp/bytelibrarian.ml(59):2356-3426
+             (let
+               (file_name =
+                  (try
+                    (after bytecomp/bytelibrarian.ml(61):2386-2405
+                      (apply (field 5 (global Load_path!)) name))
+                   with exn
+                    (if (== exn (field 7 (global Stdlib!)))
+                      (before bytecomp/bytelibrarian.ml(63):2434-2467
+                        (raise
+                          (after bytecomp/bytelibrarian.ml(63):2439-2467
+                            (makeblock 0 Error (makeblock 0 name)))))
+                      (reraise exn))))
+               (before bytecomp/bytelibrarian.ml(64):2473-3426
+                 (let
+                   (ic =
+                      (after bytecomp/bytelibrarian.ml(64):2482-2503
+                        (apply (field 79 (global Stdlib!)) file_name)))
+                   (before bytecomp/bytelibrarian.ml(65):2509-3426
+                     (try
+                       (let
+                         (buffer =
+                            (after bytecomp/bytelibrarian.ml(66):2530-2585
+                              (apply (field 85 (global Stdlib!)) ic
+                                (string.length (field 22 (global Config!))))))
+                         (before bytecomp/bytelibrarian.ml(67):2593-3314
+                           (if
+                             (after bytecomp/bytelibrarian.ml(67):2596-2621
+                               (caml_string_equal buffer
+                                 (field 22 (global Config!))))
+                             (before bytecomp/bytelibrarian.ml(67):2627-2904
+                               (let
+                                 (compunit_pos =[int]
+                                    (after bytecomp/bytelibrarian.ml(68):2658-2677
+                                      (apply (field 87 (global Stdlib!)) ic)))
+                                 (before bytecomp/bytelibrarian.ml(69):2687-2896
+                                   (seq
+                                     (after bytecomp/bytelibrarian.ml(69):2687-2710
+                                       (apply (field 89 (global Stdlib!)) ic
+                                         compunit_pos))
+                                     (before bytecomp/bytelibrarian.ml(70):2718-2896
+                                       (let
+                                         (compunit =
+                                            (after bytecomp/bytelibrarian.ml(70):2734-2748
+                                              (apply
+                                                (field 88 (global Stdlib!))
+                                                ic)))
+                                         (before bytecomp/bytelibrarian.ml(71):2778-2896
+                                           (seq
+                                             (after bytecomp/bytelibrarian.ml(71):2778-2823
+                                               (apply
+                                                 (field 2 (global Bytelink!))
+                                                 file_name compunit))
+                                             (before bytecomp/bytelibrarian.ml(72):2831-2896
+                                               (seq
+                                                 (after bytecomp/bytelibrarian.ml(72):2831-2859
+                                                   (apply copy_compunit ic oc
+                                                     compunit))
+                                                 (before bytecomp/bytelibrarian.ml(73):2867-2896
+                                                   (seq
+                                                     (after bytecomp/bytelibrarian.ml(73):2867-2878
+                                                       (apply
+                                                         (field 92
+                                                           (global Stdlib!))
+                                                         ic))
+                                                     (before bytecomp/bytelibrarian.ml(74):2886-2896
+                                                       (makeblock 0 compunit
+                                                         0a))))))))))))))
+                             (before bytecomp/bytelibrarian.ml(76):2914-3314
+                               (if
+                                 (after bytecomp/bytelibrarian.ml(76):2917-2942
+                                   (caml_string_equal buffer
+                                     (field 23 (global Config!))))
+                                 (before bytecomp/bytelibrarian.ml(76):2948-3260
+                                   (let
+                                     (toc_pos =[int]
+                                        (after bytecomp/bytelibrarian.ml(77):2974-2993
+                                          (apply (field 87 (global Stdlib!))
+                                            ic)))
+                                     (before bytecomp/bytelibrarian.ml(78):3003-3252
+                                       (seq
+                                         (after bytecomp/bytelibrarian.ml(78):3003-3021
+                                           (apply (field 89 (global Stdlib!))
+                                             ic toc_pos))
+                                         (before bytecomp/bytelibrarian.ml(79):3029-3252
+                                           (let
+                                             (toc =
+                                                (after bytecomp/bytelibrarian.ml(79):3040-3054
+                                                  (apply
+                                                    (field 88
+                                                      (global Stdlib!))
+                                                    ic)))
+                                             (before bytecomp/bytelibrarian.ml(80):3075-3252
+                                               (seq
+                                                 (after bytecomp/bytelibrarian.ml(80):3075-3137
+                                                   (apply
+                                                     (field 14
+                                                       (global Stdlib__list!))
+                                                     (after bytecomp/bytelibrarian.ml(80):3085-3123
+                                                       (apply
+                                                         (field 2
+                                                           (global Bytelink!))
+                                                         file_name))
+                                                     (field 0 toc)))
+                                                 (before bytecomp/bytelibrarian.ml(81):3145-3252
+                                                   (seq
+                                                     (after bytecomp/bytelibrarian.ml(81):3145-3159
+                                                       (apply add_ccobjs toc))
+                                                     (before bytecomp/bytelibrarian.ml(82):3167-3252
+                                                       (seq
+                                                         (after bytecomp/bytelibrarian.ml(82):3167-3212
+                                                           (apply
+                                                             (field 14
+                                                               (global Stdlib__list!))
+                                                             (after bytecomp/bytelibrarian.ml(82):3177-3198
+                                                               (apply
+                                                                 copy_compunit
+                                                                 ic oc))
+                                                             (field 0 toc)))
+                                                         (before bytecomp/bytelibrarian.ml(83):3220-3252
+                                                           (seq
+                                                             (after bytecomp/bytelibrarian.ml(83):3220-3231
+                                                               (apply
+                                                                 (field 92
+                                                                   (global Stdlib!))
+                                                                 ic))
+                                                             (before bytecomp/bytelibrarian.ml(84):3239-3252
+                                                               (field 0 toc))))))))))))))))
+                                 (before bytecomp/bytelibrarian.ml(86):3272-3314
+                                   (raise
+                                     (after bytecomp/bytelibrarian.ml(86):3277-3314
+                                       (makeblock 0 Error
+                                         (makeblock 1 file_name))))))))))
+                      with x
+                       (if (== x (field 11 (global Stdlib!)))
+                         (before bytecomp/bytelibrarian.ml(88):3341-3396
+                           (seq
+                             (after bytecomp/bytelibrarian.ml(88):3341-3352
+                               (apply (field 92 (global Stdlib!)) ic))
+                             (before bytecomp/bytelibrarian.ml(88):3354-3396
+                               (raise
+                                 (after bytecomp/bytelibrarian.ml(88):3359-3396
+                                   (makeblock 0 Error
+                                     (makeblock 1 file_name)))))))
+                         (before bytecomp/bytelibrarian.ml(89):3406-3426
+                           (seq
+                             (after bytecomp/bytelibrarian.ml(89):3406-3417
+                               (apply (field 92 (global Stdlib!)) ic))
+                             (before bytecomp/bytelibrarian.ml(89):3419-3426
+                               (reraise
+                                 (after bytecomp/bytelibrarian.ml(89):3425-3426
+                                   x))))))))))))))
+     create_archive =
+       (function file_list lib_name
+         (funct-body bytecomp/bytelibrarian.ml(91)<ghost>:3447-4385
+           (before bytecomp/bytelibrarian.ml(92):3470-4385
+             (let
+               (outchan =
+                  (after bytecomp/bytelibrarian.ml(92):3484-3505
+                    (apply (field 60 (global Stdlib!)) lib_name)))
+               (before bytecomp/bytelibrarian.ml(93):3511-4385
+                 (after bytecomp/bytelibrarian.ml(93):3511-4385
+                   (apply (field 3 (global Misc!))
+                     (makeblock 0
+                       (function param
+                         (funct-body bytecomp/bytelibrarian.ml(94):3540-3569
+                           (before bytecomp/bytelibrarian.ml(94):3551-3568
+                             (after bytecomp/bytelibrarian.ml(94):3551-3568
+                               (apply (field 75 (global Stdlib!)) outchan))))))
+                     (makeblock 0
+                       (function param
+                         (funct-body bytecomp/bytelibrarian.ml(95):3589-3621
+                           (before bytecomp/bytelibrarian.ml(95):3600-3620
+                             (after bytecomp/bytelibrarian.ml(95):3600-3620
+                               (apply (field 15 (global Misc!)) lib_name))))))
+                     (function param
+                       (funct-body bytecomp/bytelibrarian.ml(96):3626-4385
+                         (before bytecomp/bytelibrarian.ml(97):3644-4379
+                           (seq
+                             (after bytecomp/bytelibrarian.ml(97):3644-3682
+                               (apply (field 65 (global Stdlib!)) outchan
+                                 (field 23 (global Config!))))
+                             (before bytecomp/bytelibrarian.ml(98):3691-4379
+                               (let
+                                 (ofs_pos_toc =[int]
+                                    (after bytecomp/bytelibrarian.ml(98):3709-3724
+                                      (apply (field 73 (global Stdlib!))
+                                        outchan)))
+                                 (before bytecomp/bytelibrarian.ml(99):3735-4379
+                                   (seq
+                                     (after bytecomp/bytelibrarian.ml(99):3735-3762
+                                       (apply (field 70 (global Stdlib!))
+                                         outchan 0))
+                                     (before bytecomp/bytelibrarian.ml(100):3771-4379
+                                       (let
+                                         (units =
+                                            (after bytecomp/bytelibrarian.ml(101):3792-3851
+                                              (apply
+                                                (field 13
+                                                  (global Stdlib__list!))
+                                                (after bytecomp/bytelibrarian.ml(101):3804-3851
+                                                  (apply
+                                                    (field 16
+                                                      (global Stdlib__list!))
+                                                    (after bytecomp/bytelibrarian.ml(101):3814-3840
+                                                      (apply copy_object_file
+                                                        outchan))
+                                                    file_list)))))
+                                         (before bytecomp/bytelibrarian.ml(102):3862-4379
+                                           (let
+                                             (toc =
+                                                (makeblock 0 units
+                                                  (field 0
+                                                    (field 21
+                                                      (global Clflags!)))
+                                                  (after bytecomp/bytelibrarian.ml(105):3975-4004
+                                                    (apply
+                                                      (field 36
+                                                        (global Stdlib!))
+                                                      (field 0
+                                                        (field 8
+                                                          (global Clflags!)))
+                                                      (field 0 lib_ccobjs)))
+                                                  (after bytecomp/bytelibrarian.ml(106):4030-4063
+                                                    (apply
+                                                      (field 36
+                                                        (global Stdlib!))
+                                                      (field 0
+                                                        (field 26
+                                                          (global Clflags!)))
+                                                      (field 0 lib_ccopts)))
+                                                  (after bytecomp/bytelibrarian.ml(107):4089-4118
+                                                    (apply
+                                                      (field 36
+                                                        (global Stdlib!))
+                                                      (field 0
+                                                        (field 9
+                                                          (global Clflags!)))
+                                                      (field 0 lib_dllibs)))))
+                                             (before bytecomp/bytelibrarian.ml(108):4131-4379
+                                               (let
+                                                 (pos_toc =[int]
+                                                    (after bytecomp/bytelibrarian.ml(108):4145-4160
+                                                      (apply
+                                                        (field 73
+                                                          (global Stdlib!))
+                                                        outchan)))
+                                                 (before bytecomp/bytelibrarian.ml(109):4171-4379
+                                                   (seq
+                                                     (after bytecomp/bytelibrarian.ml(109):4171-4299
+                                                       (apply
+                                                         (field 4
+                                                           (global Emitcode!))
+                                                         lib_name
+                                                         "bytecode library"
+                                                         outchan toc))
+                                                     (before bytecomp/bytelibrarian.ml(112):4308-4379
+                                                       (seq
+                                                         (after bytecomp/bytelibrarian.ml(112):4308-4336
+                                                           (apply
+                                                             (field 72
+                                                               (global Stdlib!))
+                                                             outchan
+                                                             ofs_pos_toc))
+                                                         (before bytecomp/bytelibrarian.ml(113):4345-4378
+                                                           (after bytecomp/bytelibrarian.ml(113):4345-4378
+                                                             (apply
+                                                               (field 70
+                                                                 (global Stdlib!))
+                                                               outchan
+                                                               pos_toc))))))))))))))))))))))))))))
+     report_error =
+       (function ppf param
+         (funct-body bytecomp/bytelibrarian.ml(118)<ghost>:4417-4633
+           (switch* param
+            case tag 0:
+             (let (name =a (field 0 param))
+               (before bytecomp/bytelibrarian.ml(120):4465-4503
+                 (after bytecomp/bytelibrarian.ml(120):4465-4503
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11: "Cannot find file " [2: 0a 0a]]
+                      "Cannot find file %s"]
+                     name))))
+            case tag 1:
+             (let (name =a (field 0 param))
+               (before bytecomp/bytelibrarian.ml(122):4541-4633
+                 (after bytecomp/bytelibrarian.ml(122):4541-4633
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11:
+                       "The file "
+                       [15: [11: " is not a bytecode object file" 0a]]]
+                      "The file %a is not a bytecode object file"]
+                     (field 18 (global Location!)) name)))))))
+     *match* =
+       (after bytecomp/bytelibrarian.ml(126):4646-4790
+         (apply (field 46 (global Location!))
+           (function param
+             (funct-body bytecomp/bytelibrarian.ml(127):4681-4790
+               (let (tag =a (field 0 param))
+                 (if (== tag Error)
+                   (let (err =a (field 1 param))
+                     (before bytecomp/bytelibrarian.ml(128):4712-4766
+                       (makeblock 0
+                         (after bytecomp/bytelibrarian.ml(128):4717-4766
+                           (apply (field 45 (global Location!)) report_error
+                             err)))))
+                   (before bytecomp/bytelibrarian.ml(129):4780-4784 0a)))))))
+     reset =
+       (function param
+         (funct-body bytecomp/bytelibrarian.ml(132)<ghost>:4802-4865
+           (before bytecomp/bytelibrarian.ml(133):4809-4865
+             (seq (setfield_ptr 0 lib_ccobjs 0a)
+               (before bytecomp/bytelibrarian.ml(134):4829-4865
+                 (seq (setfield_ptr 0 lib_ccopts 0a)
+                   (before bytecomp/bytelibrarian.ml(135):4849-4865
+                     (setfield_ptr 0 lib_dllibs 0a)))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 create_archive Error report_error reset))))

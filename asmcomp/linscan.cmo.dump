@@ -1,0 +1,542 @@
+(setglobal Linscan!
+  (let
+    (active =
+       (after asmcomp/linscan.ml(31):1429-1534
+         (apply (field 1 (global Stdlib__array!)) (field 1 (global Proc!))
+           (function param[int]
+             (funct-body asmcomp/linscan.ml(31):1466-1534
+               (before asmcomp/linscan.ml(31):1476-1533
+                 (makemutable 0 0a 0a 0a)))))))
+    (letrec
+      (insert_interval_sorted
+         (function i il
+           (funct-body asmcomp/linscan.ml(39)<ghost>:1623-1747
+             (if il
+               (let (il =a (field 1 il) j =a (field 0 il))
+                 (before asmcomp/linscan.ml(41):1672-1688
+                   (if (<= (field 2 j) (field 2 i))
+                     (before asmcomp/linscan.ml(41):1692-1699
+                       (makeblock 0 i il))
+                     (let (j =a j)
+                       (before asmcomp/linscan.ml(42):1715-1747
+                         (makeblock 0 j
+                           (after asmcomp/linscan.ml(42):1720-1747
+                             (apply insert_interval_sorted i il))))))))
+               (before asmcomp/linscan.ml(40):1646-1649 (makeblock 0 i 0a))))))
+      (letrec
+        (release_expired_fixed
+           (function pos[int] param
+             (funct-body asmcomp/linscan.ml(44)<ghost>:1779-1923
+               (catch
+                 (if param
+                   (let (il =a (field 1 param) i =a (field 0 param))
+                     (before asmcomp/linscan.ml(45):1811-1824
+                       (if (>= (field 2 i) pos)
+                         (before asmcomp/linscan.ml(46):1834-1911
+                           (seq
+                             (after asmcomp/linscan.ml(46):1834-1870
+                               (apply (field 4 (global Interval!)) i pos))
+                             (before asmcomp/linscan.ml(47):1878-1911
+                               (makeblock 0 i
+                                 (after asmcomp/linscan.ml(47):1883-1911
+                                   (apply release_expired_fixed pos il))))))
+                         (exit 1))))
+                   (exit 1))
+                with (1) (before asmcomp/linscan.ml(48):1921-1923 0a)))))
+        (letrec
+          (release_expired_active
+             (function ci pos[int] param
+               (funct-body asmcomp/linscan.ml(50)<ghost>:1956-2281
+                 (catch
+                   (if param
+                     (let (il =a (field 1 param) i =a (field 0 param))
+                       (before asmcomp/linscan.ml(51):1991-2004
+                         (if (>= (field 2 i) pos)
+                           (before asmcomp/linscan.ml(52):2014-2269
+                             (seq
+                               (after asmcomp/linscan.ml(52):2014-2050
+                                 (apply (field 4 (global Interval!)) i pos))
+                               (before asmcomp/linscan.ml(53):2058-2269
+                                 (if
+                                   (after asmcomp/linscan.ml(53):2061-2083
+                                     (apply (field 3 (global Interval!)) i
+                                       pos))
+                                   (before asmcomp/linscan.ml(54):2097-2134
+                                     (makeblock 0 i
+                                       (after asmcomp/linscan.ml(54):2102-2134
+                                         (apply release_expired_active ci pos
+                                           il))))
+                                   (before asmcomp/linscan.ml(55):2146-2269
+                                     (seq
+                                       (setfield_ptr 2 ci
+                                         (after asmcomp/linscan.ml(56):2178-2217
+                                           (apply insert_interval_sorted i
+                                             (field 2 ci))))
+                                       (before asmcomp/linscan.ml(57):2227-2259
+                                         (after asmcomp/linscan.ml(57):2227-2259
+                                           (apply release_expired_active ci
+                                             pos il)))))))))
+                           (exit 2))))
+                     (exit 2))
+                  with (2) (before asmcomp/linscan.ml(59):2279-2281 0a)))))
+          (letrec
+            (release_expired_inactive
+               (function ci pos[int] param
+                 (funct-body asmcomp/linscan.ml(61)<ghost>:2316-2647
+                   (catch
+                     (if param
+                       (let (il =a (field 1 param) i =a (field 0 param))
+                         (before asmcomp/linscan.ml(62):2351-2364
+                           (if (>= (field 2 i) pos)
+                             (before asmcomp/linscan.ml(63):2374-2635
+                               (seq
+                                 (after asmcomp/linscan.ml(63):2374-2410
+                                   (apply (field 4 (global Interval!)) i pos))
+                                 (before asmcomp/linscan.ml(64):2418-2635
+                                   (if
+                                     (not
+                                       (after asmcomp/linscan.ml(64):2425-2449
+                                         (apply (field 3 (global Interval!))
+                                           i pos)))
+                                     (before asmcomp/linscan.ml(65):2463-2502
+                                       (makeblock 0 i
+                                         (after asmcomp/linscan.ml(65):2468-2502
+                                           (apply release_expired_inactive ci
+                                             pos il))))
+                                     (before asmcomp/linscan.ml(66):2514-2635
+                                       (seq
+                                         (setfield_ptr 1 ci
+                                           (after asmcomp/linscan.ml(67):2544-2581
+                                             (apply insert_interval_sorted i
+                                               (field 1 ci))))
+                                         (before asmcomp/linscan.ml(68):2591-2625
+                                           (after asmcomp/linscan.ml(68):2591-2625
+                                             (apply release_expired_inactive
+                                               ci pos il)))))))))
+                             (exit 3))))
+                       (exit 3))
+                    with (3) (before asmcomp/linscan.ml(70):2645-2647 0a)))))
+            (let
+              (allocate_stack_slot =
+                 (function i
+                   (funct-body asmcomp/linscan.ml(74)<ghost>:2723-2900
+                     (before asmcomp/linscan.ml(75):2729-2900
+                       (let
+                         (cl =[int]
+                            (after asmcomp/linscan.ml(75):2738-2763
+                              (apply (field 2 (global Proc!)) (field 0 i))))
+                         (before asmcomp/linscan.ml(76):2769-2900
+                           (let
+                             (ss =[int]
+                                (after asmcomp/linscan.ml(76):2778-2803
+                                  (array.get[int] (field 23 (global Proc!))
+                                    cl)))
+                             (before asmcomp/linscan.ml(77):2809-2900
+                               (seq
+                                 (after asmcomp/linscan.ml(77):2809-2845
+                                   (array.set[int] (field 23 (global Proc!))
+                                     cl (1+ ss)))
+                                 (before asmcomp/linscan.ml(78):2849-2900
+                                   (seq
+                                     (setfield_ptr 3 (field 0 i)
+                                       (makeblock 1 (makeblock 0 (int) ss)))
+                                     (before asmcomp/linscan.ml(79):2881-2900
+                                       (setfield_imm 4 (field 0 i) 1a))))))))))))
+               allocate_free_register =
+                 (function i
+                   (funct-body asmcomp/linscan.ml(85)<ghost>:3085-5267
+                     (before asmcomp/linscan.ml(86):3091-5267
+                       (let
+                         (*match* = (field 3 (field 0 i))
+                          *match* = (field 4 (field 0 i))
+                          *match* = *match*
+                          *match* = *match*)
+                         (if (isint *match*)
+                           (if *match*
+                             (before asmcomp/linscan.ml(89):3225-3246
+                               (after asmcomp/linscan.ml(89):3225-3246
+                                 (apply allocate_stack_slot i)))
+                             (before asmcomp/linscan.ml(92):3339-5249
+                               (let
+                                 (cl =[int]
+                                    (after asmcomp/linscan.ml(92):3348-3373
+                                      (apply (field 2 (global Proc!))
+                                        (field 0 i))))
+                                 (before asmcomp/linscan.ml(93):3383-5249
+                                   (let
+                                     (rn =
+                                        (after asmcomp/linscan.ml(93):3395-3428
+                                          (array.get[int]
+                                            (field 3 (global Proc!)) cl)))
+                                     (if (!= rn 0)
+                                       (before asmcomp/linscan.ml(98):3561-5239
+                                         (let
+                                           (ci =
+                                              (after asmcomp/linscan.ml(98):3570-3581
+                                                (array.get[addr] active cl)))
+                                           (before asmcomp/linscan.ml(99):3595-5239
+                                             (let
+                                               (r0 =[int]
+                                                  (after asmcomp/linscan.ml(99):3604-3638
+                                                    (array.get[int]
+                                                      (field 4
+                                                        (global Proc!))
+                                                      cl)))
+                                               (before asmcomp/linscan.ml(105):3972-5239
+                                                 (let
+                                                   (regmask =
+                                                      (after asmcomp/linscan.ml(105):3986-4004
+                                                        (caml_make_vect rn
+                                                          1a)))
+                                                   (before asmcomp/linscan.ml(107):4087-5239
+                                                     (seq
+                                                       (after asmcomp/linscan.ml(107):4087-4267
+                                                         (apply
+                                                           (field 14
+                                                             (global Stdlib__list!))
+                                                           (function param
+                                                             (funct-body asmcomp/linscan.ml(108):4109-4242
+                                                               (let
+                                                                 (*match* =o
+                                                                    (field 0
+                                                                    param)
+                                                                  *match* =o
+                                                                    (field 3
+                                                                    *match*))
+                                                                 (catch
+                                                                   (switch* *match*
+                                                                    case int 0:
+                                                                    (exit 5)
+                                                                    case tag 0:
+                                                                    (let
+                                                                    (r =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/linscan.ml(110):4174-4219
+                                                                    (if
+                                                                    (<
+                                                                    (- r r0)
+                                                                    rn)
+                                                                    (before asmcomp/linscan.ml(110):4194-4219
+                                                                    (after asmcomp/linscan.ml(110):4194-4219
+                                                                    (array.set[int]
+                                                                    regmask
+                                                                    (- r r0)
+                                                                    0a))) 0a)))
+                                                                    case tag 1:
+                                                                    (exit 5))
+                                                                  with (5)
+                                                                   (before asmcomp/linscan.ml(111):4239-4241
+                                                                    0a)))))
+                                                           (field 1 ci)))
+                                                       (before asmcomp/linscan.ml(114):4351-5239
+                                                         (let
+                                                           (remove_bound_overlapping =
+                                                              (function j
+                                                                (funct-body asmcomp/linscan.ml(114):4382-4599
+                                                                  (let
+                                                                    (*match* =o
+                                                                    (field 0
+                                                                    j)
+                                                                    *match* =o
+                                                                    (field 3
+                                                                    *match*))
+                                                                    (catch
+                                                                    (switch* *match*
+                                                                    case int 0:
+                                                                    (exit 4)
+                                                                    case tag 0:
+                                                                    (let
+                                                                    (r =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/linscan.ml(116):4451-4577
+                                                                    (if
+                                                                    (&&
+                                                                    (<
+                                                                    (- r r0)
+                                                                    rn)
+                                                                    (&&
+                                                                    (after asmcomp/linscan.ml(116):4471-4487
+                                                                    (array.get[int]
+                                                                    regmask
+                                                                    (- r r0)))
+                                                                    (after asmcomp/linscan.ml(117):4510-4530
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Interval!))
+                                                                    j i))))
+                                                                    (before asmcomp/linscan.ml(118):4552-4577
+                                                                    (after asmcomp/linscan.ml(118):4552-4577
+                                                                    (array.set[int]
+                                                                    regmask
+                                                                    (- r r0)
+                                                                    0a))) 0a)))
+                                                                    case tag 1:
+                                                                    (exit 4))
+                                                                    with (4)
+                                                                    (before asmcomp/linscan.ml(119):4597-4599
+                                                                    0a))))))
+                                                           (before asmcomp/linscan.ml(120):4613-5239
+                                                             (seq
+                                                               (after asmcomp/linscan.ml(120):4613-4662
+                                                                 (apply
+                                                                   (field 14
+                                                                    (global Stdlib__list!))
+                                                                   remove_bound_overlapping
+                                                                   (field 2
+                                                                    ci)))
+                                                               (before asmcomp/linscan.ml(121):4674-5239
+                                                                 (seq
+                                                                   (after asmcomp/linscan.ml(121):4674-4720
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    remove_bound_overlapping
+                                                                    (field 0
+                                                                    ci)))
+                                                                   (before asmcomp/linscan.ml(123):4788-5239
+                                                                    (letrec
+                                                                    (assign
+                                                                    (function
+                                                                    r[int]
+                                                                    (funct-body asmcomp/linscan.ml(123)<ghost>:4803-5217
+                                                                    (before asmcomp/linscan.ml(124):4819-5217
+                                                                    (if
+                                                                    (== r rn)
+                                                                    (before asmcomp/linscan.ml(125):4848-4863
+                                                                    (raise
+                                                                    (after asmcomp/linscan.ml(125):4854-4863
+                                                                    (field 7
+                                                                    (global Stdlib!)))))
+                                                                    (before asmcomp/linscan.ml(126):4881-5217
+                                                                    (if
+                                                                    (after asmcomp/linscan.ml(126):4884-4895
+                                                                    (array.get[int]
+                                                                    regmask
+                                                                    r))
+                                                                    (before asmcomp/linscan.ml(126):4901-5182
+                                                                    (seq
+                                                                    (setfield_ptr 3
+                                                                    (field 0
+                                                                    i)
+                                                                    (makeblock 0 (int)
+                                                                    (+ r0 r)))
+                                                                    (before asmcomp/linscan.ml(130):5077-5166
+                                                                    (seq
+                                                                    (setfield_imm 4
+                                                                    (field 0
+                                                                    i) 0a)
+                                                                    (before asmcomp/linscan.ml(131):5113-5166
+                                                                    (setfield_ptr 1
+                                                                    ci
+                                                                    (after asmcomp/linscan.ml(131):5129-5166
+                                                                    (apply
+                                                                    insert_interval_sorted
+                                                                    i
+                                                                    (field 1
+                                                                    ci)))))))))
+                                                                    (before asmcomp/linscan.ml(133):5202-5217
+                                                                    (after asmcomp/linscan.ml(133):5202-5217
+                                                                    (apply
+                                                                    assign
+                                                                    (1+ r)))))))))))
+                                                                    (before asmcomp/linscan.ml(134):5231-5239
+                                                                    (after asmcomp/linscan.ml(134):5231-5239
+                                                                    (apply
+                                                                    assign 0)))))))))))))))))))
+                                       (before asmcomp/linscan.ml(96):3521-3536
+                                         (raise
+                                           (after asmcomp/linscan.ml(96):3527-3536
+                                             (field 7 (global Stdlib!)))))))))))
+                           (before asmcomp/linscan.ml(136):5259-5261 0a))))))
+               allocate_blocked_register =
+                 (function i
+                   (funct-body asmcomp/linscan.ml(139)<ghost>:5299-6372
+                     (before asmcomp/linscan.ml(140):5305-6372
+                       (let
+                         (cl =[int]
+                            (after asmcomp/linscan.ml(140):5314-5339
+                              (apply (field 2 (global Proc!)) (field 0 i))))
+                         (before asmcomp/linscan.ml(141):5345-6372
+                           (let
+                             (ci =
+                                (after asmcomp/linscan.ml(141):5354-5365
+                                  (array.get[addr] active cl)))
+                             (before asmcomp/linscan.ml(142):5371-6372
+                               (let (*match* = (field 1 ci))
+                                 (catch
+                                   (if *match*
+                                     (let
+                                       (il =a (field 1 *match*)
+                                        ilast =a (field 0 *match*))
+                                       (before asmcomp/linscan.ml(144):5422-5755
+                                         (if
+                                           (&&
+                                             (> (field 2 ilast) (field 2 i))
+                                             (let
+                                               (chk =
+                                                  (function r
+                                                    (funct-body asmcomp/linscan.ml(146)<ghost>:5530-5583
+                                                      (before asmcomp/linscan.ml(146):5534-5583
+                                                        (&&
+                                                          (after asmcomp/linscan.ml(146):5534-5559
+                                                            (caml_equal
+                                                              (field 3
+                                                                (field 0 r))
+                                                              (field 3
+                                                                (field 0
+                                                                  ilast))))
+                                                          (after asmcomp/linscan.ml(146):5563-5583
+                                                            (apply
+                                                              (field 2
+                                                                (global Interval!))
+                                                              r i)))))))
+                                               (before asmcomp/linscan.ml(149):5688-5755
+                                                 (not
+                                                   (||
+                                                     (after asmcomp/linscan.ml(149):5693-5720
+                                                       (apply
+                                                         (field 28
+                                                           (global Stdlib__list!))
+                                                         chk (field 0 ci)))
+                                                     (after asmcomp/linscan.ml(149):5724-5754
+                                                       (apply
+                                                         (field 28
+                                                           (global Stdlib__list!))
+                                                         chk (field 2 ci))))))))
+                                           (before asmcomp/linscan.ml(151):5769-6152
+                                             (seq
+                                               (let
+                                                 (*match* =
+                                                    (field 3 (field 0 ilast)))
+                                                 (catch
+                                                   (switch* *match*
+                                                    case int 0: (exit 9)
+                                                    case tag 0:
+                                                     (before asmcomp/linscan.ml(151):5809-5811
+                                                       0a)
+                                                    case tag 1: (exit 9))
+                                                  with (9)
+                                                   (before asmcomp/linscan.ml(151):5819-5831
+                                                     (raise
+                                                       (after asmcomp/linscan.ml(151):5819-5831
+                                                         (makeblock 0
+                                                           (global Assert_failure!)
+                                                           [0:
+                                                            "asmcomp/linscan.ml"
+                                                            151 56]))))))
+                                               (before asmcomp/linscan.ml(153):5908-6152
+                                                 (seq
+                                                   (setfield_ptr 3
+                                                     (field 0 i)
+                                                     (field 3
+                                                       (field 0 ilast)))
+                                                   (before asmcomp/linscan.ml(155):6014-6152
+                                                     (seq
+                                                       (setfield_ptr 1 ci
+                                                         (after asmcomp/linscan.ml(155):6030-6057
+                                                           (apply
+                                                             insert_interval_sorted
+                                                             i il)))
+                                                       (before asmcomp/linscan.ml(157):6127-6152
+                                                         (after asmcomp/linscan.ml(157):6127-6152
+                                                           (apply
+                                                             allocate_stack_slot
+                                                             ilast)))))))))
+                                           (exit 10))))
+                                     (exit 10))
+                                  with (10)
+                                   (before asmcomp/linscan.ml(162):6351-6372
+                                     (after asmcomp/linscan.ml(162):6351-6372
+                                       (apply allocate_stack_slot i))))))))))))
+               walk_interval =
+                 (function i
+                   (funct-body asmcomp/linscan.ml(164)<ghost>:6392-6955
+                     (before asmcomp/linscan.ml(165):6398-6955
+                       (let
+                         (pos =[int]
+                            (and (field 1 i)
+                              (after asmcomp/linscan.ml(165):6422-6433
+                                (apply (field 20 (global Stdlib!)) 1))))
+                         (before asmcomp/linscan.ml(167):6516-6955
+                           (seq
+                             (after asmcomp/linscan.ml(167):6516-6750
+                               (apply (field 12 (global Stdlib__array!))
+                                 (function ci
+                                   (funct-body asmcomp/linscan.ml(168):6531-6739
+                                     (before asmcomp/linscan.ml(169):6548-6738
+                                       (seq
+                                         (setfield_ptr 0 ci
+                                           (after asmcomp/linscan.ml(169):6563-6600
+                                             (apply release_expired_fixed pos
+                                               (field 0 ci))))
+                                         (before asmcomp/linscan.ml(170):6608-6738
+                                           (seq
+                                             (setfield_ptr 1 ci
+                                               (after asmcomp/linscan.ml(170):6624-6666
+                                                 (apply
+                                                   release_expired_active ci
+                                                   pos (field 1 ci))))
+                                             (before asmcomp/linscan.ml(171):6674-6738
+                                               (setfield_ptr 2 ci
+                                                 (after asmcomp/linscan.ml(171):6692-6738
+                                                   (apply
+                                                     release_expired_inactive
+                                                     ci pos (field 2 ci)))))))))))
+                                 active))
+                             (before asmcomp/linscan.ml(173):6754-6955
+                               (try
+                                 (after asmcomp/linscan.ml(175):6804-6828
+                                   (apply allocate_free_register i))
+                                with exn
+                                 (if (== exn (field 7 (global Stdlib!)))
+                                   (before asmcomp/linscan.ml(179):6928-6955
+                                     (after asmcomp/linscan.ml(179):6928-6955
+                                       (apply allocate_blocked_register i)))
+                                   (reraise exn))))))))))
+               allocate_registers =
+                 (function param
+                   (funct-body asmcomp/linscan.ml(181)<ghost>:6979-7598
+                     (before asmcomp/linscan.ml(183):7040-7598
+                       (seq
+                         (for cl 0 to (- (field 1 (global Proc!)) 1)
+                           (before asmcomp/linscan.ml(185):7133-7257
+                             (seq
+                               (after asmcomp/linscan.ml(185):7133-7221
+                                 (array.set[addr] active cl
+                                   (makemutable 0 0a 0a 0a)))
+                               (before asmcomp/linscan.ml(190):7227-7257
+                                 (after asmcomp/linscan.ml(190):7227-7257
+                                   (array.set[int] (field 23 (global Proc!))
+                                     cl 0))))))
+                         (before asmcomp/linscan.ml(193):7325-7598
+                           (seq
+                             (after asmcomp/linscan.ml(193):7325-7497
+                               (apply (field 14 (global Stdlib__list!))
+                                 (function i
+                                   (funct-body asmcomp/linscan.ml(194):7339-7460
+                                     (before asmcomp/linscan.ml(195):7355-7459
+                                       (let
+                                         (ci =
+                                            (after asmcomp/linscan.ml(195):7364-7398
+                                              (array.get[addr] active
+                                                (after asmcomp/linscan.ml(195):7372-7397
+                                                  (apply
+                                                    (field 2 (global Proc!))
+                                                    (field 0 i))))))
+                                         (before asmcomp/linscan.ml(196):7408-7459
+                                           (setfield_ptr 0 ci
+                                             (after asmcomp/linscan.ml(196):7423-7459
+                                               (apply insert_interval_sorted
+                                                 i (field 0 ci)))))))))
+                                 (after asmcomp/linscan.ml(197):7465-7497
+                                   (apply (field 1 (global Interval!)) 0a))))
+                             (before asmcomp/linscan.ml(199):7548-7598
+                               (after asmcomp/linscan.ml(199):7548-7598
+                                 (apply (field 14 (global Stdlib__list!))
+                                   walk_interval
+                                   (after asmcomp/linscan.ml(199):7572-7598
+                                     (apply (field 0 (global Interval!)) 0a))))))))))))
+              (pseudo _none_(0)<ghost>:-1--1
+                (makeblock 0 allocate_registers)))))))))

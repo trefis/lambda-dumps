@@ -1,0 +1,503 @@
+(setglobal Translobj!
+  (let
+    (oo_prim =
+       (after lambda/translobj.ml(21):1157-1192
+         (apply (field 13 (global Lambda!)) "CamlinternalOO"))
+     consts =
+       (after lambda/translobj.ml(25):1270-1287
+         (apply (field 0 (global Stdlib__hashtbl!)) 0a 17))
+     share =
+       (function c
+         (funct-body lambda/translobj.ml(27)<ghost>:1299-1559
+           (before lambda/translobj.ml(28):1305-1559
+             (catch
+               (switch c
+                case tag 2:
+                 (let (l =a (field 1 c))
+                   (before lambda/translobj.ml(29):1347-1354
+                     (if (!= l 0a)
+                       (before lambda/translobj.ml(30):1364-1541
+                         (try
+                           (makeblock 0
+                             (after lambda/translobj.ml(31):1387-1410
+                               (apply (field 5 (global Stdlib__hashtbl!))
+                                 consts c)))
+                          with exn
+                           (if (== exn (field 7 (global Stdlib!)))
+                             (before lambda/translobj.ml(33):1443-1531
+                               (let
+                                 (id =
+                                    (after lambda/translobj.ml(33):1452-1479
+                                      (apply (field 10 (global Ident!))
+                                        "shared")))
+                                 (before lambda/translobj.ml(34):1491-1531
+                                   (seq
+                                     (after lambda/translobj.ml(34):1491-1514
+                                       (apply
+                                         (field 4 (global Stdlib__hashtbl!))
+                                         consts c id))
+                                     (before lambda/translobj.ml(35):1524-1531
+                                       (makeblock 0 id))))))
+                             (reraise exn))))
+                       (exit 2))))
+                default: (exit 2))
+              with (2)
+               (before lambda/translobj.ml(37):1551-1559 (makeblock 1 c))))))
+     cache_required = (makemutable 0 0a)
+     method_cache = (makemutable 0 (field 8 (global Lambda!)))
+     method_count = (makemutable 0 (int) 0)
+     method_table = (makemutable 0 0a)
+     meth_tag =
+       (function s
+         (funct-body lambda/translobj.ml(46)<ghost>:1714-1769
+           (before lambda/translobj.ml(46):1718-1769
+             (makeblock 1
+               (makeblock 0
+                 (makeblock 0 (int)
+                   (after lambda/translobj.ml(46):1745-1767
+                     (apply (field 21 (global Btype!)) s))))))))
+     next_cache =
+       (function tag
+         (funct-body lambda/translobj.ml(48)<ghost>:1786-1897
+           (before lambda/translobj.ml(49):1794-1897
+             (let (n =[int] (field 0 method_count))
+               (before lambda/translobj.ml(50):1821-1897
+                 (seq (+:=1 method_count)
+                   (before lambda/translobj.ml(51):1842-1897
+                     (makeblock 0 tag
+                       (makeblock 0 (field 0 method_cache)
+                         (makeblock 0
+                           (makeblock 1 (makeblock 0 (makeblock 0 (int) n)))
+                           0a)))))))))))
+    (letrec
+      (is_path
+         (function param
+           (funct-body lambda/translobj.ml(53):1917-2143
+             (catch
+               (catch
+                 (switch param
+                  case tag 0: (exit 3)
+                  case tag 1: (exit 3)
+                  case tag 6:
+                   (let (*match* =a (field 0 param))
+                     (catch
+                       (switch *match*
+                        case tag 0:
+                         (let (*match* =a (field 1 param))
+                           (if *match* (exit 4) (exit 3)))
+                        case tag 3:
+                         (let (*match* =a (field 1 param))
+                           (if *match*
+                             (let (*match* =a (field 1 *match*))
+                               (if *match* (exit 4)
+                                 (let (lam =a (field 0 *match*))
+                                   (before lambda/translobj.ml(55):2020-2031
+                                     (after lambda/translobj.ml(55):2020-2031
+                                       (apply is_path lam))))))
+                             (exit 4)))
+                        case tag 20: (exit 5)
+                        case tag 22: (exit 5)
+                        default: (exit 4))
+                      with (5)
+                       (let (*match* =a (field 1 param))
+                         (if *match*
+                           (let (*match* =a (field 1 *match*))
+                             (if *match*
+                               (let (*match* =a (field 1 *match*))
+                                 (if *match* (exit 4)
+                                   (let
+                                     (lam2 =a (field 0 *match*)
+                                      lam1 =a (field 0 *match*))
+                                     (before lambda/translobj.ml(57):2100-2128
+                                       (&&
+                                         (after lambda/translobj.ml(57):2100-2112
+                                           (apply is_path lam1))
+                                         (after lambda/translobj.ml(57):2116-2128
+                                           (apply is_path lam2)))))))
+                               (exit 4)))
+                           (exit 4)))))
+                  default: (exit 4))
+                with (4) (before lambda/translobj.ml(58):2138-2143 0a))
+              with (3) (before lambda/translobj.ml(54):1981-1985 1a)))))
+      (let
+        (meth =
+           (function obj lab
+             (funct-body lambda/translobj.ml(60)<ghost>:2154-2590
+               (before lambda/translobj.ml(61):2166-2590
+                 (let
+                   (tag =
+                      (after lambda/translobj.ml(61):2176-2188
+                        (apply meth_tag lab)))
+                   (before lambda/translobj.ml(62):2194-2590
+                     (if
+                       (not
+                         (&& (field 0 cache_required)
+                           (field 0 (field 94 (global Clflags!)))))
+                       (before lambda/translobj.ml(62):2248-2257
+                         (makeblock 0 tag 0a))
+                       (before lambda/translobj.ml(63):2265-2590
+                         (if
+                           (not
+                             (after lambda/translobj.ml(63):2272-2285
+                               (apply is_path obj)))
+                           (before lambda/translobj.ml(63):2291-2305
+                             (after lambda/translobj.ml(63):2291-2305
+                               (apply next_cache tag)))
+                           (before lambda/translobj.ml(64):2313-2590
+                             (try
+                               (let
+                                 (r =
+                                    (after lambda/translobj.ml(65):2329-2357
+                                      (apply
+                                        (field 38 (global Stdlib__list!)) obj
+                                        (field 0 method_table))))
+                                 (before lambda/translobj.ml(66):2365-2481
+                                   (try
+                                     (makeblock 0 tag
+                                       (after lambda/translobj.ml(67):2381-2398
+                                         (apply
+                                           (field 38 (global Stdlib__list!))
+                                           tag (field 0 r))))
+                                    with exn
+                                     (if (== exn (field 7 (global Stdlib!)))
+                                       (before lambda/translobj.ml(69):2428-2481
+                                         (let
+                                           (p =
+                                              (after lambda/translobj.ml(69):2436-2450
+                                                (apply next_cache tag)))
+                                           (before lambda/translobj.ml(70):2460-2481
+                                             (seq
+                                               (setfield_ptr 0 r
+                                                 (makeblock 0 p (field 0 r)))
+                                               (before lambda/translobj.ml(71):2480-2481
+                                                 p)))))
+                                       (reraise exn)))))
+                              with exn
+                               (if (== exn (field 7 (global Stdlib!)))
+                                 (before lambda/translobj.ml(73):2506-2590
+                                   (let
+                                     (p =
+                                        (after lambda/translobj.ml(73):2514-2528
+                                          (apply next_cache tag)))
+                                     (before lambda/translobj.ml(74):2536-2590
+                                       (seq
+                                         (setfield_ptr 0 method_table
+                                           (makeblock 0
+                                             (makeblock 0 obj
+                                               (makemutable 0
+                                                 (makeblock 0 p 0a)))
+                                             (field 0 method_table)))
+                                         (before lambda/translobj.ml(75):2589-2590
+                                           p)))))
+                                 (reraise exn))))))))))))
+         reset_labels =
+           (function param
+             (funct-body lambda/translobj.ml(77)<ghost>:2609-2679
+               (before lambda/translobj.ml(78):2616-2679
+                 (seq
+                   (after lambda/translobj.ml(78):2616-2636
+                     (apply (field 1 (global Stdlib__hashtbl!)) consts))
+                   (before lambda/translobj.ml(79):2640-2679
+                     (seq (setfield_imm 0 method_count 0)
+                       (before lambda/translobj.ml(80):2661-2679
+                         (setfield_ptr 0 method_table 0a))))))))
+         int =
+           (function n[int]
+             (funct-body lambda/translobj.ml(84)<ghost>:2710-2747
+               (before lambda/translobj.ml(84):2714-2747
+                 (makeblock 1 (makeblock 0 (makeblock 0 (int) n))))))
+         prim_makearray =
+           (after lambda/translobj.ml(87):2772-2832
+             (apply (field 0 (global Primitive!)) "caml_make_vect" 2 1a))
+         transl_label_init_general =
+           (function f
+             (funct-body lambda/translobj.ml(90)<ghost>:2903-3280
+               (before lambda/translobj.ml(91):2909-3280
+                 (let
+                   (*match* =
+                      (after lambda/translobj.ml(91):2926-2930 (apply f 0a))
+                    size =a (field 1 *match*)
+                    expr =a (field 0 *match*))
+                   (before lambda/translobj.ml(92):2936-3280
+                     (let
+                       (expr =
+                          (after lambda/translobj.ml(93):2951-3047
+                            (apply (field 13 (global Stdlib__hashtbl!))
+                              (function c id expr
+                                (funct-body lambda/translobj.ml(94):2970-3029
+                                  (before lambda/translobj.ml(94):2988-3028
+                                    (makeblock 4 1a 0a id (makeblock 1 c)
+                                      expr))))
+                              consts expr)))
+                       (before lambda/translobj.ml(103):3251-3280
+                         (seq
+                           (after lambda/translobj.ml(103):3251-3266
+                             (apply reset_labels 0a))
+                           (before lambda/translobj.ml(104):3270-3280
+                             (makeblock 0 expr size))))))))))
+         transl_label_init_flambda =
+           (function f
+             (funct-body lambda/translobj.ml(106)<ghost>:3312-3909
+               (before lambda/translobj.ml(107):3318-3909
+                 (seq
+                   (if (field 50 (global Config!)) 0a
+                     (raise
+                       (after lambda/translobj.ml(107):3318-3340
+                         (makeblock 0 (global Assert_failure!)
+                           [0: "lambda/translobj.ml" 107 2]))))
+                   (before lambda/translobj.ml(108):3344-3909
+                     (let
+                       (method_cache_id =
+                          (after lambda/translobj.ml(108):3366-3399
+                            (apply (field 10 (global Ident!)) "method_cache")))
+                       (before lambda/translobj.ml(109):3405-3909
+                         (seq
+                           (setfield_ptr 0 method_cache
+                             (makeblock 0 method_cache_id))
+                           (before lambda/translobj.ml(113):3600-3909
+                             (let
+                               (*match* =
+                                  (after lambda/translobj.ml(113):3617-3621
+                                    (apply f 0a))
+                                size =a (field 1 *match*)
+                                expr =a (field 0 *match*))
+                               (before lambda/translobj.ml(114):3627-3909
+                                 (let
+                                   (expr =
+                                      (if (== (field 0 method_count) 0)
+                                        (before lambda/translobj.ml(115):3668-3672
+                                          expr)
+                                        (before lambda/translobj.ml(117):3688-3853
+                                          (makeblock 4 0a 0a method_cache_id
+                                            (makeblock 6
+                                              (makeblock 9 prim_makearray)
+                                              (makeblock 0
+                                                (after lambda/translobj.ml(119):3782-3799
+                                                  (apply int
+                                                    (field 0 method_count)))
+                                                (makeblock 0
+                                                  (after lambda/translobj.ml(119):3801-3806
+                                                    (apply int 0))
+                                                  0a))
+                                              (field 0 (global Location!)))
+                                            expr))))
+                                   (before lambda/translobj.ml(123):3861-3909
+                                     (after lambda/translobj.ml(123):3861-3909
+                                       (apply transl_label_init_general
+                                         (function param
+                                           (funct-body lambda/translobj.ml(123):3887-3909
+                                             (before lambda/translobj.ml(123):3898-3908
+                                               (makeblock 0 expr size)))))))))))))))))))
+         transl_store_label_init =
+           (function glob size[int] f arg
+             (funct-body lambda/translobj.ml(125)<ghost>:3939-4650
+               (before lambda/translobj.ml(126):3959-4650
+                 (seq
+                   (if (not (field 50 (global Config!))) 0a
+                     (raise
+                       (after lambda/translobj.ml(126):3959-3985
+                         (makeblock 0 (global Assert_failure!)
+                           [0: "lambda/translobj.ml" 126 2]))))
+                   (before lambda/translobj.ml(127):3989-4650
+                     (seq
+                       (if (field 0 (field 94 (global Clflags!))) 0a
+                         (raise
+                           (after lambda/translobj.ml(127):3989-4017
+                             (makeblock 0 (global Assert_failure!)
+                               [0: "lambda/translobj.ml" 127 2]))))
+                       (before lambda/translobj.ml(128):4021-4650
+                         (seq
+                           (setfield_ptr 0 method_cache
+                             (makeblock 6 (makeblock 3 (int) size)
+                               (makeblock 0
+                                 (makeblock 6 (makeblock 0 glob) 0a
+                                   (field 0 (global Location!)))
+                                 0a)
+                               (field 0 (global Location!))))
+                           (before lambda/translobj.ml(131):4167-4650
+                             (let
+                               (expr =
+                                  (after lambda/translobj.ml(131):4178-4183
+                                    (apply f arg)))
+                               (before lambda/translobj.ml(132):4189-4650
+                                 (catch
+                                   (if (== (field 0 method_count) 0)
+                                     (before lambda/translobj.ml(133):4238-4250
+                                       (let (expr =a expr size =a[int] size)
+                                         (exit 17 expr size)))
+                                     (before lambda/translobj.ml(134):4260-4561
+                                       (let
+                                         (expr =
+                                            (makeblock 13
+                                              (makeblock 6
+                                                (makeblock 4 (int,*,*) size
+                                                  1a 2a)
+                                                (makeblock 0
+                                                  (makeblock 6
+                                                    (makeblock 0 glob) 0a
+                                                    (field 0
+                                                      (global Location!)))
+                                                  (makeblock 0
+                                                    (makeblock 6
+                                                      (makeblock 9
+                                                        prim_makearray)
+                                                      (makeblock 0
+                                                        (after lambda/translobj.ml(139):4460-4477
+                                                          (apply int
+                                                            (field 0
+                                                              method_count)))
+                                                        (makeblock 0
+                                                          (after lambda/translobj.ml(139):4479-4484
+                                                            (apply int 0))
+                                                          0a))
+                                                      (field 0
+                                                        (global Location!)))
+                                                    0a))
+                                                (field 0 (global Location!)))
+                                              expr)
+                                          size = (+ size 1))
+                                         (exit 17 expr size))))
+                                  with (17 expr size[int])
+                                   (before lambda/translobj.ml(144):4569-4650
+                                     (let
+                                       (*match* =
+                                          (after lambda/translobj.ml(144):4585-4635
+                                            (apply transl_label_init_general
+                                              (function param
+                                                (funct-body lambda/translobj.ml(144):4611-4635
+                                                  (before lambda/translobj.ml(144):4622-4634
+                                                    (makeblock 0 (*,int) expr
+                                                      size))))))
+                                        size =a (field 1 *match*)
+                                        lam =a (field 0 *match*))
+                                       (before lambda/translobj.ml(145):4641-4650
+                                         (makeblock 0 (int,*) size lam))))))))))))))))
+         transl_label_init =
+           (function f
+             (funct-body lambda/translobj.ml(147)<ghost>:4674-4779
+               (before lambda/translobj.ml(148):4680-4779
+                 (if (field 0 (field 94 (global Clflags!)))
+                   (before lambda/translobj.ml(149):4713-4740
+                     (after lambda/translobj.ml(149):4713-4740
+                       (apply transl_label_init_flambda f)))
+                   (before lambda/translobj.ml(151):4752-4779
+                     (after lambda/translobj.ml(151):4752-4779
+                       (apply transl_label_init_general f)))))))
+         wrapping = (makemutable 0 0a)
+         top_env = (makemutable 0 (field 0 (global Env!)))
+         classes = (makemutable 0 0a)
+         method_ids = (makemutable 0 (field 0 (field 5 (global Ident!))))
+         oo_add_class =
+           (function id
+             (funct-body lambda/translobj.ml(160)<ghost>:4931-4994
+               (before lambda/translobj.ml(161):4938-4994
+                 (seq
+                   (setfield_ptr 0 classes
+                     (makeblock 0 id (field 0 classes)))
+                   (before lambda/translobj.ml(162):4967-4994
+                     (makeblock 0 (field 0 top_env) (field 0 cache_required)))))))
+         oo_wrap =
+           (function env req f x
+             (funct-body lambda/translobj.ml(164)<ghost>:5008-5776
+               (before lambda/translobj.ml(165):5024-5776
+                 (if (field 0 wrapping)
+                   (before lambda/translobj.ml(166):5046-5169
+                     (if (field 0 cache_required)
+                       (before lambda/translobj.ml(166):5070-5073
+                         (after lambda/translobj.ml(166):5070-5073
+                           (apply f x)))
+                       (before lambda/translobj.ml(167):5085-5169
+                         (after lambda/translobj.ml(167):5085-5169
+                           (apply (field 10 (global Misc!))
+                             (makeblock 0 (makeblock 0 cache_required 1a) 0a)
+                             (function param
+                               (funct-body lambda/translobj.ml(167):5135-5169
+                                 (before lambda/translobj.ml(168):5156-5159
+                                   (after lambda/translobj.ml(168):5156-5159
+                                     (apply f x))))))))))
+                   (before lambda/translobj.ml(171):5181-5776
+                     (after lambda/translobj.ml(171):5181-5776
+                       (apply (field 10 (global Misc!))
+                         (makeblock 0 (makeblock 0 wrapping 1a)
+                           (makeblock 0 (makeblock 0 top_env env) 0a))
+                         (function param
+                           (funct-body lambda/translobj.ml(172):5254-5776
+                             (before lambda/translobj.ml(173):5274-5768
+                               (seq (setfield_imm 0 cache_required req)
+                                 (before lambda/translobj.ml(174):5306-5768
+                                   (seq (setfield_ptr 0 classes 0a)
+                                     (before lambda/translobj.ml(175):5330-5768
+                                       (seq
+                                         (setfield_ptr 0 method_ids
+                                           (field 0
+                                             (field 5 (global Ident!))))
+                                         (before lambda/translobj.ml(176):5370-5768
+                                           (let
+                                             (lambda =
+                                                (after lambda/translobj.ml(176):5383-5386
+                                                  (apply f x)))
+                                             (before lambda/translobj.ml(177):5399-5768
+                                               (let
+                                                 (lambda =
+                                                    (after lambda/translobj.ml(178):5423-5740
+                                                      (apply
+                                                        (field 20
+                                                          (global Stdlib__list!))
+                                                        (function lambda id
+                                                          (funct-body lambda/translobj.ml(179):5451-5711
+                                                            (before lambda/translobj.ml(180):5485-5710
+                                                              (makeblock 4 2a
+                                                                0a id
+                                                                (makeblock 6
+                                                                  [2:
+                                                                   0 1a 0a]
+                                                                  (makeblock 0
+                                                                    (field 8
+                                                                    (global Lambda!))
+                                                                    (makeblock 0
+                                                                    (field 8
+                                                                    (global Lambda!))
+                                                                    (makeblock 0
+                                                                    (field 8
+                                                                    (global Lambda!))
+                                                                    0a)))
+                                                                  (field 0
+                                                                    (global Location!)))
+                                                                lambda))))
+                                                        lambda
+                                                        (field 0 classes))))
+                                                 (before lambda/translobj.ml(187):5762-5768
+                                                   lambda))))))))))))))))))))
+         reset =
+           (function param
+             (funct-body lambda/translobj.ml(190)<ghost>:5788-6011
+               (before lambda/translobj.ml(191):5795-6011
+                 (seq
+                   (after lambda/translobj.ml(191):5795-5815
+                     (apply (field 1 (global Stdlib__hashtbl!)) consts))
+                   (before lambda/translobj.ml(192):5819-6011
+                     (seq (setfield_imm 0 cache_required 0a)
+                       (before lambda/translobj.ml(193):5846-6011
+                         (seq
+                           (setfield_ptr 0 method_cache
+                             (field 8 (global Lambda!)))
+                           (before lambda/translobj.ml(194):5877-6011
+                             (seq (setfield_imm 0 method_count 0)
+                               (before lambda/translobj.ml(195):5898-6011
+                                 (seq (setfield_ptr 0 method_table 0a)
+                                   (before lambda/translobj.ml(196):5920-6011
+                                     (seq (setfield_imm 0 wrapping 0a)
+                                       (before lambda/translobj.ml(197):5941-6011
+                                         (seq
+                                           (setfield_ptr 0 top_env
+                                             (field 0 (global Env!)))
+                                           (before lambda/translobj.ml(198):5965-6011
+                                             (seq (setfield_ptr 0 classes 0a)
+                                               (before lambda/translobj.ml(199):5982-6011
+                                                 (setfield_ptr 0 method_ids
+                                                   (field 0
+                                                     (field 5
+                                                       (global Ident!))))))))))))))))))))))))
+        (pseudo _none_(0)<ghost>:-1--1
+          (makeblock 0 oo_prim share meth reset_labels transl_label_init
+            transl_store_label_init method_ids oo_wrap oo_add_class reset))))))

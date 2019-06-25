@@ -1,0 +1,1778 @@
+(setglobal Typedecl_variance!
+  (let
+    (Error = (makeblock 248 "Typedecl_variance.Error" (caml_fresh_oo_id 0))
+     get_variance =
+       (function ty visited
+         (funct-body typing/typedecl_variance.ml(33)<ghost>:1463-1538
+           (before typing/typedecl_variance.ml(34):1478-1538
+             (try
+               (after typing/typedecl_variance.ml(34):1482-1506
+                 (apply (field 26 (field 1 (global Btype!))) ty
+                   (field 0 visited)))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before typing/typedecl_variance.ml(34):1525-1538
+                   (field 0 (field 3 (global Types!))))
+                 (reraise exn))))))
+     compute_variance =
+       (function env visited vari ty
+         (funct-body typing/typedecl_variance.ml(36)<ghost>:1561-4682
+           (before typing/typedecl_variance.ml(37):1585-4682
+             (letrec
+               (compute_variance_rec
+                  (function vari ty
+                    (funct-body typing/typedecl_variance.ml(37)<ghost>:1614-4646
+                      (before typing/typedecl_variance.ml(39):1704-4646
+                        (let
+                          (ty =
+                             (after typing/typedecl_variance.ml(39):1713-1726
+                               (apply (field 24 (global Ctype!)) ty)))
+                          (before typing/typedecl_variance.ml(40):1734-4646
+                            (let
+                              (vari' =
+                                 (after typing/typedecl_variance.ml(40):1746-1769
+                                   (apply get_variance ty visited)))
+                              (before typing/typedecl_variance.ml(41):1777-4646
+                                (if
+                                  (after typing/typedecl_variance.ml(41):1780-1806
+                                    (apply
+                                      (field 6 (field 3 (global Types!)))
+                                      vari vari'))
+                                  (before typing/typedecl_variance.ml(41):1812-1814
+                                    0a)
+                                  (before typing/typedecl_variance.ml(42):1824-4646
+                                    (let
+                                      (vari =
+                                         (after typing/typedecl_variance.ml(42):1835-1860
+                                           (apply
+                                             (field 4
+                                               (field 3 (global Types!)))
+                                             vari vari')))
+                                      (before typing/typedecl_variance.ml(43):1868-4646
+                                        (seq
+                                          (setfield_ptr 0 visited
+                                            (after typing/typedecl_variance.ml(43):1879-1907
+                                              (apply
+                                                (field 3
+                                                  (field 1 (global Btype!)))
+                                                ty vari (field 0 visited))))
+                                          (before typing/typedecl_variance.ml(44):1913-4646
+                                            (let
+                                              (compute_same =
+                                                 (after typing/typedecl_variance.ml(44):1932-1957
+                                                   (apply
+                                                     compute_variance_rec
+                                                     vari)))
+                                              (before typing/typedecl_variance.ml(45):1965-4646
+                                                (let (*match* = (field 0 ty))
+                                                  (catch
+                                                    (switch *match*
+                                                     case tag 1:
+                                                      (let
+                                                        (ty2 =a
+                                                           (field 2 *match*)
+                                                         ty1 =a
+                                                           (field 1 *match*))
+                                                        (before typing/typedecl_variance.ml(47):2025-2255
+                                                          (let
+                                                            (v =
+                                                               (after typing/typedecl_variance.ml(48):2062-2076
+                                                                 (apply
+                                                                   (field 10
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                   vari)))
+                                                            (before typing/typedecl_variance.ml(49):2088-2255
+                                                              (let
+                                                                (v1 =
+                                                                   (if
+                                                                    (||
+                                                                    (after typing/typedecl_variance.ml(50):2110-2123
+                                                                    (apply
+                                                                    (field 9
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    0a v))
+                                                                    (after typing/typedecl_variance.ml(50):2127-2140
+                                                                    (apply
+                                                                    (field 9
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    1a v)))
+                                                                    (before typing/typedecl_variance.ml(51):2156-2175
+                                                                    (after typing/typedecl_variance.ml(51):2156-2175
+                                                                    (apply
+                                                                    (field 8
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    2a 1a v)))
+                                                                    (before typing/typedecl_variance.ml(51):2181-2182
+                                                                    v)))
+                                                                (before typing/typedecl_variance.ml(53):2202-2255
+                                                                  (seq
+                                                                    (after typing/typedecl_variance.ml(53):2202-2229
+                                                                    (apply
+                                                                    compute_variance_rec
+                                                                    v1 ty1))
+                                                                    (before typing/typedecl_variance.ml(54):2239-2255
+                                                                    (after typing/typedecl_variance.ml(54):2239-2255
+                                                                    (apply
+                                                                    compute_same
+                                                                    ty2))))))))))
+                                                     case tag 2:
+                                                      (let
+                                                        (tl =a
+                                                           (field 0 *match*))
+                                                        (before typing/typedecl_variance.ml(56):2283-2308
+                                                          (after typing/typedecl_variance.ml(56):2283-2308
+                                                            (apply
+                                                              (field 14
+                                                                (global Stdlib__list!))
+                                                              compute_same
+                                                              tl))))
+                                                     case tag 3:
+                                                      (let
+                                                        (tl =a
+                                                           (field 1 *match*)
+                                                         path =a
+                                                           (field 0 *match*))
+                                                        (before typing/typedecl_variance.ml(58):2348-3449
+                                                          (if (== tl 0a)
+                                                            (before typing/typedecl_variance.ml(59):2393-2395
+                                                              0a)
+                                                            (before typing/typedecl_variance.ml(59):2401-3449
+                                                              (try
+                                                                (let
+                                                                  (decl =
+                                                                    (after typing/typedecl_variance.ml(61):2444-2466
+                                                                    (apply
+                                                                    (field 12
+                                                                    (global Env!))
+                                                                    path env)))
+                                                                  (before typing/typedecl_variance.ml(62):2482-3353
+                                                                    (let
+                                                                    (cvari =
+                                                                    (function
+                                                                    f
+                                                                    (funct-body typing/typedecl_variance.ml(62)<ghost>:2492-2506
+                                                                    (before typing/typedecl_variance.ml(62):2496-2506
+                                                                    (after typing/typedecl_variance.ml(62):2496-2506
+                                                                    (apply
+                                                                    (field 9
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    f vari))))))
+                                                                    (before typing/typedecl_variance.ml(63):2522-3353
+                                                                    (after typing/typedecl_variance.ml(63):2522-3353
+                                                                    (apply
+                                                                    (field 22
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    ty v
+                                                                    (funct-body typing/typedecl_variance.ml(64):2547-3317
+                                                                    (before typing/typedecl_variance.ml(65):2576-3316
+                                                                    (let
+                                                                    (cv =
+                                                                    (function
+                                                                    f
+                                                                    (funct-body typing/typedecl_variance.ml(65)<ghost>:2583-2594
+                                                                    (before typing/typedecl_variance.ml(65):2587-2594
+                                                                    (after typing/typedecl_variance.ml(65):2587-2594
+                                                                    (apply
+                                                                    (field 9
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    f v))))))
+                                                                    (before typing/typedecl_variance.ml(66):2614-3316
+                                                                    (let
+                                                                    (strict =
+                                                                    (||
+                                                                    (&&
+                                                                    (after typing/typedecl_variance.ml(67):2645-2654
+                                                                    (apply
+                                                                    cvari 6a))
+                                                                    (after typing/typedecl_variance.ml(67):2658-2664
+                                                                    (apply cv
+                                                                    3a)))
+                                                                    (&&
+                                                                    (||
+                                                                    (after typing/typedecl_variance.ml(67):2669-2678
+                                                                    (apply
+                                                                    cvari 4a))
+                                                                    (after typing/typedecl_variance.ml(67):2682-2691
+                                                                    (apply
+                                                                    cvari 5a)))
+                                                                    (after typing/typedecl_variance.ml(67):2696-2702
+                                                                    (apply cv
+                                                                    6a)))))
+                                                                    (before typing/typedecl_variance.ml(69):2738-3316
+                                                                    (if
+                                                                    strict
+                                                                    (before typing/typedecl_variance.ml(69):2753-2781
+                                                                    (after typing/typedecl_variance.ml(69):2753-2781
+                                                                    (apply
+                                                                    compute_variance_rec
+                                                                    (field 1
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    ty)))
+                                                                    (before typing/typedecl_variance.ml(70):2803-3316
+                                                                    (let
+                                                                    (p1 =
+                                                                    (after typing/typedecl_variance.ml(70):2812-2824
+                                                                    (apply
+                                                                    (field 5
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    v vari))
+                                                                    n1 =
+                                                                    (after typing/typedecl_variance.ml(71):2850-2874
+                                                                    (apply
+                                                                    (field 5
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    v
+                                                                    (after typing/typedecl_variance.ml(71):2858-2874
+                                                                    (apply
+                                                                    (field 10
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    vari)))))
+                                                                    (before typing/typedecl_variance.ml(72):2894-3316
+                                                                    (let
+                                                                    (v1 =
+                                                                    (after typing/typedecl_variance.ml(73):2921-3046
+                                                                    (apply
+                                                                    (field 4
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    (after typing/typedecl_variance.ml(73):2927-2970
+                                                                    (apply
+                                                                    (field 5
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    (field 2
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    (after typing/typedecl_variance.ml(73):2944-2969
+                                                                    (apply
+                                                                    (field 4
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    p1
+                                                                    (after typing/typedecl_variance.ml(73):2954-2968
+                                                                    (apply
+                                                                    (field 10
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    p1))))))
+                                                                    (after typing/typedecl_variance.ml(74):2991-3046
+                                                                    (apply
+                                                                    (field 5
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    (after typing/typedecl_variance.ml(74):2998-3019
+                                                                    (apply
+                                                                    (field 10
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    (field 2
+                                                                    (field 3
+                                                                    (global Types!)))))
+                                                                    (after typing/typedecl_variance.ml(74):3020-3045
+                                                                    (apply
+                                                                    (field 4
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    n1
+                                                                    (after typing/typedecl_variance.ml(74):3030-3044
+                                                                    (apply
+                                                                    (field 10
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    n1))))))))
+                                                                    weak =
+                                                                    (||
+                                                                    (&&
+                                                                    (after typing/typedecl_variance.ml(76):3092-3106
+                                                                    (apply
+                                                                    cvari 2a))
+                                                                    (||
+                                                                    (after typing/typedecl_variance.ml(76):3111-3121
+                                                                    (apply cv
+                                                                    0a))
+                                                                    (after typing/typedecl_variance.ml(76):3125-3135
+                                                                    (apply cv
+                                                                    1a))))
+                                                                    (&&
+                                                                    (||
+                                                                    (after typing/typedecl_variance.ml(77):3159-3172
+                                                                    (apply
+                                                                    cvari 0a))
+                                                                    (after typing/typedecl_variance.ml(77):3176-3189
+                                                                    (apply
+                                                                    cvari 1a)))
+                                                                    (after typing/typedecl_variance.ml(77):3194-3205
+                                                                    (apply cv
+                                                                    2a)))))
+                                                                    (before typing/typedecl_variance.ml(79):3241-3316
+                                                                    (let
+                                                                    (v2 =
+                                                                    (after typing/typedecl_variance.ml(79):3250-3270
+                                                                    (apply
+                                                                    (field 8
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    2a weak
+                                                                    v1)))
+                                                                    (before typing/typedecl_variance.ml(80):3290-3316
+                                                                    (after typing/typedecl_variance.ml(80):3290-3316
+                                                                    (apply
+                                                                    compute_variance_rec
+                                                                    v2 ty)))))))))))))))))
+                                                                    tl
+                                                                    (field 5
+                                                                    decl)))))))
+                                                               with exn
+                                                                (if
+                                                                  (== exn
+                                                                    (field 7
+                                                                    (global Stdlib!)))
+                                                                  (before typing/typedecl_variance.ml(83):3394-3437
+                                                                    (after typing/typedecl_variance.ml(83):3394-3437
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    (after typing/typedecl_variance.ml(83):3404-3434
+                                                                    (apply
+                                                                    compute_variance_rec
+                                                                    (field 3
+                                                                    (field 3
+                                                                    (global Types!)))))
+                                                                    tl)))
+                                                                  (reraise
+                                                                    exn)))))))
+                                                     case tag 4:
+                                                      (let
+                                                        (ty =a
+                                                           (field 0 *match*))
+                                                        (before typing/typedecl_variance.ml(86):3483-3498
+                                                          (after typing/typedecl_variance.ml(86):3483-3498
+                                                            (apply
+                                                              compute_same
+                                                              ty))))
+                                                     case tag 5:
+                                                      (let
+                                                        (ty2 =a
+                                                           (field 3 *match*)
+                                                         ty1 =a
+                                                           (field 2 *match*))
+                                                        (before typing/typedecl_variance.ml(88):3540-3582
+                                                          (seq
+                                                            (after typing/typedecl_variance.ml(88):3540-3556
+                                                              (apply
+                                                                compute_same
+                                                                ty1))
+                                                            (before typing/typedecl_variance.ml(89):3566-3582
+                                                              (after typing/typedecl_variance.ml(89):3566-3582
+                                                                (apply
+                                                                  compute_same
+                                                                  ty2))))))
+                                                     case tag 7:
+                                                      (let
+                                                        (ty =a
+                                                           (field 0 *match*))
+                                                        (before typing/typedecl_variance.ml(91):3610-3625
+                                                          (after typing/typedecl_variance.ml(91):3610-3625
+                                                            (apply
+                                                              compute_same
+                                                              ty))))
+                                                     case tag 8:
+                                                      (let
+                                                        (row =a
+                                                           (field 0 *match*))
+                                                        (before typing/typedecl_variance.ml(93):3656-4371
+                                                          (let
+                                                            (row =
+                                                               (after typing/typedecl_variance.ml(93):3666-3684
+                                                                 (apply
+                                                                   (field 15
+                                                                    (global Btype!))
+                                                                   row)))
+                                                            (before typing/typedecl_variance.ml(94):3696-4371
+                                                              (seq
+                                                                (after typing/typedecl_variance.ml(94):3696-4336
+                                                                  (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    param
+                                                                    (funct-body typing/typedecl_variance.ml(95):3716-4311
+                                                                    (let
+                                                                    (f =a
+                                                                    (field 1
+                                                                    param))
+                                                                    (before typing/typedecl_variance.ml(96):3742-4310
+                                                                    (let
+                                                                    (*match* =
+                                                                    (after typing/typedecl_variance.ml(96):3748-3770
+                                                                    (apply
+                                                                    (field 16
+                                                                    (global Btype!))
+                                                                    f)))
+                                                                    (catch
+                                                                    (switch* *match*
+                                                                    case int 0:
+                                                                    (exit 3)
+                                                                    case tag 0:
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (if
+                                                                    *match*
+                                                                    (let
+                                                                    (ty =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before typing/typedecl_variance.ml(98):3828-3843
+                                                                    (after typing/typedecl_variance.ml(98):3828-3843
+                                                                    (apply
+                                                                    compute_same
+                                                                    ty))))
+                                                                    (exit 3)))
+                                                                    case tag 1:
+                                                                    (let
+                                                                    (tyl =a
+                                                                    (field 1
+                                                                    *match*))
+                                                                    (before typing/typedecl_variance.ml(100):3900-4288
+                                                                    (let
+                                                                    (upper =
+                                                                    (after typing/typedecl_variance.ml(102):3967-4061
+                                                                    (apply
+                                                                    (field 20
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    s f
+                                                                    (funct-body typing/typedecl_variance.ml(102):3982-4007
+                                                                    (before typing/typedecl_variance.ml(102):3994-4006
+                                                                    (after typing/typedecl_variance.ml(102):3994-4006
+                                                                    (apply
+                                                                    (field 8
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    f 1a s)))))
+                                                                    (field 0
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    [0:
+                                                                    0a
+                                                                    [0:
+                                                                    1a
+                                                                    [0:
+                                                                    2a 0a]]])))
+                                                                    (before typing/typedecl_variance.ml(105):4097-4288
+                                                                    (let
+                                                                    (v =
+                                                                    (after typing/typedecl_variance.ml(105):4105-4121
+                                                                    (apply
+                                                                    (field 5
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    vari
+                                                                    upper)))
+                                                                    (before typing/typedecl_variance.ml(108):4250-4288
+                                                                    (after typing/typedecl_variance.ml(108):4250-4288
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    (after typing/typedecl_variance.ml(108):4260-4284
+                                                                    (apply
+                                                                    compute_variance_rec
+                                                                    v)) tyl)))))))))
+                                                                    with (3)
+                                                                    (before typing/typedecl_variance.ml(109):4308-4310
+                                                                    0a)))))))
+                                                                    (field 0
+                                                                    row)))
+                                                                (before typing/typedecl_variance.ml(111):4346-4371
+                                                                  (after typing/typedecl_variance.ml(111):4346-4371
+                                                                    (apply
+                                                                    compute_same
+                                                                    (field 1
+                                                                    row)))))))))
+                                                     case tag 10:
+                                                      (let
+                                                        (ty =a
+                                                           (field 0 *match*))
+                                                        (before typing/typedecl_variance.ml(113):4403-4418
+                                                          (after typing/typedecl_variance.ml(113):4403-4418
+                                                            (apply
+                                                              compute_same
+                                                              ty))))
+                                                     case tag 11:
+                                                      (let
+                                                        (tyl =a
+                                                           (field 2 *match*))
+                                                        (before typing/typedecl_variance.ml(116):4505-4646
+                                                          (let
+                                                            (v =
+                                                               (if
+                                                                 (||
+                                                                   (after typing/typedecl_variance.ml(117):4536-4548
+                                                                    (apply
+                                                                    (field 9
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    4a vari))
+                                                                   (after typing/typedecl_variance.ml(117):4552-4564
+                                                                    (apply
+                                                                    (field 9
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    5a vari)))
+                                                                 (before typing/typedecl_variance.ml(117):4570-4574
+                                                                   (field 1
+                                                                    (field 3
+                                                                    (global Types!))))
+                                                                 (before typing/typedecl_variance.ml(117):4580-4587
+                                                                   (field 3
+                                                                    (field 3
+                                                                    (global Types!))))))
+                                                            (before typing/typedecl_variance.ml(119):4608-4646
+                                                              (after typing/typedecl_variance.ml(119):4608-4646
+                                                                (apply
+                                                                  (field 14
+                                                                    (global Stdlib__list!))
+                                                                  (after typing/typedecl_variance.ml(119):4618-4642
+                                                                    (apply
+                                                                    compute_variance_rec
+                                                                    v))
+                                                                  tyl))))))
+                                                     default: (exit 4))
+                                                   with (4)
+                                                    (before typing/typedecl_variance.ml(114):4464-4466
+                                                      0a)))))))))))))))))))
+               (before typing/typedecl_variance.ml(121):4654-4682
+                 (after typing/typedecl_variance.ml(121):4654-4682
+                   (apply compute_variance_rec vari ty)))))))
+     make =
+       (function p n i
+         (funct-body typing/typedecl_variance.ml(123)<ghost>:4693-4789
+           (before typing/typedecl_variance.ml(124):4703-4789
+             (after typing/typedecl_variance.ml(125):4726-4789
+               (apply (field 8 (field 3 (global Types!))) 0a p
+                 (after typing/typedecl_variance.ml(125):4740-4789
+                   (apply (field 8 (field 3 (global Types!))) 1a n
+                     (after typing/typedecl_variance.ml(125):4755-4788
+                       (apply (field 8 (field 3 (global Types!))) 2a n
+                         (after typing/typedecl_variance.ml(125):4771-4787
+                           (apply (field 8 (field 3 (global Types!))) 3a i
+                             (field 0 (field 3 (global Types!))))))))))))))
+     compute_variance_type =
+       (function env check param decl tyl
+         (funct-body typing/typedecl_variance.ml(127)<ghost>:4817-7963
+           (let (loc =a (field 1 param) required =a (field 0 param))
+             (before typing/typedecl_variance.ml(129):4878-7963
+               (let
+                 (required =
+                    (after typing/typedecl_variance.ml(130):4897-4979
+                      (apply (field 16 (global Stdlib__list!))
+                        (function param
+                          (funct-body typing/typedecl_variance.ml(130):4906-4964
+                            (let
+                              (i =a (field 2 param)
+                               n =a (field 1 param)
+                               c =a (field 0 param))
+                              (before typing/typedecl_variance.ml(130):4922-4963
+                                (if (|| c n)
+                                  (before typing/typedecl_variance.ml(130):4937-4944
+                                    (makeblock 0 c n i))
+                                  (before typing/typedecl_variance.ml(130):4950-4963
+                                    (makeblock 0 1a 1a i)))))))
+                        required)))
+                 (before typing/typedecl_variance.ml(134):5003-7963
+                   (let
+                     (params =
+                        (after typing/typedecl_variance.ml(134):5016-5052
+                          (apply (field 16 (global Stdlib__list!))
+                            (field 12 (global Btype!)) (field 0 decl))))
+                     (before typing/typedecl_variance.ml(135):5058-7963
+                       (let
+                         (tvl =
+                            (makemutable 0
+                              (field 0 (field 1 (global Btype!)))))
+                         (before typing/typedecl_variance.ml(137):5131-7963
+                           (seq
+                             (after typing/typedecl_variance.ml(138):5154-5259
+                               (apply (field 14 (global Stdlib__list!))
+                                 (function param
+                                   (funct-body typing/typedecl_variance.ml(139):5168-5251
+                                     (let
+                                       (ty =a (field 1 param)
+                                        cn =a (field 0 param))
+                                       (before typing/typedecl_variance.ml(140):5190-5250
+                                         (after typing/typedecl_variance.ml(140):5190-5250
+                                           (apply compute_variance env tvl
+                                             (if cn
+                                               (before typing/typedecl_variance.ml(140):5227-5231
+                                                 (field 1
+                                                   (field 3 (global Types!))))
+                                               (before typing/typedecl_variance.ml(140):5237-5246
+                                                 (field 2
+                                                   (field 3 (global Types!)))))
+                                             ty))))))
+                                 tyl))
+                             (before typing/typedecl_variance.ml(142):5263-7963
+                               (seq
+                                 (if check
+                                   (before typing/typedecl_variance.ml(142):5277-7147
+                                     (let (pos = (makemutable 0 (int) 0))
+                                       (before typing/typedecl_variance.ml(145):5349-7141
+                                         (seq
+                                           (after typing/typedecl_variance.ml(145):5349-5677
+                                             (apply
+                                               (field 22
+                                                 (global Stdlib__list!))
+                                               (function ty param
+                                                 (funct-body typing/typedecl_variance.ml(146):5366-5655
+                                                   (let
+                                                     (i =a (field 2 param)
+                                                      n =a (field 1 param)
+                                                      c =a (field 0 param))
+                                                     (before typing/typedecl_variance.ml(147):5395-5654
+                                                       (seq (+:=1 pos)
+                                                         (before typing/typedecl_variance.ml(148):5413-5654
+                                                           (let
+                                                             (var =
+                                                                (after typing/typedecl_variance.ml(148):5423-5442
+                                                                  (apply
+                                                                    get_variance
+                                                                    ty tvl)))
+                                                             (before typing/typedecl_variance.ml(149):5454-5654
+                                                               (let
+                                                                 (*match* =
+                                                                    (after typing/typedecl_variance.ml(149):5468-5481
+                                                                    (apply
+                                                                    (field 11
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    var))
+                                                                  cn =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                  co =a
+                                                                    (field 0
+                                                                    *match*)
+                                                                  ij =
+                                                                    (after typing/typedecl_variance.ml(149):5491-5502
+                                                                    (apply
+                                                                    (field 9
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    3a var)))
+                                                                 (before typing/typedecl_variance.ml(150):5514-5654
+                                                                   (if
+                                                                    (&&
+                                                                    (after typing/typedecl_variance.ml(150):5517-5533
+                                                                    (apply
+                                                                    (field 7
+                                                                    (global Btype!))
+                                                                    ty))
+                                                                    (||
+                                                                    (&& co
+                                                                    (not c))
+                                                                    (||
+                                                                    (&& cn
+                                                                    (not n))
+                                                                    (&&
+                                                                    (not ij)
+                                                                    i))))
+                                                                    (before typing/typedecl_variance.ml(151):5594-5654
+                                                                    (raise
+                                                                    (after typing/typedecl_variance.ml(151):5600-5654
+                                                                    (makeblock 0
+                                                                    Error loc
+                                                                    (makeblock 0 (int,*,*)
+                                                                    (field 0
+                                                                    pos)
+                                                                    (makeblock 0
+                                                                    co cn ij)
+                                                                    (makeblock 0
+                                                                    c n i))))))
+                                                                    0a)))))))))))
+                                               params required))
+                                           (before typing/typedecl_variance.ml(154):5739-7141
+                                             (let
+                                               (args =
+                                                  (after typing/typedecl_variance.ml(154):5750-5780
+                                                    (apply
+                                                      (field 5
+                                                        (global Btype!))
+                                                      (makeblock 2 params))))
+                                               (before typing/typedecl_variance.ml(155):5788-7141
+                                                 (let
+                                                   (fvl =
+                                                      (after typing/typedecl_variance.ml(155):5798-5823
+                                                        (apply
+                                                          (field 96
+                                                            (global Ctype!))
+                                                          0a args)))
+                                                   (before typing/typedecl_variance.ml(156):5831-7141
+                                                     (let
+                                                       (fvl =
+                                                          (after typing/typedecl_variance.ml(156):5841-5892
+                                                            (apply
+                                                              (field 35
+                                                                (global Stdlib__list!))
+                                                              (function v
+                                                                (funct-body typing/typedecl_variance.ml(156):5853-5888
+                                                                  (before typing/typedecl_variance.ml(156):5863-5887
+                                                                    (not
+                                                                    (after typing/typedecl_variance.ml(156):5867-5887
+                                                                    (apply
+                                                                    (field 32
+                                                                    (global Stdlib__list!))
+                                                                    v params))))))
+                                                              fvl)))
+                                                       (before typing/typedecl_variance.ml(158):5965-7141
+                                                         (if (== fvl 0a)
+                                                           (before typing/typedecl_variance.ml(158):5982-5984
+                                                             0a)
+                                                           (before typing/typedecl_variance.ml(159):5994-7141
+                                                             (let
+                                                               (tvl2 =
+                                                                  (makemutable 0
+                                                                    (field 0
+                                                                    (field 1
+                                                                    (global Btype!)))))
+                                                               (before typing/typedecl_variance.ml(160):6030-7141
+                                                                 (seq
+                                                                   (after typing/typedecl_variance.ml(160):6030-6262
+                                                                    (apply
+                                                                    (field 22
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    ty param
+                                                                    (funct-body typing/typedecl_variance.ml(161):6047-6240
+                                                                    (let
+                                                                    (n =a
+                                                                    (field 1
+                                                                    param)
+                                                                    p =a
+                                                                    (field 0
+                                                                    param))
+                                                                    (before typing/typedecl_variance.ml(162):6074-6239
+                                                                    (if
+                                                                    (after typing/typedecl_variance.ml(162):6077-6093
+                                                                    (apply
+                                                                    (field 7
+                                                                    (global Btype!))
+                                                                    ty))
+                                                                    (before typing/typedecl_variance.ml(162):6099-6101
+                                                                    0a)
+                                                                    (before typing/typedecl_variance.ml(163):6115-6239
+                                                                    (let
+                                                                    (v =
+                                                                    (if p
+                                                                    (before typing/typedecl_variance.ml(164):6143-6172
+                                                                    (if n
+                                                                    (before typing/typedecl_variance.ml(164):6153-6157
+                                                                    (field 1
+                                                                    (field 3
+                                                                    (global Types!))))
+                                                                    (before typing/typedecl_variance.ml(164):6163-6172
+                                                                    (field 2
+                                                                    (field 3
+                                                                    (global Types!))))))
+                                                                    (before typing/typedecl_variance.ml(164):6178-6197
+                                                                    (after typing/typedecl_variance.ml(164):6178-6197
+                                                                    (apply
+                                                                    (field 10
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    (field 2
+                                                                    (field 3
+                                                                    (global Types!))))))))
+                                                                    (before typing/typedecl_variance.ml(165):6209-6239
+                                                                    (after typing/typedecl_variance.ml(165):6209-6239
+                                                                    (apply
+                                                                    compute_variance
+                                                                    env tvl2
+                                                                    v ty))))))))))
+                                                                    params
+                                                                    required))
+                                                                   (before typing/typedecl_variance.ml(167):6268-7141
+                                                                    (let
+                                                                    (visited =
+                                                                    (makemutable 0
+                                                                    (field 0
+                                                                    (field 0
+                                                                    (global Btype!)))))
+                                                                    (before typing/typedecl_variance.ml(168):6307-7141
+                                                                    (letrec
+                                                                    (check
+                                                                    (function
+                                                                    ty
+                                                                    (funct-body typing/typedecl_variance.ml(168)<ghost>:6321-7090
+                                                                    (before typing/typedecl_variance.ml(169):6332-7090
+                                                                    (let
+                                                                    (ty =
+                                                                    (after typing/typedecl_variance.ml(169):6341-6354
+                                                                    (apply
+                                                                    (field 24
+                                                                    (global Ctype!))
+                                                                    ty)))
+                                                                    (before typing/typedecl_variance.ml(170):6364-7090
+                                                                    (if
+                                                                    (after typing/typedecl_variance.ml(170):6367-6390
+                                                                    (apply
+                                                                    (field 2
+                                                                    (field 0
+                                                                    (global Btype!)))
+                                                                    ty
+                                                                    (field 0
+                                                                    visited)))
+                                                                    (before typing/typedecl_variance.ml(170):6396-6398
+                                                                    0a)
+                                                                    (before typing/typedecl_variance.ml(171):6410-7090
+                                                                    (let
+                                                                    (visited' =
+                                                                    (after typing/typedecl_variance.ml(171):6425-6448
+                                                                    (apply
+                                                                    (field 3
+                                                                    (field 0
+                                                                    (global Btype!)))
+                                                                    ty
+                                                                    (field 0
+                                                                    visited))))
+                                                                    (before typing/typedecl_variance.ml(172):6458-7090
+                                                                    (seq
+                                                                    (setfield_ptr 0
+                                                                    visited
+                                                                    visited')
+                                                                    (before typing/typedecl_variance.ml(173):6485-7090
+                                                                    (let
+                                                                    (v1 =
+                                                                    (after typing/typedecl_variance.ml(173):6494-6513
+                                                                    (apply
+                                                                    get_variance
+                                                                    ty tvl)))
+                                                                    (before typing/typedecl_variance.ml(174):6523-7090
+                                                                    (let
+                                                                    (snap =
+                                                                    (after typing/typedecl_variance.ml(174):6534-6551
+                                                                    (apply
+                                                                    (field 56
+                                                                    (global Btype!))
+                                                                    0a)))
+                                                                    (before typing/typedecl_variance.ml(175):6561-7090
+                                                                    (let
+                                                                    (v2 =
+                                                                    (after typing/typedecl_variance.ml(176):6578-6706
+                                                                    (apply
+                                                                    (field 12
+                                                                    (field 1
+                                                                    (global Btype!)))
+                                                                    (function
+                                                                    t vt v
+                                                                    (funct-body typing/typedecl_variance.ml(177):6601-6685
+                                                                    (before typing/typedecl_variance.ml(178):6628-6684
+                                                                    (if
+                                                                    (after typing/typedecl_variance.ml(178):6631-6661
+                                                                    (apply
+                                                                    (field 82
+                                                                    (global Ctype!))
+                                                                    env 0a
+                                                                    (makeblock 0
+                                                                    ty 0a)
+                                                                    (makeblock 0
+                                                                    t 0a)))
+                                                                    (before typing/typedecl_variance.ml(178):6667-6677
+                                                                    (after typing/typedecl_variance.ml(178):6667-6677
+                                                                    (apply
+                                                                    (field 4
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    vt v)))
+                                                                    (before typing/typedecl_variance.ml(178):6683-6684
+                                                                    v)))))
+                                                                    (field 0
+                                                                    tvl2)
+                                                                    (field 0
+                                                                    (field 3
+                                                                    (global Types!))))))
+                                                                    (before typing/typedecl_variance.ml(180):6716-7090
+                                                                    (seq
+                                                                    (after typing/typedecl_variance.ml(180):6716-6736
+                                                                    (apply
+                                                                    (field 57
+                                                                    (global Btype!))
+                                                                    snap))
+                                                                    (before typing/typedecl_variance.ml(181):6744-7090
+                                                                    (let
+                                                                    (*match* =
+                                                                    (after typing/typedecl_variance.ml(181):6758-6770
+                                                                    (apply
+                                                                    (field 11
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    v1))
+                                                                    n1 =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    c1 =a
+                                                                    (field 0
+                                                                    *match*)
+                                                                    *match* =
+                                                                    (after typing/typedecl_variance.ml(181):6790-6802
+                                                                    (apply
+                                                                    (field 12
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    v2))
+                                                                    i2 =a
+                                                                    (field 3
+                                                                    *match*)
+                                                                    n2 =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    c2 =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before typing/typedecl_variance.ml(182):6812-7090
+                                                                    (if
+                                                                    (||
+                                                                    (&& c1
+                                                                    (not c2))
+                                                                    (&& n1
+                                                                    (not n2)))
+                                                                    (before typing/typedecl_variance.ml(183):6857-7090
+                                                                    (if
+                                                                    (after typing/typedecl_variance.ml(183):6860-6876
+                                                                    (apply
+                                                                    (field 32
+                                                                    (global Stdlib__list!))
+                                                                    ty fvl))
+                                                                    (before typing/typedecl_variance.ml(184):6892-7037
+                                                                    (let
+                                                                    (code =[int]
+                                                                    (if
+                                                                    (not i2)
+                                                                    (before typing/typedecl_variance.ml(184):6918-6920
+                                                                    -2)
+                                                                    (before typing/typedecl_variance.ml(184):6926-6953
+                                                                    (if
+                                                                    (|| c2
+                                                                    n2)
+                                                                    (before typing/typedecl_variance.ml(184):6943-6945
+                                                                    -1)
+                                                                    (before typing/typedecl_variance.ml(184):6951-6953
+                                                                    -3)))))
+                                                                    (before typing/typedecl_variance.ml(185):6967-7037
+                                                                    (raise
+                                                                    (after typing/typedecl_variance.ml(185):6973-7037
+                                                                    (makeblock 0
+                                                                    Error loc
+                                                                    (makeblock 0 (int,*,*)
+                                                                    code
+                                                                    (makeblock 0
+                                                                    c1 n1 0a)
+                                                                    (makeblock 0
+                                                                    c2 n2 0a))))))))
+                                                                    (before typing/typedecl_variance.ml(187):7061-7090
+                                                                    (after typing/typedecl_variance.ml(187):7061-7090
+                                                                    (apply
+                                                                    (field 27
+                                                                    (global Btype!))
+                                                                    check ty)))))
+                                                                    0a)))))))))))))))))))))))
+                                                                    (before typing/typedecl_variance.ml(189):7102-7140
+                                                                    (after typing/typedecl_variance.ml(189):7102-7140
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    param
+                                                                    (funct-body typing/typedecl_variance.ml(189):7112-7136
+                                                                    (let
+                                                                    (ty =a
+                                                                    (field 1
+                                                                    param))
+                                                                    (before typing/typedecl_variance.ml(189):7127-7135
+                                                                    (after typing/typedecl_variance.ml(189):7127-7135
+                                                                    (apply
+                                                                    check ty))))))
+                                                                    tyl)))))))))))))))))))))))
+                                   0a)
+                                 (before typing/typedecl_variance.ml(191):7151-7963
+                                   (after typing/typedecl_variance.ml(191):7151-7963
+                                     (apply (field 23 (global Stdlib__list!))
+                                       (function ty param
+                                         (funct-body typing/typedecl_variance.ml(192):7165-7943
+                                           (let
+                                             (i =a (field 2 param)
+                                              n =a (field 1 param)
+                                              p =a (field 0 param))
+                                             (before typing/typedecl_variance.ml(193):7192-7942
+                                               (let
+                                                 (v =
+                                                    (after typing/typedecl_variance.ml(193):7200-7219
+                                                      (apply get_variance ty
+                                                        tvl)))
+                                                 (before typing/typedecl_variance.ml(194):7229-7942
+                                                   (let (tr = (field 3 decl))
+                                                     (before typing/typedecl_variance.ml(196):7314-7942
+                                                       (let
+                                                         (concr =
+                                                            (!=
+                                                              (field 2 decl)
+                                                              0a))
+                                                         (before typing/typedecl_variance.ml(197):7388-7942
+                                                           (catch
+                                                             (if
+                                                               (|| (== tr 0a)
+                                                                 (not
+                                                                   (after typing/typedecl_variance.ml(198):7432-7450
+                                                                    (apply
+                                                                    (field 7
+                                                                    (global Btype!))
+                                                                    ty))))
+                                                               (before typing/typedecl_variance.ml(198):7456-7462
+                                                                 (let
+                                                                   (n =a n
+                                                                    p =a p)
+                                                                   (exit 5 n
+                                                                    p)))
+                                                               (before typing/typedecl_variance.ml(199):7486-7500
+                                                                 (let
+                                                                   (n = 0a
+                                                                    p = 0a)
+                                                                   (exit 5 n
+                                                                    p))))
+                                                            with (5 n p)
+                                                             (let
+                                                               (i =
+                                                                  (|| concr
+                                                                    (&& i
+                                                                    (== tr
+                                                                    0a))))
+                                                               (before typing/typedecl_variance.ml(201):7569-7942
+                                                                 (let
+                                                                   (v =
+                                                                    (after typing/typedecl_variance.ml(201):7577-7597
+                                                                    (apply
+                                                                    (field 4
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    v
+                                                                    (after typing/typedecl_variance.ml(201):7585-7597
+                                                                    (apply
+                                                                    make p n
+                                                                    i)))))
+                                                                   (before typing/typedecl_variance.ml(202):7607-7942
+                                                                    (let
+                                                                    (v =
+                                                                    (if
+                                                                    (not
+                                                                    concr)
+                                                                    (before typing/typedecl_variance.ml(203):7641-7642
+                                                                    v)
+                                                                    (before typing/typedecl_variance.ml(204):7656-7829
+                                                                    (if
+                                                                    (&&
+                                                                    (after typing/typedecl_variance.ml(204):7659-7668
+                                                                    (apply
+                                                                    (field 9
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    4a v))
+                                                                    (after typing/typedecl_variance.ml(204):7672-7681
+                                                                    (apply
+                                                                    (field 9
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    5a v)))
+                                                                    (before typing/typedecl_variance.ml(204):7687-7691
+                                                                    (field 1
+                                                                    (field 3
+                                                                    (global Types!))))
+                                                                    (before typing/typedecl_variance.ml(205):7705-7829
+                                                                    (if
+                                                                    (after typing/typedecl_variance.ml(205):7708-7724
+                                                                    (apply
+                                                                    (field 7
+                                                                    (global Btype!))
+                                                                    ty))
+                                                                    (before typing/typedecl_variance.ml(205):7730-7731
+                                                                    v)
+                                                                    (before typing/typedecl_variance.ml(206):7745-7829
+                                                                    (after typing/typedecl_variance.ml(206):7745-7829
+                                                                    (apply
+                                                                    (field 4
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    v
+                                                                    (if p
+                                                                    (before typing/typedecl_variance.ml(207):7774-7803
+                                                                    (if n
+                                                                    (before typing/typedecl_variance.ml(207):7784-7788
+                                                                    (field 1
+                                                                    (field 3
+                                                                    (global Types!))))
+                                                                    (before typing/typedecl_variance.ml(207):7794-7803
+                                                                    (field 2
+                                                                    (field 3
+                                                                    (global Types!))))))
+                                                                    (before typing/typedecl_variance.ml(207):7809-7828
+                                                                    (after typing/typedecl_variance.ml(207):7809-7828
+                                                                    (apply
+                                                                    (field 10
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    (field 2
+                                                                    (field 3
+                                                                    (global Types!))))))))))))))))
+                                                                    (before typing/typedecl_variance.ml(209):7845-7942
+                                                                    (if
+                                                                    (&&
+                                                                    (==
+                                                                    (field 2
+                                                                    decl) 0a)
+                                                                    (== tr
+                                                                    1a))
+                                                                    (before typing/typedecl_variance.ml(209):7899-7900
+                                                                    v)
+                                                                    (before typing/typedecl_variance.ml(210):7912-7942
+                                                                    (after typing/typedecl_variance.ml(210):7912-7942
+                                                                    (apply
+                                                                    (field 8
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    2a
+                                                                    (after typing/typedecl_variance.ml(210):7925-7940
+                                                                    (apply
+                                                                    (field 9
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    1a v)) v)))))))))))))))))))))
+                                       params required))))))))))))))))
+     add_false =
+       (after typing/typedecl_variance.ml(213):7981-8011
+         (apply (field 16 (global Stdlib__list!))
+           (function ty
+             (funct-body typing/typedecl_variance.ml(213):7990-8011
+               (before typing/typedecl_variance.ml(213):8001-8010
+                 (makeblock 0 0a ty))))))
+     constrained =
+       (function vars ty
+         (funct-body typing/typedecl_variance.ml(217)<ghost>:8146-8249
+           (before typing/typedecl_variance.ml(218):8158-8249
+             (let (*match* = (field 0 ty))
+               (catch
+                 (switch *match*
+                  case tag 0:
+                   (before typing/typedecl_variance.ml(219):8191-8235
+                     (after typing/typedecl_variance.ml(219):8191-8235
+                       (apply (field 28 (global Stdlib__list!))
+                         (function tl
+                           (funct-body typing/typedecl_variance.ml(219):8203-8230
+                             (before typing/typedecl_variance.ml(219):8214-8229
+                               (after typing/typedecl_variance.ml(219):8214-8229
+                                 (apply (field 32 (global Stdlib__list!)) ty
+                                   tl)))))
+                         vars)))
+                  default: (exit 19))
+                with (19)
+                 (before typing/typedecl_variance.ml(220):8245-8249 1a))))))
+     for_constr =
+       (function param
+         (funct-body typing/typedecl_variance.ml(222):8268-8443
+           (switch* param
+            case tag 0:
+             (let (l =a (field 0 param))
+               (before typing/typedecl_variance.ml(223):8303-8314
+                 (after typing/typedecl_variance.ml(223):8303-8314
+                   (apply add_false l))))
+            case tag 1:
+             (let (l =a (field 0 param))
+               (before typing/typedecl_variance.ml(225):8348-8443
+                 (after typing/typedecl_variance.ml(225):8348-8443
+                   (apply (field 16 (global Stdlib__list!))
+                     (function param
+                       (funct-body typing/typedecl_variance.ml(226):8365-8433
+                         (let
+                           (ld_type =a (field 2 param)
+                            ld_mutable =a (field 1 param))
+                           (before typing/typedecl_variance.ml(226):8401-8432
+                             (makeblock 0 (== ld_mutable 1a) ld_type)))))
+                     l)))))))
+     compute_variance_gadt =
+       (function env check rloc decl param
+         (funct-body typing/typedecl_variance.ml(229)<ghost>:8471-9579
+           (let
+             (ret_type_opt =a (field 1 param)
+              tl =a (field 0 param)
+              loc =a (field 1 rloc)
+              required =a (field 0 rloc))
+             (before typing/typedecl_variance.ml(231):8538-9579
+               (if ret_type_opt
+                 (let (ret_type =a (field 0 ret_type_opt))
+                   (before typing/typedecl_variance.ml(236):8704-9579
+                     (let
+                       (*match* =
+                          (after typing/typedecl_variance.ml(236):8710-8729
+                            (apply (field 24 (global Ctype!)) ret_type))
+                        *match* =o (field 0 *match*))
+                       (catch
+                         (switch *match*
+                          case tag 3:
+                           (let (tyl =a (field 1 *match*))
+                             (before typing/typedecl_variance.ml(239):8849-9553
+                               (let
+                                 (tyl =
+                                    (after typing/typedecl_variance.ml(239):8859-8882
+                                      (apply
+                                        (field 16 (global Stdlib__list!))
+                                        (field 24 (global Ctype!)) tyl)))
+                                 (before typing/typedecl_variance.ml(240):8896-9553
+                                   (let
+                                     (fvl =
+                                        (after typing/typedecl_variance.ml(240):8906-8951
+                                          (apply
+                                            (field 16 (global Stdlib__list!))
+                                            (after typing/typedecl_variance.ml(240):8915-8947
+                                              (apply
+                                                (field 96 (global Ctype!))
+                                                0a))
+                                            tyl)))
+                                     (before typing/typedecl_variance.ml(241):8965-9553
+                                       (seq
+                                         (after typing/typedecl_variance.ml(242):8985-9398
+                                           (apply
+                                             (field 25
+                                               (global Stdlib__list!))
+                                             (function param ty param
+                                               (funct-body typing/typedecl_variance.ml(243):9015-9361
+                                                 (let
+                                                   (n =a (field 1 param)
+                                                    c =a (field 0 param)
+                                                    fv2 =a (field 1 param)
+                                                    fv1 =a (field 0 param))
+                                                   (before typing/typedecl_variance.ml(244):9060-9360
+                                                     (if fv2
+                                                       (let
+                                                         (fv2 =a
+                                                            (field 1 fv2)
+                                                          fv =a (field 0 fv2))
+                                                         (before typing/typedecl_variance.ml(247):9218-9360
+                                                           (seq
+                                                             (if
+                                                               (&& (|| c n)
+                                                                 (after typing/typedecl_variance.ml(247):9231-9257
+                                                                   (apply
+                                                                    constrained
+                                                                    (after typing/typedecl_variance.ml(247):9243-9254
+                                                                    (apply
+                                                                    (field 36
+                                                                    (global Stdlib!))
+                                                                    fv1 fv2))
+                                                                    ty)))
+                                                               (before typing/typedecl_variance.ml(248):9285-9322
+                                                                 (raise
+                                                                   (after typing/typedecl_variance.ml(248):9291-9322
+                                                                    (makeblock 0
+                                                                    Error loc
+                                                                    0a))))
+                                                               0a)
+                                                             (before typing/typedecl_variance.ml(249):9344-9360
+                                                               (makeblock 0
+                                                                 (makeblock 0
+                                                                   fv fv1)
+                                                                 fv2)))))
+                                                       (before typing/typedecl_variance.ml(244):9081-9093
+                                                         (raise
+                                                           (after typing/typedecl_variance.ml(244):9081-9093
+                                                             (makeblock 0
+                                                               (global Assert_failure!)
+                                                               [0:
+                                                                "typing/typedecl_variance.ml"
+                                                                244 37])))))))))
+                                             (makeblock 0 0a fvl) tyl
+                                             required))
+                                         (before typing/typedecl_variance.ml(252):9422-9553
+                                           (after typing/typedecl_variance.ml(252):9422-9553
+                                             (apply compute_variance_type env
+                                               check rloc
+                                               (let (init = decl)
+                                                 (makeblock 0 (*,int,*,*,*,*,*,int,*,*,*,*)
+                                                   tyl (field 1 init)
+                                                   (field 2 init) 0a
+                                                   (field 4 init)
+                                                   (field 5 init)
+                                                   (field 6 init)
+                                                   (field 7 init)
+                                                   (field 8 init)
+                                                   (field 9 init)
+                                                   (field 10 init)
+                                                   (field 11 init)))
+                                               (after typing/typedecl_variance.ml(254):9538-9553
+                                                 (apply for_constr tl))))))))))))
+                          default: (exit 20))
+                        with (20)
+                         (before typing/typedecl_variance.ml(255):9567-9579
+                           (raise
+                             (after typing/typedecl_variance.ml(255):9567-9579
+                               (makeblock 0 (global Assert_failure!)
+                                 [0: "typing/typedecl_variance.ml" 255 13]))))))))
+                 (before typing/typedecl_variance.ml(233):8580-8676
+                   (after typing/typedecl_variance.ml(233):8580-8676
+                     (apply compute_variance_type env check rloc
+                       (let (init = decl)
+                         (makeblock 0 (*,int,*,*,*,*,*,int,*,*,*,*)
+                           (field 0 init) (field 1 init) (field 2 init) 0a
+                           (field 4 init) (field 5 init) (field 6 init)
+                           (field 7 init) (field 8 init) (field 9 init)
+                           (field 10 init) (field 11 init)))
+                       (after typing/typedecl_variance.ml(234):8661-8676
+                         (apply for_constr tl))))))))))
+     compute_variance_extension =
+       (function env check decl ext rloc
+         (funct-body typing/typedecl_variance.ml(257)<ghost>:9612-9765
+           (before typing/typedecl_variance.ml(258):9641-9765
+             (after typing/typedecl_variance.ml(258):9641-9765
+               (apply compute_variance_gadt env check rloc
+                 (let (init = decl)
+                   (makeblock 0 (*,int,*,*,*,*,*,int,*,*,*,*) (field 1 ext)
+                     (field 1 init) (field 2 init) (field 3 init)
+                     (field 4 init) (field 5 init) (field 6 init)
+                     (field 7 init) (field 8 init) (field 9 init)
+                     (field 10 init) (field 11 init)))
+                 (makeblock 0 (field 2 ext) (field 3 ext)))))))
+     compute_variance_decl =
+       (function env check decl rloc
+         (funct-body typing/typedecl_variance.ml(262)<ghost>:9793-11249
+           (let (required =a (field 0 rloc))
+             (before typing/typedecl_variance.ml(263):9835-11249
+               (if
+                 (&& (|| (== (field 2 decl) 0a) (== (field 2 decl) 1a))
+                   (== (field 4 decl) 0a))
+                 (before typing/typedecl_variance.ml(265):9946-10062
+                   (after typing/typedecl_variance.ml(265):9946-10062
+                     (apply (field 16 (global Stdlib__list!))
+                       (function param
+                         (funct-body typing/typedecl_variance.ml(266):9961-10047
+                           (let
+                             (i =a (field 2 param)
+                              n =a (field 1 param)
+                              c =a (field 0 param))
+                             (before typing/typedecl_variance.ml(267):9987-10046
+                               (after typing/typedecl_variance.ml(267):9987-10046
+                                 (apply make (not n) (not c)
+                                   (|| (!= (field 2 decl) 0a) i)))))))
+                       required)))
+                 (before typing/typedecl_variance.ml(270):10072-11249
+                   (let
+                     (mn =
+                        (let (*match* = (field 4 decl))
+                          (if *match*
+                            (let (ty =a (field 0 *match*))
+                              (before typing/typedecl_variance.ml(273):10149-10160
+                                (makeblock 0 (makeblock 0 0a ty) 0a)))
+                            (before typing/typedecl_variance.ml(272):10129-10131
+                              0a))))
+                     (before typing/typedecl_variance.ml(275):10168-11249
+                       (let (*match* = (field 2 decl))
+                         (catch
+                           (switch* *match*
+                            case int 0: (exit 22)
+                            case int 1: (exit 22)
+                            case tag 0:
+                             (let (ftl =a (field 0 *match*))
+                               (before typing/typedecl_variance.ml(297):11097-11249
+                                 (after typing/typedecl_variance.ml(297):11097-11249
+                                   (apply compute_variance_type env check
+                                     rloc decl
+                                     (after typing/typedecl_variance.ml(298):11148-11249
+                                       (apply (field 36 (global Stdlib!)) mn
+                                         (after typing/typedecl_variance.ml(298):11154-11248
+                                           (apply
+                                             (field 16
+                                               (global Stdlib__list!))
+                                             (function param
+                                               (funct-body typing/typedecl_variance.ml(298):11163-11244
+                                                 (let
+                                                   (ld_type =a
+                                                      (field 2 param)
+                                                    ld_mutable =a
+                                                      (field 1 param))
+                                                   (before typing/typedecl_variance.ml(299):11212-11243
+                                                     (makeblock 0
+                                                       (== ld_mutable 1a)
+                                                       ld_type)))))
+                                             ftl))))))))
+                            case tag 1:
+                             (let (tll =a (field 0 *match*))
+                               (before typing/typedecl_variance.ml(279):10309-11062
+                                 (if
+                                   (after typing/typedecl_variance.ml(279):10312-10361
+                                     (apply (field 27 (global Stdlib__list!))
+                                       (function c
+                                         (funct-body typing/typedecl_variance.ml(279):10325-10357
+                                           (before typing/typedecl_variance.ml(279):10335-10356
+                                             (== (field 2 c) 0a))))
+                                       tll))
+                                   (before typing/typedecl_variance.ml(280):10375-10532
+                                     (after typing/typedecl_variance.ml(280):10375-10532
+                                       (apply compute_variance_type env check
+                                         rloc decl
+                                         (after typing/typedecl_variance.ml(281):10428-10532
+                                           (apply (field 36 (global Stdlib!))
+                                             mn
+                                             (after typing/typedecl_variance.ml(281):10434-10531
+                                               (apply
+                                                 (field 13
+                                                   (global Stdlib__list!))
+                                                 (after typing/typedecl_variance.ml(281):10447-10531
+                                                   (apply
+                                                     (field 16
+                                                       (global Stdlib__list!))
+                                                     (function c
+                                                       (funct-body typing/typedecl_variance.ml(281):10457-10494
+                                                         (before typing/typedecl_variance.ml(281):10467-10493
+                                                           (after typing/typedecl_variance.ml(281):10467-10493
+                                                             (apply
+                                                               for_constr
+                                                               (field 1 c))))))
+                                                     tll)))))))))
+                                   (before typing/typedecl_variance.ml(283):10544-11062
+                                     (let
+                                       (mn =
+                                          (after typing/typedecl_variance.ml(285):10577-10633
+                                            (apply
+                                              (field 16
+                                                (global Stdlib__list!))
+                                              (function param
+                                                (funct-body typing/typedecl_variance.ml(285):10586-10630
+                                                  (let
+                                                    (ty =a (field 1 param))
+                                                    (before typing/typedecl_variance.ml(285):10601-10629
+                                                      (makeblock 0
+                                                        (makeblock 0
+                                                          (makeblock 0 ty 0a))
+                                                        0a)))))
+                                              mn)))
+                                       (before typing/typedecl_variance.ml(286):10645-11052
+                                         (let
+                                           (tll =
+                                              (after typing/typedecl_variance.ml(287):10665-10725
+                                                (apply
+                                                  (field 36 (global Stdlib!))
+                                                  mn
+                                                  (after typing/typedecl_variance.ml(287):10670-10725
+                                                    (apply
+                                                      (field 16
+                                                        (global Stdlib__list!))
+                                                      (function c
+                                                        (funct-body typing/typedecl_variance.ml(287):10679-10721
+                                                          (before typing/typedecl_variance.ml(287):10689-10720
+                                                            (makeblock 0
+                                                              (field 1 c)
+                                                              (field 2 c)))))
+                                                      tll)))))
+                                           (before typing/typedecl_variance.ml(288):10737-11052
+                                             (let
+                                               (*match* =
+                                                  (after typing/typedecl_variance.ml(288):10743-10800
+                                                    (apply
+                                                      (field 16
+                                                        (global Stdlib__list!))
+                                                      (after typing/typedecl_variance.ml(288):10752-10796
+                                                        (apply
+                                                          compute_variance_gadt
+                                                          env check rloc
+                                                          decl))
+                                                      tll)))
+                                               (if *match*
+                                                 (let
+                                                   (rem =a (field 1 *match*)
+                                                    vari =a (field 0 *match*))
+                                                   (before typing/typedecl_variance.ml(290):10843-11024
+                                                     (let
+                                                       (varl =
+                                                          (after typing/typedecl_variance.ml(290):10854-10904
+                                                            (apply
+                                                              (field 20
+                                                                (global Stdlib__list!))
+                                                              (after typing/typedecl_variance.ml(290):10869-10895
+                                                                (apply
+                                                                  (field 23
+                                                                    (global Stdlib__list!))
+                                                                  (field 4
+                                                                    (field 3
+                                                                    (global Types!)))))
+                                                              vari rem)))
+                                                       (before typing/typedecl_variance.ml(291):10920-11024
+                                                         (after typing/typedecl_variance.ml(291):10920-11024
+                                                           (apply
+                                                             (field 16
+                                                               (global Stdlib__list!))
+                                                             (function v
+                                                               (funct-body typing/typedecl_variance.ml(292):10953-11004
+                                                                 (before typing/typedecl_variance.ml(292):10962-11004
+                                                                   (if
+                                                                    (&&
+                                                                    (after typing/typedecl_variance.ml(292):10965-10974
+                                                                    (apply
+                                                                    (field 9
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    4a v))
+                                                                    (after typing/typedecl_variance.ml(292):10978-10987
+                                                                    (apply
+                                                                    (field 9
+                                                                    (field 3
+                                                                    (global Types!)))
+                                                                    5a v)))
+                                                                    (before typing/typedecl_variance.ml(292):10993-10997
+                                                                    (field 1
+                                                                    (field 3
+                                                                    (global Types!))))
+                                                                    (before typing/typedecl_variance.ml(292):11003-11004
+                                                                    v)))))
+                                                             varl))))))
+                                                 (before typing/typedecl_variance.ml(294):11040-11052
+                                                   (raise
+                                                     (after typing/typedecl_variance.ml(294):11040-11052
+                                                       (makeblock 0
+                                                         (global Assert_failure!)
+                                                         [0:
+                                                          "typing/typedecl_variance.ml"
+                                                          294 15])))))))))))))))
+                          with (22)
+                           (before typing/typedecl_variance.ml(277):10233-10278
+                             (after typing/typedecl_variance.ml(277):10233-10278
+                               (apply compute_variance_type env check rloc
+                                 decl mn)))))))))))))
+     is_hash =
+       (function id
+         (funct-body typing/typedecl_variance.ml(301)<ghost>:11263-11331
+           (before typing/typedecl_variance.ml(302):11270-11331
+             (let
+               (s =
+                  (after typing/typedecl_variance.ml(302):11278-11291
+                    (apply (field 14 (global Ident!)) id)))
+               (before typing/typedecl_variance.ml(303):11297-11331
+                 (&& (> (string.length s) 0)
+                   (==
+                     (after typing/typedecl_variance.ml(303):11320-11325
+                       (string.get s 0))
+                     '#')))))))
+     check_variance_extension =
+       (function env decl ext rloc
+         (funct-body typing/typedecl_variance.ml(305)<ghost>:11362-11525
+           (before typing/typedecl_variance.ml(307):11437-11525
+             (ignore
+               (after typing/typedecl_variance.ml(307):11444-11525
+                 (apply compute_variance_extension env 1a decl (field 2 ext)
+                   rloc))))))
+     compute_decl =
+       (function env check decl req
+         (funct-body typing/typedecl_variance.ml(310)<ghost>:11544-11626
+           (before typing/typedecl_variance.ml(311):11568-11626
+             (after typing/typedecl_variance.ml(311):11568-11626
+               (apply compute_variance_decl env check decl
+                 (makeblock 0 req (field 8 decl)))))))
+     check_decl =
+       (function env decl req
+         (funct-body typing/typedecl_variance.ml(313)<ghost>:11643-11732
+           (before typing/typedecl_variance.ml(314):11660-11732
+             (ignore
+               (after typing/typedecl_variance.ml(314):11667-11732
+                 (apply compute_variance_decl env 1a decl
+                   (makeblock 0 req (field 8 decl))))))))
+     property =
+       (let
+         (eq =
+            (function li1 li2
+              (funct-body typing/typedecl_variance.ml(320)<ghost>:11896-11963
+                (before typing/typedecl_variance.ml(321):11910-11963
+                  (try
+                    (after typing/typedecl_variance.ml(321):11914-11947
+                      (apply (field 29 (global Stdlib__list!))
+                        (field 7 (field 3 (global Types!))) li1 li2))
+                   with exn
+                    (before typing/typedecl_variance.ml(321):11958-11963 0a))))))
+         (before typing/typedecl_variance.ml(322):11969-12445
+           (let
+             (merge =
+                (function prop new_prop
+                  (funct-body typing/typedecl_variance.ml(322)<ghost>:11979-12039
+                    (before typing/typedecl_variance.ml(323):12001-12039
+                      (after typing/typedecl_variance.ml(323):12001-12039
+                        (apply (field 23 (global Stdlib__list!))
+                          (field 4 (field 3 (global Types!))) prop new_prop))))))
+             (before typing/typedecl_variance.ml(324):12045-12445
+               (let
+                 (default =
+                    (function decl
+                      (funct-body typing/typedecl_variance.ml(324)<ghost>:12057-12118
+                        (before typing/typedecl_variance.ml(325):12068-12118
+                          (after typing/typedecl_variance.ml(325):12068-12118
+                            (apply (field 16 (global Stdlib__list!))
+                              (function param
+                                (funct-body typing/typedecl_variance.ml(325):12077-12101
+                                  (before typing/typedecl_variance.ml(325):12087-12100
+                                    (field 0 (field 3 (global Types!))))))
+                              (field 0 decl)))))))
+                 (before typing/typedecl_variance.ml(326):12124-12445
+                   (let
+                     (compute =
+                        (function env decl req
+                          (funct-body typing/typedecl_variance.ml(326)<ghost>:12136-12193
+                            (before typing/typedecl_variance.ml(327):12155-12193
+                              (after typing/typedecl_variance.ml(327):12155-12193
+                                (apply compute_decl env 0a decl req))))))
+                     (before typing/typedecl_variance.ml(328):12199-12445
+                       (let
+                         (update_decl =
+                            (function decl variance
+                              (funct-body typing/typedecl_variance.ml(328)<ghost>:12215-12273
+                                (before typing/typedecl_variance.ml(329):12235-12273
+                                  (let (init = decl)
+                                    (makeblock 0 (*,int,*,*,*,*,*,int,*,*,*,*)
+                                      (field 0 init) (field 1 init)
+                                      (field 2 init) (field 3 init)
+                                      (field 4 init) variance (field 6 init)
+                                      (field 7 init) (field 8 init)
+                                      (field 9 init) (field 10 init)
+                                      (field 11 init)))))))
+                         (before typing/typedecl_variance.ml(330):12279-12445
+                           (let
+                             (check =
+                                (function env id decl req
+                                  (funct-body typing/typedecl_variance.ml(330)<ghost>:12289-12361
+                                    (before typing/typedecl_variance.ml(331):12311-12361
+                                      (if
+                                        (after typing/typedecl_variance.ml(331):12314-12324
+                                          (apply is_hash id))
+                                        (before typing/typedecl_variance.ml(331):12330-12332
+                                          0a)
+                                        (before typing/typedecl_variance.ml(331):12338-12361
+                                          (after typing/typedecl_variance.ml(331):12338-12361
+                                            (apply check_decl env decl req))))))))
+                             (before typing/typedecl_variance.ml(332):12367-12445
+                               (makeblock 0 eq merge default compute
+                                 update_decl check)))))))))))))
+     transl_variance =
+       (function param
+         (funct-body typing/typedecl_variance.ml(341):12494-12621
+           (switch* param
+            case int 0:
+             (before typing/typedecl_variance.ml(342):12520-12540
+               [0: 1a 0a 0a])
+            case int 1:
+             (before typing/typedecl_variance.ml(343):12562-12582
+               [0: 0a 1a 0a])
+            case int 2:
+             (before typing/typedecl_variance.ml(344):12600-12621
+               [0: 0a 0a 0a]))))
+     variance_of_params =
+       (function ptype_params
+         (funct-body typing/typedecl_variance.ml(346)<ghost>:12646-12715
+           (before typing/typedecl_variance.ml(347):12663-12715
+             (after typing/typedecl_variance.ml(347):12663-12715
+               (apply (field 16 (global Stdlib__list!)) transl_variance
+                 (after typing/typedecl_variance.ml(347):12688-12715
+                   (apply (field 16 (global Stdlib__list!))
+                     (function prim stub (field 1 prim)) ptype_params)))))))
+     variance_of_sdecl =
+       (function sdecl
+         (funct-body typing/typedecl_variance.ml(349)<ghost>:12739-12796
+           (before typing/typedecl_variance.ml(350):12749-12796
+             (after typing/typedecl_variance.ml(350):12749-12796
+               (apply variance_of_params (field 1 sdecl))))))
+     update_decls =
+       (function env sdecls decls
+         (funct-body typing/typedecl_variance.ml(352)<ghost>:12815-12954
+           (before typing/typedecl_variance.ml(353):12836-12954
+             (let
+               (required =
+                  (after typing/typedecl_variance.ml(353):12851-12884
+                    (apply (field 16 (global Stdlib__list!))
+                      variance_of_sdecl sdecls)))
+               (before typing/typedecl_variance.ml(354):12890-12954
+                 (after typing/typedecl_variance.ml(354):12890-12954
+                   (apply (field 0 (global Typedecl_properties!)) property
+                     env decls required)))))))
+     update_class_decls =
+       (function env cldecls
+         (funct-body typing/typedecl_variance.ml(356)<ghost>:12979-13596
+           (before typing/typedecl_variance.ml(357):12995-13596
+             (let
+               (*match* =
+                  (after typing/typedecl_variance.ml(358):13021-13230
+                    (apply (field 21 (global Stdlib__list!))
+                      (function param param
+                        (funct-body typing/typedecl_variance.ml(359):13043-13208
+                          (let
+                            (req =a (field 1 param)
+                             decls =a (field 0 param)
+                             ci =a (field 5 param)
+                             obj_abbr =a (field 1 param)
+                             obj_id =a (field 0 param))
+                            (before typing/typedecl_variance.ml(360):13122-13207
+                              (makeblock 0
+                                (makeblock 0 (makeblock 0 obj_id obj_abbr)
+                                  decls)
+                                (makeblock 0
+                                  (after typing/typedecl_variance.ml(361):13159-13200
+                                    (apply variance_of_params (field 1 ci)))
+                                  req))))))
+                      cldecls [0: 0a 0a]))
+                required =a (field 1 *match*)
+                decls =a (field 0 *match*))
+               (before typing/typedecl_variance.ml(364):13238-13596
+                 (let
+                   (decls =
+                      (after typing/typedecl_variance.ml(365):13254-13318
+                        (apply (field 0 (global Typedecl_properties!))
+                          property env decls required)))
+                   (before typing/typedecl_variance.ml(366):13324-13596
+                     (after typing/typedecl_variance.ml(366):13324-13596
+                       (apply (field 23 (global Stdlib__list!))
+                         (function param param
+                           (funct-body typing/typedecl_variance.ml(367):13338-13578
+                             (let
+                               (cltydef =a (field 4 param)
+                                clty =a (field 3 param)
+                                cl_abbr =a (field 2 param)
+                                decl =a (field 1 param))
+                               (before typing/typedecl_variance.ml(368):13395-13577
+                                 (let (variance = (field 5 decl))
+                                   (before typing/typedecl_variance.ml(369):13438-13577
+                                     (makeblock 0 decl
+                                       (let (init = cl_abbr)
+                                         (makeblock 0 (*,int,*,*,*,*,*,int,*,*,*,*)
+                                           (field 0 init) (field 1 init)
+                                           (field 2 init) (field 3 init)
+                                           (field 4 init) variance
+                                           (field 6 init) (field 7 init)
+                                           (field 8 init) (field 9 init)
+                                           (field 10 init) (field 11 init)))
+                                       (let (init = clty)
+                                         (makemutable 0 (field 0 init)
+                                           (field 1 init) (field 2 init)
+                                           (field 3 init) variance
+                                           (field 5 init) (field 6 init)))
+                                       (let (init = cltydef)
+                                         (makeblock 0 (field 0 init)
+                                           (field 1 init) (field 2 init)
+                                           variance (field 4 init)
+                                           (field 5 init))))))))))
+                         decls cldecls))))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 variance_of_params variance_of_sdecl property Error
+        check_variance_extension compute_decl update_decls
+        update_class_decls))))

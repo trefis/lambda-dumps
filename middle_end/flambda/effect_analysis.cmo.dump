@@ -1,0 +1,136 @@
+(setglobal Effect_analysis!
+  (let
+    (no_effects_prim =
+       (function prim
+         (funct-body middle_end/flambda/effect_analysis.ml(20)<ghost>:1258-1455
+           (before middle_end/flambda/effect_analysis.ml(21):1300-1455
+             (let
+               (*match* =
+                  (after middle_end/flambda/effect_analysis.ml(21):1306-1348
+                    (apply (field 0 (global Semantics_of_primitives!)) prim))
+                *match* =a (field 0 *match*))
+               (if (>= *match* 2)
+                 (before middle_end/flambda/effect_analysis.ml(24):1450-1455
+                   0a)
+                 (before middle_end/flambda/effect_analysis.ml(23):1436-1440
+                   1a)))))))
+    (letrec
+      (no_effects
+         (function flam
+           (funct-body middle_end/flambda/effect_analysis.ml(26)<ghost>:1476-2509
+             (before middle_end/flambda/effect_analysis.ml(27):1499-2509
+               (catch
+                 (switch flam
+                  case int 0:
+                   (before middle_end/flambda/effect_analysis.ml(49):2505-2509
+                     1a)
+                  case tag 0:
+                   (before middle_end/flambda/effect_analysis.ml(28):1528-1532
+                     1a)
+                  case tag 1:
+                   (let
+                     (*match* =a (field 0 flam)
+                      body =a (field 2 *match*)
+                      defining_expr =a (field 1 *match*))
+                     (before middle_end/flambda/effect_analysis.ml(30):1575-1624
+                       (&&
+                         (after middle_end/flambda/effect_analysis.ml(30):1575-1605
+                           (apply no_effects_named defining_expr))
+                         (after middle_end/flambda/effect_analysis.ml(30):1609-1624
+                           (apply no_effects body)))))
+                  case tag 2:
+                   (let (*match* =a (field 0 flam) body =a (field 3 *match*))
+                     (before middle_end/flambda/effect_analysis.ml(31):1653-1668
+                       (after middle_end/flambda/effect_analysis.ml(31):1653-1668
+                         (apply no_effects body))))
+                  case tag 3:
+                   (let (body =a (field 1 flam) defs =a (field 0 flam))
+                     (before middle_end/flambda/effect_analysis.ml(33):1701-1782
+                       (&&
+                         (after middle_end/flambda/effect_analysis.ml(33):1701-1716
+                           (apply no_effects body))
+                         (after middle_end/flambda/effect_analysis.ml(34):1726-1782
+                           (apply (field 27 (global Stdlib__list!))
+                             (function param
+                               (funct-body middle_end/flambda/effect_analysis.ml(34):1739-1777
+                                 (let (def =a (field 1 param))
+                                   (before middle_end/flambda/effect_analysis.ml(34):1756-1776
+                                     (after middle_end/flambda/effect_analysis.ml(34):1756-1776
+                                       (apply no_effects_named def))))))
+                             defs)))))
+                  case tag 7:
+                   (let (ifnot =a (field 2 flam) ifso =a (field 1 flam))
+                     (before middle_end/flambda/effect_analysis.ml(35):1820-1855
+                       (&&
+                         (after middle_end/flambda/effect_analysis.ml(35):1820-1835
+                           (apply no_effects ifso))
+                         (after middle_end/flambda/effect_analysis.ml(35):1839-1855
+                           (apply no_effects ifnot)))))
+                  case tag 8:
+                   (let (sw =a (field 1 flam))
+                     (before middle_end/flambda/effect_analysis.ml(37):1882-2050
+                       (let
+                         (aux =
+                            (function param
+                              (funct-body middle_end/flambda/effect_analysis.ml(37)<ghost>:1890-1917
+                                (let (flam =a (field 1 param))
+                                  (before middle_end/flambda/effect_analysis.ml(37):1902-1917
+                                    (after middle_end/flambda/effect_analysis.ml(37):1902-1917
+                                      (apply no_effects flam)))))))
+                         (before middle_end/flambda/effect_analysis.ml(38):1925-2050
+                           (&&
+                             (after middle_end/flambda/effect_analysis.ml(38):1925-1951
+                               (apply (field 27 (global Stdlib__list!)) aux
+                                 (field 3 sw)))
+                             (&&
+                               (after middle_end/flambda/effect_analysis.ml(39):1961-1987
+                                 (apply (field 27 (global Stdlib__list!)) aux
+                                   (field 1 sw)))
+                               (after middle_end/flambda/effect_analysis.ml(40):1997-2050
+                                 (apply (field 7 (global Stdlib__option!)) 1a
+                                   no_effects (field 4 sw)))))))))
+                  case tag 9:
+                   (let (def =a (field 2 flam) sw =a (field 1 flam))
+                     (before middle_end/flambda/effect_analysis.ml(42):2089-2190
+                       (&&
+                         (after middle_end/flambda/effect_analysis.ml(42):2089-2137
+                           (apply (field 27 (global Stdlib__list!))
+                             (function param
+                               (funct-body middle_end/flambda/effect_analysis.ml(42):2102-2134
+                                 (let (lam =a (field 1 param))
+                                   (before middle_end/flambda/effect_analysis.ml(42):2119-2133
+                                     (after middle_end/flambda/effect_analysis.ml(42):2119-2133
+                                       (apply no_effects lam))))))
+                             sw))
+                         (after middle_end/flambda/effect_analysis.ml(43):2147-2190
+                           (apply (field 7 (global Stdlib__option!)) 1a
+                             no_effects def)))))
+                  case tag 11: (let (body =a (field 2 flam)) (exit 4 body))
+                  case tag 12: (let (body =a (field 0 flam)) (exit 4 body))
+                  default:
+                   (before middle_end/flambda/effect_analysis.ml(48):2473-2478
+                     0a))
+                with (4 body)
+                 (before middle_end/flambda/effect_analysis.ml(47):2387-2402
+                   (after middle_end/flambda/effect_analysis.ml(47):2387-2402
+                     (apply no_effects body)))))))
+        no_effects_named
+          (function named
+            (funct-body middle_end/flambda/effect_analysis.ml(51)<ghost>:2532-2839
+              (before middle_end/flambda/effect_analysis.ml(52):2560-2839
+                (switch named
+                 case tag 9:
+                  (let (prim =a (field 0 named))
+                    (before middle_end/flambda/effect_analysis.ml(57):2786-2806
+                      (after middle_end/flambda/effect_analysis.ml(57):2786-2806
+                        (apply no_effects_prim prim))))
+                 case tag 10:
+                  (let (flam =a (field 0 named))
+                    (before middle_end/flambda/effect_analysis.ml(58):2824-2839
+                      (after middle_end/flambda/effect_analysis.ml(58):2824-2839
+                        (apply no_effects flam))))
+                 default:
+                  (before middle_end/flambda/effect_analysis.ml(56):2756-2760
+                    1a))))))
+      (pseudo _none_(0)<ghost>:-1--1
+        (makeblock 0 no_effects no_effects_named)))))

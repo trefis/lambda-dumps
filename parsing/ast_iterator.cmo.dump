@@ -1,0 +1,2250 @@
+(setglobal Ast_iterator!
+  (let
+    (iter_fst =
+       (function f param
+         (funct-body parsing/ast_iterator.ml(80)<ghost>:3907-3921
+           (let (x =a (field 0 param))
+             (before parsing/ast_iterator.ml(80):3918-3921
+               (after parsing/ast_iterator.ml(80):3918-3921 (apply f x))))))
+     iter_snd =
+       (function f param
+         (funct-body parsing/ast_iterator.ml(81)<ghost>:3935-3949
+           (let (y =a (field 1 param))
+             (before parsing/ast_iterator.ml(81):3946-3949
+               (after parsing/ast_iterator.ml(81):3946-3949 (apply f y))))))
+     iter_tuple =
+       (function f1 f2 param
+         (funct-body parsing/ast_iterator.ml(82)<ghost>:3965-3990
+           (let (y =a (field 1 param) x =a (field 0 param))
+             (before parsing/ast_iterator.ml(82):3980-3990
+               (seq
+                 (after parsing/ast_iterator.ml(82):3980-3984 (apply f1 x))
+                 (before parsing/ast_iterator.ml(82):3986-3990
+                   (after parsing/ast_iterator.ml(82):3986-3990 (apply f2 y))))))))
+     iter_tuple3 =
+       (function f1 f2 f3 param
+         (funct-body parsing/ast_iterator.ml(83)<ghost>:4007-4044
+           (let
+             (z =a (field 2 param) y =a (field 1 param) x =a (field 0 param))
+             (before parsing/ast_iterator.ml(83):4028-4044
+               (seq
+                 (after parsing/ast_iterator.ml(83):4028-4032 (apply f1 x))
+                 (before parsing/ast_iterator.ml(83):4034-4044
+                   (seq
+                     (after parsing/ast_iterator.ml(83):4034-4038
+                       (apply f2 y))
+                     (before parsing/ast_iterator.ml(83):4040-4044
+                       (after parsing/ast_iterator.ml(83):4040-4044
+                         (apply f3 z))))))))))
+     iter_opt =
+       (function f param
+         (funct-body parsing/ast_iterator.ml(84)<ghost>:4058-4097
+           (if param
+             (let (x =a (field 0 param))
+               (before parsing/ast_iterator.ml(84):4094-4097
+                 (after parsing/ast_iterator.ml(84):4094-4097 (apply f x))))
+             (before parsing/ast_iterator.ml(84):4079-4081 0a))))
+     iter_loc =
+       (function sub param
+         (funct-body parsing/ast_iterator.ml(86)<ghost>:4112-4153
+           (let (loc =a (field 1 param))
+             (before parsing/ast_iterator.ml(86):4133-4153
+               (after parsing/ast_iterator.ml(86):4133-4153
+                 (apply (field 21 sub) sub loc))))))
+     T =
+       (module-defn(T) parsing/ast_iterator.ml(88):4155-7613
+         (let
+           (row_field =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(91)<ghost>:4237-4482
+                  (let
+                    (prf_attributes =a (field 2 param)
+                     prf_loc =a (field 1 param)
+                     prf_desc =a (field 0 param))
+                    (before parsing/ast_iterator.ml(96):4308-4482
+                      (seq
+                        (after parsing/ast_iterator.ml(96):4308-4332
+                          (apply (field 21 sub) sub prf_loc))
+                        (before parsing/ast_iterator.ml(97):4338-4482
+                          (seq
+                            (after parsing/ast_iterator.ml(97):4338-4371
+                              (apply (field 1 sub) sub prf_attributes))
+                            (before parsing/ast_iterator.ml(98):4377-4482
+                              (switch* prf_desc
+                               case tag 0:
+                                (let (tl =a (field 2 prf_desc))
+                                  (before parsing/ast_iterator.ml(99):4422-4448
+                                    (after parsing/ast_iterator.ml(99):4422-4448
+                                      (apply
+                                        (field 14 (global Stdlib__list!))
+                                        (after parsing/ast_iterator.ml(99):4432-4445
+                                          (apply (field 36 sub) sub))
+                                        tl))))
+                               case tag 1:
+                                (let (t =a (field 0 prf_desc))
+                                  (before parsing/ast_iterator.ml(100):4469-4482
+                                    (after parsing/ast_iterator.ml(100):4469-4482
+                                      (apply (field 36 sub) sub t)))))))))))))
+            object_field =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(102)<ghost>:4503-4731
+                  (let
+                    (pof_attributes =a (field 2 param)
+                     pof_loc =a (field 1 param)
+                     pof_desc =a (field 0 param))
+                    (before parsing/ast_iterator.ml(107):4574-4731
+                      (seq
+                        (after parsing/ast_iterator.ml(107):4574-4598
+                          (apply (field 21 sub) sub pof_loc))
+                        (before parsing/ast_iterator.ml(108):4604-4731
+                          (seq
+                            (after parsing/ast_iterator.ml(108):4604-4637
+                              (apply (field 1 sub) sub pof_attributes))
+                            (before parsing/ast_iterator.ml(109):4643-4731
+                              (switch* pof_desc
+                               case tag 0:
+                                (let (t =a (field 1 pof_desc))
+                                  (before parsing/ast_iterator.ml(110):4684-4697
+                                    (after parsing/ast_iterator.ml(110):4684-4697
+                                      (apply (field 36 sub) sub t))))
+                               case tag 1:
+                                (let (t =a (field 0 pof_desc))
+                                  (before parsing/ast_iterator.ml(111):4718-4731
+                                    (after parsing/ast_iterator.ml(111):4718-4731
+                                      (apply (field 36 sub) sub t)))))))))))))
+            iter =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(113)<ghost>:4744-5605
+                  (let
+                    (attrs =a (field 3 param)
+                     loc =a (field 1 param)
+                     desc =a (field 0 param))
+                    (before parsing/ast_iterator.ml(114):4814-5605
+                      (seq
+                        (after parsing/ast_iterator.ml(114):4814-4834
+                          (apply (field 21 sub) sub loc))
+                        (before parsing/ast_iterator.ml(115):4840-5605
+                          (seq
+                            (after parsing/ast_iterator.ml(115):4840-4864
+                              (apply (field 1 sub) sub attrs))
+                            (before parsing/ast_iterator.ml(116):4870-5605
+                              (catch
+                                (switch* desc
+                                 case int 0: (exit 1)
+                                 case tag 0: (exit 1)
+                                 case tag 1:
+                                  (let
+                                    (t2 =a (field 2 desc)
+                                     t1 =a (field 1 desc))
+                                    (before parsing/ast_iterator.ml(120):4967-4997
+                                      (seq
+                                        (after parsing/ast_iterator.ml(120):4967-4981
+                                          (apply (field 36 sub) sub t1))
+                                        (before parsing/ast_iterator.ml(120):4983-4997
+                                          (after parsing/ast_iterator.ml(120):4983-4997
+                                            (apply (field 36 sub) sub t2))))))
+                                 case tag 2:
+                                  (let (tyl =a (field 0 desc))
+                                    (before parsing/ast_iterator.ml(121):5022-5049
+                                      (after parsing/ast_iterator.ml(121):5022-5049
+                                        (apply
+                                          (field 14 (global Stdlib__list!))
+                                          (after parsing/ast_iterator.ml(121):5032-5045
+                                            (apply (field 36 sub) sub))
+                                          tyl))))
+                                 case tag 3:
+                                  (let
+                                    (tl =a (field 1 desc)
+                                     lid =a (field 0 desc))
+                                    (before parsing/ast_iterator.ml(123):5089-5133
+                                      (seq
+                                        (after parsing/ast_iterator.ml(123):5089-5105
+                                          (apply iter_loc sub lid))
+                                        (before parsing/ast_iterator.ml(123):5107-5133
+                                          (after parsing/ast_iterator.ml(123):5107-5133
+                                            (apply
+                                              (field 14
+                                                (global Stdlib__list!))
+                                              (after parsing/ast_iterator.ml(123):5117-5130
+                                                (apply (field 36 sub) sub))
+                                              tl))))))
+                                 case tag 4:
+                                  (let (ol =a (field 0 desc))
+                                    (before parsing/ast_iterator.ml(125):5172-5203
+                                      (after parsing/ast_iterator.ml(125):5172-5203
+                                        (apply
+                                          (field 14 (global Stdlib__list!))
+                                          (after parsing/ast_iterator.ml(125):5182-5200
+                                            (apply object_field sub))
+                                          ol))))
+                                 case tag 5:
+                                  (let
+                                    (tl =a (field 1 desc)
+                                     lid =a (field 0 desc))
+                                    (before parsing/ast_iterator.ml(127):5242-5286
+                                      (seq
+                                        (after parsing/ast_iterator.ml(127):5242-5258
+                                          (apply iter_loc sub lid))
+                                        (before parsing/ast_iterator.ml(127):5260-5286
+                                          (after parsing/ast_iterator.ml(127):5260-5286
+                                            (apply
+                                              (field 14
+                                                (global Stdlib__list!))
+                                              (after parsing/ast_iterator.ml(127):5270-5283
+                                                (apply (field 36 sub) sub))
+                                              tl))))))
+                                 case tag 6:
+                                  (let (t =a (field 0 desc))
+                                    (before parsing/ast_iterator.ml(128):5314-5327
+                                      (after parsing/ast_iterator.ml(128):5314-5327
+                                        (apply (field 36 sub) sub t))))
+                                 case tag 7:
+                                  (let (rl =a (field 0 desc))
+                                    (before parsing/ast_iterator.ml(130):5372-5400
+                                      (after parsing/ast_iterator.ml(130):5372-5400
+                                        (apply
+                                          (field 14 (global Stdlib__list!))
+                                          (after parsing/ast_iterator.ml(130):5382-5397
+                                            (apply row_field sub))
+                                          rl))))
+                                 case tag 8:
+                                  (let (t =a (field 1 desc))
+                                    (before parsing/ast_iterator.ml(131):5427-5440
+                                      (after parsing/ast_iterator.ml(131):5427-5440
+                                        (apply (field 36 sub) sub t))))
+                                 case tag 9:
+                                  (let
+                                    (*match* =a (field 0 desc)
+                                     l =a (field 1 *match*)
+                                     lid =a (field 0 *match*))
+                                    (before parsing/ast_iterator.ml(133):5480-5559
+                                      (seq
+                                        (after parsing/ast_iterator.ml(133):5480-5496
+                                          (apply iter_loc sub lid))
+                                        (before parsing/ast_iterator.ml(134):5506-5559
+                                          (after parsing/ast_iterator.ml(134):5506-5559
+                                            (apply
+                                              (field 14
+                                                (global Stdlib__list!))
+                                              (after parsing/ast_iterator.ml(134):5516-5557
+                                                (apply iter_tuple
+                                                  (after parsing/ast_iterator.ml(134):5528-5542
+                                                    (apply iter_loc sub))
+                                                  (after parsing/ast_iterator.ml(134):5543-5556
+                                                    (apply (field 36 sub)
+                                                      sub))))
+                                              l))))))
+                                 case tag 10:
+                                  (let (x =a (field 0 desc))
+                                    (before parsing/ast_iterator.ml(135):5586-5605
+                                      (after parsing/ast_iterator.ml(135):5586-5605
+                                        (apply (field 16 sub) sub x)))))
+                               with (1)
+                                (before parsing/ast_iterator.ml(118):4921-4923
+                                  0a))))))))))
+            iter_type_declaration =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(137)<ghost>:5635-6128
+                  (let
+                    (ptype_loc =a (field 7 param)
+                     ptype_attributes =a (field 6 param)
+                     ptype_manifest =a (field 5 param)
+                     ptype_kind =a (field 3 param)
+                     ptype_cstrs =a (field 2 param)
+                     ptype_params =a (field 1 param)
+                     ptype_name =a (field 0 param))
+                    (before parsing/ast_iterator.ml(144):5802-6128
+                      (seq
+                        (after parsing/ast_iterator.ml(144):5802-5825
+                          (apply iter_loc sub ptype_name))
+                        (before parsing/ast_iterator.ml(145):5831-6128
+                          (seq
+                            (after parsing/ast_iterator.ml(145):5831-5878
+                              (apply (field 14 (global Stdlib__list!))
+                                (after parsing/ast_iterator.ml(145):5841-5865
+                                  (apply iter_fst
+                                    (after parsing/ast_iterator.ml(145):5851-5864
+                                      (apply (field 36 sub) sub))))
+                                ptype_params))
+                            (before parsing/ast_iterator.ml(146):5884-6128
+                              (seq
+                                (after parsing/ast_iterator.ml(146):5884-5978
+                                  (apply (field 14 (global Stdlib__list!))
+                                    (after parsing/ast_iterator.ml(147):5900-5960
+                                      (apply iter_tuple3
+                                        (after parsing/ast_iterator.ml(147):5913-5926
+                                          (apply (field 36 sub) sub))
+                                        (after parsing/ast_iterator.ml(147):5927-5940
+                                          (apply (field 36 sub) sub))
+                                        (after parsing/ast_iterator.ml(147):5941-5959
+                                          (apply (field 21 sub) sub))))
+                                    ptype_cstrs))
+                                (before parsing/ast_iterator.ml(149):5984-6128
+                                  (seq
+                                    (after parsing/ast_iterator.ml(149):5984-6012
+                                      (apply (field 42 sub) sub ptype_kind))
+                                    (before parsing/ast_iterator.ml(150):6018-6128
+                                      (seq
+                                        (after parsing/ast_iterator.ml(150):6018-6055
+                                          (apply iter_opt
+                                            (after parsing/ast_iterator.ml(150):6027-6040
+                                              (apply (field 36 sub) sub))
+                                            ptype_manifest))
+                                        (before parsing/ast_iterator.ml(151):6061-6128
+                                          (seq
+                                            (after parsing/ast_iterator.ml(151):6061-6087
+                                              (apply (field 21 sub) sub
+                                                ptype_loc))
+                                            (before parsing/ast_iterator.ml(152):6093-6128
+                                              (after parsing/ast_iterator.ml(152):6093-6128
+                                                (apply (field 1 sub) sub
+                                                  ptype_attributes))))))))))))))))))
+            iter_type_kind =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(154)<ghost>:6151-6358
+                  (switch* param
+                   case int 0:
+                    (before parsing/ast_iterator.ml(155):6190-6192 0a)
+                   case int 1:
+                    (before parsing/ast_iterator.ml(159):6356-6358 0a)
+                   case tag 0:
+                    (let (l =a (field 0 param))
+                      (before parsing/ast_iterator.ml(157):6226-6271
+                        (after parsing/ast_iterator.ml(157):6226-6271
+                          (apply (field 14 (global Stdlib__list!))
+                            (after parsing/ast_iterator.ml(157):6236-6269
+                              (apply (field 14 sub) sub))
+                            l))))
+                   case tag 1:
+                    (let (l =a (field 0 param))
+                      (before parsing/ast_iterator.ml(158):6296-6335
+                        (after parsing/ast_iterator.ml(158):6296-6335
+                          (apply (field 14 (global Stdlib__list!))
+                            (after parsing/ast_iterator.ml(158):6306-6333
+                              (apply (field 20 sub) sub))
+                            l)))))))
+            iter_constructor_arguments =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(161)<ghost>:6393-6528
+                  (switch* param
+                   case tag 0:
+                    (let (l =a (field 0 param))
+                      (before parsing/ast_iterator.ml(162):6431-6456
+                        (after parsing/ast_iterator.ml(162):6431-6456
+                          (apply (field 14 (global Stdlib__list!))
+                            (after parsing/ast_iterator.ml(162):6441-6454
+                              (apply (field 36 sub) sub))
+                            l))))
+                   case tag 1:
+                    (let (l =a (field 0 param))
+                      (before parsing/ast_iterator.ml(164):6489-6528
+                        (after parsing/ast_iterator.ml(164):6489-6528
+                          (apply (field 14 (global Stdlib__list!))
+                            (after parsing/ast_iterator.ml(164):6499-6526
+                              (apply (field 20 sub) sub))
+                            l)))))))
+            iter_type_extension =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(166)<ghost>:6556-6921
+                  (let
+                    (ptyext_attributes =a (field 5 param)
+                     ptyext_loc =a (field 4 param)
+                     ptyext_constructors =a (field 2 param)
+                     ptyext_params =a (field 1 param)
+                     ptyext_path =a (field 0 param))
+                    (before parsing/ast_iterator.ml(172):6701-6921
+                      (seq
+                        (after parsing/ast_iterator.ml(172):6701-6725
+                          (apply iter_loc sub ptyext_path))
+                        (before parsing/ast_iterator.ml(173):6731-6921
+                          (seq
+                            (after parsing/ast_iterator.ml(173):6731-6792
+                              (apply (field 14 (global Stdlib__list!))
+                                (after parsing/ast_iterator.ml(173):6741-6772
+                                  (apply (field 17 sub) sub))
+                                ptyext_constructors))
+                            (before parsing/ast_iterator.ml(174):6798-6921
+                              (seq
+                                (after parsing/ast_iterator.ml(174):6798-6846
+                                  (apply (field 14 (global Stdlib__list!))
+                                    (after parsing/ast_iterator.ml(174):6808-6832
+                                      (apply iter_fst
+                                        (after parsing/ast_iterator.ml(174):6818-6831
+                                          (apply (field 36 sub) sub))))
+                                    ptyext_params))
+                                (before parsing/ast_iterator.ml(175):6852-6921
+                                  (seq
+                                    (after parsing/ast_iterator.ml(175):6852-6879
+                                      (apply (field 21 sub) sub ptyext_loc))
+                                    (before parsing/ast_iterator.ml(176):6885-6921
+                                      (after parsing/ast_iterator.ml(176):6885-6921
+                                        (apply (field 1 sub) sub
+                                          ptyext_attributes))))))))))))))
+            iter_type_exception =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(178)<ghost>:6949-7140
+                  (let
+                    (ptyexn_attributes =a (field 2 param)
+                     ptyexn_loc =a (field 1 param)
+                     ptyexn_constructor =a (field 0 param))
+                    (before parsing/ast_iterator.ml(180):7017-7140
+                      (seq
+                        (after parsing/ast_iterator.ml(180):7017-7065
+                          (apply (field 17 sub) sub ptyexn_constructor))
+                        (before parsing/ast_iterator.ml(181):7071-7140
+                          (seq
+                            (after parsing/ast_iterator.ml(181):7071-7098
+                              (apply (field 21 sub) sub ptyexn_loc))
+                            (before parsing/ast_iterator.ml(182):7104-7140
+                              (after parsing/ast_iterator.ml(182):7104-7140
+                                (apply (field 1 sub) sub ptyexn_attributes))))))))))
+            iter_extension_constructor_kind =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(184)<ghost>:7180-7342
+                  (switch* param
+                   case tag 0:
+                    (let (cto =a (field 1 param) ctl =a (field 0 param))
+                      (before parsing/ast_iterator.ml(186):7232-7294
+                        (seq
+                          (after parsing/ast_iterator.ml(186):7232-7266
+                            (apply iter_constructor_arguments sub ctl))
+                          (before parsing/ast_iterator.ml(186):7268-7294
+                            (after parsing/ast_iterator.ml(186):7268-7294
+                              (apply iter_opt
+                                (after parsing/ast_iterator.ml(186):7277-7290
+                                  (apply (field 36 sub) sub))
+                                cto))))))
+                   case tag 1:
+                    (let (li =a (field 0 param))
+                      (before parsing/ast_iterator.ml(188):7327-7342
+                        (after parsing/ast_iterator.ml(188):7327-7342
+                          (apply iter_loc sub li)))))))
+            iter_extension_constructor =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(190)<ghost>:7377-7608
+                  (let
+                    (pext_attributes =a (field 3 param)
+                     pext_loc =a (field 2 param)
+                     pext_kind =a (field 1 param)
+                     pext_name =a (field 0 param))
+                    (before parsing/ast_iterator.ml(195):7464-7608
+                      (seq
+                        (after parsing/ast_iterator.ml(195):7464-7486
+                          (apply iter_loc sub pext_name))
+                        (before parsing/ast_iterator.ml(196):7492-7608
+                          (seq
+                            (after parsing/ast_iterator.ml(196):7492-7537
+                              (apply iter_extension_constructor_kind sub
+                                pext_kind))
+                            (before parsing/ast_iterator.ml(197):7543-7608
+                              (seq
+                                (after parsing/ast_iterator.ml(197):7543-7568
+                                  (apply (field 21 sub) sub pext_loc))
+                                (before parsing/ast_iterator.ml(198):7574-7608
+                                  (after parsing/ast_iterator.ml(198):7574-7608
+                                    (apply (field 1 sub) sub pext_attributes)))))))))))))
+           (pseudo parsing/ast_iterator.ml(88):4166-7613
+             (makeblock 0 row_field object_field iter iter_type_declaration
+               iter_type_kind iter_constructor_arguments iter_type_extension
+               iter_type_exception iter_extension_constructor_kind
+               iter_extension_constructor))))
+     CT =
+       (module-defn(CT) parsing/ast_iterator.ml(202):7615-8797
+         (let
+           (iter =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(205)<ghost>:7694-8181
+                  (let
+                    (attrs =a (field 2 param)
+                     loc =a (field 1 param)
+                     desc =a (field 0 param))
+                    (before parsing/ast_iterator.ml(206):7764-8181
+                      (seq
+                        (after parsing/ast_iterator.ml(206):7764-7784
+                          (apply (field 21 sub) sub loc))
+                        (before parsing/ast_iterator.ml(207):7790-8181
+                          (seq
+                            (after parsing/ast_iterator.ml(207):7790-7814
+                              (apply (field 1 sub) sub attrs))
+                            (before parsing/ast_iterator.ml(208):7820-8181
+                              (switch* desc
+                               case tag 0:
+                                (let
+                                  (tys =a (field 1 desc)
+                                   lid =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(210):7876-7921
+                                    (seq
+                                      (after parsing/ast_iterator.ml(210):7876-7892
+                                        (apply iter_loc sub lid))
+                                      (before parsing/ast_iterator.ml(210):7894-7921
+                                        (after parsing/ast_iterator.ml(210):7894-7921
+                                          (apply
+                                            (field 14 (global Stdlib__list!))
+                                            (after parsing/ast_iterator.ml(210):7904-7917
+                                              (apply (field 36 sub) sub))
+                                            tys))))))
+                               case tag 1:
+                                (let (x =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(211):7948-7973
+                                    (after parsing/ast_iterator.ml(211):7948-7973
+                                      (apply (field 9 sub) sub x))))
+                               case tag 2:
+                                (let
+                                  (ct =a (field 2 desc) t =a (field 1 desc))
+                                  (before parsing/ast_iterator.ml(213):8016-8052
+                                    (seq
+                                      (after parsing/ast_iterator.ml(213):8016-8029
+                                        (apply (field 36 sub) sub t))
+                                      (before parsing/ast_iterator.ml(213):8031-8052
+                                        (after parsing/ast_iterator.ml(213):8031-8052
+                                          (apply (field 11 sub) sub ct))))))
+                               case tag 3:
+                                (let (x =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(214):8079-8098
+                                    (after parsing/ast_iterator.ml(214):8079-8098
+                                      (apply (field 16 sub) sub x))))
+                               case tag 4:
+                                (let
+                                  (e =a (field 1 desc) o =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(216):8133-8181
+                                    (seq
+                                      (after parsing/ast_iterator.ml(216):8133-8159
+                                        (apply (field 29 sub) sub o))
+                                      (before parsing/ast_iterator.ml(216):8161-8181
+                                        (after parsing/ast_iterator.ml(216):8161-8181
+                                          (apply (field 11 sub) sub e)))))))))))))))
+            iter_field =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(218)<ghost>:8200-8656
+                  (let
+                    (attrs =a (field 2 param)
+                     loc =a (field 1 param)
+                     desc =a (field 0 param))
+                    (before parsing/ast_iterator.ml(220):8274-8656
+                      (seq
+                        (after parsing/ast_iterator.ml(220):8274-8294
+                          (apply (field 21 sub) sub loc))
+                        (before parsing/ast_iterator.ml(221):8300-8656
+                          (seq
+                            (after parsing/ast_iterator.ml(221):8300-8324
+                              (apply (field 1 sub) sub attrs))
+                            (before parsing/ast_iterator.ml(222):8330-8656
+                              (switch* desc
+                               case tag 0:
+                                (let (ct =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(223):8371-8392
+                                    (after parsing/ast_iterator.ml(223):8371-8392
+                                      (apply (field 11 sub) sub ct))))
+                               case tag 1:
+                                (let
+                                  (*match* =a (field 0 desc)
+                                   t =a (field 3 *match*))
+                                  (before parsing/ast_iterator.ml(224):8427-8440
+                                    (after parsing/ast_iterator.ml(224):8427-8440
+                                      (apply (field 36 sub) sub t))))
+                               case tag 2:
+                                (let
+                                  (*match* =a (field 0 desc)
+                                   t =a (field 3 *match*))
+                                  (before parsing/ast_iterator.ml(225):8478-8491
+                                    (after parsing/ast_iterator.ml(225):8478-8491
+                                      (apply (field 36 sub) sub t))))
+                               case tag 3:
+                                (let
+                                  (*match* =a (field 0 desc)
+                                   t2 =a (field 1 *match*)
+                                   t1 =a (field 0 *match*))
+                                  (before parsing/ast_iterator.ml(227):8534-8564
+                                    (seq
+                                      (after parsing/ast_iterator.ml(227):8534-8548
+                                        (apply (field 36 sub) sub t1))
+                                      (before parsing/ast_iterator.ml(227):8550-8564
+                                        (after parsing/ast_iterator.ml(227):8550-8564
+                                          (apply (field 36 sub) sub t2))))))
+                               case tag 4:
+                                (let (x =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(228):8591-8610
+                                    (after parsing/ast_iterator.ml(228):8591-8610
+                                      (apply (field 0 sub) sub x))))
+                               case tag 5:
+                                (let (x =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(229):8637-8656
+                                    (after parsing/ast_iterator.ml(229):8637-8656
+                                      (apply (field 16 sub) sub x)))))))))))))
+            iter_signature =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(231)<ghost>:8679-8793
+                  (let
+                    (pcsig_fields =a (field 1 param)
+                     pcsig_self =a (field 0 param))
+                    (before parsing/ast_iterator.ml(232):8716-8793
+                      (seq
+                        (after parsing/ast_iterator.ml(232):8716-8738
+                          (apply (field 36 sub) sub pcsig_self))
+                        (before parsing/ast_iterator.ml(233):8744-8793
+                          (after parsing/ast_iterator.ml(233):8744-8793
+                            (apply (field 14 (global Stdlib__list!))
+                              (after parsing/ast_iterator.ml(233):8754-8780
+                                (apply (field 13 sub) sub))
+                              pcsig_fields)))))))))
+           (pseudo parsing/ast_iterator.ml(202):7627-8797
+             (makeblock 0 iter iter_field iter_signature))))
+     MT =
+       (module-defn(MT) parsing/ast_iterator.ml(236):8799-10834
+         (let
+           (iter =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(239)<ghost>:8879-9476
+                  (let
+                    (attrs =a (field 2 param)
+                     loc =a (field 1 param)
+                     desc =a (field 0 param))
+                    (before parsing/ast_iterator.ml(240):8949-9476
+                      (seq
+                        (after parsing/ast_iterator.ml(240):8949-8969
+                          (apply (field 21 sub) sub loc))
+                        (before parsing/ast_iterator.ml(241):8975-9476
+                          (seq
+                            (after parsing/ast_iterator.ml(241):8975-8999
+                              (apply (field 1 sub) sub attrs))
+                            (before parsing/ast_iterator.ml(242):9005-9476
+                              (switch* desc
+                               case tag 0:
+                                (let (s =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(243):9043-9057
+                                    (after parsing/ast_iterator.ml(243):9043-9057
+                                      (apply iter_loc sub s))))
+                               case tag 1:
+                                (let (sg =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(245):9122-9142
+                                    (after parsing/ast_iterator.ml(245):9122-9142
+                                      (apply (field 32 sub) sub sg))))
+                               case tag 2:
+                                (let
+                                  (mt2 =a (field 2 desc)
+                                   mt1 =a (field 1 desc)
+                                   s =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(247):9187-9278
+                                    (seq
+                                      (after parsing/ast_iterator.ml(247):9187-9201
+                                        (apply iter_loc sub s))
+                                      (before parsing/ast_iterator.ml(248):9211-9278
+                                        (seq
+                                          (after parsing/ast_iterator.ml(248):9211-9245
+                                            (apply iter_opt
+                                              (after parsing/ast_iterator.ml(248):9220-9241
+                                                (apply (field 26 sub) sub))
+                                              mt1))
+                                          (before parsing/ast_iterator.ml(249):9255-9278
+                                            (after parsing/ast_iterator.ml(249):9255-9278
+                                              (apply (field 26 sub) sub mt2))))))))
+                               case tag 3:
+                                (let
+                                  (l =a (field 1 desc) mt =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(251):9314-9383
+                                    (seq
+                                      (after parsing/ast_iterator.ml(251):9314-9336
+                                        (apply (field 26 sub) sub mt))
+                                      (before parsing/ast_iterator.ml(252):9346-9383
+                                        (after parsing/ast_iterator.ml(252):9346-9383
+                                          (apply
+                                            (field 14 (global Stdlib__list!))
+                                            (after parsing/ast_iterator.ml(252):9356-9381
+                                              (apply (field 45 sub) sub))
+                                            l))))))
+                               case tag 4:
+                                (let (me =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(253):9408-9430
+                                    (after parsing/ast_iterator.ml(253):9408-9430
+                                      (apply (field 25 sub) sub me))))
+                               case tag 5:
+                                (let (x =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(254):9457-9476
+                                    (after parsing/ast_iterator.ml(254):9457-9476
+                                      (apply (field 16 sub) sub x))))
+                               case tag 6:
+                                (let (s =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(244):9080-9094
+                                    (after parsing/ast_iterator.ml(244):9080-9094
+                                      (apply iter_loc sub s)))))))))))))
+            iter_with_constraint =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(256)<ghost>:9505-9840
+                  (switch* param
+                   case tag 0:
+                    (let (d =a (field 1 param) lid =a (field 0 param))
+                      (before parsing/ast_iterator.ml(258):9557-9601
+                        (seq
+                          (after parsing/ast_iterator.ml(258):9557-9573
+                            (apply iter_loc sub lid))
+                          (before parsing/ast_iterator.ml(258):9575-9601
+                            (after parsing/ast_iterator.ml(258):9575-9601
+                              (apply (field 39 sub) sub d))))))
+                   case tag 1:
+                    (let (lid2 =a (field 1 param) lid =a (field 0 param))
+                      (before parsing/ast_iterator.ml(260):9644-9679
+                        (seq
+                          (after parsing/ast_iterator.ml(260):9644-9660
+                            (apply iter_loc sub lid))
+                          (before parsing/ast_iterator.ml(260):9662-9679
+                            (after parsing/ast_iterator.ml(260):9662-9679
+                              (apply iter_loc sub lid2))))))
+                   case tag 2:
+                    (let (d =a (field 1 param) lid =a (field 0 param))
+                      (before parsing/ast_iterator.ml(262):9722-9766
+                        (seq
+                          (after parsing/ast_iterator.ml(262):9722-9738
+                            (apply iter_loc sub lid))
+                          (before parsing/ast_iterator.ml(262):9740-9766
+                            (after parsing/ast_iterator.ml(262):9740-9766
+                              (apply (field 39 sub) sub d))))))
+                   case tag 3:
+                    (let (lid =a (field 1 param) s =a (field 0 param))
+                      (before parsing/ast_iterator.ml(264):9808-9840
+                        (seq
+                          (after parsing/ast_iterator.ml(264):9808-9822
+                            (apply iter_loc sub s))
+                          (before parsing/ast_iterator.ml(264):9824-9840
+                            (after parsing/ast_iterator.ml(264):9824-9840
+                              (apply iter_loc sub lid)))))))))
+            iter_signature_item =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(266)<ghost>:9868-10830
+                  (let (loc =a (field 1 param) desc =a (field 0 param))
+                    (before parsing/ast_iterator.ml(267):9913-10830
+                      (seq
+                        (after parsing/ast_iterator.ml(267):9913-9933
+                          (apply (field 21 sub) sub loc))
+                        (before parsing/ast_iterator.ml(268):9939-10830
+                          (catch
+                            (switch* desc
+                             case tag 0:
+                              (let (vd =a (field 0 desc))
+                                (before parsing/ast_iterator.ml(269):9978-10006
+                                  (after parsing/ast_iterator.ml(269):9978-10006
+                                    (apply (field 44 sub) sub vd))))
+                             case tag 1:
+                              (let (l =a (field 1 desc)) (exit 2 l))
+                             case tag 2:
+                              (let (l =a (field 0 desc)) (exit 2 l))
+                             case tag 3:
+                              (let (te =a (field 0 desc))
+                                (before parsing/ast_iterator.ml(273):10125-10150
+                                  (after parsing/ast_iterator.ml(273):10125-10150
+                                    (apply (field 40 sub) sub te))))
+                             case tag 4:
+                              (let (ed =a (field 0 desc))
+                                (before parsing/ast_iterator.ml(274):10178-10203
+                                  (after parsing/ast_iterator.ml(274):10178-10203
+                                    (apply (field 41 sub) sub ed))))
+                             case tag 5:
+                              (let (x =a (field 0 desc))
+                                (before parsing/ast_iterator.ml(275):10227-10255
+                                  (after parsing/ast_iterator.ml(275):10227-10255
+                                    (apply (field 23 sub) sub x))))
+                             case tag 6:
+                              (let (x =a (field 0 desc))
+                                (before parsing/ast_iterator.ml(276):10281-10310
+                                  (after parsing/ast_iterator.ml(276):10281-10310
+                                    (apply (field 24 sub) sub x))))
+                             case tag 7:
+                              (let (l =a (field 0 desc))
+                                (before parsing/ast_iterator.ml(278):10345-10385
+                                  (after parsing/ast_iterator.ml(278):10345-10385
+                                    (apply (field 14 (global Stdlib__list!))
+                                      (after parsing/ast_iterator.ml(278):10355-10383
+                                        (apply (field 23 sub) sub))
+                                      l))))
+                             case tag 8:
+                              (let (x =a (field 0 desc))
+                                (before parsing/ast_iterator.ml(279):10410-10443
+                                  (after parsing/ast_iterator.ml(279):10410-10443
+                                    (apply (field 27 sub) sub x))))
+                             case tag 9:
+                              (let (x =a (field 0 desc))
+                                (before parsing/ast_iterator.ml(280):10465-10491
+                                  (after parsing/ast_iterator.ml(280):10465-10491
+                                    (apply (field 29 sub) sub x))))
+                             case tag 10:
+                              (let (x =a (field 0 desc))
+                                (before parsing/ast_iterator.ml(281):10516-10545
+                                  (after parsing/ast_iterator.ml(281):10516-10545
+                                    (apply (field 19 sub) sub x))))
+                             case tag 11:
+                              (let (l =a (field 0 desc))
+                                (before parsing/ast_iterator.ml(282):10568-10607
+                                  (after parsing/ast_iterator.ml(282):10568-10607
+                                    (apply (field 14 (global Stdlib__list!))
+                                      (after parsing/ast_iterator.ml(282):10578-10605
+                                        (apply (field 6 sub) sub))
+                                      l))))
+                             case tag 12:
+                              (let (l =a (field 0 desc))
+                                (before parsing/ast_iterator.ml(284):10643-10687
+                                  (after parsing/ast_iterator.ml(284):10643-10687
+                                    (apply (field 14 (global Stdlib__list!))
+                                      (after parsing/ast_iterator.ml(284):10653-10685
+                                        (apply (field 12 sub) sub))
+                                      l))))
+                             case tag 13:
+                              (let (x =a (field 0 desc))
+                                (before parsing/ast_iterator.ml(288):10811-10830
+                                  (after parsing/ast_iterator.ml(288):10811-10830
+                                    (apply (field 0 sub) sub x))))
+                             case tag 14:
+                              (let
+                                (attrs =a (field 1 desc) x =a (field 0 desc))
+                                (before parsing/ast_iterator.ml(286):10731-10784
+                                  (seq
+                                    (after parsing/ast_iterator.ml(286):10731-10755
+                                      (apply (field 1 sub) sub attrs))
+                                    (before parsing/ast_iterator.ml(287):10765-10784
+                                      (after parsing/ast_iterator.ml(287):10765-10784
+                                        (apply (field 16 sub) sub x)))))))
+                           with (2 l)
+                            (before parsing/ast_iterator.ml(272):10062-10100
+                              (after parsing/ast_iterator.ml(272):10062-10100
+                                (apply (field 14 (global Stdlib__list!))
+                                  (after parsing/ast_iterator.ml(272):10072-10098
+                                    (apply (field 39 sub) sub))
+                                  l)))))))))))
+           (pseudo parsing/ast_iterator.ml(236):8811-10834
+             (makeblock 0 iter iter_with_constraint iter_signature_item))))
+     M =
+       (module-defn(M) parsing/ast_iterator.ml(292):10837-12589
+         (let
+           (iter =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(295)<ghost>:10917-11550
+                  (let
+                    (attrs =a (field 2 param)
+                     loc =a (field 1 param)
+                     desc =a (field 0 param))
+                    (before parsing/ast_iterator.ml(296):10987-11550
+                      (seq
+                        (after parsing/ast_iterator.ml(296):10987-11007
+                          (apply (field 21 sub) sub loc))
+                        (before parsing/ast_iterator.ml(297):11013-11550
+                          (seq
+                            (after parsing/ast_iterator.ml(297):11013-11037
+                              (apply (field 1 sub) sub attrs))
+                            (before parsing/ast_iterator.ml(298):11043-11550
+                              (switch* desc
+                               case tag 0:
+                                (let (x =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(299):11081-11095
+                                    (after parsing/ast_iterator.ml(299):11081-11095
+                                      (apply iter_loc sub x))))
+                               case tag 1:
+                                (let (str =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(300):11124-11145
+                                    (after parsing/ast_iterator.ml(300):11124-11145
+                                      (apply (field 34 sub) sub str))))
+                               case tag 2:
+                                (let
+                                  (body =a (field 2 desc)
+                                   arg_ty =a (field 1 desc)
+                                   arg =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(302):11196-11293
+                                    (seq
+                                      (after parsing/ast_iterator.ml(302):11196-11212
+                                        (apply iter_loc sub arg))
+                                      (before parsing/ast_iterator.ml(303):11222-11293
+                                        (seq
+                                          (after parsing/ast_iterator.ml(303):11222-11259
+                                            (apply iter_opt
+                                              (after parsing/ast_iterator.ml(303):11231-11252
+                                                (apply (field 26 sub) sub))
+                                              arg_ty))
+                                          (before parsing/ast_iterator.ml(304):11269-11293
+                                            (after parsing/ast_iterator.ml(304):11269-11293
+                                              (apply (field 25 sub) sub body))))))))
+                               case tag 3:
+                                (let
+                                  (m2 =a (field 1 desc) m1 =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(306):11331-11377
+                                    (seq
+                                      (after parsing/ast_iterator.ml(306):11331-11353
+                                        (apply (field 25 sub) sub m1))
+                                      (before parsing/ast_iterator.ml(306):11355-11377
+                                        (after parsing/ast_iterator.ml(306):11355-11377
+                                          (apply (field 25 sub) sub m2))))))
+                               case tag 4:
+                                (let
+                                  (mty =a (field 1 desc) m =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(308):11420-11466
+                                    (seq
+                                      (after parsing/ast_iterator.ml(308):11420-11441
+                                        (apply (field 25 sub) sub m))
+                                      (before parsing/ast_iterator.ml(308):11443-11466
+                                        (after parsing/ast_iterator.ml(308):11443-11466
+                                          (apply (field 26 sub) sub mty))))))
+                               case tag 5:
+                                (let (e =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(309):11490-11504
+                                    (after parsing/ast_iterator.ml(309):11490-11504
+                                      (apply (field 15 sub) sub e))))
+                               case tag 6:
+                                (let (x =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(310):11531-11550
+                                    (after parsing/ast_iterator.ml(310):11531-11550
+                                      (apply (field 16 sub) sub x)))))))))))))
+            iter_structure_item =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(312)<ghost>:11578-12585
+                  (let (loc =a (field 1 param) desc =a (field 0 param))
+                    (before parsing/ast_iterator.ml(313):11623-12585
+                      (seq
+                        (after parsing/ast_iterator.ml(313):11623-11643
+                          (apply (field 21 sub) sub loc))
+                        (before parsing/ast_iterator.ml(314):11649-12585
+                          (switch* desc
+                           case tag 0:
+                            (let
+                              (attrs =a (field 1 desc) x =a (field 0 desc))
+                              (before parsing/ast_iterator.ml(316):11703-11743
+                                (seq
+                                  (after parsing/ast_iterator.ml(316):11703-11727
+                                    (apply (field 1 sub) sub attrs))
+                                  (before parsing/ast_iterator.ml(316):11729-11743
+                                    (after parsing/ast_iterator.ml(316):11729-11743
+                                      (apply (field 15 sub) sub x))))))
+                           case tag 1:
+                            (let (vbs =a (field 1 desc))
+                              (before parsing/ast_iterator.ml(317):11774-11811
+                                (after parsing/ast_iterator.ml(317):11774-11811
+                                  (apply (field 14 (global Stdlib__list!))
+                                    (after parsing/ast_iterator.ml(317):11784-11807
+                                      (apply (field 43 sub) sub))
+                                    vbs))))
+                           case tag 2:
+                            (let (vd =a (field 0 desc))
+                              (before parsing/ast_iterator.ml(318):11839-11867
+                                (after parsing/ast_iterator.ml(318):11839-11867
+                                  (apply (field 44 sub) sub vd))))
+                           case tag 3:
+                            (let (l =a (field 1 desc))
+                              (before parsing/ast_iterator.ml(319):11896-11934
+                                (after parsing/ast_iterator.ml(319):11896-11934
+                                  (apply (field 14 (global Stdlib__list!))
+                                    (after parsing/ast_iterator.ml(319):11906-11932
+                                      (apply (field 39 sub) sub))
+                                    l))))
+                           case tag 4:
+                            (let (te =a (field 0 desc))
+                              (before parsing/ast_iterator.ml(320):11959-11984
+                                (after parsing/ast_iterator.ml(320):11959-11984
+                                  (apply (field 40 sub) sub te))))
+                           case tag 5:
+                            (let (ed =a (field 0 desc))
+                              (before parsing/ast_iterator.ml(321):12012-12037
+                                (after parsing/ast_iterator.ml(321):12012-12037
+                                  (apply (field 41 sub) sub ed))))
+                           case tag 6:
+                            (let (x =a (field 0 desc))
+                              (before parsing/ast_iterator.ml(322):12061-12085
+                                (after parsing/ast_iterator.ml(322):12061-12085
+                                  (apply (field 22 sub) sub x))))
+                           case tag 7:
+                            (let (l =a (field 0 desc))
+                              (before parsing/ast_iterator.ml(323):12112-12148
+                                (after parsing/ast_iterator.ml(323):12112-12148
+                                  (apply (field 14 (global Stdlib__list!))
+                                    (after parsing/ast_iterator.ml(323):12122-12146
+                                      (apply (field 22 sub) sub))
+                                    l))))
+                           case tag 8:
+                            (let (x =a (field 0 desc))
+                              (before parsing/ast_iterator.ml(324):12173-12206
+                                (after parsing/ast_iterator.ml(324):12173-12206
+                                  (apply (field 27 sub) sub x))))
+                           case tag 9:
+                            (let (x =a (field 0 desc))
+                              (before parsing/ast_iterator.ml(325):12228-12254
+                                (after parsing/ast_iterator.ml(325):12228-12254
+                                  (apply (field 28 sub) sub x))))
+                           case tag 10:
+                            (let (l =a (field 0 desc))
+                              (before parsing/ast_iterator.ml(326):12277-12316
+                                (after parsing/ast_iterator.ml(326):12277-12316
+                                  (apply (field 14 (global Stdlib__list!))
+                                    (after parsing/ast_iterator.ml(326):12287-12314
+                                      (apply (field 5 sub) sub))
+                                    l))))
+                           case tag 11:
+                            (let (l =a (field 0 desc))
+                              (before parsing/ast_iterator.ml(328):12352-12396
+                                (after parsing/ast_iterator.ml(328):12352-12396
+                                  (apply (field 14 (global Stdlib__list!))
+                                    (after parsing/ast_iterator.ml(328):12362-12394
+                                      (apply (field 12 sub) sub))
+                                    l))))
+                           case tag 12:
+                            (let (x =a (field 0 desc))
+                              (before parsing/ast_iterator.ml(329):12421-12450
+                                (after parsing/ast_iterator.ml(329):12421-12450
+                                  (apply (field 18 sub) sub x))))
+                           case tag 13:
+                            (let (x =a (field 0 desc))
+                              (before parsing/ast_iterator.ml(332):12566-12585
+                                (after parsing/ast_iterator.ml(332):12566-12585
+                                  (apply (field 0 sub) sub x))))
+                           case tag 14:
+                            (let
+                              (attrs =a (field 1 desc) x =a (field 0 desc))
+                              (before parsing/ast_iterator.ml(331):12494-12539
+                                (seq
+                                  (after parsing/ast_iterator.ml(331):12494-12518
+                                    (apply (field 1 sub) sub attrs))
+                                  (before parsing/ast_iterator.ml(331):12520-12539
+                                    (after parsing/ast_iterator.ml(331):12520-12539
+                                      (apply (field 16 sub) sub x))))))))))))))
+           (pseudo parsing/ast_iterator.ml(292):10848-12589
+             (makeblock 0 iter iter_structure_item))))
+     E =
+       (module-defn(E) parsing/ast_iterator.ml(335):12591-15696
+         (let
+           (iter =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(338)<ghost>:12669-15513
+                  (let
+                    (attrs =a (field 3 param)
+                     loc =a (field 1 param)
+                     desc =a (field 0 param))
+                    (before parsing/ast_iterator.ml(339):12739-15513
+                      (seq
+                        (after parsing/ast_iterator.ml(339):12739-12759
+                          (apply (field 21 sub) sub loc))
+                        (before parsing/ast_iterator.ml(340):12765-15513
+                          (seq
+                            (after parsing/ast_iterator.ml(340):12765-12789
+                              (apply (field 1 sub) sub attrs))
+                            (before parsing/ast_iterator.ml(341):12795-15513
+                              (switch* desc
+                               case int 0:
+                                (before parsing/ast_iterator.ml(412):15511-15513
+                                  0a)
+                               case tag 0:
+                                (let (x =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(342):12833-12847
+                                    (after parsing/ast_iterator.ml(342):12833-12847
+                                      (apply iter_loc sub x))))
+                               case tag 1:
+                                (before parsing/ast_iterator.ml(343):12873-12875
+                                  0a)
+                               case tag 2:
+                                (let
+                                  (e =a (field 2 desc) vbs =a (field 1 desc))
+                                  (before parsing/ast_iterator.ml(345):12915-12976
+                                    (seq
+                                      (after parsing/ast_iterator.ml(345):12915-12952
+                                        (apply
+                                          (field 14 (global Stdlib__list!))
+                                          (after parsing/ast_iterator.ml(345):12925-12948
+                                            (apply (field 43 sub) sub))
+                                          vbs))
+                                      (before parsing/ast_iterator.ml(346):12962-12976
+                                        (after parsing/ast_iterator.ml(346):12962-12976
+                                          (apply (field 15 sub) sub e))))))
+                               case tag 3:
+                                (let (pel =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(351):13123-13140
+                                    (after parsing/ast_iterator.ml(351):13123-13140
+                                      (apply (field 4 sub) sub pel))))
+                               case tag 4:
+                                (let
+                                  (e =a (field 3 desc)
+                                   p =a (field 2 desc)
+                                   def =a (field 1 desc))
+                                  (before parsing/ast_iterator.ml(348):13021-13095
+                                    (seq
+                                      (after parsing/ast_iterator.ml(348):13021-13048
+                                        (apply iter_opt
+                                          (after parsing/ast_iterator.ml(348):13030-13044
+                                            (apply (field 15 sub) sub))
+                                          def))
+                                      (before parsing/ast_iterator.ml(349):13058-13095
+                                        (seq
+                                          (after parsing/ast_iterator.ml(349):13058-13071
+                                            (apply (field 30 sub) sub p))
+                                          (before parsing/ast_iterator.ml(350):13081-13095
+                                            (after parsing/ast_iterator.ml(350):13081-13095
+                                              (apply (field 15 sub) sub e))))))))
+                               case tag 5:
+                                (let
+                                  (l =a (field 1 desc) e =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(353):13176-13229
+                                    (seq
+                                      (after parsing/ast_iterator.ml(353):13176-13190
+                                        (apply (field 15 sub) sub e))
+                                      (before parsing/ast_iterator.ml(353):13192-13229
+                                        (after parsing/ast_iterator.ml(353):13192-13229
+                                          (apply
+                                            (field 14 (global Stdlib__list!))
+                                            (after parsing/ast_iterator.ml(353):13202-13227
+                                              (apply iter_snd
+                                                (after parsing/ast_iterator.ml(353):13212-13226
+                                                  (apply (field 15 sub) sub))))
+                                            l))))))
+                               case tag 6:
+                                (let
+                                  (pel =a (field 1 desc) e =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(355):13267-13300
+                                    (seq
+                                      (after parsing/ast_iterator.ml(355):13267-13281
+                                        (apply (field 15 sub) sub e))
+                                      (before parsing/ast_iterator.ml(355):13283-13300
+                                        (after parsing/ast_iterator.ml(355):13283-13300
+                                          (apply (field 4 sub) sub pel))))))
+                               case tag 7:
+                                (let
+                                  (pel =a (field 1 desc) e =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(356):13328-13361
+                                    (seq
+                                      (after parsing/ast_iterator.ml(356):13328-13342
+                                        (apply (field 15 sub) sub e))
+                                      (before parsing/ast_iterator.ml(356):13344-13361
+                                        (after parsing/ast_iterator.ml(356):13344-13361
+                                          (apply (field 4 sub) sub pel))))))
+                               case tag 8:
+                                (let (el =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(357):13385-13412
+                                    (after parsing/ast_iterator.ml(357):13385-13412
+                                      (apply
+                                        (field 14 (global Stdlib__list!))
+                                        (after parsing/ast_iterator.ml(357):13395-13409
+                                          (apply (field 15 sub) sub))
+                                        el))))
+                               case tag 9:
+                                (let
+                                  (arg =a (field 1 desc)
+                                   lid =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(359):13456-13501
+                                    (seq
+                                      (after parsing/ast_iterator.ml(359):13456-13472
+                                        (apply iter_loc sub lid))
+                                      (before parsing/ast_iterator.ml(359):13474-13501
+                                        (after parsing/ast_iterator.ml(359):13474-13501
+                                          (apply iter_opt
+                                            (after parsing/ast_iterator.ml(359):13483-13497
+                                              (apply (field 15 sub) sub))
+                                            arg))))))
+                               case tag 10:
+                                (let (eo =a (field 1 desc))
+                                  (before parsing/ast_iterator.ml(361):13543-13569
+                                    (after parsing/ast_iterator.ml(361):13543-13569
+                                      (apply iter_opt
+                                        (after parsing/ast_iterator.ml(361):13552-13566
+                                          (apply (field 15 sub) sub))
+                                        eo))))
+                               case tag 11:
+                                (let
+                                  (eo =a (field 1 desc) l =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(363):13607-13697
+                                    (seq
+                                      (after parsing/ast_iterator.ml(363):13607-13661
+                                        (apply
+                                          (field 14 (global Stdlib__list!))
+                                          (after parsing/ast_iterator.ml(363):13617-13659
+                                            (apply iter_tuple
+                                              (after parsing/ast_iterator.ml(363):13629-13643
+                                                (apply iter_loc sub))
+                                              (after parsing/ast_iterator.ml(363):13644-13658
+                                                (apply (field 15 sub) sub))))
+                                          l))
+                                      (before parsing/ast_iterator.ml(364):13671-13697
+                                        (after parsing/ast_iterator.ml(364):13671-13697
+                                          (apply iter_opt
+                                            (after parsing/ast_iterator.ml(364):13680-13694
+                                              (apply (field 15 sub) sub))
+                                            eo))))))
+                               case tag 12:
+                                (let
+                                  (lid =a (field 1 desc) e =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(366):13735-13767
+                                    (seq
+                                      (after parsing/ast_iterator.ml(366):13735-13749
+                                        (apply (field 15 sub) sub e))
+                                      (before parsing/ast_iterator.ml(366):13751-13767
+                                        (after parsing/ast_iterator.ml(366):13751-13767
+                                          (apply iter_loc sub lid))))))
+                               case tag 13:
+                                (let
+                                  (e2 =a (field 2 desc)
+                                   lid =a (field 1 desc)
+                                   e1 =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(368):13813-13871
+                                    (seq
+                                      (after parsing/ast_iterator.ml(368):13813-13828
+                                        (apply (field 15 sub) sub e1))
+                                      (before parsing/ast_iterator.ml(368):13830-13871
+                                        (seq
+                                          (after parsing/ast_iterator.ml(368):13830-13846
+                                            (apply iter_loc sub lid))
+                                          (before parsing/ast_iterator.ml(369):13856-13871
+                                            (after parsing/ast_iterator.ml(369):13856-13871
+                                              (apply (field 15 sub) sub e2))))))))
+                               case tag 14:
+                                (let (el =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(370):13895-13922
+                                    (after parsing/ast_iterator.ml(370):13895-13922
+                                      (apply
+                                        (field 14 (global Stdlib__list!))
+                                        (after parsing/ast_iterator.ml(370):13905-13919
+                                          (apply (field 15 sub) sub))
+                                        el))))
+                               case tag 15:
+                                (let
+                                  (e3 =a (field 2 desc)
+                                   e2 =a (field 1 desc)
+                                   e1 =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(372):13969-14037
+                                    (seq
+                                      (after parsing/ast_iterator.ml(372):13969-13984
+                                        (apply (field 15 sub) sub e1))
+                                      (before parsing/ast_iterator.ml(372):13986-14037
+                                        (seq
+                                          (after parsing/ast_iterator.ml(372):13986-14001
+                                            (apply (field 15 sub) sub e2))
+                                          (before parsing/ast_iterator.ml(373):14011-14037
+                                            (after parsing/ast_iterator.ml(373):14011-14037
+                                              (apply iter_opt
+                                                (after parsing/ast_iterator.ml(373):14020-14034
+                                                  (apply (field 15 sub) sub))
+                                                e3))))))))
+                               case tag 16:
+                                (let
+                                  (e2 =a (field 1 desc) e1 =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(375):14078-14110
+                                    (seq
+                                      (after parsing/ast_iterator.ml(375):14078-14093
+                                        (apply (field 15 sub) sub e1))
+                                      (before parsing/ast_iterator.ml(375):14095-14110
+                                        (after parsing/ast_iterator.ml(375):14095-14110
+                                          (apply (field 15 sub) sub e2))))))
+                               case tag 17:
+                                (let
+                                  (e2 =a (field 1 desc) e1 =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(377):14148-14180
+                                    (seq
+                                      (after parsing/ast_iterator.ml(377):14148-14163
+                                        (apply (field 15 sub) sub e1))
+                                      (before parsing/ast_iterator.ml(377):14165-14180
+                                        (after parsing/ast_iterator.ml(377):14165-14180
+                                          (apply (field 15 sub) sub e2))))))
+                               case tag 18:
+                                (let
+                                  (e3 =a (field 4 desc)
+                                   e2 =a (field 2 desc)
+                                   e1 =a (field 1 desc)
+                                   p =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(379):14227-14299
+                                    (seq
+                                      (after parsing/ast_iterator.ml(379):14227-14240
+                                        (apply (field 30 sub) sub p))
+                                      (before parsing/ast_iterator.ml(379):14242-14299
+                                        (seq
+                                          (after parsing/ast_iterator.ml(379):14242-14257
+                                            (apply (field 15 sub) sub e1))
+                                          (before parsing/ast_iterator.ml(379):14259-14299
+                                            (seq
+                                              (after parsing/ast_iterator.ml(379):14259-14274
+                                                (apply (field 15 sub) sub e2))
+                                              (before parsing/ast_iterator.ml(380):14284-14299
+                                                (after parsing/ast_iterator.ml(380):14284-14299
+                                                  (apply (field 15 sub) sub
+                                                    e3))))))))))
+                               case tag 19:
+                                (let
+                                  (t =a (field 1 desc) e =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(385):14447-14476
+                                    (seq
+                                      (after parsing/ast_iterator.ml(385):14447-14461
+                                        (apply (field 15 sub) sub e))
+                                      (before parsing/ast_iterator.ml(385):14463-14476
+                                        (after parsing/ast_iterator.ml(385):14463-14476
+                                          (apply (field 36 sub) sub t))))))
+                               case tag 20:
+                                (let
+                                  (t2 =a (field 2 desc)
+                                   t1 =a (field 1 desc)
+                                   e =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(382):14341-14406
+                                    (seq
+                                      (after parsing/ast_iterator.ml(382):14341-14355
+                                        (apply (field 15 sub) sub e))
+                                      (before parsing/ast_iterator.ml(382):14357-14406
+                                        (seq
+                                          (after parsing/ast_iterator.ml(382):14357-14382
+                                            (apply iter_opt
+                                              (after parsing/ast_iterator.ml(382):14366-14379
+                                                (apply (field 36 sub) sub))
+                                              t1))
+                                          (before parsing/ast_iterator.ml(383):14392-14406
+                                            (after parsing/ast_iterator.ml(383):14392-14406
+                                              (apply (field 36 sub) sub t2))))))))
+                               case tag 21:
+                                (let (e =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(386):14504-14518
+                                    (after parsing/ast_iterator.ml(386):14504-14518
+                                      (apply (field 15 sub) sub e))))
+                               case tag 22:
+                                (let (lid =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(387):14541-14557
+                                    (after parsing/ast_iterator.ml(387):14541-14557
+                                      (apply iter_loc sub lid))))
+                               case tag 23:
+                                (let
+                                  (e =a (field 1 desc) s =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(389):14598-14628
+                                    (seq
+                                      (after parsing/ast_iterator.ml(389):14598-14612
+                                        (apply iter_loc sub s))
+                                      (before parsing/ast_iterator.ml(389):14614-14628
+                                        (after parsing/ast_iterator.ml(389):14614-14628
+                                          (apply (field 15 sub) sub e))))))
+                               case tag 24:
+                                (let (sel =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(391):14664-14720
+                                    (after parsing/ast_iterator.ml(391):14664-14720
+                                      (apply
+                                        (field 14 (global Stdlib__list!))
+                                        (after parsing/ast_iterator.ml(391):14674-14716
+                                          (apply iter_tuple
+                                            (after parsing/ast_iterator.ml(391):14686-14700
+                                              (apply iter_loc sub))
+                                            (after parsing/ast_iterator.ml(391):14701-14715
+                                              (apply (field 15 sub) sub))))
+                                        sel))))
+                               case tag 25:
+                                (let
+                                  (e =a (field 2 desc)
+                                   me =a (field 1 desc)
+                                   s =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(393):14764-14826
+                                    (seq
+                                      (after parsing/ast_iterator.ml(393):14764-14778
+                                        (apply iter_loc sub s))
+                                      (before parsing/ast_iterator.ml(393):14780-14826
+                                        (seq
+                                          (after parsing/ast_iterator.ml(393):14780-14802
+                                            (apply (field 25 sub) sub me))
+                                          (before parsing/ast_iterator.ml(394):14812-14826
+                                            (after parsing/ast_iterator.ml(394):14812-14826
+                                              (apply (field 15 sub) sub e))))))))
+                               case tag 26:
+                                (let
+                                  (e =a (field 1 desc) cd =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(396):14870-14926
+                                    (seq
+                                      (after parsing/ast_iterator.ml(396):14870-14902
+                                        (apply (field 17 sub) sub cd))
+                                      (before parsing/ast_iterator.ml(397):14912-14926
+                                        (after parsing/ast_iterator.ml(397):14912-14926
+                                          (apply (field 15 sub) sub e))))))
+                               case tag 27:
+                                (let (e =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(398):14950-14964
+                                    (after parsing/ast_iterator.ml(398):14950-14964
+                                      (apply (field 15 sub) sub e))))
+                               case tag 28:
+                                (let (e =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(399):14986-15000
+                                    (after parsing/ast_iterator.ml(399):14986-15000
+                                      (apply (field 15 sub) sub e))))
+                               case tag 29:
+                                (let
+                                  (t =a (field 1 desc) e =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(401):15035-15075
+                                    (seq
+                                      (after parsing/ast_iterator.ml(401):15035-15049
+                                        (apply (field 15 sub) sub e))
+                                      (before parsing/ast_iterator.ml(401):15051-15075
+                                        (after parsing/ast_iterator.ml(401):15051-15075
+                                          (apply iter_opt
+                                            (after parsing/ast_iterator.ml(401):15060-15073
+                                              (apply (field 36 sub) sub))
+                                            t))))))
+                               case tag 30:
+                                (let (cls =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(402):15101-15128
+                                    (after parsing/ast_iterator.ml(402):15101-15128
+                                      (apply (field 10 sub) sub cls))))
+                               case tag 31:
+                                (let (e =a (field 1 desc))
+                                  (before parsing/ast_iterator.ml(403):15159-15173
+                                    (after parsing/ast_iterator.ml(403):15159-15173
+                                      (apply (field 15 sub) sub e))))
+                               case tag 32:
+                                (let (me =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(404):15196-15218
+                                    (after parsing/ast_iterator.ml(404):15196-15218
+                                      (apply (field 25 sub) sub me))))
+                               case tag 33:
+                                (let
+                                  (e =a (field 1 desc) o =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(406):15253-15295
+                                    (seq
+                                      (after parsing/ast_iterator.ml(406):15253-15279
+                                        (apply (field 28 sub) sub o))
+                                      (before parsing/ast_iterator.ml(406):15281-15295
+                                        (after parsing/ast_iterator.ml(406):15281-15295
+                                          (apply (field 15 sub) sub e))))))
+                               case tag 34:
+                                (let
+                                  (*match* =a (field 0 desc)
+                                   body =a (field 2 *match*)
+                                   ands =a (field 1 *match*)
+                                   let_ =a (field 0 *match*))
+                                  (before parsing/ast_iterator.ml(408):15343-15438
+                                    (seq
+                                      (after parsing/ast_iterator.ml(408):15343-15366
+                                        (apply (field 2 sub) sub let_))
+                                      (before parsing/ast_iterator.ml(409):15376-15438
+                                        (seq
+                                          (after parsing/ast_iterator.ml(409):15376-15411
+                                            (apply
+                                              (field 14
+                                                (global Stdlib__list!))
+                                              (after parsing/ast_iterator.ml(409):15386-15406
+                                                (apply (field 2 sub) sub))
+                                              ands))
+                                          (before parsing/ast_iterator.ml(410):15421-15438
+                                            (after parsing/ast_iterator.ml(410):15421-15438
+                                              (apply (field 15 sub) sub body))))))))
+                               case tag 35:
+                                (let (x =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(411):15465-15484
+                                    (after parsing/ast_iterator.ml(411):15465-15484
+                                      (apply (field 16 sub) sub x)))))))))))))
+            iter_binding_op =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(414)<ghost>:15537-15691
+                  (let
+                    (pbop_loc =a (field 3 param)
+                     pbop_exp =a (field 2 param)
+                     pbop_pat =a (field 1 param)
+                     pbop_op =a (field 0 param))
+                    (before parsing/ast_iterator.ml(415):15587-15691
+                      (seq
+                        (after parsing/ast_iterator.ml(415):15587-15607
+                          (apply iter_loc sub pbop_op))
+                        (before parsing/ast_iterator.ml(416):15613-15691
+                          (seq
+                            (after parsing/ast_iterator.ml(416):15613-15633
+                              (apply (field 30 sub) sub pbop_pat))
+                            (before parsing/ast_iterator.ml(417):15639-15691
+                              (seq
+                                (after parsing/ast_iterator.ml(417):15639-15660
+                                  (apply (field 15 sub) sub pbop_exp))
+                                (before parsing/ast_iterator.ml(418):15666-15691
+                                  (after parsing/ast_iterator.ml(418):15666-15691
+                                    (apply (field 21 sub) sub pbop_loc)))))))))))))
+           (pseudo parsing/ast_iterator.ml(335):12602-15696
+             (makeblock 0 iter iter_binding_op))))
+     P =
+       (module-defn(P) parsing/ast_iterator.ml(422):15698-16780
+         (let
+           (iter =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(425)<ghost>:15745-16775
+                  (let
+                    (attrs =a (field 3 param)
+                     loc =a (field 1 param)
+                     desc =a (field 0 param))
+                    (before parsing/ast_iterator.ml(426):15815-16775
+                      (seq
+                        (after parsing/ast_iterator.ml(426):15815-15835
+                          (apply (field 21 sub) sub loc))
+                        (before parsing/ast_iterator.ml(427):15841-16775
+                          (seq
+                            (after parsing/ast_iterator.ml(427):15841-15865
+                              (apply (field 1 sub) sub attrs))
+                            (before parsing/ast_iterator.ml(428):15871-16775
+                              (switch* desc
+                               case int 0:
+                                (before parsing/ast_iterator.ml(429):15905-15907
+                                  0a)
+                               case tag 0:
+                                (let (s =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(430):15928-15942
+                                    (after parsing/ast_iterator.ml(430):15928-15942
+                                      (apply iter_loc sub s))))
+                               case tag 1:
+                                (let
+                                  (s =a (field 1 desc) p =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(431):15970-15999
+                                    (seq
+                                      (after parsing/ast_iterator.ml(431):15970-15983
+                                        (apply (field 30 sub) sub p))
+                                      (before parsing/ast_iterator.ml(431):15985-15999
+                                        (after parsing/ast_iterator.ml(431):15985-15999
+                                          (apply iter_loc sub s))))))
+                               case tag 2:
+                                (before parsing/ast_iterator.ml(432):16025-16027
+                                  0a)
+                               case tag 3:
+                                (before parsing/ast_iterator.ml(433):16053-16055
+                                  0a)
+                               case tag 4:
+                                (let (pl =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(434):16079-16105
+                                    (after parsing/ast_iterator.ml(434):16079-16105
+                                      (apply
+                                        (field 14 (global Stdlib__list!))
+                                        (after parsing/ast_iterator.ml(434):16089-16102
+                                          (apply (field 30 sub) sub))
+                                        pl))))
+                               case tag 5:
+                                (let
+                                  (p =a (field 1 desc) l =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(436):16145-16185
+                                    (seq
+                                      (after parsing/ast_iterator.ml(436):16145-16159
+                                        (apply iter_loc sub l))
+                                      (before parsing/ast_iterator.ml(436):16161-16185
+                                        (after parsing/ast_iterator.ml(436):16161-16185
+                                          (apply iter_opt
+                                            (after parsing/ast_iterator.ml(436):16170-16183
+                                              (apply (field 30 sub) sub))
+                                            p))))))
+                               case tag 6:
+                                (let (p =a (field 1 desc))
+                                  (before parsing/ast_iterator.ml(437):16216-16240
+                                    (after parsing/ast_iterator.ml(437):16216-16240
+                                      (apply iter_opt
+                                        (after parsing/ast_iterator.ml(437):16225-16238
+                                          (apply (field 30 sub) sub))
+                                        p))))
+                               case tag 7:
+                                (let (lpl =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(439):16281-16336
+                                    (after parsing/ast_iterator.ml(439):16281-16336
+                                      (apply
+                                        (field 14 (global Stdlib__list!))
+                                        (after parsing/ast_iterator.ml(439):16291-16332
+                                          (apply iter_tuple
+                                            (after parsing/ast_iterator.ml(439):16303-16317
+                                              (apply iter_loc sub))
+                                            (after parsing/ast_iterator.ml(439):16318-16331
+                                              (apply (field 30 sub) sub))))
+                                        lpl))))
+                               case tag 8:
+                                (let (pl =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(440):16360-16386
+                                    (after parsing/ast_iterator.ml(440):16360-16386
+                                      (apply
+                                        (field 14 (global Stdlib__list!))
+                                        (after parsing/ast_iterator.ml(440):16370-16383
+                                          (apply (field 30 sub) sub))
+                                        pl))))
+                               case tag 9:
+                                (let
+                                  (p2 =a (field 1 desc) p1 =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(441):16413-16443
+                                    (seq
+                                      (after parsing/ast_iterator.ml(441):16413-16427
+                                        (apply (field 30 sub) sub p1))
+                                      (before parsing/ast_iterator.ml(441):16429-16443
+                                        (after parsing/ast_iterator.ml(441):16429-16443
+                                          (apply (field 30 sub) sub p2))))))
+                               case tag 10:
+                                (let
+                                  (t =a (field 1 desc) p =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(443):16484-16512
+                                    (seq
+                                      (after parsing/ast_iterator.ml(443):16484-16497
+                                        (apply (field 30 sub) sub p))
+                                      (before parsing/ast_iterator.ml(443):16499-16512
+                                        (after parsing/ast_iterator.ml(443):16499-16512
+                                          (apply (field 36 sub) sub t))))))
+                               case tag 11:
+                                (let (s =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(444):16534-16548
+                                    (after parsing/ast_iterator.ml(444):16534-16548
+                                      (apply iter_loc sub s))))
+                               case tag 12:
+                                (let (p =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(445):16570-16583
+                                    (after parsing/ast_iterator.ml(445):16570-16583
+                                      (apply (field 30 sub) sub p))))
+                               case tag 13:
+                                (let (s =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(446):16607-16621
+                                    (after parsing/ast_iterator.ml(446):16607-16621
+                                      (apply iter_loc sub s))))
+                               case tag 14:
+                                (let (p =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(447):16648-16661
+                                    (after parsing/ast_iterator.ml(447):16648-16661
+                                      (apply (field 30 sub) sub p))))
+                               case tag 15:
+                                (let (x =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(448):16688-16707
+                                    (after parsing/ast_iterator.ml(448):16688-16707
+                                      (apply (field 16 sub) sub x))))
+                               case tag 16:
+                                (let
+                                  (p =a (field 1 desc) lid =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(450):16744-16775
+                                    (seq
+                                      (after parsing/ast_iterator.ml(450):16744-16760
+                                        (apply iter_loc sub lid))
+                                      (before parsing/ast_iterator.ml(450):16762-16775
+                                        (after parsing/ast_iterator.ml(450):16762-16775
+                                          (apply (field 30 sub) sub p))))))))))))))))
+           (pseudo parsing/ast_iterator.ml(422):15709-16780
+             (makeblock 0 iter))))
+     CE =
+       (module-defn(CE) parsing/ast_iterator.ml(454):16782-18772
+         (let
+           (iter =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(457)<ghost>:16862-17691
+                  (let
+                    (attrs =a (field 2 param)
+                     loc =a (field 1 param)
+                     desc =a (field 0 param))
+                    (before parsing/ast_iterator.ml(458):16929-17691
+                      (seq
+                        (after parsing/ast_iterator.ml(458):16929-16949
+                          (apply (field 21 sub) sub loc))
+                        (before parsing/ast_iterator.ml(459):16955-17691
+                          (seq
+                            (after parsing/ast_iterator.ml(459):16955-16979
+                              (apply (field 1 sub) sub attrs))
+                            (before parsing/ast_iterator.ml(460):16985-17691
+                              (switch* desc
+                               case tag 0:
+                                (let
+                                  (tys =a (field 1 desc)
+                                   lid =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(462):17040-17085
+                                    (seq
+                                      (after parsing/ast_iterator.ml(462):17040-17056
+                                        (apply iter_loc sub lid))
+                                      (before parsing/ast_iterator.ml(462):17058-17085
+                                        (after parsing/ast_iterator.ml(462):17058-17085
+                                          (apply
+                                            (field 14 (global Stdlib__list!))
+                                            (after parsing/ast_iterator.ml(462):17068-17081
+                                              (apply (field 36 sub) sub))
+                                            tys))))))
+                               case tag 1:
+                                (let (s =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(464):17119-17144
+                                    (after parsing/ast_iterator.ml(464):17119-17144
+                                      (apply (field 10 sub) sub s))))
+                               case tag 2:
+                                (let
+                                  (ce =a (field 3 desc)
+                                   p =a (field 2 desc)
+                                   e =a (field 1 desc))
+                                  (before parsing/ast_iterator.ml(466):17187-17266
+                                    (seq
+                                      (after parsing/ast_iterator.ml(466):17187-17212
+                                        (apply iter_opt
+                                          (after parsing/ast_iterator.ml(466):17196-17210
+                                            (apply (field 15 sub) sub))
+                                          e))
+                                      (before parsing/ast_iterator.ml(467):17222-17266
+                                        (seq
+                                          (after parsing/ast_iterator.ml(467):17222-17235
+                                            (apply (field 30 sub) sub p))
+                                          (before parsing/ast_iterator.ml(468):17245-17266
+                                            (after parsing/ast_iterator.ml(468):17245-17266
+                                              (apply (field 7 sub) sub ce))))))))
+                               case tag 3:
+                                (let
+                                  (l =a (field 1 desc) ce =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(470):17302-17370
+                                    (seq
+                                      (after parsing/ast_iterator.ml(470):17302-17323
+                                        (apply (field 7 sub) sub ce))
+                                      (before parsing/ast_iterator.ml(471):17333-17370
+                                        (after parsing/ast_iterator.ml(471):17333-17370
+                                          (apply
+                                            (field 14 (global Stdlib__list!))
+                                            (after parsing/ast_iterator.ml(471):17343-17368
+                                              (apply iter_snd
+                                                (after parsing/ast_iterator.ml(471):17353-17367
+                                                  (apply (field 15 sub) sub))))
+                                            l))))))
+                               case tag 4:
+                                (let
+                                  (ce =a (field 2 desc)
+                                   vbs =a (field 1 desc))
+                                  (before parsing/ast_iterator.ml(473):17410-17478
+                                    (seq
+                                      (after parsing/ast_iterator.ml(473):17410-17447
+                                        (apply
+                                          (field 14 (global Stdlib__list!))
+                                          (after parsing/ast_iterator.ml(473):17420-17443
+                                            (apply (field 43 sub) sub))
+                                          vbs))
+                                      (before parsing/ast_iterator.ml(474):17457-17478
+                                        (after parsing/ast_iterator.ml(474):17457-17478
+                                          (apply (field 7 sub) sub ce))))))
+                               case tag 5:
+                                (let
+                                  (ct =a (field 1 desc) ce =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(476):17520-17564
+                                    (seq
+                                      (after parsing/ast_iterator.ml(476):17520-17541
+                                        (apply (field 7 sub) sub ce))
+                                      (before parsing/ast_iterator.ml(476):17543-17564
+                                        (after parsing/ast_iterator.ml(476):17543-17564
+                                          (apply (field 11 sub) sub ct))))))
+                               case tag 6:
+                                (let (x =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(477):17590-17609
+                                    (after parsing/ast_iterator.ml(477):17590-17609
+                                      (apply (field 16 sub) sub x))))
+                               case tag 7:
+                                (let
+                                  (e =a (field 1 desc) o =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(479):17643-17691
+                                    (seq
+                                      (after parsing/ast_iterator.ml(479):17643-17669
+                                        (apply (field 29 sub) sub o))
+                                      (before parsing/ast_iterator.ml(479):17671-17691
+                                        (after parsing/ast_iterator.ml(479):17671-17691
+                                          (apply (field 7 sub) sub e)))))))))))))))
+            iter_kind =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(481)<ghost>:17709-17805
+                  (switch* param
+                   case tag 0:
+                    (let (t =a (field 0 param))
+                      (before parsing/ast_iterator.ml(483):17792-17805
+                        (after parsing/ast_iterator.ml(483):17792-17805
+                          (apply (field 36 sub) sub t))))
+                   case tag 1:
+                    (let (e =a (field 1 param))
+                      (before parsing/ast_iterator.ml(482):17754-17768
+                        (after parsing/ast_iterator.ml(482):17754-17768
+                          (apply (field 15 sub) sub e)))))))
+            iter_field =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(485)<ghost>:17824-18353
+                  (let
+                    (attrs =a (field 2 param)
+                     loc =a (field 1 param)
+                     desc =a (field 0 param))
+                    (before parsing/ast_iterator.ml(486):17891-18353
+                      (seq
+                        (after parsing/ast_iterator.ml(486):17891-17911
+                          (apply (field 21 sub) sub loc))
+                        (before parsing/ast_iterator.ml(487):17917-18353
+                          (seq
+                            (after parsing/ast_iterator.ml(487):17917-17941
+                              (apply (field 1 sub) sub attrs))
+                            (before parsing/ast_iterator.ml(488):17947-18353
+                              (switch* desc
+                               case tag 0:
+                                (let (ce =a (field 1 desc))
+                                  (before parsing/ast_iterator.ml(489):17997-18018
+                                    (after parsing/ast_iterator.ml(489):17997-18018
+                                      (apply (field 7 sub) sub ce))))
+                               case tag 1:
+                                (let
+                                  (*match* =a (field 0 desc)
+                                   k =a (field 2 *match*)
+                                   s =a (field 0 *match*))
+                                  (before parsing/ast_iterator.ml(490):18047-18078
+                                    (seq
+                                      (after parsing/ast_iterator.ml(490):18047-18061
+                                        (apply iter_loc sub s))
+                                      (before parsing/ast_iterator.ml(490):18063-18078
+                                        (after parsing/ast_iterator.ml(490):18063-18078
+                                          (apply iter_kind sub k))))))
+                               case tag 2:
+                                (let
+                                  (*match* =a (field 0 desc)
+                                   k =a (field 2 *match*)
+                                   s =a (field 0 *match*))
+                                  (before parsing/ast_iterator.ml(492):18118-18149
+                                    (seq
+                                      (after parsing/ast_iterator.ml(492):18118-18132
+                                        (apply iter_loc sub s))
+                                      (before parsing/ast_iterator.ml(492):18134-18149
+                                        (after parsing/ast_iterator.ml(492):18134-18149
+                                          (apply iter_kind sub k))))))
+                               case tag 3:
+                                (let
+                                  (*match* =a (field 0 desc)
+                                   t2 =a (field 1 *match*)
+                                   t1 =a (field 0 *match*))
+                                  (before parsing/ast_iterator.ml(494):18191-18221
+                                    (seq
+                                      (after parsing/ast_iterator.ml(494):18191-18205
+                                        (apply (field 36 sub) sub t1))
+                                      (before parsing/ast_iterator.ml(494):18207-18221
+                                        (after parsing/ast_iterator.ml(494):18207-18221
+                                          (apply (field 36 sub) sub t2))))))
+                               case tag 4:
+                                (let (e =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(495):18249-18263
+                                    (after parsing/ast_iterator.ml(495):18249-18263
+                                      (apply (field 15 sub) sub e))))
+                               case tag 5:
+                                (let (x =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(496):18289-18308
+                                    (after parsing/ast_iterator.ml(496):18289-18308
+                                      (apply (field 0 sub) sub x))))
+                               case tag 6:
+                                (let (x =a (field 0 desc))
+                                  (before parsing/ast_iterator.ml(497):18334-18353
+                                    (after parsing/ast_iterator.ml(497):18334-18353
+                                      (apply (field 16 sub) sub x)))))))))))))
+            iter_structure =
+              (function sub param
+                (funct-body parsing/ast_iterator.ml(499)<ghost>:18376-18485
+                  (let
+                    (pcstr_fields =a (field 1 param)
+                     pcstr_self =a (field 0 param))
+                    (before parsing/ast_iterator.ml(500):18413-18485
+                      (seq
+                        (after parsing/ast_iterator.ml(500):18413-18435
+                          (apply (field 30 sub) sub pcstr_self))
+                        (before parsing/ast_iterator.ml(501):18441-18485
+                          (after parsing/ast_iterator.ml(501):18441-18485
+                            (apply (field 14 (global Stdlib__list!))
+                              (after parsing/ast_iterator.ml(501):18451-18472
+                                (apply (field 8 sub) sub))
+                              pcstr_fields))))))))
+            class_infos =
+              (function sub f param
+                (funct-body parsing/ast_iterator.ml(503)<ghost>:18505-18768
+                  (let
+                    (pci_attributes =a (field 5 param)
+                     pci_loc =a (field 4 param)
+                     pci_expr =a (field 3 param)
+                     pci_name =a (field 2 param)
+                     pl =a (field 1 param))
+                    (before parsing/ast_iterator.ml(505):18619-18768
+                      (seq
+                        (after parsing/ast_iterator.ml(505):18619-18656
+                          (apply (field 14 (global Stdlib__list!))
+                            (after parsing/ast_iterator.ml(505):18629-18653
+                              (apply iter_fst
+                                (after parsing/ast_iterator.ml(505):18639-18652
+                                  (apply (field 36 sub) sub))))
+                            pl))
+                        (before parsing/ast_iterator.ml(506):18662-18768
+                          (seq
+                            (after parsing/ast_iterator.ml(506):18662-18683
+                              (apply iter_loc sub pci_name))
+                            (before parsing/ast_iterator.ml(507):18689-18768
+                              (seq
+                                (after parsing/ast_iterator.ml(507):18689-18699
+                                  (apply f pci_expr))
+                                (before parsing/ast_iterator.ml(508):18705-18768
+                                  (seq
+                                    (after parsing/ast_iterator.ml(508):18705-18729
+                                      (apply (field 21 sub) sub pci_loc))
+                                    (before parsing/ast_iterator.ml(509):18735-18768
+                                      (after parsing/ast_iterator.ml(509):18735-18768
+                                        (apply (field 1 sub) sub
+                                          pci_attributes)))))))))))))))
+           (pseudo parsing/ast_iterator.ml(454):16794-18772
+             (makeblock 0 iter iter_kind iter_field iter_structure
+               class_infos))))
+     default_iterator =
+       (makeblock 0
+         (function this a
+           (funct-body parsing/ast_iterator.ml(656):23595-23724
+             (before parsing/ast_iterator.ml(657):23616-23718
+               (seq
+                 (after parsing/ast_iterator.ml(657):23616-23641
+                   (apply iter_loc this (field 0 a)))
+                 (before parsing/ast_iterator.ml(658):23649-23718
+                   (seq
+                     (after parsing/ast_iterator.ml(658):23649-23681
+                       (apply (field 31 this) this (field 1 a)))
+                     (before parsing/ast_iterator.ml(659):23689-23718
+                       (after parsing/ast_iterator.ml(659):23689-23718
+                         (apply (field 21 this) this (field 2 a))))))))))
+         (function this l
+           (funct-body parsing/ast_iterator.ml(661):23743-23792
+             (before parsing/ast_iterator.ml(661):23758-23791
+               (after parsing/ast_iterator.ml(661):23758-23791
+                 (apply (field 14 (global Stdlib__list!))
+                   (after parsing/ast_iterator.ml(661):23768-23789
+                     (apply (field 0 this) this))
+                   l)))))
+         (field 1 E)
+         (function this param
+           (funct-body parsing/ast_iterator.ml(647):23309-23463
+             (let
+               (pc_rhs =a (field 2 param)
+                pc_guard =a (field 1 param)
+                pc_lhs =a (field 0 param))
+               (before parsing/ast_iterator.ml(648):23358-23455
+                 (seq
+                   (after parsing/ast_iterator.ml(648):23358-23378
+                     (apply (field 30 this) this pc_lhs))
+                   (before parsing/ast_iterator.ml(649):23389-23455
+                     (seq
+                       (after parsing/ast_iterator.ml(649):23389-23423
+                         (apply iter_opt
+                           (after parsing/ast_iterator.ml(649):23398-23414
+                             (apply (field 15 this) this))
+                           pc_guard))
+                       (before parsing/ast_iterator.ml(650):23434-23455
+                         (after parsing/ast_iterator.ml(650):23434-23455
+                           (apply (field 15 this) this pc_rhs))))))))))
+         (function this l
+           (funct-body parsing/ast_iterator.ml(645):23246-23290
+             (before parsing/ast_iterator.ml(645):23261-23289
+               (after parsing/ast_iterator.ml(645):23261-23289
+                 (apply (field 14 (global Stdlib__list!))
+                   (after parsing/ast_iterator.ml(645):23271-23287
+                     (apply (field 3 this) this))
+                   l)))))
+         (function this
+           (funct-body parsing/ast_iterator.ml(526):19323-19379
+             (before parsing/ast_iterator.ml(526):19336-19378
+               (after parsing/ast_iterator.ml(526):19336-19378
+                 (apply (field 4 CE) this
+                   (after parsing/ast_iterator.ml(526):19356-19378
+                     (apply (field 7 this) this)))))))
+         (function this
+           (funct-body parsing/ast_iterator.ml(536):19709-19765
+             (before parsing/ast_iterator.ml(536):19722-19764
+               (after parsing/ast_iterator.ml(536):19722-19764
+                 (apply (field 4 CE) this
+                   (after parsing/ast_iterator.ml(536):19742-19764
+                     (apply (field 11 this) this)))))))
+         (field 0 CE) (field 2 CE) (field 2 CT) (field 3 CE) (field 0 CT)
+         (function this
+           (funct-body parsing/ast_iterator.ml(534):19621-19677
+             (before parsing/ast_iterator.ml(534):19634-19676
+               (after parsing/ast_iterator.ml(534):19634-19676
+                 (apply (field 4 CE) this
+                   (after parsing/ast_iterator.ml(534):19654-19676
+                     (apply (field 11 this) this)))))))
+         (field 1 CT)
+         (function this param
+           (funct-body parsing/ast_iterator.ml(629):22682-22968
+             (let
+               (pcd_attributes =a (field 4 param)
+                pcd_loc =a (field 3 param)
+                pcd_res =a (field 2 param)
+                pcd_args =a (field 1 param)
+                pcd_name =a (field 0 param))
+               (before parsing/ast_iterator.ml(630):22759-22960
+                 (seq
+                   (after parsing/ast_iterator.ml(630):22759-22781
+                     (apply iter_loc this pcd_name))
+                   (before parsing/ast_iterator.ml(631):22792-22960
+                     (seq
+                       (after parsing/ast_iterator.ml(631):22792-22834
+                         (apply (field 5 T) this pcd_args))
+                       (before parsing/ast_iterator.ml(632):22845-22960
+                         (seq
+                           (after parsing/ast_iterator.ml(632):22845-22877
+                             (apply iter_opt
+                               (after parsing/ast_iterator.ml(632):22854-22869
+                                 (apply (field 36 this) this))
+                               pcd_res))
+                           (before parsing/ast_iterator.ml(633):22888-22960
+                             (seq
+                               (after parsing/ast_iterator.ml(633):22888-22914
+                                 (apply (field 21 this) this pcd_loc))
+                               (before parsing/ast_iterator.ml(634):22925-22960
+                                 (after parsing/ast_iterator.ml(634):22925-22960
+                                   (apply (field 1 this) this pcd_attributes))))))))))))))
+         (field 0 E)
+         (function this param
+           (funct-body parsing/ast_iterator.ml(655):23520-23577
+             (let (e =a (field 1 param) s =a (field 0 param))
+               (before parsing/ast_iterator.ml(655):23540-23576
+                 (seq
+                   (after parsing/ast_iterator.ml(655):23540-23555
+                     (apply iter_loc this s))
+                   (before parsing/ast_iterator.ml(655):23557-23576
+                     (after parsing/ast_iterator.ml(655):23557-23576
+                       (apply (field 31 this) this e))))))))
+         (field 9 T)
+         (function this param
+           (funct-body parsing/ast_iterator.ml(612):22210-22399
+             (let
+               (pincl_attributes =a (field 2 param)
+                pincl_loc =a (field 1 param)
+                pincl_mod =a (field 0 param))
+               (before parsing/ast_iterator.ml(613):22273-22391
+                 (seq
+                   (after parsing/ast_iterator.ml(613):22273-22304
+                     (apply (field 25 this) this pincl_mod))
+                   (before parsing/ast_iterator.ml(614):22315-22391
+                     (seq
+                       (after parsing/ast_iterator.ml(614):22315-22343
+                         (apply (field 21 this) this pincl_loc))
+                       (before parsing/ast_iterator.ml(615):22354-22391
+                         (after parsing/ast_iterator.ml(615):22354-22391
+                           (apply (field 1 this) this pincl_attributes))))))))))
+         (function this param
+           (funct-body parsing/ast_iterator.ml(605):21986-22175
+             (let
+               (pincl_attributes =a (field 2 param)
+                pincl_loc =a (field 1 param)
+                pincl_mod =a (field 0 param))
+               (before parsing/ast_iterator.ml(606):22049-22167
+                 (seq
+                   (after parsing/ast_iterator.ml(606):22049-22080
+                     (apply (field 26 this) this pincl_mod))
+                   (before parsing/ast_iterator.ml(607):22091-22167
+                     (seq
+                       (after parsing/ast_iterator.ml(607):22091-22119
+                         (apply (field 21 this) this pincl_loc))
+                       (before parsing/ast_iterator.ml(608):22130-22167
+                         (after parsing/ast_iterator.ml(608):22130-22167
+                           (apply (field 1 this) this pincl_attributes))))))))))
+         (function this param
+           (funct-body parsing/ast_iterator.ml(638):23001-23231
+             (let
+               (pld_attributes =a (field 4 param)
+                pld_loc =a (field 3 param)
+                pld_type =a (field 2 param)
+                pld_name =a (field 0 param))
+               (before parsing/ast_iterator.ml(639):23085-23223
+                 (seq
+                   (after parsing/ast_iterator.ml(639):23085-23107
+                     (apply iter_loc this pld_name))
+                   (before parsing/ast_iterator.ml(640):23118-23223
+                     (seq
+                       (after parsing/ast_iterator.ml(640):23118-23140
+                         (apply (field 36 this) this pld_type))
+                       (before parsing/ast_iterator.ml(641):23151-23223
+                         (seq
+                           (after parsing/ast_iterator.ml(641):23151-23177
+                             (apply (field 21 this) this pld_loc))
+                           (before parsing/ast_iterator.ml(642):23188-23223
+                             (after parsing/ast_iterator.ml(642):23188-23223
+                               (apply (field 1 this) this pld_attributes))))))))))))
+         (function _this _l
+           (funct-body parsing/ast_iterator.ml(653):23481-23501
+             (before parsing/ast_iterator.ml(653):23498-23500 0a)))
+         (function this param
+           (funct-body parsing/ast_iterator.ml(583):21258-21472
+             (let
+               (pmb_loc =a (field 3 param)
+                pmb_attributes =a (field 2 param)
+                pmb_expr =a (field 1 param)
+                pmb_name =a (field 0 param))
+               (before parsing/ast_iterator.ml(584):21326-21464
+                 (seq
+                   (after parsing/ast_iterator.ml(584):21326-21348
+                     (apply iter_loc this pmb_name))
+                   (before parsing/ast_iterator.ml(584):21350-21464
+                     (seq
+                       (after parsing/ast_iterator.ml(584):21350-21380
+                         (apply (field 25 this) this pmb_expr))
+                       (before parsing/ast_iterator.ml(585):21391-21464
+                         (seq
+                           (after parsing/ast_iterator.ml(585):21391-21417
+                             (apply (field 21 this) this pmb_loc))
+                           (before parsing/ast_iterator.ml(586):21428-21463
+                             (after parsing/ast_iterator.ml(586):21428-21463
+                               (apply (field 1 this) this pmb_attributes))))))))))))
+         (function this param
+           (funct-body parsing/ast_iterator.ml(559):20466-20689
+             (let
+               (pmd_loc =a (field 3 param)
+                pmd_attributes =a (field 2 param)
+                pmd_type =a (field 1 param)
+                pmd_name =a (field 0 param))
+               (before parsing/ast_iterator.ml(560):20534-20681
+                 (seq
+                   (after parsing/ast_iterator.ml(560):20534-20556
+                     (apply iter_loc this pmd_name))
+                   (before parsing/ast_iterator.ml(561):20567-20681
+                     (seq
+                       (after parsing/ast_iterator.ml(561):20567-20597
+                         (apply (field 26 this) this pmd_type))
+                       (before parsing/ast_iterator.ml(562):20608-20681
+                         (seq
+                           (after parsing/ast_iterator.ml(562):20608-20634
+                             (apply (field 21 this) this pmd_loc))
+                           (before parsing/ast_iterator.ml(563):20645-20680
+                             (after parsing/ast_iterator.ml(563):20645-20680
+                               (apply (field 1 this) this pmd_attributes))))))))))))
+         (function this param
+           (funct-body parsing/ast_iterator.ml(567):20724-20947
+             (let
+               (pms_loc =a (field 3 param)
+                pms_attributes =a (field 2 param)
+                pms_manifest =a (field 1 param)
+                pms_name =a (field 0 param))
+               (before parsing/ast_iterator.ml(568):20796-20939
+                 (seq
+                   (after parsing/ast_iterator.ml(568):20796-20818
+                     (apply iter_loc this pms_name))
+                   (before parsing/ast_iterator.ml(569):20829-20939
+                     (seq
+                       (after parsing/ast_iterator.ml(569):20829-20855
+                         (apply iter_loc this pms_manifest))
+                       (before parsing/ast_iterator.ml(570):20866-20939
+                         (seq
+                           (after parsing/ast_iterator.ml(570):20866-20892
+                             (apply (field 21 this) this pms_loc))
+                           (before parsing/ast_iterator.ml(571):20903-20938
+                             (after parsing/ast_iterator.ml(571):20903-20938
+                               (apply (field 1 this) this pms_attributes))))))))))))
+         (field 0 M) (field 0 MT)
+         (function this param
+           (funct-body parsing/ast_iterator.ml(575):20986-21228
+             (let
+               (pmtd_loc =a (field 3 param)
+                pmtd_attributes =a (field 2 param)
+                pmtd_type =a (field 1 param)
+                pmtd_name =a (field 0 param))
+               (before parsing/ast_iterator.ml(576):21058-21220
+                 (seq
+                   (after parsing/ast_iterator.ml(576):21058-21081
+                     (apply iter_loc this pmtd_name))
+                   (before parsing/ast_iterator.ml(577):21092-21220
+                     (seq
+                       (after parsing/ast_iterator.ml(577):21092-21134
+                         (apply iter_opt
+                           (after parsing/ast_iterator.ml(577):21101-21124
+                             (apply (field 26 this) this))
+                           pmtd_type))
+                       (before parsing/ast_iterator.ml(578):21145-21220
+                         (seq
+                           (after parsing/ast_iterator.ml(578):21145-21172
+                             (apply (field 21 this) this pmtd_loc))
+                           (before parsing/ast_iterator.ml(579):21183-21219
+                             (after parsing/ast_iterator.ml(579):21183-21219
+                               (apply (field 1 this) this pmtd_attributes))))))))))))
+         (function this param
+           (funct-body parsing/ast_iterator.ml(590):21504-21715
+             (let
+               (popen_attributes =a (field 3 param)
+                popen_loc =a (field 2 param)
+                popen_expr =a (field 0 param))
+               (before parsing/ast_iterator.ml(591):21588-21707
+                 (seq
+                   (after parsing/ast_iterator.ml(591):21588-21620
+                     (apply (field 25 this) this popen_expr))
+                   (before parsing/ast_iterator.ml(592):21631-21707
+                     (seq
+                       (after parsing/ast_iterator.ml(592):21631-21659
+                         (apply (field 21 this) this popen_loc))
+                       (before parsing/ast_iterator.ml(593):21670-21707
+                         (after parsing/ast_iterator.ml(593):21670-21707
+                           (apply (field 1 this) this popen_attributes))))))))))
+         (function this param
+           (funct-body parsing/ast_iterator.ml(597):21747-21950
+             (let
+               (popen_attributes =a (field 3 param)
+                popen_loc =a (field 2 param)
+                popen_expr =a (field 0 param))
+               (before parsing/ast_iterator.ml(598):21831-21942
+                 (seq
+                   (after parsing/ast_iterator.ml(598):21831-21855
+                     (apply iter_loc this popen_expr))
+                   (before parsing/ast_iterator.ml(599):21866-21942
+                     (seq
+                       (after parsing/ast_iterator.ml(599):21866-21894
+                         (apply (field 21 this) this popen_loc))
+                       (before parsing/ast_iterator.ml(600):21905-21942
+                         (after parsing/ast_iterator.ml(600):21905-21942
+                           (apply (field 1 this) this popen_attributes))))))))))
+         (field 0 P)
+         (function this param
+           (funct-body parsing/ast_iterator.ml(663):23814-24037
+             (switch* param
+              case tag 0:
+               (let (x =a (field 0 param))
+                 (before parsing/ast_iterator.ml(664):23857-23878
+                   (after parsing/ast_iterator.ml(664):23857-23878
+                     (apply (field 34 this) this x))))
+              case tag 1:
+               (let (x =a (field 0 param))
+                 (before parsing/ast_iterator.ml(665):23900-23921
+                   (after parsing/ast_iterator.ml(665):23900-23921
+                     (apply (field 32 this) this x))))
+              case tag 2:
+               (let (x =a (field 0 param))
+                 (before parsing/ast_iterator.ml(666):23943-23958
+                   (after parsing/ast_iterator.ml(666):23943-23958
+                     (apply (field 36 this) this x))))
+              case tag 3:
+               (let (g =a (field 1 param) x =a (field 0 param))
+                 (before parsing/ast_iterator.ml(667):23985-24029
+                   (seq
+                     (after parsing/ast_iterator.ml(667):23985-24000
+                       (apply (field 30 this) this x))
+                     (before parsing/ast_iterator.ml(667):24002-24029
+                       (after parsing/ast_iterator.ml(667):24002-24029
+                         (apply iter_opt
+                           (after parsing/ast_iterator.ml(667):24011-24027
+                             (apply (field 15 this) this))
+                           g)))))))))
+         (function this l
+           (funct-body parsing/ast_iterator.ml(521):19118-19172
+             (before parsing/ast_iterator.ml(521):19133-19171
+               (after parsing/ast_iterator.ml(521):19133-19171
+                 (apply (field 14 (global Stdlib__list!))
+                   (after parsing/ast_iterator.ml(521):19143-19169
+                     (apply (field 33 this) this))
+                   l)))))
+         (field 2 MT)
+         (function this l
+           (funct-body parsing/ast_iterator.ml(518):18976-19030
+             (before parsing/ast_iterator.ml(518):18991-19029
+               (after parsing/ast_iterator.ml(518):18991-19029
+                 (apply (field 14 (global Stdlib__list!))
+                   (after parsing/ast_iterator.ml(518):19001-19027
+                     (apply (field 35 this) this))
+                   l)))))
+         (field 1 M) (field 2 T) (field 0 T) (field 1 T) (field 3 T)
+         (field 6 T) (field 7 T) (field 4 T)
+         (function this param
+           (funct-body parsing/ast_iterator.ml(620):22429-22642
+             (let
+               (pvb_loc =a (field 3 param)
+                pvb_attributes =a (field 2 param)
+                pvb_expr =a (field 1 param)
+                pvb_pat =a (field 0 param))
+               (before parsing/ast_iterator.ml(621):22496-22634
+                 (seq
+                   (after parsing/ast_iterator.ml(621):22496-22517
+                     (apply (field 30 this) this pvb_pat))
+                   (before parsing/ast_iterator.ml(622):22528-22634
+                     (seq
+                       (after parsing/ast_iterator.ml(622):22528-22551
+                         (apply (field 15 this) this pvb_expr))
+                       (before parsing/ast_iterator.ml(623):22562-22634
+                         (seq
+                           (after parsing/ast_iterator.ml(623):22562-22588
+                             (apply (field 21 this) this pvb_loc))
+                           (before parsing/ast_iterator.ml(624):22599-22634
+                             (after parsing/ast_iterator.ml(624):22599-22634
+                               (apply (field 1 this) this pvb_attributes))))))))))))
+         (function this param
+           (funct-body parsing/ast_iterator.ml(546):20107-20358
+             (let
+               (pval_loc =a (field 4 param)
+                pval_attributes =a (field 3 param)
+                pval_type =a (field 1 param)
+                pval_name =a (field 0 param))
+               (before parsing/ast_iterator.ml(548):20210-20350
+                 (seq
+                   (after parsing/ast_iterator.ml(548):20210-20233
+                     (apply iter_loc this pval_name))
+                   (before parsing/ast_iterator.ml(549):20243-20350
+                     (seq
+                       (after parsing/ast_iterator.ml(549):20243-20266
+                         (apply (field 36 this) this pval_type))
+                       (before parsing/ast_iterator.ml(550):20276-20350
+                         (seq
+                           (after parsing/ast_iterator.ml(550):20276-20303
+                             (apply (field 21 this) this pval_loc))
+                           (before parsing/ast_iterator.ml(551):20313-20349
+                             (after parsing/ast_iterator.ml(551):20313-20349
+                               (apply (field 1 this) this pval_attributes))))))))))))
+         (field 1 MT)))
+    (pseudo _none_(0)<ghost>:-1--1 (makeblock 0 default_iterator))))

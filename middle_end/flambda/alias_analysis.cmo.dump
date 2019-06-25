@@ -1,0 +1,338 @@
+(setglobal Alias_analysis!
+  (let
+    (print_constant_defining_value =
+       (function ppf param
+         (funct-body middle_end/flambda/alias_analysis.ml(50)<ghost>:2257-3313
+           (switch* param
+            case tag 0:
+             (let (*match* =a (field 0 param))
+               (switch* *match*
+                case tag 0:
+                 (let (const =a (field 0 *match*))
+                   (before middle_end/flambda/alias_analysis.ml(51):2310-2341
+                     (after middle_end/flambda/alias_analysis.ml(51):2310-2341
+                       (apply (field 2 (global Allocated_const!)) ppf const))))
+                case tag 1:
+                 (let (vars =a (field 2 *match*))
+                   (before middle_end/flambda/alias_analysis.ml(53):2390-2468
+                     (after middle_end/flambda/alias_analysis.ml(53):2390-2468
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [11: "[| " [15: [11: " |]" 0a]]] "[| %a |]"]
+                         (after middle_end/flambda/alias_analysis.ml(54):2426-2463
+                           (apply (field 118 (global Stdlib__format!)) 0a
+                             (field 5 (global Variable!))))
+                         vars))))
+                case tag 2:
+                 (let (var =a (field 2 *match*))
+                   (before middle_end/flambda/alias_analysis.ml(56):2526-2579
+                     (after middle_end/flambda/alias_analysis.ml(56):2526-2579
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [11: "dup_array(" [15: [12: ')' 0a]]]
+                          "dup_array(%a)"]
+                         (field 5 (global Variable!)) var))))))
+            case tag 1:
+             (let (vars =a (field 1 param) tag =a (field 0 param))
+               (before middle_end/flambda/alias_analysis.ml(58):2609-2709
+                 (after middle_end/flambda/alias_analysis.ml(58):2609-2709
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11: "[|" [15: [11: ": " [15: [11: "|]" 0a]]]]]
+                      "[|%a: %a|]"]
+                     (field 4 (global Tag!)) tag
+                     (after middle_end/flambda/alias_analysis.ml(60):2667-2704
+                       (apply (field 118 (global Stdlib__format!)) 0a
+                         (field 5 (global Variable!))))
+                     vars))))
+            case tag 2:
+             (let (set =a (field 0 param))
+               (before middle_end/flambda/alias_analysis.ml(61):2737-2774
+                 (after middle_end/flambda/alias_analysis.ml(61):2737-2774
+                   (apply (field 36 (global Flambda!)) ppf set))))
+            case tag 3:
+             (let (project =a (field 0 param))
+               (before middle_end/flambda/alias_analysis.ml(62):2806-2847
+                 (after middle_end/flambda/alias_analysis.ml(62):2806-2847
+                   (apply (field 33 (global Flambda!)) ppf project))))
+            case tag 4:
+             (let (move =a (field 0 param))
+               (before middle_end/flambda/alias_analysis.ml(64):2892-2942
+                 (after middle_end/flambda/alias_analysis.ml(64):2892-2942
+                   (apply (field 34 (global Flambda!)) ppf move))))
+            case tag 5:
+             (let (project =a (field 0 param))
+               (before middle_end/flambda/alias_analysis.ml(65):2970-3007
+                 (after middle_end/flambda/alias_analysis.ml(65):2970-3007
+                   (apply (field 35 (global Flambda!)) ppf project))))
+            case tag 6:
+             (let (field =a (field 1 param) var =a (field 0 param))
+               (before middle_end/flambda/alias_analysis.ml(66):3034-3087
+                 (after middle_end/flambda/alias_analysis.ml(66):3034-3087
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [15: [11: ".(" [4: 0a 0a 0a [12: ')' 0a]]]] "%a.(%d)"]
+                     (field 5 (global Variable!)) var field))))
+            case tag 7:
+             (let (field =a (field 1 param) sym =a (field 0 param))
+               (before middle_end/flambda/alias_analysis.ml(68):3125-3176
+                 (after middle_end/flambda/alias_analysis.ml(68):3125-3176
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [15: [11: ".(" [4: 0a 0a 0a [12: ')' 0a]]]] "%a.(%d)"]
+                     (field 5 (global Symbol!)) sym field))))
+            case tag 8:
+             (let (const =a (field 0 param))
+               (before middle_end/flambda/alias_analysis.ml(69):3196-3225
+                 (after middle_end/flambda/alias_analysis.ml(69):3196-3225
+                   (apply (field 29 (global Flambda!)) ppf const))))
+            case tag 9:
+             (let (symbol =a (field 0 param))
+               (before middle_end/flambda/alias_analysis.ml(70):3247-3270
+                 (after middle_end/flambda/alias_analysis.ml(70):3247-3270
+                   (apply (field 5 (global Symbol!)) ppf symbol))))
+            case tag 10:
+             (let (var =a (field 0 param))
+               (before middle_end/flambda/alias_analysis.ml(71):3291-3313
+                 (after middle_end/flambda/alias_analysis.ml(71):3291-3313
+                   (apply (field 5 (global Variable!)) ppf var))))))))
+    (letrec
+      (resolve_definition
+         (function definitions var def the_dead_constant
+           (funct-body middle_end/flambda/alias_analysis.ml(74)<ghost>:3346-4212
+             (before middle_end/flambda/alias_analysis.ml(78):3476-4212
+               (switch def
+                case tag 5:
+                 (let (*match* =a (field 0 def) var =a (field 2 *match*))
+                   (before middle_end/flambda/alias_analysis.ml(87):3664-3747
+                     (after middle_end/flambda/alias_analysis.ml(87):3664-3747
+                       (apply fetch_variable definitions
+                         (after middle_end/flambda/alias_analysis.ml(87):3691-3722
+                           (apply (field 10 (global Var_within_closure!))
+                             var))
+                         the_dead_constant))))
+                case tag 6:
+                 (let (n =a (field 1 def) v =a (field 0 def))
+                   (before middle_end/flambda/alias_analysis.ml(94):3877-4109
+                     (let
+                       (*match* =
+                          (after middle_end/flambda/alias_analysis.ml(94):3889-3936
+                            (apply fetch_variable definitions v
+                              the_dead_constant)))
+                       (switch* *match*
+                        case tag 0:
+                         (let (s =a (field 0 *match*))
+                           (before middle_end/flambda/alias_analysis.ml(96):3966-4019
+                             (after middle_end/flambda/alias_analysis.ml(96):3966-4019
+                               (apply fetch_symbol_field definitions s n
+                                 the_dead_constant))))
+                        case tag 1:
+                         (let (v =a (field 0 *match*))
+                           (before middle_end/flambda/alias_analysis.ml(98):4046-4101
+                             (after middle_end/flambda/alias_analysis.ml(98):4046-4101
+                               (apply fetch_variable_field definitions v n
+                                 the_dead_constant))))))))
+                case tag 7:
+                 (let (field =a (field 1 def) symbol =a (field 0 def))
+                   (before middle_end/flambda/alias_analysis.ml(101):4150-4212
+                     (after middle_end/flambda/alias_analysis.ml(101):4150-4212
+                       (apply fetch_symbol_field definitions symbol field
+                         the_dead_constant))))
+                case tag 9:
+                 (let (sym =a (field 0 def))
+                   (before middle_end/flambda/alias_analysis.ml(92):3842-3852
+                     (makeblock 0 sym)))
+                case tag 10:
+                 (let (v =a (field 0 def))
+                   (before middle_end/flambda/alias_analysis.ml(90):3770-3823
+                     (after middle_end/flambda/alias_analysis.ml(90):3770-3823
+                       (apply fetch_variable definitions v the_dead_constant))))
+                default:
+                 (before middle_end/flambda/alias_analysis.ml(85):3622-3634
+                   (makeblock 1 var))))))
+        fetch_variable
+          (function definitions var the_dead_constant
+            (funct-body middle_end/flambda/alias_analysis.ml(104)<ghost>:4237-4494
+              (before middle_end/flambda/alias_analysis.ml(107):4332-4494
+                (catch
+                  (try
+                    (exit 2
+                      (after middle_end/flambda/alias_analysis.ml(107):4338-4380
+                        (apply (field 6 (field 8 (global Variable!)))
+                          (field 0 definitions) var)))
+                   with exn
+                    (if (== exn (field 7 (global Stdlib!)))
+                      (before middle_end/flambda/alias_analysis.ml(108):4413-4425
+                        (makeblock 1 var))
+                      (reraise exn)))
+                 with (2 def)
+                  (before middle_end/flambda/alias_analysis.ml(109):4437-4494
+                    (after middle_end/flambda/alias_analysis.ml(109):4437-4494
+                      (apply resolve_definition definitions var def
+                        the_dead_constant)))))))
+        fetch_variable_field
+          (function definitions var field[int] the_dead_constant
+            (funct-body middle_end/flambda/alias_analysis.ml(112)<ghost>:4525-5247
+              (before middle_end/flambda/alias_analysis.ml(116):4637-5247
+                (catch
+                  (try
+                    (exit 8
+                      (after middle_end/flambda/alias_analysis.ml(116):4643-4685
+                        (apply (field 6 (field 8 (global Variable!)))
+                          (field 0 definitions) var)))
+                   with exn
+                    (if (== exn (field 7 (global Stdlib!)))
+                      (before middle_end/flambda/alias_analysis.ml(123):4911-4986
+                        (after middle_end/flambda/alias_analysis.ml(123):4911-4986
+                          (apply (field 1 (global Misc!))
+                            [0:
+                             [11:
+                              "No definition for field access to " [15: 0a]]
+                             "No definition for field access to %a"]
+                            (field 5 (global Variable!)) var)))
+                      (reraise exn)))
+                 with (8 val)
+                  (catch
+                    (switch val
+                     case tag 1:
+                      (let (fields =a (field 1 val))
+                        (before middle_end/flambda/alias_analysis.ml(118):4720-4879
+                          (catch
+                            (try
+                              (exit 4
+                                (after middle_end/flambda/alias_analysis.ml(118):4732-4753
+                                  (apply (field 6 (global Stdlib__list!))
+                                    fields field)))
+                             with exn
+                              (if (== exn (field 7 (global Stdlib!)))
+                                (before middle_end/flambda/alias_analysis.ml(119):4788-4812
+                                  (makeblock 0 the_dead_constant))
+                                (reraise exn)))
+                           with (4 v)
+                            (before middle_end/flambda/alias_analysis.ml(120):4824-4871
+                              (after middle_end/flambda/alias_analysis.ml(120):4824-4871
+                                (apply fetch_variable definitions v
+                                  the_dead_constant))))))
+                     case tag 5: (exit 6)
+                     case tag 6: (exit 6)
+                     case tag 7: (exit 6)
+                     case tag 9: (exit 6)
+                     case tag 10: (exit 6)
+                     default:
+                      (before middle_end/flambda/alias_analysis.ml(129):5223-5247
+                        (makeblock 0 the_dead_constant)))
+                   with (6)
+                    (before middle_end/flambda/alias_analysis.ml(126):5097-5109
+                      (raise
+                        (after middle_end/flambda/alias_analysis.ml(126):5097-5109
+                          (makeblock 0 (global Assert_failure!)
+                            [0: "middle_end/flambda/alias_analysis.ml" 126 4])))))))))
+        fetch_symbol_field
+          (function definitions sym field[int] the_dead_constant
+            (funct-body middle_end/flambda/alias_analysis.ml(132)<ghost>:5276-6217
+              (before middle_end/flambda/alias_analysis.ml(136):5386-6217
+                (catch
+                  (try
+                    (exit 15
+                      (after middle_end/flambda/alias_analysis.ml(136):5392-5430
+                        (apply (field 6 (field 8 (global Symbol!)))
+                          (field 2 definitions) sym)))
+                   with exn
+                    (if (== exn (field 7 (global Stdlib!)))
+                      (before middle_end/flambda/alias_analysis.ml(144):5652-6123
+                        (catch
+                          (try
+                            (exit 12
+                              (after middle_end/flambda/alias_analysis.ml(144):5664-5713
+                                (apply (field 6 (field 8 (global Symbol!)))
+                                  (field 1 definitions) sym)))
+                           with exn
+                            (if (== exn (field 7 (global Stdlib!)))
+                              (before middle_end/flambda/alias_analysis.ml(154):6032-6115
+                                (after middle_end/flambda/alias_analysis.ml(154):6032-6115
+                                  (apply (field 1 (global Misc!))
+                                    [0:
+                                     [11:
+                                      "No definition for field access to "
+                                      [15: 0a]]
+                                     "No definition for field access to %a"]
+                                    (field 5 (global Symbol!)) sym)))
+                              (reraise exn)))
+                         with (12 fields)
+                          (before middle_end/flambda/alias_analysis.ml(146):5745-5992
+                            (let
+                              (*match* =
+                                 (after middle_end/flambda/alias_analysis.ml(146):5757-5778
+                                   (apply (field 6 (global Stdlib__list!))
+                                     fields field)))
+                              (if *match*
+                                (let (v =a (field 0 *match*))
+                                  (before middle_end/flambda/alias_analysis.ml(151):5933-5980
+                                    (after middle_end/flambda/alias_analysis.ml(151):5933-5980
+                                      (apply fetch_variable definitions v
+                                        the_dead_constant))))
+                                (before middle_end/flambda/alias_analysis.ml(148):5812-5902
+                                  (after middle_end/flambda/alias_analysis.ml(148):5812-5902
+                                    (apply (field 1 (global Misc!))
+                                      [0:
+                                       [11:
+                                        "Constant field access to an inconstant "
+                                        [15: 0a]]
+                                       "Constant field access to an inconstant %a"]
+                                      (field 5 (global Symbol!)) sym))))))))
+                      (reraise exn)))
+                 with (15 val)
+                  (switch val
+                   case tag 1:
+                    (let (fields =a (field 1 val))
+                      (before middle_end/flambda/alias_analysis.ml(138):5465-5620
+                        (catch
+                          (try
+                            (exit 10
+                              (after middle_end/flambda/alias_analysis.ml(138):5477-5498
+                                (apply (field 6 (global Stdlib__list!))
+                                  fields field)))
+                           with exn
+                            (if (== exn (field 7 (global Stdlib!)))
+                              (before middle_end/flambda/alias_analysis.ml(139):5533-5557
+                                (makeblock 0 the_dead_constant))
+                              (reraise exn)))
+                         with (10 val)
+                          (switch* val
+                           case tag 0:
+                            (let (s =a (field 0 val))
+                              (before middle_end/flambda/alias_analysis.ml(140):5576-5584
+                                (makeblock 0 s)))
+                           case tag 1:
+                            (before middle_end/flambda/alias_analysis.ml(141):5602-5612
+                              (makeblock 0 sym))))))
+                   default:
+                    (before middle_end/flambda/alias_analysis.ml(158):6193-6217
+                      (makeblock 0 the_dead_constant))))))))
+      (let
+        (run =
+           (function variable initialize_symbol symbol the_dead_constant
+             (funct-body middle_end/flambda/alias_analysis.ml(160)<ghost>:6227-6594
+               (before middle_end/flambda/alias_analysis.ml(161):6284-6594
+                 (let
+                   (definitions =
+                      (makeblock 0 variable initialize_symbol symbol))
+                   (before middle_end/flambda/alias_analysis.ml(162):6348-6594
+                     (after middle_end/flambda/alias_analysis.ml(162):6348-6594
+                       (apply (field 13 (field 8 (global Variable!)))
+                         (function var definition result
+                           (funct-body middle_end/flambda/alias_analysis.ml(162):6366-6546
+                             (before middle_end/flambda/alias_analysis.ml(163):6402-6545
+                               (let
+                                 (definition =
+                                    (after middle_end/flambda/alias_analysis.ml(164):6427-6491
+                                      (apply resolve_definition definitions
+                                        var definition the_dead_constant)))
+                                 (before middle_end/flambda/alias_analysis.ml(166):6507-6545
+                                   (after middle_end/flambda/alias_analysis.ml(166):6507-6545
+                                     (apply
+                                       (field 3 (field 7 (global Variable!)))
+                                       var definition result)))))))
+                         (field 0 definitions)
+                         (field 0 (field 7 (global Variable!)))))))))))
+        (pseudo _none_(0)<ghost>:-1--1
+          (makeblock 0 run print_constant_defining_value))))))

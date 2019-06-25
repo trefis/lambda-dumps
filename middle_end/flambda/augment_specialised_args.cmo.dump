@@ -1,0 +1,2194 @@
+(setglobal Augment_specialised_args!
+  (let
+    (Definition =
+       (module-defn(Definition) middle_end/flambda/augment_specialised_args.ml(23):1311-2408
+         (let
+           (include =
+              (apply (field 1 (global Identifiable!))
+                (let
+                  (compare =
+                     (function t1 t2 : int
+                       (funct-body middle_end/flambda/augment_specialised_args.ml(31)<ghost>:1532-1908
+                         (before middle_end/flambda/augment_specialised_args.ml(32):1546-1908
+                           (let (*match* = t1 *match* = t2)
+                             (switch* *match*
+                              case tag 0:
+                               (let (var1 =a (field 0 *match*))
+                                 (switch* *match*
+                                  case tag 0:
+                                   (let (var2 =a (field 0 *match*))
+                                     (before middle_end/flambda/augment_specialised_args.ml(34):1642-1668
+                                       (after middle_end/flambda/augment_specialised_args.ml(34):1642-1668
+                                         (apply (field 3 (global Variable!))
+                                           var1 var2))))
+                                  case tag 1:
+                                   (before middle_end/flambda/augment_specialised_args.ml(38):1864-1866
+                                     -1)))
+                              case tag 1:
+                               (let (proj1 =a (field 0 *match*))
+                                 (switch* *match*
+                                  case tag 0:
+                                   (before middle_end/flambda/augment_specialised_args.ml(39):1907-1908
+                                     1)
+                                  case tag 1:
+                                   (let (proj2 =a (field 0 *match*))
+                                     (before middle_end/flambda/augment_specialised_args.ml(37):1793-1823
+                                       (after middle_end/flambda/augment_specialised_args.ml(37):1793-1823
+                                         (apply
+                                           (field 9 (global Projection!))
+                                           proj1 proj2)))))))))))
+                   equal =
+                     (function t1 t2
+                       (funct-body middle_end/flambda/augment_specialised_args.ml(41)<ghost>:1924-1957
+                         (before middle_end/flambda/augment_specialised_args.ml(42):1938-1957
+                           (after middle_end/flambda/augment_specialised_args.ml(42):1938-1957
+                             (apply
+                               (field 0
+                                 (global Int_replace_polymorphic_compare!))
+                               (after middle_end/flambda/augment_specialised_args.ml(42):1938-1953
+                                 (apply compare t1 t2))
+                               0)))))
+                   hash = (field 26 (global Stdlib__hashtbl!))
+                   print =
+                     (function ppf t
+                       (funct-body middle_end/flambda/augment_specialised_args.ml(46)<ghost>:2002-2326
+                         (before middle_end/flambda/augment_specialised_args.ml(47):2016-2326
+                           (switch* t
+                            case tag 0:
+                             (let (var =a (field 0 t))
+                               (before middle_end/flambda/augment_specialised_args.ml(49):2076-2152
+                                 (after middle_end/flambda/augment_specialised_args.ml(49):2076-2152
+                                   (apply
+                                     (field 122 (global Stdlib__format!)) ppf
+                                     [0:
+                                      [11:
+                                       "Existing_inner_free_var " [15: 0a]]
+                                      "Existing_inner_free_var %a"]
+                                     (field 5 (global Variable!)) var))))
+                            case tag 1:
+                             (let (projection =a (field 0 t))
+                               (before middle_end/flambda/augment_specialised_args.ml(52):2224-2326
+                                 (after middle_end/flambda/augment_specialised_args.ml(52):2224-2326
+                                   (apply
+                                     (field 122 (global Stdlib__format!)) ppf
+                                     [0:
+                                      [11:
+                                       "Projection_from_existing_specialised_arg "
+                                       [15: 0a]]
+                                      "Projection_from_existing_specialised_arg %a"]
+                                     (field 11 (global Projection!))
+                                     projection))))))))
+                   output =
+                     (function param param
+                       (funct-body middle_end/flambda/augment_specialised_args.ml(55)<ghost>:2343-2397
+                         (before middle_end/flambda/augment_specialised_args.ml(55):2349-2397
+                           (after middle_end/flambda/augment_specialised_args.ml(55):2349-2397
+                             (apply (field 1 (global Stdlib!))
+                               "Definition.output not yet implemented"))))))
+                  (pseudo middle_end/flambda/augment_specialised_args.ml(28):1486-2403
+                    (makeblock 0 equal hash compare output print))))
+            T =a (field 0 include)
+            equal =a (field 1 include)
+            hash =a (field 2 include)
+            compare =a (field 3 include)
+            output =a (field 4 include)
+            print =a (field 5 include)
+            Set =a (field 6 include)
+            Map =a (field 7 include)
+            Tbl =a (field 8 include))
+           (pseudo middle_end/flambda/augment_specialised_args.ml(23):1331-2408
+             (makeblock 0 T equal hash compare output print Set Map Tbl))))
+     What_to_specialise =
+       (module-defn(What_to_specialise) middle_end/flambda/augment_specialised_args.ml(59):2410-3700
+         (let
+           (create =
+              (function set_of_closures
+                (funct-body middle_end/flambda/augment_specialised_args.ml(67)<ghost>:2689-2841
+                  (before middle_end/flambda/augment_specialised_args.ml(68):2712-2841
+                    (makeblock 0
+                      (field 0 (field 7 (field 19 (global Variable!))))
+                      set_of_closures (field 0 (field 6 (global Variable!)))))))
+            new_specialised_arg =
+              (function t fun_var group definition
+                (funct-body middle_end/flambda/augment_specialised_args.ml(73)<ghost>:2869-3240
+                  (before middle_end/flambda/augment_specialised_args.ml(74):2905-3240
+                    (let (key = (makeblock 0 fun_var group))
+                      (before middle_end/flambda/augment_specialised_args.ml(75):2937-3240
+                        (let
+                          (definitions =
+                             (catch
+                               (try
+                                 (exit 3
+                                   (after middle_end/flambda/augment_specialised_args.ml(76):2967-3007
+                                     (apply
+                                       (field 26
+                                         (field 7
+                                           (field 19 (global Variable!))))
+                                       key (field 0 t))))
+                                with exn
+                                 (if (== exn (field 7 (global Stdlib!)))
+                                   (before middle_end/flambda/augment_specialised_args.ml(77):3044-3046
+                                     0a)
+                                   (reraise exn)))
+                              with (3 definitions)
+                               (before middle_end/flambda/augment_specialised_args.ml(78):3070-3081
+                                 definitions)))
+                          (before middle_end/flambda/augment_specialised_args.ml(80):3093-3240
+                            (let
+                              (definitions =
+                                 (after middle_end/flambda/augment_specialised_args.ml(81):3117-3205
+                                   (apply
+                                     (field 3
+                                       (field 7
+                                         (field 19 (global Variable!))))
+                                     (makeblock 0 fun_var group)
+                                     (makeblock 0 definition definitions)
+                                     (field 0 t))))
+                              (before middle_end/flambda/augment_specialised_args.ml(84):3217-3240
+                                (let (init = t)
+                                  (makeblock 0 definitions (field 1 init)
+                                    (field 2 init))))))))))))
+            make_direct_call_surrogate_for =
+              (function t fun_var
+                (funct-body middle_end/flambda/augment_specialised_args.ml(86)<ghost>:3279-3696
+                  (before middle_end/flambda/augment_specialised_args.ml(87):3296-3696
+                    (catch
+                      (try
+                        (exit 5
+                          (after middle_end/flambda/augment_specialised_args.ml(87):3302-3365
+                            (apply (field 26 (field 7 (global Variable!)))
+                              fun_var (field 3 (field 0 (field 1 t))))))
+                       with exn
+                        (if (== exn (field 7 (global Stdlib!)))
+                          (before middle_end/flambda/augment_specialised_args.ml(89):3406-3550
+                            (after middle_end/flambda/augment_specialised_args.ml(89):3406-3550
+                              (apply (field 1 (global Misc!))
+                                [0:
+                                 [11:
+                                  "use_direct_call_surrogate_for: "
+                                  [15:
+                                   [11:
+                                    " is not a fun_var from the given set of closures"
+                                    0a]]]
+                                 "use_direct_call_surrogate_for: %a is not a fun_var from the given set of closures"]
+                                (field 5 (global Variable!)) fun_var)))
+                          (reraise exn)))
+                     with (5 val)
+                      (before middle_end/flambda/augment_specialised_args.ml(93):3568-3696
+                        (let (init = t)
+                          (makeblock 0 (field 0 init) (field 1 init)
+                            (after middle_end/flambda/augment_specialised_args.ml(95):3629-3687
+                              (apply (field 3 (field 6 (global Variable!)))
+                                fun_var (field 2 t)))))))))))
+           (pseudo middle_end/flambda/augment_specialised_args.ml(59):2438-3700
+             (makeblock 0 create new_specialised_arg
+               make_direct_call_surrogate_for))))
+     Processed_what_to_specialise =
+       (module-defn(Processed_what_to_specialise) middle_end/flambda/augment_specialised_args.ml(110):3925-14895
+         (let
+           (lift_projection =
+              (function t projection
+                (funct-body middle_end/flambda/augment_specialised_args.ml(135)<ghost>:5017-5730
+                  (before middle_end/flambda/augment_specialised_args.ml(138):5151-5730
+                    (let
+                      (find_outer_var =
+                         (function inner_var
+                           (funct-body middle_end/flambda/augment_specialised_args.ml(138)<ghost>:5170-5659
+                             (before middle_end/flambda/augment_specialised_args.ml(139):5188-5659
+                               (catch
+                                 (try
+                                   (exit 7
+                                     (after middle_end/flambda/augment_specialised_args.ml(139):5194-5256
+                                       (apply
+                                         (field 26
+                                           (field 7 (global Variable!)))
+                                         inner_var (field 2 (field 0 t)))))
+                                  with exn
+                                   (if (== exn (field 7 (global Stdlib!)))
+                                     (before middle_end/flambda/augment_specialised_args.ml(142):5363-5659
+                                       (after middle_end/flambda/augment_specialised_args.ml(142):5363-5659
+                                         (apply (field 1 (global Misc!))
+                                           [0:
+                                            [11:
+                                             "find_outer_var: expected "
+                                             [15:
+                                              [11:
+                                               " to be in [specialised_args], but it is not.  The projection was: "
+                                               [15:
+                                                [11:
+                                                 ".  Set of closures: "
+                                                 [15: 0a]]]]]]
+                                            "find_outer_var: expected %a to be in [specialised_args], but it is not.  The projection was: %a.  Set of closures: %a"]
+                                           (field 5 (global Variable!))
+                                           inner_var
+                                           (field 11 (global Projection!))
+                                           projection
+                                           (field 36 (global Flambda!))
+                                           (field 0 t))))
+                                     (reraise exn)))
+                                with (7 outer_var)
+                                 (before middle_end/flambda/augment_specialised_args.ml(140):5310-5323
+                                   (field 0 outer_var)))))))
+                      (before middle_end/flambda/augment_specialised_args.ml(149):5671-5730
+                        (after middle_end/flambda/augment_specialised_args.ml(149):5671-5730
+                          (apply (field 16 (global Projection!)) projection
+                            find_outer_var)))))))
+            really_add_new_specialised_arg =
+              (function t group definition for_one_function
+                (funct-body middle_end/flambda/augment_specialised_args.ml(151)<ghost>:5769-9259
+                  (before middle_end/flambda/augment_specialised_args.ml(153):5860-9259
+                    (let (fun_var = (field 0 for_one_function))
+                      (before middle_end/flambda/augment_specialised_args.ml(162):6445-9259
+                        (catch
+                          (let
+                            (existing_outer_var =
+                               (switch* definition
+                                case tag 0:
+                                 (before middle_end/flambda/augment_specialised_args.ml(165):6568-6572
+                                   0a)
+                                case tag 1:
+                                 (let (projection =a (field 0 definition))
+                                   (before middle_end/flambda/augment_specialised_args.ml(167):6648-6918
+                                     (let
+                                       (projection =
+                                          (after middle_end/flambda/augment_specialised_args.ml(167):6665-6694
+                                            (apply lift_projection t
+                                              projection)))
+                                       (before middle_end/flambda/augment_specialised_args.ml(168):6708-6918
+                                         (catch
+                                           (try
+                                             (exit 11
+                                               (after middle_end/flambda/augment_specialised_args.ml(169):6726-6815
+                                                 (apply
+                                                   (field 26
+                                                     (field 13
+                                                       (global Projection!)))
+                                                   projection (field 3 t))))
+                                            with exn
+                                             (if
+                                               (== exn
+                                                 (field 7 (global Stdlib!)))
+                                               (before middle_end/flambda/augment_specialised_args.ml(173):6914-6918
+                                                 0a)
+                                               (reraise exn)))
+                                          with (11 new_outer_var)
+                                           (before middle_end/flambda/augment_specialised_args.ml(172):6860-6878
+                                             (makeblock 0 new_outer_var)))))))))
+                            (before middle_end/flambda/augment_specialised_args.ml(175):6934-8464
+                              (if existing_outer_var
+                                (let
+                                  (existing_outer_var =a
+                                     (field 0 existing_outer_var))
+                                  (before middle_end/flambda/augment_specialised_args.ml(176):6999-7020
+                                    (let
+                                      (t =a t
+                                       new_outer_var =a existing_outer_var)
+                                      (exit 13 t new_outer_var))))
+                                (before middle_end/flambda/augment_specialised_args.ml(178):7045-8464
+                                  (let
+                                    (*match* =
+                                       (switch* definition
+                                        case tag 0:
+                                         (let
+                                           (existing_inner_var =a
+                                              (field 0 definition))
+                                           (before middle_end/flambda/augment_specialised_args.ml(180):7133-7675
+                                             (catch
+                                               (try
+                                                 (exit 9
+                                                   (after middle_end/flambda/augment_specialised_args.ml(181):7157-7235
+                                                     (apply
+                                                       (field 26
+                                                         (field 7
+                                                           (global Variable!)))
+                                                       existing_inner_var
+                                                       (field 1 (field 0 t)))))
+                                                with exn
+                                                 (if
+                                                   (== exn
+                                                     (field 7
+                                                       (global Stdlib!)))
+                                                   (before middle_end/flambda/augment_specialised_args.ml(185):7298-7601
+                                                     (after middle_end/flambda/augment_specialised_args.ml(185):7298-7601
+                                                       (apply
+                                                         (field 1
+                                                           (global Misc!))
+                                                         [0:
+                                                          [11:
+                                                           "really_add_new_specialised_arg: Existing_inner_free_var "
+                                                           [15:
+                                                            [11:
+                                                             " is not an inner free variable of "
+                                                             [15:
+                                                              [11:
+                                                               " in "
+                                                               [15: 0a]]]]]]
+                                                          "really_add_new_specialised_arg: Existing_inner_free_var %a is not an inner free variable of %a in %a"]
+                                                         (field 5
+                                                           (global Variable!))
+                                                         existing_inner_var
+                                                         (field 5
+                                                           (global Variable!))
+                                                         fun_var
+                                                         (field 36
+                                                           (global Flambda!))
+                                                         (field 0 t))))
+                                                   (reraise exn)))
+                                              with (9 existing_outer_var)
+                                               (before middle_end/flambda/augment_specialised_args.ml(191):7636-7661
+                                                 (makeblock 0
+                                                   (field 0
+                                                     existing_outer_var)
+                                                   t)))))
+                                        case tag 1:
+                                         (let
+                                           (projection =a
+                                              (field 0 definition))
+                                           (before middle_end/flambda/augment_specialised_args.ml(194):7751-8464
+                                             (let
+                                               (new_outer_var =
+                                                  (after middle_end/flambda/augment_specialised_args.ml(194):7771-7792
+                                                    (apply
+                                                      (field 11
+                                                        (global Variable!))
+                                                      0a group)))
+                                               (before middle_end/flambda/augment_specialised_args.ml(195):7806-8464
+                                                 (let
+                                                   (projection =
+                                                      (after middle_end/flambda/augment_specialised_args.ml(195):7823-7852
+                                                        (apply
+                                                          lift_projection t
+                                                          projection)))
+                                                   (before middle_end/flambda/augment_specialised_args.ml(196):7866-8464
+                                                     (let
+                                                       (new_outer_vars_indexed_by_new_lifted_defns =
+                                                          (after middle_end/flambda/augment_specialised_args.ml(197):7927-8043
+                                                            (apply
+                                                              (field 3
+                                                                (field 13
+                                                                  (global Projection!)))
+                                                              projection
+                                                              new_outer_var
+                                                              (field 3 t))))
+                                                       (before middle_end/flambda/augment_specialised_args.ml(201):8067-8464
+                                                         (let
+                                                           (new_lifted_defns_indexed_by_new_outer_vars =
+                                                              (after middle_end/flambda/augment_specialised_args.ml(202):8128-8242
+                                                                (apply
+                                                                  (field 3
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                  new_outer_var
+                                                                  projection
+                                                                  (field 2 t))))
+                                                           (before middle_end/flambda/augment_specialised_args.ml(206):8266-8464
+                                                             (let
+                                                               (t =
+                                                                  (let
+                                                                    (init = t)
+                                                                    (makeblock 0
+                                                                    (field 0
+                                                                    init)
+                                                                    (field 1
+                                                                    init)
+                                                                    new_lifted_defns_indexed_by_new_outer_vars
+                                                                    new_outer_vars_indexed_by_new_lifted_defns
+                                                                    (field 4
+                                                                    init)
+                                                                    (field 5
+                                                                    init))))
+                                                               (before middle_end/flambda/augment_specialised_args.ml(212):8448-8464
+                                                                 (makeblock 0
+                                                                   new_outer_var
+                                                                   t))))))))))))))
+                                     t =a (field 1 *match*)
+                                     new_outer_var =a (field 0 *match*))
+                                    (exit 13 t new_outer_var))))))
+                         with (13 t new_outer_var)
+                          (before middle_end/flambda/augment_specialised_args.ml(214):8476-9259
+                            (let
+                              (new_inner_var =
+                                 (after middle_end/flambda/augment_specialised_args.ml(214):8496-8517
+                                   (apply (field 11 (global Variable!)) 0a
+                                     group)))
+                              (before middle_end/flambda/augment_specialised_args.ml(215):8525-9259
+                                (let
+                                  (new_inner_to_new_outer_vars =
+                                     (after middle_end/flambda/augment_specialised_args.ml(216):8565-8662
+                                       (apply
+                                         (field 3
+                                           (field 7 (global Variable!)))
+                                         new_inner_var new_outer_var
+                                         (field 5 for_one_function))))
+                                  (before middle_end/flambda/augment_specialised_args.ml(219):8674-9259
+                                    (let
+                                      (for_one_function =
+                                         (let (init = for_one_function)
+                                           (makeblock 0 (*,*,*,*,*,*,int,*)
+                                             (field 0 init) (field 1 init)
+                                             (field 2 init)
+                                             (after middle_end/flambda/augment_specialised_args.ml(222):8808-8920
+                                               (apply
+                                                 (field 3
+                                                   (field 7
+                                                     (global Variable!)))
+                                                 new_inner_var definition
+                                                 (field 3 for_one_function)))
+                                             (after middle_end/flambda/augment_specialised_args.ml(225):8962-9040
+                                               (apply
+                                                 (field 3
+                                                   (field 6 Definition))
+                                                 definition
+                                                 (field 4 for_one_function)))
+                                             new_inner_to_new_outer_vars
+                                             (+ (field 6 for_one_function) 1)
+                                             (field 7 init))))
+                                      (before middle_end/flambda/augment_specialised_args.ml(231):9172-9259
+                                        (let (init = t)
+                                          (makeblock 0 (field 0 init)
+                                            (field 1 init) (field 2 init)
+                                            (field 3 init)
+                                            (after middle_end/flambda/augment_specialised_args.ml(232):9199-9252
+                                              (apply
+                                                (field 3
+                                                  (field 7
+                                                    (global Variable!)))
+                                                fun_var for_one_function
+                                                (field 4 t)))
+                                            (field 5 init))))))))))))))))
+            new_specialised_arg =
+              (function t fun_var group definition
+                (funct-body middle_end/flambda/augment_specialised_args.ml(235)<ghost>:9287-11400
+                  (before middle_end/flambda/augment_specialised_args.ml(236):9323-11400
+                    (let
+                      (for_one_function =
+                         (catch
+                           (try
+                             (exit 21
+                               (after middle_end/flambda/augment_specialised_args.ml(237):9377-9414
+                                 (apply
+                                   (field 26 (field 7 (global Variable!)))
+                                   fun_var (field 4 t))))
+                            with exn
+                             (if (== exn (field 7 (global Stdlib!)))
+                               (before middle_end/flambda/augment_specialised_args.ml(239):9459-10603
+                                 (catch
+                                   (try
+                                     (exit 19
+                                       (after middle_end/flambda/augment_specialised_args.ml(240):9481-9544
+                                         (apply
+                                           (field 26
+                                             (field 7 (global Variable!)))
+                                           fun_var
+                                           (field 3 (field 0 (field 0 t))))))
+                                    with exn
+                                     (if (== exn (field 7 (global Stdlib!)))
+                                       (before middle_end/flambda/augment_specialised_args.ml(242):9591-9603
+                                         (raise
+                                           (after middle_end/flambda/augment_specialised_args.ml(242):9591-9603
+                                             (makeblock 0
+                                               (global Assert_failure!)
+                                               [0:
+                                                "middle_end/flambda/augment_specialised_args.ml"
+                                                242 33]))))
+                                       (reraise exn)))
+                                  with (19 function_decl)
+                                   (before middle_end/flambda/augment_specialised_args.ml(244):9674-10591
+                                     (let
+                                       (params =
+                                          (after middle_end/flambda/augment_specialised_args.ml(244):9687-9726
+                                            (apply
+                                              (field 43
+                                                (field 5 (global Parameter!)))
+                                              (field 1 function_decl))))
+                                       (before middle_end/flambda/augment_specialised_args.ml(245):9740-10591
+                                         (let
+                                           (existing_specialised_args =
+                                              (after middle_end/flambda/augment_specialised_args.ml(246):9784-9930
+                                                (apply
+                                                  (field 15
+                                                    (field 7
+                                                      (global Variable!)))
+                                                  (function inner_var
+                                                    _spec_to
+                                                    (funct-body middle_end/flambda/augment_specialised_args.ml(246):9804-9881
+                                                      (before middle_end/flambda/augment_specialised_args.ml(247):9847-9880
+                                                        (after middle_end/flambda/augment_specialised_args.ml(247):9847-9880
+                                                          (apply
+                                                            (field 2
+                                                              (field 6
+                                                                (global Variable!)))
+                                                            inner_var params)))))
+                                                  (field 2 (field 0 t)))))
+                                           (before middle_end/flambda/augment_specialised_args.ml(250):9954-10591
+                                             (let
+                                               (make_direct_call_surrogates =
+                                                  (after middle_end/flambda/augment_specialised_args.ml(251):10000-10058
+                                                    (apply
+                                                      (field 2
+                                                        (field 6
+                                                          (global Variable!)))
+                                                      fun_var (field 5 t))))
+                                               (before middle_end/flambda/augment_specialised_args.ml(253):10082-10591
+                                                 (makeblock 0 (*,*,*,*,*,*,int,*)
+                                                   fun_var function_decl
+                                                   make_direct_call_surrogates
+                                                   (field 0
+                                                     (field 7
+                                                       (global Variable!)))
+                                                   (field 0
+                                                     (field 6 Definition))
+                                                   (field 0
+                                                     (field 7
+                                                       (global Variable!)))
+                                                   (+
+                                                     (after middle_end/flambda/augment_specialised_args.ml(261):10503-10535
+                                                       (apply
+                                                         (field 0
+                                                           (global Stdlib__list!))
+                                                         (field 1
+                                                           function_decl)))
+                                                     1)
+                                                   existing_specialised_args))))))))))
+                               (reraise exn)))
+                          with (21 for_one_function)
+                           (before middle_end/flambda/augment_specialised_args.ml(265):10632-10648
+                             for_one_function)))
+                      (before middle_end/flambda/augment_specialised_args.ml(272):11040-11400
+                        (let
+                          (exists_already =
+                             (catch
+                               (try
+                                 (exit 17
+                                   (after middle_end/flambda/augment_specialised_args.ml(274):11081-11172
+                                     (apply
+                                       (field 26
+                                         (field 7 (global Variable!)))
+                                       fun_var (field 1 t))))
+                                with exn
+                                 (if (== exn (field 7 (global Stdlib!)))
+                                   (before middle_end/flambda/augment_specialised_args.ml(277):11215-11220
+                                     0a)
+                                   (reraise exn)))
+                              with (17 definitions)
+                               (before middle_end/flambda/augment_specialised_args.ml(278):11244-11285
+                                 (after middle_end/flambda/augment_specialised_args.ml(278):11244-11285
+                                   (apply (field 2 (field 6 Definition))
+                                     definition definitions)))))
+                          (before middle_end/flambda/augment_specialised_args.ml(280):11297-11400
+                            (if exists_already
+                              (before middle_end/flambda/augment_specialised_args.ml(280):11320-11321
+                                t)
+                              (before middle_end/flambda/augment_specialised_args.ml(281):11331-11400
+                                (after middle_end/flambda/augment_specialised_args.ml(281):11331-11400
+                                  (apply really_add_new_specialised_arg t
+                                    group definition for_one_function)))))))))))
+            create =
+              (function env what_to_specialise
+                (funct-body middle_end/flambda/augment_specialised_args.ml(283)<ghost>:11415-14891
+                  (before middle_end/flambda/augment_specialised_args.ml(284):11454-14891
+                    (let
+                      (existing_definitions_via_spec_args_indexed_by_fun_var =
+                         (after middle_end/flambda/augment_specialised_args.ml(285):11520-12504
+                           (apply (field 32 (field 7 (global Variable!)))
+                             (function function_decl
+                               (funct-body middle_end/flambda/augment_specialised_args.ml(285):11537-12439
+                                 (before middle_end/flambda/augment_specialised_args.ml(286):11602-12438
+                                   (if (field 5 function_decl)
+                                     (before middle_end/flambda/augment_specialised_args.ml(287):11641-11661
+                                       (field 0 (field 6 Definition)))
+                                     (before middle_end/flambda/augment_specialised_args.ml(289):11689-12438
+                                       (let
+                                         (params =
+                                            (after middle_end/flambda/augment_specialised_args.ml(289):11702-11741
+                                              (apply
+                                                (field 43
+                                                  (field 5
+                                                    (global Parameter!)))
+                                                (field 1 function_decl))))
+                                         (before middle_end/flambda/augment_specialised_args.ml(290):11757-12438
+                                           (after middle_end/flambda/augment_specialised_args.ml(290):11757-12438
+                                             (apply
+                                               (field 12
+                                                 (field 7 (global Variable!)))
+                                               (function inner_var spec_to
+                                                 definitions
+                                                 (funct-body middle_end/flambda/augment_specialised_args.ml(290):11775-12337
+                                                   (before middle_end/flambda/augment_specialised_args.ml(292):11878-12336
+                                                     (if
+                                                       (not
+                                                         (after middle_end/flambda/augment_specialised_args.ml(292):11885-11920
+                                                           (apply
+                                                             (field 2
+                                                               (field 6
+                                                                 (global Variable!)))
+                                                             inner_var
+                                                             params)))
+                                                       (before middle_end/flambda/augment_specialised_args.ml(293):11944-11955
+                                                         definitions)
+                                                       (before middle_end/flambda/augment_specialised_args.ml(295):11995-12336
+                                                         (let
+                                                           (definition =
+                                                              (let
+                                                                (*match* =
+                                                                   (field 1
+                                                                    spec_to))
+                                                                (if *match*
+                                                                  (let
+                                                                    (projection =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(299):12204-12255
+                                                                    (makeblock 1
+                                                                    projection)))
+                                                                  (before middle_end/flambda/augment_specialised_args.ml(297):12107-12140
+                                                                    (makeblock 0
+                                                                    inner_var)))))
+                                                           (before middle_end/flambda/augment_specialised_args.ml(301):12295-12336
+                                                             (after middle_end/flambda/augment_specialised_args.ml(301):12295-12336
+                                                               (apply
+                                                                 (field 3
+                                                                   (field 6
+                                                                    Definition))
+                                                                 definition
+                                                                 definitions)))))))))
+                                               (field 2
+                                                 (field 1 what_to_specialise))
+                                               (field 0 (field 6 Definition)))))))))))
+                             (field 3 (field 0 (field 1 what_to_specialise))))))
+                      (before middle_end/flambda/augment_specialised_args.ml(306):12516-14891
+                        (let
+                          (t =
+                             (makeblock 0 (field 1 what_to_specialise)
+                               existing_definitions_via_spec_args_indexed_by_fun_var
+                               (field 0 (field 7 (global Variable!)))
+                               (field 0 (field 13 (global Projection!)))
+                               (field 0 (field 7 (global Variable!)))
+                               (field 2 what_to_specialise)))
+                          (before middle_end/flambda/augment_specialised_args.ml(323):13450-14891
+                            (let
+                              (by_group =
+                                 (after middle_end/flambda/augment_specialised_args.ml(324):13471-13940
+                                   (apply
+                                     (field 12
+                                       (field 7
+                                         (field 19 (global Variable!))))
+                                     (function param definitions by_group
+                                       (funct-body middle_end/flambda/augment_specialised_args.ml(324):13494-13874
+                                         (let
+                                           (group =a (field 1 param)
+                                            fun_var =a (field 0 param))
+                                           (before middle_end/flambda/augment_specialised_args.ml(325):13550-13873
+                                             (let
+                                               (fun_vars_and_definitions =
+                                                  (catch
+                                                    (try
+                                                      (exit 23
+                                                        (after middle_end/flambda/augment_specialised_args.ml(326):13599-13631
+                                                          (apply
+                                                            (field 26
+                                                              (field 7
+                                                                (global Variable!)))
+                                                            group by_group)))
+                                                     with exn
+                                                      (if
+                                                        (== exn
+                                                          (field 7
+                                                            (global Stdlib!)))
+                                                        (before middle_end/flambda/augment_specialised_args.ml(327):13674-13676
+                                                          0a)
+                                                        (reraise exn)))
+                                                   with (23 fun_vars_and_definitions)
+                                                    (before middle_end/flambda/augment_specialised_args.ml(328):13719-13743
+                                                      fun_vars_and_definitions)))
+                                               (before middle_end/flambda/augment_specialised_args.ml(330):13767-13873
+                                                 (after middle_end/flambda/augment_specialised_args.ml(330):13767-13873
+                                                   (apply
+                                                     (field 3
+                                                       (field 7
+                                                         (global Variable!)))
+                                                     group
+                                                     (makeblock 0
+                                                       (makeblock 0 fun_var
+                                                         definitions)
+                                                       fun_vars_and_definitions)
+                                                     by_group))))))))
+                                     (field 0 what_to_specialise)
+                                     (field 0 (field 7 (global Variable!))))))
+                              (before middle_end/flambda/augment_specialised_args.ml(336):13952-14891
+                                (let
+                                  (Backend =
+                                     (module-defn(Backend) middle_end/flambda/augment_specialised_args.ml(336):13963-13970
+                                       (after middle_end/flambda/augment_specialised_args.ml(336):13978-13993
+                                         (apply
+                                           (field 1
+                                             (field 0
+                                               (global Inline_and_simplify_aux!)))
+                                           env))))
+                                  (after middle_end/flambda/augment_specialised_args.ml(337):14019-14891
+                                    (apply
+                                      (field 12 (field 7 (global Variable!)))
+                                      (function group
+                                        fun_vars_and_definitions t
+                                        (funct-body middle_end/flambda/augment_specialised_args.ml(337):14037-14868
+                                          (before middle_end/flambda/augment_specialised_args.ml(338):14086-14867
+                                            (let (original_t = t)
+                                              (before middle_end/flambda/augment_specialised_args.ml(339):14116-14867
+                                                (let
+                                                  (t =
+                                                     (after middle_end/flambda/augment_specialised_args.ml(341):14204-14468
+                                                       (apply
+                                                         (field 20
+                                                           (global Stdlib__list!))
+                                                         (function t param
+                                                           (funct-body middle_end/flambda/augment_specialised_args.ml(341):14219-14417
+                                                             (let
+                                                               (definitions =a
+                                                                  (field 1
+                                                                    param)
+                                                                fun_var =a
+                                                                  (field 0
+                                                                    param))
+                                                               (before middle_end/flambda/augment_specialised_args.ml(342):14266-14416
+                                                                 (after middle_end/flambda/augment_specialised_args.ml(342):14266-14416
+                                                                   (apply
+                                                                    (field 20
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    t
+                                                                    definition
+                                                                    (funct-body middle_end/flambda/augment_specialised_args.ml(342):14281-14370
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(343):14320-14369
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(343):14320-14369
+                                                                    (apply
+                                                                    new_specialised_arg
+                                                                    t fun_var
+                                                                    group
+                                                                    definition)))))
+                                                                    t
+                                                                    definitions))))))
+                                                         t
+                                                         fun_vars_and_definitions)))
+                                                  (before middle_end/flambda/augment_specialised_args.ml(349):14488-14867
+                                                    (let
+                                                      (some_function_has_too_many_args =
+                                                         (after middle_end/flambda/augment_specialised_args.ml(350):14536-14739
+                                                           (apply
+                                                             (field 14
+                                                               (field 7
+                                                                 (global Variable!)))
+                                                             (function param
+                                                               for_one_function
+                                                               (funct-body middle_end/flambda/augment_specialised_args.ml(350):14556-14715
+                                                                 (before middle_end/flambda/augment_specialised_args.ml(351):14618-14714
+                                                                   (after middle_end/flambda/augment_specialised_args.ml(351):14618-14714
+                                                                    (apply
+                                                                    (field 3
+                                                                    (global Int_replace_polymorphic_compare!))
+                                                                    (field 6
+                                                                    for_one_function)
+                                                                    (field 6
+                                                                    Backend))))))
+                                                             (field 4 t))))
+                                                      (before middle_end/flambda/augment_specialised_args.ml(355):14759-14867
+                                                        (if
+                                                          some_function_has_too_many_args
+                                                          (before middle_end/flambda/augment_specialised_args.ml(356):14809-14819
+                                                            original_t)
+                                                          (before middle_end/flambda/augment_specialised_args.ml(358):14866-14867
+                                                            t)))))))))))
+                                      by_group t)))))))))))))
+           (pseudo middle_end/flambda/augment_specialised_args.ml(110):3963-14895
+             (makeblock 0 lift_projection really_add_new_specialised_arg
+               new_specialised_arg create))))
+     check_invariants =
+       (function pass_name set_of_closures original_set_of_closures
+         (funct-body middle_end/flambda/augment_specialised_args.ml(365)<ghost>:14959-16685
+           (before middle_end/flambda/augment_specialised_args.ml(367):15051-16685
+             (if (field 0 (field 133 (global Clflags!)))
+               (before middle_end/flambda/augment_specialised_args.ml(367):15093-16685
+                 (after middle_end/flambda/augment_specialised_args.ml(367):15093-16685
+                   (apply (field 11 (field 7 (global Variable!)))
+                     (function fun_var function_decl
+                       (funct-body middle_end/flambda/augment_specialised_args.ml(368):15121-16637
+                         (before middle_end/flambda/augment_specialised_args.ml(370):15206-16636
+                           (let
+                             (params =
+                                (after middle_end/flambda/augment_specialised_args.ml(370):15219-15258
+                                  (apply
+                                    (field 43 (field 5 (global Parameter!)))
+                                    (field 1 function_decl))))
+                             (before middle_end/flambda/augment_specialised_args.ml(371):15270-16636
+                               (after middle_end/flambda/augment_specialised_args.ml(371):15270-16636
+                                 (apply
+                                   (field 11 (field 7 (global Variable!)))
+                                   (function inner_var outer_var
+                                     (funct-body middle_end/flambda/augment_specialised_args.ml(371):15288-16593
+                                       (before middle_end/flambda/augment_specialised_args.ml(373):15377-16592
+                                         (if
+                                           (after middle_end/flambda/augment_specialised_args.ml(373):15380-15413
+                                             (apply
+                                               (field 2
+                                                 (field 6 (global Variable!)))
+                                               inner_var params))
+                                           (before middle_end/flambda/augment_specialised_args.ml(373):15419-16592
+                                             (seq
+                                               (if
+                                                 (not
+                                                   (after middle_end/flambda/augment_specialised_args.ml(374):15453-15532
+                                                     (apply
+                                                       (field 2
+                                                         (field 6
+                                                           (global Variable!)))
+                                                       (field 0 outer_var)
+                                                       (field 3
+                                                         function_decl))))
+                                                 0a
+                                                 (raise
+                                                   (after middle_end/flambda/augment_specialised_args.ml(374):15441-15533
+                                                     (makeblock 0
+                                                       (global Assert_failure!)
+                                                       [0:
+                                                        "middle_end/flambda/augment_specialised_args.ml"
+                                                        374 16]))))
+                                               (before middle_end/flambda/augment_specialised_args.ml(376):15551-16574
+                                                 (let
+                                                   (*match* =
+                                                      (field 1 outer_var))
+                                                   (if *match*
+                                                     (let
+                                                       (projection =a
+                                                          (field 0 *match*))
+                                                       (before middle_end/flambda/augment_specialised_args.ml(379):15667-16574
+                                                         (let
+                                                           (from =
+                                                              (after middle_end/flambda/augment_specialised_args.ml(379):15678-15715
+                                                                (apply
+                                                                  (field 15
+                                                                    (global Projection!))
+                                                                  projection)))
+                                                           (before middle_end/flambda/augment_specialised_args.ml(380):15737-16574
+                                                             (if
+                                                               (not
+                                                                 (after middle_end/flambda/augment_specialised_args.ml(380):15744-15774
+                                                                   (apply
+                                                                    (field 2
+                                                                    (field 6
+                                                                    (global Variable!)))
+                                                                    from
+                                                                    params)))
+                                                               (before middle_end/flambda/augment_specialised_args.ml(380):15780-16574
+                                                                 (after middle_end/flambda/augment_specialised_args.ml(380):15780-16574
+                                                                   (apply
+                                                                    (field 1
+                                                                    (global Misc!))
+                                                                    [0:
+                                                                    [11:
+                                                                    "Augment_specialised_args ("
+                                                                    [2:
+                                                                    0a
+                                                                    [11:
+                                                                    "): specialised argument ("
+                                                                    [15:
+                                                                    [11:
+                                                                    " -> "
+                                                                    [15:
+                                                                    [11:
+                                                                    ") references a projection variable that is not a specialised argument of the function "
+                                                                    [15:
+                                                                    [11:
+                                                                    ". "
+                                                                    [17:
+                                                                    [0:
+                                                                    "@ " 1 0]
+                                                                    [11:
+                                                                    "The set of closures before the transformation was:"
+                                                                    [17:
+                                                                    [0:
+                                                                    "@ " 1 0]
+                                                                    [12:
+                                                                    ' '
+                                                                    [15:
+                                                                    [11:
+                                                                    ". "
+                                                                    [17:
+                                                                    [0:
+                                                                    "@ " 1 0]
+                                                                    [11:
+                                                                    "The set of closures after the transformation was:"
+                                                                    [17:
+                                                                    [0:
+                                                                    "@ " 1 0]
+                                                                    [15:
+                                                                    [12:
+                                                                    '.' 0a]]]]]]]]]]]]]]]]]]]]
+                                                                    "Augment_specialised_args (%s): specialised argument (%a -> %a) references a projection variable that is not a specialised argument of the function %a. @ The set of closures before the transformation was:@  %a. @ The set of closures after the transformation was:@ %a."]
+                                                                    pass_name
+                                                                    (field 5
+                                                                    (global Variable!))
+                                                                    inner_var
+                                                                    (field 37
+                                                                    (global Flambda!))
+                                                                    outer_var
+                                                                    (field 5
+                                                                    (global Variable!))
+                                                                    fun_var
+                                                                    (field 36
+                                                                    (global Flambda!))
+                                                                    original_set_of_closures
+                                                                    (field 36
+                                                                    (global Flambda!))
+                                                                    set_of_closures)))
+                                                               0a)))))
+                                                     (before middle_end/flambda/augment_specialised_args.ml(377):15609-15611
+                                                       0a))))))
+                                           0a))))
+                                   (field 2 set_of_closures))))))))
+                     (field 3 (field 0 set_of_closures)))))
+               0a))))
+     Make =
+       (module-defn(Make) middle_end/flambda/augment_specialised_args.ml(399):16687-31862
+         (function T is_a_functor
+           (let
+             (T =a T
+              *match* =
+                (after middle_end/flambda/augment_specialised_args.ml(400):16727-16771
+                  (apply (field 0 (global Pass_wrapper!)) (field 0 T)))
+              rename_function_and_parameters =
+                (function fun_var function_decl
+                  (funct-body middle_end/flambda/augment_specialised_args.ml(402)<ghost>:16810-17409
+                    (before middle_end/flambda/augment_specialised_args.ml(404):16881-17409
+                      (let
+                        (new_fun_var =
+                           (after middle_end/flambda/augment_specialised_args.ml(404):16899-16922
+                             (apply (field 11 (global Variable!)) 0a fun_var)))
+                        (before middle_end/flambda/augment_specialised_args.ml(405):16930-17409
+                          (let
+                            (params_renaming_list =
+                               (after middle_end/flambda/augment_specialised_args.ml(406):16963-17094
+                                 (apply (field 16 (global Stdlib__list!))
+                                   (function param
+                                     (funct-body middle_end/flambda/augment_specialised_args.ml(406):16972-17065
+                                       (before middle_end/flambda/augment_specialised_args.ml(407):16996-17064
+                                         (let
+                                           (new_param =
+                                              (after middle_end/flambda/augment_specialised_args.ml(407):17012-17034
+                                                (apply
+                                                  (field 2
+                                                    (global Parameter!))
+                                                  0a param)))
+                                           (before middle_end/flambda/augment_specialised_args.ml(408):17048-17064
+                                             (makeblock 0 param new_param))))))
+                                   (field 1 function_decl))))
+                            (before middle_end/flambda/augment_specialised_args.ml(411):17106-17409
+                              (let
+                                (renamed_params =
+                                   (after middle_end/flambda/augment_specialised_args.ml(411):17127-17160
+                                     (apply (field 16 (global Stdlib__list!))
+                                       (function prim stub (field 1 prim))
+                                       params_renaming_list)))
+                                (before middle_end/flambda/augment_specialised_args.ml(412):17168-17409
+                                  (let
+                                    (params_renaming =
+                                       (after middle_end/flambda/augment_specialised_args.ml(413):17196-17353
+                                         (apply
+                                           (field 39
+                                             (field 7 (global Variable!)))
+                                           (after middle_end/flambda/augment_specialised_args.ml(414):17225-17353
+                                             (apply
+                                               (field 16
+                                                 (global Stdlib__list!))
+                                               (function param
+                                                 (funct-body middle_end/flambda/augment_specialised_args.ml(414):17235-17320
+                                                   (let
+                                                     (new_param =a
+                                                        (field 1 param)
+                                                      param =a
+                                                        (field 0 param))
+                                                     (before middle_end/flambda/augment_specialised_args.ml(415):17275-17319
+                                                       (makeblock 0
+                                                         (after middle_end/flambda/augment_specialised_args.ml(415):17275-17294
+                                                           (apply
+                                                             (field 1
+                                                               (global Parameter!))
+                                                             param))
+                                                         (after middle_end/flambda/augment_specialised_args.ml(415):17296-17319
+                                                           (apply
+                                                             (field 1
+                                                               (global Parameter!))
+                                                             new_param)))))))
+                                               params_renaming_list)))))
+                                    (before middle_end/flambda/augment_specialised_args.ml(418):17365-17409
+                                      (makeblock 0 new_fun_var
+                                        params_renaming renamed_params))))))))))))
+              create_wrapper =
+                (function for_one_function benefit
+                  (funct-body middle_end/flambda/augment_specialised_args.ml(420)<ghost>:17432-22695
+                    (before middle_end/flambda/augment_specialised_args.ml(421):17488-22695
+                      (let (fun_var = (field 0 for_one_function))
+                        (before middle_end/flambda/augment_specialised_args.ml(422):17534-22695
+                          (let (function_decl = (field 1 for_one_function))
+                            (before middle_end/flambda/augment_specialised_args.ml(430):18077-22695
+                              (let
+                                (params =
+                                   (after middle_end/flambda/augment_specialised_args.ml(430):18090-18129
+                                     (apply
+                                       (field 43
+                                         (field 5 (global Parameter!)))
+                                       (field 1 function_decl))))
+                                (before middle_end/flambda/augment_specialised_args.ml(431):18137-22695
+                                  (let
+                                    (*match* =
+                                       (after middle_end/flambda/augment_specialised_args.ml(432):18194-18248
+                                         (apply
+                                           rename_function_and_parameters
+                                           fun_var function_decl))
+                                     wrapper_params =a (field 2 *match*)
+                                     params_renaming =a (field 1 *match*)
+                                     new_fun_var =a (field 0 *match*))
+                                    (before middle_end/flambda/augment_specialised_args.ml(434):18260-22695
+                                      (let
+                                        (find_wrapper_param =
+                                           (function param
+                                             (funct-body middle_end/flambda/augment_specialised_args.ml(434)<ghost>:18283-18611
+                                               (before middle_end/flambda/augment_specialised_args.ml(435):18297-18611
+                                                 (seq
+                                                   (if
+                                                     (after middle_end/flambda/augment_specialised_args.ml(435):18304-18335
+                                                       (apply
+                                                         (field 2
+                                                           (field 6
+                                                             (global Variable!)))
+                                                         param params))
+                                                     0a
+                                                     (raise
+                                                       (after middle_end/flambda/augment_specialised_args.ml(435):18297-18335
+                                                         (makeblock 0
+                                                           (global Assert_failure!)
+                                                           [0:
+                                                            "middle_end/flambda/augment_specialised_args.ml"
+                                                            435 6]))))
+                                                   (before middle_end/flambda/augment_specialised_args.ml(436):18343-18611
+                                                     (catch
+                                                       (try
+                                                         (exit 30
+                                                           (after middle_end/flambda/augment_specialised_args.ml(436):18349-18388
+                                                             (apply
+                                                               (field 26
+                                                                 (field 7
+                                                                   (global Variable!)))
+                                                               param
+                                                               params_renaming)))
+                                                        with exn
+                                                         (if
+                                                           (== exn
+                                                             (field 7
+                                                               (global Stdlib!)))
+                                                           (before middle_end/flambda/augment_specialised_args.ml(439):18472-18611
+                                                             (after middle_end/flambda/augment_specialised_args.ml(439):18472-18611
+                                                               (apply
+                                                                 (field 1
+                                                                   (global Misc!))
+                                                                 [0:
+                                                                  [11:
+                                                                   "find_wrapper_param: expected "
+                                                                   [15:
+                                                                    [11:
+                                                                    " to be in [params_renaming], but it is not."
+                                                                    0a]]]
+                                                                  "find_wrapper_param: expected %a to be in [params_renaming], but it is not."]
+                                                                 (field 5
+                                                                   (global Variable!))
+                                                                 param)))
+                                                           (reraise exn)))
+                                                      with (30 wrapper_param)
+                                                       (before middle_end/flambda/augment_specialised_args.ml(437):18419-18432
+                                                         wrapper_param))))))))
+                                        (before middle_end/flambda/augment_specialised_args.ml(443):18623-22695
+                                          (let
+                                            (new_inner_vars_to_spec_args_bound_in_the_wrapper_renaming =
+                                               (after middle_end/flambda/augment_specialised_args.ml(444):18693-18842
+                                                 (apply
+                                                   (field 33
+                                                     (field 7
+                                                       (global Variable!)))
+                                                   (function new_inner_var
+                                                     param
+                                                     (funct-body middle_end/flambda/augment_specialised_args.ml(444):18711-18775
+                                                       (before middle_end/flambda/augment_specialised_args.ml(445):18745-18774
+                                                         (after middle_end/flambda/augment_specialised_args.ml(445):18745-18774
+                                                           (apply
+                                                             (field 11
+                                                               (global Variable!))
+                                                             0a
+                                                             new_inner_var)))))
+                                                   (field 3 for_one_function))))
+                                            (before middle_end/flambda/augment_specialised_args.ml(448):18854-22695
+                                              (let
+                                                (spec_args_bound_in_the_wrapper =
+                                                   (after middle_end/flambda/augment_specialised_args.ml(451):19008-19091
+                                                     (apply
+                                                       (field 47
+                                                         (field 7
+                                                           (global Variable!)))
+                                                       new_inner_vars_to_spec_args_bound_in_the_wrapper_renaming)))
+                                                (before middle_end/flambda/augment_specialised_args.ml(462):19609-22695
+                                                  (let
+                                                    (*match* =
+                                                       (let
+                                                         (apply =
+                                                            (makeblock 4
+                                                              (makeblock 0
+                                                                new_fun_var
+                                                                (after middle_end/flambda/augment_specialised_args.ml(467):19745-19826
+                                                                  (apply
+                                                                    (field 36
+                                                                    (global Stdlib!))
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(467):19745-19781
+                                                                    (apply
+                                                                    (field 0
+                                                                    (field 13
+                                                                    (global Parameter!)))
+                                                                    wrapper_params))
+                                                                    spec_args_bound_in_the_wrapper))
+                                                                (makeblock 0
+                                                                  (after middle_end/flambda/augment_specialised_args.ml(469):19852-19881
+                                                                    (apply
+                                                                    (field 9
+                                                                    (global Closure_id!))
+                                                                    new_fun_var)))
+                                                                (field 0
+                                                                  (global Debuginfo!))
+                                                                2a 2a)))
+                                                         (before middle_end/flambda/augment_specialised_args.ml(475):20018-21548
+                                                           (after middle_end/flambda/augment_specialised_args.ml(475):20018-21548
+                                                             (apply
+                                                               (field 12
+                                                                 (field 7
+                                                                   (global Variable!)))
+                                                               (function
+                                                                 new_inner_var
+                                                                 definition
+                                                                 param
+                                                                 (funct-body middle_end/flambda/augment_specialised_args.ml(475):20036-21460
+                                                                   (let
+                                                                    (benefit =a
+                                                                    (field 1
+                                                                    param)
+                                                                    wrapper_body =a
+                                                                    (field 0
+                                                                    param))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(476):20103-21459
+                                                                    (let
+                                                                    (definition =
+                                                                    (switch* definition
+                                                                    case tag 0:
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(478):20229-20239
+                                                                    definition)
+                                                                    case tag 1:
+                                                                    (let
+                                                                    (projection =a
+                                                                    (field 0
+                                                                    definition))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(480):20323-20463
+                                                                    (makeblock 1
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(481):20380-20463
+                                                                    (apply
+                                                                    (field 16
+                                                                    (global Projection!))
+                                                                    projection
+                                                                    find_wrapper_param)))))))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(484):20487-21459
+                                                                    (let
+                                                                    (benefit =
+                                                                    (switch* definition
+                                                                    case tag 0:
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(486):20595-20602
+                                                                    benefit)
+                                                                    case tag 1:
+                                                                    (let
+                                                                    (projection =a
+                                                                    (field 0
+                                                                    definition))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(488):20686-20721
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(488):20686-20721
+                                                                    (apply
+                                                                    (field 15
+                                                                    (field 3
+                                                                    (global Inlining_cost!)))
+                                                                    projection
+                                                                    benefit))))))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(490):20745-21459
+                                                                    (catch
+                                                                    (try
+                                                                    (exit 25
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(491):20763-20866
+                                                                    (apply
+                                                                    (field 26
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    new_inner_var
+                                                                    new_inner_vars_to_spec_args_bound_in_the_wrapper_renaming)))
+                                                                    with exn
+                                                                    (if
+                                                                    (== exn
+                                                                    (field 7
+                                                                    (global Stdlib!)))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(494):20917-20929
+                                                                    (raise
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(494):20917-20929
+                                                                    (makeblock 0
+                                                                    (global Assert_failure!)
+                                                                    [0:
+                                                                    "middle_end/flambda/augment_specialised_args.ml"
+                                                                    494 35]))))
+                                                                    (reraise
+                                                                    exn)))
+                                                                    with (25 new_inner_var_of_wrapper)
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(496):20982-21459
+                                                                    (let
+                                                                    (named =
+                                                                    (switch* definition
+                                                                    case tag 0:
+                                                                    (let
+                                                                    (existing_inner_var =a
+                                                                    (field 0
+                                                                    definition))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(499):21124-21153
+                                                                    (makeblock 10
+                                                                    (makeblock 0
+                                                                    existing_inner_var))))
+                                                                    case tag 1:
+                                                                    (let
+                                                                    (projection =a
+                                                                    (field 0
+                                                                    definition))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(501):21241-21285
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(501):21241-21285
+                                                                    (apply
+                                                                    (field 34
+                                                                    (global Flambda_utils!))
+                                                                    projection))))))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(503):21313-21459
+                                                                    (let
+                                                                    (wrapper_body =
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(504):21346-21408
+                                                                    (apply
+                                                                    (field 11
+                                                                    (global Flambda!))
+                                                                    new_inner_var_of_wrapper
+                                                                    named
+                                                                    wrapper_body)))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(506):21436-21459
+                                                                    (makeblock 0
+                                                                    wrapper_body
+                                                                    benefit)))))))))))))))
+                                                               (field 3
+                                                                 for_one_function)
+                                                               (makeblock 0
+                                                                 apply
+                                                                 benefit)))))
+                                                     benefit =a
+                                                       (field 1 *match*)
+                                                     wrapper_body =a
+                                                       (field 0 *match*))
+                                                    (before middle_end/flambda/augment_specialised_args.ml(510):21560-22695
+                                                      (let
+                                                        (rewritten_existing_specialised_args =
+                                                           (after middle_end/flambda/augment_specialised_args.ml(511):21608-22268
+                                                             (apply
+                                                               (field 12
+                                                                 (field 7
+                                                                   (global Variable!)))
+                                                               (function
+                                                                 inner_var
+                                                                 spec_to
+                                                                 result
+                                                                 (funct-body middle_end/flambda/augment_specialised_args.ml(511):21626-22190
+                                                                   (before middle_end/flambda/augment_specialised_args.ml(513):21712-22189
+                                                                    (let
+                                                                    (inner_var =
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(513):21728-21756
+                                                                    (apply
+                                                                    find_wrapper_param
+                                                                    inner_var)))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(514):21770-22189
+                                                                    (let
+                                                                    (projection =
+                                                                    (let
+                                                                    (*match* =
+                                                                    (field 1
+                                                                    spec_to))
+                                                                    (if
+                                                                    *match*
+                                                                    (let
+                                                                    (projection =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(518):21903-21989
+                                                                    (makeblock 0
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(518):21908-21989
+                                                                    (apply
+                                                                    (field 16
+                                                                    (global Projection!))
+                                                                    projection
+                                                                    find_wrapper_param)))))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(516):21851-21855
+                                                                    0a))))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(521):22013-22189
+                                                                    (let
+                                                                    (spec_to =
+                                                                    (makeblock 0
+                                                                    (field 0
+                                                                    spec_to)
+                                                                    projection))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(526):22148-22189
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(526):22148-22189
+                                                                    (apply
+                                                                    (field 3
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    inner_var
+                                                                    spec_to
+                                                                    result)))))))))))
+                                                               (field 7
+                                                                 for_one_function)
+                                                               (field 0
+                                                                 (field 7
+                                                                   (global Variable!))))))
+                                                        (before middle_end/flambda/augment_specialised_args.ml(530):22280-22695
+                                                          (let
+                                                            (new_function_decl =
+                                                               (after middle_end/flambda/augment_specialised_args.ml(531):22310-22601
+                                                                 (apply
+                                                                   (field 14
+                                                                    (global Flambda!))
+                                                                   wrapper_params
+                                                                   wrapper_body
+                                                                   1a
+                                                                   (field 0
+                                                                    (global Debuginfo!))
+                                                                   2a 2a 0a
+                                                                   (field 0
+                                                                    function_decl))))
+                                                            (before middle_end/flambda/augment_specialised_args.ml(541):22613-22695
+                                                              (makeblock 0
+                                                                new_fun_var
+                                                                new_function_decl
+                                                                rewritten_existing_specialised_args
+                                                                benefit))))))))))))))))))))))))
+              rewrite_function_decl =
+                (function t env duplicate_function for_one_function benefit
+                  (funct-body middle_end/flambda/augment_specialised_args.ml(544)<ghost>:22725-27432
+                    (before middle_end/flambda/augment_specialised_args.ml(546):22822-27432
+                      (let (set_of_closures = (field 0 t))
+                        (before middle_end/flambda/augment_specialised_args.ml(547):22869-27432
+                          (let (fun_var = (field 0 for_one_function))
+                            (before middle_end/flambda/augment_specialised_args.ml(548):22915-27432
+                              (let
+                                (function_decl = (field 1 for_one_function))
+                                (before middle_end/flambda/augment_specialised_args.ml(549):22973-27432
+                                  (let
+                                    (num_definitions =[int]
+                                       (after middle_end/flambda/augment_specialised_args.ml(550):23001-23090
+                                         (apply
+                                           (field 17
+                                             (field 7 (global Variable!)))
+                                           (field 3 for_one_function))))
+                                    (before middle_end/flambda/augment_specialised_args.ml(553):23102-27432
+                                      (if
+                                        (|| (field 5 function_decl)
+                                          (||
+                                            (after middle_end/flambda/augment_specialised_args.ml(554):23133-23152
+                                              (apply
+                                                (field 2
+                                                  (global Int_replace_polymorphic_compare!))
+                                                num_definitions 1))
+                                            (after middle_end/flambda/augment_specialised_args.ml(555):23162-23225
+                                              (apply
+                                                (field 2
+                                                  (field 7
+                                                    (global Variable!)))
+                                                fun_var
+                                                (field 3 set_of_closures)))))
+                                        (before middle_end/flambda/augment_specialised_args.ml(557):23241-23245
+                                          0a)
+                                        (before middle_end/flambda/augment_specialised_args.ml(559):23261-27432
+                                          (let
+                                            (*match* =
+                                               (after middle_end/flambda/augment_specialised_args.ml(560):23342-23383
+                                                 (apply create_wrapper
+                                                   for_one_function benefit))
+                                             benefit =a (field 3 *match*)
+                                             rewritten_existing_specialised_args =a
+                                               (field 2 *match*)
+                                             wrapper =a (field 1 *match*)
+                                             new_fun_var =a (field 0 *match*))
+                                            (before middle_end/flambda/augment_specialised_args.ml(562):23399-27432
+                                              (let
+                                                (new_specialised_args =
+                                                   (after middle_end/flambda/augment_specialised_args.ml(563):23434-24600
+                                                     (apply
+                                                       (field 33
+                                                         (field 7
+                                                           (global Variable!)))
+                                                       (function
+                                                         new_inner_var
+                                                         definition
+                                                         (funct-body middle_end/flambda/augment_specialised_args.ml(563):23452-24531
+                                                           (before middle_end/flambda/augment_specialised_args.ml(565):23555-24530
+                                                             (seq
+                                                               (if
+                                                                 (not
+                                                                   (after middle_end/flambda/augment_specialised_args.ml(565):23567-23646
+                                                                    (apply
+                                                                    (field 2
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    new_inner_var
+                                                                    (field 2
+                                                                    set_of_closures))))
+                                                                 0a
+                                                                 (raise
+                                                                   (after middle_end/flambda/augment_specialised_args.ml(565):23555-23647
+                                                                    (makeblock 0
+                                                                    (global Assert_failure!)
+                                                                    [0:
+                                                                    "middle_end/flambda/augment_specialised_args.ml"
+                                                                    565 12]))))
+                                                               (before middle_end/flambda/augment_specialised_args.ml(567):23661-24530
+                                                                 (catch
+                                                                   (try
+                                                                    (exit 48
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(568):23681-23773
+                                                                    (apply
+                                                                    (field 26
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    new_inner_var
+                                                                    (field 5
+                                                                    for_one_function))))
+                                                                    with exn
+                                                                    (if
+                                                                    (== exn
+                                                                    (field 7
+                                                                    (global Stdlib!)))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(571):23828-23840
+                                                                    (raise
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(571):23828-23840
+                                                                    (makeblock 0
+                                                                    (global Assert_failure!)
+                                                                    [0:
+                                                                    "middle_end/flambda/augment_specialised_args.ml"
+                                                                    571 37]))))
+                                                                    (reraise
+                                                                    exn)))
+                                                                  with (48 new_outer_var)
+                                                                   (before middle_end/flambda/augment_specialised_args.ml(573):23886-24530
+                                                                    (switch* definition
+                                                                    case tag 0:
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(575):23969-24046
+                                                                    (makeblock 0
+                                                                    new_outer_var
+                                                                    0a))
+                                                                    case tag 1:
+                                                                    (let
+                                                                    (projection =a
+                                                                    (field 0
+                                                                    definition))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(579):24134-24530
+                                                                    (let
+                                                                    (projecting_from =
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(579):24156-24193
+                                                                    (apply
+                                                                    (field 15
+                                                                    (global Projection!))
+                                                                    projection)))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(580):24213-24530
+                                                                    (seq
+                                                                    (if
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(580):24220-24305
+                                                                    (apply
+                                                                    (field 2
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    projecting_from
+                                                                    (field 2
+                                                                    set_of_closures)))
+                                                                    0a
+                                                                    (raise
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(580):24213-24305
+                                                                    (makeblock 0
+                                                                    (global Assert_failure!)
+                                                                    [0:
+                                                                    "middle_end/flambda/augment_specialised_args.ml"
+                                                                    580 16]))))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(582):24323-24530
+                                                                    (seq
+                                                                    (if
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(582):24330-24424
+                                                                    (apply
+                                                                    (field 2
+                                                                    (field 6
+                                                                    (global Variable!)))
+                                                                    projecting_from
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(583):24382-24423
+                                                                    (apply
+                                                                    (field 43
+                                                                    (field 5
+                                                                    (global Parameter!)))
+                                                                    (field 1
+                                                                    function_decl)))))
+                                                                    0a
+                                                                    (raise
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(582):24323-24424
+                                                                    (makeblock 0
+                                                                    (global Assert_failure!)
+                                                                    [0:
+                                                                    "middle_end/flambda/augment_specialised_args.ml"
+                                                                    582 16]))))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(584):24442-24530
+                                                                    (makeblock 0
+                                                                    new_outer_var
+                                                                    (makeblock 0
+                                                                    projection))))))))))))))))))
+                                                       (field 3
+                                                         for_one_function))))
+                                                (before middle_end/flambda/augment_specialised_args.ml(589):24616-27432
+                                                  (let
+                                                    (specialised_args =
+                                                       (after middle_end/flambda/augment_specialised_args.ml(590):24647-24741
+                                                         (apply
+                                                           (field 40
+                                                             (field 7
+                                                               (global Variable!)))
+                                                           0a 0a
+                                                           rewritten_existing_specialised_args
+                                                           new_specialised_args)))
+                                                    (before middle_end/flambda/augment_specialised_args.ml(593):24757-27432
+                                                      (catch
+                                                        (if
+                                                          (not
+                                                            (field 2
+                                                              for_one_function))
+                                                          (before middle_end/flambda/augment_specialised_args.ml(595):24879-24901
+                                                            (let
+                                                              (existing_function_decl =
+                                                                 0a
+                                                               specialised_args =a
+                                                                 specialised_args)
+                                                              (exit 43
+                                                                existing_function_decl
+                                                                specialised_args)))
+                                                          (before middle_end/flambda/augment_specialised_args.ml(597):24925-25225
+                                                            (let
+                                                              (*match* =
+                                                                 (after middle_end/flambda/augment_specialised_args.ml(598):24979-25041
+                                                                   (apply
+                                                                    duplicate_function
+                                                                    env
+                                                                    set_of_closures
+                                                                    fun_var
+                                                                    new_fun_var))
+                                                               new_specialised_args =a
+                                                                 (field 1
+                                                                   *match*)
+                                                               function_decl =a
+                                                                 (field 0
+                                                                   *match*))
+                                                              (before middle_end/flambda/augment_specialised_args.ml(600):25065-25225
+                                                                (let
+                                                                  (specialised_args =
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(601):25100-25165
+                                                                    (apply
+                                                                    (field 40
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    0a 0a
+                                                                    specialised_args
+                                                                    new_specialised_args)))
+                                                                  (before middle_end/flambda/augment_specialised_args.ml(603):25189-25225
+                                                                    (let
+                                                                    (existing_function_decl =
+                                                                    (makeblock 0
+                                                                    function_decl)
+                                                                    specialised_args =a
+                                                                    specialised_args)
+                                                                    (exit 43
+                                                                    existing_function_decl
+                                                                    specialised_args))))))))
+                                                       with (43 existing_function_decl specialised_args)
+                                                        (before middle_end/flambda/augment_specialised_args.ml(605):25241-27432
+                                                          (let
+                                                            (all_params =
+                                                               (let
+                                                                 (new_params =
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(607):25293-25391
+                                                                    (apply
+                                                                    (field 20
+                                                                    (field 6
+                                                                    (global Variable!)))
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(607):25315-25391
+                                                                    (apply
+                                                                    (field 46
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    (field 5
+                                                                    for_one_function))))))
+                                                                 (before middle_end/flambda/augment_specialised_args.ml(610):25411-25525
+                                                                   (let
+                                                                    (new_params =
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(611):25438-25472
+                                                                    (apply
+                                                                    (field 16
+                                                                    (global Stdlib__list!))
+                                                                    (field 0
+                                                                    (global Parameter!))
+                                                                    new_params)))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(613):25492-25525
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(613):25492-25525
+                                                                    (apply
+                                                                    (field 36
+                                                                    (global Stdlib!))
+                                                                    (field 1
+                                                                    function_decl)
+                                                                    new_params)))))))
+                                                            (before middle_end/flambda/augment_specialised_args.ml(615):25541-27432
+                                                              (let
+                                                                (closure_origin =
+                                                                   (after middle_end/flambda/augment_specialised_args.ml(616):25570-25621
+                                                                    (apply
+                                                                    (field 9
+                                                                    (global Closure_origin!))
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(616):25592-25621
+                                                                    (apply
+                                                                    (field 9
+                                                                    (global Closure_id!))
+                                                                    new_fun_var)))))
+                                                                (before middle_end/flambda/augment_specialised_args.ml(618):25637-27432
+                                                                  (let
+                                                                    (rewritten_function_decl =
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(619):25675-26005
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Flambda!))
+                                                                    all_params
+                                                                    (field 2
+                                                                    function_decl)
+                                                                    (field 5
+                                                                    function_decl)
+                                                                    (field 6
+                                                                    function_decl)
+                                                                    (field 7
+                                                                    function_decl)
+                                                                    (field 8
+                                                                    function_decl)
+                                                                    (field 9
+                                                                    function_decl)
+                                                                    closure_origin)))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(629):26021-27432
+                                                                    (catch
+                                                                    (if
+                                                                    (field 2
+                                                                    for_one_function)
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(631):26127-27084
+                                                                    (let
+                                                                    (surrogate =
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(631):26143-26166
+                                                                    (apply
+                                                                    (field 11
+                                                                    (global Variable!))
+                                                                    0a
+                                                                    fun_var)))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(632):26180-27084
+                                                                    (let
+                                                                    (funs =
+                                                                    (let
+                                                                    (existing_function_decl =
+                                                                    (if
+                                                                    existing_function_decl
+                                                                    (let
+                                                                    (decl =a
+                                                                    (field 0
+                                                                    existing_function_decl))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(640):26639-26643
+                                                                    decl))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(641):26668-26680
+                                                                    (raise
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(641):26668-26680
+                                                                    (makeblock 0
+                                                                    (global Assert_failure!)
+                                                                    [0:
+                                                                    "middle_end/flambda/augment_specialised_args.ml"
+                                                                    641 24]))))))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(643):26708-26914
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(643):26708-26914
+                                                                    (apply
+                                                                    (field 3
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    new_fun_var
+                                                                    rewritten_function_decl
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(644):26775-26914
+                                                                    (apply
+                                                                    (field 3
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    surrogate
+                                                                    wrapper
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(645):26827-26913
+                                                                    (apply
+                                                                    (field 3
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    fun_var
+                                                                    existing_function_decl
+                                                                    (field 0
+                                                                    (field 7
+                                                                    (global Variable!))))))))))))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(648):26938-27084
+                                                                    (let
+                                                                    (direct_call_surrogates =
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(649):26979-27032
+                                                                    (apply
+                                                                    (field 3
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    fun_var
+                                                                    surrogate
+                                                                    (field 0
+                                                                    (field 7
+                                                                    (global Variable!))))))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(651):27056-27084
+                                                                    (let
+                                                                    (direct_call_surrogates =a
+                                                                    direct_call_surrogates
+                                                                    funs =a
+                                                                    funs)
+                                                                    (exit 35
+                                                                    direct_call_surrogates
+                                                                    funs)))))))))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(653):27108-27299
+                                                                    (let
+                                                                    (funs =
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(654):27131-27251
+                                                                    (apply
+                                                                    (field 3
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    new_fun_var
+                                                                    rewritten_function_decl
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(655):27198-27251
+                                                                    (apply
+                                                                    (field 3
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    fun_var
+                                                                    wrapper
+                                                                    (field 0
+                                                                    (field 7
+                                                                    (global Variable!))))))))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(657):27275-27299
+                                                                    (let
+                                                                    (direct_call_surrogates =
+                                                                    (field 0
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    funs =a
+                                                                    funs)
+                                                                    (exit 35
+                                                                    direct_call_surrogates
+                                                                    funs))))))
+                                                                    with (35 direct_call_surrogates funs)
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(659):27315-27432
+                                                                    (let
+                                                                    (free_vars =
+                                                                    (field 0
+                                                                    (field 7
+                                                                    (global Variable!))))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(660):27359-27432
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    funs
+                                                                    free_vars
+                                                                    specialised_args
+                                                                    direct_call_surrogates
+                                                                    benefit)))))))))))))))))))))))))))))))))
+              add_lifted_projections_around_set_of_closures =
+                (function set_of_closures benefit
+                  new_lifted_defns_indexed_by_new_outer_vars
+                  (funct-body middle_end/flambda/augment_specialised_args.ml(663)<ghost>:27494-28136
+                    (before middle_end/flambda/augment_specialised_args.ml(665):27606-28136
+                      (let
+                        (body =
+                           (after middle_end/flambda/augment_specialised_args.ml(666):27623-27742
+                             (apply (field 11 (global Flambda_utils!))
+                               (field 60 (global Internal_variable_names!))
+                               (makeblock 5 set_of_closures))))
+                        (before middle_end/flambda/augment_specialised_args.ml(670):27754-28136
+                          (after middle_end/flambda/augment_specialised_args.ml(670):27754-28136
+                            (apply (field 12 (field 7 (global Variable!)))
+                              (function new_outer_var projection param
+                                (funct-body middle_end/flambda/augment_specialised_args.ml(670):27772-28065
+                                  (let
+                                    (benefit =a (field 1 param)
+                                     expr =a (field 0 param))
+                                    (before middle_end/flambda/augment_specialised_args.ml(672):27856-28064
+                                      (let
+                                        (named =
+                                           (after middle_end/flambda/augment_specialised_args.ml(672):27868-27912
+                                             (apply
+                                               (field 34
+                                                 (global Flambda_utils!))
+                                               projection)))
+                                        (before middle_end/flambda/augment_specialised_args.ml(673):27924-28064
+                                          (let
+                                            (benefit =
+                                               (after middle_end/flambda/augment_specialised_args.ml(673):27938-27973
+                                                 (apply
+                                                   (field 15
+                                                     (field 3
+                                                       (global Inlining_cost!)))
+                                                   projection benefit)))
+                                            (before middle_end/flambda/augment_specialised_args.ml(674):27985-28064
+                                              (let
+                                                (expr =
+                                                   (after middle_end/flambda/augment_specialised_args.ml(674):27996-28039
+                                                     (apply
+                                                       (field 11
+                                                         (global Flambda!))
+                                                       new_outer_var named
+                                                       expr)))
+                                                (before middle_end/flambda/augment_specialised_args.ml(675):28051-28064
+                                                  (makeblock 0 expr benefit)))))))))))
+                              new_lifted_defns_indexed_by_new_outer_vars
+                              (makeblock 0 body benefit))))))))
+              rewrite_set_of_closures_core =
+                (function env duplicate_function benefit set_of_closures
+                  (funct-body middle_end/flambda/augment_specialised_args.ml(679)<ghost>:28173-31410
+                    (before middle_end/flambda/augment_specialised_args.ml(681):28266-31410
+                      (let
+                        (what_to_specialise =
+                           (after middle_end/flambda/augment_specialised_args.ml(682):28297-28383
+                             (apply (field 3 Processed_what_to_specialise)
+                               env
+                               (after middle_end/flambda/augment_specialised_args.ml(683):28339-28383
+                                 (apply (field 1 T) env set_of_closures)))))
+                        (before middle_end/flambda/augment_specialised_args.ml(685):28395-31410
+                          (let (original_set_of_closures = set_of_closures)
+                            (before middle_end/flambda/augment_specialised_args.ml(686):28449-31410
+                              (let
+                                (*match* =
+                                   (after middle_end/flambda/augment_specialised_args.ml(688):28552-30472
+                                     (apply
+                                       (field 12
+                                         (field 7 (global Variable!)))
+                                       (function fun_var function_decl param
+                                         (funct-body middle_end/flambda/augment_specialised_args.ml(688):28570-30262
+                                           (let
+                                             (benefit =a (field 5 param)
+                                              done_something =a
+                                                (field 4 param)
+                                              direct_call_surrogates =a
+                                                (field 3 param)
+                                              specialised_args =a
+                                                (field 2 param)
+                                              free_vars =a (field 1 param)
+                                              funs =a (field 0 param))
+                                             (before middle_end/flambda/augment_specialised_args.ml(691):28729-30261
+                                               (catch
+                                                 (try
+                                                   (exit 56
+                                                     (after middle_end/flambda/augment_specialised_args.ml(691):28735-28789
+                                                       (apply
+                                                         (field 26
+                                                           (field 7
+                                                             (global Variable!)))
+                                                         fun_var
+                                                         (field 4
+                                                           what_to_specialise))))
+                                                  with exn
+                                                   (if
+                                                     (== exn
+                                                       (field 7
+                                                         (global Stdlib!)))
+                                                     (before middle_end/flambda/augment_specialised_args.ml(693):28842-29008
+                                                       (let
+                                                         (funs =
+                                                            (after middle_end/flambda/augment_specialised_args.ml(693):28853-28896
+                                                              (apply
+                                                                (field 3
+                                                                  (field 7
+                                                                    (global Variable!)))
+                                                                fun_var
+                                                                function_decl
+                                                                funs)))
+                                                         (before middle_end/flambda/augment_specialised_args.ml(694):28912-29008
+                                                           (makeblock 0 funs
+                                                             free_vars
+                                                             specialised_args
+                                                             direct_call_surrogates
+                                                             done_something
+                                                             benefit))))
+                                                     (reraise exn)))
+                                                with (56 for_one_function)
+                                                 (before middle_end/flambda/augment_specialised_args.ml(697):29076-30261
+                                                   (seq
+                                                     (if
+                                                       (after middle_end/flambda/augment_specialised_args.ml(697):29083-29132
+                                                         (apply
+                                                           (field 1
+                                                             (global Variable!))
+                                                           fun_var
+                                                           (field 0
+                                                             for_one_function)))
+                                                       0a
+                                                       (raise
+                                                         (after middle_end/flambda/augment_specialised_args.ml(697):29076-29132
+                                                           (makeblock 0
+                                                             (global Assert_failure!)
+                                                             [0:
+                                                              "middle_end/flambda/augment_specialised_args.ml"
+                                                              697 12]))))
+                                                     (before middle_end/flambda/augment_specialised_args.ml(698):29146-30261
+                                                       (let
+                                                         (*match* =
+                                                            (after middle_end/flambda/augment_specialised_args.ml(699):29166-29274
+                                                              (apply
+                                                                rewrite_function_decl
+                                                                what_to_specialise
+                                                                env
+                                                                duplicate_function
+                                                                for_one_function
+                                                                benefit)))
+                                                         (if *match*
+                                                           (let
+                                                             (*match* =a
+                                                                (field 0
+                                                                  *match*)
+                                                              benefit =a
+                                                                (field 4
+                                                                  *match*)
+                                                              direct_call_surrogates' =a
+                                                                (field 3
+                                                                  *match*)
+                                                              specialised_args' =a
+                                                                (field 2
+                                                                  *match*)
+                                                              free_vars' =a
+                                                                (field 1
+                                                                  *match*)
+                                                              funs' =a
+                                                                (field 0
+                                                                  *match*))
+                                                             (before middle_end/flambda/augment_specialised_args.ml(709):29692-30261
+                                                               (let
+                                                                 (funs =
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(709):29703-29741
+                                                                    (apply
+                                                                    (field 40
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    0a 0a
+                                                                    funs
+                                                                    funs')))
+                                                                 (before middle_end/flambda/augment_specialised_args.ml(710):29759-30261
+                                                                   (let
+                                                                    (direct_call_surrogates =
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(711):29804-29896
+                                                                    (apply
+                                                                    (field 40
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    0a 0a
+                                                                    direct_call_surrogates
+                                                                    direct_call_surrogates')))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(714):29928-30261
+                                                                    (let
+                                                                    (free_vars =
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(715):29960-30008
+                                                                    (apply
+                                                                    (field 40
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    0a 0a
+                                                                    free_vars
+                                                                    free_vars')))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(717):30040-30261
+                                                                    (let
+                                                                    (specialised_args =
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(718):30079-30141
+                                                                    (apply
+                                                                    (field 40
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    0a 0a
+                                                                    specialised_args
+                                                                    specialised_args')))
+                                                                    (before middle_end/flambda/augment_specialised_args.ml(720):30173-30261
+                                                                    (makeblock 0
+                                                                    funs
+                                                                    free_vars
+                                                                    specialised_args
+                                                                    direct_call_surrogates
+                                                                    1a
+                                                                    benefit)))))))))))
+                                                           (before middle_end/flambda/augment_specialised_args.ml(703):29328-29566
+                                                             (let
+                                                               (function_decl =
+                                                                  (field 1
+                                                                    for_one_function))
+                                                               (before middle_end/flambda/augment_specialised_args.ml(704):29396-29566
+                                                                 (let
+                                                                   (funs =
+                                                                    (after middle_end/flambda/augment_specialised_args.ml(704):29407-29450
+                                                                    (apply
+                                                                    (field 3
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    fun_var
+                                                                    function_decl
+                                                                    funs)))
+                                                                   (before middle_end/flambda/augment_specialised_args.ml(705):29468-29566
+                                                                    (makeblock 0
+                                                                    funs
+                                                                    free_vars
+                                                                    specialised_args
+                                                                    direct_call_surrogates
+                                                                    done_something
+                                                                    benefit))))))))))))))))
+                                       (field 3 (field 0 set_of_closures))
+                                       (makeblock 0
+                                         (field 0
+                                           (field 7 (global Variable!)))
+                                         (field 1 set_of_closures)
+                                         (field 2 set_of_closures)
+                                         (field 3 set_of_closures) 0a
+                                         benefit)))
+                                 benefit =a (field 5 *match*)
+                                 done_something =a (field 4 *match*)
+                                 direct_call_surrogates =a (field 3 *match*)
+                                 specialised_args =a (field 2 *match*)
+                                 free_vars =a (field 1 *match*)
+                                 funs =a (field 0 *match*))
+                                (before middle_end/flambda/augment_specialised_args.ml(727):30484-31410
+                                  (if (not done_something)
+                                    (before middle_end/flambda/augment_specialised_args.ml(728):30517-30521
+                                      0a)
+                                    (before middle_end/flambda/augment_specialised_args.ml(730):30537-31410
+                                      (let
+                                        (function_decls =
+                                           (after middle_end/flambda/augment_specialised_args.ml(731):30566-30649
+                                             (apply
+                                               (field 20 (global Flambda!))
+                                               (field 0 set_of_closures)
+                                               funs)))
+                                        (before middle_end/flambda/augment_specialised_args.ml(734):30665-31410
+                                          (seq
+                                            (if
+                                              (after middle_end/flambda/augment_specialised_args.ml(734):30672-30787
+                                                (apply
+                                                  (field 5
+                                                    (global Int_replace_polymorphic_compare!))
+                                                  (after middle_end/flambda/augment_specialised_args.ml(734):30673-30711
+                                                    (apply
+                                                      (field 17
+                                                        (field 7
+                                                          (global Variable!)))
+                                                      specialised_args))
+                                                  (after middle_end/flambda/augment_specialised_args.ml(735):30723-30786
+                                                    (apply
+                                                      (field 17
+                                                        (field 7
+                                                          (global Variable!)))
+                                                      (field 2
+                                                        original_set_of_closures)))))
+                                              0a
+                                              (raise
+                                                (after middle_end/flambda/augment_specialised_args.ml(734):30665-30787
+                                                  (makeblock 0
+                                                    (global Assert_failure!)
+                                                    [0:
+                                                     "middle_end/flambda/augment_specialised_args.ml"
+                                                     734 6]))))
+                                            (before middle_end/flambda/augment_specialised_args.ml(736):30795-31410
+                                              (let
+                                                (set_of_closures =
+                                                   (after middle_end/flambda/augment_specialised_args.ml(737):30825-30964
+                                                     (apply
+                                                       (field 23
+                                                         (global Flambda!))
+                                                       function_decls
+                                                       free_vars
+                                                       specialised_args
+                                                       direct_call_surrogates)))
+                                                (before middle_end/flambda/augment_specialised_args.ml(743):30980-31410
+                                                  (seq
+                                                    (if
+                                                      (field 0
+                                                        (field 133
+                                                          (global Clflags!)))
+                                                      (before middle_end/flambda/augment_specialised_args.ml(743):31022-31138
+                                                        (after middle_end/flambda/augment_specialised_args.ml(743):31022-31138
+                                                          (apply
+                                                            check_invariants
+                                                            (field 0 T)
+                                                            set_of_closures
+                                                            original_set_of_closures)))
+                                                      0a)
+                                                    (before middle_end/flambda/augment_specialised_args.ml(747):31146-31410
+                                                      (let
+                                                        (*match* =
+                                                           (after middle_end/flambda/augment_specialised_args.ml(748):31174-31374
+                                                             (apply
+                                                               add_lifted_projections_around_set_of_closures
+                                                               set_of_closures
+                                                               benefit
+                                                               (field 2
+                                                                 what_to_specialise)))
+                                                         benefit =a
+                                                           (field 1 *match*)
+                                                         expr =a
+                                                           (field 0 *match*))
+                                                        (before middle_end/flambda/augment_specialised_args.ml(752):31390-31410
+                                                          (makeblock 0
+                                                            (makeblock 0 expr
+                                                              benefit)))))))))))))))))))))))
+              rewrite_set_of_closures =
+                (function env duplicate_function set_of_closures
+                  (funct-body middle_end/flambda/augment_specialised_args.ml(754)<ghost>:31442-31858
+                    (before middle_end/flambda/augment_specialised_args.ml(755):31490-31858
+                      (after middle_end/flambda/augment_specialised_args.ml(755):31490-31858
+                        (apply (field 1 (global Pass_wrapper!))
+                          (after middle_end/flambda/augment_specialised_args.ml(755):31523-31565
+                            (apply
+                              (field 4
+                                (field 0 (global Inline_and_simplify_aux!)))
+                              env))
+                          (field 0 T)
+                          (function param
+                            (funct-body middle_end/flambda/augment_specialised_args.ml(759):31742-31858
+                              (before middle_end/flambda/augment_specialised_args.ml(760):31761-31857
+                                (after middle_end/flambda/augment_specialised_args.ml(760):31761-31857
+                                  (apply rewrite_set_of_closures_core env
+                                    duplicate_function
+                                    (field 0
+                                      (field 3 (global Inlining_cost!)))
+                                    set_of_closures)))))
+                          set_of_closures (field 36 (global Flambda!))
+                          (function ppf param
+                            (funct-body middle_end/flambda/augment_specialised_args.ml(758):31687-31732
+                              (let (expr =a (field 0 param))
+                                (before middle_end/flambda/augment_specialised_args.ml(758):31709-31731
+                                  (after middle_end/flambda/augment_specialised_args.ml(758):31709-31731
+                                    (apply (field 26 (global Flambda!)) ppf
+                                      expr))))))))))))
+             (pseudo middle_end/flambda/augment_specialised_args.ml(399):16709-31862
+               (makeblock 0 rename_function_and_parameters create_wrapper
+                 rewrite_function_decl
+                 add_lifted_projections_around_set_of_closures
+                 rewrite_set_of_closures_core rewrite_set_of_closures))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 (makeblock 0) What_to_specialise
+        (function funarg is_a_functor stub
+          (let (let = (apply Make funarg)) (makeblock 0 (field 5 let))))))))

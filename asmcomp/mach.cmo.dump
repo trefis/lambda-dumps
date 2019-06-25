@@ -1,0 +1,219 @@
+(setglobal Mach!
+  (letrec
+    (dummy_instr
+       (makemutable 0 0a dummy_instr (makearray[addr]) (makearray[addr])
+         (field 0 (global Debuginfo!)) (field 0 (field 9 (global Reg!)))
+         (makeblock 0 (field 0 (field 15 (global Reg_with_debug_info!)))) 0a))
+    (let
+      (end_instr =
+         (function param
+           (funct-body asmcomp/mach.ml(116)<ghost>:4013-4253
+             (before asmcomp/mach.ml(117):4020-4253
+               (makemutable 0 0a dummy_instr (makearray[addr])
+                 (makearray[addr]) (field 0 (global Debuginfo!))
+                 (field 0 (field 9 (global Reg!)))
+                 (makeblock 0
+                   (field 0 (field 15 (global Reg_with_debug_info!))))
+                 0a))))
+       instr_cons =
+         (function d a r n
+           (funct-body asmcomp/mach.ml(127)<ghost>:4270-4480
+             (before asmcomp/mach.ml(128):4282-4480
+               (makemutable 0 d n a r (field 0 (global Debuginfo!))
+                 (field 0 (field 9 (global Reg!)))
+                 (makeblock 0
+                   (field 0 (field 15 (global Reg_with_debug_info!))))
+                 0a))))
+       instr_cons_debug =
+         (function d a r dbg n
+           (funct-body asmcomp/mach.ml(134)<ghost>:4503-4702
+             (before asmcomp/mach.ml(135):4519-4702
+               (makemutable 0 d n a r dbg (field 0 (field 9 (global Reg!)))
+                 (makeblock 0
+                   (field 0 (field 15 (global Reg_with_debug_info!))))
+                 0a)))))
+      (letrec
+        (instr_iter
+           (function f i
+             (funct-body asmcomp/mach.ml(140)<ghost>:4723-5533
+               (before asmcomp/mach.ml(141):4731-5533
+                 (let (*match* = (field 0 i))
+                   (catch
+                     (if (isint *match*)
+                       (if *match* (exit 3)
+                         (before asmcomp/mach.ml(142):4761-4763 0a))
+                       (exit 3))
+                    with (3)
+                     (before asmcomp/mach.ml(144):4779-5533
+                       (seq
+                         (after asmcomp/mach.ml(144):4779-4782 (apply f i))
+                         (before asmcomp/mach.ml(145):4790-5533
+                           (let (*match* = (field 0 i))
+                             (catch
+                               (catch
+                                 (switch* *match*
+                                  case int 0:
+                                   (before asmcomp/mach.ml(146):4824-4826 0a)
+                                  case int 1: (exit 1)
+                                  case tag 0:
+                                   (let (*match* =a (field 0 *match*))
+                                     (switch *match*
+                                      case tag 5: (exit 1)
+                                      case tag 6: (exit 1)
+                                      default: (exit 2)))
+                                  case tag 1:
+                                   (let
+                                     (ifnot =a (field 2 *match*)
+                                      ifso =a (field 1 *match*))
+                                     (before asmcomp/mach.ml(149):4947-5005
+                                       (seq
+                                         (after asmcomp/mach.ml(149):4947-4964
+                                           (apply instr_iter f ifso))
+                                         (before asmcomp/mach.ml(149):4966-5005
+                                           (seq
+                                             (after asmcomp/mach.ml(149):4966-4984
+                                               (apply instr_iter f ifnot))
+                                             (before asmcomp/mach.ml(149):4986-5005
+                                               (after asmcomp/mach.ml(149):4986-5005
+                                                 (apply instr_iter f
+                                                   (field 1 i)))))))))
+                                  case tag 2:
+                                   (let (cases =a (field 1 *match*))
+                                     (before asmcomp/mach.ml(151):5050-5169
+                                       (seq
+                                         (for i 0 to
+                                           (- (array.length[addr] cases) 1)
+                                           (before asmcomp/mach.ml(152):5101-5123
+                                             (after asmcomp/mach.ml(152):5101-5123
+                                               (apply instr_iter f
+                                                 (after asmcomp/mach.ml(152):5114-5123
+                                                   (array.get[addr] cases i))))))
+                                         (before asmcomp/mach.ml(154):5150-5169
+                                           (after asmcomp/mach.ml(154):5150-5169
+                                             (apply instr_iter f (field 1 i)))))))
+                                  case tag 3:
+                                   (let
+                                     (body =a (field 2 *match*)
+                                      handlers =a (field 1 *match*))
+                                     (before asmcomp/mach.ml(156):5217-5339
+                                       (seq
+                                         (after asmcomp/mach.ml(156):5217-5234
+                                           (apply instr_iter f body))
+                                         (before asmcomp/mach.ml(157):5246-5339
+                                           (seq
+                                             (after asmcomp/mach.ml(157):5246-5308
+                                               (apply
+                                                 (field 14
+                                                   (global Stdlib__list!))
+                                                 (function param
+                                                   (funct-body asmcomp/mach.ml(157):5256-5299
+                                                     (let
+                                                       (handler =a
+                                                          (field 1 param))
+                                                       (before asmcomp/mach.ml(157):5278-5298
+                                                         (after asmcomp/mach.ml(157):5278-5298
+                                                           (apply instr_iter
+                                                             f handler))))))
+                                                 handlers))
+                                             (before asmcomp/mach.ml(158):5320-5339
+                                               (after asmcomp/mach.ml(158):5320-5339
+                                                 (apply instr_iter f
+                                                   (field 1 i)))))))))
+                                  case tag 4:
+                                   (before asmcomp/mach.ml(159):5359-5361 0a)
+                                  case tag 5:
+                                   (let
+                                     (handler =a (field 1 *match*)
+                                      body =a (field 0 *match*))
+                                     (before asmcomp/mach.ml(161):5407-5467
+                                       (seq
+                                         (after asmcomp/mach.ml(161):5407-5424
+                                           (apply instr_iter f body))
+                                         (before asmcomp/mach.ml(161):5426-5467
+                                           (seq
+                                             (after asmcomp/mach.ml(161):5426-5446
+                                               (apply instr_iter f handler))
+                                             (before asmcomp/mach.ml(161):5448-5467
+                                               (after asmcomp/mach.ml(161):5448-5467
+                                                 (apply instr_iter f
+                                                   (field 1 i)))))))))
+                                  case tag 6:
+                                   (before asmcomp/mach.ml(162):5488-5490 0a))
+                                with (2)
+                                 (before asmcomp/mach.ml(164):5514-5533
+                                   (after asmcomp/mach.ml(164):5514-5533
+                                     (apply instr_iter f (field 1 i)))))
+                              with (1)
+                               (before asmcomp/mach.ml(147):4892-4894 0a))))))))))))
+        (let
+          (spacetime_node_hole_pointer_is_live_before =
+             (function insn
+               (funct-body asmcomp/mach.ml(166)<ghost>:5582-6989
+                 (before asmcomp/mach.ml(167):5591-6989
+                   (let (*match* = (field 0 insn))
+                     (catch
+                       (switch *match*
+                        case tag 0:
+                         (let (op =a (field 0 *match*))
+                           (before asmcomp/mach.ml(169):5630-6886
+                             (catch
+                               (catch
+                                 (catch
+                                   (switch op
+                                    case tag 3: (exit 5)
+                                    case tag 4: (exit 5)
+                                    case tag 5: (exit 5)
+                                    case tag 6: (exit 5)
+                                    case tag 7:
+                                     (let (alloc =a (field 1 op))
+                                       (before asmcomp/mach.ml(171):5755-5760
+                                         alloc))
+                                    case tag 11:
+                                     (before asmcomp/mach.ml(179):6212-6217
+                                       0a)
+                                    case tag 12: (exit 6)
+                                    case tag 13: (exit 6)
+                                    case tag 14:
+                                     (let (specific_op =a (field 0 op))
+                                       (before asmcomp/mach.ml(190):6576-6635
+                                         (after asmcomp/mach.ml(190):6576-6635
+                                           (apply (field 1 (global Arch!))
+                                             specific_op))))
+                                    default: (exit 7))
+                                  with (5)
+                                   (before asmcomp/mach.ml(170):5721-5725 1a))
+                                with (6)
+                                 (before asmcomp/mach.ml(181):6264-6538
+                                   (before asmcomp/mach.ml(187):6523-6528 0a)))
+                              with (7)
+                               (before asmcomp/mach.ml(195):6873-6878 0a))))
+                        default: (exit 8))
+                      with (8) (before asmcomp/mach.ml(198):6984-6989 0a))))))
+           operation_can_raise =
+             (function op
+               (funct-body asmcomp/mach.ml(200)<ghost>:7015-7173
+                 (before asmcomp/mach.ml(201):7022-7173
+                   (catch
+                     (catch
+                       (switch op
+                        case tag 3: (exit 9)
+                        case tag 4: (exit 9)
+                        case tag 7: (exit 9)
+                        case tag 11: (exit 9)
+                        case tag 12:
+                         (let (*match* =a (field 0 op))
+                           (switch *match*
+                            case tag 1: (exit 9)
+                            default: (exit 10)))
+                        case tag 13:
+                         (let (*match* =a (field 0 op))
+                           (switch *match*
+                            case tag 1: (exit 9)
+                            default: (exit 10)))
+                        default: (exit 10))
+                      with (10) (before asmcomp/mach.ml(205):7168-7173 0a))
+                    with (9) (before asmcomp/mach.ml(204):7154-7158 1a))))))
+          (pseudo _none_(0)<ghost>:-1--1
+            (makeblock 0 dummy_instr end_instr instr_cons instr_cons_debug
+              instr_iter spacetime_node_hole_pointer_is_live_before
+              operation_can_raise)))))))

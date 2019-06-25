@@ -1,0 +1,99 @@
+(setglobal Longident!
+  (letrec
+    (flat
+       (function accu param
+         (funct-body parsing/longident.ml(21)<ghost>:1166-1302
+           (switch* param
+            case tag 0:
+             (let (s =a (field 0 param))
+               (before parsing/longident.ml(22):1198-1207
+                 (makeblock 0 s accu)))
+            case tag 1:
+             (let (s =a (field 1 param) lid =a (field 0 param))
+               (before parsing/longident.ml(23):1228-1248
+                 (after parsing/longident.ml(23):1228-1248
+                   (apply flat (makeblock 0 s accu) lid))))
+            case tag 2:
+             (before parsing/longident.ml(24):1269-1302
+               (after parsing/longident.ml(24):1269-1302
+                 (apply (field 0 (global Misc!)) "Longident.flat")))))))
+    (let
+      (flatten =
+         (function lid
+           (funct-body parsing/longident.ml(26)<ghost>:1316-1333
+             (before parsing/longident.ml(26):1322-1333
+               (after parsing/longident.ml(26):1322-1333 (apply flat 0a lid)))))
+       last =
+         (function param
+           (funct-body parsing/longident.ml(28):1346-1446
+             (switch* param
+              case tag 0:
+               (let (s =a (field 0 param))
+                 (before parsing/longident.ml(29):1371-1372 s))
+              case tag 1:
+               (let (s =a (field 1 param))
+                 (before parsing/longident.ml(30):1391-1392 s))
+              case tag 2:
+               (before parsing/longident.ml(31):1413-1446
+                 (after parsing/longident.ml(31):1413-1446
+                   (apply (field 0 (global Misc!)) "Longident.last")))))))
+      (letrec
+        (split_at_dots
+           (function s pos[int]
+             (funct-body parsing/longident.ml(33)<ghost>:1470-1657
+               (before parsing/longident.ml(34):1480-1657
+                 (try
+                   (let
+                     (dot =[int]
+                        (after parsing/longident.ml(35):1498-1525
+                          (apply (field 17 (global Stdlib__string!)) s pos
+                            '.')))
+                     (before parsing/longident.ml(36):1533-1590
+                       (makeblock 0
+                         (after parsing/longident.ml(36):1533-1561
+                           (apply (field 3 (global Stdlib__string!)) s pos
+                             (- dot pos)))
+                         (after parsing/longident.ml(36):1565-1590
+                           (apply split_at_dots s (+ dot 1))))))
+                  with exn
+                   (if (== exn (field 7 (global Stdlib!)))
+                     (before parsing/longident.ml(38):1615-1657
+                       (makeblock 0
+                         (after parsing/longident.ml(38):1616-1656
+                           (apply (field 3 (global Stdlib__string!)) s pos
+                             (- (string.length s) pos)))
+                         0a))
+                     (reraise exn)))))))
+        (let
+          (unflatten =
+             (function l
+               (funct-body parsing/longident.ml(40)<ghost>:1673-1783
+                 (before parsing/longident.ml(41):1679-1783
+                   (if l
+                     (let (tl =a (field 1 l) hd =a (field 0 l))
+                       (before parsing/longident.ml(43):1723-1783
+                         (makeblock 0
+                           (after parsing/longident.ml(43):1728-1783
+                             (apply (field 20 (global Stdlib__list!))
+                               (function p s
+                                 (funct-body parsing/longident.ml(43):1744-1767
+                                   (before parsing/longident.ml(43):1756-1766
+                                     (makeblock 1 p s))))
+                               (makeblock 0 hd) tl)))))
+                     (before parsing/longident.ml(42):1702-1706 0a)))))
+           parse =
+             (function s
+               (funct-body parsing/longident.ml(45)<ghost>:1795-2008
+                 (before parsing/longident.ml(46):1801-2008
+                   (let
+                     (*match* =
+                        (after parsing/longident.ml(46):1807-1836
+                          (apply unflatten
+                            (after parsing/longident.ml(46):1817-1836
+                              (apply split_at_dots s 0)))))
+                     (if *match*
+                       (let (v =a (field 0 *match*))
+                         (before parsing/longident.ml(49):2007-2008 v))
+                       (before parsing/longident.ml(47):1854-1863 [0: ""])))))))
+          (pseudo _none_(0)<ghost>:-1--1
+            (makeblock 0 flatten unflatten last parse)))))))

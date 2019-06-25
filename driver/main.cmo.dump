@@ -1,0 +1,804 @@
+(setglobal Main!
+  (let
+    (usage = "Usage: ocamlc <options> <files>\nOptions are:"
+     ppf = (field 105 (global Stdlib__format!))
+     vmthread_removed_message =
+       "The -vmthread argument of ocamlc is no longer supported\nsince OCaml 4.09.0.  Please switch to system threads, which have the\nsame API. Lightweight threads with VM-level scheduling are provided by\nthird-party libraries such as Lwt, but with a different API."
+     Options =
+       (module-defn(Options) driver/main.ml(30):1550-6100
+         (apply (field 0 (global Main_args!))
+           (let
+             (set =
+                (function r param
+                  (funct-body driver/main.ml(31)<ghost>:1617-1633
+                    (before driver/main.ml(31):1624-1633
+                      (setfield_imm 0 r 1a))))
+              unset =
+                (function r param
+                  (funct-body driver/main.ml(32)<ghost>:1646-1663
+                    (before driver/main.ml(32):1653-1663
+                      (setfield_imm 0 r 0a))))
+              _a =
+                (after driver/main.ml(33):1675-1691
+                  (apply set (field 15 (global Clflags!))))
+              _absname =
+                (after driver/main.ml(34):1709-1728
+                  (apply set (field 33 (global Clflags!))))
+              _alert = (field 1 (global Warnings!))
+              _annot =
+                (after driver/main.ml(36):1787-1802
+                  (apply set (field 34 (global Clflags!))))
+              _binannot =
+                (after driver/main.ml(37):1821-1843
+                  (apply set (field 35 (global Clflags!))))
+              _c =
+                (after driver/main.ml(38):1855-1871
+                  (apply set (field 10 (global Clflags!))))
+              _cc =
+                (function s
+                  (funct-body driver/main.ml(39)<ghost>:1882-1906
+                    (before driver/main.ml(39):1886-1906
+                      (setfield_ptr 0 (field 54 (global Clflags!))
+                        (makeblock 0 s)))))
+              _cclib =
+                (function s
+                  (funct-body driver/main.ml(40)<ghost>:1920-1979
+                    (before driver/main.ml(40):1924-1979
+                      (after driver/main.ml(40):1924-1979
+                        (apply (field 19 (global Compenv!))
+                          (makeblock 4
+                            (after driver/main.ml(40):1954-1978
+                              (apply (field 34 (global Misc!)) s))))))))
+              _ccopt =
+                (function s
+                  (funct-body driver/main.ml(41)<ghost>:1993-2031
+                    (before driver/main.ml(41):1997-2031
+                      (setfield_ptr 0 (field 8 (global Compenv!))
+                        (makeblock 0 s (field 0 (field 8 (global Compenv!))))))))
+              _compat_32 =
+                (after driver/main.ml(42):2051-2077
+                  (apply set (field 23 (global Clflags!))))
+              _config = (field 54 (global Misc!))
+              _config_var = (field 55 (global Misc!))
+              _custom =
+                (after driver/main.ml(45):2191-2209
+                  (apply set (field 21 (global Clflags!))))
+              _no_check_prims =
+                (after driver/main.ml(46):2234-2252
+                  (apply set (field 22 (global Clflags!))))
+              _dllib =
+                (function s
+                  (funct-body driver/main.ml(47)<ghost>:2266-2314
+                    (before driver/main.ml(47):2270-2314
+                      (after driver/main.ml(47):2270-2314
+                        (apply (field 19 (global Compenv!))
+                          (makeblock 5
+                            (after driver/main.ml(47):2289-2313
+                              (apply (field 34 (global Misc!)) s))))))))
+              _dllpath =
+                (function s
+                  (funct-body driver/main.ml(48)<ghost>:2330-2361
+                    (before driver/main.ml(48):2334-2361
+                      (setfield_ptr 0 (field 56 (global Clflags!))
+                        (after driver/main.ml(48):2346-2361
+                          (apply (field 36 (global Stdlib!))
+                            (field 0 (field 56 (global Clflags!)))
+                            (makeblock 0 s 0a)))))))
+              _for_pack =
+                (function s
+                  (funct-body driver/main.ml(49)<ghost>:2378-2403
+                    (before driver/main.ml(49):2382-2403
+                      (setfield_ptr 0 (field 58 (global Clflags!))
+                        (makeblock 0 s)))))
+              _g =
+                (after driver/main.ml(50):2415-2424
+                  (apply set (field 16 (global Clflags!))))
+              _i =
+                (function param
+                  (funct-body driver/main.ml(51)<ghost>:2434-2541
+                    (before driver/main.ml(52):2443-2541
+                      (seq (setfield_imm 0 (field 14 (global Clflags!)) 1a)
+                        (before driver/main.ml(53):2468-2541
+                          (seq
+                            (setfield_imm 0 (field 10 (global Clflags!)) 1a)
+                            (before driver/main.ml(54):2494-2541
+                              (seq
+                                (setfield_ptr 0 (field 159 (global Clflags!))
+                                  [0: 1a])
+                                (before driver/main.ml(55):2539-2541 0a)))))))))
+              _stop_after =
+                (function pass
+                  (funct-body driver/main.ml(56)<ghost>:2560-2876
+                    (before driver/main.ml(57):2571-2876
+                      (let
+                        (*match* =
+                           (after driver/main.ml(58):2619-2635
+                             (apply (field 0 (field 158 (global Clflags!)))
+                               pass)))
+                        (if *match*
+                          (let (pass =a (field 0 *match*))
+                            (before driver/main.ml(61):2734-2868
+                              (seq
+                                (setfield_ptr 0 (field 159 (global Clflags!))
+                                  (makeblock 0 pass))
+                                (before driver/main.ml(62):2767-2867
+                                  (before driver/main.ml(64):2835-2855
+                                    (setfield_imm 0
+                                      (field 10 (global Clflags!)) 1a))))))
+                          (before driver/main.ml(59):2655-2657 0a))))))
+              _I =
+                (function s
+                  (funct-body driver/main.ml(67)<ghost>:2886-2924
+                    (before driver/main.ml(67):2890-2924
+                      (setfield_ptr 0 (field 12 (global Clflags!))
+                        (makeblock 0 s
+                          (field 0 (field 12 (global Clflags!))))))))
+              _impl = (field 21 (global Compenv!))
+              _intf = (field 22 (global Compenv!))
+              _intf_suffix =
+                (function s
+                  (funct-body driver/main.ml(70)<ghost>:2982-3014
+                    (before driver/main.ml(70):2986-3014
+                      (setfield_ptr 0 (field 19 (global Config!)) s))))
+              _keep_docs =
+                (after driver/main.ml(71):3034-3047
+                  (apply set (field 128 (global Clflags!))))
+              _no_keep_docs =
+                (after driver/main.ml(72):3070-3085
+                  (apply unset (field 128 (global Clflags!))))
+              _keep_locs =
+                (after driver/main.ml(73):3105-3118
+                  (apply set (field 129 (global Clflags!))))
+              _no_keep_locs =
+                (after driver/main.ml(74):3141-3156
+                  (apply unset (field 129 (global Clflags!))))
+              _labels =
+                (after driver/main.ml(75):3173-3186
+                  (apply unset (field 27 (global Clflags!))))
+              _linkall =
+                (after driver/main.ml(76):3204-3223
+                  (apply set (field 20 (global Clflags!))))
+              _make_runtime =
+                (function param
+                  (funct-body driver/main.ml(77)<ghost>:3244-3322
+                    (before driver/main.ml(78):3253-3322
+                      (seq (setfield_imm 0 (field 21 (global Clflags!)) 1a)
+                        (before driver/main.ml(78):3277-3322
+                          (seq
+                            (setfield_imm 0 (field 53 (global Clflags!)) 1a)
+                            (before driver/main.ml(78):3299-3322
+                              (setfield_imm 0 (field 20 (global Clflags!))
+                                1a))))))))
+              _alias_deps =
+                (after driver/main.ml(79):3343-3368
+                  (apply unset (field 61 (global Clflags!))))
+              _no_alias_deps =
+                (after driver/main.ml(80):3392-3415
+                  (apply set (field 61 (global Clflags!))))
+              _app_funct =
+                (after driver/main.ml(81):3435-3459
+                  (apply set (field 52 (global Clflags!))))
+              _no_app_funct =
+                (after driver/main.ml(82):3482-3508
+                  (apply unset (field 52 (global Clflags!))))
+              _noassert =
+                (after driver/main.ml(83):3527-3539
+                  (apply set (field 37 (global Clflags!))))
+              _nolabels =
+                (after driver/main.ml(84):3558-3569
+                  (apply set (field 27 (global Clflags!))))
+              _noautolink =
+                (after driver/main.ml(85):3590-3606
+                  (apply set (field 55 (global Clflags!))))
+              _nostdlib =
+                (after driver/main.ml(86):3625-3643
+                  (apply set (field 13 (global Clflags!))))
+              _o =
+                (function s
+                  (funct-body driver/main.ml(87)<ghost>:3653-3678
+                    (before driver/main.ml(87):3657-3678
+                      (setfield_ptr 0 (field 11 (global Clflags!))
+                        (makeblock 0 s)))))
+              _opaque =
+                (after driver/main.ml(88):3695-3705
+                  (apply set (field 131 (global Clflags!))))
+              _open =
+                (function s
+                  (funct-body driver/main.ml(89)<ghost>:3718-3756
+                    (before driver/main.ml(89):3722-3756
+                      (setfield_ptr 0 (field 30 (global Clflags!))
+                        (makeblock 0 s
+                          (field 0 (field 30 (global Clflags!))))))))
+              _output_obj =
+                (function param
+                  (funct-body driver/main.ml(90)<ghost>:3775-3827
+                    (before driver/main.ml(90):3780-3827
+                      (seq (setfield_imm 0 (field 24 (global Clflags!)) 1a)
+                        (before driver/main.ml(90):3805-3827
+                          (setfield_imm 0 (field 21 (global Clflags!)) 1a))))))
+              _output_complete_obj =
+                (function param
+                  (funct-body driver/main.ml(91)<ghost>:3855-3951
+                    (before driver/main.ml(92):3864-3951
+                      (seq (setfield_imm 0 (field 24 (global Clflags!)) 1a)
+                        (before driver/main.ml(93):3893-3951
+                          (seq
+                            (setfield_imm 0 (field 25 (global Clflags!)) 1a)
+                            (before driver/main.ml(94):3929-3951
+                              (setfield_imm 0 (field 21 (global Clflags!))
+                                1a))))))))
+              _pack =
+                (after driver/main.ml(95):3966-3982
+                  (apply set (field 57 (global Clflags!))))
+              _pp =
+                (function s
+                  (funct-body driver/main.ml(96)<ghost>:3993-4019
+                    (before driver/main.ml(96):3997-4019
+                      (setfield_ptr 0 (field 31 (global Clflags!))
+                        (makeblock 0 s)))))
+              _ppx =
+                (function s
+                  (funct-body driver/main.ml(97)<ghost>:4031-4063
+                    (before driver/main.ml(97):4035-4063
+                      (setfield_ptr 0 (field 9 (global Compenv!))
+                        (makeblock 0 s (field 0 (field 9 (global Compenv!))))))))
+              _plugin =
+                (function _p
+                  (funct-body driver/main.ml(98)<ghost>:4078-4097
+                    (before driver/main.ml(98):4083-4097
+                      (setfield_imm 0 (field 46 (global Clflags!)) 1a))))
+              _principal =
+                (after driver/main.ml(99):4117-4130
+                  (apply set (field 47 (global Clflags!))))
+              _no_principal =
+                (after driver/main.ml(100):4153-4168
+                  (apply unset (field 47 (global Clflags!))))
+              _rectypes =
+                (after driver/main.ml(101):4187-4206
+                  (apply set (field 49 (global Clflags!))))
+              _no_rectypes =
+                (after driver/main.ml(102):4228-4249
+                  (apply unset (field 49 (global Clflags!))))
+              _runtime_variant =
+                (function s
+                  (funct-body driver/main.ml(103)<ghost>:4273-4297
+                    (before driver/main.ml(103):4277-4297
+                      (setfield_ptr 0 (field 125 (global Clflags!)) s))))
+              _with_runtime =
+                (after driver/main.ml(104):4320-4336
+                  (apply set (field 126 (global Clflags!))))
+              _without_runtime =
+                (after driver/main.ml(105):4362-4380
+                  (apply unset (field 126 (global Clflags!))))
+              _safe_string =
+                (after driver/main.ml(106):4402-4421
+                  (apply unset (field 130 (global Clflags!))))
+              _short_paths =
+                (after driver/main.ml(107):4443-4459
+                  (apply unset (field 48 (global Clflags!))))
+              _strict_sequence =
+                (after driver/main.ml(108):4485-4504
+                  (apply set (field 50 (global Clflags!))))
+              _no_strict_sequence =
+                (after driver/main.ml(109):4533-4554
+                  (apply unset (field 50 (global Clflags!))))
+              _strict_formats =
+                (after driver/main.ml(110):4579-4597
+                  (apply set (field 51 (global Clflags!))))
+              _no_strict_formats =
+                (after driver/main.ml(111):4625-4645
+                  (apply unset (field 51 (global Clflags!))))
+              _thread =
+                (after driver/main.ml(112):4662-4677
+                  (apply set (field 36 (global Clflags!))))
+              _vmthread =
+                (function param
+                  (funct-body driver/main.ml(113):4696-4736
+                    (before driver/main.ml(113):4706-4736
+                      (after driver/main.ml(113):4706-4736
+                        (apply (field 7 (global Compenv!))
+                          vmthread_removed_message)))))
+              _unboxed_types =
+                (after driver/main.ml(114):4760-4777
+                  (apply set (field 155 (global Clflags!))))
+              _no_unboxed_types =
+                (after driver/main.ml(115):4804-4823
+                  (apply unset (field 155 (global Clflags!))))
+              _unsafe =
+                (after driver/main.ml(116):4840-4850
+                  (apply set (field 18 (global Clflags!))))
+              _unsafe_string =
+                (after driver/main.ml(117):4874-4891
+                  (apply set (field 130 (global Clflags!))))
+              _use_prims =
+                (function s
+                  (funct-body driver/main.ml(118)<ghost>:4909-4927
+                    (before driver/main.ml(118):4913-4927
+                      (setfield_ptr 0 (field 44 (global Clflags!)) s))))
+              _use_runtime =
+                (function s
+                  (funct-body driver/main.ml(119)<ghost>:4947-4967
+                    (before driver/main.ml(119):4951-4967
+                      (setfield_ptr 0 (field 45 (global Clflags!)) s))))
+              _v =
+                (function param
+                  (funct-body driver/main.ml(120)<ghost>:4977-5018
+                    (before driver/main.ml(120):4982-5018
+                      (after driver/main.ml(120):4982-5018
+                        (apply (field 4 (global Compenv!)) "compiler")))))
+              _version = (field 5 (global Compenv!))
+              _vnum = (field 5 (global Compenv!))
+              _w =
+                (after driver/main.ml(123):5103-5133
+                  (apply (field 0 (global Warnings!)) 0a))
+              _warn_error =
+                (after driver/main.ml(124):5154-5183
+                  (apply (field 0 (global Warnings!)) 1a))
+              _warn_help = (field 12 (global Warnings!))
+              _color =
+                (after driver/main.ml(126):5241-5284
+                  (apply (field 36 (global Misc!))
+                    (field 0 (field 152 (global Clflags!)))
+                    (field 151 (global Clflags!))))
+              _error_style =
+                (after driver/main.ml(127):5306-5361
+                  (apply (field 36 (global Misc!))
+                    (field 0 (field 154 (global Clflags!)))
+                    (field 153 (global Clflags!))))
+              _where = (field 6 (global Compenv!))
+              _verbose =
+                (after driver/main.ml(129):5417-5428
+                  (apply set (field 38 (global Clflags!))))
+              _nopervasives =
+                (after driver/main.ml(130):5451-5467
+                  (apply set (field 28 (global Clflags!))))
+              _match_context_rows =
+                (function n[int]
+                  (funct-body driver/main.ml(131)<ghost>:5494-5521
+                    (before driver/main.ml(131):5498-5521
+                      (setfield_imm 0 (field 29 (global Clflags!)) n))))
+              _dump_into_file =
+                (after driver/main.ml(132):5546-5564
+                  (apply set (field 150 (global Clflags!))))
+              _dno_unique_ids =
+                (after driver/main.ml(133):5589-5605
+                  (apply unset (field 62 (global Clflags!))))
+              _dunique_ids =
+                (after driver/main.ml(134):5627-5641
+                  (apply set (field 62 (global Clflags!))))
+              _dsource =
+                (after driver/main.ml(135):5659-5674
+                  (apply set (field 63 (global Clflags!))))
+              _dparsetree =
+                (after driver/main.ml(136):5695-5713
+                  (apply set (field 64 (global Clflags!))))
+              _dtypedtree =
+                (after driver/main.ml(137):5734-5752
+                  (apply set (field 65 (global Clflags!))))
+              _drawlambda =
+                (after driver/main.ml(138):5773-5791
+                  (apply set (field 66 (global Clflags!))))
+              _dlambda =
+                (after driver/main.ml(139):5809-5824
+                  (apply set (field 67 (global Clflags!))))
+              _dinstr =
+                (after driver/main.ml(140):5841-5855
+                  (apply set (field 73 (global Clflags!))))
+              _dcamlprimc =
+                (after driver/main.ml(141):5876-5899
+                  (apply set (field 74 (global Clflags!))))
+              _dtimings =
+                (function param
+                  (funct-body driver/main.ml(142)<ghost>:5916-5949
+                    (before driver/main.ml(142):5921-5949
+                      (setfield_ptr 0 (field 132 (global Clflags!))
+                        [0: 936769581a 0a]))))
+              _dprofile =
+                (function param
+                  (funct-body driver/main.ml(143)<ghost>:5966-6009
+                    (before driver/main.ml(143):5971-6009
+                      (setfield_ptr 0 (field 132 (global Clflags!))
+                        (field 5 (global Profile!))))))
+              _args = (field 12 (global Stdlib__arg!))
+              _args0 = (field 13 (global Stdlib__arg!))
+              anonymous = (field 20 (global Compenv!)))
+             (pseudo driver/main.ml(30):1600-6099
+               (makeblock 0 _absname _alert _I _labels _alias_deps
+                 _no_alias_deps _app_funct _no_app_funct _noassert _nolabels
+                 _nostdlib _nopervasives _open _ppx _no_rectypes
+                 _strict_sequence _no_strict_sequence _strict_formats
+                 _no_strict_formats _unboxed_types _no_unboxed_types _unsafe
+                 _unsafe_string _version _vnum _w _warn_error _warn_help
+                 _dno_unique_ids _dunique_ids _dsource _dparsetree
+                 _dtypedtree _drawlambda _dlambda anonymous _a _annot
+                 _binannot _c _cc _cclib _ccopt _config _config_var _for_pack
+                 _g _stop_after _i _impl _intf _intf_suffix _keep_docs
+                 _no_keep_docs _keep_locs _no_keep_locs _linkall _noautolink
+                 _o _opaque _output_obj _output_complete_obj _pack _plugin
+                 _pp _principal _no_principal _rectypes _runtime_variant
+                 _with_runtime _without_runtime _safe_string _short_paths
+                 _thread _v _verbose _where _color _error_style
+                 _match_context_rows _dtimings _dprofile _dump_into_file
+                 _args _args0 _compat_32 _custom _no_check_prims _dllib
+                 _dllpath _make_runtime _vmthread _use_runtime _dinstr
+                 _dcamlprimc _use_prims)))))
+     main =
+       (function param
+         (funct-body driver/main.ml(151)<ghost>:6111-8831
+           (before driver/main.ml(152):6118-8831
+             (seq
+               (after driver/main.ml(152):6118-6160
+                 (apply (field 162 (global Clflags!))
+                   #"File \"driver/main.ml\", line 152, characters 24-31"
+                   (field 0 Options)))
+               (before driver/main.ml(153):6164-8831
+                 (seq
+                   (after driver/main.ml(153):6164-6327
+                     (apply (field 162 (global Clflags!))
+                       #"File \"driver/main.ml\", line 153, characters 24-31"
+                       (makeblock 0
+                         (makeblock 0 "-depend"
+                           (makeblock 0 (field 1 (global Makedepend!)))
+                           "<options> Compute dependencies (use 'ocamlc -depend -help' for details)")
+                         0a)))
+                   (before driver/main.ml(156):6331-8831
+                     (try
+                       (seq
+                         (after driver/main.ml(157):6339-6362
+                           (apply (field 15 (global Compenv!)) ppf 0a))
+                         (before driver/main.ml(158):6368-8771
+                           (seq
+                             (after driver/main.ml(158):6368-6407
+                               (apply (field 163 (global Clflags!))
+                                 (field 20 (global Compenv!)) usage))
+                             (before driver/main.ml(159):6413-8771
+                               (seq
+                                 (after driver/main.ml(159):6413-6446
+                                   (apply (field 3 (global Compmisc!)) 0a))
+                                 (before driver/main.ml(160):6452-8771
+                                   (seq
+                                     (if
+                                       (field 0 (field 46 (global Clflags!)))
+                                       (before driver/main.ml(161):6482-6534
+                                         (after driver/main.ml(161):6482-6534
+                                           (apply (field 7 (global Compenv!))
+                                             "-plugin is only supported up to OCaml 4.08.0")))
+                                       0a)
+                                     (before driver/main.ml(162):6540-8771
+                                       (seq
+                                         (try
+                                           (after driver/main.ml(163):6556-6697
+                                             (apply
+                                               (field 23 (global Compenv!))
+                                               (makeblock 0 ppf
+                                                 (field 1 (global Compile!))
+                                                 (field 0 (global Compile!))
+                                                 ".cmo" ".cma")))
+                                          with exn
+                                           (let (tag =a (field 0 exn))
+                                             (if
+                                               (== tag
+                                                 (field 7
+                                                   (global Stdlib__arg!)))
+                                               (let (msg =a (field 1 exn))
+                                                 (before driver/main.ml(170):6729-6825
+                                                   (seq
+                                                     (after driver/main.ml(171):6743-6760
+                                                       (apply
+                                                         (field 52
+                                                           (global Stdlib!))
+                                                         msg))
+                                                     (before driver/main.ml(172):6770-6815
+                                                       (seq
+                                                         (after driver/main.ml(172):6770-6799
+                                                           (apply
+                                                             (field 164
+                                                               (global Clflags!))
+                                                             usage))
+                                                         (before driver/main.ml(173):6809-6815
+                                                           (after driver/main.ml(173):6809-6815
+                                                             (apply
+                                                               (field 98
+                                                                 (global Stdlib!))
+                                                               2))))))))
+                                               (reraise exn))))
+                                         (before driver/main.ml(176):6839-8771
+                                           (seq
+                                             (after driver/main.ml(176):6839-6862
+                                               (apply
+                                                 (field 15 (global Compenv!))
+                                                 ppf 1a))
+                                             (before driver/main.ml(177):6868-8771
+                                               (seq
+                                                 (if
+                                                   (>
+                                                     (after driver/main.ml(178):6877-6992
+                                                       (apply
+                                                         (field 0
+                                                           (global Stdlib__list!))
+                                                         (after driver/main.ml(179):6897-6992
+                                                           (apply
+                                                             (field 35
+                                                               (global Stdlib__list!))
+                                                             (function x
+                                                               (funct-body driver/main.ml(179):6910-6923
+                                                                 (before driver/main.ml(179):6920-6922
+                                                                   (field 0
+                                                                    x))))
+                                                             (makeblock 0
+                                                               (field 15
+                                                                 (global Clflags!))
+                                                               (makeblock 0
+                                                                 (field 57
+                                                                   (global Clflags!))
+                                                                 (makeblock 0
+                                                                   (field 10
+                                                                    (global Clflags!))
+                                                                   (makeblock 0
+                                                                    (field 24
+                                                                    (global Clflags!))
+                                                                    0a))))))))
+                                                     1)
+                                                   (before driver/main.ml(182):7014-7414
+                                                     (let
+                                                       (*match* =
+                                                          (field 0
+                                                            (field 159
+                                                              (global Clflags!))))
+                                                       (if *match*
+                                                         (before driver/main.ml(188):7234-7406
+                                                           (after driver/main.ml(188):7234-7406
+                                                             (apply
+                                                               (field 8
+                                                                 (global Stdlib__printf!))
+                                                               (field 7
+                                                                 (global Compenv!))
+                                                               [0:
+                                                                [11:
+                                                                 "Options -i and -stop-after ("
+                                                                 [2:
+                                                                  0a
+                                                                  [11:
+                                                                   ")are  incompatible with -pack, -a, -output-obj"
+                                                                   0a]]]
+                                                                "Options -i and -stop-after (%s)are  incompatible with -pack, -a, -output-obj"]
+                                                               (after driver/main.ml(191):7374-7406
+                                                                 (apply
+                                                                   (field 6
+                                                                    (global Stdlib__string!))
+                                                                   "|"
+                                                                   (field 3
+                                                                    (field 158
+                                                                    (global Clflags!))))))))
+                                                         (before driver/main.ml(186):7119-7183
+                                                           (after driver/main.ml(186):7119-7183
+                                                             (apply
+                                                               (field 7
+                                                                 (global Compenv!))
+                                                               "Please specify at most one of -pack, -a, -c, -output-obj"))))))
+                                                   0a)
+                                                 (before driver/main.ml(193):7420-8770
+                                                   (if
+                                                     (field 0
+                                                       (field 15
+                                                         (global Clflags!)))
+                                                     (before driver/main.ml(193):7442-7644
+                                                       (seq
+                                                         (after driver/main.ml(194):7454-7475
+                                                           (apply
+                                                             (field 0
+                                                               (global Compmisc!))
+                                                             0a 0a))
+                                                         (before driver/main.ml(196):7484-7636
+                                                           (seq
+                                                             (after driver/main.ml(196):7484-7604
+                                                               (apply
+                                                                 (field 0
+                                                                   (global Bytelibrarian!))
+                                                                 (after driver/main.ml(197):7521-7566
+                                                                   (apply
+                                                                    (field 12
+                                                                    (global Compenv!))
+                                                                    0a))
+                                                                 (after driver/main.ml(198):7575-7604
+                                                                   (apply
+                                                                    (field 2
+                                                                    (global Compenv!))
+                                                                    (field 0
+                                                                    (field 11
+                                                                    (global Clflags!)))))))
+                                                             (before driver/main.ml(199):7612-7635
+                                                               (after driver/main.ml(199):7612-7635
+                                                                 (apply
+                                                                   (field 10
+                                                                    (global Warnings!))
+                                                                   0a)))))))
+                                                     (before driver/main.ml(201):7654-8770
+                                                       (if
+                                                         (field 0
+                                                           (field 57
+                                                             (global Clflags!)))
+                                                         (before driver/main.ml(201):7676-8048
+                                                           (seq
+                                                             (after driver/main.ml(202):7688-7709
+                                                               (apply
+                                                                 (field 0
+                                                                   (global Compmisc!))
+                                                                 0a 0a))
+                                                             (before driver/main.ml(203):7717-8040
+                                                               (let
+                                                                 (extracted_output =
+                                                                    (after driver/main.ml(203):7740-7767
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Compenv!))
+                                                                    (field 0
+                                                                    (field 11
+                                                                    (global Clflags!))))))
+                                                                 (before driver/main.ml(204):7777-8040
+                                                                   (let
+                                                                    (revd =
+                                                                    (after driver/main.ml(204):7788-7823
+                                                                    (apply
+                                                                    (field 12
+                                                                    (global Compenv!))
+                                                                    0a)))
+                                                                    (before driver/main.ml(205):7833-8040
+                                                                    (seq
+                                                                    (after driver/main.ml(205):7833-8008
+                                                                    (apply
+                                                                    (field 4
+                                                                    (global Compmisc!))
+                                                                    extracted_output
+                                                                    (function
+                                                                    ppf_dump
+                                                                    (funct-body driver/main.ml(205):7886-8008
+                                                                    (before driver/main.ml(206):7911-8007
+                                                                    (after driver/main.ml(206):7911-8007
+                                                                    (apply
+                                                                    (field 0
+                                                                    (global Bytepackager!))
+                                                                    ppf_dump
+                                                                    (after driver/main.ml(206):7948-7973
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Compmisc!))
+                                                                    0a)) revd
+                                                                    extracted_output)))))))
+                                                                    (before driver/main.ml(208):8016-8039
+                                                                    (after driver/main.ml(208):8016-8039
+                                                                    (apply
+                                                                    (field 10
+                                                                    (global Warnings!))
+                                                                    0a)))))))))))
+                                                         (before driver/main.ml(210):8058-8770
+                                                           (if
+                                                             (&&
+                                                               (not
+                                                                 (field 0
+                                                                   (field 10
+                                                                    (global Clflags!))))
+                                                               (!=
+                                                                 (field 0
+                                                                   (field 7
+                                                                    (global Clflags!)))
+                                                                 0a))
+                                                             (before driver/main.ml(210):8103-8770
+                                                               (let
+                                                                 (target =
+                                                                    (if
+                                                                    (field 0
+                                                                    (field 24
+                                                                    (global Clflags!)))
+                                                                    (before driver/main.ml(213):8171-8577
+                                                                    (let
+                                                                    (s =
+                                                                    (after driver/main.ml(213):8179-8206
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Compenv!))
+                                                                    (field 0
+                                                                    (field 11
+                                                                    (global Clflags!))))))
+                                                                    (before driver/main.ml(214):8220-8577
+                                                                    (if
+                                                                    (||
+                                                                    (after driver/main.ml(214):8224-8262
+                                                                    (apply
+                                                                    (field 6
+                                                                    (global Stdlib__filename!))
+                                                                    s
+                                                                    (field 41
+                                                                    (global Config!))))
+                                                                    (||
+                                                                    (after driver/main.ml(215):8278-8316
+                                                                    (apply
+                                                                    (field 6
+                                                                    (global Stdlib__filename!))
+                                                                    s
+                                                                    (field 44
+                                                                    (global Config!))))
+                                                                    (after driver/main.ml(216):8332-8360
+                                                                    (apply
+                                                                    (field 6
+                                                                    (global Stdlib__filename!))
+                                                                    s ".c"))))
+                                                                    (before driver/main.ml(217):8377-8378
+                                                                    s)
+                                                                    (before driver/main.ml(219):8406-8577
+                                                                    (after driver/main.ml(219):8406-8577
+                                                                    (apply
+                                                                    (field 7
+                                                                    (global Compenv!))
+                                                                    (after driver/main.ml(220):8426-8577
+                                                                    (apply
+                                                                    (field 3
+                                                                    (global Stdlib__printf!))
+                                                                    [0:
+                                                                    [11:
+                                                                    "The extension of the output file must be .c, "
+                                                                    [2:
+                                                                    0a
+                                                                    [11:
+                                                                    " or "
+                                                                    [2:
+                                                                    0a 0a]]]]
+                                                                    "The extension of the output file must be .c, %s or %s"]
+                                                                    (field 41
+                                                                    (global Config!))
+                                                                    (field 44
+                                                                    (global Config!)))))))))))
+                                                                    (before driver/main.ml(225):8601-8628
+                                                                    (after driver/main.ml(225):8601-8628
+                                                                    (apply
+                                                                    (field 3
+                                                                    (global Compenv!))
+                                                                    (field 0
+                                                                    (field 11
+                                                                    (global Clflags!))))))))
+                                                                 (before driver/main.ml(227):8644-8762
+                                                                   (seq
+                                                                    (after driver/main.ml(227):8644-8665
+                                                                    (apply
+                                                                    (field 0
+                                                                    (global Compmisc!))
+                                                                    0a 0a))
+                                                                    (before driver/main.ml(228):8673-8762
+                                                                    (seq
+                                                                    (after driver/main.ml(228):8673-8730
+                                                                    (apply
+                                                                    (field 0
+                                                                    (global Bytelink!))
+                                                                    (after driver/main.ml(228):8687-8723
+                                                                    (apply
+                                                                    (field 12
+                                                                    (global Compenv!))
+                                                                    1a))
+                                                                    target))
+                                                                    (before driver/main.ml(229):8738-8761
+                                                                    (after driver/main.ml(229):8738-8761
+                                                                    (apply
+                                                                    (field 10
+                                                                    (global Warnings!))
+                                                                    0a)))))))))
+                                                             0a)))))))))))))))))))
+                      with x
+                       (before driver/main.ml(232):8788-8831
+                         (seq
+                           (after driver/main.ml(232):8788-8819
+                             (apply (field 51 (global Location!)) ppf x))
+                           (before driver/main.ml(233):8825-8831
+                             (after driver/main.ml(233):8825-8831
+                               (apply (field 98 (global Stdlib!)) 2)))))))))))))
+     *match* =
+       (seq (after driver/main.ml(236):8844-8851 (apply main 0a))
+         (before driver/main.ml(237):8855-8924
+           (seq
+             (after driver/main.ml(237):8855-8914
+               (apply (field 3 (global Profile!))
+                 (field 104 (global Stdlib__format!))
+                 (field 0 (field 132 (global Clflags!)))))
+             (before driver/main.ml(238):8918-8924
+               (after driver/main.ml(238):8918-8924
+                 (apply (field 98 (global Stdlib!)) 0)))))))
+    (pseudo _none_(0)<ghost>:-1--1 (makeblock 0))))

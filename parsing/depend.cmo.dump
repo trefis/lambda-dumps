@@ -1,0 +1,2750 @@
+(setglobal Depend!
+  (let
+    (pp_deps = (makemutable 0 0a)
+     bound =
+       (makeblock 0 (field 0 (field 38 (field 3 (field 11 (global Misc!)))))
+         (field 0 (field 39 (field 3 (field 11 (global Misc!))))))
+     get_map =
+       (function param
+         (funct-body parsing/depend.ml(31)<ghost>:1476-1494
+           (let (m =a (field 1 param))
+             (before parsing/depend.ml(31):1493-1494 m))))
+     make_leaf =
+       (function s
+         (funct-body parsing/depend.ml(32)<ghost>:1509-1560
+           (before parsing/depend.ml(32):1513-1560
+             (makeblock 0
+               (after parsing/depend.ml(32):1519-1541
+                 (apply
+                   (field 4 (field 38 (field 3 (field 11 (global Misc!)))))
+                   s))
+               (field 0 (field 39 (field 3 (field 11 (global Misc!)))))))))
+     make_node =
+       (function m
+         (funct-body parsing/depend.ml(33)<ghost>:1575-1606
+           (before parsing/depend.ml(33):1580-1606
+             (makeblock 0
+               (field 0 (field 38 (field 3 (field 11 (global Misc!))))) m)))))
+    (letrec
+      (weaken_map
+         (function s param
+           (funct-body parsing/depend.ml(34)<ghost>:1626-1708
+             (let (m0 =a (field 1 param) s0 =a (field 0 param))
+               (before parsing/depend.ml(35):1646-1708
+                 (makeblock 0
+                   (after parsing/depend.ml(35):1652-1673
+                     (apply
+                       (field 6
+                         (field 38 (field 3 (field 11 (global Misc!)))))
+                       s s0))
+                   (after parsing/depend.ml(35):1675-1707
+                     (apply
+                       (field 32
+                         (field 39 (field 3 (field 11 (global Misc!)))))
+                       (after parsing/depend.ml(35):1690-1704
+                         (apply weaken_map s))
+                       m0))))))))
+      (letrec
+        (collect_free
+           (function param
+             (funct-body parsing/depend.ml(36)<ghost>:1730-1814
+               (let (m =a (field 1 param) s =a (field 0 param))
+                 (before parsing/depend.ml(37):1748-1814
+                   (after parsing/depend.ml(37):1748-1814
+                     (apply
+                       (field 12
+                         (field 39 (field 3 (field 11 (global Misc!)))))
+                       (function param n
+                         (funct-body parsing/depend.ml(37):1764-1810
+                           (before parsing/depend.ml(37):1776-1809
+                             (after parsing/depend.ml(37):1776-1809
+                               (apply
+                                 (field 6
+                                   (field 38
+                                     (field 3 (field 11 (global Misc!)))))
+                                 (after parsing/depend.ml(37):1793-1809
+                                   (apply collect_free n)))))))
+                       m s)))))))
+        (letrec
+          (lookup_free
+             (function p m
+               (funct-body parsing/depend.ml(41)<ghost>:1977-2131
+                 (before parsing/depend.ml(42):1985-2131
+                   (if p
+                     (let (p =a (field 1 p) s =a (field 0 p))
+                       (before parsing/depend.ml(45):2042-2131
+                         (let
+                           (*match* =
+                              (after parsing/depend.ml(45):2061-2080
+                                (apply
+                                  (field 26
+                                    (field 39
+                                      (field 3 (field 11 (global Misc!)))))
+                                  s m))
+                            m' =a (field 1 *match*)
+                            f =a (field 0 *match*))
+                           (before parsing/depend.ml(46):2091-2131
+                             (try
+                               (after parsing/depend.ml(46):2095-2111
+                                 (apply lookup_free p m'))
+                              with exn
+                               (if (== exn (field 7 (global Stdlib!)))
+                                 (before parsing/depend.ml(46):2130-2131 f)
+                                 (reraise exn)))))))
+                     (before parsing/depend.ml(43):2008-2023
+                       (raise
+                         (after parsing/depend.ml(43):2014-2023
+                           (field 7 (global Stdlib!))))))))))
+          (letrec
+            (lookup_map
+               (function lid m
+                 (funct-body parsing/depend.ml(49)<ghost>:2216-2378
+                   (before parsing/depend.ml(50):2226-2378
+                     (switch* lid
+                      case tag 0:
+                       (let (s =a (field 0 lid))
+                         (before parsing/depend.ml(51):2260-2279
+                           (after parsing/depend.ml(51):2260-2279
+                             (apply
+                               (field 26
+                                 (field 39
+                                   (field 3 (field 11 (global Misc!)))))
+                               s m))))
+                      case tag 1:
+                       (let (s =a (field 1 lid) l =a (field 0 lid))
+                         (before parsing/depend.ml(52):2299-2343
+                           (after parsing/depend.ml(52):2299-2343
+                             (apply
+                               (field 26
+                                 (field 39
+                                   (field 3 (field 11 (global Misc!)))))
+                               s
+                               (after parsing/depend.ml(52):2317-2343
+                                 (apply get_map
+                                   (after parsing/depend.ml(52):2326-2342
+                                     (apply lookup_map l m))))))))
+                      case tag 2:
+                       (before parsing/depend.ml(53):2363-2378
+                         (raise
+                           (after parsing/depend.ml(53):2369-2378
+                             (field 7 (global Stdlib!))))))))))
+            (let
+              (free_structure_names =
+                 (makemutable 0
+                   (field 0 (field 38 (field 3 (field 11 (global Misc!))))))
+               add_names =
+                 (function s
+                   (funct-body parsing/depend.ml(59)<ghost>:2496-2566
+                     (before parsing/depend.ml(60):2502-2566
+                       (setfield_ptr 0 free_structure_names
+                         (after parsing/depend.ml(60):2526-2566
+                           (apply
+                             (field 6
+                               (field 38 (field 3 (field 11 (global Misc!)))))
+                             s (field 0 free_structure_names))))))))
+              (letrec
+                (add_path
+                   (function bv *opt* param
+                     (funct-body parsing/depend.ml(62)<ghost>:2585-2931
+                       (let (param =a param)
+                         (before parsing/depend.ml(62):2598-2931
+                           (let
+                             (p =
+                                (if *opt*
+                                  (let (*sth* =a (field 0 *opt*))
+                                    (before parsing/depend.ml(62):2592-2594
+                                      *sth*))
+                                  (before parsing/depend.ml(62):2592-2594 0a)))
+                             (before parsing/depend.ml(62):2598-2931
+                               (switch* param
+                                case tag 0:
+                                 (let (s =a (field 0 param))
+                                   (before parsing/depend.ml(64):2629-2836
+                                     (let
+                                       (free =
+                                          (try
+                                            (after parsing/depend.ml(65):2652-2673
+                                              (apply lookup_free
+                                                (makeblock 0 s p) bv))
+                                           with exn
+                                            (if
+                                              (== exn
+                                                (field 7 (global Stdlib!)))
+                                              (before parsing/depend.ml(65):2692-2714
+                                                (after parsing/depend.ml(65):2692-2714
+                                                  (apply
+                                                    (field 4
+                                                      (field 38
+                                                        (field 3
+                                                          (field 11
+                                                            (global Misc!)))))
+                                                    s)))
+                                              (reraise exn))))
+                                       (before parsing/depend.ml(69):2822-2836
+                                         (after parsing/depend.ml(69):2822-2836
+                                           (apply add_names free))))))
+                                case tag 1:
+                                 (let
+                                   (s =a (field 1 param)
+                                    l =a (field 0 param))
+                                   (before parsing/depend.ml(70):2855-2878
+                                     (after parsing/depend.ml(70):2855-2878
+                                       (apply add_path bv
+                                         (makeblock 0 (makeblock 0 s p)) l))))
+                                case tag 2:
+                                 (let
+                                   (l2 =a (field 1 param)
+                                    l1 =a (field 0 param))
+                                   (before parsing/depend.ml(71):2901-2931
+                                     (seq
+                                       (after parsing/depend.ml(71):2901-2915
+                                         (apply add_path bv 0a l1))
+                                       (before parsing/depend.ml(71):2917-2931
+                                         (after parsing/depend.ml(71):2917-2931
+                                           (apply add_path bv 0a l2))))))))))))))
+                (let
+                  (open_module =
+                     (function bv lid
+                       (funct-body parsing/depend.ml(73)<ghost>:2949-3121
+                         (before parsing/depend.ml(74):2960-3121
+                           (catch
+                             (try
+                               (exit 3
+                                 (after parsing/depend.ml(74):2966-2983
+                                   (apply lookup_map lid bv)))
+                              with exn
+                               (if (== exn (field 7 (global Stdlib!)))
+                                 (before parsing/depend.ml(79):3102-3121
+                                   (seq
+                                     (after parsing/depend.ml(79):3102-3117
+                                       (apply add_path bv 0a lid))
+                                     (before parsing/depend.ml(79):3119-3121
+                                       bv)))
+                                 (reraise exn)))
+                            with (3 val)
+                             (let (m =a (field 1 val) s =a (field 0 val))
+                               (before parsing/depend.ml(76):3014-3068
+                                 (seq
+                                   (after parsing/depend.ml(76):3014-3025
+                                     (apply add_names s))
+                                   (before parsing/depend.ml(77):3033-3068
+                                     (after parsing/depend.ml(77):3033-3068
+                                       (apply
+                                         (field 12
+                                           (field 39
+                                             (field 3
+                                               (field 11 (global Misc!)))))
+                                         (field 3
+                                           (field 39
+                                             (field 3
+                                               (field 11 (global Misc!)))))
+                                         m bv))))))))))
+                   add_parent =
+                     (function bv lid
+                       (funct-body parsing/depend.ml(81)<ghost>:3138-3212
+                         (before parsing/depend.ml(82):3149-3212
+                           (let (*match* = (field 0 lid))
+                             (catch
+                               (switch* *match*
+                                case tag 0: (exit 5)
+                                case tag 1:
+                                 (let (l =a (field 0 *match*))
+                                   (before parsing/depend.ml(83):3187-3200
+                                     (after parsing/depend.ml(83):3187-3200
+                                       (apply add_path bv 0a l))))
+                                case tag 2: (exit 5))
+                              with (5)
+                               (before parsing/depend.ml(84):3210-3212 0a))))))
+                   add = add_parent
+                   add_module_path =
+                     (function bv lid
+                       (funct-body parsing/depend.ml(88)<ghost>:3256-3284
+                         (before parsing/depend.ml(88):3265-3284
+                           (after parsing/depend.ml(88):3265-3284
+                             (apply add_path bv 0a (field 0 lid))))))
+                   handle_extension =
+                     (function ext
+                       (funct-body parsing/depend.ml(90)<ghost>:3307-3470
+                         (before parsing/depend.ml(91):3315-3470
+                           (let (*match* = (field 0 (field 0 ext)))
+                             (catch
+                               (catch
+                                 (stringswitch *match*
+                                  case "error": (exit 6)
+                                  case "ocaml.error": (exit 6)
+                                  default: (exit 7))
+                                with (7)
+                                 (before parsing/depend.ml(96):3468-3470 0a))
+                              with (6)
+                               (before parsing/depend.ml(93):3375-3454
+                                 (raise
+                                   (after parsing/depend.ml(93):3381-3454
+                                     (makeblock 0
+                                       (field 48 (global Location!))
+                                       (after parsing/depend.ml(94):3410-3453
+                                         (apply
+                                           (field 8
+                                             (global Builtin_attributes!))
+                                           ext))))))))))))
+                  (letrec
+                    (add_type
+                       (function bv ty
+                         (funct-body parsing/depend.ml(98)<ghost>:3489-4345
+                           (before parsing/depend.ml(99):3499-4345
+                             (let (*match* = (field 0 ty))
+                               (switch* *match*
+                                case int 0:
+                                 (before parsing/depend.ml(100):3539-3541 0a)
+                                case tag 0:
+                                 (before parsing/depend.ml(101):3560-3562 0a)
+                                case tag 1:
+                                 (let
+                                   (t2 =a (field 2 *match*)
+                                    t1 =a (field 1 *match*))
+                                   (before parsing/depend.ml(102):3592-3622
+                                     (seq
+                                       (after parsing/depend.ml(102):3592-3606
+                                         (apply add_type bv t1))
+                                       (before parsing/depend.ml(102):3608-3622
+                                         (after parsing/depend.ml(102):3608-3622
+                                           (apply add_type bv t2))))))
+                                case tag 2:
+                                 (let (tl =a (field 0 *match*))
+                                   (before parsing/depend.ml(103):3644-3670
+                                     (after parsing/depend.ml(103):3644-3670
+                                       (apply
+                                         (field 14 (global Stdlib__list!))
+                                         (after parsing/depend.ml(103):3654-3667
+                                           (apply add_type bv))
+                                         tl))))
+                                case tag 3:
+                                 (let
+                                   (tl =a (field 1 *match*)
+                                    c =a (field 0 *match*))
+                                   (before parsing/depend.ml(104):3697-3733
+                                     (seq
+                                       (after parsing/depend.ml(104):3697-3705
+                                         (apply add bv c))
+                                       (before parsing/depend.ml(104):3707-3733
+                                         (after parsing/depend.ml(104):3707-3733
+                                           (apply
+                                             (field 14
+                                               (global Stdlib__list!))
+                                             (after parsing/depend.ml(104):3717-3730
+                                               (apply add_type bv))
+                                             tl))))))
+                                case tag 4:
+                                 (let (fl =a (field 0 *match*))
+                                   (before parsing/depend.ml(106):3767-3908
+                                     (after parsing/depend.ml(106):3767-3908
+                                       (apply
+                                         (field 14 (global Stdlib__list!))
+                                         (function param
+                                           (funct-body parsing/depend.ml(107):3784-3905
+                                             (let
+                                               (pof_desc =a (field 0 param))
+                                               (before parsing/depend.ml(107):3806-3904
+                                                 (switch* pof_desc
+                                                  case tag 0:
+                                                   (let
+                                                     (t =a (field 1 pof_desc))
+                                                     (before parsing/depend.ml(108):3852-3865
+                                                       (after parsing/depend.ml(108):3852-3865
+                                                         (apply add_type bv
+                                                           t))))
+                                                  case tag 1:
+                                                   (let
+                                                     (t =a (field 0 pof_desc))
+                                                     (before parsing/depend.ml(109):3891-3904
+                                                       (after parsing/depend.ml(109):3891-3904
+                                                         (apply add_type bv
+                                                           t)))))))))
+                                         fl))))
+                                case tag 5:
+                                 (let
+                                   (tl =a (field 1 *match*)
+                                    c =a (field 0 *match*))
+                                   (before parsing/depend.ml(110):3934-3970
+                                     (seq
+                                       (after parsing/depend.ml(110):3934-3942
+                                         (apply add bv c))
+                                       (before parsing/depend.ml(110):3944-3970
+                                         (after parsing/depend.ml(110):3944-3970
+                                           (apply
+                                             (field 14
+                                               (global Stdlib__list!))
+                                             (after parsing/depend.ml(110):3954-3967
+                                               (apply add_type bv))
+                                             tl))))))
+                                case tag 6:
+                                 (let (t =a (field 0 *match*))
+                                   (before parsing/depend.ml(111):3995-4008
+                                     (after parsing/depend.ml(111):3995-4008
+                                       (apply add_type bv t))))
+                                case tag 7:
+                                 (let (fl =a (field 0 *match*))
+                                   (before parsing/depend.ml(113):4045-4219
+                                     (after parsing/depend.ml(113):4045-4219
+                                       (apply
+                                         (field 14 (global Stdlib__list!))
+                                         (function param
+                                           (funct-body parsing/depend.ml(114):4063-4208
+                                             (let
+                                               (prf_desc =a (field 0 param))
+                                               (before parsing/depend.ml(114):4085-4207
+                                                 (switch* prf_desc
+                                                  case tag 0:
+                                                   (let
+                                                     (stl =a
+                                                        (field 2 prf_desc))
+                                                     (before parsing/depend.ml(115):4136-4163
+                                                       (after parsing/depend.ml(115):4136-4163
+                                                         (apply
+                                                           (field 14
+                                                             (global Stdlib__list!))
+                                                           (after parsing/depend.ml(115):4146-4159
+                                                             (apply add_type
+                                                               bv))
+                                                           stl))))
+                                                  case tag 1:
+                                                   (let
+                                                     (sty =a
+                                                        (field 0 prf_desc))
+                                                     (before parsing/depend.ml(116):4192-4207
+                                                       (after parsing/depend.ml(116):4192-4207
+                                                         (apply add_type bv
+                                                           sty)))))))))
+                                         fl))))
+                                case tag 8:
+                                 (let (t =a (field 1 *match*))
+                                   (before parsing/depend.ml(118):4243-4256
+                                     (after parsing/depend.ml(118):4243-4256
+                                       (apply add_type bv t))))
+                                case tag 9:
+                                 (let (pt =a (field 0 *match*))
+                                   (before parsing/depend.ml(119):4280-4302
+                                     (after parsing/depend.ml(119):4280-4302
+                                       (apply add_package_type bv pt))))
+                                case tag 10:
+                                 (let (e =a (field 0 *match*))
+                                   (before parsing/depend.ml(120):4327-4345
+                                     (after parsing/depend.ml(120):4327-4345
+                                       (apply handle_extension e)))))))))
+                      add_package_type
+                        (function bv param
+                          (funct-body parsing/depend.ml(122)<ghost>:4368-4452
+                            (let
+                              (l =a (field 1 param) lid =a (field 0 param))
+                              (before parsing/depend.ml(123):4384-4452
+                                (seq
+                                  (after parsing/depend.ml(123):4384-4394
+                                    (apply add bv lid))
+                                  (before parsing/depend.ml(124):4398-4452
+                                    (after parsing/depend.ml(124):4398-4452
+                                      (apply
+                                        (field 14 (global Stdlib__list!))
+                                        (after parsing/depend.ml(124):4408-4421
+                                          (apply add_type bv))
+                                        (after parsing/depend.ml(124):4422-4452
+                                          (apply
+                                            (field 16 (global Stdlib__list!))
+                                            (function param
+                                              (funct-body parsing/depend.ml(124):4432-4449
+                                                (let (e =a (field 1 param))
+                                                  (before parsing/depend.ml(124):4447-4448
+                                                    e))))
+                                            l)))))))))))
+                    (let
+                      (add_opt =
+                         (function add_fn bv param
+                           (funct-body parsing/depend.ml(126)<ghost>:4466-4527
+                             (if param
+                               (let (x =a (field 0 param))
+                                 (before parsing/depend.ml(128):4516-4527
+                                   (after parsing/depend.ml(128):4516-4527
+                                     (apply add_fn bv x))))
+                               (before parsing/depend.ml(127):4499-4501 0a))))
+                       add_constructor_arguments =
+                         (function bv param
+                           (funct-body parsing/depend.ml(130)<ghost>:4559-4687
+                             (switch* param
+                              case tag 0:
+                               (let (l =a (field 0 param))
+                                 (before parsing/depend.ml(131):4594-4619
+                                   (after parsing/depend.ml(131):4594-4619
+                                     (apply (field 14 (global Stdlib__list!))
+                                       (after parsing/depend.ml(131):4604-4617
+                                         (apply add_type bv))
+                                       l))))
+                              case tag 1:
+                               (let (l =a (field 0 param))
+                                 (before parsing/depend.ml(132):4642-4687
+                                   (after parsing/depend.ml(132):4642-4687
+                                     (apply (field 14 (global Stdlib__list!))
+                                       (function l
+                                         (funct-body parsing/depend.ml(132):4652-4685
+                                           (before parsing/depend.ml(132):4662-4684
+                                             (after parsing/depend.ml(132):4662-4684
+                                               (apply add_type bv
+                                                 (field 2 l))))))
+                                       l)))))))
+                       add_constructor_decl =
+                         (function bv pcd
+                           (funct-body parsing/depend.ml(134)<ghost>:4714-4807
+                             (before parsing/depend.ml(135):4725-4807
+                               (seq
+                                 (after parsing/depend.ml(135):4725-4766
+                                   (apply add_constructor_arguments bv
+                                     (field 1 pcd)))
+                                 (before parsing/depend.ml(136):4770-4807
+                                   (after parsing/depend.ml(136):4770-4807
+                                     (apply
+                                       (field 8 (global Stdlib__option!))
+                                       (after parsing/depend.ml(136):4782-4795
+                                         (apply add_type bv))
+                                       (field 2 pcd))))))))
+                       add_type_declaration =
+                         (function bv td
+                           (funct-body parsing/depend.ml(138)<ghost>:4834-5235
+                             (before parsing/depend.ml(139):4844-5235
+                               (seq
+                                 (after parsing/depend.ml(139):4844-4932
+                                   (apply (field 14 (global Stdlib__list!))
+                                     (function param
+                                       (funct-body parsing/depend.ml(140):4858-4913
+                                         (let
+                                           (ty2 =a (field 1 param)
+                                            ty1 =a (field 0 param))
+                                           (before parsing/depend.ml(140):4880-4912
+                                             (seq
+                                               (after parsing/depend.ml(140):4880-4895
+                                                 (apply add_type bv ty1))
+                                               (before parsing/depend.ml(140):4897-4912
+                                                 (after parsing/depend.ml(140):4897-4912
+                                                   (apply add_type bv ty2))))))))
+                                     (field 2 td)))
+                                 (before parsing/depend.ml(142):4936-5235
+                                   (seq
+                                     (after parsing/depend.ml(142):4936-4973
+                                       (apply add_opt add_type bv
+                                         (field 5 td)))
+                                     (before parsing/depend.ml(143):4977-5235
+                                       (let
+                                         (add_tkind =
+                                            (function param
+                                              (funct-body parsing/depend.ml(143):4993-5206
+                                                (switch* param
+                                                 case int 0:
+                                                  (before parsing/depend.ml(144):5024-5026
+                                                    0a)
+                                                 case int 1:
+                                                  (before parsing/depend.ml(149):5204-5206
+                                                    0a)
+                                                 case tag 0:
+                                                  (let
+                                                    (cstrs =a (field 0 param))
+                                                    (before parsing/depend.ml(146):5060-5101
+                                                      (after parsing/depend.ml(146):5060-5101
+                                                        (apply
+                                                          (field 14
+                                                            (global Stdlib__list!))
+                                                          (after parsing/depend.ml(146):5070-5095
+                                                            (apply
+                                                              add_constructor_decl
+                                                              bv))
+                                                          cstrs))))
+                                                 case tag 1:
+                                                  (let
+                                                    (lbls =a (field 0 param))
+                                                    (before parsing/depend.ml(148):5133-5185
+                                                      (after parsing/depend.ml(148):5133-5185
+                                                        (apply
+                                                          (field 14
+                                                            (global Stdlib__list!))
+                                                          (function pld
+                                                            (funct-body parsing/depend.ml(148):5143-5180
+                                                              (before parsing/depend.ml(148):5155-5179
+                                                                (after parsing/depend.ml(148):5155-5179
+                                                                  (apply
+                                                                    add_type
+                                                                    bv
+                                                                    (field 2
+                                                                    pld))))))
+                                                          lbls))))))))
+                                         (before parsing/depend.ml(150):5212-5235
+                                           (after parsing/depend.ml(150):5212-5235
+                                             (apply add_tkind (field 3 td))))))))))))
+                       add_extension_constructor =
+                         (function bv ext
+                           (funct-body parsing/depend.ml(152)<ghost>:5267-5441
+                             (before parsing/depend.ml(153):5278-5441
+                               (let (*match* = (field 1 ext))
+                                 (switch* *match*
+                                  case tag 0:
+                                   (let
+                                     (rty =a (field 1 *match*)
+                                      args =a (field 0 *match*))
+                                     (before parsing/depend.ml(155):5337-5407
+                                       (seq
+                                         (after parsing/depend.ml(155):5337-5370
+                                           (apply add_constructor_arguments
+                                             bv args))
+                                         (before parsing/depend.ml(156):5378-5407
+                                           (after parsing/depend.ml(156):5378-5407
+                                             (apply
+                                               (field 8
+                                                 (global Stdlib__option!))
+                                               (after parsing/depend.ml(156):5390-5403
+                                                 (apply add_type bv))
+                                               rty))))))
+                                  case tag 1:
+                                   (let (lid =a (field 0 *match*))
+                                     (before parsing/depend.ml(157):5431-5441
+                                       (after parsing/depend.ml(157):5431-5441
+                                         (apply add bv lid)))))))))
+                       add_type_extension =
+                         (function bv te
+                           (funct-body parsing/depend.ml(159)<ghost>:5466-5564
+                             (before parsing/depend.ml(160):5476-5564
+                               (seq
+                                 (after parsing/depend.ml(160):5476-5497
+                                   (apply add bv (field 0 te)))
+                                 (before parsing/depend.ml(161):5501-5564
+                                   (after parsing/depend.ml(161):5501-5564
+                                     (apply (field 14 (global Stdlib__list!))
+                                       (after parsing/depend.ml(161):5511-5541
+                                         (apply add_extension_constructor bv))
+                                       (field 2 te))))))))
+                       add_type_exception =
+                         (function bv te
+                           (funct-body parsing/depend.ml(163)<ghost>:5589-5649
+                             (before parsing/depend.ml(164):5599-5649
+                               (after parsing/depend.ml(164):5599-5649
+                                 (apply add_extension_constructor bv
+                                   (field 0 te))))))
+                       pattern_bv =
+                         (makemutable 0
+                           (field 0
+                             (field 39 (field 3 (field 11 (global Misc!)))))))
+                      (letrec
+                        (add_pattern
+                           (function bv pat
+                             (funct-body parsing/depend.ml(168)<ghost>:5710-6608
+                               (before parsing/depend.ml(169):5721-6608
+                                 (let (*match* = (field 0 pat))
+                                   (catch
+                                     (switch* *match*
+                                      case int 0:
+                                       (before parsing/depend.ml(170):5762-5764
+                                         0a)
+                                      case tag 0:
+                                       (before parsing/depend.ml(171):5783-5785
+                                         0a)
+                                      case tag 1:
+                                       (let (p =a (field 0 *match*))
+                                         (before parsing/depend.ml(172):5810-5826
+                                           (after parsing/depend.ml(172):5810-5826
+                                             (apply add_pattern bv p))))
+                                      case tag 2: (exit 8)
+                                      case tag 3: (exit 8)
+                                      case tag 4:
+                                       (let (pl =a (field 0 *match*))
+                                         (before parsing/depend.ml(175):5894-5923
+                                           (after parsing/depend.ml(175):5894-5923
+                                             (apply
+                                               (field 14
+                                                 (global Stdlib__list!))
+                                               (after parsing/depend.ml(175):5904-5920
+                                                 (apply add_pattern bv))
+                                               pl))))
+                                      case tag 5:
+                                       (let
+                                         (op =a (field 1 *match*)
+                                          c =a (field 0 *match*))
+                                         (before parsing/depend.ml(176):5953-5988
+                                           (seq
+                                             (after parsing/depend.ml(176):5953-5961
+                                               (apply add bv c))
+                                             (before parsing/depend.ml(176):5963-5988
+                                               (after parsing/depend.ml(176):5963-5988
+                                                 (apply add_opt add_pattern
+                                                   bv op))))))
+                                      case tag 6:
+                                       (let (op =a (field 1 *match*))
+                                         (before parsing/depend.ml(182):6282-6307
+                                           (after parsing/depend.ml(182):6282-6307
+                                             (apply add_opt add_pattern bv
+                                               op))))
+                                      case tag 7:
+                                       (let (pl =a (field 0 *match*))
+                                         (before parsing/depend.ml(178):6021-6080
+                                           (after parsing/depend.ml(178):6021-6080
+                                             (apply
+                                               (field 14
+                                                 (global Stdlib__list!))
+                                               (function param
+                                                 (funct-body parsing/depend.ml(178):6031-6077
+                                                   (let
+                                                     (p =a (field 1 param)
+                                                      lbl =a (field 0 param))
+                                                     (before parsing/depend.ml(178):6048-6076
+                                                       (seq
+                                                         (after parsing/depend.ml(178):6048-6058
+                                                           (apply add bv lbl))
+                                                         (before parsing/depend.ml(178):6060-6076
+                                                           (after parsing/depend.ml(178):6060-6076
+                                                             (apply
+                                                               add_pattern bv
+                                                               p))))))))
+                                               pl))))
+                                      case tag 8:
+                                       (let (pl =a (field 0 *match*))
+                                         (before parsing/depend.ml(179):6102-6131
+                                           (after parsing/depend.ml(179):6102-6131
+                                             (apply
+                                               (field 14
+                                                 (global Stdlib__list!))
+                                               (after parsing/depend.ml(179):6112-6128
+                                                 (apply add_pattern bv))
+                                               pl))))
+                                      case tag 9:
+                                       (let
+                                         (p2 =a (field 1 *match*)
+                                          p1 =a (field 0 *match*))
+                                         (before parsing/depend.ml(180):6155-6191
+                                           (seq
+                                             (after parsing/depend.ml(180):6155-6172
+                                               (apply add_pattern bv p1))
+                                             (before parsing/depend.ml(180):6174-6191
+                                               (after parsing/depend.ml(180):6174-6191
+                                                 (apply add_pattern bv p2))))))
+                                      case tag 10:
+                                       (let
+                                         (ty =a (field 1 *match*)
+                                          p =a (field 0 *match*))
+                                         (before parsing/depend.ml(181):6222-6254
+                                           (seq
+                                             (after parsing/depend.ml(181):6222-6238
+                                               (apply add_pattern bv p))
+                                             (before parsing/depend.ml(181):6240-6254
+                                               (after parsing/depend.ml(181):6240-6254
+                                                 (apply add_type bv ty))))))
+                                      case tag 11:
+                                       (let (li =a (field 0 *match*))
+                                         (before parsing/depend.ml(183):6328-6337
+                                           (after parsing/depend.ml(183):6328-6337
+                                             (apply add bv li))))
+                                      case tag 12:
+                                       (let (p =a (field 0 *match*))
+                                         (before parsing/depend.ml(184):6357-6373
+                                           (after parsing/depend.ml(184):6357-6373
+                                             (apply add_pattern bv p))))
+                                      case tag 13:
+                                       (let (id =a (field 0 *match*))
+                                         (before parsing/depend.ml(185):6396-6449
+                                           (setfield_ptr 0 pattern_bv
+                                             (after parsing/depend.ml(185):6410-6449
+                                               (apply
+                                                 (field 3
+                                                   (field 39
+                                                     (field 3
+                                                       (field 11
+                                                         (global Misc!)))))
+                                                 (field 0 id) bound
+                                                 (field 0 pattern_bv))))))
+                                      case tag 14:
+                                       (let (p =a (field 0 *match*))
+                                         (before parsing/depend.ml(187):6549-6565
+                                           (after parsing/depend.ml(187):6549-6565
+                                             (apply add_pattern bv p))))
+                                      case tag 15:
+                                       (let (e =a (field 0 *match*))
+                                         (before parsing/depend.ml(188):6590-6608
+                                           (after parsing/depend.ml(188):6590-6608
+                                             (apply handle_extension e))))
+                                      case tag 16:
+                                       (let
+                                         (p =a (field 1 *match*)
+                                          m =a (field 0 *match*))
+                                         (before parsing/depend.ml(186):6475-6524
+                                           (let
+                                             (bv =
+                                                (after parsing/depend.ml(186):6484-6504
+                                                  (apply open_module bv
+                                                    (field 0 m))))
+                                             (before parsing/depend.ml(186):6508-6524
+                                               (after parsing/depend.ml(186):6508-6524
+                                                 (apply add_pattern bv p)))))))
+                                    with (8)
+                                     (before parsing/depend.ml(174):5870-5872
+                                       0a)))))))
+                        (let
+                          (add_pattern =
+                             (function bv pat
+                               (funct-body parsing/depend.ml(190)<ghost>:6626-6690
+                                 (before parsing/depend.ml(191):6637-6690
+                                   (seq (setfield_ptr 0 pattern_bv bv)
+                                     (before parsing/depend.ml(192):6657-6690
+                                       (seq
+                                         (after parsing/depend.ml(192):6657-6675
+                                           (apply add_pattern bv pat))
+                                         (before parsing/depend.ml(193):6679-6690
+                                           (field 0 pattern_bv)))))))))
+                          (letrec
+                            (add_expr
+                               (function bv exp
+                                 (funct-body parsing/depend.ml(195)<ghost>:6709-9535
+                                   (before parsing/depend.ml(196):6720-9535
+                                     (let (*match* = (field 0 exp))
+                                       (switch* *match*
+                                        case int 0:
+                                         (before parsing/depend.ml(261):9533-9535
+                                           0a)
+                                        case tag 0:
+                                         (let (l =a (field 0 *match*))
+                                           (before parsing/depend.ml(197):6765-6773
+                                             (after parsing/depend.ml(197):6765-6773
+                                               (apply add bv l))))
+                                        case tag 1:
+                                         (before parsing/depend.ml(198):6797-6799
+                                           0a)
+                                        case tag 2:
+                                         (let
+                                           (e =a (field 2 *match*)
+                                            pel =a (field 1 *match*)
+                                            rf =a (field 0 *match*))
+                                           (before parsing/depend.ml(200):6834-6882
+                                             (let
+                                               (bv =
+                                                  (after parsing/depend.ml(200):6843-6865
+                                                    (apply add_bindings rf bv
+                                                      pel)))
+                                               (before parsing/depend.ml(200):6869-6882
+                                                 (after parsing/depend.ml(200):6869-6882
+                                                   (apply add_expr bv e))))))
+                                        case tag 3:
+                                         (let (pel =a (field 0 *match*))
+                                           (before parsing/depend.ml(204):7008-7024
+                                             (after parsing/depend.ml(204):7008-7024
+                                               (apply add_cases bv pel))))
+                                        case tag 4:
+                                         (let
+                                           (e =a (field 3 *match*)
+                                            p =a (field 2 *match*)
+                                            opte =a (field 1 *match*))
+                                           (before parsing/depend.ml(202):6921-6976
+                                             (seq
+                                               (after parsing/depend.ml(202):6921-6945
+                                                 (apply add_opt add_expr bv
+                                                   opte))
+                                               (before parsing/depend.ml(202):6947-6976
+                                                 (after parsing/depend.ml(202):6947-6976
+                                                   (apply add_expr
+                                                     (after parsing/depend.ml(202):6956-6974
+                                                       (apply add_pattern bv
+                                                         p))
+                                                     e))))))
+                                        case tag 5:
+                                         (let
+                                           (el =a (field 1 *match*)
+                                            e =a (field 0 *match*))
+                                           (before parsing/depend.ml(206):7056-7112
+                                             (seq
+                                               (after parsing/depend.ml(206):7056-7069
+                                                 (apply add_expr bv e))
+                                               (before parsing/depend.ml(206):7071-7112
+                                                 (after parsing/depend.ml(206):7071-7112
+                                                   (apply
+                                                     (field 14
+                                                       (global Stdlib__list!))
+                                                     (function param
+                                                       (funct-body parsing/depend.ml(206):7081-7109
+                                                         (let
+                                                           (e =a
+                                                              (field 1 param))
+                                                           (before parsing/depend.ml(206):7095-7108
+                                                             (after parsing/depend.ml(206):7095-7108
+                                                               (apply
+                                                                 add_expr bv
+                                                                 e))))))
+                                                     el))))))
+                                        case tag 6:
+                                         (let
+                                           (pel =a (field 1 *match*)
+                                            e =a (field 0 *match*))
+                                           (before parsing/depend.ml(207):7139-7170
+                                             (seq
+                                               (after parsing/depend.ml(207):7139-7152
+                                                 (apply add_expr bv e))
+                                               (before parsing/depend.ml(207):7154-7170
+                                                 (after parsing/depend.ml(207):7154-7170
+                                                   (apply add_cases bv pel))))))
+                                        case tag 7:
+                                         (let
+                                           (pel =a (field 1 *match*)
+                                            e =a (field 0 *match*))
+                                           (before parsing/depend.ml(208):7195-7226
+                                             (seq
+                                               (after parsing/depend.ml(208):7195-7208
+                                                 (apply add_expr bv e))
+                                               (before parsing/depend.ml(208):7210-7226
+                                                 (after parsing/depend.ml(208):7210-7226
+                                                   (apply add_cases bv pel))))))
+                                        case tag 8:
+                                         (let (el =a (field 0 *match*))
+                                           (before parsing/depend.ml(209):7248-7274
+                                             (after parsing/depend.ml(209):7248-7274
+                                               (apply
+                                                 (field 14
+                                                   (global Stdlib__list!))
+                                                 (after parsing/depend.ml(209):7258-7271
+                                                   (apply add_expr bv))
+                                                 el))))
+                                        case tag 9:
+                                         (let
+                                           (opte =a (field 1 *match*)
+                                            c =a (field 0 *match*))
+                                           (before parsing/depend.ml(210):7306-7340
+                                             (seq
+                                               (after parsing/depend.ml(210):7306-7314
+                                                 (apply add bv c))
+                                               (before parsing/depend.ml(210):7316-7340
+                                                 (after parsing/depend.ml(210):7316-7340
+                                                   (apply add_opt add_expr bv
+                                                     opte))))))
+                                        case tag 10:
+                                         (let (opte =a (field 1 *match*))
+                                           (before parsing/depend.ml(211):7370-7394
+                                             (after parsing/depend.ml(211):7370-7394
+                                               (apply add_opt add_expr bv
+                                                 opte))))
+                                        case tag 11:
+                                         (let
+                                           (opte =a (field 1 *match*)
+                                            lblel =a (field 0 *match*))
+                                           (before parsing/depend.ml(213):7433-7524
+                                             (seq
+                                               (after parsing/depend.ml(213):7433-7492
+                                                 (apply
+                                                   (field 14
+                                                     (global Stdlib__list!))
+                                                   (function param
+                                                     (funct-body parsing/depend.ml(213):7443-7486
+                                                       (let
+                                                         (e =a
+                                                            (field 1 param)
+                                                          lbl =a
+                                                            (field 0 param))
+                                                         (before parsing/depend.ml(213):7460-7485
+                                                           (seq
+                                                             (after parsing/depend.ml(213):7460-7470
+                                                               (apply add bv
+                                                                 lbl))
+                                                             (before parsing/depend.ml(213):7472-7485
+                                                               (after parsing/depend.ml(213):7472-7485
+                                                                 (apply
+                                                                   add_expr
+                                                                   bv e))))))))
+                                                   lblel))
+                                               (before parsing/depend.ml(214):7500-7524
+                                                 (after parsing/depend.ml(214):7500-7524
+                                                   (apply add_opt add_expr bv
+                                                     opte))))))
+                                        case tag 12:
+                                         (let
+                                           (fld =a (field 1 *match*)
+                                            e =a (field 0 *match*))
+                                           (before parsing/depend.ml(215):7551-7576
+                                             (seq
+                                               (after parsing/depend.ml(215):7551-7564
+                                                 (apply add_expr bv e))
+                                               (before parsing/depend.ml(215):7566-7576
+                                                 (after parsing/depend.ml(215):7566-7576
+                                                   (apply add bv fld))))))
+                                        case tag 13:
+                                         (let
+                                           (e2 =a (field 2 *match*)
+                                            fld =a (field 1 *match*)
+                                            e1 =a (field 0 *match*))
+                                           (before parsing/depend.ml(216):7611-7653
+                                             (seq
+                                               (after parsing/depend.ml(216):7611-7625
+                                                 (apply add_expr bv e1))
+                                               (before parsing/depend.ml(216):7627-7653
+                                                 (seq
+                                                   (after parsing/depend.ml(216):7627-7637
+                                                     (apply add bv fld))
+                                                   (before parsing/depend.ml(216):7639-7653
+                                                     (after parsing/depend.ml(216):7639-7653
+                                                       (apply add_expr bv e2))))))))
+                                        case tag 14:
+                                         (let (el =a (field 0 *match*))
+                                           (before parsing/depend.ml(217):7675-7701
+                                             (after parsing/depend.ml(217):7675-7701
+                                               (apply
+                                                 (field 14
+                                                   (global Stdlib__list!))
+                                                 (after parsing/depend.ml(217):7685-7698
+                                                   (apply add_expr bv))
+                                                 el))))
+                                        case tag 15:
+                                         (let
+                                           (opte3 =a (field 2 *match*)
+                                            e2 =a (field 1 *match*)
+                                            e1 =a (field 0 *match*))
+                                           (before parsing/depend.ml(219):7746-7803
+                                             (seq
+                                               (after parsing/depend.ml(219):7746-7760
+                                                 (apply add_expr bv e1))
+                                               (before parsing/depend.ml(219):7762-7803
+                                                 (seq
+                                                   (after parsing/depend.ml(219):7762-7776
+                                                     (apply add_expr bv e2))
+                                                   (before parsing/depend.ml(219):7778-7803
+                                                     (after parsing/depend.ml(219):7778-7803
+                                                       (apply add_opt
+                                                         add_expr bv opte3))))))))
+                                        case tag 16:
+                                         (let
+                                           (e2 =a (field 1 *match*)
+                                            e1 =a (field 0 *match*))
+                                           (before parsing/depend.ml(220):7833-7863
+                                             (seq
+                                               (after parsing/depend.ml(220):7833-7847
+                                                 (apply add_expr bv e1))
+                                               (before parsing/depend.ml(220):7849-7863
+                                                 (after parsing/depend.ml(220):7849-7863
+                                                   (apply add_expr bv e2))))))
+                                        case tag 17:
+                                         (let
+                                           (e2 =a (field 1 *match*)
+                                            e1 =a (field 0 *match*))
+                                           (before parsing/depend.ml(221):7890-7920
+                                             (seq
+                                               (after parsing/depend.ml(221):7890-7904
+                                                 (apply add_expr bv e1))
+                                               (before parsing/depend.ml(221):7906-7920
+                                                 (after parsing/depend.ml(221):7906-7920
+                                                   (apply add_expr bv e2))))))
+                                        case tag 18:
+                                         (let
+                                           (e3 =a (field 4 *match*)
+                                            e2 =a (field 2 *match*)
+                                            e1 =a (field 1 *match*))
+                                           (before parsing/depend.ml(223):7962-8008
+                                             (seq
+                                               (after parsing/depend.ml(223):7962-7976
+                                                 (apply add_expr bv e1))
+                                               (before parsing/depend.ml(223):7978-8008
+                                                 (seq
+                                                   (after parsing/depend.ml(223):7978-7992
+                                                     (apply add_expr bv e2))
+                                                   (before parsing/depend.ml(223):7994-8008
+                                                     (after parsing/depend.ml(223):7994-8008
+                                                       (apply add_expr bv e3))))))))
+                                        case tag 19:
+                                         (let
+                                           (ty2 =a (field 1 *match*)
+                                            e1 =a (field 0 *match*))
+                                           (before parsing/depend.ml(229):8157-8194
+                                             (seq
+                                               (after parsing/depend.ml(229):8157-8171
+                                                 (apply add_expr bv e1))
+                                               (before parsing/depend.ml(230):8179-8194
+                                                 (after parsing/depend.ml(230):8179-8194
+                                                   (apply add_type bv ty2))))))
+                                        case tag 20:
+                                         (let
+                                           (ty3 =a (field 2 *match*)
+                                            oty2 =a (field 1 *match*)
+                                            e1 =a (field 0 *match*))
+                                           (before parsing/depend.ml(225):8049-8118
+                                             (seq
+                                               (after parsing/depend.ml(225):8049-8063
+                                                 (apply add_expr bv e1))
+                                               (before parsing/depend.ml(226):8071-8118
+                                                 (seq
+                                                   (after parsing/depend.ml(226):8071-8095
+                                                     (apply add_opt add_type
+                                                       bv oty2))
+                                                   (before parsing/depend.ml(227):8103-8118
+                                                     (after parsing/depend.ml(227):8103-8118
+                                                       (apply add_type bv
+                                                         ty3))))))))
+                                        case tag 21:
+                                         (let (e =a (field 0 *match*))
+                                           (before parsing/depend.ml(231):8219-8232
+                                             (after parsing/depend.ml(231):8219-8232
+                                               (apply add_expr bv e))))
+                                        case tag 22:
+                                         (let (li =a (field 0 *match*))
+                                           (before parsing/depend.ml(232):8252-8261
+                                             (after parsing/depend.ml(232):8252-8261
+                                               (apply add bv li))))
+                                        case tag 23:
+                                         (let (e =a (field 1 *match*))
+                                           (before parsing/depend.ml(233):8292-8305
+                                             (after parsing/depend.ml(233):8292-8305
+                                               (apply add_expr bv e))))
+                                        case tag 24:
+                                         (let (sel =a (field 0 *match*))
+                                           (before parsing/depend.ml(234):8331-8375
+                                             (after parsing/depend.ml(234):8331-8375
+                                               (apply
+                                                 (field 14
+                                                   (global Stdlib__list!))
+                                                 (function param
+                                                   (funct-body parsing/depend.ml(234):8341-8371
+                                                     (let
+                                                       (e =a (field 1 param))
+                                                       (before parsing/depend.ml(234):8357-8370
+                                                         (after parsing/depend.ml(234):8357-8370
+                                                           (apply add_expr bv
+                                                             e))))))
+                                                 sel))))
+                                        case tag 25:
+                                         (let
+                                           (e =a (field 2 *match*)
+                                            m =a (field 1 *match*)
+                                            id =a (field 0 *match*))
+                                           (before parsing/depend.ml(236):8414-8494
+                                             (let
+                                               (b =
+                                                  (after parsing/depend.ml(236):8422-8445
+                                                    (apply add_module_binding
+                                                      bv m)))
+                                               (before parsing/depend.ml(237):8455-8494
+                                                 (after parsing/depend.ml(237):8455-8494
+                                                   (apply add_expr
+                                                     (after parsing/depend.ml(237):8464-8492
+                                                       (apply
+                                                         (field 3
+                                                           (field 39
+                                                             (field 3
+                                                               (field 11
+                                                                 (global Misc!)))))
+                                                         (field 0 id) b bv))
+                                                     e))))))
+                                        case tag 26:
+                                         (let (e =a (field 1 *match*))
+                                           (before parsing/depend.ml(238):8526-8539
+                                             (after parsing/depend.ml(238):8526-8539
+                                               (apply add_expr bv e))))
+                                        case tag 27:
+                                         (let (e =a (field 0 *match*))
+                                           (before parsing/depend.ml(239):8563-8576
+                                             (after parsing/depend.ml(239):8563-8576
+                                               (apply add_expr bv e))))
+                                        case tag 28:
+                                         (let (e =a (field 0 *match*))
+                                           (before parsing/depend.ml(240):8598-8611
+                                             (after parsing/depend.ml(240):8598-8611
+                                               (apply add_expr bv e))))
+                                        case tag 29:
+                                         (let
+                                           (t =a (field 1 *match*)
+                                            e =a (field 0 *match*))
+                                           (before parsing/depend.ml(241):8636-8672
+                                             (seq
+                                               (after parsing/depend.ml(241):8636-8649
+                                                 (apply add_expr bv e))
+                                               (before parsing/depend.ml(241):8651-8672
+                                                 (after parsing/depend.ml(241):8651-8672
+                                                   (apply add_opt add_type bv
+                                                     t))))))
+                                        case tag 30:
+                                         (let
+                                           (*match* =a (field 0 *match*)
+                                            fieldl =a (field 1 *match*)
+                                            pat =a (field 0 *match*))
+                                           (before parsing/depend.ml(243):8742-8810
+                                             (let
+                                               (bv =
+                                                  (after parsing/depend.ml(243):8751-8769
+                                                    (apply add_pattern bv
+                                                      pat)))
+                                               (before parsing/depend.ml(243):8773-8810
+                                                 (after parsing/depend.ml(243):8773-8810
+                                                   (apply
+                                                     (field 14
+                                                       (global Stdlib__list!))
+                                                     (after parsing/depend.ml(243):8783-8803
+                                                       (apply add_class_field
+                                                         bv))
+                                                     fieldl))))))
+                                        case tag 31:
+                                         (let (e =a (field 1 *match*))
+                                           (before parsing/depend.ml(244):8838-8851
+                                             (after parsing/depend.ml(244):8838-8851
+                                               (apply add_expr bv e))))
+                                        case tag 32:
+                                         (let (m =a (field 0 *match*))
+                                           (before parsing/depend.ml(245):8871-8891
+                                             (after parsing/depend.ml(245):8871-8891
+                                               (apply add_module_expr bv m))))
+                                        case tag 33:
+                                         (let
+                                           (e =a (field 1 *match*)
+                                            o =a (field 0 *match*))
+                                           (before parsing/depend.ml(247):8922-8975
+                                             (let
+                                               (bv =
+                                                  (after parsing/depend.ml(247):8931-8952
+                                                    (apply open_declaration
+                                                      bv o)))
+                                               (before parsing/depend.ml(248):8962-8975
+                                                 (after parsing/depend.ml(248):8962-8975
+                                                   (apply add_expr bv e))))))
+                                        case tag 34:
+                                         (let
+                                           (*match* =a (field 0 *match*)
+                                            body =a (field 2 *match*)
+                                            ands =a (field 1 *match*)
+                                            let_ =a (field 0 *match*))
+                                           (before parsing/depend.ml(250):9019-9144
+                                             (let
+                                               (bv' =
+                                                  (after parsing/depend.ml(250):9029-9054
+                                                    (apply add_binding_op bv
+                                                      bv let_)))
+                                               (before parsing/depend.ml(251):9064-9144
+                                                 (let
+                                                   (bv' =
+                                                      (after parsing/depend.ml(251):9074-9117
+                                                        (apply
+                                                          (field 20
+                                                            (global Stdlib__list!))
+                                                          (after parsing/depend.ml(251):9089-9108
+                                                            (apply
+                                                              add_binding_op
+                                                              bv))
+                                                          bv' ands)))
+                                                   (before parsing/depend.ml(252):9127-9144
+                                                     (after parsing/depend.ml(252):9127-9144
+                                                       (apply add_expr bv'
+                                                         body))))))))
+                                        case tag 35:
+                                         (let
+                                           (e =a (field 0 *match*)
+                                            *match* =a (field 0 e)
+                                            *match* =a (field 0 *match*))
+                                           (catch
+                                             (catch
+                                               (stringswitch *match*
+                                                case "extension_constructor":
+                                                 (exit 11)
+                                                case "ocaml.extension_constructor":
+                                                 (exit 11)
+                                                default: (exit 10))
+                                              with (11)
+                                               (let (*match* =a (field 1 e))
+                                                 (switch *match*
+                                                  case tag 0:
+                                                   (let
+                                                     (*match* =a
+                                                        (field 0 *match*))
+                                                     (if *match*
+                                                       (let
+                                                         (*match* =a
+                                                            (field 1 *match*))
+                                                         (if *match*
+                                                           (exit 10)
+                                                           (let
+                                                             (item =a
+                                                                (field 0
+                                                                  *match*))
+                                                             (before parsing/depend.ml(256):9316-9465
+                                                               (let
+                                                                 (*match* =
+                                                                    (field 0
+                                                                    item))
+                                                                 (catch
+                                                                   (switch *match*
+                                                                    case tag 0:
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 0
+                                                                    *match*)
+                                                                    *match* =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (switch *match*
+                                                                    case tag 9:
+                                                                    (let
+                                                                    (*match* =a
+                                                                    (field 1
+                                                                    *match*))
+                                                                    (if
+                                                                    *match*
+                                                                    (exit 9)
+                                                                    (let
+                                                                    (c =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before parsing/depend.ml(257):9415-9423
+                                                                    (after parsing/depend.ml(257):9415-9423
+                                                                    (apply
+                                                                    add bv c))))))
+                                                                    default:
+                                                                    (exit 9)))
+                                                                    default:
+                                                                    (exit 9))
+                                                                  with (9)
+                                                                   (before parsing/depend.ml(258):9437-9455
+                                                                    (after parsing/depend.ml(258):9437-9455
+                                                                    (apply
+                                                                    handle_extension
+                                                                    e)))))))))
+                                                       (exit 10)))
+                                                  default: (exit 10))))
+                                            with (10)
+                                             (let (e =a e)
+                                               (before parsing/depend.ml(260):9490-9508
+                                                 (after parsing/depend.ml(260):9490-9508
+                                                   (apply handle_extension e)))))))))))
+                              add_cases
+                                (function bv cases
+                                  (funct-body parsing/depend.ml(263)<ghost>:9551-9593
+                                    (before parsing/depend.ml(264):9564-9593
+                                      (after parsing/depend.ml(264):9564-9593
+                                        (apply
+                                          (field 14 (global Stdlib__list!))
+                                          (after parsing/depend.ml(264):9574-9587
+                                            (apply add_case bv))
+                                          cases)))))
+                              add_case
+                                (function bv param
+                                  (funct-body parsing/depend.ml(266)<ghost>:9608-9728
+                                    (let
+                                      (pc_rhs =a (field 2 param)
+                                       pc_guard =a (field 1 param)
+                                       pc_lhs =a (field 0 param))
+                                      (before parsing/depend.ml(267):9642-9728
+                                        (let
+                                          (bv =
+                                             (after parsing/depend.ml(267):9651-9672
+                                               (apply add_pattern bv pc_lhs)))
+                                          (before parsing/depend.ml(268):9678-9728
+                                            (seq
+                                              (after parsing/depend.ml(268):9678-9706
+                                                (apply add_opt add_expr bv
+                                                  pc_guard))
+                                              (before parsing/depend.ml(269):9710-9728
+                                                (after parsing/depend.ml(269):9710-9728
+                                                  (apply add_expr bv pc_rhs))))))))))
+                              add_bindings
+                                (function recf bv pel
+                                  (funct-body parsing/depend.ml(271)<ghost>:9747-9944
+                                    (before parsing/depend.ml(272):9763-9944
+                                      (let
+                                        (bv' =
+                                           (after parsing/depend.ml(272):9773-9833
+                                             (apply
+                                               (field 20
+                                                 (global Stdlib__list!))
+                                               (function bv x
+                                                 (funct-body parsing/depend.ml(272):9788-9826
+                                                   (before parsing/depend.ml(272):9801-9825
+                                                     (after parsing/depend.ml(272):9801-9825
+                                                       (apply add_pattern bv
+                                                         (field 0 x))))))
+                                               bv pel)))
+                                        (before parsing/depend.ml(273):9839-9944
+                                          (let
+                                            (bv =
+                                               (if (== recf 1a)
+                                                 (before parsing/depend.ml(273):9873-9876
+                                                   bv')
+                                                 (before parsing/depend.ml(273):9882-9884
+                                                   bv)))
+                                            (before parsing/depend.ml(274):9890-9944
+                                              (seq
+                                                (after parsing/depend.ml(274):9890-9937
+                                                  (apply
+                                                    (field 14
+                                                      (global Stdlib__list!))
+                                                    (function x
+                                                      (funct-body parsing/depend.ml(274):9900-9933
+                                                        (before parsing/depend.ml(274):9910-9932
+                                                          (after parsing/depend.ml(274):9910-9932
+                                                            (apply add_expr
+                                                              bv (field 1 x))))))
+                                                    pel))
+                                                (before parsing/depend.ml(275):9941-9944
+                                                  bv')))))))))
+                              add_binding_op
+                                (function bv bv' pbop
+                                  (funct-body parsing/depend.ml(277)<ghost>:9965-10039
+                                    (before parsing/depend.ml(278):9981-10039
+                                      (seq
+                                        (after parsing/depend.ml(278):9981-10006
+                                          (apply add_expr bv (field 2 pbop)))
+                                        (before parsing/depend.ml(279):10010-10039
+                                          (after parsing/depend.ml(279):10010-10039
+                                            (apply add_pattern bv'
+                                              (field 1 pbop))))))))
+                              add_modtype
+                                (function bv mty
+                                  (funct-body parsing/depend.ml(281)<ghost>:10057-10785
+                                    (before parsing/depend.ml(282):10068-10785
+                                      (let (*match* = (field 0 mty))
+                                        (switch* *match*
+                                         case tag 0:
+                                          (let (l =a (field 0 *match*))
+                                            (before parsing/depend.ml(283):10113-10121
+                                              (after parsing/depend.ml(283):10113-10121
+                                                (apply add bv l))))
+                                         case tag 1:
+                                          (let (s =a (field 0 *match*))
+                                            (before parsing/depend.ml(285):10187-10205
+                                              (after parsing/depend.ml(285):10187-10205
+                                                (apply add_signature bv s))))
+                                         case tag 2:
+                                          (let
+                                            (mty2 =a (field 2 *match*)
+                                             mty1 =a (field 1 *match*)
+                                             id =a (field 0 *match*))
+                                            (before parsing/depend.ml(287):10248-10338
+                                              (seq
+                                                (after parsing/depend.ml(287):10248-10281
+                                                  (apply
+                                                    (field 8
+                                                      (global Stdlib__option!))
+                                                    (after parsing/depend.ml(287):10260-10276
+                                                      (apply add_modtype bv))
+                                                    mty1))
+                                                (before parsing/depend.ml(288):10289-10338
+                                                  (after parsing/depend.ml(288):10289-10338
+                                                    (apply add_modtype
+                                                      (after parsing/depend.ml(288):10301-10333
+                                                        (apply
+                                                          (field 3
+                                                            (field 39
+                                                              (field 3
+                                                                (field 11
+                                                                  (global Misc!)))))
+                                                          (field 0 id) bound
+                                                          bv))
+                                                      mty2))))))
+                                         case tag 3:
+                                          (let
+                                            (cstrl =a (field 1 *match*)
+                                             mty =a (field 0 *match*))
+                                            (before parsing/depend.ml(290):10374-10700
+                                              (seq
+                                                (after parsing/depend.ml(290):10374-10392
+                                                  (apply add_modtype bv mty))
+                                                (before parsing/depend.ml(291):10400-10700
+                                                  (after parsing/depend.ml(291):10400-10700
+                                                    (apply
+                                                      (field 14
+                                                        (global Stdlib__list!))
+                                                      (function param
+                                                        (funct-body parsing/depend.ml(292):10418-10686
+                                                          (switch* param
+                                                           case tag 0:
+                                                            (let
+                                                              (td =a
+                                                                 (field 1
+                                                                   param))
+                                                              (before parsing/depend.ml(293):10462-10488
+                                                                (after parsing/depend.ml(293):10462-10488
+                                                                  (apply
+                                                                    add_type_declaration
+                                                                    bv td))))
+                                                           case tag 1:
+                                                            (let
+                                                              (lid =a
+                                                                 (field 1
+                                                                   param))
+                                                              (before parsing/depend.ml(294):10526-10548
+                                                                (after parsing/depend.ml(294):10526-10548
+                                                                  (apply
+                                                                    add_module_path
+                                                                    bv lid))))
+                                                           case tag 2:
+                                                            (let
+                                                              (td =a
+                                                                 (field 1
+                                                                   param))
+                                                              (before parsing/depend.ml(295):10588-10614
+                                                                (after parsing/depend.ml(295):10588-10614
+                                                                  (apply
+                                                                    add_type_declaration
+                                                                    bv td))))
+                                                           case tag 3:
+                                                            (let
+                                                              (lid =a
+                                                                 (field 1
+                                                                   param))
+                                                              (before parsing/depend.ml(296):10654-10676
+                                                                (after parsing/depend.ml(296):10654-10676
+                                                                  (apply
+                                                                    add_module_path
+                                                                    bv lid)))))))
+                                                      cstrl))))))
+                                         case tag 4:
+                                          (let (m =a (field 0 *match*))
+                                            (before parsing/depend.ml(299):10722-10742
+                                              (after parsing/depend.ml(299):10722-10742
+                                                (apply add_module_expr bv m))))
+                                         case tag 5:
+                                          (let (e =a (field 0 *match*))
+                                            (before parsing/depend.ml(300):10767-10785
+                                              (after parsing/depend.ml(300):10767-10785
+                                                (apply handle_extension e))))
+                                         case tag 6:
+                                          (let (l =a (field 0 *match*))
+                                            (before parsing/depend.ml(284):10142-10162
+                                              (after parsing/depend.ml(284):10142-10162
+                                                (apply add_module_path bv l)))))))))
+                              add_module_alias
+                                (function bv l
+                                  (funct-body parsing/depend.ml(302)<ghost>:10808-11136
+                                    (before parsing/depend.ml(305):10920-11136
+                                      (seq
+                                        (after parsing/depend.ml(305):10920-10995
+                                          (apply
+                                            (if
+                                              (field 0
+                                                (field 61 (global Clflags!)))
+                                              (before parsing/depend.ml(305):10958-10968
+                                                add_parent)
+                                              (before parsing/depend.ml(305):10974-10989
+                                                add_module_path))
+                                            bv l))
+                                        (before parsing/depend.ml(306):10999-11136
+                                          (try
+                                            (after parsing/depend.ml(307):11007-11026
+                                              (apply lookup_map (field 0 l)
+                                                bv))
+                                           with exn
+                                            (if
+                                              (== exn
+                                                (field 7 (global Stdlib!)))
+                                              (before parsing/depend.ml(309):11051-11136
+                                                (let (*match* = (field 0 l))
+                                                  (catch
+                                                    (switch* *match*
+                                                     case tag 0:
+                                                      (let
+                                                        (s =a
+                                                           (field 0 *match*))
+                                                        (before parsing/depend.ml(310):11086-11097
+                                                          (after parsing/depend.ml(310):11086-11097
+                                                            (apply make_leaf
+                                                              s))))
+                                                     case tag 1: (exit 12)
+                                                     case tag 2: (exit 12))
+                                                   with (12)
+                                                    (before parsing/depend.ml(311):11109-11136
+                                                      (seq
+                                                        (after parsing/depend.ml(311):11109-11129
+                                                          (apply
+                                                            add_module_path
+                                                            bv l))
+                                                        (before parsing/depend.ml(311):11131-11136
+                                                          bound))))))
+                                              (reraise exn))))))))
+                              add_modtype_binding
+                                (function bv mty
+                                  (funct-body parsing/depend.ml(313)<ghost>:11181-11431
+                                    (before parsing/depend.ml(314):11192-11431
+                                      (let (*match* = (field 0 mty))
+                                        (switch *match*
+                                         case tag 1:
+                                          (let (s =a (field 0 *match*))
+                                            (before parsing/depend.ml(318):11295-11333
+                                              (after parsing/depend.ml(318):11295-11333
+                                                (apply make_node
+                                                  (after parsing/depend.ml(318):11305-11333
+                                                    (apply
+                                                      add_signature_binding
+                                                      bv s))))))
+                                         case tag 4:
+                                          (let (modl =a (field 0 *match*))
+                                            (before parsing/depend.ml(320):11364-11390
+                                              (after parsing/depend.ml(320):11364-11390
+                                                (apply add_module_binding bv
+                                                  modl))))
+                                         case tag 6:
+                                          (let (l =a (field 0 *match*))
+                                            (before parsing/depend.ml(316):11243-11264
+                                              (after parsing/depend.ml(316):11243-11264
+                                                (apply add_module_alias bv l))))
+                                         default:
+                                          (before parsing/depend.ml(322):11406-11431
+                                            (seq
+                                              (after parsing/depend.ml(322):11406-11424
+                                                (apply add_modtype bv mty))
+                                              (before parsing/depend.ml(322):11426-11431
+                                                bound))))))))
+                              add_signature
+                                (function bv sg
+                                  (funct-body parsing/depend.ml(324)<ghost>:11451-11497
+                                    (before parsing/depend.ml(325):11461-11497
+                                      (ignore
+                                        (after parsing/depend.ml(325):11468-11497
+                                          (apply add_signature_binding bv sg))))))
+                              add_signature_binding
+                                (function bv sg
+                                  (funct-body parsing/depend.ml(327)<ghost>:11525-11594
+                                    (before parsing/depend.ml(328):11535-11594
+                                      (field 1
+                                        (after parsing/depend.ml(328):11539-11594
+                                          (apply
+                                            (field 20 (global Stdlib__list!))
+                                            add_sig_item
+                                            (makeblock 0 bv
+                                              (field 0
+                                                (field 39
+                                                  (field 3
+                                                    (field 11 (global Misc!))))))
+                                            sg))))))
+                              add_sig_item
+                                (function param item
+                                  (funct-body parsing/depend.ml(330)<ghost>:11613-13186
+                                    (let
+                                      (m =a (field 1 param)
+                                       bv =a (field 0 param))
+                                      (before parsing/depend.ml(331):11630-13186
+                                        (let (*match* = (field 0 item))
+                                          (catch
+                                            (switch* *match*
+                                             case tag 0:
+                                              (let (vd =a (field 0 *match*))
+                                                (before parsing/depend.ml(333):11683-11716
+                                                  (seq
+                                                    (after parsing/depend.ml(333):11683-11707
+                                                      (apply add_type bv
+                                                        (field 1 vd)))
+                                                    (before parsing/depend.ml(333):11709-11716
+                                                      (makeblock 0 bv m)))))
+                                             case tag 1:
+                                              (let
+                                                (dcls =a (field 1 *match*))
+                                                (exit 15 dcls))
+                                             case tag 2:
+                                              (let
+                                                (dcls =a (field 0 *match*))
+                                                (exit 15 dcls))
+                                             case tag 3:
+                                              (let (te =a (field 0 *match*))
+                                                (before parsing/depend.ml(338):11851-11884
+                                                  (seq
+                                                    (after parsing/depend.ml(338):11851-11875
+                                                      (apply
+                                                        add_type_extension bv
+                                                        te))
+                                                    (before parsing/depend.ml(338):11877-11884
+                                                      (makeblock 0 bv m)))))
+                                             case tag 4:
+                                              (let (te =a (field 0 *match*))
+                                                (before parsing/depend.ml(340):11916-11949
+                                                  (seq
+                                                    (after parsing/depend.ml(340):11916-11940
+                                                      (apply
+                                                        add_type_exception bv
+                                                        te))
+                                                    (before parsing/depend.ml(340):11942-11949
+                                                      (makeblock 0 bv m)))))
+                                             case tag 5:
+                                              (let (pmd =a (field 0 *match*))
+                                                (before parsing/depend.ml(342):11979-12102
+                                                  (let
+                                                    (m' =
+                                                       (after parsing/depend.ml(342):11988-12023
+                                                         (apply
+                                                           add_modtype_binding
+                                                           bv (field 1 pmd))))
+                                                    (before parsing/depend.ml(343):12033-12102
+                                                      (let
+                                                        (add =
+                                                           (after parsing/depend.ml(343):12043-12077
+                                                             (apply
+                                                               (field 3
+                                                                 (field 39
+                                                                   (field 3
+                                                                    (field 11
+                                                                    (global Misc!)))))
+                                                               (field 0
+                                                                 (field 0
+                                                                   pmd))
+                                                               m')))
+                                                        (before parsing/depend.ml(344):12087-12102
+                                                          (makeblock 0
+                                                            (after parsing/depend.ml(344):12088-12094
+                                                              (apply add bv))
+                                                            (after parsing/depend.ml(344):12096-12101
+                                                              (apply add m)))))))))
+                                             case tag 6:
+                                              (let (pms =a (field 0 *match*))
+                                                (before parsing/depend.ml(346):12134-12258
+                                                  (let
+                                                    (m' =
+                                                       (after parsing/depend.ml(346):12143-12179
+                                                         (apply
+                                                           add_module_alias
+                                                           bv (field 1 pms))))
+                                                    (before parsing/depend.ml(347):12189-12258
+                                                      (let
+                                                        (add =
+                                                           (after parsing/depend.ml(347):12199-12233
+                                                             (apply
+                                                               (field 3
+                                                                 (field 39
+                                                                   (field 3
+                                                                    (field 11
+                                                                    (global Misc!)))))
+                                                               (field 0
+                                                                 (field 0
+                                                                   pms))
+                                                               m')))
+                                                        (before parsing/depend.ml(348):12243-12258
+                                                          (makeblock 0
+                                                            (after parsing/depend.ml(348):12244-12250
+                                                              (apply add bv))
+                                                            (after parsing/depend.ml(348):12252-12257
+                                                              (apply add m)))))))))
+                                             case tag 7:
+                                              (let
+                                                (decls =a (field 0 *match*))
+                                                (before parsing/depend.ml(350):12293-12538
+                                                  (let
+                                                    (add =
+                                                       (after parsing/depend.ml(351):12311-12407
+                                                         (apply
+                                                           (field 21
+                                                             (global Stdlib__list!))
+                                                           (function pmd
+                                                             (funct-body parsing/depend.ml(351):12327-12377
+                                                               (before parsing/depend.ml(351):12339-12376
+                                                                 (after parsing/depend.ml(351):12339-12376
+                                                                   (apply
+                                                                    (field 3
+                                                                    (field 39
+                                                                    (field 3
+                                                                    (field 11
+                                                                    (global Misc!)))))
+                                                                    (field 0
+                                                                    (field 0
+                                                                    pmd))
+                                                                    bound)))))
+                                                           decls)))
+                                                    (before parsing/depend.ml(354):12423-12538
+                                                      (let
+                                                        (bv' =
+                                                           (after parsing/depend.ml(354):12433-12439
+                                                             (apply add bv))
+                                                         m' =
+                                                           (after parsing/depend.ml(354):12449-12454
+                                                             (apply add m)))
+                                                        (before parsing/depend.ml(355):12464-12538
+                                                          (seq
+                                                            (after parsing/depend.ml(355):12464-12521
+                                                              (apply
+                                                                (field 14
+                                                                  (global Stdlib__list!))
+                                                                (function pmd
+                                                                  (funct-body parsing/depend.ml(355):12474-12515
+                                                                    (before parsing/depend.ml(355):12486-12514
+                                                                    (after parsing/depend.ml(355):12486-12514
+                                                                    (apply
+                                                                    add_modtype
+                                                                    bv'
+                                                                    (field 1
+                                                                    pmd))))))
+                                                                decls))
+                                                            (before parsing/depend.ml(356):12529-12538
+                                                              (makeblock 0
+                                                                bv' m')))))))))
+                                             case tag 8:
+                                              (let (x =a (field 0 *match*))
+                                                (before parsing/depend.ml(358):12567-12678
+                                                  (seq
+                                                    (let
+                                                      (*match* = (field 1 x))
+                                                      (if *match*
+                                                        (let
+                                                          (mty =a
+                                                             (field 0
+                                                               *match*))
+                                                          (before parsing/depend.ml(360):12635-12653
+                                                            (after parsing/depend.ml(360):12635-12653
+                                                              (apply
+                                                                add_modtype
+                                                                bv mty))))
+                                                        (before parsing/depend.ml(359):12612-12614
+                                                          0a)))
+                                                    (before parsing/depend.ml(362):12671-12678
+                                                      (makeblock 0 bv m)))))
+                                             case tag 9:
+                                              (let (od =a (field 0 *match*))
+                                                (before parsing/depend.ml(364):12705-12732
+                                                  (makeblock 0
+                                                    (after parsing/depend.ml(364):12706-12728
+                                                      (apply open_description
+                                                        bv od))
+                                                    m)))
+                                             case tag 10:
+                                              (let
+                                                (incl =a (field 0 *match*))
+                                                (before parsing/depend.ml(366):12764-12917
+                                                  (let
+                                                    (*match* =
+                                                       (after parsing/depend.ml(366):12783-12820
+                                                         (apply
+                                                           add_modtype_binding
+                                                           bv (field 0 incl)))
+                                                     m' =a (field 1 *match*)
+                                                     s =a (field 0 *match*))
+                                                    (before parsing/depend.ml(367):12830-12917
+                                                      (seq
+                                                        (after parsing/depend.ml(367):12830-12841
+                                                          (apply add_names s))
+                                                        (before parsing/depend.ml(368):12849-12917
+                                                          (let
+                                                            (add =
+                                                               (after parsing/depend.ml(368):12859-12892
+                                                                 (apply
+                                                                   (field 12
+                                                                    (field 39
+                                                                    (field 3
+                                                                    (field 11
+                                                                    (global Misc!)))))
+                                                                   (field 3
+                                                                    (field 39
+                                                                    (field 3
+                                                                    (field 11
+                                                                    (global Misc!)))))
+                                                                   m')))
+                                                            (before parsing/depend.ml(369):12902-12917
+                                                              (makeblock 0
+                                                                (after parsing/depend.ml(369):12903-12909
+                                                                  (apply add
+                                                                    bv))
+                                                                (after parsing/depend.ml(369):12911-12916
+                                                                  (apply add
+                                                                    m)))))))))))
+                                             case tag 11:
+                                              (let (cdl =a (field 0 *match*))
+                                                (before parsing/depend.ml(371):12946-12995
+                                                  (seq
+                                                    (after parsing/depend.ml(371):12946-12986
+                                                      (apply
+                                                        (field 14
+                                                          (global Stdlib__list!))
+                                                        (after parsing/depend.ml(371):12956-12982
+                                                          (apply
+                                                            add_class_description
+                                                            bv))
+                                                        cdl))
+                                                    (before parsing/depend.ml(371):12988-12995
+                                                      (makeblock 0 bv m)))))
+                                             case tag 12:
+                                              (let
+                                                (cdtl =a (field 0 *match*))
+                                                (before parsing/depend.ml(373):13030-13085
+                                                  (seq
+                                                    (after parsing/depend.ml(373):13030-13076
+                                                      (apply
+                                                        (field 14
+                                                          (global Stdlib__list!))
+                                                        (after parsing/depend.ml(373):13040-13071
+                                                          (apply
+                                                            add_class_type_declaration
+                                                            bv))
+                                                        cdtl))
+                                                    (before parsing/depend.ml(373):13078-13085
+                                                      (makeblock 0 bv m)))))
+                                             case tag 13:
+                                              (before parsing/depend.ml(374):13110-13117
+                                                (makeblock 0 bv m))
+                                             case tag 14:
+                                              (let (e =a (field 0 *match*))
+                                                (before parsing/depend.ml(376):13153-13186
+                                                  (seq
+                                                    (after parsing/depend.ml(376):13153-13171
+                                                      (apply handle_extension
+                                                        e))
+                                                    (before parsing/depend.ml(377):13179-13186
+                                                      (makeblock 0 bv m))))))
+                                           with (15 dcls)
+                                            (before parsing/depend.ml(336):11773-11822
+                                              (seq
+                                                (after parsing/depend.ml(336):11773-11813
+                                                  (apply
+                                                    (field 14
+                                                      (global Stdlib__list!))
+                                                    (after parsing/depend.ml(336):11783-11808
+                                                      (apply
+                                                        add_type_declaration
+                                                        bv))
+                                                    dcls))
+                                                (before parsing/depend.ml(336):11815-11822
+                                                  (makeblock 0 bv m))))))))))
+                              open_description
+                                (function bv od
+                                  (funct-body parsing/depend.ml(379)<ghost>:13209-13325
+                                    (before parsing/depend.ml(380):13219-13325
+                                      (let
+                                        (*match* =
+                                           (after parsing/depend.ml(380):13236-13269
+                                             (apply add_module_alias bv
+                                               (field 0 od)))
+                                         m =a (field 1 *match*)
+                                         s =a (field 0 *match*))
+                                        (before parsing/depend.ml(381):13275-13325
+                                          (seq
+                                            (after parsing/depend.ml(381):13275-13286
+                                              (apply add_names s))
+                                            (before parsing/depend.ml(382):13290-13325
+                                              (after parsing/depend.ml(382):13290-13325
+                                                (apply
+                                                  (field 12
+                                                    (field 39
+                                                      (field 3
+                                                        (field 11
+                                                          (global Misc!)))))
+                                                  (field 3
+                                                    (field 39
+                                                      (field 3
+                                                        (field 11
+                                                          (global Misc!)))))
+                                                  m bv)))))))))
+                              open_declaration
+                                (function bv od
+                                  (funct-body parsing/depend.ml(384)<ghost>:13348-13467
+                                    (before parsing/depend.ml(385):13358-13467
+                                      (let
+                                        (*match* =
+                                           (after parsing/depend.ml(385):13376-13411
+                                             (apply add_module_binding bv
+                                               (field 0 od)))
+                                         m =a (field 1 *match*)
+                                         s =a (field 0 *match*))
+                                        (before parsing/depend.ml(386):13417-13467
+                                          (seq
+                                            (after parsing/depend.ml(386):13417-13428
+                                              (apply add_names s))
+                                            (before parsing/depend.ml(387):13432-13467
+                                              (after parsing/depend.ml(387):13432-13467
+                                                (apply
+                                                  (field 12
+                                                    (field 39
+                                                      (field 3
+                                                        (field 11
+                                                          (global Misc!)))))
+                                                  (field 3
+                                                    (field 39
+                                                      (field 3
+                                                        (field 11
+                                                          (global Misc!)))))
+                                                  m bv)))))))))
+                              add_module_binding
+                                (function bv modl
+                                  (funct-body parsing/depend.ml(389)<ghost>:13492-13686
+                                    (before parsing/depend.ml(390):13504-13686
+                                      (let (*match* = (field 0 modl))
+                                        (switch *match*
+                                         case tag 0:
+                                          (let (l =a (field 0 *match*))
+                                            (before parsing/depend.ml(391):13550-13571
+                                              (after parsing/depend.ml(391):13550-13571
+                                                (apply add_module_alias bv l))))
+                                         case tag 1:
+                                          (let (s =a (field 0 *match*))
+                                            (before parsing/depend.ml(393):13601-13646
+                                              (after parsing/depend.ml(393):13601-13646
+                                                (apply make_node
+                                                  (after parsing/depend.ml(393):13611-13646
+                                                    (apply
+                                                      (function prim stub
+                                                        (field 1 prim))
+                                                      (after parsing/depend.ml(393):13619-13645
+                                                        (apply
+                                                          add_structure_binding
+                                                          bv s))))))))
+                                         default:
+                                          (before parsing/depend.ml(394):13656-13686
+                                            (seq
+                                              (after parsing/depend.ml(394):13656-13679
+                                                (apply add_module_expr bv
+                                                  modl))
+                                              (before parsing/depend.ml(394):13681-13686
+                                                bound))))))))
+                              add_module_expr
+                                (function bv modl
+                                  (funct-body parsing/depend.ml(396)<ghost>:13708-14233
+                                    (before parsing/depend.ml(397):13720-14233
+                                      (let (*match* = (field 0 modl))
+                                        (switch* *match*
+                                         case tag 0:
+                                          (let (l =a (field 0 *match*))
+                                            (before parsing/depend.ml(398):13766-13786
+                                              (after parsing/depend.ml(398):13766-13786
+                                                (apply add_module_path bv l))))
+                                         case tag 1:
+                                          (let (s =a (field 0 *match*))
+                                            (before parsing/depend.ml(399):13811-13838
+                                              (ignore
+                                                (after parsing/depend.ml(399):13818-13838
+                                                  (apply add_structure bv s)))))
+                                         case tag 2:
+                                          (let
+                                            (modl =a (field 2 *match*)
+                                             mty =a (field 1 *match*)
+                                             id =a (field 0 *match*))
+                                            (before parsing/depend.ml(401):13880-13973
+                                              (seq
+                                                (after parsing/depend.ml(401):13880-13912
+                                                  (apply
+                                                    (field 8
+                                                      (global Stdlib__option!))
+                                                    (after parsing/depend.ml(401):13892-13908
+                                                      (apply add_modtype bv))
+                                                    mty))
+                                                (before parsing/depend.ml(402):13920-13973
+                                                  (after parsing/depend.ml(402):13920-13973
+                                                    (apply add_module_expr
+                                                      (after parsing/depend.ml(402):13936-13968
+                                                        (apply
+                                                          (field 3
+                                                            (field 39
+                                                              (field 3
+                                                                (field 11
+                                                                  (global Misc!)))))
+                                                          (field 0 id) bound
+                                                          bv))
+                                                      modl))))))
+                                         case tag 3:
+                                          (let
+                                            (mod2 =a (field 1 *match*)
+                                             mod1 =a (field 0 *match*))
+                                            (before parsing/depend.ml(404):14010-14058
+                                              (seq
+                                                (after parsing/depend.ml(404):14010-14033
+                                                  (apply add_module_expr bv
+                                                    mod1))
+                                                (before parsing/depend.ml(404):14035-14058
+                                                  (after parsing/depend.ml(404):14035-14058
+                                                    (apply add_module_expr bv
+                                                      mod2))))))
+                                         case tag 4:
+                                          (let
+                                            (mty =a (field 1 *match*)
+                                             modl =a (field 0 *match*))
+                                            (before parsing/depend.ml(406):14099-14142
+                                              (seq
+                                                (after parsing/depend.ml(406):14099-14122
+                                                  (apply add_module_expr bv
+                                                    modl))
+                                                (before parsing/depend.ml(406):14124-14142
+                                                  (after parsing/depend.ml(406):14124-14142
+                                                    (apply add_modtype bv
+                                                      mty))))))
+                                         case tag 5:
+                                          (let (e =a (field 0 *match*))
+                                            (before parsing/depend.ml(408):14171-14184
+                                              (after parsing/depend.ml(408):14171-14184
+                                                (apply add_expr bv e))))
+                                         case tag 6:
+                                          (let (e =a (field 0 *match*))
+                                            (before parsing/depend.ml(410):14215-14233
+                                              (after parsing/depend.ml(410):14215-14233
+                                                (apply handle_extension e)))))))))
+                              add_class_type
+                                (function bv cty
+                                  (funct-body parsing/depend.ml(412)<ghost>:14254-14707
+                                    (before parsing/depend.ml(413):14265-14707
+                                      (let (*match* = (field 0 cty))
+                                        (switch* *match*
+                                         case tag 0:
+                                          (let
+                                            (tyl =a (field 1 *match*)
+                                             l =a (field 0 *match*))
+                                            (before parsing/depend.ml(415):14323-14360
+                                              (seq
+                                                (after parsing/depend.ml(415):14323-14331
+                                                  (apply add bv l))
+                                                (before parsing/depend.ml(415):14333-14360
+                                                  (after parsing/depend.ml(415):14333-14360
+                                                    (apply
+                                                      (field 14
+                                                        (global Stdlib__list!))
+                                                      (after parsing/depend.ml(415):14343-14356
+                                                        (apply add_type bv))
+                                                      tyl))))))
+                                         case tag 1:
+                                          (let
+                                            (*match* =a (field 0 *match*)
+                                             fieldl =a (field 1 *match*)
+                                             ty =a (field 0 *match*))
+                                            (before parsing/depend.ml(417):14432-14496
+                                              (seq
+                                                (after parsing/depend.ml(417):14432-14446
+                                                  (apply add_type bv ty))
+                                                (before parsing/depend.ml(418):14454-14496
+                                                  (after parsing/depend.ml(418):14454-14496
+                                                    (apply
+                                                      (field 14
+                                                        (global Stdlib__list!))
+                                                      (after parsing/depend.ml(418):14464-14489
+                                                        (apply
+                                                          add_class_type_field
+                                                          bv))
+                                                      fieldl))))))
+                                         case tag 2:
+                                          (let
+                                            (cty2 =a (field 2 *match*)
+                                             ty1 =a (field 1 *match*))
+                                            (before parsing/depend.ml(420):14535-14574
+                                              (seq
+                                                (after parsing/depend.ml(420):14535-14550
+                                                  (apply add_type bv ty1))
+                                                (before parsing/depend.ml(420):14552-14574
+                                                  (after parsing/depend.ml(420):14552-14574
+                                                    (apply add_class_type bv
+                                                      cty2))))))
+                                         case tag 3:
+                                          (let (e =a (field 0 *match*))
+                                            (before parsing/depend.ml(421):14599-14617
+                                              (after parsing/depend.ml(421):14599-14617
+                                                (apply handle_extension e))))
+                                         case tag 4:
+                                          (let
+                                            (e =a (field 1 *match*)
+                                             o =a (field 0 *match*))
+                                            (before parsing/depend.ml(423):14648-14707
+                                              (let
+                                                (bv =
+                                                   (after parsing/depend.ml(423):14657-14678
+                                                     (apply open_description
+                                                       bv o)))
+                                                (before parsing/depend.ml(424):14688-14707
+                                                  (after parsing/depend.ml(424):14688-14707
+                                                    (apply add_class_type bv
+                                                      e)))))))))))
+                              add_class_type_field
+                                (function bv pctf
+                                  (funct-body parsing/depend.ml(426)<ghost>:14734-15044
+                                    (before parsing/depend.ml(427):14746-15044
+                                      (let (*match* = (field 0 pctf))
+                                        (switch* *match*
+                                         case tag 0:
+                                          (let (cty =a (field 0 *match*))
+                                            (before parsing/depend.ml(428):14796-14817
+                                              (after parsing/depend.ml(428):14796-14817
+                                                (apply add_class_type bv cty))))
+                                         case tag 1:
+                                          (let
+                                            (*match* =a (field 0 *match*)
+                                             ty =a (field 3 *match*))
+                                            (before parsing/depend.ml(429):14847-14861
+                                              (after parsing/depend.ml(429):14847-14861
+                                                (apply add_type bv ty))))
+                                         case tag 2:
+                                          (let
+                                            (*match* =a (field 0 *match*)
+                                             ty =a (field 3 *match*))
+                                            (before parsing/depend.ml(430):14894-14908
+                                              (after parsing/depend.ml(430):14894-14908
+                                                (apply add_type bv ty))))
+                                         case tag 3:
+                                          (let
+                                            (*match* =a (field 0 *match*)
+                                             ty2 =a (field 1 *match*)
+                                             ty1 =a (field 0 *match*))
+                                            (before parsing/depend.ml(431):14942-14974
+                                              (seq
+                                                (after parsing/depend.ml(431):14942-14957
+                                                  (apply add_type bv ty1))
+                                                (before parsing/depend.ml(431):14959-14974
+                                                  (after parsing/depend.ml(431):14959-14974
+                                                    (apply add_type bv ty2))))))
+                                         case tag 4:
+                                          (before parsing/depend.ml(432):14999-15001
+                                            0a)
+                                         case tag 5:
+                                          (let (e =a (field 0 *match*))
+                                            (before parsing/depend.ml(433):15026-15044
+                                              (after parsing/depend.ml(433):15026-15044
+                                                (apply handle_extension e)))))))))
+                              add_class_description
+                                (function bv infos
+                                  (funct-body parsing/depend.ml(435)<ghost>:15072-15117
+                                    (before parsing/depend.ml(436):15085-15117
+                                      (after parsing/depend.ml(436):15085-15117
+                                        (apply add_class_type bv
+                                          (field 3 infos))))))
+                              add_class_type_declaration
+                                (function bv infos
+                                  (funct-body parsing/depend.ml(438)<ghost>:15150-15191
+                                    (before parsing/depend.ml(438):15161-15191
+                                      (after parsing/depend.ml(438):15161-15191
+                                        (apply add_class_description bv
+                                          infos)))))
+                              add_structure
+                                (function bv item_list
+                                  (funct-body parsing/depend.ml(440)<ghost>:15211-15326
+                                    (before parsing/depend.ml(441):15228-15326
+                                      (let
+                                        (*match* =
+                                           (after parsing/depend.ml(441):15242-15276
+                                             (apply add_structure_binding bv
+                                               item_list))
+                                         m =a (field 1 *match*)
+                                         bv =a (field 0 *match*))
+                                        (before parsing/depend.ml(442):15282-15326
+                                          (seq
+                                            (after parsing/depend.ml(442):15282-15320
+                                              (apply add_names
+                                                (after parsing/depend.ml(442):15292-15320
+                                                  (apply collect_free
+                                                    (after parsing/depend.ml(442):15306-15319
+                                                      (apply make_node m))))))
+                                            (before parsing/depend.ml(443):15324-15326
+                                              bv)))))))
+                              add_structure_binding
+                                (function bv item_list
+                                  (funct-body parsing/depend.ml(445)<ghost>:15354-15434
+                                    (before parsing/depend.ml(446):15371-15434
+                                      (after parsing/depend.ml(446):15371-15434
+                                        (apply
+                                          (field 20 (global Stdlib__list!))
+                                          add_struct_item
+                                          (makeblock 0 bv
+                                            (field 0
+                                              (field 39
+                                                (field 3
+                                                  (field 11 (global Misc!))))))
+                                          item_list)))))
+                              add_struct_item
+                                (function param item
+                                  (funct-body parsing/depend.ml(448)<ghost>:15456-17264
+                                    (let
+                                      (m =a (field 1 param)
+                                       bv =a (field 0 param))
+                                      (before parsing/depend.ml(449):15507-17264
+                                        (let (*match* = (field 0 item))
+                                          (switch* *match*
+                                           case tag 0:
+                                            (let (e =a (field 0 *match*))
+                                              (before parsing/depend.ml(451):15568-15590
+                                                (seq
+                                                  (after parsing/depend.ml(451):15568-15581
+                                                    (apply add_expr bv e))
+                                                  (before parsing/depend.ml(451):15583-15590
+                                                    (makeblock 0 bv m)))))
+                                           case tag 1:
+                                            (let
+                                              (pel =a (field 1 *match*)
+                                               rf =a (field 0 *match*))
+                                              (before parsing/depend.ml(453):15624-15666
+                                                (let
+                                                  (bv =
+                                                     (after parsing/depend.ml(453):15633-15655
+                                                       (apply add_bindings rf
+                                                         bv pel)))
+                                                  (before parsing/depend.ml(453):15659-15666
+                                                    (makeblock 0 bv m)))))
+                                           case tag 2:
+                                            (let (vd =a (field 0 *match*))
+                                              (before parsing/depend.ml(455):15698-15731
+                                                (seq
+                                                  (after parsing/depend.ml(455):15698-15722
+                                                    (apply add_type bv
+                                                      (field 1 vd)))
+                                                  (before parsing/depend.ml(455):15724-15731
+                                                    (makeblock 0 bv m)))))
+                                           case tag 3:
+                                            (let (dcls =a (field 1 *match*))
+                                              (before parsing/depend.ml(457):15765-15814
+                                                (seq
+                                                  (after parsing/depend.ml(457):15765-15805
+                                                    (apply
+                                                      (field 14
+                                                        (global Stdlib__list!))
+                                                      (after parsing/depend.ml(457):15775-15800
+                                                        (apply
+                                                          add_type_declaration
+                                                          bv))
+                                                      dcls))
+                                                  (before parsing/depend.ml(457):15807-15814
+                                                    (makeblock 0 bv m)))))
+                                           case tag 4:
+                                            (let (te =a (field 0 *match*))
+                                              (before parsing/depend.ml(459):15843-15882
+                                                (seq
+                                                  (after parsing/depend.ml(459):15843-15867
+                                                    (apply add_type_extension
+                                                      bv te))
+                                                  (before parsing/depend.ml(460):15875-15882
+                                                    (makeblock 0 bv m)))))
+                                           case tag 5:
+                                            (let (te =a (field 0 *match*))
+                                              (before parsing/depend.ml(462):15914-15953
+                                                (seq
+                                                  (after parsing/depend.ml(462):15914-15938
+                                                    (apply add_type_exception
+                                                      bv te))
+                                                  (before parsing/depend.ml(463):15946-15953
+                                                    (makeblock 0 bv m)))))
+                                           case tag 6:
+                                            (let (x =a (field 0 *match*))
+                                              (before parsing/depend.ml(465):15981-16097
+                                                (let
+                                                  (b =
+                                                     (after parsing/depend.ml(465):15989-16021
+                                                       (apply
+                                                         add_module_binding
+                                                         bv (field 1 x))))
+                                                  (before parsing/depend.ml(466):16031-16097
+                                                    (let
+                                                      (add =
+                                                         (after parsing/depend.ml(466):16041-16072
+                                                           (apply
+                                                             (field 3
+                                                               (field 39
+                                                                 (field 3
+                                                                   (field 11
+                                                                    (global Misc!)))))
+                                                             (field 0
+                                                               (field 0 x))
+                                                             b)))
+                                                      (before parsing/depend.ml(467):16082-16097
+                                                        (makeblock 0
+                                                          (after parsing/depend.ml(467):16083-16089
+                                                            (apply add bv))
+                                                          (after parsing/depend.ml(467):16091-16096
+                                                            (apply add m)))))))))
+                                           case tag 7:
+                                            (let
+                                              (bindings =a (field 0 *match*))
+                                              (before parsing/depend.ml(469):16135-16372
+                                                (let
+                                                  (add =
+                                                     (after parsing/depend.ml(470):16153-16224
+                                                       (apply
+                                                         (field 21
+                                                           (global Stdlib__list!))
+                                                         (function x
+                                                           (funct-body parsing/depend.ml(470):16169-16215
+                                                             (before parsing/depend.ml(470):16179-16214
+                                                               (after parsing/depend.ml(470):16179-16214
+                                                                 (apply
+                                                                   (field 3
+                                                                    (field 39
+                                                                    (field 3
+                                                                    (field 11
+                                                                    (global Misc!)))))
+                                                                   (field 0
+                                                                    (field 0
+                                                                    x))
+                                                                   bound)))))
+                                                         bindings)))
+                                                  (before parsing/depend.ml(472):16240-16372
+                                                    (let
+                                                      (bv' =
+                                                         (after parsing/depend.ml(472):16250-16256
+                                                           (apply add bv))
+                                                       m =
+                                                         (after parsing/depend.ml(472):16265-16270
+                                                           (apply add m)))
+                                                      (before parsing/depend.ml(473):16280-16372
+                                                        (seq
+                                                          (after parsing/depend.ml(473):16280-16356
+                                                            (apply
+                                                              (field 14
+                                                                (global Stdlib__list!))
+                                                              (function x
+                                                                (funct-body parsing/depend.ml(474):16298-16339
+                                                                  (before parsing/depend.ml(474):16308-16338
+                                                                    (after parsing/depend.ml(474):16308-16338
+                                                                    (apply
+                                                                    add_module_expr
+                                                                    bv'
+                                                                    (field 1
+                                                                    x))))))
+                                                              bindings))
+                                                          (before parsing/depend.ml(476):16364-16372
+                                                            (makeblock 0 bv'
+                                                              m)))))))))
+                                           case tag 8:
+                                            (let (x =a (field 0 *match*))
+                                              (before parsing/depend.ml(478):16401-16512
+                                                (seq
+                                                  (let
+                                                    (*match* = (field 1 x))
+                                                    (if *match*
+                                                      (let
+                                                        (mty =a
+                                                           (field 0 *match*))
+                                                        (before parsing/depend.ml(480):16469-16487
+                                                          (after parsing/depend.ml(480):16469-16487
+                                                            (apply
+                                                              add_modtype bv
+                                                              mty))))
+                                                      (before parsing/depend.ml(479):16446-16448
+                                                        0a)))
+                                                  (before parsing/depend.ml(482):16505-16512
+                                                    (makeblock 0 bv m)))))
+                                           case tag 9:
+                                            (let (od =a (field 0 *match*))
+                                              (before parsing/depend.ml(484):16539-16566
+                                                (makeblock 0
+                                                  (after parsing/depend.ml(484):16540-16562
+                                                    (apply open_declaration
+                                                      bv od))
+                                                  m)))
+                                           case tag 10:
+                                            (let (cdl =a (field 0 *match*))
+                                              (before parsing/depend.ml(486):16595-16644
+                                                (seq
+                                                  (after parsing/depend.ml(486):16595-16635
+                                                    (apply
+                                                      (field 14
+                                                        (global Stdlib__list!))
+                                                      (after parsing/depend.ml(486):16605-16631
+                                                        (apply
+                                                          add_class_declaration
+                                                          bv))
+                                                      cdl))
+                                                  (before parsing/depend.ml(486):16637-16644
+                                                    (makeblock 0 bv m)))))
+                                           case tag 11:
+                                            (let (cdtl =a (field 0 *match*))
+                                              (before parsing/depend.ml(488):16679-16734
+                                                (seq
+                                                  (after parsing/depend.ml(488):16679-16725
+                                                    (apply
+                                                      (field 14
+                                                        (global Stdlib__list!))
+                                                      (after parsing/depend.ml(488):16689-16720
+                                                        (apply
+                                                          add_class_type_declaration
+                                                          bv))
+                                                      cdtl))
+                                                  (before parsing/depend.ml(488):16727-16734
+                                                    (makeblock 0 bv m)))))
+                                           case tag 12:
+                                            (let (incl =a (field 0 *match*))
+                                              (before parsing/depend.ml(490):16766-17163
+                                                (let
+                                                  (n =
+                                                     (after parsing/depend.ml(490):16790-16826
+                                                       (apply
+                                                         add_module_binding
+                                                         bv (field 0 incl)))
+                                                   m' =a (field 1 n)
+                                                   s =a (field 0 n))
+                                                  (before parsing/depend.ml(491):16836-17163
+                                                    (seq
+                                                      (if
+                                                        (field 0
+                                                          (field 61
+                                                            (global Clflags!)))
+                                                        (before parsing/depend.ml(492):16881-16892
+                                                          (after parsing/depend.ml(492):16881-16892
+                                                            (apply add_names
+                                                              s)))
+                                                        (before parsing/depend.ml(496):17061-17087
+                                                          (after parsing/depend.ml(496):17061-17087
+                                                            (apply add_names
+                                                              (after parsing/depend.ml(496):17071-17087
+                                                                (apply
+                                                                  collect_free
+                                                                  n))))))
+                                                      (before parsing/depend.ml(497):17095-17163
+                                                        (let
+                                                          (add =
+                                                             (after parsing/depend.ml(497):17105-17138
+                                                               (apply
+                                                                 (field 12
+                                                                   (field 39
+                                                                    (field 3
+                                                                    (field 11
+                                                                    (global Misc!)))))
+                                                                 (field 3
+                                                                   (field 39
+                                                                    (field 3
+                                                                    (field 11
+                                                                    (global Misc!)))))
+                                                                 m')))
+                                                          (before parsing/depend.ml(498):17148-17163
+                                                            (makeblock 0
+                                                              (after parsing/depend.ml(498):17149-17155
+                                                                (apply add
+                                                                  bv))
+                                                              (after parsing/depend.ml(498):17157-17162
+                                                                (apply add m)))))))))))
+                                           case tag 13:
+                                            (before parsing/depend.ml(499):17188-17195
+                                              (makeblock 0 bv m))
+                                           case tag 14:
+                                            (let (e =a (field 0 *match*))
+                                              (before parsing/depend.ml(501):17231-17264
+                                                (seq
+                                                  (after parsing/depend.ml(501):17231-17249
+                                                    (apply handle_extension
+                                                      e))
+                                                  (before parsing/depend.ml(502):17257-17264
+                                                    (makeblock 0 bv m)))))))))))
+                              add_use_file
+                                (function bv top_phrs
+                                  (funct-body parsing/depend.ml(504)<ghost>:17283-17349
+                                    (before parsing/depend.ml(505):17299-17349
+                                      (ignore
+                                        (after parsing/depend.ml(505):17306-17349
+                                          (apply
+                                            (field 20 (global Stdlib__list!))
+                                            add_top_phrase bv top_phrs))))))
+                              add_implementation
+                                (function bv l
+                                  (funct-body parsing/depend.ml(507)<ghost>:17374-17420
+                                    (before parsing/depend.ml(508):17385-17420
+                                      (ignore
+                                        (after parsing/depend.ml(508):17392-17420
+                                          (apply add_structure_binding bv l))))))
+                              add_implementation_binding
+                                (function bv l
+                                  (funct-body parsing/depend.ml(510)<ghost>:17453-17494
+                                    (before parsing/depend.ml(511):17462-17494
+                                      (field 1
+                                        (after parsing/depend.ml(511):17466-17494
+                                          (apply add_structure_binding bv l))))))
+                              add_top_phrase
+                                (function bv param
+                                  (funct-body parsing/depend.ml(513)<ghost>:17515-17590
+                                    (switch* param
+                                     case tag 0:
+                                      (let (str =a (field 0 param))
+                                        (before parsing/depend.ml(514):17549-17569
+                                          (after parsing/depend.ml(514):17549-17569
+                                            (apply add_structure bv str))))
+                                     case tag 1:
+                                      (before parsing/depend.ml(515):17588-17590
+                                        bv))))
+                              add_class_expr
+                                (function bv ce
+                                  (funct-body parsing/depend.ml(517)<ghost>:17611-18377
+                                    (before parsing/depend.ml(518):17621-18377
+                                      (let (*match* = (field 0 ce))
+                                        (switch* *match*
+                                         case tag 0:
+                                          (let
+                                            (tyl =a (field 1 *match*)
+                                             l =a (field 0 *match*))
+                                            (before parsing/depend.ml(520):17676-17713
+                                              (seq
+                                                (after parsing/depend.ml(520):17676-17684
+                                                  (apply add bv l))
+                                                (before parsing/depend.ml(520):17686-17713
+                                                  (after parsing/depend.ml(520):17686-17713
+                                                    (apply
+                                                      (field 14
+                                                        (global Stdlib__list!))
+                                                      (after parsing/depend.ml(520):17696-17709
+                                                        (apply add_type bv))
+                                                      tyl))))))
+                                         case tag 1:
+                                          (let
+                                            (*match* =a (field 0 *match*)
+                                             fieldl =a (field 1 *match*)
+                                             pat =a (field 0 *match*))
+                                            (before parsing/depend.ml(522):17785-17853
+                                              (let
+                                                (bv =
+                                                   (after parsing/depend.ml(522):17794-17812
+                                                     (apply add_pattern bv
+                                                       pat)))
+                                                (before parsing/depend.ml(522):17816-17853
+                                                  (after parsing/depend.ml(522):17816-17853
+                                                    (apply
+                                                      (field 14
+                                                        (global Stdlib__list!))
+                                                      (after parsing/depend.ml(522):17826-17846
+                                                        (apply
+                                                          add_class_field bv))
+                                                      fieldl))))))
+                                         case tag 2:
+                                          (let
+                                            (ce =a (field 3 *match*)
+                                             pat =a (field 2 *match*)
+                                             opte =a (field 1 *match*))
+                                            (before parsing/depend.ml(524):17893-17976
+                                              (seq
+                                                (after parsing/depend.ml(524):17893-17917
+                                                  (apply add_opt add_expr bv
+                                                    opte))
+                                                (before parsing/depend.ml(525):17925-17976
+                                                  (let
+                                                    (bv =
+                                                       (after parsing/depend.ml(525):17934-17952
+                                                         (apply add_pattern
+                                                           bv pat)))
+                                                    (before parsing/depend.ml(525):17956-17976
+                                                      (after parsing/depend.ml(525):17956-17976
+                                                        (apply add_class_expr
+                                                          bv ce))))))))
+                                         case tag 3:
+                                          (let
+                                            (exprl =a (field 1 *match*)
+                                             ce =a (field 0 *match*))
+                                            (before parsing/depend.ml(527):18011-18077
+                                              (seq
+                                                (after parsing/depend.ml(527):18011-18031
+                                                  (apply add_class_expr bv
+                                                    ce))
+                                                (before parsing/depend.ml(527):18033-18077
+                                                  (after parsing/depend.ml(527):18033-18077
+                                                    (apply
+                                                      (field 14
+                                                        (global Stdlib__list!))
+                                                      (function param
+                                                        (funct-body parsing/depend.ml(527):18043-18071
+                                                          (let
+                                                            (e =a
+                                                               (field 1
+                                                                 param))
+                                                            (before parsing/depend.ml(527):18057-18070
+                                                              (after parsing/depend.ml(527):18057-18070
+                                                                (apply
+                                                                  add_expr bv
+                                                                  e))))))
+                                                      exprl))))))
+                                         case tag 4:
+                                          (let
+                                            (ce =a (field 2 *match*)
+                                             pel =a (field 1 *match*)
+                                             rf =a (field 0 *match*))
+                                            (before parsing/depend.ml(529):18112-18167
+                                              (let
+                                                (bv =
+                                                   (after parsing/depend.ml(529):18121-18143
+                                                     (apply add_bindings rf
+                                                       bv pel)))
+                                                (before parsing/depend.ml(529):18147-18167
+                                                  (after parsing/depend.ml(529):18147-18167
+                                                    (apply add_class_expr bv
+                                                      ce))))))
+                                         case tag 5:
+                                          (let
+                                            (ct =a (field 1 *match*)
+                                             ce =a (field 0 *match*))
+                                            (before parsing/depend.ml(531):18204-18246
+                                              (seq
+                                                (after parsing/depend.ml(531):18204-18224
+                                                  (apply add_class_expr bv
+                                                    ce))
+                                                (before parsing/depend.ml(531):18226-18246
+                                                  (after parsing/depend.ml(531):18226-18246
+                                                    (apply add_class_type bv
+                                                      ct))))))
+                                         case tag 6:
+                                          (let (e =a (field 0 *match*))
+                                            (before parsing/depend.ml(532):18270-18288
+                                              (after parsing/depend.ml(532):18270-18288
+                                                (apply handle_extension e))))
+                                         case tag 7:
+                                          (let
+                                            (e =a (field 1 *match*)
+                                             o =a (field 0 *match*))
+                                            (before parsing/depend.ml(534):18318-18377
+                                              (let
+                                                (bv =
+                                                   (after parsing/depend.ml(534):18327-18348
+                                                     (apply open_description
+                                                       bv o)))
+                                                (before parsing/depend.ml(535):18358-18377
+                                                  (after parsing/depend.ml(535):18358-18377
+                                                    (apply add_class_expr bv
+                                                      e)))))))))))
+                              add_class_field
+                                (function bv pcf
+                                  (funct-body parsing/depend.ml(537)<ghost>:18399-18842
+                                    (before parsing/depend.ml(538):18410-18842
+                                      (let (*match* = (field 0 pcf))
+                                        (catch
+                                          (catch
+                                            (switch* *match*
+                                             case tag 0:
+                                              (let (ce =a (field 1 *match*))
+                                                (before parsing/depend.ml(539):18463-18483
+                                                  (after parsing/depend.ml(539):18463-18483
+                                                    (apply add_class_expr bv
+                                                      ce))))
+                                             case tag 1:
+                                              (let
+                                                (*match* =a (field 0 *match*)
+                                                 *match* =a (field 2 *match*))
+                                                (switch* *match*
+                                                 case tag 0:
+                                                  (let
+                                                    (ty =a (field 0 *match*))
+                                                    (exit 21 ty))
+                                                 case tag 1:
+                                                  (let
+                                                    (e =a (field 1 *match*))
+                                                    (exit 20 e))))
+                                             case tag 2:
+                                              (let
+                                                (*match* =a (field 0 *match*)
+                                                 *match* =a (field 2 *match*))
+                                                (switch* *match*
+                                                 case tag 0:
+                                                  (let
+                                                    (ty =a (field 0 *match*))
+                                                    (exit 21 ty))
+                                                 case tag 1:
+                                                  (let
+                                                    (e =a (field 1 *match*))
+                                                    (exit 20 e))))
+                                             case tag 3:
+                                              (let
+                                                (*match* =a (field 0 *match*)
+                                                 ty2 =a (field 1 *match*)
+                                                 ty1 =a (field 0 *match*))
+                                                (before parsing/depend.ml(544):18703-18735
+                                                  (seq
+                                                    (after parsing/depend.ml(544):18703-18718
+                                                      (apply add_type bv ty1))
+                                                    (before parsing/depend.ml(544):18720-18735
+                                                      (after parsing/depend.ml(544):18720-18735
+                                                        (apply add_type bv
+                                                          ty2))))))
+                                             case tag 4:
+                                              (let (e =a (field 0 *match*))
+                                                (before parsing/depend.ml(545):18761-18774
+                                                  (after parsing/depend.ml(545):18761-18774
+                                                    (apply add_expr bv e))))
+                                             case tag 5:
+                                              (before parsing/depend.ml(546):18798-18800
+                                                0a)
+                                             case tag 6:
+                                              (let (e =a (field 0 *match*))
+                                                (before parsing/depend.ml(547):18824-18842
+                                                  (after parsing/depend.ml(547):18824-18842
+                                                    (apply handle_extension
+                                                      e)))))
+                                           with (20 e)
+                                            (before parsing/depend.ml(541):18568-18581
+                                              (after parsing/depend.ml(541):18568-18581
+                                                (apply add_expr bv e))))
+                                         with (21 ty)
+                                          (before parsing/depend.ml(543):18656-18670
+                                            (after parsing/depend.ml(543):18656-18670
+                                              (apply add_type bv ty))))))))
+                              add_class_declaration
+                                (function bv decl
+                                  (funct-body parsing/depend.ml(549)<ghost>:18870-18913
+                                    (before parsing/depend.ml(550):18882-18913
+                                      (after parsing/depend.ml(550):18882-18913
+                                        (apply add_class_expr bv
+                                          (field 3 decl)))))))
+                            (pseudo _none_(0)<ghost>:-1--1
+                              (makeblock 0 make_leaf make_node weaken_map
+                                free_structure_names pp_deps open_module
+                                add_use_file add_signature add_implementation
+                                add_implementation_binding
+                                add_signature_binding))))))))))))))))

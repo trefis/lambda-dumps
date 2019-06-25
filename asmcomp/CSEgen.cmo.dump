@@ -1,0 +1,1001 @@
+(setglobal CSEgen!
+  (let
+    (shared =a [0: #"is_cheap_operation" #"class_of_operation" #"fundecl"]
+     shared =a
+       [0:
+        #"kill_loads" #"is_cheap_operation" #"fundecl" #"cse"
+        #"class_of_operation"]
+     Equations =
+       (module-defn(Equations) asmcomp/CSEgen.ml(38):1772-2555
+         (let
+           (Rhs_map =
+              (module-defn(Rhs_map) asmcomp/CSEgen.ml(39):1800-1883
+                (apply
+                  (let (let = (field 0 (global Stdlib__map!)))
+                    (field 0 (global Stdlib__map!)))
+                  (let
+                    (compare =
+                       (function prim prim stub (caml_compare prim prim)))
+                    (pseudo asmcomp/CSEgen.ml(40):1830-1882
+                      (makeblock 0 compare)))))
+            empty = (makeblock 0 (field 0 Rhs_map) (field 0 Rhs_map))
+            add =
+              (function op_class op v m
+                (funct-body asmcomp/CSEgen.ml(50)<ghost>:2079-2286
+                  (before asmcomp/CSEgen.ml(51):2101-2286
+                    (catch
+                      (if (isint op_class)
+                        (if (!= op_class 2) (exit 1)
+                          (before asmcomp/CSEgen.ml(53):2144-2205
+                            (let (init = m)
+                              (makeblock 0
+                                (after asmcomp/CSEgen.ml(53):2170-2203
+                                  (apply (field 3 Rhs_map) op v (field 0 m)))
+                                (field 1 init)))))
+                        (exit 1))
+                     with (1)
+                      (before asmcomp/CSEgen.ml(55):2223-2286
+                        (let (init = m)
+                          (makeblock 0 (field 0 init)
+                            (after asmcomp/CSEgen.ml(55):2250-2284
+                              (apply (field 3 Rhs_map) op v (field 1 m))))))))))
+            find =
+              (function op_class op m
+                (funct-body asmcomp/CSEgen.ml(57)<ghost>:2299-2445
+                  (before asmcomp/CSEgen.ml(58):2319-2445
+                    (catch
+                      (if (isint op_class)
+                        (if (!= op_class 2) (exit 2)
+                          (before asmcomp/CSEgen.ml(60):2362-2394
+                            (after asmcomp/CSEgen.ml(60):2362-2394
+                              (apply (field 26 Rhs_map) op (field 0 m)))))
+                        (exit 2))
+                     with (2)
+                      (before asmcomp/CSEgen.ml(62):2412-2445
+                        (after asmcomp/CSEgen.ml(62):2412-2445
+                          (apply (field 26 Rhs_map) op (field 1 m))))))))
+            remove_loads =
+              (function m
+                (funct-body asmcomp/CSEgen.ml(64)<ghost>:2466-2551
+                  (before asmcomp/CSEgen.ml(65):2474-2551
+                    (makeblock 0 (field 0 Rhs_map) (field 1 m))))))
+           (pseudo asmcomp/CSEgen.ml(38):1791-2555
+             (makeblock 0 Rhs_map empty add find remove_loads))))
+     empty_numbering =
+       (makeblock 0 (int,*,*) 0 (field 1 Equations)
+         (field 0 (field 10 (global Reg!))))
+     fresh_valnum_reg =
+       (function n r
+         (funct-body asmcomp/CSEgen.ml(80)<ghost>:3043-3142
+           (before asmcomp/CSEgen.ml(81):3051-3142
+             (let (v =[int] (field 0 n))
+               (before asmcomp/CSEgen.ml(82):3075-3142
+                 (makeblock 0 (*,int)
+                   (let (init = n)
+                     (makeblock 0 (int,*,*) (+ v 1) (field 1 init)
+                       (after asmcomp/CSEgen.ml(82):3112-3137
+                         (apply (field 3 (field 10 (global Reg!))) r v
+                           (field 2 n)))))
+                   v))))))
+     array_fold_transf =
+       (function f n a
+         (funct-body asmcomp/CSEgen.ml(86)<ghost>:3208-3586
+           (before asmcomp/CSEgen.ml(88):3312-3586
+             (let (l = (array.length[gen] a))
+               (if (!= l 0)
+                 (if (!= l 1)
+                   (before asmcomp/CSEgen.ml(91):3414-3586
+                     (let
+                       (b =
+                          (after asmcomp/CSEgen.ml(91):3422-3436
+                            (caml_make_vect l 0))
+                        n = (makemutable 0 n))
+                       (before asmcomp/CSEgen.ml(92):3463-3586
+                         (seq
+                           (for i 0 to (- l 1)
+                             (before asmcomp/CSEgen.ml(93):3496-3554
+                               (let
+                                 (*match* =
+                                    (after asmcomp/CSEgen.ml(93):3510-3520
+                                      (apply f (field 0 n)
+                                        (after asmcomp/CSEgen.ml(93):3515-3520
+                                          (array.get[gen] a i))))
+                                  x =a (field 1 *match*)
+                                  n' =a (field 0 *match*))
+                                 (before asmcomp/CSEgen.ml(94):3535-3554
+                                   (seq
+                                     (after asmcomp/CSEgen.ml(94):3535-3545
+                                       (array.set[int] b i x))
+                                     (before asmcomp/CSEgen.ml(94):3547-3554
+                                       (setfield_ptr 0 n n')))))))
+                           (before asmcomp/CSEgen.ml(96):3579-3586
+                             (makeblock 0 (field 0 n) b))))))
+                   (before asmcomp/CSEgen.ml(90):3366-3404
+                     (let
+                       (*match* =
+                          (after asmcomp/CSEgen.ml(90):3380-3389
+                            (apply f n
+                              (after asmcomp/CSEgen.ml(90):3384-3389
+                                (array.get[gen] a 0))))
+                        b =a (field 1 *match*)
+                        n' =a (field 0 *match*))
+                       (before asmcomp/CSEgen.ml(90):3393-3404
+                         (makeblock 0 n' (makearray[int] b))))))
+                 (before asmcomp/CSEgen.ml(89):3347-3356
+                   (makeblock 0 n (makearray[int]))))))))
+     fresh_valnum_regs =
+       (function n rs
+         (funct-body asmcomp/CSEgen.ml(98)<ghost>:3610-3658
+           (before asmcomp/CSEgen.ml(99):3619-3658
+             (after asmcomp/CSEgen.ml(99):3619-3658
+               (apply array_fold_transf fresh_valnum_reg n rs)))))
+     valnum_reg =
+       (function n r
+         (funct-body asmcomp/CSEgen.ml(107)<ghost>:3959-4049
+           (before asmcomp/CSEgen.ml(108):3967-4049
+             (try
+               (makeblock 0 (*,int) n
+                 (after asmcomp/CSEgen.ml(109):3979-4003
+                   (apply (field 26 (field 10 (global Reg!))) r (field 2 n))))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before asmcomp/CSEgen.ml(111):4029-4049
+                   (after asmcomp/CSEgen.ml(111):4029-4049
+                     (apply fresh_valnum_reg n r)))
+                 (reraise exn))))))
+     valnum_regs =
+       (function n rs
+         (funct-body asmcomp/CSEgen.ml(113)<ghost>:4067-4109
+           (before asmcomp/CSEgen.ml(114):4076-4109
+             (after asmcomp/CSEgen.ml(114):4076-4109
+               (apply array_fold_transf valnum_reg n rs)))))
+     find_equation =
+       (function op_class n rhs
+         (funct-body asmcomp/CSEgen.ml(119)<ghost>:4263-4362
+           (before asmcomp/CSEgen.ml(120):4282-4362
+             (try
+               (makeblock 0
+                 (after asmcomp/CSEgen.ml(121):4294-4333
+                   (apply (field 3 Equations) op_class rhs (field 1 n))))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before asmcomp/CSEgen.ml(123):4358-4362 0a) (reraise exn))))))
+     find_reg_containing =
+       (function n v[int]
+         (funct-body asmcomp/CSEgen.ml(127)<ghost>:4446-4545
+           (before asmcomp/CSEgen.ml(128):4454-4545
+             (after asmcomp/CSEgen.ml(128):4454-4545
+               (apply (field 12 (field 10 (global Reg!)))
+                 (function r v'[int] res
+                   (funct-body asmcomp/CSEgen.ml(128):4467-4515
+                     (before asmcomp/CSEgen.ml(128):4484-4514
+                       (if (== v' v)
+                         (before asmcomp/CSEgen.ml(128):4499-4505
+                           (makeblock 0 r))
+                         (before asmcomp/CSEgen.ml(128):4511-4514 res)))))
+                 (field 2 n) 0a)))))
+     find_regs_containing =
+       (function n vs
+         (funct-body asmcomp/CSEgen.ml(133)<ghost>:4639-5124
+           (before asmcomp/CSEgen.ml(134):4648-5124
+             (let (l = (array.length[int] vs))
+               (if (!= l 0)
+                 (if (!= l 1)
+                   (before asmcomp/CSEgen.ml(140):4827-5124
+                     (let
+                       (rs =
+                          (after asmcomp/CSEgen.ml(140):4836-4858
+                            (caml_make_vect l (field 1 (global Reg!)))))
+                       (before asmcomp/CSEgen.ml(141):4871-5124
+                         (try
+                           (seq
+                             (for i 0 to (- l 1)
+                               (before asmcomp/CSEgen.ml(143):4927-5037
+                                 (let
+                                   (*match* =
+                                      (after asmcomp/CSEgen.ml(143):4933-4961
+                                        (apply find_reg_containing n
+                                          (after asmcomp/CSEgen.ml(143):4955-4961
+                                            (array.get[int] vs i)))))
+                                   (if *match*
+                                     (let (r =a (field 0 *match*))
+                                       (before asmcomp/CSEgen.ml(145):5026-5037
+                                         (after asmcomp/CSEgen.ml(145):5026-5037
+                                           (array.set[addr] rs i r))))
+                                     (before asmcomp/CSEgen.ml(144):4990-5000
+                                       (raise
+                                         (after asmcomp/CSEgen.ml(144):4996-5000
+                                           (field 2 (global Stdlib!)))))))))
+                             (before asmcomp/CSEgen.ml(147):5066-5073
+                               (makeblock 0 rs)))
+                          with exn
+                           (if (== exn (field 2 (global Stdlib!)))
+                             (before asmcomp/CSEgen.ml(149):5107-5111 0a)
+                             (reraise exn))))))
+                   (before asmcomp/CSEgen.ml(136):4703-4817
+                     (let
+                       (*match* =
+                          (after asmcomp/CSEgen.ml(136):4715-4743
+                            (apply find_reg_containing n
+                              (after asmcomp/CSEgen.ml(136):4737-4743
+                                (array.get[int] vs 0)))))
+                       (if *match*
+                         (let (r =a (field 0 *match*))
+                           (before asmcomp/CSEgen.ml(138):4794-4804
+                             (makeblock 0 (makearray[addr] r))))
+                         (before asmcomp/CSEgen.ml(137):4768-4772 0a)))))
+                 (before asmcomp/CSEgen.ml(135):4684-4693
+                   (makeblock 0 (makearray[addr]))))))))
+     set_known_reg =
+       (function n r v[int]
+         (funct-body asmcomp/CSEgen.ml(155)<ghost>:5247-5303
+           (before asmcomp/CSEgen.ml(156):5257-5303
+             (let (init = n)
+               (makeblock 0 (int,*,*) (field 0 init) (field 1 init)
+                 (after asmcomp/CSEgen.ml(156):5276-5301
+                   (apply (field 3 (field 10 (global Reg!))) r v (field 2 n))))))))
+     array_fold2 =
+       (function f n a1 a2
+         (funct-body asmcomp/CSEgen.ml(161)<ghost>:5426-5576
+           (before asmcomp/CSEgen.ml(162):5440-5576
+             (let (l =[int] (array.length[gen] a1))
+               (before asmcomp/CSEgen.ml(163):5469-5576
+                 (seq
+                   (if (== l (array.length[gen] a2)) 0a
+                     (raise
+                       (after asmcomp/CSEgen.ml(163):5469-5497
+                         (makeblock 0 (global Assert_failure!)
+                           [0: "asmcomp/CSEgen.ml" 163 2]))))
+                   (before asmcomp/CSEgen.ml(164):5501-5576
+                     (let (n = (makemutable 0 n))
+                       (before asmcomp/CSEgen.ml(165):5520-5576
+                         (seq
+                           (for i 0 to (- l 1)
+                             (before asmcomp/CSEgen.ml(165):5542-5565
+                               (setfield_ptr 0 n
+                                 (after asmcomp/CSEgen.ml(165):5547-5565
+                                   (apply f (field 0 n)
+                                     (after asmcomp/CSEgen.ml(165):5552-5558
+                                       (array.get[gen] a1 i))
+                                     (after asmcomp/CSEgen.ml(165):5559-5565
+                                       (array.get[gen] a2 i)))))))
+                           (before asmcomp/CSEgen.ml(166):5574-5576
+                             (field 0 n))))))))))))
+     set_known_regs =
+       (function n rs vs
+         (funct-body asmcomp/CSEgen.ml(168)<ghost>:5597-5642
+           (before asmcomp/CSEgen.ml(169):5609-5642
+             (after asmcomp/CSEgen.ml(169):5609-5642
+               (apply array_fold2 set_known_reg n rs vs)))))
+     set_move =
+       (function n src dst
+         (funct-body asmcomp/CSEgen.ml(174)<ghost>:5784-5884
+           (before asmcomp/CSEgen.ml(175):5798-5884
+             (let
+               (*match* =
+                  (after asmcomp/CSEgen.ml(175):5812-5828
+                    (apply valnum_reg n src))
+                v =a (field 1 *match*)
+                n1 =a (field 0 *match*))
+               (before asmcomp/CSEgen.ml(176):5834-5884
+                 (let (init = n1)
+                   (makeblock 0 (int,*,*) (field 0 init) (field 1 init)
+                     (after asmcomp/CSEgen.ml(176):5854-5882
+                       (apply (field 3 (field 10 (global Reg!))) dst v
+                         (field 2 n1))))))))))
+     set_fresh_regs =
+       (function n rs rhs op_class
+         (funct-body asmcomp/CSEgen.ml(181)<ghost>:6023-6149
+           (before asmcomp/CSEgen.ml(182):6045-6149
+             (let
+               (*match* =
+                  (after asmcomp/CSEgen.ml(182):6060-6082
+                    (apply fresh_valnum_regs n rs))
+                vs =a (field 1 *match*)
+                n1 =a (field 0 *match*))
+               (before asmcomp/CSEgen.ml(183):6088-6149
+                 (let (init = n1)
+                   (makeblock 0 (int,*,*) (field 0 init)
+                     (after asmcomp/CSEgen.ml(183):6108-6147
+                       (apply (field 2 Equations) op_class rhs vs
+                         (field 1 n)))
+                     (field 2 init))))))))
+     set_unknown_regs =
+       (function n rs
+         (funct-body asmcomp/CSEgen.ml(188)<ghost>:6296-6370
+           (before asmcomp/CSEgen.ml(189):6305-6370
+             (let (init = n)
+               (makeblock 0 (int,*,*) (field 0 init) (field 1 init)
+                 (after asmcomp/CSEgen.ml(189):6324-6368
+                   (apply (field 17 (global Stdlib__array!))
+                     (field 6 (field 10 (global Reg!))) rs (field 2 n))))))))
+     remove_load_numbering =
+       (function n
+         (funct-body asmcomp/CSEgen.ml(193)<ghost>:6461-6520
+           (before asmcomp/CSEgen.ml(194):6467-6520
+             (let (init = n)
+               (makeblock 0 (int,*,*) (field 0 init)
+                 (after asmcomp/CSEgen.ml(194):6486-6518
+                   (apply (field 4 Equations) (field 1 n)))
+                 (field 2 init))))))
+     kill_addr_regs =
+       (function n
+         (funct-body asmcomp/CSEgen.ml(198)<ghost>:6606-6707
+           (before asmcomp/CSEgen.ml(199):6612-6707
+             (let (init = n)
+               (makeblock 0 (int,*,*) (field 0 init) (field 1 init)
+                 (after asmcomp/CSEgen.ml(200):6645-6705
+                   (apply (field 15 (field 10 (global Reg!)))
+                     (function r _n[int]
+                       (funct-body asmcomp/CSEgen.ml(200):6660-6695
+                         (before asmcomp/CSEgen.ml(200):6673-6694
+                           (!= (field 2 r) 1a))))
+                     (field 2 n))))))))
+     insert_single_move =
+       (function i src dst
+         (funct-body asmcomp/CSEgen.ml(204)<ghost>:6802-6854
+           (before asmcomp/CSEgen.ml(204):6814-6854
+             (after asmcomp/CSEgen.ml(204):6814-6854
+               (apply (field 2 (global Mach!)) [0: 0a] (makearray[addr] src)
+                 (makearray[addr] dst) i)))))
+     insert_move =
+       (function srcs dsts i
+         (funct-body asmcomp/CSEgen.ml(206)<ghost>:6872-7249
+           (before asmcomp/CSEgen.ml(207):6888-7249
+             (let (*match* = (array.length[addr] srcs))
+               (if (!= *match* 0)
+                 (if (!= *match* 1)
+                   (before asmcomp/CSEgen.ml(212):7097-7249
+                     (let
+                       (tmps =
+                          (after asmcomp/CSEgen.ml(212):7108-7129
+                            (apply (field 4 (global Reg!)) srcs)))
+                       (before asmcomp/CSEgen.ml(213):7142-7249
+                         (let
+                           (i1 =
+                              (after asmcomp/CSEgen.ml(213):7151-7193
+                                (apply array_fold2 insert_single_move i tmps
+                                  dsts)))
+                           (before asmcomp/CSEgen.ml(214):7206-7249
+                             (after asmcomp/CSEgen.ml(214):7206-7249
+                               (apply array_fold2 insert_single_move i1 srcs
+                                 tmps)))))))
+                   (before asmcomp/CSEgen.ml(209):6937-6971
+                     (after asmcomp/CSEgen.ml(209):6937-6971
+                       (apply (field 2 (global Mach!)) [0: 0a] srcs dsts i))))
+                 (before asmcomp/CSEgen.ml(208):6926-6927 i)))))))
+    (letrec
+      (cse_generic
+         (let
+           (cse_generic_init =
+              (function class
+                (let
+                  (ids =
+                     (apply (field 7 (global CamlinternalOO!)) class shared)
+                   kill_loads =o (field 0 ids)
+                   is_cheap_operation =o (field 1 ids)
+                   fundecl =o (field 2 ids)
+                   cse =o (field 3 ids)
+                   class_of_operation =o (field 4 ids))
+                  (seq
+                    (apply (field 10 (global CamlinternalOO!)) class
+                      (makeblock 0 class_of_operation
+                        (function self-1 op
+                          (funct-body asmcomp/CSEgen.ml(221)<ghost>:7447-8206
+                            (before asmcomp/CSEgen.ml(222):7454-8206
+                              (catch
+                                (catch
+                                  (catch
+                                    (switch op
+                                     case int 0: (exit 32)
+                                     case int 1: (exit 32)
+                                     case int 2: (exit 32)
+                                     case tag 0: (exit 33)
+                                     case tag 1: (exit 33)
+                                     case tag 2: (exit 33)
+                                     case tag 3: (exit 34)
+                                     case tag 4: (exit 34)
+                                     case tag 5: (exit 34)
+                                     case tag 6: (exit 34)
+                                     case tag 7: (exit 34)
+                                     case tag 8:
+                                      (before asmcomp/CSEgen.ml(227):7761-7769
+                                        3a)
+                                     case tag 9:
+                                      (before asmcomp/CSEgen.ml(228):7788-7795
+                                        2a)
+                                     case tag 10:
+                                      (let (asg =a (field 2 op))
+                                        (before asmcomp/CSEgen.ml(229):7819-7831
+                                          (makeblock 0 asg)))
+                                     case tag 11:
+                                      (before asmcomp/CSEgen.ml(230):7848-7860
+                                        (raise
+                                          (after asmcomp/CSEgen.ml(230):7848-7860
+                                            (makeblock 0
+                                              (global Assert_failure!)
+                                              [0: "asmcomp/CSEgen.ml" 230 16]))))
+                                     case tag 12:
+                                      (let (*match* =a (field 0 op))
+                                        (catch
+                                          (switch *match*
+                                           case tag 1:
+                                            (before asmcomp/CSEgen.ml(231):7932-7945
+                                              1a)
+                                           default: (exit 36))
+                                         with (36)
+                                          (before asmcomp/CSEgen.ml(232):7962-7969
+                                            0a)))
+                                     case tag 13:
+                                      (let (*match* =a (field 0 op))
+                                        (catch
+                                          (switch *match*
+                                           case tag 1:
+                                            (before asmcomp/CSEgen.ml(233):8006-8019
+                                              1a)
+                                           default: (exit 37))
+                                         with (37)
+                                          (before asmcomp/CSEgen.ml(234):8044-8051
+                                            0a)))
+                                     case tag 14:
+                                      (before asmcomp/CSEgen.ml(237):8162-8170
+                                        3a)
+                                     case tag 15:
+                                      (before asmcomp/CSEgen.ml(238):8199-8206
+                                        0a)
+                                     default:
+                                      (before asmcomp/CSEgen.ml(236):8135-8142
+                                        0a))
+                                   with (32)
+                                    (before asmcomp/CSEgen.ml(223):7500-7512
+                                      (raise
+                                        (after asmcomp/CSEgen.ml(223):7500-7512
+                                          (makeblock 0
+                                            (global Assert_failure!)
+                                            [0: "asmcomp/CSEgen.ml" 223 32])))))
+                                 with (33)
+                                  (before asmcomp/CSEgen.ml(224):7594-7601
+                                    0a))
+                               with (34)
+                                (before asmcomp/CSEgen.ml(226):7686-7698
+                                  (raise
+                                    (after asmcomp/CSEgen.ml(226):7686-7698
+                                      (makeblock 0 (global Assert_failure!)
+                                        [0: "asmcomp/CSEgen.ml" 226 18]))))))))
+                        is_cheap_operation
+                        (function self-1 op
+                          (funct-body asmcomp/CSEgen.ml(242)<ghost>:8306-8366
+                            (before asmcomp/CSEgen.ml(243):8313-8366
+                              (catch
+                                (switch op
+                                 case tag 0:
+                                  (before asmcomp/CSEgen.ml(244):8347-8351
+                                    1a)
+                                 default: (exit 31))
+                               with (31)
+                                (before asmcomp/CSEgen.ml(245):8361-8366 0a)))))
+                        kill_loads
+                        (function self-1 n
+                          (funct-body asmcomp/CSEgen.ml(250)<ghost>:8491-8520
+                            (before asmcomp/CSEgen.ml(251):8497-8520
+                              (after asmcomp/CSEgen.ml(251):8497-8520
+                                (apply remove_load_numbering n)))))
+                        cse
+                        (function self-1 n i
+                          (funct-body asmcomp/CSEgen.ml(256)<ghost>:8672-14166
+                            (before asmcomp/CSEgen.ml(257):8680-14166
+                              (let (*match* = (field 0 i))
+                                (catch
+                                  (switch *match*
+                                   case tag 0:
+                                    (let (op =a (field 0 *match*))
+                                      (catch
+                                        (catch
+                                          (catch
+                                            (switch op
+                                             case int 0: (exit 28)
+                                             case int 1: (exit 28)
+                                             case int 2: (exit 28)
+                                             case tag 3: (exit 29)
+                                             case tag 4: (exit 29)
+                                             case tag 5: (exit 27)
+                                             case tag 6: (exit 27)
+                                             case tag 7: (exit 29)
+                                             case tag 11:
+                                              (before asmcomp/CSEgen.ml(291):10518-10651
+                                                (let
+                                                  (n1 =
+                                                     (after asmcomp/CSEgen.ml(291):10527-10561
+                                                       (apply kill_addr_regs
+                                                         (after asmcomp/CSEgen.ml(291):10542-10561
+                                                           (sendself self-1
+                                                             kill_loads n)))))
+                                                  (before asmcomp/CSEgen.ml(292):10572-10651
+                                                    (let
+                                                      (n2 =
+                                                         (after asmcomp/CSEgen.ml(292):10581-10606
+                                                           (apply
+                                                             set_unknown_regs
+                                                             n1 (field 3 i))))
+                                                      (before asmcomp/CSEgen.ml(293):10617-10651
+                                                        (let (init = i)
+                                                          (makemutable 0
+                                                            (field 0 init)
+                                                            (after asmcomp/CSEgen.ml(293):10632-10650
+                                                              (sendself
+                                                                self-1 cse n2
+                                                                (field 1 i)))
+                                                            (field 2 init)
+                                                            (field 3 init)
+                                                            (field 4 init)
+                                                            (field 5 init)
+                                                            (field 6 init)
+                                                            (field 7 init))))))))
+                                             default: (exit 30))
+                                           with (30)
+                                            (before asmcomp/CSEgen.ml(295):10672-13106
+                                              (let
+                                                (op_class =
+                                                   (after asmcomp/CSEgen.ml(295):10684-10710
+                                                     (sendself self-1
+                                                       class_of_operation op)))
+                                                (catch
+                                                  (if (isint op_class)
+                                                    (if (>= op_class 3)
+                                                      (exit 26)
+                                                      (before asmcomp/CSEgen.ml(297):10785-12408
+                                                        (let
+                                                          (*match* =
+                                                             (after asmcomp/CSEgen.ml(297):10802-10821
+                                                               (apply
+                                                                 valnum_regs
+                                                                 n
+                                                                 (field 2 i)))
+                                                           varg =a
+                                                             (field 1
+                                                               *match*)
+                                                           n1 =a
+                                                             (field 0
+                                                               *match*))
+                                                          (before asmcomp/CSEgen.ml(298):10835-12408
+                                                            (let
+                                                              (n2 =
+                                                                 (after asmcomp/CSEgen.ml(298):10844-10895
+                                                                   (apply
+                                                                    set_unknown_regs
+                                                                    n1
+                                                                    (after asmcomp/CSEgen.ml(298):10864-10895
+                                                                    (apply
+                                                                    (field 18
+                                                                    (global Proc!))
+                                                                    (field 0
+                                                                    i))))))
+                                                              (before asmcomp/CSEgen.ml(299):10909-12408
+                                                                (let
+                                                                  (*match* =
+                                                                    (after asmcomp/CSEgen.ml(299):10921-10957
+                                                                    (apply
+                                                                    find_equation
+                                                                    op_class
+                                                                    n1
+                                                                    (makeblock 0
+                                                                    op varg))))
+                                                                  (if *match*
+                                                                    (let
+                                                                    (vres =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/CSEgen.ml(303):11139-12177
+                                                                    (let
+                                                                    (*match* =
+                                                                    (after asmcomp/CSEgen.ml(303):11151-11179
+                                                                    (apply
+                                                                    find_regs_containing
+                                                                    n1 vres)))
+                                                                    (catch
+                                                                    (if
+                                                                    *match*
+                                                                    (let
+                                                                    (res =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before asmcomp/CSEgen.ml(304):11215-11314
+                                                                    (if
+                                                                    (&&
+                                                                    (not
+                                                                    (after asmcomp/CSEgen.ml(304):11220-11248
+                                                                    (sendself
+                                                                    self-1
+                                                                    is_cheap_operation
+                                                                    op)))
+                                                                    (not
+                                                                    (after asmcomp/CSEgen.ml(305):11285-11313
+                                                                    (apply
+                                                                    (field 21
+                                                                    (global Proc!))
+                                                                    res))))
+                                                                    (before asmcomp/CSEgen.ml(310):11606-11823
+                                                                    (let
+                                                                    (n3 =
+                                                                    (after asmcomp/CSEgen.ml(310):11615-11643
+                                                                    (apply
+                                                                    set_known_regs
+                                                                    n1
+                                                                    (field 3
+                                                                    i) vres)))
+                                                                    (before asmcomp/CSEgen.ml(313):11781-11823
+                                                                    (after asmcomp/CSEgen.ml(313):11781-11823
+                                                                    (apply
+                                                                    insert_move
+                                                                    res
+                                                                    (field 3
+                                                                    i)
+                                                                    (after asmcomp/CSEgen.ml(313):11803-11823
+                                                                    (sendself
+                                                                    self-1
+                                                                    cse n3
+                                                                    (field 1
+                                                                    i))))))))
+                                                                    (exit 21))))
+                                                                    (exit 21))
+                                                                    with (21)
+                                                                    (before asmcomp/CSEgen.ml(318):12066-12159
+                                                                    (let
+                                                                    (n3 =
+                                                                    (after asmcomp/CSEgen.ml(318):12075-12103
+                                                                    (apply
+                                                                    set_known_regs
+                                                                    n2
+                                                                    (field 3
+                                                                    i) vres)))
+                                                                    (before asmcomp/CSEgen.ml(319):12125-12159
+                                                                    (let
+                                                                    (init = i)
+                                                                    (makemutable 0
+                                                                    (field 0
+                                                                    init)
+                                                                    (after asmcomp/CSEgen.ml(319):12140-12158
+                                                                    (sendself
+                                                                    self-1
+                                                                    cse n3
+                                                                    (field 1
+                                                                    i)))
+                                                                    (field 2
+                                                                    init)
+                                                                    (field 3
+                                                                    init)
+                                                                    (field 4
+                                                                    init)
+                                                                    (field 5
+                                                                    init)
+                                                                    (field 6
+                                                                    init)
+                                                                    (field 7
+                                                                    init))))))))))
+                                                                    (before asmcomp/CSEgen.ml(323):12290-12394
+                                                                    (let
+                                                                    (n3 =
+                                                                    (after asmcomp/CSEgen.ml(323):12299-12342
+                                                                    (apply
+                                                                    set_fresh_regs
+                                                                    n2
+                                                                    (field 3
+                                                                    i)
+                                                                    (makeblock 0
+                                                                    op varg)
+                                                                    op_class)))
+                                                                    (before asmcomp/CSEgen.ml(324):12360-12394
+                                                                    (let
+                                                                    (init = i)
+                                                                    (makemutable 0
+                                                                    (field 0
+                                                                    init)
+                                                                    (after asmcomp/CSEgen.ml(324):12375-12393
+                                                                    (sendself
+                                                                    self-1
+                                                                    cse n3
+                                                                    (field 1
+                                                                    i)))
+                                                                    (field 2
+                                                                    init)
+                                                                    (field 3
+                                                                    init)
+                                                                    (field 4
+                                                                    init)
+                                                                    (field 5
+                                                                    init)
+                                                                    (field 6
+                                                                    init)
+                                                                    (field 7
+                                                                    init))))))))))))))
+                                                    (let
+                                                      (*match* =a
+                                                         (field 0 op_class))
+                                                      (if *match*
+                                                        (before asmcomp/CSEgen.ml(335):12903-13096
+                                                          (let
+                                                            (n1 =
+                                                               (after asmcomp/CSEgen.ml(335):12912-12962
+                                                                 (apply
+                                                                   set_unknown_regs
+                                                                   n
+                                                                   (after asmcomp/CSEgen.ml(335):12931-12962
+                                                                    (apply
+                                                                    (field 18
+                                                                    (global Proc!))
+                                                                    (field 0
+                                                                    i))))))
+                                                            (before asmcomp/CSEgen.ml(336):12975-13096
+                                                              (let
+                                                                (n2 =
+                                                                   (after asmcomp/CSEgen.ml(336):12984-13009
+                                                                    (apply
+                                                                    set_unknown_regs
+                                                                    n1
+                                                                    (field 3
+                                                                    i))))
+                                                                (before asmcomp/CSEgen.ml(337):13022-13096
+                                                                  (let
+                                                                    (n3 =
+                                                                    (after asmcomp/CSEgen.ml(337):13031-13049
+                                                                    (sendself
+                                                                    self-1
+                                                                    kill_loads
+                                                                    n2)))
+                                                                    (before asmcomp/CSEgen.ml(338):13062-13096
+                                                                    (let
+                                                                    (init = i)
+                                                                    (makemutable 0
+                                                                    (field 0
+                                                                    init)
+                                                                    (after asmcomp/CSEgen.ml(338):13077-13095
+                                                                    (sendself
+                                                                    self-1
+                                                                    cse n3
+                                                                    (field 1
+                                                                    i)))
+                                                                    (field 2
+                                                                    init)
+                                                                    (field 3
+                                                                    init)
+                                                                    (field 4
+                                                                    init)
+                                                                    (field 5
+                                                                    init)
+                                                                    (field 6
+                                                                    init)
+                                                                    (field 7
+                                                                    init))))))))))
+                                                        (exit 26))))
+                                                 with (26)
+                                                  (before asmcomp/CSEgen.ml(329):12610-12763
+                                                    (let
+                                                      (n1 =
+                                                         (after asmcomp/CSEgen.ml(329):12619-12669
+                                                           (apply
+                                                             set_unknown_regs
+                                                             n
+                                                             (after asmcomp/CSEgen.ml(329):12638-12669
+                                                               (apply
+                                                                 (field 18
+                                                                   (global Proc!))
+                                                                 (field 0 i))))))
+                                                      (before asmcomp/CSEgen.ml(330):12682-12763
+                                                        (let
+                                                          (n2 =
+                                                             (after asmcomp/CSEgen.ml(330):12691-12716
+                                                               (apply
+                                                                 set_unknown_regs
+                                                                 n1
+                                                                 (field 3 i))))
+                                                          (before asmcomp/CSEgen.ml(331):12729-12763
+                                                            (let (init = i)
+                                                              (makemutable 0
+                                                                (field 0
+                                                                  init)
+                                                                (after asmcomp/CSEgen.ml(331):12744-12762
+                                                                  (sendself
+                                                                    self-1
+                                                                    cse n2
+                                                                    (field 1
+                                                                    i)))
+                                                                (field 2
+                                                                  init)
+                                                                (field 3
+                                                                  init)
+                                                                (field 4
+                                                                  init)
+                                                                (field 5
+                                                                  init)
+                                                                (field 6
+                                                                  init)
+                                                                (field 7
+                                                                  init))))))))))))
+                                         with (28)
+                                          (before asmcomp/CSEgen.ml(264):8950-9033
+                                            (let
+                                              (n1 =
+                                                 (after asmcomp/CSEgen.ml(264):8959-8989
+                                                   (apply set_move n
+                                                     (after asmcomp/CSEgen.ml(264):8970-8979
+                                                       (array.get[addr]
+                                                         (field 2 i) 0))
+                                                     (after asmcomp/CSEgen.ml(264):8980-8989
+                                                       (array.get[addr]
+                                                         (field 3 i) 0)))))
+                                              (before asmcomp/CSEgen.ml(265):8999-9033
+                                                (let (init = i)
+                                                  (makemutable 0
+                                                    (field 0 init)
+                                                    (after asmcomp/CSEgen.ml(265):9014-9032
+                                                      (sendself self-1 cse n1
+                                                        (field 1 i)))
+                                                    (field 2 init)
+                                                    (field 3 init)
+                                                    (field 4 init)
+                                                    (field 5 init)
+                                                    (field 6 init)
+                                                    (field 7 init)))))))
+                                       with (29)
+                                        (before asmcomp/CSEgen.ml(279):9776-9823
+                                          (let (init = i)
+                                            (makemutable 0 (field 0 init)
+                                              (after asmcomp/CSEgen.ml(279):9791-9822
+                                                (sendself self-1 cse
+                                                  empty_numbering
+                                                  (field 1 i)))
+                                              (field 2 init) (field 3 init)
+                                              (field 4 init) (field 5 init)
+                                              (field 6 init) (field 7 init))))))
+                                   case tag 1:
+                                    (let
+                                      (ifnot =a (field 2 *match*)
+                                       ifso =a (field 1 *match*)
+                                       test =a (field 0 *match*))
+                                      (before asmcomp/CSEgen.ml(343):13294-13487
+                                        (let
+                                          (n1 =
+                                             (after asmcomp/CSEgen.ml(343):13303-13353
+                                               (apply set_unknown_regs n
+                                                 (after asmcomp/CSEgen.ml(343):13322-13353
+                                                   (apply
+                                                     (field 18
+                                                       (global Proc!))
+                                                     (field 0 i))))))
+                                          (before asmcomp/CSEgen.ml(344):13363-13487
+                                            (let (init = i)
+                                              (makemutable 0
+                                                (makeblock 1 test
+                                                  (after asmcomp/CSEgen.ml(344):13396-13412
+                                                    (sendself self-1 cse n1
+                                                      ifso))
+                                                  (after asmcomp/CSEgen.ml(344):13414-13431
+                                                    (sendself self-1 cse n1
+                                                      ifnot)))
+                                                (after asmcomp/CSEgen.ml(345):13455-13486
+                                                  (sendself self-1 cse
+                                                    empty_numbering
+                                                    (field 1 i)))
+                                                (field 2 init) (field 3 init)
+                                                (field 4 init) (field 5 init)
+                                                (field 6 init)
+                                                (field 7 init)))))))
+                                   case tag 2:
+                                    (let
+                                      (cases =a (field 1 *match*)
+                                       index =a (field 0 *match*))
+                                      (before asmcomp/CSEgen.ml(347):13522-13706
+                                        (let
+                                          (n1 =
+                                             (after asmcomp/CSEgen.ml(347):13531-13581
+                                               (apply set_unknown_regs n
+                                                 (after asmcomp/CSEgen.ml(347):13550-13581
+                                                   (apply
+                                                     (field 18
+                                                       (global Proc!))
+                                                     (field 0 i))))))
+                                          (before asmcomp/CSEgen.ml(348):13591-13706
+                                            (let (init = i)
+                                              (makemutable 0
+                                                (makeblock 2 index
+                                                  (after asmcomp/CSEgen.ml(348):13621-13650
+                                                    (apply
+                                                      (field 14
+                                                        (global Stdlib__array!))
+                                                      (after asmcomp/CSEgen.ml(348):13631-13644
+                                                        (sendself self-1 cse
+                                                          n1))
+                                                      cases)))
+                                                (after asmcomp/CSEgen.ml(349):13674-13705
+                                                  (sendself self-1 cse
+                                                    empty_numbering
+                                                    (field 1 i)))
+                                                (field 2 init) (field 3 init)
+                                                (field 4 init) (field 5 init)
+                                                (field 6 init)
+                                                (field 7 init)))))))
+                                   case tag 3:
+                                    (let
+                                      (body =a (field 2 *match*)
+                                       handlers =a (field 1 *match*)
+                                       rec_flag =a (field 0 *match*))
+                                      (before asmcomp/CSEgen.ml(351):13753-13969
+                                        (let
+                                          (aux =
+                                             (function param
+                                               (funct-body asmcomp/CSEgen.ml(351)<ghost>:13761-13827
+                                                 (let
+                                                   (handler =a
+                                                      (field 1 param)
+                                                    nfail =a (field 0 param))
+                                                   (before asmcomp/CSEgen.ml(352):13788-13827
+                                                     (makeblock 0 nfail
+                                                       (after asmcomp/CSEgen.ml(352):13795-13827
+                                                         (sendself self-1 cse
+                                                           empty_numbering
+                                                           handler))))))))
+                                          (before asmcomp/CSEgen.ml(354):13843-13969
+                                            (let (init = i)
+                                              (makemutable 0
+                                                (makeblock 3 rec_flag
+                                                  (after asmcomp/CSEgen.ml(354):13875-13896
+                                                    (apply
+                                                      (field 16
+                                                        (global Stdlib__list!))
+                                                      aux handlers))
+                                                  (after asmcomp/CSEgen.ml(354):13898-13913
+                                                    (sendself self-1 cse n
+                                                      body)))
+                                                (after asmcomp/CSEgen.ml(355):13937-13968
+                                                  (sendself self-1 cse
+                                                    empty_numbering
+                                                    (field 1 i)))
+                                                (field 2 init) (field 3 init)
+                                                (field 4 init) (field 5 init)
+                                                (field 6 init)
+                                                (field 7 init)))))))
+                                   case tag 5:
+                                    (let
+                                      (handler =a (field 1 *match*)
+                                       body =a (field 0 *match*))
+                                      (before asmcomp/CSEgen.ml(357):14007-14166
+                                        (let (init = i)
+                                          (makemutable 0
+                                            (makeblock 5
+                                              (after asmcomp/CSEgen.ml(357):14031-14046
+                                                (sendself self-1 cse n body))
+                                              (after asmcomp/CSEgen.ml(358):14078-14110
+                                                (sendself self-1 cse
+                                                  empty_numbering handler)))
+                                            (after asmcomp/CSEgen.ml(359):14134-14165
+                                              (sendself self-1 cse
+                                                empty_numbering (field 1 i)))
+                                            (field 2 init) (field 3 init)
+                                            (field 4 init) (field 5 init)
+                                            (field 6 init) (field 7 init)))))
+                                   default: (exit 27))
+                                 with (27)
+                                  (before asmcomp/CSEgen.ml(260):8795-8796 i))))))
+                        fundecl
+                        (function self-1 f
+                          (funct-body asmcomp/CSEgen.ml(361)<ghost>:14183-14384
+                            (before asmcomp/CSEgen.ml(363):14261-14384
+                              (if
+                                (after asmcomp/CSEgen.ml(363):14264-14305
+                                  (apply (field 31 (global Stdlib__list!)) 1a
+                                    (field 3 f)))
+                                (before asmcomp/CSEgen.ml(364):14315-14316 f)
+                                (before asmcomp/CSEgen.ml(366):14328-14384
+                                  (let (init = f)
+                                    (makeblock 0 (field 0 init)
+                                      (field 1 init)
+                                      (after asmcomp/CSEgen.ml(366):14347-14382
+                                        (sendself self-1 cse empty_numbering
+                                          (field 2 f)))
+                                      (field 3 init) (field 4 init)
+                                      (field 5 init))))))))))
+                    (function env self
+                      (apply (field 23 (global CamlinternalOO!)) self class))))))
+           (apply (field 18 (global CamlinternalOO!)) shared
+             cse_generic_init)))
+      (pseudo _none_(0)<ghost>:-1--1 (makeblock 0 cse_generic)))))

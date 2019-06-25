@@ -1,0 +1,296 @@
+(setglobal Arch!
+  (let
+    (command_line_options =
+       (makeblock 0
+         (makeblock 0 "-fPIC" (makeblock 2 (field 124 (global Clflags!)))
+           " Generate position-independent machine code (default)")
+         (makeblock 0
+           (makeblock 0 "-fno-PIC"
+             (makeblock 3 (field 124 (global Clflags!)))
+             " Generate position-dependent machine code")
+           0a))
+     spacetime_node_hole_pointer_is_live_before =
+       (function _specific_op
+         (funct-body asmcomp/arch.ml(50)<ghost>:2647-2667
+           (before asmcomp/arch.ml(50):2662-2667 0a)))
+     big_endian = 0a
+     size_addr =[int] 8
+     size_int =[int] 8
+     size_float =[int] 8
+     allow_unaligned_access = 1a
+     division_crashes_on_overflow = 1a
+     identity_addressing = [1: 0]
+     offset_addressing =
+       (function addr delta[int]
+         (funct-body asmcomp/arch.ml(70)<ghost>:2975-3242
+           (before asmcomp/arch.ml(71):2990-3242
+             (switch* addr
+              case tag 0:
+               (let (n =a (field 1 addr) s =a (field 0 addr))
+                 (before asmcomp/arch.ml(72):3026-3046
+                   (makeblock 0 (*,int) s (+ n delta))))
+              case tag 1:
+               (let (n =a (field 0 addr))
+                 (before asmcomp/arch.ml(73):3065-3084
+                   (makeblock 1 (int) (+ n delta))))
+              case tag 2:
+               (let (n =a (field 0 addr))
+                 (before asmcomp/arch.ml(74):3104-3124
+                   (makeblock 2 (int) (+ n delta))))
+              case tag 3:
+               (let (n =a (field 1 addr) scale =a (field 0 addr))
+                 (before asmcomp/arch.ml(75):3150-3175
+                   (makeblock 3 (int,int) scale (+ n delta))))
+              case tag 4:
+               (let (n =a (field 1 addr) scale =a (field 0 addr))
+                 (before asmcomp/arch.ml(76):3209-3242
+                   (makeblock 4 (int,int) scale (+ n delta))))))))
+     num_args_addressing =
+       (function param : int
+         (funct-body asmcomp/arch.ml(78):3270-3383
+           (switch* param
+            case tag 0: (before asmcomp/arch.ml(79):3295-3296 0)
+            case tag 1: (before asmcomp/arch.ml(80):3315-3316 1)
+            case tag 2: (before asmcomp/arch.ml(81):3336-3337 2)
+            case tag 3: (before asmcomp/arch.ml(82):3355-3356 1)
+            case tag 4: (before asmcomp/arch.ml(83):3382-3383 2))))
+     print_addressing =
+       (function printreg addr ppf arg
+         (funct-body asmcomp/arch.ml(87)<ghost>:3454-4214
+           (before asmcomp/arch.ml(88):3480-4214
+             (switch* addr
+              case tag 0:
+               (let (n =a (field 1 addr) s =a (field 0 addr))
+                 (if (!= n 0)
+                   (let (s =a s)
+                     (before asmcomp/arch.ml(92):3571-3600
+                       (after asmcomp/arch.ml(92):3571-3600
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [12: '"' [2: 0a [11: "\" + " [4: 3a 0a 0a 0a]]]]
+                            "\"%s\" + %i"]
+                           s n))))
+                   (before asmcomp/arch.ml(90):3522-3544
+                     (after asmcomp/arch.ml(90):3522-3544
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [12: '"' [2: 0a [12: '"' 0a]]] "\"%s\""] s)))))
+              case tag 1:
+               (let (n =a (field 0 addr))
+                 (before asmcomp/arch.ml(94):3625-3731
+                   (let
+                     (idx =
+                        (if (!= n 0)
+                          (before asmcomp/arch.ml(94):3650-3674
+                            (after asmcomp/arch.ml(94):3650-3674
+                              (apply (field 3 (global Stdlib__printf!))
+                                [0: [11: " + " [4: 3a 0a 0a 0a]] " + %i"] n)))
+                          (before asmcomp/arch.ml(94):3680-3682 "")))
+                     (before asmcomp/arch.ml(95):3692-3731
+                       (after asmcomp/arch.ml(95):3692-3731
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0: [15: [2: 0a 0a]] "%a%s"] printreg
+                           (after asmcomp/arch.ml(95):3720-3727
+                             (array.get[gen] arg 0))
+                           idx))))))
+              case tag 2:
+               (let (n =a (field 0 addr))
+                 (before asmcomp/arch.ml(97):3757-3885
+                   (let
+                     (idx =
+                        (if (!= n 0)
+                          (before asmcomp/arch.ml(97):3782-3806
+                            (after asmcomp/arch.ml(97):3782-3806
+                              (apply (field 3 (global Stdlib__printf!))
+                                [0: [11: " + " [4: 3a 0a 0a 0a]] " + %i"] n)))
+                          (before asmcomp/arch.ml(97):3812-3814 "")))
+                     (before asmcomp/arch.ml(98):3824-3885
+                       (after asmcomp/arch.ml(98):3824-3885
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [15: [11: " + " [15: [2: 0a 0a]]]] "%a + %a%s"]
+                           printreg
+                           (after asmcomp/arch.ml(98):3857-3864
+                             (array.get[gen] arg 0))
+                           printreg
+                           (after asmcomp/arch.ml(98):3874-3881
+                             (array.get[gen] arg 1))
+                           idx))))))
+              case tag 3:
+               (let (n =a (field 1 addr) scale =a (field 0 addr))
+                 (before asmcomp/arch.ml(100):3917-4035
+                   (let
+                     (idx =
+                        (if (!= n 0)
+                          (before asmcomp/arch.ml(100):3942-3966
+                            (after asmcomp/arch.ml(100):3942-3966
+                              (apply (field 3 (global Stdlib__printf!))
+                                [0: [11: " + " [4: 3a 0a 0a 0a]] " + %i"] n)))
+                          (before asmcomp/arch.ml(100):3972-3974 "")))
+                     (before asmcomp/arch.ml(101):3984-4035
+                       (after asmcomp/arch.ml(101):3984-4035
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [15: [11: "  * " [4: 3a 0a 0a [2: 0a 0a]]]]
+                            "%a  * %i%s"]
+                           printreg
+                           (after asmcomp/arch.ml(101):4018-4025
+                             (array.get[gen] arg 0))
+                           scale idx))))))
+              case tag 4:
+               (let (n =a (field 1 addr) scale =a (field 0 addr))
+                 (before asmcomp/arch.ml(103):4075-4214
+                   (let
+                     (idx =
+                        (if (!= n 0)
+                          (before asmcomp/arch.ml(103):4100-4124
+                            (after asmcomp/arch.ml(103):4100-4124
+                              (apply (field 3 (global Stdlib__printf!))
+                                [0: [11: " + " [4: 3a 0a 0a 0a]] " + %i"] n)))
+                          (before asmcomp/arch.ml(103):4130-4132 "")))
+                     (before asmcomp/arch.ml(104):4142-4214
+                       (after asmcomp/arch.ml(104):4142-4214
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [15:
+                             [11:
+                              " + "
+                              [15: [11: " * " [4: 3a 0a 0a [2: 0a 0a]]]]]]
+                            "%a + %a * %i%s"]
+                           printreg
+                           (after asmcomp/arch.ml(104):4180-4187
+                             (array.get[gen] arg 0))
+                           printreg
+                           (after asmcomp/arch.ml(104):4197-4204
+                             (array.get[gen] arg 1))
+                           scale idx))))))))))
+     print_specific_operation =
+       (function printreg op ppf arg
+         (funct-body asmcomp/arch.ml(106)<ghost>:4245-5274
+           (before asmcomp/arch.ml(107):4269-5274
+             (switch* op
+              case int 0:
+               (before asmcomp/arch.ml(116):4633-4672
+                 (after asmcomp/arch.ml(116):4633-4672
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "sqrtf " [15: 0a]] "sqrtf %a"] printreg
+                     (after asmcomp/arch.ml(116):4665-4672
+                       (array.get[gen] arg 0)))))
+              case int 1:
+               (before asmcomp/arch.ml(132):5231-5274
+                 (after asmcomp/arch.ml(132):5231-5274
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "sextend32 " [15: 0a]] "sextend32 %a"] printreg
+                     (after asmcomp/arch.ml(132):5267-5274
+                       (array.get[gen] arg 0)))))
+              case tag 0:
+               (let (addr =a (field 0 op))
+                 (before asmcomp/arch.ml(108):4300-4338
+                   (after asmcomp/arch.ml(108):4300-4338
+                     (apply print_addressing printreg addr ppf arg))))
+              case tag 1:
+               (let
+                 (is_assign =a (field 2 op)
+                  addr =a (field 1 op)
+                  n =a (field 0 op))
+                 (before asmcomp/arch.ml(110):4383-4513
+                   (after asmcomp/arch.ml(110):4383-4513
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [12:
+                         '['
+                         [15:
+                          [11: "] := " [6: 0a 0a 0a [12: ' ' [2: 0a 0a]]]]]]
+                        "[%a] := %nd %s"]
+                       (after asmcomp/arch.ml(111):4421-4453
+                         (apply print_addressing printreg addr))
+                       arg n
+                       (if is_assign
+                         (before asmcomp/arch.ml(112):4488-4498 "(assign)")
+                         (before asmcomp/arch.ml(112):4504-4512 "(init)"))))))
+              case tag 2:
+               (let (addr =a (field 1 op) n =a (field 0 op))
+                 (before asmcomp/arch.ml(114):4548-4612
+                   (after asmcomp/arch.ml(114):4548-4612
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [12: '[' [15: [11: "] +:= " [4: 3a 0a 0a 0a]]]]
+                        "[%a] +:= %i"]
+                       (after asmcomp/arch.ml(114):4574-4606
+                         (apply print_addressing printreg addr))
+                       arg n))))
+              case tag 3:
+               (let (addr =a (field 1 op) op =a (field 0 op))
+                 (before asmcomp/arch.ml(121):4830-5139
+                   (let
+                     (op_name =
+                        (function param
+                          (funct-body asmcomp/arch.ml(121):4844-4956
+                            (switch* param
+                             case int 0:
+                              (before asmcomp/arch.ml(122):4874-4878 "+f")
+                             case int 1:
+                              (before asmcomp/arch.ml(123):4900-4904 "-f")
+                             case int 2:
+                              (before asmcomp/arch.ml(124):4926-4930 "*f")
+                             case int 3:
+                              (before asmcomp/arch.ml(125):4952-4956 "/f")))))
+                     (before asmcomp/arch.ml(126):4966-5139
+                       (after asmcomp/arch.ml(126):4966-5139
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [15:
+                             [12:
+                              ' '
+                              [2: 0a [11: " float64[" [15: [12: ']' 0a]]]]]]
+                            "%a %s float64[%a]"]
+                           printreg
+                           (after asmcomp/arch.ml(126):5007-5014
+                             (array.get[gen] arg 0))
+                           (after asmcomp/arch.ml(126):5015-5027
+                             (apply op_name op))
+                           (after asmcomp/arch.ml(127):5047-5079
+                             (apply print_addressing printreg addr))
+                           (after asmcomp/arch.ml(128):5099-5139
+                             (apply (field 6 (global Stdlib__array!)) arg 1
+                               (- (array.length[gen] arg) 1)))))))))
+              case tag 4:
+               (let (i =a (field 0 op))
+                 (before asmcomp/arch.ml(130):5162-5206
+                   (after asmcomp/arch.ml(130):5162-5206
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [11: "bswap_" [4: 3a 0a 0a [12: ' ' [15: 0a]]]]
+                        "bswap_%i %a"]
+                       i printreg
+                       (after asmcomp/arch.ml(130):5199-5206
+                         (array.get[gen] arg 0))))))
+              case tag 5:
+               (let (addr =a (field 0 op))
+                 (before asmcomp/arch.ml(118):4702-4791
+                   (after asmcomp/arch.ml(118):4702-4791
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [11: "sqrtf float64[" [15: [12: ']' 0a]]]
+                        "sqrtf float64[%a]"]
+                       (after asmcomp/arch.ml(119):4747-4779
+                         (apply print_addressing printreg addr))
+                       (makearray[gen]
+                         (after asmcomp/arch.ml(119):4782-4789
+                           (array.get[gen] arg 0)))))))))))
+     win64 =
+       (let (*match* = (field 37 (global Config!)))
+         (catch
+           (catch
+             (stringswitch *match*
+              case "cygwin": (exit 2)
+              case "mingw64": (exit 2)
+              case "win64": (exit 2)
+              default: (exit 3))
+            with (3) (before asmcomp/arch.ml(137):5385-5390 0a))
+          with (2) (before asmcomp/arch.ml(136):5353-5357 1a))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 command_line_options
+        spacetime_node_hole_pointer_is_live_before big_endian size_addr
+        size_int size_float allow_unaligned_access
+        division_crashes_on_overflow identity_addressing offset_addressing
+        num_args_addressing print_addressing print_specific_operation win64))))

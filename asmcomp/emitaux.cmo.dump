@@ -1,0 +1,937 @@
+(setglobal Emitaux!
+  (let
+    (output_channel = (makemutable 0 (field 38 (global Stdlib!)))
+     emit_string =
+       (function s
+         (funct-body asmcomp/emitaux.ml(20)<ghost>:1179-1214
+           (before asmcomp/emitaux.ml(20):1183-1214
+             (after asmcomp/emitaux.ml(20):1183-1214
+               (apply (field 65 (global Stdlib!)) (field 0 output_channel) s)))))
+     emit_int =
+       (function n[int]
+         (funct-body asmcomp/emitaux.ml(22)<ghost>:1229-1280
+           (before asmcomp/emitaux.ml(22):1233-1280
+             (after asmcomp/emitaux.ml(22):1233-1280
+               (apply (field 65 (global Stdlib!)) (field 0 output_channel)
+                 (after asmcomp/emitaux.ml(22):1263-1280
+                   (apply (field 9 (global Stdlib__int!)) n)))))))
+     emit_char =
+       (function c[int]
+         (funct-body asmcomp/emitaux.ml(24)<ghost>:1296-1329
+           (before asmcomp/emitaux.ml(24):1300-1329
+             (after asmcomp/emitaux.ml(24):1300-1329
+               (apply (field 64 (global Stdlib!)) (field 0 output_channel) c)))))
+     emit_nativeint =
+       (function n[nativeint]
+         (funct-body asmcomp/emitaux.ml(26)<ghost>:1350-1407
+           (before asmcomp/emitaux.ml(26):1354-1407
+             (after asmcomp/emitaux.ml(26):1354-1407
+               (apply (field 65 (global Stdlib!)) (field 0 output_channel)
+                 (after asmcomp/emitaux.ml(26):1384-1407
+                   (apply (field 14 (global Stdlib__nativeint!)) n)))))))
+     emit_printf =
+       (function fmt
+         (funct-body asmcomp/emitaux.ml(28)<ghost>:1425-1467
+           (before asmcomp/emitaux.ml(29):1433-1467
+             (after asmcomp/emitaux.ml(29):1433-1467
+               (apply (field 0 (global Stdlib__printf!))
+                 (field 0 output_channel) fmt)))))
+     emit_int32 =
+       (function n[int32]
+         (funct-body asmcomp/emitaux.ml(31)<ghost>:1484-1509
+           (before asmcomp/emitaux.ml(31):1488-1509
+             (after asmcomp/emitaux.ml(31):1488-1509
+               (apply emit_printf [0: [11: "0x" [5: 6a 0a 0a 0a]] "0x%lx"] n)))))
+     emit_symbol =
+       (function esc[int] s
+         (funct-body asmcomp/emitaux.ml(33)<ghost>:1527-1778
+           (before asmcomp/emitaux.ml(34):1537-1778
+             (for i 0 to (- (string.length s) 1)
+               (before asmcomp/emitaux.ml(35):1577-1771
+                 (let
+                   (c =[int]
+                      (after asmcomp/emitaux.ml(35):1585-1590
+                        (string.get s i)))
+                   (before asmcomp/emitaux.ml(36):1598-1771
+                     (catch
+                       (catch
+                         (if (>= c 91)
+                           (if (>= c 97) (if (>= c 123) (exit 2) (exit 1))
+                             (if (!= c 95) (exit 2) (exit 1)))
+                           (if (>= c 58) (if (>= c 65) (exit 1) (exit 2))
+                             (if (>= c 48) (exit 1) (exit 2))))
+                        with (2)
+                         (before asmcomp/emitaux.ml(40):1714-1771
+                           (after asmcomp/emitaux.ml(40):1714-1771
+                             (apply (field 0 (global Stdlib__printf!))
+                               (field 0 output_channel)
+                               [0: [0: [4: 6a [0: 2a 2] 0a 0a]] "%c%02x"] esc
+                               c))))
+                      with (1)
+                       (before asmcomp/emitaux.ml(38):1665-1694
+                         (after asmcomp/emitaux.ml(38):1665-1694
+                           (apply (field 64 (global Stdlib!))
+                             (field 0 output_channel) c)))))))))))
+     emit_string_literal =
+       (function s
+         (funct-body asmcomp/emitaux.ml(43)<ghost>:1804-2376
+           (before asmcomp/emitaux.ml(44):1810-2376
+             (let (last_was_escape = (makemutable 0 0a))
+               (before asmcomp/emitaux.ml(45):1847-2376
+                 (seq
+                   (after asmcomp/emitaux.ml(45):1847-1863
+                     (apply emit_string "\""))
+                   (before asmcomp/emitaux.ml(46):1867-2376
+                     (seq
+                       (for i 0 to (- (string.length s) 1)
+                         (before asmcomp/emitaux.ml(47):1907-2349
+                           (let
+                             (c =[int]
+                                (after asmcomp/emitaux.ml(47):1915-1920
+                                  (string.get s i)))
+                             (before asmcomp/emitaux.ml(48):1928-2349
+                               (if (&& (>= c '0') (<= c '9'))
+                                 (before asmcomp/emitaux.ml(49):1963-2086
+                                   (if (field 0 last_was_escape)
+                                     (before asmcomp/emitaux.ml(50):1994-2045
+                                       (after asmcomp/emitaux.ml(50):1994-2045
+                                         (apply
+                                           (field 0 (global Stdlib__printf!))
+                                           (field 0 output_channel)
+                                           [0:
+                                            [12: '\\' [4: 10a 0a 0a 0a]]
+                                            "\\%o"]
+                                           c)))
+                                     (before asmcomp/emitaux.ml(51):2057-2086
+                                       (after asmcomp/emitaux.ml(51):2057-2086
+                                         (apply (field 64 (global Stdlib!))
+                                           (field 0 output_channel) c)))))
+                                 (before asmcomp/emitaux.ml(52):2096-2349
+                                   (if
+                                     (&& (>= c ' ')
+                                       (&& (<= c '~')
+                                         (&& (!= c '"') (!= c '\\'))))
+                                     (before asmcomp/emitaux.ml(52):2160-2241
+                                       (seq
+                                         (after asmcomp/emitaux.ml(53):2172-2201
+                                           (apply (field 64 (global Stdlib!))
+                                             (field 0 output_channel) c))
+                                         (before asmcomp/emitaux.ml(54):2209-2233
+                                           (setfield_imm 0 last_was_escape
+                                             0a))))
+                                     (before asmcomp/emitaux.ml(55):2247-2349
+                                       (seq
+                                         (after asmcomp/emitaux.ml(56):2259-2310
+                                           (apply
+                                             (field 0
+                                               (global Stdlib__printf!))
+                                             (field 0 output_channel)
+                                             [0:
+                                              [12: '\\' [4: 10a 0a 0a 0a]]
+                                              "\\%o"]
+                                             c))
+                                         (before asmcomp/emitaux.ml(57):2318-2341
+                                           (setfield_imm 0 last_was_escape
+                                             1a)))))))))))
+                       (before asmcomp/emitaux.ml(60):2360-2376
+                         (after asmcomp/emitaux.ml(60):2360-2376
+                           (apply emit_string "\"")))))))))))
+     emit_string_directive =
+       (function directive s
+         (funct-body asmcomp/emitaux.ml(62)<ghost>:2404-2788
+           (before asmcomp/emitaux.ml(63):2420-2788
+             (let (l =[int] (string.length s))
+               (before asmcomp/emitaux.ml(64):2449-2788
+                 (if (== l 0) (before asmcomp/emitaux.ml(64):2463-2465 0a)
+                   (before asmcomp/emitaux.ml(65):2473-2788
+                     (if (< l 80)
+                       (before asmcomp/emitaux.ml(65):2488-2572
+                         (seq
+                           (after asmcomp/emitaux.ml(66):2498-2519
+                             (apply emit_string directive))
+                           (before asmcomp/emitaux.ml(67):2525-2566
+                             (seq
+                               (after asmcomp/emitaux.ml(67):2525-2546
+                                 (apply emit_string_literal s))
+                               (before asmcomp/emitaux.ml(68):2552-2566
+                                 (after asmcomp/emitaux.ml(68):2552-2566
+                                   (apply emit_char '\n')))))))
+                       (before asmcomp/emitaux.ml(69):2578-2788
+                         (let (i = (makemutable 0 (int) 0))
+                           (before asmcomp/emitaux.ml(71):2609-2782
+                             (while (< (field 0 i) l)
+                               (before asmcomp/emitaux.ml(72):2631-2773
+                                 (let
+                                   (n =[int]
+                                      (after asmcomp/emitaux.ml(72):2639-2654
+                                        (apply (field 15 (global Stdlib!))
+                                          (- l (field 0 i)) 80)))
+                                   (before asmcomp/emitaux.ml(73):2664-2773
+                                     (seq
+                                       (after asmcomp/emitaux.ml(73):2664-2685
+                                         (apply emit_string directive))
+                                       (before asmcomp/emitaux.ml(74):2693-2773
+                                         (seq
+                                           (after asmcomp/emitaux.ml(74):2693-2732
+                                             (apply emit_string_literal
+                                               (after asmcomp/emitaux.ml(74):2713-2732
+                                                 (apply
+                                                   (field 3
+                                                     (global Stdlib__string!))
+                                                   s (field 0 i) n))))
+                                           (before asmcomp/emitaux.ml(75):2740-2773
+                                             (seq
+                                               (after asmcomp/emitaux.ml(75):2740-2754
+                                                 (apply emit_char '\n'))
+                                               (before asmcomp/emitaux.ml(76):2762-2773
+                                                 (setfield_imm 0 i
+                                                   (+ (field 0 i) n)))))))))))))))))))))))
+     emit_bytes_directive =
+       (function directive s
+         (funct-body asmcomp/emitaux.ml(80)<ghost>:2815-3113
+           (before asmcomp/emitaux.ml(81):2832-3113
+             (let (pos = (makemutable 0 (int) 0))
+               (before asmcomp/emitaux.ml(82):2854-3113
+                 (seq
+                   (for i 0 to (- (string.length s) 1)
+                     (before asmcomp/emitaux.ml(83):2895-3069
+                       (seq
+                         (if (== (field 0 pos) 0)
+                           (before asmcomp/emitaux.ml(84):2917-2938
+                             (after asmcomp/emitaux.ml(84):2917-2938
+                               (apply emit_string directive)))
+                           (before asmcomp/emitaux.ml(85):2949-2962
+                             (after asmcomp/emitaux.ml(85):2949-2962
+                               (apply emit_char ','))))
+                         (before asmcomp/emitaux.ml(86):2969-3069
+                           (seq
+                             (after asmcomp/emitaux.ml(86):2969-2994
+                               (apply emit_int
+                                 (after asmcomp/emitaux.ml(86):2988-2993
+                                   (string.get s i))))
+                             (before asmcomp/emitaux.ml(87):3001-3069
+                               (seq (+:=1 pos)
+                                 (before asmcomp/emitaux.ml(88):3016-3069
+                                   (if (>= (field 0 pos) 16)
+                                     (before asmcomp/emitaux.ml(88):3035-3069
+                                       (seq
+                                         (after asmcomp/emitaux.ml(88):3041-3055
+                                           (apply emit_char '\n'))
+                                         (before asmcomp/emitaux.ml(88):3057-3065
+                                           (setfield_imm 0 pos 0))))
+                                     0a)))))))))
+                   (before asmcomp/emitaux.ml(90):3082-3113
+                     (if (> (field 0 pos) 0)
+                       (before asmcomp/emitaux.ml(90):3099-3113
+                         (after asmcomp/emitaux.ml(90):3099-3113
+                           (apply emit_char '\n')))
+                       0a))))))))
+     emit_float64_directive =
+       (function directive x[int64]
+         (funct-body asmcomp/emitaux.ml(92)<ghost>:3142-3197
+           (before asmcomp/emitaux.ml(93):3158-3197
+             (after asmcomp/emitaux.ml(93):3158-3197
+               (apply emit_printf
+                 [0:
+                  [12: '\t' [2: 0a [11: "\t0x" [7: 6a 0a 0a [12: '\n' 0a]]]]]
+                  "\t%s\t0x%Lx\n"]
+                 directive x)))))
+     emit_float64_split_directive =
+       (function directive x[int64]
+         (funct-body asmcomp/emitaux.ml(95)<ghost>:3232-3462
+           (before asmcomp/emitaux.ml(96):3248-3462
+             (let
+               (lo =[int64] (Int64.and x 4294967295L)
+                hi =[int64] (Int64.lsr x 32))
+               (before asmcomp/emitaux.ml(98):3332-3462
+                 (after asmcomp/emitaux.ml(98):3332-3462
+                   (apply emit_printf
+                     [0:
+                      [12:
+                       '\t'
+                       [2:
+                        0a
+                        [11:
+                         "\t0x"
+                         [7:
+                          6a 0a 0a [11: ", 0x" [7: 6a 0a 0a [12: '\n' 0a]]]]]]]
+                      "\t%s\t0x%Lx, 0x%Lx\n"]
+                     directive
+                     (if (field 2 (global Arch!))
+                       (before asmcomp/emitaux.ml(100):3410-3412 hi)
+                       (before asmcomp/emitaux.ml(100):3418-3420 lo))
+                     (if (field 2 (global Arch!))
+                       (before asmcomp/emitaux.ml(101):3451-3453 lo)
+                       (before asmcomp/emitaux.ml(101):3459-3461 hi)))))))))
+     emit_float32_directive =
+       (function directive x[int32]
+         (funct-body asmcomp/emitaux.ml(103)<ghost>:3491-3546
+           (before asmcomp/emitaux.ml(104):3507-3546
+             (after asmcomp/emitaux.ml(104):3507-3546
+               (apply emit_printf
+                 [0:
+                  [12: '\t' [2: 0a [11: "\t0x" [5: 6a 0a 0a [12: '\n' 0a]]]]]
+                  "\t%s\t0x%lx\n"]
+                 directive x)))))
+     frame_descriptors = (makemutable 0 0a)
+     record_frame_descr =
+       (function label[int] frame_size[int] live_offset raise_frame debuginfo
+         (funct-body asmcomp/emitaux.ml(117)<ghost>:4021-4296
+           (before asmcomp/emitaux.ml(118):4080-4296
+             (setfield_ptr 0 frame_descriptors
+               (makeblock 0
+                 (makeblock 0 (int,int,*,*,*) label frame_size
+                   (after asmcomp/emitaux.ml(121):4180-4210
+                     (apply (field 51 (global Stdlib__list!))
+                       (function prim prim stub (- prim prim)) live_offset))
+                   raise_frame debuginfo)
+                 (field 0 frame_descriptors))))))
+     emit_frames =
+       (function a
+         (funct-body asmcomp/emitaux.ml(136)<ghost>:4620-7266
+           (before asmcomp/emitaux.ml(137):4626-7266
+             (let
+               (filenames =
+                  (after asmcomp/emitaux.ml(137):4642-4658
+                    (apply (field 0 (global Stdlib__hashtbl!)) 0a 7)))
+               (before asmcomp/emitaux.ml(138):4664-7266
+                 (let
+                   (label_filename =
+                      (function name : int
+                        (funct-body asmcomp/emitaux.ml(138)<ghost>:4683-4837
+                          (before asmcomp/emitaux.ml(139):4694-4837
+                            (try
+                              (after asmcomp/emitaux.ml(140):4704-4731
+                                (apply (field 5 (global Stdlib__hashtbl!))
+                                  filenames name))
+                             with exn
+                              (if (== exn (field 7 (global Stdlib!)))
+                                (before asmcomp/emitaux.ml(142):4760-4837
+                                  (let
+                                    (lbl =[int]
+                                       (after asmcomp/emitaux.ml(142):4770-4786
+                                         (apply (field 11 (global Cmm!)) 0a)))
+                                    (before asmcomp/emitaux.ml(143):4796-4837
+                                      (seq
+                                        (after asmcomp/emitaux.ml(143):4796-4826
+                                          (apply
+                                            (field 4
+                                              (global Stdlib__hashtbl!))
+                                            filenames name lbl))
+                                        (before asmcomp/emitaux.ml(144):4834-4837
+                                          lbl)))))
+                                (reraise exn)))))))
+                   (before asmcomp/emitaux.ml(146):4845-7266
+                     (let
+                       (Label_table =
+                          (module-defn(Label_table) asmcomp/emitaux.ml(146):4856-4867
+                            (apply
+                              (let
+                                (let = (field 24 (global Stdlib__hashtbl!)))
+                                (field 24 (global Stdlib__hashtbl!)))
+                              (let
+                                (equal =
+                                   (function param param
+                                     (funct-body asmcomp/emitaux.ml(150)<ghost>:4946-5033
+                                       (let
+                                         (dbg2 =a (field 1 param)
+                                          rs2 =a (field 0 param)
+                                          dbg1 =a (field 1 param)
+                                          rs1 =a (field 0 param))
+                                         (before asmcomp/emitaux.ml(151):4989-5033
+                                           (&& (== rs1 rs2)
+                                             (==
+                                               (after asmcomp/emitaux.ml(151):5002-5029
+                                                 (apply
+                                                   (field 7
+                                                     (global Debuginfo!))
+                                                   dbg1 dbg2))
+                                               0))))))
+                                 hash =
+                                   (function param : int
+                                     (funct-body asmcomp/emitaux.ml(153)<ghost>:5050-5107
+                                       (let
+                                         (dbg =a (field 1 param)
+                                          rs =a (field 0 param))
+                                         (before asmcomp/emitaux.ml(154):5070-5107
+                                           (after asmcomp/emitaux.ml(154):5070-5107
+                                             (apply
+                                               (field 26
+                                                 (global Stdlib__hashtbl!))
+                                               (makeblock 0 (*,int) rs
+                                                 (after asmcomp/emitaux.ml(154):5088-5106
+                                                   (apply
+                                                     (field 8
+                                                       (global Debuginfo!))
+                                                     dbg))))))))))
+                                (pseudo asmcomp/emitaux.ml(147):4888-5115
+                                  (makeblock 0 equal hash)))))
+                        debuginfos =
+                          (after asmcomp/emitaux.ml(157):5141-5161
+                            (apply (field 0 Label_table) 7)))
+                       (before asmcomp/emitaux.ml(158):5167-7266
+                         (letrec
+                           (label_debuginfos
+                              (function rs rdbg : int
+                                (funct-body asmcomp/emitaux.ml(158)<ghost>:5192-5572
+                                  (before asmcomp/emitaux.ml(159):5206-5572
+                                    (let (key = (makeblock 0 rs rdbg))
+                                      (before asmcomp/emitaux.ml(160):5234-5572
+                                        (try
+                                          (field 0
+                                            (after asmcomp/emitaux.ml(160):5242-5275
+                                              (apply (field 6 Label_table)
+                                                debuginfos key)))
+                                         with exn
+                                          (if
+                                            (== exn
+                                              (field 7 (global Stdlib!)))
+                                            (before asmcomp/emitaux.ml(162):5304-5572
+                                              (let
+                                                (lbl =[int]
+                                                   (after asmcomp/emitaux.ml(162):5314-5330
+                                                     (apply
+                                                       (field 11
+                                                         (global Cmm!))
+                                                       0a)))
+                                                (before asmcomp/emitaux.ml(163):5340-5572
+                                                  (let
+                                                    (next =
+                                                       (if rdbg
+                                                         (let
+                                                           (rdbg' =a
+                                                              (field 1 rdbg))
+                                                           (if rdbg'
+                                                             (before asmcomp/emitaux.ml(167):5468-5503
+                                                               (makeblock 0 (int)
+                                                                 (after asmcomp/emitaux.ml(167):5473-5503
+                                                                   (apply
+                                                                    label_debuginfos
+                                                                    0a rdbg'))))
+                                                             (before asmcomp/emitaux.ml(166):5425-5429
+                                                               0a)))
+                                                         (before asmcomp/emitaux.ml(165):5391-5403
+                                                           (raise
+                                                             (after asmcomp/emitaux.ml(165):5391-5403
+                                                               (makeblock 0
+                                                                 (global Assert_failure!)
+                                                                 [0:
+                                                                  "asmcomp/emitaux.ml"
+                                                                  165 16]))))))
+                                                    (before asmcomp/emitaux.ml(169):5519-5572
+                                                      (seq
+                                                        (after asmcomp/emitaux.ml(169):5519-5561
+                                                          (apply
+                                                            (field 4
+                                                              Label_table)
+                                                            debuginfos key
+                                                            (makeblock 0 (int,*)
+                                                              lbl next)))
+                                                        (before asmcomp/emitaux.ml(170):5569-5572
+                                                          lbl)))))))
+                                            (reraise exn)))))))))
+                           (before asmcomp/emitaux.ml(172):5580-7266
+                             (let
+                               (emit_debuginfo_label =
+                                  (function rs rdbg
+                                    (funct-body asmcomp/emitaux.ml(172)<ghost>:5605-5662
+                                      (before asmcomp/emitaux.ml(173):5619-5662
+                                        (after asmcomp/emitaux.ml(173):5619-5662
+                                          (apply (field 1 a)
+                                            (after asmcomp/emitaux.ml(173):5636-5662
+                                              (apply label_debuginfos rs
+                                                rdbg))))))))
+                               (before asmcomp/emitaux.ml(175):5670-7266
+                                 (let
+                                   (emit_frame =
+                                      (function fd
+                                        (funct-body asmcomp/emitaux.ml(175)<ghost>:5685-6087
+                                          (before asmcomp/emitaux.ml(176):5694-6087
+                                            (seq
+                                              (after asmcomp/emitaux.ml(176):5694-5720
+                                                (apply (field 0 a)
+                                                  (field 0 fd)))
+                                              (before asmcomp/emitaux.ml(177):5726-6087
+                                                (seq
+                                                  (after asmcomp/emitaux.ml(177):5726-5849
+                                                    (apply (field 2 a)
+                                                      (if
+                                                        (after asmcomp/emitaux.ml(177):5739-5772
+                                                          (apply
+                                                            (field 1
+                                                              (global Debuginfo!))
+                                                            (field 4 fd)))
+                                                        (before asmcomp/emitaux.ml(178):5792-5808
+                                                          (field 1 fd))
+                                                        (before asmcomp/emitaux.ml(179):5828-5848
+                                                          (+ (field 1 fd) 1)))))
+                                                  (before asmcomp/emitaux.ml(180):5855-6087
+                                                    (seq
+                                                      (after asmcomp/emitaux.ml(180):5855-5895
+                                                        (apply (field 2 a)
+                                                          (after asmcomp/emitaux.ml(180):5864-5895
+                                                            (apply
+                                                              (field 0
+                                                                (global Stdlib__list!))
+                                                              (field 2 fd)))))
+                                                      (before asmcomp/emitaux.ml(181):5901-6087
+                                                        (seq
+                                                          (after asmcomp/emitaux.ml(181):5901-5937
+                                                            (apply
+                                                              (field 14
+                                                                (global Stdlib__list!))
+                                                              (field 2 a)
+                                                              (field 2 fd)))
+                                                          (before asmcomp/emitaux.ml(182):5943-6087
+                                                            (seq
+                                                              (after asmcomp/emitaux.ml(182):5943-5969
+                                                                (apply
+                                                                  (field 5 a)
+                                                                  (field 3
+                                                                    (global Arch!))))
+                                                              (before asmcomp/emitaux.ml(183):5975-6087
+                                                                (let
+                                                                  (rdbg =
+                                                                    (after asmcomp/emitaux.ml(183):5981-6005
+                                                                    (apply
+                                                                    (field 8
+                                                                    (global Stdlib__list!))
+                                                                    (field 4
+                                                                    fd))))
+                                                                  (if rdbg
+                                                                    (before asmcomp/emitaux.ml(185):6050-6087
+                                                                    (after asmcomp/emitaux.ml(185):6050-6087
+                                                                    (apply
+                                                                    emit_debuginfo_label
+                                                                    (field 3
+                                                                    fd) rdbg)))
+                                                                    (before asmcomp/emitaux.ml(184):6023-6025
+                                                                    0a)))))))))))))))))
+                                   (before asmcomp/emitaux.ml(187):6095-7266
+                                     (let
+                                       (emit_filename =
+                                          (function name lbl[int]
+                                            (funct-body asmcomp/emitaux.ml(187)<ghost>:6113-6202
+                                              (before asmcomp/emitaux.ml(188):6128-6202
+                                                (seq
+                                                  (after asmcomp/emitaux.ml(188):6128-6147
+                                                    (apply (field 7 a) lbl))
+                                                  (before asmcomp/emitaux.ml(189):6153-6202
+                                                    (seq
+                                                      (after asmcomp/emitaux.ml(189):6153-6170
+                                                        (apply (field 8 a)
+                                                          name))
+                                                      (before asmcomp/emitaux.ml(190):6176-6202
+                                                        (after asmcomp/emitaux.ml(190):6176-6202
+                                                          (apply (field 5 a)
+                                                            (field 3
+                                                              (global Arch!))))))))))))
+                                       (before asmcomp/emitaux.ml(192):6210-7266
+                                         (let
+                                           (pack_info =
+                                              (function fd_raise d : int64
+                                                (funct-body asmcomp/emitaux.ml(192)<ghost>:6224-6635
+                                                  (before asmcomp/emitaux.ml(193):6241-6635
+                                                    (let
+                                                      (line =[int]
+                                                         (after asmcomp/emitaux.ml(193):6252-6286
+                                                           (apply
+                                                             (field 15
+                                                               (global Stdlib!))
+                                                             1048575
+                                                             (field 1 d)))
+                                                       char_start =[int]
+                                                         (after asmcomp/emitaux.ml(194):6308-6345
+                                                           (apply
+                                                             (field 15
+                                                               (global Stdlib!))
+                                                             255 (field 2 d)))
+                                                       char_end =[int]
+                                                         (after asmcomp/emitaux.ml(195):6365-6401
+                                                           (apply
+                                                             (field 15
+                                                               (global Stdlib!))
+                                                             1023
+                                                             (field 3 d)))
+                                                       kind =[int]
+                                                         (if fd_raise
+                                                           (before asmcomp/emitaux.ml(196):6434-6435
+                                                             1)
+                                                           (before asmcomp/emitaux.ml(196):6441-6442
+                                                             0)))
+                                                      (before asmcomp/emitaux.ml(197):6450-6635
+                                                        (Int64.add
+                                                          (Int64.lsl
+                                                            (Int64.of_int
+                                                              line)
+                                                            44)
+                                                          (Int64.add
+                                                            (Int64.lsl
+                                                              (Int64.of_int
+                                                                char_start)
+                                                              36)
+                                                            (Int64.add
+                                                              (Int64.lsl
+                                                                (Int64.of_int
+                                                                  char_end)
+                                                                26)
+                                                              (Int64.of_int
+                                                                kind))))))))))
+                                           (before asmcomp/emitaux.ml(202):6643-7266
+                                             (let
+                                               (emit_debuginfo =
+                                                  (function param param
+                                                    (funct-body asmcomp/emitaux.ml(202)<ghost>:6662-7059
+                                                      (let
+                                                        (next =a
+                                                           (field 1 param)
+                                                         lbl =a
+                                                           (field 0 param)
+                                                         rdbg =a
+                                                           (field 1 param)
+                                                         rs =a
+                                                           (field 0 param))
+                                                        (before asmcomp/emitaux.ml(203):6690-7059
+                                                          (let
+                                                            (d =
+                                                               (after asmcomp/emitaux.ml(203):6698-6710
+                                                                 (apply
+                                                                   (field 4
+                                                                    (global Stdlib__list!))
+                                                                   rdbg)))
+                                                            (before asmcomp/emitaux.ml(204):6718-7059
+                                                              (seq
+                                                                (after asmcomp/emitaux.ml(204):6718-6744
+                                                                  (apply
+                                                                    (field 5
+                                                                    a)
+                                                                    (field 3
+                                                                    (global Arch!))))
+                                                                (before asmcomp/emitaux.ml(205):6750-7059
+                                                                  (seq
+                                                                    (after asmcomp/emitaux.ml(205):6750-6769
+                                                                    (apply
+                                                                    (field 7
+                                                                    a) lbl))
+                                                                    (before asmcomp/emitaux.ml(206):6775-7059
+                                                                    (let
+                                                                    (info =[int64]
+                                                                    (after asmcomp/emitaux.ml(206):6786-6800
+                                                                    (apply
+                                                                    pack_info
+                                                                    rs d)))
+                                                                    (before asmcomp/emitaux.ml(207):6808-7059
+                                                                    (seq
+                                                                    (after asmcomp/emitaux.ml(207):6808-6897
+                                                                    (apply
+                                                                    (field 6
+                                                                    a)
+                                                                    (after asmcomp/emitaux.ml(208):6830-6869
+                                                                    (apply
+                                                                    label_filename
+                                                                    (field 0
+                                                                    d)))
+                                                                    (int32_of_int64
+                                                                    info)))
+                                                                    (before asmcomp/emitaux.ml(210):6903-7059
+                                                                    (seq
+                                                                    (after asmcomp/emitaux.ml(210):6903-6956
+                                                                    (apply
+                                                                    (field 3
+                                                                    a)
+                                                                    (int32_of_int64
+                                                                    (Int64.asr
+                                                                    info 32))))
+                                                                    (before asmcomp/emitaux.ml(211):6962-7059
+                                                                    (if next
+                                                                    (let
+                                                                    (next =a
+                                                                    (field 0
+                                                                    next))
+                                                                    (before asmcomp/emitaux.ml(212):7003-7024
+                                                                    (after asmcomp/emitaux.ml(212):7003-7024
+                                                                    (apply
+                                                                    (field 1
+                                                                    a) next))))
+                                                                    (before asmcomp/emitaux.ml(213):7039-7051
+                                                                    (after asmcomp/emitaux.ml(213):7039-7051
+                                                                    (apply
+                                                                    (field 4
+                                                                    a) 0)))))))))))))))))))))
+                                               (before asmcomp/emitaux.ml(216):7067-7266
+                                                 (seq
+                                                   (after asmcomp/emitaux.ml(216):7067-7110
+                                                     (apply (field 4 a)
+                                                       (after asmcomp/emitaux.ml(216):7078-7110
+                                                         (apply
+                                                           (field 0
+                                                             (global Stdlib__list!))
+                                                           (field 0
+                                                             frame_descriptors)))))
+                                                   (before asmcomp/emitaux.ml(217):7114-7266
+                                                     (seq
+                                                       (after asmcomp/emitaux.ml(217):7114-7153
+                                                         (apply
+                                                           (field 14
+                                                             (global Stdlib__list!))
+                                                           emit_frame
+                                                           (field 0
+                                                             frame_descriptors)))
+                                                       (before asmcomp/emitaux.ml(218):7157-7266
+                                                         (seq
+                                                           (after asmcomp/emitaux.ml(218):7157-7199
+                                                             (apply
+                                                               (field 11
+                                                                 Label_table)
+                                                               emit_debuginfo
+                                                               debuginfos))
+                                                           (before asmcomp/emitaux.ml(219):7203-7266
+                                                             (seq
+                                                               (after asmcomp/emitaux.ml(219):7203-7239
+                                                                 (apply
+                                                                   (field 11
+                                                                    (global Stdlib__hashtbl!))
+                                                                   emit_filename
+                                                                   filenames))
+                                                               (before asmcomp/emitaux.ml(220):7243-7266
+                                                                 (setfield_ptr 0
+                                                                   frame_descriptors
+                                                                   0a))))))))))))))))))))))))))))))
+     isprefix =
+       (function s1 s2
+         (funct-body asmcomp/emitaux.ml(225)<ghost>:7382-7473
+           (before asmcomp/emitaux.ml(226):7392-7473
+             (&& (<= (string.length s1) (string.length s2))
+               (after asmcomp/emitaux.ml(227):7434-7473
+                 (caml_string_equal
+                   (after asmcomp/emitaux.ml(227):7434-7468
+                     (apply (field 3 (global Stdlib__string!)) s2 0
+                       (string.length s1)))
+                   s1))))))
+     is_generic_function =
+       (function name
+         (funct-body asmcomp/emitaux.ml(229)<ghost>:7499-7612
+           (before asmcomp/emitaux.ml(230):7508-7612
+             (after asmcomp/emitaux.ml(230):7508-7612
+               (apply (field 28 (global Stdlib__list!))
+                 (function p
+                   (funct-body asmcomp/emitaux.ml(231):7524-7550
+                     (before asmcomp/emitaux.ml(231):7534-7549
+                       (after asmcomp/emitaux.ml(231):7534-7549
+                         (apply isprefix p name)))))
+                 [0:
+                  "caml_apply"
+                  [0: "caml_curry" [0: "caml_send" [0: "caml_tuplify" 0a]]]])))))
+     is_cfi_enabled =
+       (function param
+         (funct-body asmcomp/emitaux.ml(236)<ghost>:7655-7686
+           (before asmcomp/emitaux.ml(237):7662-7686
+             (field 39 (global Config!)))))
+     cfi_startproc =
+       (function param
+         (funct-body asmcomp/emitaux.ml(239)<ghost>:7706-7775
+           (before asmcomp/emitaux.ml(240):7713-7775
+             (if
+               (after asmcomp/emitaux.ml(240):7716-7733
+                 (apply is_cfi_enabled 0a))
+               (before asmcomp/emitaux.ml(241):7743-7775
+                 (after asmcomp/emitaux.ml(241):7743-7775
+                   (apply emit_string "\t.cfi_startproc\n")))
+               0a))))
+     cfi_endproc =
+       (function param
+         (funct-body asmcomp/emitaux.ml(243)<ghost>:7793-7860
+           (before asmcomp/emitaux.ml(244):7800-7860
+             (if
+               (after asmcomp/emitaux.ml(244):7803-7820
+                 (apply is_cfi_enabled 0a))
+               (before asmcomp/emitaux.ml(245):7830-7860
+                 (after asmcomp/emitaux.ml(245):7830-7860
+                   (apply emit_string "\t.cfi_endproc\n")))
+               0a))))
+     cfi_adjust_cfa_offset =
+       (function n[int]
+         (funct-body asmcomp/emitaux.ml(247)<ghost>:7888-8009
+           (before asmcomp/emitaux.ml(248):7894-8009
+             (if
+               (after asmcomp/emitaux.ml(248):7897-7914
+                 (apply is_cfi_enabled 0a))
+               (before asmcomp/emitaux.ml(249):7922-8009
+                 (seq
+                   (after asmcomp/emitaux.ml(250):7932-7972
+                     (apply emit_string "\t.cfi_adjust_cfa_offset\t"))
+                   (before asmcomp/emitaux.ml(250):7974-8003
+                     (seq
+                       (after asmcomp/emitaux.ml(250):7974-7984
+                         (apply emit_int n))
+                       (before asmcomp/emitaux.ml(250):7986-8002
+                         (after asmcomp/emitaux.ml(250):7986-8002
+                           (apply emit_string "\n")))))))
+               0a))))
+     cfi_offset =
+       (function reg[int] offset[int]
+         (funct-body asmcomp/emitaux.ml(253)<ghost>:8026-8196
+           (before asmcomp/emitaux.ml(254):8043-8196
+             (if
+               (after asmcomp/emitaux.ml(254):8046-8063
+                 (apply is_cfi_enabled 0a))
+               (before asmcomp/emitaux.ml(254):8069-8196
+                 (seq
+                   (after asmcomp/emitaux.ml(255):8079-8107
+                     (apply emit_string "\t.cfi_offset "))
+                   (before asmcomp/emitaux.ml(256):8113-8190
+                     (seq
+                       (after asmcomp/emitaux.ml(256):8113-8125
+                         (apply emit_int reg))
+                       (before asmcomp/emitaux.ml(257):8131-8190
+                         (seq
+                           (after asmcomp/emitaux.ml(257):8131-8147
+                             (apply emit_string ", "))
+                           (before asmcomp/emitaux.ml(258):8153-8190
+                             (seq
+                               (after asmcomp/emitaux.ml(258):8153-8168
+                                 (apply emit_int offset))
+                               (before asmcomp/emitaux.ml(259):8174-8190
+                                 (after asmcomp/emitaux.ml(259):8174-8190
+                                   (apply emit_string "\n")))))))))))
+               0a))))
+     file_pos_nums = (makemutable 0 0a)
+     file_pos_num_cnt = (makemutable 0 (int) 1)
+     reset_debug_info =
+       (function param
+         (funct-body asmcomp/emitaux.ml(272)<ghost>:8459-8510
+           (before asmcomp/emitaux.ml(273):8466-8510
+             (seq (setfield_ptr 0 file_pos_nums 0a)
+               (before asmcomp/emitaux.ml(274):8489-8510
+                 (setfield_imm 0 file_pos_num_cnt 1))))))
+     emit_debug_info_gen =
+       (function dbg file_emitter loc_emitter
+         (funct-body asmcomp/emitaux.ml(278)<ghost>:8644-9341
+           (before asmcomp/emitaux.ml(279):8677-9341
+             (if
+               (&&
+                 (after asmcomp/emitaux.ml(279):8680-8697
+                   (apply is_cfi_enabled 0a))
+                 (|| (field 0 (field 16 (global Clflags!)))
+                   (field 40 (global Config!))))
+               (before asmcomp/emitaux.ml(280):8757-9341
+                 (let
+                   (*match* =
+                      (after asmcomp/emitaux.ml(281):8773-8785
+                        (apply (field 8 (global Stdlib__list!)) dbg)))
+                   (if *match*
+                     (let
+                       (*match* =a (field 0 *match*)
+                        col =a (field 2 *match*)
+                        line =a (field 1 *match*)
+                        file_name =a (field 0 *match*))
+                       (before asmcomp/emitaux.ml(286):8923-9335
+                         (if (> line 0)
+                           (before asmcomp/emitaux.ml(286):8940-9335
+                             (let
+                               (file_num =[int]
+                                  (try
+                                    (after asmcomp/emitaux.ml(288):8997-9032
+                                      (apply
+                                        (field 38 (global Stdlib__list!))
+                                        file_name (field 0 file_pos_nums)))
+                                   with exn
+                                    (if (== exn (field 7 (global Stdlib!)))
+                                      (before asmcomp/emitaux.ml(290):9073-9280
+                                        (let
+                                          (file_num =[int]
+                                             (field 0 file_pos_num_cnt))
+                                          (before asmcomp/emitaux.ml(291):9121-9280
+                                            (seq (+:=1 file_pos_num_cnt)
+                                              (before asmcomp/emitaux.ml(292):9156-9280
+                                                (seq
+                                                  (after asmcomp/emitaux.ml(292):9156-9189
+                                                    (apply file_emitter
+                                                      file_num file_name))
+                                                  (before asmcomp/emitaux.ml(293):9203-9280
+                                                    (seq
+                                                      (setfield_ptr 0
+                                                        file_pos_nums
+                                                        (makeblock 0
+                                                          (makeblock 0 (*,int)
+                                                            file_name
+                                                            file_num)
+                                                          (field 0
+                                                            file_pos_nums)))
+                                                      (before asmcomp/emitaux.ml(294):9272-9280
+                                                        file_num)))))))))
+                                      (reraise exn))))
+                               (before asmcomp/emitaux.ml(295):9292-9324
+                                 (after asmcomp/emitaux.ml(295):9292-9324
+                                   (apply loc_emitter file_num line col)))))
+                           0a)))
+                     (before asmcomp/emitaux.ml(282):8803-8805 0a))))
+               0a))))
+     emit_debug_info =
+       (function dbg
+         (funct-body asmcomp/emitaux.ml(299)<ghost>:9363-9700
+           (before asmcomp/emitaux.ml(300):9371-9700
+             (after asmcomp/emitaux.ml(300):9371-9700
+               (apply emit_debug_info_gen dbg
+                 (function file_num[int] file_name
+                   (funct-body asmcomp/emitaux.ml(300):9395-9554
+                     (before asmcomp/emitaux.ml(301):9430-9548
+                       (seq
+                         (after asmcomp/emitaux.ml(301):9430-9453
+                           (apply emit_string "\t.file\t"))
+                         (before asmcomp/emitaux.ml(302):9461-9548
+                           (seq
+                             (after asmcomp/emitaux.ml(302):9461-9478
+                               (apply emit_int file_num))
+                             (before asmcomp/emitaux.ml(302):9480-9548
+                               (seq
+                                 (after asmcomp/emitaux.ml(302):9480-9494
+                                   (apply emit_char '\t'))
+                                 (before asmcomp/emitaux.ml(303):9502-9548
+                                   (seq
+                                     (after asmcomp/emitaux.ml(303):9502-9531
+                                       (apply emit_string_literal file_name))
+                                     (before asmcomp/emitaux.ml(303):9533-9547
+                                       (after asmcomp/emitaux.ml(303):9533-9547
+                                         (apply emit_char '\n')))))))))))))
+                 (function file_num[int] line[int] param[int]
+                   (funct-body asmcomp/emitaux.ml(305):9559-9700
+                     (before asmcomp/emitaux.ml(306):9597-9699
+                       (seq
+                         (after asmcomp/emitaux.ml(306):9597-9619
+                           (apply emit_string "\t.loc\t"))
+                         (before asmcomp/emitaux.ml(307):9628-9699
+                           (seq
+                             (after asmcomp/emitaux.ml(307):9628-9645
+                               (apply emit_int file_num))
+                             (before asmcomp/emitaux.ml(307):9647-9699
+                               (seq
+                                 (after asmcomp/emitaux.ml(307):9647-9661
+                                   (apply emit_char '\t'))
+                                 (before asmcomp/emitaux.ml(308):9670-9699
+                                   (seq
+                                     (after asmcomp/emitaux.ml(308):9670-9683
+                                       (apply emit_int line))
+                                     (before asmcomp/emitaux.ml(308):9685-9699
+                                       (after asmcomp/emitaux.ml(308):9685-9699
+                                         (apply emit_char '\n'))))))))))))))))))
+     reset =
+       (function param
+         (funct-body asmcomp/emitaux.ml(310)<ghost>:9712-9765
+           (before asmcomp/emitaux.ml(311):9719-9765
+             (seq
+               (after asmcomp/emitaux.ml(311):9719-9738
+                 (apply reset_debug_info 0a))
+               (before asmcomp/emitaux.ml(312):9742-9765
+                 (setfield_ptr 0 frame_descriptors 0a))))))
+     binary_backend_available = (makemutable 0 0a)
+     create_asm_file = (makemutable 0 1a))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 output_channel emit_string emit_int emit_nativeint
+        emit_int32 emit_symbol emit_printf emit_char emit_string_literal
+        emit_string_directive emit_bytes_directive emit_float64_directive
+        emit_float64_split_directive emit_float32_directive reset
+        reset_debug_info emit_debug_info emit_debug_info_gen
+        record_frame_descr emit_frames is_generic_function cfi_startproc
+        cfi_endproc cfi_adjust_cfa_offset cfi_offset binary_backend_available
+        create_asm_file))))

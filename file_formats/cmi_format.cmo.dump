@@ -1,0 +1,236 @@
+(setglobal Cmi_format!
+  (let
+    (Error = (makeblock 248 "Cmi_format.Error" (caml_fresh_oo_id 0))
+     input_cmi =
+       (function ic
+         (funct-body file_formats/cmi_format.ml(38)<ghost>:1491-1701
+           (before file_formats/cmi_format.ml(39):1498-1701
+             (let
+               (*match* =
+                  (after file_formats/cmi_format.ml(39):1517-1531
+                    (apply (field 88 (global Stdlib!)) ic))
+                sign =a (field 1 *match*)
+                name =a (field 0 *match*))
+               (before file_formats/cmi_format.ml(40):1537-1701
+                 (let
+                   (crcs =
+                      (after file_formats/cmi_format.ml(40):1548-1562
+                        (apply (field 88 (global Stdlib!)) ic)))
+                   (before file_formats/cmi_format.ml(41):1568-1701
+                     (let
+                       (flags =
+                          (after file_formats/cmi_format.ml(41):1580-1594
+                            (apply (field 88 (global Stdlib!)) ic)))
+                       (before file_formats/cmi_format.ml(42):1600-1701
+                         (makeblock 0 name sign crcs flags))))))))))
+     read_cmi =
+       (function filename
+         (funct-body file_formats/cmi_format.ml(49)<ghost>:1716-2573
+           (before file_formats/cmi_format.ml(50):1729-2573
+             (let
+               (ic =
+                  (after file_formats/cmi_format.ml(50):1738-1758
+                    (apply (field 79 (global Stdlib!)) filename)))
+               (before file_formats/cmi_format.ml(51):1764-2573
+                 (try
+                   (let
+                     (buffer =
+                        (after file_formats/cmi_format.ml(53):1791-1853
+                          (apply (field 85 (global Stdlib!)) ic
+                            (string.length (field 21 (global Config!))))))
+                     (before file_formats/cmi_format.ml(55):1865-2412
+                       (seq
+                         (if
+                           (after file_formats/cmi_format.ml(55):1868-1901
+                             (caml_string_notequal buffer
+                               (field 21 (global Config!))))
+                           (before file_formats/cmi_format.ml(55):1907-2356
+                             (seq
+                               (after file_formats/cmi_format.ml(56):1919-1930
+                                 (apply (field 92 (global Stdlib!)) ic))
+                               (before file_formats/cmi_format.ml(57):1938-2348
+                                 (let
+                                   (pre_len =[int]
+                                      (-
+                                        (string.length
+                                          (field 21 (global Config!)))
+                                        3))
+                                   (before file_formats/cmi_format.ml(58):2003-2348
+                                     (if
+                                       (after file_formats/cmi_format.ml(58):2006-2090
+                                         (caml_string_equal
+                                           (after file_formats/cmi_format.ml(58):2006-2033
+                                             (apply
+                                               (field 3
+                                                 (global Stdlib__string!))
+                                               buffer 0 pre_len))
+                                           (after file_formats/cmi_format.ml(59):2046-2090
+                                             (apply
+                                               (field 3
+                                                 (global Stdlib__string!))
+                                               (field 21 (global Config!)) 0
+                                               pre_len))))
+                                       (before file_formats/cmi_format.ml(60):2102-2279
+                                         (let
+                                           (msg =
+                                              (if
+                                                (after file_formats/cmi_format.ml(62):2139-2171
+                                                  (caml_string_lessthan
+                                                    buffer
+                                                    (field 21
+                                                      (global Config!))))
+                                                (before file_formats/cmi_format.ml(62):2177-2187
+                                                  "an older")
+                                                (before file_formats/cmi_format.ml(62):2193-2202
+                                                  "a newer")))
+                                           (before file_formats/cmi_format.ml(63):2214-2269
+                                             (raise
+                                               (after file_formats/cmi_format.ml(63):2220-2269
+                                                 (makeblock 0 Error
+                                                   (makeblock 1 filename msg)))))))
+                                       (before file_formats/cmi_format.ml(64):2285-2348
+                                         (raise
+                                           (after file_formats/cmi_format.ml(65):2304-2338
+                                             (makeblock 0 Error
+                                               (makeblock 0 filename)))))))))))
+                           0a)
+                         (before file_formats/cmi_format.ml(68):2362-2412
+                           (let
+                             (cmi =
+                                (after file_formats/cmi_format.ml(68):2372-2384
+                                  (apply input_cmi ic)))
+                             (before file_formats/cmi_format.ml(69):2392-2412
+                               (seq
+                                 (after file_formats/cmi_format.ml(69):2392-2403
+                                   (apply (field 92 (global Stdlib!)) ic))
+                                 (before file_formats/cmi_format.ml(70):2409-2412
+                                   cmi))))))))
+                  with exn
+                   (catch
+                     (if (== exn (field 11 (global Stdlib!))) (exit 5)
+                       (let (tag =a (field 0 exn))
+                         (if (== tag (field 6 (global Stdlib!))) (exit 5)
+                           (let (tag =a (field 0 exn))
+                             (if (== tag Error)
+                               (let (e =a (field 1 exn))
+                                 (before file_formats/cmi_format.ml(75):2539-2573
+                                   (seq
+                                     (after file_formats/cmi_format.ml(75):2539-2550
+                                       (apply (field 92 (global Stdlib!)) ic))
+                                     (before file_formats/cmi_format.ml(76):2558-2573
+                                       (raise
+                                         (after file_formats/cmi_format.ml(76):2564-2573
+                                           (makeblock 0 Error e)))))))
+                               (reraise exn))))))
+                    with (5)
+                     (before file_formats/cmi_format.ml(72):2453-2515
+                       (seq
+                         (after file_formats/cmi_format.ml(72):2453-2464
+                           (apply (field 92 (global Stdlib!)) ic))
+                         (before file_formats/cmi_format.ml(73):2472-2515
+                           (raise
+                             (after file_formats/cmi_format.ml(73):2477-2515
+                               (makeblock 0 Error (makeblock 2 filename))))))))))))))
+     output_cmi =
+       (function filename oc cmi
+         (funct-body file_formats/cmi_format.ml(78)<ghost>:2590-2942
+           (before file_formats/cmi_format.ml(80):2685-2942
+             (seq
+               (after file_formats/cmi_format.ml(80):2685-2725
+                 (apply (field 65 (global Stdlib!)) oc
+                   (field 21 (global Config!))))
+               (before file_formats/cmi_format.ml(81):2729-2942
+                 (seq
+                   (after file_formats/cmi_format.ml(81):2729-2773
+                     (apply (field 71 (global Stdlib!)) oc
+                       (makeblock 0 (field 0 cmi) (field 1 cmi))))
+                   (before file_formats/cmi_format.ml(82):2777-2942
+                     (seq
+                       (after file_formats/cmi_format.ml(82):2777-2785
+                         (apply (field 62 (global Stdlib!)) oc))
+                       (before file_formats/cmi_format.ml(83):2789-2942
+                         (let
+                           (crc =
+                              (after file_formats/cmi_format.ml(83):2799-2819
+                                (apply (field 6 (global Stdlib__digest!))
+                                  filename)))
+                           (before file_formats/cmi_format.ml(84):2825-2942
+                             (let
+                               (crcs =
+                                  (makeblock 0
+                                    (makeblock 0 (field 0 cmi)
+                                      (makeblock 0 crc))
+                                    (field 2 cmi)))
+                               (before file_formats/cmi_format.ml(85):2882-2942
+                                 (seq
+                                   (after file_formats/cmi_format.ml(85):2882-2902
+                                     (apply (field 71 (global Stdlib!)) oc
+                                       crcs))
+                                   (before file_formats/cmi_format.ml(86):2906-2942
+                                     (seq
+                                       (after file_formats/cmi_format.ml(86):2906-2935
+                                         (apply (field 71 (global Stdlib!))
+                                           oc (field 3 cmi)))
+                                       (before file_formats/cmi_format.ml(87):2939-2942
+                                         crc)))))))))))))))))
+     report_error =
+       (function ppf param
+         (funct-body file_formats/cmi_format.ml(93)<ghost>:2994-3511
+           (switch* param
+            case tag 0:
+             (let (filename =a (field 0 param))
+               (before file_formats/cmi_format.ml(95):3048-3134
+                 (after file_formats/cmi_format.ml(95):3048-3134
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [15:
+                       [17:
+                        [0: "@ " 1 0] [11: "is not a compiled interface" 0a]]]
+                      "%a@ is not a compiled interface"]
+                     (field 18 (global Location!)) filename))))
+            case tag 1:
+             (let
+               (older_newer =a (field 1 param) filename =a (field 0 param))
+               (before file_formats/cmi_format.ml(98):3196-3381
+                 (after file_formats/cmi_format.ml(98):3196-3381
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [15:
+                       [17:
+                        [0: "@ " 1 0]
+                        [11:
+                         "is not a compiled interface for this version of OCaml."
+                         [17:
+                          4a
+                          [11:
+                           "It seems to be for "
+                           [2: 0a [11: " version of OCaml." 0a]]]]]]]
+                      "%a@ is not a compiled interface for this version of OCaml.@.It seems to be for %s version of OCaml."]
+                     (field 18 (global Location!)) filename older_newer))))
+            case tag 2:
+             (let (filename =a (field 0 param))
+               (before file_formats/cmi_format.ml(103):3424-3511
+                 (after file_formats/cmi_format.ml(103):3424-3511
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11:
+                       "Corrupted compiled interface"
+                       [17: [0: "@ " 1 0] [15: 0a]]]
+                      "Corrupted compiled interface@ %a"]
+                     (field 18 (global Location!)) filename)))))))
+     *match* =
+       (after file_formats/cmi_format.ml(107):3524-3668
+         (apply (field 46 (global Location!))
+           (function param
+             (funct-body file_formats/cmi_format.ml(108):3559-3668
+               (let (tag =a (field 0 param))
+                 (if (== tag Error)
+                   (let (err =a (field 1 param))
+                     (before file_formats/cmi_format.ml(109):3590-3644
+                       (makeblock 0
+                         (after file_formats/cmi_format.ml(109):3595-3644
+                           (apply (field 45 (global Location!)) report_error
+                             err)))))
+                   (before file_formats/cmi_format.ml(110):3658-3662 0a))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 output_cmi input_cmi read_cmi Error report_error))))

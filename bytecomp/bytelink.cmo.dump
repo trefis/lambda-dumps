@@ -1,0 +1,2415 @@
+(setglobal Bytelink!
+  (let
+    (Error = (makeblock 248 "Bytelink.Error" (caml_fresh_oo_id 0))
+     lib_ccobjs = (makemutable 0 0a)
+     lib_ccopts = (makemutable 0 0a)
+     lib_dllibs = (makemutable 0 0a)
+     add_ccobjs =
+       (function origin l
+         (funct-body bytecomp/bytelink.ml(49)<ghost>:2051-2558
+           (before bytecomp/bytelink.ml(50):2064-2558
+             (if (not (field 0 (field 55 (global Clflags!))))
+               (before bytecomp/bytelink.ml(50):2098-2558
+                 (seq
+                   (if
+                     (&&
+                       (==
+                         (string.length
+                           (field 0 (field 45 (global Clflags!))))
+                         0)
+                       (==
+                         (string.length
+                           (field 0 (field 44 (global Clflags!))))
+                         0))
+                     (before bytecomp/bytelink.ml(54):2211-2506
+                       (seq
+                         (if (field 1 l)
+                           (before bytecomp/bytelink.ml(55):2244-2274
+                             (setfield_imm 0 (field 21 (global Clflags!)) 1a))
+                           0a)
+                         (before bytecomp/bytelink.ml(56):2282-2498
+                           (seq
+                             (setfield_ptr 0 lib_ccobjs
+                               (after bytecomp/bytelink.ml(56):2296-2322
+                                 (apply (field 36 (global Stdlib!))
+                                   (field 2 l) (field 0 lib_ccobjs))))
+                             (before bytecomp/bytelink.ml(57):2330-2498
+                               (let
+                                 (replace_origin =
+                                    (after bytecomp/bytelink.ml(58):2359-2417
+                                      (apply (field 33 (global Misc!))
+                                        "$CAMLORIGIN" origin)))
+                                 (before bytecomp/bytelink.ml(60):2433-2497
+                                   (setfield_ptr 0 lib_ccopts
+                                     (after bytecomp/bytelink.ml(60):2447-2497
+                                       (apply (field 36 (global Stdlib!))
+                                         (after bytecomp/bytelink.ml(60):2447-2483
+                                           (apply
+                                             (field 16
+                                               (global Stdlib__list!))
+                                             replace_origin (field 3 l)))
+                                         (field 0 lib_ccopts)))))))))))
+                     0a)
+                   (before bytecomp/bytelink.ml(62):2512-2552
+                     (setfield_ptr 0 lib_dllibs
+                       (after bytecomp/bytelink.ml(62):2526-2552
+                         (apply (field 36 (global Stdlib!)) (field 4 l)
+                           (field 0 lib_dllibs)))))))
+               0a))))
+     missing_globals = (makemutable 0 (field 0 (field 5 (global Ident!))))
+     is_required =
+       (function param
+         (funct-body bytecomp/bytelink.ml(91)<ghost>:3753-3864
+           (let (rel =a (field 0 param))
+             (before bytecomp/bytelink.ml(92):3769-3864
+               (switch rel
+                case tag 2:
+                 (let (id =a (field 0 rel))
+                   (before bytecomp/bytelink.ml(94):3816-3849
+                     (after bytecomp/bytelink.ml(94):3816-3849
+                       (apply (field 2 (field 5 (global Ident!))) id
+                         (field 0 missing_globals)))))
+                default: (before bytecomp/bytelink.ml(95):3859-3864 0a))))))
+     add_required =
+       (function compunit
+         (funct-body bytecomp/bytelink.ml(97)<ghost>:3883-4078
+           (before bytecomp/bytelink.ml(98):3896-4078
+             (let
+               (add =
+                  (function id
+                    (funct-body bytecomp/bytelink.ml(98)<ghost>:3904-3965
+                      (before bytecomp/bytelink.ml(99):3913-3965
+                        (setfield_ptr 0 missing_globals
+                          (after bytecomp/bytelink.ml(99):3932-3965
+                            (apply (field 3 (field 5 (global Ident!))) id
+                              (field 0 missing_globals))))))))
+               (before bytecomp/bytelink.ml(101):3973-4078
+                 (seq
+                   (after bytecomp/bytelink.ml(101):3973-4032
+                     (apply (field 14 (global Stdlib__list!)) add
+                       (after bytecomp/bytelink.ml(101):3987-4032
+                         (apply (field 18 (global Symtable!))
+                           (field 3 compunit)))))
+                   (before bytecomp/bytelink.ml(102):4036-4078
+                     (after bytecomp/bytelink.ml(102):4036-4078
+                       (apply (field 14 (global Stdlib__list!)) add
+                         (field 5 compunit))))))))))
+     remove_required =
+       (function param
+         (funct-body bytecomp/bytelink.ml(104)<ghost>:4100-4230
+           (let (rel =a (field 0 param))
+             (before bytecomp/bytelink.ml(105):4116-4230
+               (switch rel
+                case tag 2:
+                 (let (id =a (field 0 rel))
+                   (before bytecomp/bytelink.ml(107):4163-4218
+                     (setfield_ptr 0 missing_globals
+                       (after bytecomp/bytelink.ml(107):4182-4218
+                         (apply (field 5 (field 5 (global Ident!))) id
+                           (field 0 missing_globals))))))
+                default: (before bytecomp/bytelink.ml(108):4228-4230 0a))))))
+     scan_file =
+       (function obj_name tolink
+         (funct-body bytecomp/bytelink.ml(110)<ghost>:4246-6045
+           (before bytecomp/bytelink.ml(111):4266-6045
+             (let
+               (file_name =
+                  (try
+                    (after bytecomp/bytelink.ml(113):4296-4319
+                      (apply (field 5 (global Load_path!)) obj_name))
+                   with exn
+                    (if (== exn (field 7 (global Stdlib!)))
+                      (before bytecomp/bytelink.ml(115):4348-4385
+                        (raise
+                          (after bytecomp/bytelink.ml(115):4353-4385
+                            (makeblock 0 Error (makeblock 0 obj_name)))))
+                      (reraise exn))))
+               (before bytecomp/bytelink.ml(116):4391-6045
+                 (let
+                   (ic =
+                      (after bytecomp/bytelink.ml(116):4400-4421
+                        (apply (field 79 (global Stdlib!)) file_name)))
+                   (before bytecomp/bytelink.ml(117):4427-6045
+                     (try
+                       (let
+                         (buffer =
+                            (after bytecomp/bytelink.ml(118):4448-4503
+                              (apply (field 85 (global Stdlib!)) ic
+                                (string.length (field 22 (global Config!))))))
+                         (before bytecomp/bytelink.ml(119):4511-5933
+                           (if
+                             (after bytecomp/bytelink.ml(119):4514-4539
+                               (caml_string_equal buffer
+                                 (field 22 (global Config!))))
+                             (before bytecomp/bytelink.ml(119):4545-5017
+                               (let
+                                 (compunit_pos =[int]
+                                    (after bytecomp/bytelink.ml(123):4724-4743
+                                      (apply (field 87 (global Stdlib!)) ic)))
+                                 (before bytecomp/bytelink.ml(124):4777-5009
+                                   (seq
+                                     (after bytecomp/bytelink.ml(124):4777-4800
+                                       (apply (field 89 (global Stdlib!)) ic
+                                         compunit_pos))
+                                     (before bytecomp/bytelink.ml(125):4808-5009
+                                       (let
+                                         (compunit =
+                                            (after bytecomp/bytelink.ml(125):4824-4838
+                                              (apply
+                                                (field 88 (global Stdlib!))
+                                                ic)))
+                                         (before bytecomp/bytelink.ml(126):4868-5009
+                                           (seq
+                                             (after bytecomp/bytelink.ml(126):4868-4879
+                                               (apply
+                                                 (field 92 (global Stdlib!))
+                                                 ic))
+                                             (before bytecomp/bytelink.ml(127):4887-5009
+                                               (seq
+                                                 (after bytecomp/bytelink.ml(127):4887-4908
+                                                   (apply add_required
+                                                     compunit))
+                                                 (before bytecomp/bytelink.ml(128):4916-5009
+                                                   (seq
+                                                     (after bytecomp/bytelink.ml(128):4916-4959
+                                                       (apply
+                                                         (field 14
+                                                           (global Stdlib__list!))
+                                                         remove_required
+                                                         (field 3 compunit)))
+                                                     (before bytecomp/bytelink.ml(129):4967-5009
+                                                       (makeblock 0
+                                                         (makeblock 0
+                                                           file_name
+                                                           compunit)
+                                                         tolink))))))))))))))
+                             (before bytecomp/bytelink.ml(131):5027-5933
+                               (if
+                                 (after bytecomp/bytelink.ml(131):5030-5055
+                                   (caml_string_equal buffer
+                                     (field 23 (global Config!))))
+                                 (before bytecomp/bytelink.ml(131):5061-5881
+                                   (let
+                                     (pos_toc =[int]
+                                        (after bytecomp/bytelink.ml(134):5193-5212
+                                          (apply (field 87 (global Stdlib!))
+                                            ic)))
+                                     (before bytecomp/bytelink.ml(135):5255-5873
+                                       (seq
+                                         (after bytecomp/bytelink.ml(135):5255-5273
+                                           (apply (field 89 (global Stdlib!))
+                                             ic pos_toc))
+                                         (before bytecomp/bytelink.ml(136):5281-5873
+                                           (let
+                                             (toc =
+                                                (after bytecomp/bytelink.ml(136):5292-5306
+                                                  (apply
+                                                    (field 88
+                                                      (global Stdlib!))
+                                                    ic)))
+                                             (before bytecomp/bytelink.ml(137):5327-5873
+                                               (seq
+                                                 (after bytecomp/bytelink.ml(137):5327-5338
+                                                   (apply
+                                                     (field 92
+                                                       (global Stdlib!))
+                                                     ic))
+                                                 (before bytecomp/bytelink.ml(138):5346-5873
+                                                   (seq
+                                                     (after bytecomp/bytelink.ml(138):5346-5389
+                                                       (apply add_ccobjs
+                                                         (after bytecomp/bytelink.ml(138):5357-5385
+                                                           (apply
+                                                             (field 13
+                                                               (global Stdlib__filename!))
+                                                             file_name))
+                                                         toc))
+                                                     (before bytecomp/bytelink.ml(139):5397-5873
+                                                       (let
+                                                         (required =
+                                                            (after bytecomp/bytelink.ml(140):5420-5820
+                                                              (apply
+                                                                (field 21
+                                                                  (global Stdlib__list!))
+                                                                (function
+                                                                  compunit
+                                                                  reqd
+                                                                  (funct-body bytecomp/bytelink.ml(141):5446-5793
+                                                                    (before bytecomp/bytelink.ml(142):5480-5792
+                                                                    (if
+                                                                    (||
+                                                                    (field 7
+                                                                    compunit)
+                                                                    (||
+                                                                    (field 0
+                                                                    (field 20
+                                                                    (global Clflags!)))
+                                                                    (after bytecomp/bytelink.ml(144):5561-5602
+                                                                    (apply
+                                                                    (field 28
+                                                                    (global Stdlib__list!))
+                                                                    is_required
+                                                                    (field 3
+                                                                    compunit)))))
+                                                                    (before bytecomp/bytelink.ml(145):5620-5768
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(146):5640-5661
+                                                                    (apply
+                                                                    add_required
+                                                                    compunit))
+                                                                    (before bytecomp/bytelink.ml(147):5677-5752
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(147):5677-5720
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    remove_required
+                                                                    (field 3
+                                                                    compunit)))
+                                                                    (before bytecomp/bytelink.ml(148):5736-5752
+                                                                    (makeblock 0
+                                                                    compunit
+                                                                    reqd))))))
+                                                                    (before bytecomp/bytelink.ml(150):5788-5792
+                                                                    reqd)))))
+                                                                (field 0 toc)
+                                                                0a)))
+                                                         (before bytecomp/bytelink.ml(152):5830-5873
+                                                           (makeblock 0
+                                                             (makeblock 1
+                                                               file_name
+                                                               required)
+                                                             tolink))))))))))))))
+                                 (before bytecomp/bytelink.ml(154):5891-5933
+                                   (raise
+                                     (after bytecomp/bytelink.ml(154):5896-5933
+                                       (makeblock 0 Error
+                                         (makeblock 1 file_name))))))))))
+                      with x
+                       (if (== x (field 11 (global Stdlib!)))
+                         (before bytecomp/bytelink.ml(156):5960-6015
+                           (seq
+                             (after bytecomp/bytelink.ml(156):5960-5971
+                               (apply (field 92 (global Stdlib!)) ic))
+                             (before bytecomp/bytelink.ml(156):5973-6015
+                               (raise
+                                 (after bytecomp/bytelink.ml(156):5978-6015
+                                   (makeblock 0 Error
+                                     (makeblock 1 file_name)))))))
+                         (before bytecomp/bytelink.ml(157):6025-6045
+                           (seq
+                             (after bytecomp/bytelink.ml(157):6025-6036
+                               (apply (field 92 (global Stdlib!)) ic))
+                             (before bytecomp/bytelink.ml(157):6038-6045
+                               (reraise
+                                 (after bytecomp/bytelink.ml(157):6044-6045
+                                   x))))))))))))))
+     Consistbl =
+       (module-defn(Consistbl) bytecomp/bytelink.ml(163):6138-6192
+         (apply (field 0 (global Consistbl!))
+           (let (let = (field 3 (field 11 (global Misc!))))
+             (makeblock 0 (field 38 let) (field 39 let) (field 40 let)
+               (field 32 let)))))
+     crc_interfaces =
+       (after bytecomp/bytelink.ml(165):6215-6234
+         (apply (field 0 Consistbl) 0a))
+     interfaces = (makemutable 0 0a)
+     implementations_defined = (makemutable 0 0a)
+     check_consistency =
+       (function file_name cu
+         (funct-body bytecomp/bytelink.ml(169)<ghost>:6362-7276
+           (before bytecomp/bytelink.ml(170):6379-7276
+             (seq
+               (try
+                 (after bytecomp/bytelink.ml(171):6393-6725
+                   (apply (field 14 (global Stdlib__list!))
+                     (function param
+                       (funct-body bytecomp/bytelink.ml(172):6409-6705
+                         (let
+                           (crco =a (field 1 param) name =a (field 0 param))
+                           (before bytecomp/bytelink.ml(173):6438-6704
+                             (seq
+                               (setfield_ptr 0 interfaces
+                                 (makeblock 0 name (field 0 interfaces)))
+                               (before bytecomp/bytelink.ml(174):6481-6704
+                                 (if crco
+                                   (let (crc =a (field 0 crco))
+                                     (before bytecomp/bytelink.ml(177):6552-6704
+                                       (if
+                                         (after bytecomp/bytelink.ml(177):6555-6572
+                                           (caml_string_equal name
+                                             (field 0 cu)))
+                                         (before bytecomp/bytelink.ml(178):6590-6637
+                                           (after bytecomp/bytelink.ml(178):6590-6637
+                                             (apply (field 4 Consistbl)
+                                               crc_interfaces name crc
+                                               file_name)))
+                                         (before bytecomp/bytelink.ml(179):6655-6704
+                                           (after bytecomp/bytelink.ml(179):6655-6704
+                                             (apply (field 2 Consistbl)
+                                               crc_interfaces name crc
+                                               file_name))))))
+                                   (before bytecomp/bytelink.ml(175):6515-6517
+                                     0a))))))))
+                     (field 4 cu)))
+                with exn
+                 (let (tag =a (field 0 exn))
+                   (if (== tag (field 9 Consistbl))
+                     (let
+                       (auth =a (field 3 exn)
+                        user =a (field 2 exn)
+                        name =a (field 1 exn))
+                       (before bytecomp/bytelink.ml(182):6782-6833
+                         (raise
+                           (after bytecomp/bytelink.ml(182):6787-6833
+                             (makeblock 0 Error (makeblock 4 name user auth))))))
+                     (reraise exn))))
+               (before bytecomp/bytelink.ml(184):6843-7276
+                 (seq
+                   (try
+                     (let
+                       (source =
+                          (after bytecomp/bytelink.ml(185):6870-6916
+                            (apply (field 38 (global Stdlib__list!))
+                              (field 0 cu) (field 0 implementations_defined))))
+                       (before bytecomp/bytelink.ml(186):6924-7161
+                         (after bytecomp/bytelink.ml(186):6924-7161
+                           (apply (field 34 (global Location!))
+                             (after bytecomp/bytelink.ml(186):6947-6975
+                               (apply (field 1 (global Location!)) file_name))
+                             (makeblock 15 (field 0 cu)
+                               (after bytecomp/bytelink.ml(188):7060-7092
+                                 (apply (field 17 (global Location!))
+                                   file_name))
+                               (after bytecomp/bytelink.ml(189):7130-7159
+                                 (apply (field 17 (global Location!)) source)))))))
+                    with exn
+                     (if (== exn (field 7 (global Stdlib!)))
+                       (before bytecomp/bytelink.ml(190):7182-7184 0a)
+                       (reraise exn)))
+                   (before bytecomp/bytelink.ml(192):7194-7276
+                     (setfield_ptr 0 implementations_defined
+                       (makeblock 0 (makeblock 0 (field 0 cu) file_name)
+                         (field 0 implementations_defined))))))))))
+     extract_crc_interfaces =
+       (function param
+         (funct-body bytecomp/bytelink.ml(195)<ghost>:7305-7356
+           (before bytecomp/bytelink.ml(196):7312-7356
+             (after bytecomp/bytelink.ml(196):7312-7356
+               (apply (field 6 Consistbl) (field 0 interfaces)
+                 crc_interfaces)))))
+     clear_crc_interfaces =
+       (function param
+         (funct-body bytecomp/bytelink.ml(198)<ghost>:7383-7440
+           (before bytecomp/bytelink.ml(199):7390-7440
+             (seq
+               (after bytecomp/bytelink.ml(199):7390-7420
+                 (apply (field 1 Consistbl) crc_interfaces))
+               (before bytecomp/bytelink.ml(200):7424-7440
+                 (setfield_ptr 0 interfaces 0a))))))
+     debug_info = (makemutable 0 0a)
+     link_compunit =
+       (function output_fun currpos_fun inchan file_name compunit
+         (funct-body bytecomp/bytelink.ml(208)<ghost>:7609-8504
+           (before bytecomp/bytelink.ml(209):7662-8504
+             (seq
+               (after bytecomp/bytelink.ml(209):7662-7698
+                 (apply check_consistency file_name compunit))
+               (before bytecomp/bytelink.ml(210):7702-8504
+                 (seq
+                   (after bytecomp/bytelink.ml(210):7702-7732
+                     (apply (field 89 (global Stdlib!)) inchan
+                       (field 1 compunit)))
+                   (before bytecomp/bytelink.ml(211):7736-8504
+                     (let
+                       (code_block =
+                          (after bytecomp/bytelink.ml(211):7753-7803
+                            (apply (field 8 (field 44 (global Misc!))) inchan
+                              (field 2 compunit))))
+                       (before bytecomp/bytelink.ml(212):7809-8504
+                         (seq
+                           (after bytecomp/bytelink.ml(212):7809-7859
+                             (apply (field 1 (global Symtable!)) code_block
+                               (field 3 compunit)))
+                           (before bytecomp/bytelink.ml(213):7863-8504
+                             (seq
+                               (if
+                                 (&& (field 0 (field 16 (global Clflags!)))
+                                   (> (field 8 compunit) 0))
+                                 (before bytecomp/bytelink.ml(213):7911-8368
+                                   (seq
+                                     (after bytecomp/bytelink.ml(214):7921-7953
+                                       (apply (field 89 (global Stdlib!))
+                                         inchan (field 8 compunit)))
+                                     (before bytecomp/bytelink.ml(215):7959-8362
+                                       (let
+                                         (debug_event_list =
+                                            (after bytecomp/bytelink.ml(215):8010-8028
+                                              (apply
+                                                (field 88 (global Stdlib!))
+                                                inchan)))
+                                         (before bytecomp/bytelink.ml(216):8036-8362
+                                           (let
+                                             (debug_dirs =
+                                                (after bytecomp/bytelink.ml(216):8067-8085
+                                                  (apply
+                                                    (field 88
+                                                      (global Stdlib!))
+                                                    inchan)))
+                                             (before bytecomp/bytelink.ml(217):8093-8362
+                                               (let
+                                                 (file_path =
+                                                    (after bytecomp/bytelink.ml(217):8109-8160
+                                                      (apply
+                                                        (field 13
+                                                          (global Stdlib__filename!))
+                                                        (after bytecomp/bytelink.ml(217):8126-8160
+                                                          (apply
+                                                            (field 16
+                                                              (global Location!))
+                                                            file_name)))))
+                                                 (before bytecomp/bytelink.ml(218):8168-8362
+                                                   (let
+                                                     (debug_dirs =
+                                                        (if
+                                                          (after bytecomp/bytelink.ml(219):8194-8223
+                                                            (apply
+                                                              (field 31
+                                                                (global Stdlib__list!))
+                                                              file_path
+                                                              debug_dirs))
+                                                          (before bytecomp/bytelink.ml(220):8235-8245
+                                                            debug_dirs)
+                                                          (before bytecomp/bytelink.ml(221):8257-8280
+                                                            (makeblock 0
+                                                              file_path
+                                                              debug_dirs))))
+                                                     (before bytecomp/bytelink.ml(222):8288-8362
+                                                       (setfield_ptr 0
+                                                         debug_info
+                                                         (makeblock 0
+                                                           (makeblock 0 (int,*,*)
+                                                             (after bytecomp/bytelink.ml(222):8303-8316
+                                                               (apply
+                                                                 currpos_fun
+                                                                 0a))
+                                                             debug_event_list
+                                                             debug_dirs)
+                                                           (field 0
+                                                             debug_info))))))))))))))
+                                 0a)
+                               (before bytecomp/bytelink.ml(224):8372-8504
+                                 (seq
+                                   (after bytecomp/bytelink.ml(224):8372-8404
+                                     (apply
+                                       (field 12 (global Stdlib__array!))
+                                       output_fun code_block))
+                                   (before bytecomp/bytelink.ml(225):8408-8504
+                                     (if
+                                       (field 0 (field 20 (global Clflags!)))
+                                       (before bytecomp/bytelink.ml(226):8445-8504
+                                         (after bytecomp/bytelink.ml(226):8445-8504
+                                           (apply
+                                             (field 14
+                                               (global Stdlib__list!))
+                                             (field 2 (global Symtable!))
+                                             (field 6 compunit))))
+                                       0a))))))))))))))))
+     link_object =
+       (function output_fun currpos_fun file_name compunit
+         (funct-body bytecomp/bytelink.ml(230)<ghost>:8549-8865
+           (before bytecomp/bytelink.ml(231):8595-8865
+             (let
+               (inchan =
+                  (after bytecomp/bytelink.ml(231):8608-8629
+                    (apply (field 79 (global Stdlib!)) file_name)))
+               (before bytecomp/bytelink.ml(232):8635-8865
+                 (try
+                   (seq
+                     (after bytecomp/bytelink.ml(233):8643-8705
+                       (apply link_compunit output_fun currpos_fun inchan
+                         file_name compunit))
+                     (before bytecomp/bytelink.ml(234):8711-8726
+                       (after bytecomp/bytelink.ml(234):8711-8726
+                         (apply (field 92 (global Stdlib!)) inchan))))
+                  with x
+                   (let (tag =a (field 0 x))
+                     (if (== tag (field 26 (global Symtable!)))
+                       (let (msg =a (field 1 x))
+                         (before bytecomp/bytelink.ml(237):8766-8825
+                           (seq
+                             (after bytecomp/bytelink.ml(237):8766-8781
+                               (apply (field 92 (global Stdlib!)) inchan))
+                             (before bytecomp/bytelink.ml(237):8783-8825
+                               (raise
+                                 (after bytecomp/bytelink.ml(237):8788-8825
+                                   (makeblock 0 Error
+                                     (makeblock 3 file_name msg))))))))
+                       (before bytecomp/bytelink.ml(239):8841-8865
+                         (seq
+                           (after bytecomp/bytelink.ml(239):8841-8856
+                             (apply (field 92 (global Stdlib!)) inchan))
+                           (before bytecomp/bytelink.ml(239):8858-8865
+                             (reraise
+                               (after bytecomp/bytelink.ml(239):8864-8865 x)))))))))))))
+     link_archive =
+       (function output_fun currpos_fun file_name units_required
+         (funct-body bytecomp/bytelink.ml(243)<ghost>:8911-9336
+           (before bytecomp/bytelink.ml(244):8963-9336
+             (let
+               (inchan =
+                  (after bytecomp/bytelink.ml(244):8976-8997
+                    (apply (field 79 (global Stdlib!)) file_name)))
+               (before bytecomp/bytelink.ml(245):9003-9336
+                 (try
+                   (seq
+                     (after bytecomp/bytelink.ml(246):9011-9278
+                       (apply (field 14 (global Stdlib__list!))
+                         (function cu
+                           (funct-body bytecomp/bytelink.ml(247):9027-9257
+                             (before bytecomp/bytelink.ml(248):9047-9256
+                               (let
+                                 (name =
+                                    (after bytecomp/bytelink.ml(248):9058-9092
+                                      (apply (field 27 (global Stdlib!))
+                                        file_name
+                                        (after bytecomp/bytelink.ml(248):9070-9092
+                                          (apply (field 27 (global Stdlib!))
+                                            "("
+                                            (after bytecomp/bytelink.ml(248):9076-9092
+                                              (apply
+                                                (field 27 (global Stdlib!))
+                                                (field 0 cu) ")")))))))
+                                 (before bytecomp/bytelink.ml(249):9105-9256
+                                   (try
+                                     (after bytecomp/bytelink.ml(250):9120-9171
+                                       (apply link_compunit output_fun
+                                         currpos_fun inchan name cu))
+                                    with exn
+                                     (let (tag =a (field 0 exn))
+                                       (if
+                                         (== tag
+                                           (field 26 (global Symtable!)))
+                                         (let (msg =a (field 1 exn))
+                                           (before bytecomp/bytelink.ml(252):9219-9256
+                                             (raise
+                                               (after bytecomp/bytelink.ml(252):9224-9256
+                                                 (makeblock 0 Error
+                                                   (makeblock 3 name msg))))))
+                                         (reraise exn)))))))))
+                         units_required))
+                     (before bytecomp/bytelink.ml(254):9284-9299
+                       (after bytecomp/bytelink.ml(254):9284-9299
+                         (apply (field 92 (global Stdlib!)) inchan))))
+                  with x
+                   (before bytecomp/bytelink.ml(255):9312-9336
+                     (seq
+                       (after bytecomp/bytelink.ml(255):9312-9327
+                         (apply (field 92 (global Stdlib!)) inchan))
+                       (before bytecomp/bytelink.ml(255):9329-9336
+                         (reraise
+                           (after bytecomp/bytelink.ml(255):9335-9336 x)))))))))))
+     link_file =
+       (function output_fun currpos_fun param
+         (funct-body bytecomp/bytelink.ml(259)<ghost>:9387-9608
+           (switch* param
+            case tag 0:
+             (let (unit =a (field 1 param) file_name =a (field 0 param))
+               (before bytecomp/bytelink.ml(261):9463-9512
+                 (after bytecomp/bytelink.ml(261):9463-9512
+                   (apply link_object output_fun currpos_fun file_name unit))))
+            case tag 1:
+             (let (units =a (field 1 param) file_name =a (field 0 param))
+               (before bytecomp/bytelink.ml(263):9557-9608
+                 (after bytecomp/bytelink.ml(263):9557-9608
+                   (apply link_archive output_fun currpos_fun file_name
+                     units)))))))
+     output_debug_info =
+       (function oc
+         (funct-body bytecomp/bytelink.ml(274)<ghost>:9922-10152
+           (before bytecomp/bytelink.ml(275):9929-10152
+             (seq
+               (after bytecomp/bytelink.ml(275):9929-9975
+                 (apply (field 70 (global Stdlib!)) oc
+                   (after bytecomp/bytelink.ml(275):9950-9975
+                     (apply (field 0 (global Stdlib__list!))
+                       (field 0 debug_info)))))
+               (before bytecomp/bytelink.ml(276):9979-10152
+                 (seq
+                   (after bytecomp/bytelink.ml(276):9979-10132
+                     (apply (field 14 (global Stdlib__list!))
+                       (function param
+                         (funct-body bytecomp/bytelink.ml(277):9993-10116
+                           (let
+                             (debug_dirs =a (field 2 param)
+                              evl =a (field 1 param)
+                              ofs =a (field 0 param))
+                             (before bytecomp/bytelink.ml(278):10030-10115
+                               (seq
+                                 (after bytecomp/bytelink.ml(278):10030-10054
+                                   (apply (field 70 (global Stdlib!)) oc ofs))
+                                 (before bytecomp/bytelink.ml(279):10062-10115
+                                   (seq
+                                     (after bytecomp/bytelink.ml(279):10062-10081
+                                       (apply (field 71 (global Stdlib!)) oc
+                                         evl))
+                                     (before bytecomp/bytelink.ml(280):10089-10115
+                                       (after bytecomp/bytelink.ml(280):10089-10115
+                                         (apply (field 71 (global Stdlib!))
+                                           oc debug_dirs))))))))))
+                       (field 0 debug_info)))
+                   (before bytecomp/bytelink.ml(282):10136-10152
+                     (setfield_ptr 0 debug_info 0a))))))))
+     output_stringlist =
+       (function oc l
+         (funct-body bytecomp/bytelink.ml(286)<ghost>:10227-10295
+           (before bytecomp/bytelink.ml(287):10236-10295
+             (after bytecomp/bytelink.ml(287):10236-10295
+               (apply (field 14 (global Stdlib__list!))
+                 (function s
+                   (funct-body bytecomp/bytelink.ml(287):10246-10293
+                     (before bytecomp/bytelink.ml(287):10256-10292
+                       (seq
+                         (after bytecomp/bytelink.ml(287):10256-10274
+                           (apply (field 65 (global Stdlib!)) oc s))
+                         (before bytecomp/bytelink.ml(287):10276-10292
+                           (after bytecomp/bytelink.ml(287):10276-10292
+                             (apply (field 69 (global Stdlib!)) oc 0)))))))
+                 l)))))
+     make_absolute =
+       (function file
+         (funct-body bytecomp/bytelink.ml(291)<ghost>:10371-10509
+           (before bytecomp/bytelink.ml(292):10380-10509
+             (if
+               (not
+                 (after bytecomp/bytelink.ml(292):10387-10414
+                   (apply (field 4 (global Stdlib__filename!)) file)))
+               (before bytecomp/bytelink.ml(292):10420-10424 file)
+               (before bytecomp/bytelink.ml(293):10432-10509
+                 (after bytecomp/bytelink.ml(293):10432-10509
+                   (apply (field 15 (global Location!))
+                     (after bytecomp/bytelink.ml(294):10472-10509
+                       (apply (field 3 (global Stdlib__filename!))
+                         (after bytecomp/bytelink.ml(294):10489-10503
+                           (caml_sys_getcwd 0a))
+                         file)))))))))
+     link_bytecode =
+       (function final_name tolink exec_name standalone
+         (funct-body bytecomp/bytelink.ml(298)<ghost>:10570-14785
+           (before bytecomp/bytelink.ml(299):10614-14785
+             (let
+               (final_name =
+                  (after bytecomp/bytelink.ml(299):10631-10673
+                    (apply (field 2 (global Stdlib__option!)) final_name
+                      exec_name)))
+               (before bytecomp/bytelink.ml(302):10791-14785
+                 (seq
+                   (after bytecomp/bytelink.ml(302):10791-10945
+                     (apply (field 14 (global Stdlib__list!))
+                       (function param
+                         (funct-body bytecomp/bytelink.ml(302):10801-10938
+                           (catch
+                             (switch* param
+                              case tag 0:
+                               (let (file_name =a (field 0 param))
+                                 (before bytecomp/bytelink.ml(303):10848-10869
+                                   (if
+                                     (after bytecomp/bytelink.ml(303):10848-10869
+                                       (caml_string_equal file_name
+                                         exec_name))
+                                     (before bytecomp/bytelink.ml(304):10879-10922
+                                       (raise
+                                         (after bytecomp/bytelink.ml(304):10885-10922
+                                           (makeblock 0 Error
+                                             (makeblock 2 exec_name)))))
+                                     (exit 21))))
+                              case tag 1: (exit 21))
+                            with (21)
+                             (before bytecomp/bytelink.ml(305):10935-10937
+                               0a))))
+                       tolink))
+                   (before bytecomp/bytelink.ml(306):10949-14785
+                     (seq
+                       (after bytecomp/bytelink.ml(306):10949-10975
+                         (apply (field 15 (global Misc!)) exec_name))
+                       (before bytecomp/bytelink.ml(307):11023-14785
+                         (let
+                           (outperm =[int]
+                              (if (field 0 (field 126 (global Clflags!)))
+                                (before bytecomp/bytelink.ml(307):11067-11072
+                                  511)
+                                (before bytecomp/bytelink.ml(307):11078-11083
+                                  438)))
+                           (before bytecomp/bytelink.ml(308):11089-14785
+                             (let
+                               (outchan =
+                                  (after bytecomp/bytelink.ml(309):11107-11205
+                                    (apply (field 61 (global Stdlib!))
+                                      [0: 1a [0: 4a [0: 3a [0: 6a 0a]]]]
+                                      outperm exec_name)))
+                               (before bytecomp/bytelink.ml(311):11211-14785
+                                 (after bytecomp/bytelink.ml(311):11211-14785
+                                   (apply (field 3 (global Misc!))
+                                     (makeblock 0
+                                       (function param
+                                         (funct-body bytecomp/bytelink.ml(312):11240-11269
+                                           (before bytecomp/bytelink.ml(312):11251-11268
+                                             (after bytecomp/bytelink.ml(312):11251-11268
+                                               (apply
+                                                 (field 75 (global Stdlib!))
+                                                 outchan))))))
+                                     (makeblock 0
+                                       (function param
+                                         (funct-body bytecomp/bytelink.ml(313):11289-11322
+                                           (before bytecomp/bytelink.ml(313):11300-11321
+                                             (after bytecomp/bytelink.ml(313):11300-11321
+                                               (apply
+                                                 (field 15 (global Misc!))
+                                                 exec_name))))))
+                                     (function param
+                                       (funct-body bytecomp/bytelink.ml(314):11327-14785
+                                         (before bytecomp/bytelink.ml(315):11345-14779
+                                           (seq
+                                             (if
+                                               (&& standalone
+                                                 (field 0
+                                                   (field 126
+                                                     (global Clflags!))))
+                                               (before bytecomp/bytelink.ml(315):11389-11885
+                                                 (let
+                                                   (header =
+                                                      (if
+                                                        (>
+                                                          (string.length
+                                                            (field 0
+                                                              (field 45
+                                                                (global Clflags!))))
+                                                          0)
+                                                        (before bytecomp/bytelink.ml(319):11517-11532
+                                                          "camlheader_ur")
+                                                        (before bytecomp/bytelink.ml(319):11538-11577
+                                                          (after bytecomp/bytelink.ml(319):11538-11577
+                                                            (apply
+                                                              (field 27
+                                                                (global Stdlib!))
+                                                              "camlheader"
+                                                              (field 0
+                                                                (field 125
+                                                                  (global Clflags!))))))))
+                                                   (before bytecomp/bytelink.ml(321):11599-11874
+                                                     (try
+                                                       (let
+                                                         (inchan =
+                                                            (after bytecomp/bytelink.ml(322):11627-11662
+                                                              (apply
+                                                                (field 79
+                                                                  (global Stdlib!))
+                                                                (after bytecomp/bytelink.ml(322):11639-11662
+                                                                  (apply
+                                                                    (field 5
+                                                                    (global Load_path!))
+                                                                    header)))))
+                                                         (before bytecomp/bytelink.ml(323):11677-11729
+                                                           (seq
+                                                             (after bytecomp/bytelink.ml(323):11677-11701
+                                                               (apply
+                                                                 (field 19
+                                                                   (global Misc!))
+                                                                 inchan
+                                                                 outchan))
+                                                             (before bytecomp/bytelink.ml(324):11714-11729
+                                                               (after bytecomp/bytelink.ml(324):11714-11729
+                                                                 (apply
+                                                                   (field 92
+                                                                    (global Stdlib!))
+                                                                   inchan))))))
+                                                      with exn
+                                                       (if
+                                                         (== exn
+                                                           (field 7
+                                                             (global Stdlib!)))
+                                                         (before bytecomp/bytelink.ml(326):11768-11805
+                                                           (raise
+                                                             (after bytecomp/bytelink.ml(326):11774-11805
+                                                               (makeblock 0
+                                                                 Error
+                                                                 (makeblock 0
+                                                                   header)))))
+                                                         (let
+                                                           (tag =a
+                                                              (field 0 exn))
+                                                           (if
+                                                             (== tag
+                                                               (field 10
+                                                                 (global Stdlib!)))
+                                                             (let
+                                                               (msg =a
+                                                                  (field 1
+                                                                    exn))
+                                                               (before bytecomp/bytelink.ml(327):11834-11874
+                                                                 (raise
+                                                                   (after bytecomp/bytelink.ml(327):11840-11874
+                                                                    (makeblock 0
+                                                                    Error
+                                                                    (makeblock 8
+                                                                    header
+                                                                    msg))))))
+                                                             (reraise exn))))))))
+                                               0a)
+                                             (before bytecomp/bytelink.ml(329):11894-14779
+                                               (seq
+                                                 (after bytecomp/bytelink.ml(329):11894-11926
+                                                   (apply
+                                                     (field 0
+                                                       (global Bytesections!))
+                                                     outchan))
+                                                 (before bytecomp/bytelink.ml(331):12007-14779
+                                                   (seq
+                                                     (if
+                                                       (&&
+                                                         (>
+                                                           (string.length
+                                                             (field 0
+                                                               (field 45
+                                                                 (global Clflags!))))
+                                                           0)
+                                                         (field 0
+                                                           (field 126
+                                                             (global Clflags!))))
+                                                       (before bytecomp/bytelink.ml(332):12086-12548
+                                                         (let
+                                                           (runtime =
+                                                              (after bytecomp/bytelink.ml(333):12115-12149
+                                                                (apply
+                                                                  make_absolute
+                                                                  (field 0
+                                                                    (field 45
+                                                                    (global Clflags!))))))
+                                                           (before bytecomp/bytelink.ml(334):12162-12537
+                                                             (let
+                                                               (runtime =
+                                                                  (if
+                                                                    (>
+                                                                    (string.length
+                                                                    runtime)
+                                                                    125)
+                                                                    (before bytecomp/bytelink.ml(337):12304-12369
+                                                                    (after bytecomp/bytelink.ml(337):12304-12369
+                                                                    (apply
+                                                                    (field 27
+                                                                    (global Stdlib!))
+                                                                    "/bin/sh\nexec \""
+                                                                    (after bytecomp/bytelink.ml(338):12341-12369
+                                                                    (apply
+                                                                    (field 27
+                                                                    (global Stdlib!))
+                                                                    runtime
+                                                                    "\" \"$0\" \"$@\"")))))
+                                                                    (before bytecomp/bytelink.ml(340):12399-12406
+                                                                    runtime)))
+                                                               (before bytecomp/bytelink.ml(342):12428-12537
+                                                                 (seq
+                                                                   (after bytecomp/bytelink.ml(342):12428-12457
+                                                                    (apply
+                                                                    (field 65
+                                                                    (global Stdlib!))
+                                                                    outchan
+                                                                    runtime))
+                                                                   (before bytecomp/bytelink.ml(343):12468-12537
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(343):12468-12492
+                                                                    (apply
+                                                                    (field 64
+                                                                    (global Stdlib!))
+                                                                    outchan
+                                                                    '\n'))
+                                                                    (before bytecomp/bytelink.ml(344):12503-12537
+                                                                    (after bytecomp/bytelink.ml(344):12503-12537
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Bytesections!))
+                                                                    outchan
+                                                                    "RNTM")))))))))))
+                                                       0a)
+                                                     (before bytecomp/bytelink.ml(347):12583-14779
+                                                       (let
+                                                         (start_code =[int]
+                                                            (after bytecomp/bytelink.ml(347):12600-12615
+                                                              (apply
+                                                                (field 73
+                                                                  (global Stdlib!))
+                                                                outchan)))
+                                                         (before bytecomp/bytelink.ml(348):12626-14779
+                                                           (seq
+                                                             (after bytecomp/bytelink.ml(348):12626-12641
+                                                               (apply
+                                                                 (field 0
+                                                                   (global Symtable!))
+                                                                 0a))
+                                                             (before bytecomp/bytelink.ml(349):12650-14779
+                                                               (seq
+                                                                 (after bytecomp/bytelink.ml(349):12650-12673
+                                                                   (apply
+                                                                    clear_crc_interfaces
+                                                                    0a))
+                                                                 (before bytecomp/bytelink.ml(350):12682-14779
+                                                                   (let
+                                                                    (sharedobjs =
+                                                                    (after bytecomp/bytelink.ml(350):12699-12744
+                                                                    (apply
+                                                                    (field 16
+                                                                    (global Stdlib__list!))
+                                                                    (field 0
+                                                                    (global Dll!))
+                                                                    (field 0
+                                                                    (field 9
+                                                                    (global Clflags!))))))
+                                                                    (before bytecomp/bytelink.ml(351):12755-14779
+                                                                    (let
+                                                                    (check_dlls =
+                                                                    (&&
+                                                                    standalone
+                                                                    (after bytecomp/bytelink.ml(351):12786-12813
+                                                                    (caml_string_equal
+                                                                    (field 49
+                                                                    (global Config!))
+                                                                    (field 48
+                                                                    (global Config!))))))
+                                                                    (before bytecomp/bytelink.ml(352):12824-14779
+                                                                    (seq
+                                                                    (if
+                                                                    check_dlls
+                                                                    (before bytecomp/bytelink.ml(352):12843-13126
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(354):12902-12942
+                                                                    (apply
+                                                                    (field 7
+                                                                    (global Dll!))
+                                                                    (field 0
+                                                                    (field 13
+                                                                    (global Clflags!)))))
+                                                                    (before bytecomp/bytelink.ml(355):12953-13115
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(355):12953-12990
+                                                                    (apply
+                                                                    (field 5
+                                                                    (global Dll!))
+                                                                    (after bytecomp/bytelink.ml(355):12966-12990
+                                                                    (apply
+                                                                    (field 4
+                                                                    (global Load_path!))
+                                                                    0a))))
+                                                                    (before bytecomp/bytelink.ml(356):13001-13115
+                                                                    (try
+                                                                    (after bytecomp/bytelink.ml(356):13005-13046
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Dll!))
+                                                                    0a
+                                                                    sharedobjs))
+                                                                    with exn
+                                                                    (let
+                                                                    (tag =a
+                                                                    (field 0
+                                                                    exn))
+                                                                    (if
+                                                                    (== tag
+                                                                    (field 6
+                                                                    (global Stdlib!)))
+                                                                    (let
+                                                                    (reason =a
+                                                                    (field 1
+                                                                    exn))
+                                                                    (before bytecomp/bytelink.ml(357):13079-13115
+                                                                    (raise
+                                                                    (after bytecomp/bytelink.ml(357):13084-13115
+                                                                    (makeblock 0
+                                                                    Error
+                                                                    (makeblock 6
+                                                                    reason))))))
+                                                                    (reraise
+                                                                    exn)))))))))
+                                                                    0a)
+                                                                    (before bytecomp/bytelink.ml(359):13135-14779
+                                                                    (let
+                                                                    (output_fun =
+                                                                    (after bytecomp/bytelink.ml(359):13152-13172
+                                                                    (apply
+                                                                    (field 66
+                                                                    (global Stdlib!))
+                                                                    outchan))
+                                                                    currpos_fun =
+                                                                    (function
+                                                                    param
+                                                                    : int
+                                                                    (funct-body bytecomp/bytelink.ml(360)<ghost>:13196-13229
+                                                                    (before bytecomp/bytelink.ml(360):13201-13229
+                                                                    (-
+                                                                    (after bytecomp/bytelink.ml(360):13201-13216
+                                                                    (apply
+                                                                    (field 73
+                                                                    (global Stdlib!))
+                                                                    outchan))
+                                                                    start_code)))))
+                                                                    (before bytecomp/bytelink.ml(361):13240-14779
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(361):13240-13291
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    (after bytecomp/bytelink.ml(361):13250-13284
+                                                                    (apply
+                                                                    link_file
+                                                                    output_fun
+                                                                    currpos_fun))
+                                                                    tolink))
+                                                                    (before bytecomp/bytelink.ml(362):13300-14779
+                                                                    (seq
+                                                                    (if
+                                                                    check_dlls
+                                                                    (before bytecomp/bytelink.ml(362):13319-13339
+                                                                    (after bytecomp/bytelink.ml(362):13319-13339
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Dll!))
+                                                                    0a))) 0a)
+                                                                    (before bytecomp/bytelink.ml(364):13388-14779
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(364):13388-13422
+                                                                    (apply
+                                                                    (field 69
+                                                                    (global Stdlib!))
+                                                                    outchan
+                                                                    (field 143
+                                                                    (global Opcodes!))))
+                                                                    (before bytecomp/bytelink.ml(365):13431-14779
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(365):13431-13452
+                                                                    (apply
+                                                                    (field 69
+                                                                    (global Stdlib!))
+                                                                    outchan
+                                                                    0))
+                                                                    (before bytecomp/bytelink.ml(365):13454-14779
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(365):13454-13475
+                                                                    (apply
+                                                                    (field 69
+                                                                    (global Stdlib!))
+                                                                    outchan
+                                                                    0))
+                                                                    (before bytecomp/bytelink.ml(365):13477-14779
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(365):13477-13498
+                                                                    (apply
+                                                                    (field 69
+                                                                    (global Stdlib!))
+                                                                    outchan
+                                                                    0))
+                                                                    (before bytecomp/bytelink.ml(366):13507-14779
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(366):13507-13541
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Bytesections!))
+                                                                    outchan
+                                                                    "CODE"))
+                                                                    (before bytecomp/bytelink.ml(368):13573-14779
+                                                                    (seq
+                                                                    (if
+                                                                    standalone
+                                                                    (before bytecomp/bytelink.ml(368):13592-13881
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(370):13653-13696
+                                                                    (apply
+                                                                    output_stringlist
+                                                                    outchan
+                                                                    (field 0
+                                                                    (field 56
+                                                                    (global Clflags!)))))
+                                                                    (before bytecomp/bytelink.ml(371):13707-13870
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(371):13707-13741
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Bytesections!))
+                                                                    outchan
+                                                                    "DLPT"))
+                                                                    (before bytecomp/bytelink.ml(373):13789-13870
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(373):13789-13825
+                                                                    (apply
+                                                                    output_stringlist
+                                                                    outchan
+                                                                    sharedobjs))
+                                                                    (before bytecomp/bytelink.ml(374):13836-13870
+                                                                    (after bytecomp/bytelink.ml(374):13836-13870
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Bytesections!))
+                                                                    outchan
+                                                                    "DLLS")))))))))
+                                                                    0a)
+                                                                    (before bytecomp/bytelink.ml(377):13931-14779
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(377):13931-13970
+                                                                    (apply
+                                                                    (field 5
+                                                                    (global Symtable!))
+                                                                    outchan))
+                                                                    (before bytecomp/bytelink.ml(378):13979-14779
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(378):13979-14013
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Bytesections!))
+                                                                    outchan
+                                                                    "PRIM"))
+                                                                    (before bytecomp/bytelink.ml(380):14060-14779
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(380):14060-14223
+                                                                    (apply
+                                                                    (field 4
+                                                                    (global Emitcode!))
+                                                                    final_name
+                                                                    "bytecode executable"
+                                                                    outchan
+                                                                    (after bytecomp/bytelink.ml(382):14190-14223
+                                                                    (apply
+                                                                    (field 3
+                                                                    (global Symtable!))
+                                                                    0a))))
+                                                                    (before bytecomp/bytelink.ml(383):14232-14779
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(383):14232-14266
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Bytesections!))
+                                                                    outchan
+                                                                    "DATA"))
+                                                                    (before bytecomp/bytelink.ml(385):14318-14779
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(385):14318-14352
+                                                                    (apply
+                                                                    (field 4
+                                                                    (global Symtable!))
+                                                                    outchan))
+                                                                    (before bytecomp/bytelink.ml(386):14361-14779
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(386):14361-14395
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Bytesections!))
+                                                                    outchan
+                                                                    "SYMB"))
+                                                                    (before bytecomp/bytelink.ml(388):14434-14779
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(388):14434-14481
+                                                                    (apply
+                                                                    (field 71
+                                                                    (global Stdlib!))
+                                                                    outchan
+                                                                    (after bytecomp/bytelink.ml(388):14455-14481
+                                                                    (apply
+                                                                    extract_crc_interfaces
+                                                                    0a))))
+                                                                    (before bytecomp/bytelink.ml(389):14490-14779
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(389):14490-14524
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Bytesections!))
+                                                                    outchan
+                                                                    "CRCS"))
+                                                                    (before bytecomp/bytelink.ml(391):14557-14779
+                                                                    (seq
+                                                                    (if
+                                                                    (field 0
+                                                                    (field 16
+                                                                    (global Clflags!)))
+                                                                    (before bytecomp/bytelink.ml(391):14580-14676
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(392):14595-14620
+                                                                    (apply
+                                                                    output_debug_info
+                                                                    outchan))
+                                                                    (before bytecomp/bytelink.ml(393):14631-14665
+                                                                    (after bytecomp/bytelink.ml(393):14631-14665
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Bytesections!))
+                                                                    outchan
+                                                                    "DBUG")))))
+                                                                    0a)
+                                                                    (before bytecomp/bytelink.ml(396):14736-14778
+                                                                    (after bytecomp/bytelink.ml(396):14736-14778
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Bytesections!))
+                                                                    outchan))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+     output_code_string_counter = (makemutable 0 (int) 0)
+     output_code_string =
+       (function outchan code
+         (funct-body bytecomp/bytelink.ml(403)<ghost>:14903-15456
+           (before bytecomp/bytelink.ml(404):14920-15456
+             (let (pos = (makemutable 0 (int) 0))
+               (before bytecomp/bytelink.ml(405):14941-15456
+                 (let (len =[int] (bytes.length code))
+                   (before bytecomp/bytelink.ml(406):14974-15456
+                     (while (< (field 0 pos) len)
+                       (before bytecomp/bytelink.ml(407):14998-15449
+                         (let
+                           (c1 =[int]
+                              (after bytecomp/bytelink.ml(407):15016-15037
+                                (bytes.get code (field 0 pos))))
+                           (before bytecomp/bytelink.ml(408):15045-15449
+                             (let
+                               (c2 =[int]
+                                  (after bytecomp/bytelink.ml(408):15063-15090
+                                    (bytes.get code (+ (field 0 pos) 1))))
+                               (before bytecomp/bytelink.ml(409):15098-15449
+                                 (let
+                                   (c3 =[int]
+                                      (after bytecomp/bytelink.ml(409):15116-15143
+                                        (bytes.get code (+ (field 0 pos) 2))))
+                                   (before bytecomp/bytelink.ml(410):15151-15449
+                                     (let
+                                       (c4 =[int]
+                                          (after bytecomp/bytelink.ml(410):15169-15196
+                                            (bytes.get code
+                                              (+ (field 0 pos) 3))))
+                                       (before bytecomp/bytelink.ml(411):15204-15449
+                                         (seq
+                                           (setfield_imm 0 pos
+                                             (+ (field 0 pos) 4))
+                                           (before bytecomp/bytelink.ml(412):15225-15449
+                                             (seq
+                                               (after bytecomp/bytelink.ml(412):15225-15282
+                                                 (apply
+                                                   (field 0
+                                                     (global Stdlib__printf!))
+                                                   outchan
+                                                   [0:
+                                                    [11:
+                                                     "0x"
+                                                     [4:
+                                                      6a [0: 2a 2] 0a
+                                                      [4:
+                                                       6a [0: 2a 2] 0a
+                                                       [4:
+                                                        6a [0: 2a 2] 0a
+                                                        [4:
+                                                         6a [0: 2a 2] 0a
+                                                         [11: ", " 0a]]]]]]
+                                                    "0x%02x%02x%02x%02x, "]
+                                                   c4 c3 c2 c1))
+                                               (before bytecomp/bytelink.ml(413):15288-15449
+                                                 (seq
+                                                   (+:=1
+                                                     output_code_string_counter)
+                                                   (before bytecomp/bytelink.ml(414):15325-15449
+                                                     (if
+                                                       (>=
+                                                         (field 0
+                                                           output_code_string_counter)
+                                                         6)
+                                                       (before bytecomp/bytelink.ml(414):15366-15449
+                                                         (seq
+                                                           (after bytecomp/bytelink.ml(415):15378-15402
+                                                             (apply
+                                                               (field 64
+                                                                 (global Stdlib!))
+                                                               outchan '\n'))
+                                                           (before bytecomp/bytelink.ml(416):15410-15441
+                                                             (setfield_imm 0
+                                                               output_code_string_counter
+                                                               0))))
+                                                       0a))))))))))))))))))))))))
+     output_data_string =
+       (function outchan data
+         (funct-body bytecomp/bytelink.ml(422)<ghost>:15518-15774
+           (before bytecomp/bytelink.ml(423):15535-15774
+             (let (counter = (makemutable 0 (int) 0))
+               (before bytecomp/bytelink.ml(424):15560-15774
+                 (for i 0 to (- (string.length data) 1)
+                   (before bytecomp/bytelink.ml(425):15603-15767
+                     (seq
+                       (after bytecomp/bytelink.ml(425):15603-15654
+                         (apply (field 0 (global Stdlib__printf!)) outchan
+                           [0: [4: 0a 0a 0a [11: ", " 0a]] "%d, "]
+                           (after bytecomp/bytelink.ml(425):15643-15653
+                             (string.get data i))))
+                       (before bytecomp/bytelink.ml(426):15660-15767
+                         (seq (+:=1 counter)
+                           (before bytecomp/bytelink.ml(427):15678-15767
+                             (if (>= (field 0 counter) 12)
+                               (before bytecomp/bytelink.ml(427):15701-15767
+                                 (seq
+                                   (after bytecomp/bytelink.ml(428):15713-15739
+                                     (apply (field 65 (global Stdlib!))
+                                       outchan "\n"))
+                                   (before bytecomp/bytelink.ml(429):15747-15759
+                                     (setfield_imm 0 counter 0))))
+                               0a))))))))))))
+     output_cds_file =
+       (function outfile
+         (funct-body bytecomp/bytelink.ml(435)<ghost>:15823-16473
+           (before bytecomp/bytelink.ml(436):15835-16473
+             (seq
+               (after bytecomp/bytelink.ml(436):15835-15859
+                 (apply (field 15 (global Misc!)) outfile))
+               (before bytecomp/bytelink.ml(437):15863-16473
+                 (let
+                   (outchan =
+                      (after bytecomp/bytelink.ml(438):15881-15964
+                        (apply (field 61 (global Stdlib!))
+                          [0: 1a [0: 4a [0: 3a [0: 6a 0a]]]] 511 outfile)))
+                   (before bytecomp/bytelink.ml(440):15970-16473
+                     (after bytecomp/bytelink.ml(440):15970-16473
+                       (apply (field 3 (global Misc!))
+                         (makeblock 0
+                           (function param
+                             (funct-body bytecomp/bytelink.ml(441):15999-16028
+                               (before bytecomp/bytelink.ml(441):16010-16027
+                                 (after bytecomp/bytelink.ml(441):16010-16027
+                                   (apply (field 75 (global Stdlib!))
+                                     outchan))))))
+                         (makeblock 0
+                           (function param
+                             (funct-body bytecomp/bytelink.ml(442):16048-16079
+                               (before bytecomp/bytelink.ml(442):16059-16078
+                                 (after bytecomp/bytelink.ml(442):16059-16078
+                                   (apply (field 15 (global Misc!)) outfile))))))
+                         (function param
+                           (funct-body bytecomp/bytelink.ml(443):16084-16473
+                             (before bytecomp/bytelink.ml(444):16102-16467
+                               (seq
+                                 (after bytecomp/bytelink.ml(444):16102-16134
+                                   (apply (field 0 (global Bytesections!))
+                                     outchan))
+                                 (before bytecomp/bytelink.ml(446):16186-16467
+                                   (seq
+                                     (after bytecomp/bytelink.ml(446):16186-16220
+                                       (apply (field 4 (global Symtable!))
+                                         outchan))
+                                     (before bytecomp/bytelink.ml(447):16229-16467
+                                       (seq
+                                         (after bytecomp/bytelink.ml(447):16229-16263
+                                           (apply
+                                             (field 1 (global Bytesections!))
+                                             outchan "SYMB"))
+                                         (before bytecomp/bytelink.ml(449):16296-16467
+                                           (seq
+                                             (after bytecomp/bytelink.ml(449):16296-16321
+                                               (apply output_debug_info
+                                                 outchan))
+                                             (before bytecomp/bytelink.ml(450):16330-16467
+                                               (seq
+                                                 (after bytecomp/bytelink.ml(450):16330-16364
+                                                   (apply
+                                                     (field 1
+                                                       (global Bytesections!))
+                                                     outchan "DBUG"))
+                                                 (before bytecomp/bytelink.ml(452):16424-16466
+                                                   (after bytecomp/bytelink.ml(452):16424-16466
+                                                     (apply
+                                                       (field 2
+                                                         (global Bytesections!))
+                                                       outchan))))))))))))))))))))))))
+     link_bytecode_as_c =
+       (function tolink outfile
+         (funct-body bytecomp/bytelink.ml(457)<ghost>:16546-19601
+           (before bytecomp/bytelink.ml(458):16565-19601
+             (let
+               (outchan =
+                  (after bytecomp/bytelink.ml(458):16579-16595
+                    (apply (field 59 (global Stdlib!)) outfile)))
+               (before bytecomp/bytelink.ml(459):16601-19601
+                 (seq
+                   (after bytecomp/bytelink.ml(459):16601-19510
+                     (apply (field 3 (global Misc!))
+                       (makeblock 0
+                         (function param
+                           (funct-body bytecomp/bytelink.ml(460):16630-16659
+                             (before bytecomp/bytelink.ml(460):16641-16658
+                               (after bytecomp/bytelink.ml(460):16641-16658
+                                 (apply (field 75 (global Stdlib!)) outchan))))))
+                       (makeblock 0
+                         (function param
+                           (funct-body bytecomp/bytelink.ml(461):16679-16710
+                             (before bytecomp/bytelink.ml(461):16690-16709
+                               (after bytecomp/bytelink.ml(461):16690-16709
+                                 (apply (field 15 (global Misc!)) outfile))))))
+                       (function param
+                         (funct-body bytecomp/bytelink.ml(462):16715-19510
+                           (before bytecomp/bytelink.ml(464):16759-19504
+                             (seq
+                               (after bytecomp/bytelink.ml(464):16759-16922
+                                 (apply (field 65 (global Stdlib!)) outchan
+                                   "#define CAML_INTERNALS\n\n#ifdef __cplusplus\nextern \"C\" {\n#endif\n#include <caml/mlvalues.h>\n#include <caml/startup.h>\n"))
+                               (before bytecomp/bytelink.ml(472):16931-19504
+                                 (seq
+                                   (after bytecomp/bytelink.ml(472):16931-16983
+                                     (apply (field 65 (global Stdlib!))
+                                       outchan
+                                       "static int caml_code[] = {\n"))
+                                   (before bytecomp/bytelink.ml(473):16992-19504
+                                     (seq
+                                       (after bytecomp/bytelink.ml(473):16992-17007
+                                         (apply (field 0 (global Symtable!))
+                                           0a))
+                                       (before bytecomp/bytelink.ml(474):17016-19504
+                                         (seq
+                                           (after bytecomp/bytelink.ml(474):17016-17039
+                                             (apply clear_crc_interfaces 0a))
+                                           (before bytecomp/bytelink.ml(475):17048-19504
+                                             (let
+                                               (currpos =
+                                                  (makemutable 0 (int) 0))
+                                               (before bytecomp/bytelink.ml(476):17078-19504
+                                                 (let
+                                                   (output_fun =
+                                                      (function code
+                                                        (funct-body bytecomp/bytelink.ml(476)<ghost>:17093-17190
+                                                          (before bytecomp/bytelink.ml(477):17109-17190
+                                                            (seq
+                                                              (after bytecomp/bytelink.ml(477):17109-17140
+                                                                (apply
+                                                                  output_code_string
+                                                                  outchan
+                                                                  code))
+                                                              (before bytecomp/bytelink.ml(478):17151-17190
+                                                                (setfield_imm 0
+                                                                  currpos
+                                                                  (+
+                                                                    (field 0
+                                                                    currpos)
+                                                                    (bytes.length
+                                                                    code))))))))
+                                                    currpos_fun =
+                                                      (function param : int
+                                                        (funct-body bytecomp/bytelink.ml(479)<ghost>:17214-17227
+                                                          (before bytecomp/bytelink.ml(479):17219-17227
+                                                            (field 0 currpos)))))
+                                                   (before bytecomp/bytelink.ml(480):17238-19504
+                                                     (seq
+                                                       (after bytecomp/bytelink.ml(480):17238-17289
+                                                         (apply
+                                                           (field 14
+                                                             (global Stdlib__list!))
+                                                           (after bytecomp/bytelink.ml(480):17248-17282
+                                                             (apply link_file
+                                                               output_fun
+                                                               currpos_fun))
+                                                           tolink))
+                                                       (before bytecomp/bytelink.ml(482):17338-19504
+                                                         (seq
+                                                           (after bytecomp/bytelink.ml(482):17338-17390
+                                                             (apply
+                                                               (field 0
+                                                                 (global Stdlib__printf!))
+                                                               outchan
+                                                               [0:
+                                                                [11:
+                                                                 "\n0x"
+                                                                 [4:
+                                                                  6a 0a 0a
+                                                                  [11:
+                                                                   "};\n\n"
+                                                                   0a]]]
+                                                                "\n0x%x};\n\n"]
+                                                               (field 143
+                                                                 (global Opcodes!))))
+                                                           (before bytecomp/bytelink.ml(484):17437-19504
+                                                             (seq
+                                                               (after bytecomp/bytelink.ml(484):17437-17490
+                                                                 (apply
+                                                                   (field 65
+                                                                    (global Stdlib!))
+                                                                   outchan
+                                                                   "static char caml_data[] = {\n"))
+                                                               (before bytecomp/bytelink.ml(485):17499-19504
+                                                                 (seq
+                                                                   (after bytecomp/bytelink.ml(485):17499-17591
+                                                                    (apply
+                                                                    output_data_string
+                                                                    outchan
+                                                                    (after bytecomp/bytelink.ml(486):17535-17591
+                                                                    (caml_output_value_to_string
+                                                                    (after bytecomp/bytelink.ml(486):17554-17587
+                                                                    (apply
+                                                                    (field 3
+                                                                    (global Symtable!))
+                                                                    0a)) 0a))))
+                                                                   (before bytecomp/bytelink.ml(487):17600-19504
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(487):17600-17632
+                                                                    (apply
+                                                                    (field 65
+                                                                    (global Stdlib!))
+                                                                    outchan
+                                                                    "\n};\n\n"))
+                                                                    (before bytecomp/bytelink.ml(489):17667-19504
+                                                                    (let
+                                                                    (sections =
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "SYMB"
+                                                                    (after bytecomp/bytelink.ml(490):17701-17727
+                                                                    (apply
+                                                                    (field 7
+                                                                    (global Symtable!))
+                                                                    0a)))
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "PRIM"
+                                                                    (after bytecomp/bytelink.ml(491):17756-17789
+                                                                    (apply
+                                                                    (field 8
+                                                                    (global Symtable!))
+                                                                    0a)))
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    "CRCS"
+                                                                    (after bytecomp/bytelink.ml(492):17818-17844
+                                                                    (apply
+                                                                    extract_crc_interfaces
+                                                                    0a))) 0a))))
+                                                                    (before bytecomp/bytelink.ml(493):17857-19504
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(493):17857-17914
+                                                                    (apply
+                                                                    (field 65
+                                                                    (global Stdlib!))
+                                                                    outchan
+                                                                    "static char caml_sections[] = {\n"))
+                                                                    (before bytecomp/bytelink.ml(494):17923-19504
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(494):17923-17990
+                                                                    (apply
+                                                                    output_data_string
+                                                                    outchan
+                                                                    (after bytecomp/bytelink.ml(495):17959-17990
+                                                                    (caml_output_value_to_string
+                                                                    sections
+                                                                    0a))))
+                                                                    (before bytecomp/bytelink.ml(496):17999-19504
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(496):17999-18031
+                                                                    (apply
+                                                                    (field 65
+                                                                    (global Stdlib!))
+                                                                    outchan
+                                                                    "\n};\n\n"))
+                                                                    (before bytecomp/bytelink.ml(498):18077-19504
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(498):18077-18116
+                                                                    (apply
+                                                                    (field 6
+                                                                    (global Symtable!))
+                                                                    outchan))
+                                                                    (before bytecomp/bytelink.ml(500):18154-19503
+                                                                    (after bytecomp/bytelink.ml(500):18154-19503
+                                                                    (apply
+                                                                    (field 65
+                                                                    (global Stdlib!))
+                                                                    outchan
+                                                                    "\nvoid caml_startup(char_os ** argv)\n{\n  caml_startup_code(caml_code, sizeof(caml_code),\n                    caml_data, sizeof(caml_data),\n                    caml_sections, sizeof(caml_sections),\n                    /* pooling */ 0,\n                    argv);\n}\n\nvalue caml_startup_exn(char_os ** argv)\n{\n  return caml_startup_code_exn(caml_code, sizeof(caml_code),\n                               caml_data, sizeof(caml_data),\n                               caml_sections, sizeof(caml_sections),\n                               /* pooling */ 0,\n                               argv);\n}\n\nvoid caml_startup_pooled(char_os ** argv)\n{\n  caml_startup_code(caml_code, sizeof(caml_code),\n                    caml_data, sizeof(caml_data),\n                    caml_sections, sizeof(caml_sections),\n                    /* pooling */ 1,\n                    argv);\n}\n\nvalue caml_startup_pooled_exn(char_os ** argv)\n{\n  return caml_startup_code_exn(caml_code, sizeof(caml_code),\n                               caml_data, sizeof(caml_data),\n                               caml_sections, sizeof(caml_sections),\n                               /* pooling */ 1,\n                               argv);\n}\n#ifdef __cplusplus\n}\n#endif\n")))))))))))))))))))))))))))))))))))))))
+                   (before bytecomp/bytelink.ml(540):19514-19601
+                     (if (field 0 (field 16 (global Clflags!)))
+                       (before bytecomp/bytelink.ml(541):19541-19601
+                         (after bytecomp/bytelink.ml(541):19541-19601
+                           (apply output_cds_file
+                             (after bytecomp/bytelink.ml(541):19557-19601
+                               (apply (field 27 (global Stdlib!))
+                                 (after bytecomp/bytelink.ml(541):19558-19591
+                                   (apply
+                                     (field 11 (global Stdlib__filename!))
+                                     outfile))
+                                 ".cds")))))
+                       0a))))))))
+     build_custom_runtime =
+       (function prim_name exec_name
+         (funct-body bytecomp/bytelink.ml(545)<ghost>:19658-20179
+           (before bytecomp/bytelink.ml(546):19682-20179
+             (let
+               (runtime_lib =
+                  (if (not (field 0 (field 126 (global Clflags!))))
+                    (before bytecomp/bytelink.ml(548):19742-19744 "")
+                    (before bytecomp/bytelink.ml(549):19754-19792
+                      (after bytecomp/bytelink.ml(549):19754-19792
+                        (apply (field 27 (global Stdlib!)) "-lcamlrun"
+                          (field 0 (field 125 (global Clflags!))))))))
+               (before bytecomp/bytelink.ml(550):19798-20179
+                 (let
+                   (debug_prefix_map =
+                      (if
+                        (&& (field 5 (global Config!))
+                          (not (field 0 (field 74 (global Clflags!)))))
+                        (before bytecomp/bytelink.ml(552):19905-19966
+                          (makeblock 0
+                            (after bytecomp/bytelink.ml(552):19906-19965
+                              (apply (field 3 (global Stdlib__printf!))
+                                [0:
+                                 [11:
+                                  "-fdebug-prefix-map="
+                                  [2: 0a [11: "=camlprim.c" 0a]]]
+                                 "-fdebug-prefix-map=%s=camlprim.c"]
+                                prim_name))
+                            0a))
+                        (before bytecomp/bytelink.ml(554):19982-19984 0a)))
+                   (before bytecomp/bytelink.ml(555):19990-20179
+                     (after bytecomp/bytelink.ml(555):19990-20179
+                       (apply (field 7 (global Ccomp!)) 0a exec_name
+                         (after bytecomp/bytelink.ml(556):20032-20107
+                           (apply (field 36 (global Stdlib!))
+                             debug_prefix_map
+                             (after bytecomp/bytelink.ml(556):20052-20106
+                               (apply (field 36 (global Stdlib!))
+                                 (makeblock 0 prim_name 0a)
+                                 (after bytecomp/bytelink.ml(556):20066-20106
+                                   (apply (field 36 (global Stdlib!))
+                                     (after bytecomp/bytelink.ml(556):20066-20090
+                                       (apply
+                                         (field 8 (global Stdlib__list!))
+                                         (field 0
+                                           (field 8 (global Clflags!)))))
+                                     (makeblock 0 runtime_lib 0a)))))))
+                         (after bytecomp/bytelink.ml(557):20112-20179
+                           (apply (field 27 (global Stdlib!))
+                             (after bytecomp/bytelink.ml(557):20113-20142
+                               (apply (field 120 (global Clflags!)) "-I"))
+                             (after bytecomp/bytelink.ml(557):20145-20178
+                               (apply (field 27 (global Stdlib!)) " "
+                                 (field 11 (global Config!)))))))))))))))
+     append_bytecode =
+       (function bytecode_name exec_name
+         (funct-body bytecomp/bytelink.ml(559)<ghost>:20201-20394
+           (before bytecomp/bytelink.ml(560):20229-20394
+             (let
+               (oc =
+                  (after bytecomp/bytelink.ml(560):20238-20302
+                    (apply (field 61 (global Stdlib!))
+                      [0: 1a [0: 2a [0: 6a 0a]]] 0 exec_name)))
+               (before bytecomp/bytelink.ml(561):20308-20394
+                 (let
+                   (ic =
+                      (after bytecomp/bytelink.ml(561):20317-20342
+                        (apply (field 79 (global Stdlib!)) bytecode_name)))
+                   (before bytecomp/bytelink.ml(562):20348-20394
+                     (seq
+                       (after bytecomp/bytelink.ml(562):20348-20363
+                         (apply (field 19 (global Misc!)) ic oc))
+                       (before bytecomp/bytelink.ml(563):20367-20394
+                         (seq
+                           (after bytecomp/bytelink.ml(563):20367-20378
+                             (apply (field 92 (global Stdlib!)) ic))
+                           (before bytecomp/bytelink.ml(564):20382-20394
+                             (after bytecomp/bytelink.ml(564):20382-20394
+                               (apply (field 75 (global Stdlib!)) oc)))))))))))))
+     fix_exec_name =
+       (function name
+         (funct-body bytecomp/bytelink.ml(569)<ghost>:20503-20637
+           (before bytecomp/bytelink.ml(570):20512-20637
+             (let (*match* = (field 3 (global Stdlib__sys!)))
+               (catch
+                 (catch
+                   (stringswitch *match*
+                    case "Cygwin": (exit 22)
+                    case "Win32": (exit 22)
+                    default: (exit 23))
+                  with (23)
+                   (before bytecomp/bytelink.ml(573):20633-20637 name))
+                with (22)
+                 (before bytecomp/bytelink.ml(572):20567-20623
+                   (if
+                     (after bytecomp/bytelink.ml(572):20570-20594
+                       (apply (field 21 (global Stdlib__string!)) name '.'))
+                     (before bytecomp/bytelink.ml(572):20600-20604 name)
+                     (before bytecomp/bytelink.ml(572):20610-20623
+                       (after bytecomp/bytelink.ml(572):20610-20623
+                         (apply (field 27 (global Stdlib!)) name ".exe"))))))))))
+     link =
+       (function objfiles output_name
+         (funct-body bytecomp/bytelink.ml(577)<ghost>:20707-24843
+           (before bytecomp/bytelink.ml(578):20732-24843
+             (let
+               (objfiles =
+                  (if (field 0 (field 28 (global Clflags!)))
+                    (before bytecomp/bytelink.ml(579):20781-20789 objfiles)
+                    (before bytecomp/bytelink.ml(580):20799-20911
+                      (if (field 0 (field 24 (global Clflags!)))
+                        (before bytecomp/bytelink.ml(580):20832-20856
+                          (makeblock 0 "stdlib.cma" objfiles))
+                        (before bytecomp/bytelink.ml(581):20866-20911
+                          (makeblock 0 "stdlib.cma"
+                            (after bytecomp/bytelink.ml(581):20882-20911
+                              (apply (field 36 (global Stdlib!)) objfiles
+                                [0: "std_exit.cmo" 0a]))))))))
+               (before bytecomp/bytelink.ml(582):20917-24843
+                 (let
+                   (tolink =
+                      (after bytecomp/bytelink.ml(582):20930-20967
+                        (apply (field 21 (global Stdlib__list!)) scan_file
+                          objfiles 0a)))
+                   (before bytecomp/bytelink.ml(583):20973-24843
+                     (let
+                       (missing_modules =
+                          (after bytecomp/bytelink.ml(584):20999-21069
+                            (apply (field 17 (field 5 (global Ident!)))
+                              (function id
+                                (funct-body bytecomp/bytelink.ml(584):21016-21052
+                                  (before bytecomp/bytelink.ml(584):21027-21051
+                                    (not
+                                      (after bytecomp/bytelink.ml(584):21031-21051
+                                        (apply (field 21 (global Ident!)) id))))))
+                              (field 0 missing_globals))))
+                       (before bytecomp/bytelink.ml(586):21077-24843
+                         (seq
+                           (let
+                             (*match* =
+                                (after bytecomp/bytelink.ml(587):21093-21127
+                                  (apply (field 20 (field 5 (global Ident!)))
+                                    missing_modules)))
+                             (if *match*
+                               (let (id =a (field 0 *match*))
+                                 (before bytecomp/bytelink.ml(589):21165-21224
+                                   (raise
+                                     (after bytecomp/bytelink.ml(589):21171-21224
+                                       (makeblock 0 Error
+                                         (makeblock 7
+                                           (after bytecomp/bytelink.ml(589):21207-21222
+                                             (apply
+                                               (field 14 (global Ident!)) id))))))))
+                               (before bytecomp/bytelink.ml(588):21145-21147
+                                 0a)))
+                           (before bytecomp/bytelink.ml(591):21234-24843
+                             (seq
+                               (setfield_ptr 0 (field 8 (global Clflags!))
+                                 (after bytecomp/bytelink.ml(591):21252-21281
+                                   (apply (field 36 (global Stdlib!))
+                                     (field 0 (field 8 (global Clflags!)))
+                                     (field 0 lib_ccobjs))))
+                               (before bytecomp/bytelink.ml(592):21312-24843
+                                 (seq
+                                   (setfield_ptr 0
+                                     (field 26 (global Clflags!))
+                                     (after bytecomp/bytelink.ml(592):21334-21367
+                                       (apply (field 36 (global Stdlib!))
+                                         (field 0 lib_ccopts)
+                                         (field 0
+                                           (field 26 (global Clflags!))))))
+                                   (before bytecomp/bytelink.ml(594):21450-24843
+                                     (seq
+                                       (setfield_ptr 0
+                                         (field 9 (global Clflags!))
+                                         (after bytecomp/bytelink.ml(594):21468-21497
+                                           (apply (field 36 (global Stdlib!))
+                                             (field 0 lib_dllibs)
+                                             (field 0
+                                               (field 9 (global Clflags!))))))
+                                       (before bytecomp/bytelink.ml(595):21529-24843
+                                         (if
+                                           (not
+                                             (field 0
+                                               (field 21 (global Clflags!))))
+                                           (before bytecomp/bytelink.ml(596):21569-21606
+                                             (after bytecomp/bytelink.ml(596):21569-21606
+                                               (apply link_bytecode 0a tolink
+                                                 output_name 1a)))
+                                           (before bytecomp/bytelink.ml(597):21614-24843
+                                             (if
+                                               (not
+                                                 (field 0
+                                                   (field 24
+                                                     (global Clflags!))))
+                                               (before bytecomp/bytelink.ml(597):21651-23047
+                                                 (let
+                                                   (bytecode_name =
+                                                      (after bytecomp/bytelink.ml(598):21681-21713
+                                                        (apply
+                                                          (field 14
+                                                            (global Stdlib__filename!))
+                                                          0a "camlcode" "")))
+                                                   (before bytecomp/bytelink.ml(599):21721-23041
+                                                     (let
+                                                       (prim_name =
+                                                          (if
+                                                            (field 0
+                                                              (field 74
+                                                                (global Clflags!)))
+                                                            (before bytecomp/bytelink.ml(601):21788-21815
+                                                              (after bytecomp/bytelink.ml(601):21788-21815
+                                                                (apply
+                                                                  (field 27
+                                                                    (global Stdlib!))
+                                                                  output_name
+                                                                  ".camlprim.c")))
+                                                            (before bytecomp/bytelink.ml(603):21835-21869
+                                                              (after bytecomp/bytelink.ml(603):21835-21869
+                                                                (apply
+                                                                  (field 14
+                                                                    (global Stdlib__filename!))
+                                                                  0a
+                                                                  "camlprim"
+                                                                  ".c")))))
+                                                       (before bytecomp/bytelink.ml(604):21877-23041
+                                                         (after bytecomp/bytelink.ml(604):21877-23041
+                                                           (apply
+                                                             (field 3
+                                                               (global Misc!))
+                                                             (makeblock 0
+                                                               (function
+                                                                 param
+                                                                 (funct-body bytecomp/bytelink.ml(605):21908-22029
+                                                                   (before bytecomp/bytelink.ml(606):21929-22028
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(606):21929-21954
+                                                                    (apply
+                                                                    (field 15
+                                                                    (global Misc!))
+                                                                    bytecode_name))
+                                                                    (before bytecomp/bytelink.ml(607):21966-22028
+                                                                    (if
+                                                                    (not
+                                                                    (field 0
+                                                                    (field 74
+                                                                    (global Clflags!))))
+                                                                    (before bytecomp/bytelink.ml(607):22007-22028
+                                                                    (after bytecomp/bytelink.ml(607):22007-22028
+                                                                    (apply
+                                                                    (field 15
+                                                                    (global Misc!))
+                                                                    prim_name)))
+                                                                    0a)))))))
+                                                             0a
+                                                             (function param
+                                                               (funct-body bytecomp/bytelink.ml(608):22036-23041
+                                                                 (before bytecomp/bytelink.ml(609):22056-23033
+                                                                   (seq
+                                                                    (after bytecomp/bytelink.ml(609):22056-22120
+                                                                    (apply
+                                                                    link_bytecode
+                                                                    (makeblock 0
+                                                                    output_name)
+                                                                    tolink
+                                                                    bytecode_name
+                                                                    0a))
+                                                                    (before bytecomp/bytelink.ml(610):22131-23033
+                                                                    (let
+                                                                    (poc =
+                                                                    (after bytecomp/bytelink.ml(610):22141-22159
+                                                                    (apply
+                                                                    (field 59
+                                                                    (global Stdlib!))
+                                                                    prim_name)))
+                                                                    (before bytecomp/bytelink.ml(613):22285-23033
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(613):22285-22617
+                                                                    (apply
+                                                                    (field 65
+                                                                    (global Stdlib!))
+                                                                    poc
+                                                                    "#ifdef __cplusplus\nextern \"C\" {\n#endif\n#ifdef _WIN64\n#ifdef __MINGW32__\ntypedef long long value;\n#else\ntypedef __int64 value;\n#endif\n#else\ntypedef long value;\n#endif\n"))
+                                                                    (before bytecomp/bytelink.ml(626):22628-23033
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(626):22628-22663
+                                                                    (apply
+                                                                    (field 6
+                                                                    (global Symtable!))
+                                                                    poc))
+                                                                    (before bytecomp/bytelink.ml(627):22674-23033
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(627):22674-22758
+                                                                    (apply
+                                                                    (field 65
+                                                                    (global Stdlib!))
+                                                                    poc
+                                                                    "#ifdef __cplusplus\n}\n#endif\n"))
+                                                                    (before bytecomp/bytelink.ml(631):22769-23033
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(631):22769-22782
+                                                                    (apply
+                                                                    (field 75
+                                                                    (global Stdlib!))
+                                                                    poc))
+                                                                    (before bytecomp/bytelink.ml(632):22793-23033
+                                                                    (let
+                                                                    (exec_name =
+                                                                    (after bytecomp/bytelink.ml(632):22809-22834
+                                                                    (apply
+                                                                    fix_exec_name
+                                                                    output_name)))
+                                                                    (before bytecomp/bytelink.ml(633):22847-23033
+                                                                    (seq
+                                                                    (if
+                                                                    (not
+                                                                    (after bytecomp/bytelink.ml(633):22854-22896
+                                                                    (apply
+                                                                    build_custom_runtime
+                                                                    prim_name
+                                                                    exec_name)))
+                                                                    (before bytecomp/bytelink.ml(634):22911-22938
+                                                                    (raise
+                                                                    (after bytecomp/bytelink.ml(634):22916-22938
+                                                                    (makeblock 0
+                                                                    Error 0a))))
+                                                                    0a)
+                                                                    (before bytecomp/bytelink.ml(635):22949-23033
+                                                                    (if
+                                                                    (not
+                                                                    (field 0
+                                                                    (field 53
+                                                                    (global Clflags!))))
+                                                                    (before bytecomp/bytelink.ml(636):22994-23033
+                                                                    (after bytecomp/bytelink.ml(636):22994-23033
+                                                                    (apply
+                                                                    append_bytecode
+                                                                    bytecode_name
+                                                                    exec_name)))
+                                                                    0a)))))))))))))))))))))))))))
+                                               (before bytecomp/bytelink.ml(638):23053-24843
+                                                 (let
+                                                   (basename =
+                                                      (after bytecomp/bytelink.ml(639):23078-23113
+                                                        (apply
+                                                          (field 11
+                                                            (global Stdlib__filename!))
+                                                          output_name)))
+                                                   (before bytecomp/bytelink.ml(640):23121-24837
+                                                     (catch
+                                                       (if
+                                                         (&&
+                                                           (field 0
+                                                             (field 25
+                                                               (global Clflags!)))
+                                                           (not
+                                                             (after bytecomp/bytelink.ml(642):23204-23244
+                                                               (apply
+                                                                 (field 6
+                                                                   (global Stdlib__filename!))
+                                                                 output_name
+                                                                 ".c"))))
+                                                         (before bytecomp/bytelink.ml(643):23256-23307
+                                                           (let
+                                                             (stable_name =
+                                                                [0:
+                                                                 "camlobj.c"]
+                                                              c_file =
+                                                                (after bytecomp/bytelink.ml(643):23256-23289
+                                                                  (apply
+                                                                    (field 14
+                                                                    (global Stdlib__filename!))
+                                                                    0a
+                                                                    "camlobj"
+                                                                    ".c")))
+                                                             (exit 29
+                                                               stable_name
+                                                               c_file)))
+                                                         (before bytecomp/bytelink.ml(644):23319-23448
+                                                           (let
+                                                             (f =
+                                                                (after bytecomp/bytelink.ml(645):23341-23356
+                                                                  (apply
+                                                                    (field 27
+                                                                    (global Stdlib!))
+                                                                    basename
+                                                                    ".c")))
+                                                             (before bytecomp/bytelink.ml(646):23368-23438
+                                                               (seq
+                                                                 (if
+                                                                   (after bytecomp/bytelink.ml(646):23371-23388
+                                                                    (caml_sys_file_exists
+                                                                    f))
+                                                                   (before bytecomp/bytelink.ml(646):23394-23421
+                                                                    (raise
+                                                                    (after bytecomp/bytelink.ml(646):23399-23421
+                                                                    (makeblock 0
+                                                                    Error
+                                                                    (makeblock 5
+                                                                    f)))))
+                                                                   0a)
+                                                                 (before bytecomp/bytelink.ml(647):23431-23438
+                                                                   (let
+                                                                    (stable_name =
+                                                                    0a
+                                                                    c_file =a
+                                                                    f)
+                                                                    (exit 29
+                                                                    stable_name
+                                                                    c_file))))))))
+                                                      with (29 stable_name c_file)
+                                                       (before bytecomp/bytelink.ml(650):23460-24837
+                                                         (let
+                                                           (obj_file =
+                                                              (if
+                                                                (field 0
+                                                                  (field 25
+                                                                    (global Clflags!)))
+                                                                (before bytecomp/bytelink.ml(652):23527-23576
+                                                                  (after bytecomp/bytelink.ml(652):23527-23576
+                                                                    (apply
+                                                                    (field 27
+                                                                    (global Stdlib!))
+                                                                    (after bytecomp/bytelink.ml(652):23527-23559
+                                                                    (apply
+                                                                    (field 11
+                                                                    (global Stdlib__filename!))
+                                                                    c_file))
+                                                                    (field 41
+                                                                    (global Config!)))))
+                                                                (before bytecomp/bytelink.ml(653):23588-23613
+                                                                  (after bytecomp/bytelink.ml(653):23588-23613
+                                                                    (apply
+                                                                    (field 27
+                                                                    (global Stdlib!))
+                                                                    basename
+                                                                    (field 41
+                                                                    (global Config!)))))))
+                                                           (before bytecomp/bytelink.ml(655):23625-24837
+                                                             (let
+                                                               (temps =
+                                                                  (makemutable 0
+                                                                    0a))
+                                                               (before bytecomp/bytelink.ml(656):23651-24837
+                                                                 (after bytecomp/bytelink.ml(656):23651-24837
+                                                                   (apply
+                                                                    (field 3
+                                                                    (global Misc!))
+                                                                    (makeblock 0
+                                                                    (function
+                                                                    param
+                                                                    (funct-body bytecomp/bytelink.ml(657):23682-23722
+                                                                    (before bytecomp/bytelink.ml(657):23693-23721
+                                                                    (after bytecomp/bytelink.ml(657):23693-23721
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__list!))
+                                                                    (field 15
+                                                                    (global Misc!))
+                                                                    (field 0
+                                                                    temps)))))))
+                                                                    0a
+                                                                    (function
+                                                                    param
+                                                                    (funct-body bytecomp/bytelink.ml(658):23729-24837
+                                                                    (before bytecomp/bytelink.ml(659):23749-24829
+                                                                    (seq
+                                                                    (after bytecomp/bytelink.ml(659):23749-23781
+                                                                    (apply
+                                                                    link_bytecode_as_c
+                                                                    tolink
+                                                                    c_file))
+                                                                    (before bytecomp/bytelink.ml(660):23792-24828
+                                                                    (if
+                                                                    (not
+                                                                    (after bytecomp/bytelink.ml(660):23799-23839
+                                                                    (apply
+                                                                    (field 6
+                                                                    (global Stdlib__filename!))
+                                                                    output_name
+                                                                    ".c")))
+                                                                    (before bytecomp/bytelink.ml(660):23845-24828
+                                                                    (seq
+                                                                    (setfield_ptr 0
+                                                                    temps
+                                                                    (makeblock 0
+                                                                    c_file
+                                                                    (field 0
+                                                                    temps)))
+                                                                    (before bytecomp/bytelink.ml(662):23900-24815
+                                                                    (seq
+                                                                    (if
+                                                                    (!=
+                                                                    (after bytecomp/bytelink.ml(662):23903-23958
+                                                                    (apply
+                                                                    (field 2
+                                                                    (global Ccomp!))
+                                                                    (makeblock 0
+                                                                    obj_file)
+                                                                    0a
+                                                                    stable_name
+                                                                    c_file))
+                                                                    0)
+                                                                    (before bytecomp/bytelink.ml(663):23982-24009
+                                                                    (raise
+                                                                    (after bytecomp/bytelink.ml(663):23987-24009
+                                                                    (makeblock 0
+                                                                    Error 0a))))
+                                                                    0a)
+                                                                    (before bytecomp/bytelink.ml(664):24022-24815
+                                                                    (if
+                                                                    (||
+                                                                    (not
+                                                                    (after bytecomp/bytelink.ml(664):24029-24079
+                                                                    (apply
+                                                                    (field 6
+                                                                    (global Stdlib__filename!))
+                                                                    output_name
+                                                                    (field 41
+                                                                    (global Config!)))))
+                                                                    (field 0
+                                                                    (field 25
+                                                                    (global Clflags!))))
+                                                                    (before bytecomp/bytelink.ml(665):24134-24815
+                                                                    (seq
+                                                                    (setfield_ptr 0
+                                                                    temps
+                                                                    (makeblock 0
+                                                                    obj_file
+                                                                    (field 0
+                                                                    temps)))
+                                                                    (before bytecomp/bytelink.ml(667):24195-24800
+                                                                    (catch
+                                                                    (if
+                                                                    (after bytecomp/bytelink.ml(668):24232-24280
+                                                                    (apply
+                                                                    (field 6
+                                                                    (global Stdlib__filename!))
+                                                                    output_name
+                                                                    (field 41
+                                                                    (global Config!))))
+                                                                    (before bytecomp/bytelink.ml(669):24301-24318
+                                                                    (let
+                                                                    (c_libs =
+                                                                    ""
+                                                                    mode = 3a)
+                                                                    (exit 24
+                                                                    c_libs
+                                                                    mode)))
+                                                                    (before bytecomp/bytelink.ml(670):24339-24381
+                                                                    (let
+                                                                    (c_libs =
+                                                                    (field 11
+                                                                    (global Config!))
+                                                                    mode = 2a)
+                                                                    (exit 24
+                                                                    c_libs
+                                                                    mode))))
+                                                                    with (24 c_libs mode)
+                                                                    (before bytecomp/bytelink.ml(672):24411-24799
+                                                                    (if
+                                                                    (not
+                                                                    (let
+                                                                    (runtime_lib =
+                                                                    (if
+                                                                    (not
+                                                                    (field 0
+                                                                    (field 126
+                                                                    (global Clflags!))))
+                                                                    (before bytecomp/bytelink.ml(675):24527-24529
+                                                                    "")
+                                                                    (before bytecomp/bytelink.ml(676):24554-24592
+                                                                    (after bytecomp/bytelink.ml(676):24554-24592
+                                                                    (apply
+                                                                    (field 27
+                                                                    (global Stdlib!))
+                                                                    "-lcamlrun"
+                                                                    (field 0
+                                                                    (field 125
+                                                                    (global Clflags!))))))))
+                                                                    (before bytecomp/bytelink.ml(677):24613-24748
+                                                                    (after bytecomp/bytelink.ml(677):24613-24748
+                                                                    (apply
+                                                                    (field 7
+                                                                    (global Ccomp!))
+                                                                    mode
+                                                                    output_name
+                                                                    (after bytecomp/bytelink.ml(678):24667-24722
+                                                                    (apply
+                                                                    (field 36
+                                                                    (global Stdlib!))
+                                                                    (makeblock 0
+                                                                    obj_file
+                                                                    0a)
+                                                                    (after bytecomp/bytelink.ml(678):24681-24721
+                                                                    (apply
+                                                                    (field 36
+                                                                    (global Stdlib!))
+                                                                    (after bytecomp/bytelink.ml(678):24681-24705
+                                                                    (apply
+                                                                    (field 8
+                                                                    (global Stdlib__list!))
+                                                                    (field 0
+                                                                    (field 8
+                                                                    (global Clflags!)))))
+                                                                    (makeblock 0
+                                                                    runtime_lib
+                                                                    0a)))))
+                                                                    c_libs)))))
+                                                                    (before bytecomp/bytelink.ml(680):24771-24799
+                                                                    (raise
+                                                                    (after bytecomp/bytelink.ml(680):24777-24799
+                                                                    (makeblock 0
+                                                                    Error 0a))))
+                                                                    0a))))))
+                                                                    0a))))))
+                                                                    0a)))))))))))))))))))))))))))))))))))))
+     report_error =
+       (function ppf param
+         (funct-body bytecomp/bytelink.ml(690)<ghost>:24895-26239
+           (switch* param
+            case int 0:
+             (before bytecomp/bytelink.ml(710):25746-25802
+               (after bytecomp/bytelink.ml(710):25746-25802
+                 (apply (field 122 (global Stdlib__format!)) ppf
+                   [0:
+                    [11: "Error while building custom runtime system" 0a]
+                    "Error while building custom runtime system"])))
+            case tag 0:
+             (let (name =a (field 0 param))
+               (before bytecomp/bytelink.ml(692):24943-25005
+                 (after bytecomp/bytelink.ml(692):24943-25005
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11: "Cannot find file " [15: 0a]]
+                      "Cannot find file %a"]
+                     (field 18 (global Location!)) name))))
+            case tag 1:
+             (let (name =a (field 0 param))
+               (before bytecomp/bytelink.ml(694):25043-25135
+                 (after bytecomp/bytelink.ml(694):25043-25135
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11:
+                       "The file "
+                       [15: [11: " is not a bytecode object file" 0a]]]
+                      "The file %a is not a bytecode object file"]
+                     (field 18 (global Location!)) name))))
+            case tag 2:
+             (let (name =a (field 0 param))
+               (before bytecomp/bytelink.ml(697):25172-25319
+                 (after bytecomp/bytelink.ml(697):25172-25319
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11:
+                       "The output file "
+                       [2:
+                        0a
+                        [11:
+                         " has the wrong name. The extension implies an object file but the link step was requested"
+                         0a]]]
+                      "The output file %s has the wrong name. The extension implies an object file but the link step was requested"]
+                     name))))
+            case tag 3:
+             (let (err =a (field 1 param) name =a (field 0 param))
+               (before bytecomp/bytelink.ml(700):25357-25459
+                 (after bytecomp/bytelink.ml(700):25357-25459
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11:
+                       "Error while linking "
+                       [15: [12: ':' [17: [0: "@ " 1 0] [15: 0a]]]]]
+                      "Error while linking %a:@ %a"]
+                     (field 18 (global Location!)) name
+                     (field 27 (global Symtable!)) err))))
+            case tag 4:
+             (let
+               (file2 =a (field 2 param)
+                file1 =a (field 1 param)
+                intf =a (field 0 param))
+               (before bytecomp/bytelink.ml(703):25513-25717
+                 (after bytecomp/bytelink.ml(703):25513-25717
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [18:
+                       [1: [0: [11: "<hov>" 0a] "<hov>"]]
+                       [11:
+                        "Files "
+                        [15:
+                         [17:
+                          [0: "@ " 1 0]
+                          [11:
+                           "and "
+                           [15:
+                            [17:
+                             [0: "@ " 1 0]
+                             [11:
+                              "make inconsistent assumptions over interface "
+                              [2: 0a [17: 0a 0a]]]]]]]]]]
+                      "@[<hov>Files %a@ and %a@ make inconsistent assumptions over interface %s@]"]
+                     (field 18 (global Location!)) file1
+                     (field 18 (global Location!)) file2 intf))))
+            case tag 5:
+             (let (file =a (field 0 param))
+               (before bytecomp/bytelink.ml(712):25833-25917
+                 (after bytecomp/bytelink.ml(712):25833-25917
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11: "Cannot overwrite existing file " [15: 0a]]
+                      "Cannot overwrite existing file %a"]
+                     (field 18 (global Location!)) file))))
+            case tag 6:
+             (let (file =a (field 0 param))
+               (before bytecomp/bytelink.ml(715):25952-26042
+                 (after bytecomp/bytelink.ml(715):25952-26042
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11: "Error on dynamically loaded library: " [15: 0a]]
+                      "Error on dynamically loaded library: %a"]
+                     (field 18 (global Location!)) file))))
+            case tag 7:
+             (let (s =a (field 0 param))
+               (before bytecomp/bytelink.ml(718):26086-26137
+                 (after bytecomp/bytelink.ml(718):26086-26137
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11:
+                       "Required module `"
+                       [2: 0a [11: "' is unavailable" 0a]]]
+                      "Required module `%s' is unavailable"]
+                     s))))
+            case tag 8:
+             (let (header =a (field 1 param) msg =a (field 0 param))
+               (before bytecomp/bytelink.ml(720):26176-26239
+                 (after bytecomp/bytelink.ml(720):26176-26239
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11:
+                       "System error while copying file "
+                       [2: 0a [11: ": " [2: 0a 0a]]]]
+                      "System error while copying file %s: %s"]
+                     header msg)))))))
+     *match* =
+       (after bytecomp/bytelink.ml(723):26252-26396
+         (apply (field 46 (global Location!))
+           (function param
+             (funct-body bytecomp/bytelink.ml(724):26287-26396
+               (let (tag =a (field 0 param))
+                 (if (== tag Error)
+                   (let (err =a (field 1 param))
+                     (before bytecomp/bytelink.ml(725):26318-26372
+                       (makeblock 0
+                         (after bytecomp/bytelink.ml(725):26323-26372
+                           (apply (field 45 (global Location!)) report_error
+                             err)))))
+                   (before bytecomp/bytelink.ml(726):26386-26390 0a)))))))
+     reset =
+       (function param
+         (funct-body bytecomp/bytelink.ml(729)<ghost>:26408-26631
+           (before bytecomp/bytelink.ml(730):26415-26631
+             (seq (setfield_ptr 0 lib_ccobjs 0a)
+               (before bytecomp/bytelink.ml(731):26435-26631
+                 (seq (setfield_ptr 0 lib_ccopts 0a)
+                   (before bytecomp/bytelink.ml(732):26455-26631
+                     (seq (setfield_ptr 0 lib_dllibs 0a)
+                       (before bytecomp/bytelink.ml(733):26475-26631
+                         (seq
+                           (setfield_ptr 0 missing_globals
+                             (field 0 (field 5 (global Ident!))))
+                           (before bytecomp/bytelink.ml(734):26513-26631
+                             (seq
+                               (after bytecomp/bytelink.ml(734):26513-26543
+                                 (apply (field 1 Consistbl) crc_interfaces))
+                               (before bytecomp/bytelink.ml(735):26547-26631
+                                 (seq
+                                   (setfield_ptr 0 implementations_defined
+                                     0a)
+                                   (before bytecomp/bytelink.ml(736):26580-26631
+                                     (seq (setfield_ptr 0 debug_info 0a)
+                                       (before bytecomp/bytelink.ml(737):26600-26631
+                                         (setfield_imm 0
+                                           output_code_string_counter 0)))))))))))))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 link reset check_consistency extract_crc_interfaces Error
+        report_error))))

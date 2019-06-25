@@ -1,0 +1,945 @@
+(setglobal Asmpackager!
+  (let
+    (Error = (makeblock 248 "Asmpackager.Error" (caml_fresh_oo_id 0))
+     read_member_info =
+       (function pack_path file
+         (funct-body asmcomp/asmpackager.ml(42)<ghost>:1694-2370
+           (before asmcomp/asmpackager.ml(42):1711-2370
+             (let
+               (name =
+                  (after asmcomp/asmpackager.ml(44):1730-1794
+                    (apply (field 30 (global Stdlib__string!))
+                      (after asmcomp/asmpackager.ml(44):1753-1794
+                        (apply (field 12 (global Stdlib__filename!))
+                          (after asmcomp/asmpackager.ml(44):1771-1793
+                            (apply (field 31 (global Misc!)) file)))))))
+               (before asmcomp/asmpackager.ml(45):1800-2368
+                 (let
+                   (kind =
+                      (if
+                        (after asmcomp/asmpackager.ml(46):1818-1851
+                          (apply (field 6 (global Stdlib__filename!)) file
+                            ".cmi"))
+                        (before asmcomp/asmpackager.ml(47):1863-1870 0a)
+                        (before asmcomp/asmpackager.ml(48):1880-2312
+                          (let
+                            (*match* =
+                               (after asmcomp/asmpackager.ml(49):1910-1939
+                                 (apply (field 32 (global Compilenv!)) file))
+                             crc =a (field 1 *match*)
+                             info =a (field 0 *match*))
+                            (before asmcomp/asmpackager.ml(50):1949-2304
+                              (seq
+                                (if
+                                  (after asmcomp/asmpackager.ml(50):1952-1972
+                                    (caml_string_notequal (field 0 info)
+                                      name))
+                                  (before asmcomp/asmpackager.ml(51):1984-2040
+                                    (raise
+                                      (after asmcomp/asmpackager.ml(51):1989-2040
+                                        (makeblock 0 Error
+                                          (makeblock 0 name file
+                                            (field 0 info))))))
+                                  0a)
+                                (before asmcomp/asmpackager.ml(52):2048-2304
+                                  (seq
+                                    (if
+                                      (after asmcomp/asmpackager.ml(52):2051-2142
+                                        (caml_string_notequal (field 1 info)
+                                          (after asmcomp/asmpackager.ml(53):2078-2142
+                                            (apply
+                                              (field 27 (global Stdlib!))
+                                              (field 1
+                                                (after asmcomp/asmpackager.ml(53):2078-2110
+                                                  (apply
+                                                    (field 3
+                                                      (global Compilenv!))
+                                                    0a)))
+                                              (after asmcomp/asmpackager.ml(53):2123-2142
+                                                (apply
+                                                  (field 27 (global Stdlib!))
+                                                  "__" (field 0 info)))))))
+                                      (before asmcomp/asmpackager.ml(54):2154-2199
+                                        (raise
+                                          (after asmcomp/asmpackager.ml(54):2159-2199
+                                            (makeblock 0 Error
+                                              (makeblock 2 file pack_path)))))
+                                      0a)
+                                    (before asmcomp/asmpackager.ml(55):2207-2304
+                                      (seq
+                                        (after asmcomp/asmpackager.ml(55):2207-2246
+                                          (apply (field 4 (global Asmlink!))
+                                            file info crc))
+                                        (before asmcomp/asmpackager.ml(56):2254-2304
+                                          (seq
+                                            (after asmcomp/asmpackager.ml(56):2254-2284
+                                              (apply
+                                                (field 35
+                                                  (global Compilenv!))
+                                                info))
+                                            (before asmcomp/asmpackager.ml(57):2292-2304
+                                              (makeblock 0 info))))))))))))))
+                   (before asmcomp/asmpackager.ml(59):2318-2368
+                     (makeblock 0 file name kind))))))))
+     check_units =
+       (function members
+         (funct-body asmcomp/asmpackager.ml(64)<ghost>:2431-2903
+           (before asmcomp/asmpackager.ml(65):2443-2903
+             (letrec
+               (check
+                  (function forbidden param
+                    (funct-body asmcomp/asmpackager.ml(65)<ghost>:2457-2842
+                      (if param
+                        (let (tl =a (field 1 param) mb =a (field 0 param))
+                          (before asmcomp/asmpackager.ml(68):2513-2842
+                            (seq
+                              (let (*match* = (field 2 mb))
+                                (if *match*
+                                  (let (infos =a (field 0 *match*))
+                                    (before asmcomp/asmpackager.ml(71):2598-2781
+                                      (after asmcomp/asmpackager.ml(71):2598-2781
+                                        (apply
+                                          (field 14 (global Stdlib__list!))
+                                          (function param
+                                            (funct-body asmcomp/asmpackager.ml(72):2620-2748
+                                              (let (unit =a (field 0 param))
+                                                (before asmcomp/asmpackager.ml(73):2652-2747
+                                                  (if
+                                                    (after asmcomp/asmpackager.ml(73):2655-2678
+                                                      (apply
+                                                        (field 31
+                                                          (global Stdlib__list!))
+                                                        unit forbidden))
+                                                    (before asmcomp/asmpackager.ml(74):2698-2747
+                                                      (raise
+                                                        (after asmcomp/asmpackager.ml(74):2703-2747
+                                                          (makeblock 0 Error
+                                                            (makeblock 1
+                                                              (field 0 mb)
+                                                              unit)))))
+                                                    0a)))))
+                                          (field 4 infos)))))
+                                  (before asmcomp/asmpackager.ml(69):2560-2562
+                                    0a)))
+                              (before asmcomp/asmpackager.ml(77):2799-2842
+                                (after asmcomp/asmpackager.ml(77):2799-2842
+                                  (apply check
+                                    (after asmcomp/asmpackager.ml(77):2805-2839
+                                      (apply (field 8 (global Misc!))
+                                        (field 1 mb) forbidden))
+                                    tl))))))
+                        (before asmcomp/asmpackager.ml(66):2488-2490 0a)))))
+               (before asmcomp/asmpackager.ml(78):2848-2903
+                 (after asmcomp/asmpackager.ml(78):2848-2903
+                   (apply check
+                     (after asmcomp/asmpackager.ml(78):2854-2895
+                       (apply (field 16 (global Stdlib__list!))
+                         (function mb
+                           (funct-body asmcomp/asmpackager.ml(78):2864-2886
+                             (before asmcomp/asmpackager.ml(78):2875-2885
+                               (field 1 mb))))
+                         members))
+                     members)))))))
+     make_package_object =
+       (function ppf_dump members targetobj targetname coercion backend
+         (funct-body asmcomp/asmpackager.ml(82)<ghost>:2969-5139
+           (before asmcomp/asmpackager.ml(84):3036-5139
+             (after asmcomp/asmpackager.ml(84):3036-5139
+               (apply (field 1 (global Profile!)) 0a
+                 (after asmcomp/asmpackager.ml(84):3056-3094
+                   (apply (field 3 (global Stdlib__printf!))
+                     [0: [11: "pack(" [2: 0a [12: ')' 0a]]] "pack(%s)"]
+                     targetname))
+                 (function param
+                   (funct-body asmcomp/asmpackager.ml(84):3095-5139
+                     (before asmcomp/asmpackager.ml(85):3110-5135
+                       (let
+                         (objtemp =
+                            (if (field 0 (field 75 (global Clflags!)))
+                              (before asmcomp/asmpackager.ml(87):3167-3229
+                                (after asmcomp/asmpackager.ml(87):3167-3229
+                                  (apply (field 27 (global Stdlib!))
+                                    (after asmcomp/asmpackager.ml(87):3167-3202
+                                      (apply
+                                        (field 10 (global Stdlib__filename!))
+                                        targetobj))
+                                    (after asmcomp/asmpackager.ml(87):3205-3229
+                                      (apply (field 27 (global Stdlib!))
+                                        ".pack" (field 41 (global Config!)))))))
+                              (before asmcomp/asmpackager.ml(92):3414-3481
+                                (after asmcomp/asmpackager.ml(92):3414-3481
+                                  (apply
+                                    (field 14 (global Stdlib__filename!)) 0a
+                                    (after asmcomp/asmpackager.ml(92):3433-3466
+                                      (apply (field 8 (global Compilenv!)) 0a
+                                        [0: ""]))
+                                    (field 41 (global Config!)))))))
+                         (before asmcomp/asmpackager.ml(93):3489-5135
+                           (let
+                             (components =
+                                (after asmcomp/asmpackager.ml(94):3512-3679
+                                  (apply (field 16 (global Stdlib__list!))
+                                    (function m
+                                      (funct-body asmcomp/asmpackager.ml(95):3529-3663
+                                        (before asmcomp/asmpackager.ml(96):3549-3662
+                                          (let (*match* = (field 2 m))
+                                            (if *match*
+                                              (before asmcomp/asmpackager.ml(98):3623-3662
+                                                (makeblock 0
+                                                  (after asmcomp/asmpackager.ml(98):3627-3662
+                                                    (apply
+                                                      (field 11
+                                                        (global Ident!))
+                                                      (field 1 m)))))
+                                              (before asmcomp/asmpackager.ml(97):3593-3597
+                                                0a))))))
+                                    members)))
+                             (before asmcomp/asmpackager.ml(100):3687-5135
+                               (let
+                                 (module_ident =
+                                    (after asmcomp/asmpackager.ml(100):3706-3740
+                                      (apply (field 11 (global Ident!))
+                                        targetname)))
+                                 (before asmcomp/asmpackager.ml(101):3748-5135
+                                   (let
+                                     (prefixname =
+                                        (after asmcomp/asmpackager.ml(101):3765-3798
+                                          (apply
+                                            (field 10
+                                              (global Stdlib__filename!))
+                                            objtemp)))
+                                     (before asmcomp/asmpackager.ml(102):3806-5135
+                                       (let
+                                         (required_globals =
+                                            (field 0
+                                              (field 5 (global Ident!))))
+                                         (before asmcomp/asmpackager.ml(103):3852-5135
+                                           (catch
+                                             (if (field 50 (global Config!))
+                                               (before asmcomp/asmpackager.ml(105):3915-4252
+                                                 (let
+                                                   (*match* =
+                                                      (after asmcomp/asmpackager.ml(106):3960-4012
+                                                        (apply
+                                                          (field 7
+                                                            (global Translmod!))
+                                                          components
+                                                          coercion))
+                                                    code =a (field 1 *match*)
+                                                    main_module_block_size =a
+                                                      (field 0 *match*))
+                                                   (before asmcomp/asmpackager.ml(108):4032-4252
+                                                     (let
+                                                       (program =
+                                                          (makeblock 0 (*,int,*,*)
+                                                            module_ident
+                                                            main_module_block_size
+                                                            required_globals
+                                                            code))
+                                                       (before asmcomp/asmpackager.ml(116):4207-4252
+                                                         (let
+                                                           (middle_end =
+                                                              (field 0
+                                                                (global Flambda_middle_end!))
+                                                            program =a
+                                                              program)
+                                                           (exit 10
+                                                             middle_end
+                                                             program)))))))
+                                               (before asmcomp/asmpackager.ml(118):4272-4656
+                                                 (let
+                                                   (*match* =
+                                                      (after asmcomp/asmpackager.ml(119):4317-4416
+                                                        (apply
+                                                          (field 6
+                                                            (global Translmod!))
+                                                          components
+                                                          (after asmcomp/asmpackager.ml(120):4371-4407
+                                                            (apply
+                                                              (field 11
+                                                                (global Ident!))
+                                                              targetname))
+                                                          coercion))
+                                                    code =a (field 1 *match*)
+                                                    main_module_block_size =a
+                                                      (field 0 *match*))
+                                                   (before asmcomp/asmpackager.ml(122):4436-4656
+                                                     (let
+                                                       (program =
+                                                          (makeblock 0 (*,int,*,*)
+                                                            module_ident
+                                                            main_module_block_size
+                                                            required_globals
+                                                            code))
+                                                       (before asmcomp/asmpackager.ml(130):4611-4656
+                                                         (let
+                                                           (middle_end =
+                                                              (field 0
+                                                                (global Closure_middle_end!))
+                                                            program =a
+                                                              program)
+                                                           (exit 10
+                                                             middle_end
+                                                             program))))))))
+                                            with (10 middle_end program)
+                                             (before asmcomp/asmpackager.ml(132):4668-5135
+                                               (seq
+                                                 (after asmcomp/asmpackager.ml(132):4668-4799
+                                                   (apply
+                                                     (field 0
+                                                       (global Asmgen!))
+                                                     0a backend targetname
+                                                     prefixname middle_end
+                                                     ppf_dump program))
+                                                 (before asmcomp/asmpackager.ml(138):4805-5135
+                                                   (let
+                                                     (objfiles =
+                                                        (after asmcomp/asmpackager.ml(139):4826-4968
+                                                          (apply
+                                                            (field 16
+                                                              (global Stdlib__list!))
+                                                            (function m
+                                                              (funct-body asmcomp/asmpackager.ml(140):4843-4906
+                                                                (before asmcomp/asmpackager.ml(140):4853-4905
+                                                                  (after asmcomp/asmpackager.ml(140):4853-4905
+                                                                    (apply
+                                                                    (field 27
+                                                                    (global Stdlib!))
+                                                                    (after asmcomp/asmpackager.ml(140):4853-4888
+                                                                    (apply
+                                                                    (field 10
+                                                                    (global Stdlib__filename!))
+                                                                    (field 0
+                                                                    m)))
+                                                                    (field 41
+                                                                    (global Config!)))))))
+                                                            (after asmcomp/asmpackager.ml(141):4915-4968
+                                                              (apply
+                                                                (field 35
+                                                                  (global Stdlib__list!))
+                                                                (function m
+                                                                  (funct-body asmcomp/asmpackager.ml(141):4928-4959
+                                                                    (before asmcomp/asmpackager.ml(141):4938-4958
+                                                                    (!=
+                                                                    (field 2
+                                                                    m) 0a))))
+                                                                members)))))
+                                                     (before asmcomp/asmpackager.ml(142):4976-5135
+                                                       (let
+                                                         (ok =
+                                                            (after asmcomp/asmpackager.ml(143):4991-5057
+                                                              (apply
+                                                                (field 7
+                                                                  (global Ccomp!))
+                                                                3a targetobj
+                                                                (makeblock 0
+                                                                  objtemp
+                                                                  objfiles)
+                                                                "")))
+                                                         (before asmcomp/asmpackager.ml(145):5069-5135
+                                                           (seq
+                                                             (after asmcomp/asmpackager.ml(145):5069-5088
+                                                               (apply
+                                                                 (field 15
+                                                                   (global Misc!))
+                                                                 objtemp))
+                                                             (before asmcomp/asmpackager.ml(146):5094-5135
+                                                               (if (not ok)
+                                                                 (before asmcomp/asmpackager.ml(146):5109-5135
+                                                                   (raise
+                                                                    (after asmcomp/asmpackager.ml(146):5114-5135
+                                                                    (makeblock 0
+                                                                    Error 0a))))
+                                                                 0a)))))))))))))))))))))))))))))
+     get_export_info =
+       (function ui
+         (funct-body asmcomp/asmpackager.ml(151)<ghost>:5203-5319
+           (before asmcomp/asmpackager.ml(152):5210-5319
+             (seq
+               (if (field 50 (global Config!)) 0a
+                 (raise
+                   (after asmcomp/asmpackager.ml(152):5210-5232
+                     (makeblock 0 (global Assert_failure!)
+                       [0: "asmcomp/asmpackager.ml" 152 2]))))
+               (before asmcomp/asmpackager.ml(153):5236-5319
+                 (let (*match* = (field 8 ui))
+                   (switch* *match*
+                    case tag 0:
+                     (before asmcomp/asmpackager.ml(154):5282-5294
+                       (raise
+                         (after asmcomp/asmpackager.ml(154):5282-5294
+                           (makeblock 0 (global Assert_failure!)
+                             [0: "asmcomp/asmpackager.ml" 154 17]))))
+                    case tag 1:
+                     (let (info =a (field 0 *match*))
+                       (before asmcomp/asmpackager.ml(155):5315-5319 info)))))))))
+     get_approx =
+       (function ui
+         (funct-body asmcomp/asmpackager.ml(157)<ghost>:5336-5456
+           (before asmcomp/asmpackager.ml(158):5343-5456
+             (seq
+               (if (not (field 50 (global Config!))) 0a
+                 (raise
+                   (after asmcomp/asmpackager.ml(158):5343-5369
+                     (makeblock 0 (global Assert_failure!)
+                       [0: "asmcomp/asmpackager.ml" 158 2]))))
+               (before asmcomp/asmpackager.ml(159):5373-5456
+                 (let (*match* = (field 8 ui))
+                   (switch* *match*
+                    case tag 0:
+                     (let (info =a (field 0 *match*))
+                       (before asmcomp/asmpackager.ml(161):5452-5456 info))
+                    case tag 1:
+                     (before asmcomp/asmpackager.ml(160):5419-5431
+                       (raise
+                         (after asmcomp/asmpackager.ml(160):5419-5431
+                           (makeblock 0 (global Assert_failure!)
+                             [0: "asmcomp/asmpackager.ml" 160 17])))))))))))
+     build_package_cmx =
+       (function members cmxfile
+         (funct-body asmcomp/asmpackager.ml(163)<ghost>:5480-7891
+           (before asmcomp/asmpackager.ml(164):5500-7891
+             (let
+               (unit_names =
+                  (after asmcomp/asmpackager.ml(165):5521-5558
+                    (apply (field 16 (global Stdlib__list!))
+                      (function m
+                        (funct-body asmcomp/asmpackager.ml(165):5530-5550
+                          (before asmcomp/asmpackager.ml(165):5540-5549
+                            (field 1 m))))
+                      members)))
+               (before asmcomp/asmpackager.ml(166):5564-7891
+                 (let
+                   (filter =
+                      (function lst
+                        (funct-body asmcomp/asmpackager.ml(166)<ghost>:5575-5653
+                          (before asmcomp/asmpackager.ml(167):5585-5653
+                            (after asmcomp/asmpackager.ml(167):5585-5653
+                              (apply (field 35 (global Stdlib__list!))
+                                (function param
+                                  (funct-body asmcomp/asmpackager.ml(167):5597-5649
+                                    (let (name =a (field 0 param))
+                                      (before asmcomp/asmpackager.ml(167):5618-5648
+                                        (not
+                                          (after asmcomp/asmpackager.ml(167):5622-5648
+                                            (apply
+                                              (field 31
+                                                (global Stdlib__list!))
+                                              name unit_names)))))))
+                                lst))))))
+                   (before asmcomp/asmpackager.ml(168):5659-7891
+                     (let
+                       (union =
+                          (function lst
+                            (funct-body asmcomp/asmpackager.ml(168)<ghost>:5669-5799
+                              (before asmcomp/asmpackager.ml(169):5679-5799
+                                (after asmcomp/asmpackager.ml(169):5679-5799
+                                  (apply (field 20 (global Stdlib__list!))
+                                    (after asmcomp/asmpackager.ml(170):5700-5786
+                                      (apply
+                                        (field 20 (global Stdlib__list!))
+                                        (function accu n
+                                          (funct-body asmcomp/asmpackager.ml(171):5726-5785
+                                            (before asmcomp/asmpackager.ml(171):5741-5784
+                                              (if
+                                                (after asmcomp/asmpackager.ml(171):5744-5759
+                                                  (apply
+                                                    (field 31
+                                                      (global Stdlib__list!))
+                                                    n accu))
+                                                (before asmcomp/asmpackager.ml(171):5765-5769
+                                                  accu)
+                                                (before asmcomp/asmpackager.ml(171):5775-5784
+                                                  (makeblock 0 n accu))))))))
+                                    0a lst))))))
+                       (before asmcomp/asmpackager.ml(173):5805-7891
+                         (let
+                           (units =
+                              (after asmcomp/asmpackager.ml(174):5821-5951
+                                (apply (field 21 (global Stdlib__list!))
+                                  (function m accu
+                                    (funct-body asmcomp/asmpackager.ml(175):5843-5934
+                                      (before asmcomp/asmpackager.ml(176):5866-5933
+                                        (let (*match* = (field 2 m))
+                                          (if *match*
+                                            (let (info =a (field 0 *match*))
+                                              (before asmcomp/asmpackager.ml(176):5921-5933
+                                                (makeblock 0 info accu)))
+                                            (before asmcomp/asmpackager.ml(176):5898-5902
+                                              accu))))))
+                                  members 0a)))
+                           (before asmcomp/asmpackager.ml(178):5957-7891
+                             (let
+                               (pack_units =
+                                  (after asmcomp/asmpackager.ml(179):5978-6207
+                                    (apply (field 20 (global Stdlib__list!))
+                                      (function set info
+                                        (funct-body asmcomp/asmpackager.ml(180):5999-6168
+                                          (before asmcomp/asmpackager.ml(181):6025-6167
+                                            (let
+                                              (unit_id =
+                                                 (after asmcomp/asmpackager.ml(181):6039-6079
+                                                   (apply
+                                                     (field 2
+                                                       (global Compilenv!))
+                                                     (field 0 info))))
+                                              (before asmcomp/asmpackager.ml(182):6092-6167
+                                                (after asmcomp/asmpackager.ml(182):6092-6167
+                                                  (apply
+                                                    (field 3
+                                                      (field 6
+                                                        (global Compilation_unit!)))
+                                                    (after asmcomp/asmpackager.ml(183):6128-6163
+                                                      (apply
+                                                        (field 11
+                                                          (global Compilenv!))
+                                                        unit_id))
+                                                    set)))))))
+                                      (field 0
+                                        (field 6 (global Compilation_unit!)))
+                                      units)))
+                               (before asmcomp/asmpackager.ml(185):6213-7891
+                                 (let
+                                   (units =
+                                      (if (field 50 (global Config!))
+                                        (before asmcomp/asmpackager.ml(187):6258-6531
+                                          (after asmcomp/asmpackager.ml(187):6258-6531
+                                            (apply
+                                              (field 16
+                                                (global Stdlib__list!))
+                                              (function info
+                                                (funct-body asmcomp/asmpackager.ml(187):6267-6517
+                                                  (before asmcomp/asmpackager.ml(188):6290-6516
+                                                    (let (init = info)
+                                                      (makemutable 0
+                                                        (field 0 init)
+                                                        (field 1 init)
+                                                        (field 2 init)
+                                                        (field 3 init)
+                                                        (field 4 init)
+                                                        (field 5 init)
+                                                        (field 6 init)
+                                                        (field 7 init)
+                                                        (makeblock 1
+                                                          (after asmcomp/asmpackager.ml(191):6369-6514
+                                                            (apply
+                                                              (field 0
+                                                                (global Export_info_for_pack!))
+                                                              pack_units
+                                                              (after asmcomp/asmpackager.ml(192):6444-6471
+                                                                (apply
+                                                                  (field 6
+                                                                    (global Compilenv!))
+                                                                  0a))
+                                                              (after asmcomp/asmpackager.ml(193):6491-6513
+                                                                (apply
+                                                                  get_export_info
+                                                                  info)))))
+                                                        (field 9 init))))))
+                                              units)))
+                                        (before asmcomp/asmpackager.ml(196):6547-6552
+                                          units)))
+                                   (before asmcomp/asmpackager.ml(198):6560-7891
+                                     (let
+                                       (ui =
+                                          (after asmcomp/asmpackager.ml(198):6569-6599
+                                            (apply
+                                              (field 3 (global Compilenv!))
+                                              0a)))
+                                       (before asmcomp/asmpackager.ml(199):6605-7891
+                                         (let
+                                           (ui_export_info =
+                                              (if (field 50 (global Config!))
+                                                (before asmcomp/asmpackager.ml(201):6659-6973
+                                                  (let
+                                                    (ui_export_info =
+                                                       (after asmcomp/asmpackager.ml(202):6688-6935
+                                                         (apply
+                                                           (field 20
+                                                             (global Stdlib__list!))
+                                                           (function acc info
+                                                             (funct-body asmcomp/asmpackager.ml(202):6703-6777
+                                                               (before asmcomp/asmpackager.ml(203):6732-6776
+                                                                 (after asmcomp/asmpackager.ml(203):6732-6776
+                                                                   (apply
+                                                                    (field 5
+                                                                    (global Export_info!))
+                                                                    acc
+                                                                    (after asmcomp/asmpackager.ml(203):6754-6776
+                                                                    (apply
+                                                                    get_export_info
+                                                                    info)))))))
+                                                           (after asmcomp/asmpackager.ml(204):6788-6919
+                                                             (apply
+                                                               (field 0
+                                                                 (global Export_info_for_pack!))
+                                                               pack_units
+                                                               (after asmcomp/asmpackager.ml(205):6857-6884
+                                                                 (apply
+                                                                   (field 6
+                                                                    (global Compilenv!))
+                                                                   0a))
+                                                               (after asmcomp/asmpackager.ml(206):6898-6918
+                                                                 (apply
+                                                                   get_export_info
+                                                                   ui))))
+                                                           units)))
+                                                    (before asmcomp/asmpackager.ml(209):6951-6973
+                                                      (makeblock 1
+                                                        ui_export_info))))
+                                                (before asmcomp/asmpackager.ml(211):6989-7012
+                                                  (makeblock 0
+                                                    (after asmcomp/asmpackager.ml(211):6997-7012
+                                                      (apply get_approx ui))))))
+                                           (before asmcomp/asmpackager.ml(213):7020-7891
+                                             (seq
+                                               (after asmcomp/asmpackager.ml(213):7020-7062
+                                                 (apply
+                                                   (field 1
+                                                     (global Export_info_for_pack!))
+                                                   0a))
+                                               (before asmcomp/asmpackager.ml(214):7066-7891
+                                                 (let
+                                                   (pkg_infos =
+                                                      (makemutable 0
+                                                        (field 0 ui)
+                                                        (field 1 ui)
+                                                        (after asmcomp/asmpackager.ml(218):7171-7257
+                                                          (apply
+                                                            (field 36
+                                                              (global Stdlib!))
+                                                            (after asmcomp/asmpackager.ml(218):7171-7230
+                                                              (apply
+                                                                (field 13
+                                                                  (global Stdlib__list!))
+                                                                (after asmcomp/asmpackager.ml(218):7184-7230
+                                                                  (apply
+                                                                    (field 16
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    info
+                                                                    (funct-body asmcomp/asmpackager.ml(218):7194-7223
+                                                                    (before asmcomp/asmpackager.ml(218):7207-7222
+                                                                    (field 2
+                                                                    info))))
+                                                                    units))))
+                                                            (makeblock 0
+                                                              (field 1 ui)
+                                                              0a)))
+                                                        (makeblock 0
+                                                          (makeblock 0
+                                                            (field 0 ui)
+                                                            (makeblock 0
+                                                              (after asmcomp/asmpackager.ml(221):7310-7338
+                                                                (apply
+                                                                  (field 79
+                                                                    (global Env!))
+                                                                  (field 0
+                                                                    ui)))))
+                                                          (after asmcomp/asmpackager.ml(222):7353-7393
+                                                            (apply filter
+                                                              (after asmcomp/asmpackager.ml(222):7359-7393
+                                                                (apply
+                                                                  (field 5
+                                                                    (global Asmlink!))
+                                                                  0a)))))
+                                                        (after asmcomp/asmpackager.ml(224):7428-7473
+                                                          (apply filter
+                                                            (after asmcomp/asmpackager.ml(224):7434-7473
+                                                              (apply
+                                                                (field 6
+                                                                  (global Asmlink!))
+                                                                0a))))
+                                                        (after asmcomp/asmpackager.ml(226):7506-7559
+                                                          (apply union
+                                                            (after asmcomp/asmpackager.ml(226):7511-7559
+                                                              (apply
+                                                                (field 16
+                                                                  (global Stdlib__list!))
+                                                                (function
+                                                                  info
+                                                                  (funct-body asmcomp/asmpackager.ml(226):7521-7552
+                                                                    (before asmcomp/asmpackager.ml(226):7534-7551
+                                                                    (field 5
+                                                                    info))))
+                                                                units))))
+                                                        (after asmcomp/asmpackager.ml(228):7592-7645
+                                                          (apply union
+                                                            (after asmcomp/asmpackager.ml(228):7597-7645
+                                                              (apply
+                                                                (field 16
+                                                                  (global Stdlib__list!))
+                                                                (function
+                                                                  info
+                                                                  (funct-body asmcomp/asmpackager.ml(228):7607-7638
+                                                                    (before asmcomp/asmpackager.ml(228):7620-7637
+                                                                    (field 6
+                                                                    info))))
+                                                                units))))
+                                                        (after asmcomp/asmpackager.ml(230):7677-7729
+                                                          (apply union
+                                                            (after asmcomp/asmpackager.ml(230):7682-7729
+                                                              (apply
+                                                                (field 16
+                                                                  (global Stdlib__list!))
+                                                                (function
+                                                                  info
+                                                                  (funct-body asmcomp/asmpackager.ml(230):7692-7722
+                                                                    (before asmcomp/asmpackager.ml(230):7705-7721
+                                                                    (field 7
+                                                                    info))))
+                                                                units))))
+                                                        ui_export_info
+                                                        (after asmcomp/asmpackager.ml(232):7763-7813
+                                                          (apply
+                                                            (field 28
+                                                              (global Stdlib__list!))
+                                                            (function info
+                                                              (funct-body asmcomp/asmpackager.ml(232):7775-7807
+                                                                (before asmcomp/asmpackager.ml(232):7788-7806
+                                                                  (field 9
+                                                                    info))))
+                                                            units))))
+                                                   (before asmcomp/asmpackager.ml(235):7848-7891
+                                                     (after asmcomp/asmpackager.ml(235):7848-7891
+                                                       (apply
+                                                         (field 33
+                                                           (global Compilenv!))
+                                                         pkg_infos cmxfile)))))))))))))))))))))))))
+     package_object_files =
+       (function ppf_dump files targetcmx targetobj targetname coercion
+         backend
+         (funct-body asmcomp/asmpackager.ml(239)<ghost>:7966-8386
+           (before asmcomp/asmpackager.ml(241):8060-8386
+             (let
+               (pack_path =
+                  (let (*match* = (field 0 (field 58 (global Clflags!))))
+                    (if *match*
+                      (let (p =a (field 0 *match*))
+                        (before asmcomp/asmpackager.ml(244):8153-8173
+                          (after asmcomp/asmpackager.ml(244):8153-8173
+                            (apply (field 27 (global Stdlib!)) p
+                              (after asmcomp/asmpackager.ml(244):8157-8173
+                                (apply (field 27 (global Stdlib!)) "."
+                                  targetname))))))
+                      (before asmcomp/asmpackager.ml(243):8126-8136
+                        targetname))))
+               (before asmcomp/asmpackager.ml(245):8179-8386
+                 (let
+                   (members =
+                      (after asmcomp/asmpackager.ml(245):8193-8242
+                        (apply (field 5 (global Misc!))
+                          (after asmcomp/asmpackager.ml(245):8208-8236
+                            (apply read_member_info pack_path))
+                          files)))
+                   (before asmcomp/asmpackager.ml(246):8248-8386
+                     (seq
+                       (after asmcomp/asmpackager.ml(246):8248-8267
+                         (apply check_units members))
+                       (before asmcomp/asmpackager.ml(247):8271-8386
+                         (seq
+                           (after asmcomp/asmpackager.ml(247):8271-8347
+                             (apply make_package_object ppf_dump members
+                               targetobj targetname coercion backend))
+                           (before asmcomp/asmpackager.ml(248):8351-8386
+                             (after asmcomp/asmpackager.ml(248):8351-8386
+                               (apply build_package_cmx members targetcmx)))))))))))))
+     package_files =
+       (function ppf_dump initial_env files targetcmx backend
+         (funct-body asmcomp/asmpackager.ml(252)<ghost>:8429-9340
+           (before asmcomp/asmpackager.ml(253):8480-9340
+             (let
+               (files =
+                  (after asmcomp/asmpackager.ml(254):8496-8619
+                    (apply (field 16 (global Stdlib__list!))
+                      (function f
+                        (funct-body asmcomp/asmpackager.ml(255):8511-8607
+                          (before asmcomp/asmpackager.ml(256):8529-8606
+                            (try
+                              (after asmcomp/asmpackager.ml(256):8533-8549
+                                (apply (field 5 (global Load_path!)) f))
+                             with exn
+                              (if (== exn (field 7 (global Stdlib!)))
+                                (before asmcomp/asmpackager.ml(257):8576-8606
+                                  (raise
+                                    (after asmcomp/asmpackager.ml(257):8581-8606
+                                      (makeblock 0 Error (makeblock 4 f)))))
+                                (reraise exn))))))
+                      files)))
+               (before asmcomp/asmpackager.ml(259):8625-9340
+                 (let
+                   (prefix =
+                      (after asmcomp/asmpackager.ml(259):8638-8663
+                        (apply (field 31 (global Misc!)) targetcmx)))
+                   (before asmcomp/asmpackager.ml(260):8669-9340
+                     (let
+                       (targetcmi =
+                          (after asmcomp/asmpackager.ml(260):8685-8700
+                            (apply (field 27 (global Stdlib!)) prefix ".cmi")))
+                       (before asmcomp/asmpackager.ml(261):8706-9340
+                         (let
+                           (targetobj =
+                              (after asmcomp/asmpackager.ml(261):8722-8774
+                                (apply (field 27 (global Stdlib!))
+                                  (after asmcomp/asmpackager.ml(261):8722-8757
+                                    (apply
+                                      (field 10 (global Stdlib__filename!))
+                                      targetcmx))
+                                  (field 41 (global Config!)))))
+                           (before asmcomp/asmpackager.ml(262):8780-9340
+                             (let
+                               (targetname =
+                                  (after asmcomp/asmpackager.ml(262):8797-8846
+                                    (apply
+                                      (field 30 (global Stdlib__string!))
+                                      (after asmcomp/asmpackager.ml(262):8820-8846
+                                        (apply
+                                          (field 12
+                                            (global Stdlib__filename!))
+                                          prefix)))))
+                               (before asmcomp/asmpackager.ml(264):8896-9340
+                                 (seq
+                                   (setfield_ptr 0
+                                     (field 11 (global Location!)) targetcmx)
+                                   (before asmcomp/asmpackager.ml(266):8977-9340
+                                     (seq
+                                       (after asmcomp/asmpackager.ml(266):8977-9034
+                                         (apply (field 1 (global Compilenv!))
+                                           (field 0
+                                             (field 58 (global Clflags!)))
+                                           targetname))
+                                       (before asmcomp/asmpackager.ml(267):9038-9340
+                                         (after asmcomp/asmpackager.ml(267):9038-9340
+                                           (apply (field 3 (global Misc!)) 0a
+                                             (makeblock 0
+                                               (function param
+                                                 (funct-body asmcomp/asmpackager.ml(273):9284-9340
+                                                   (before asmcomp/asmpackager.ml(273):9295-9339
+                                                     (seq
+                                                       (after asmcomp/asmpackager.ml(273):9295-9316
+                                                         (apply
+                                                           (field 15
+                                                             (global Misc!))
+                                                           targetcmx))
+                                                       (before asmcomp/asmpackager.ml(273):9318-9339
+                                                         (after asmcomp/asmpackager.ml(273):9318-9339
+                                                           (apply
+                                                             (field 15
+                                                               (global Misc!))
+                                                             targetobj))))))))
+                                             (function param
+                                               (funct-body asmcomp/asmpackager.ml(267):9055-9264
+                                                 (before asmcomp/asmpackager.ml(268):9072-9258
+                                                   (let
+                                                     (coercion =
+                                                        (after asmcomp/asmpackager.ml(269):9095-9155
+                                                          (apply
+                                                            (field 11
+                                                              (global Typemod!))
+                                                            initial_env files
+                                                            targetcmi
+                                                            targetname)))
+                                                     (before asmcomp/asmpackager.ml(270):9165-9258
+                                                       (after asmcomp/asmpackager.ml(270):9165-9258
+                                                         (apply
+                                                           package_object_files
+                                                           ppf_dump files
+                                                           targetcmx
+                                                           targetobj
+                                                           targetname
+                                                           coercion backend))))))))))))))))))))))))))
+     report_error =
+       (function ppf param
+         (funct-body asmcomp/asmpackager.ml(279)<ghost>:9392-10116
+           (switch* param
+            case int 0:
+             (before asmcomp/asmpackager.ml(295):10074-10116
+               (after asmcomp/asmpackager.ml(295):10074-10116
+                 (apply (field 122 (global Stdlib__format!)) ppf
+                   [0:
+                    [11: "Error during partial linking" 0a]
+                    "Error during partial linking"])))
+            case tag 0:
+             (let
+               (id =a (field 2 param)
+                file =a (field 1 param)
+                name =a (field 0 param))
+               (before asmcomp/asmpackager.ml(281):9453-9602
+                 (after asmcomp/asmpackager.ml(281):9453-9602
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11:
+                       "Wrong file naming: "
+                       [15:
+                        [17:
+                         [0: "@ " 1 0]
+                         [11:
+                          "contains the code for"
+                          [17:
+                           [0: "@ " 1 0]
+                           [2:
+                            0a
+                            [11: " when " [2: 0a [11: " was expected" 0a]]]]]]]]]
+                      "Wrong file naming: %a@ contains the code for@ %s when %s was expected"]
+                     (field 18 (global Location!)) file name id))))
+            case tag 1:
+             (let (ident =a (field 1 param) file =a (field 0 param))
+               (before asmcomp/asmpackager.ml(285):9647-9738
+                 (after asmcomp/asmpackager.ml(285):9647-9738
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11:
+                       "Forward reference to "
+                       [2: 0a [11: " in file " [15: 0a]]]]
+                      "Forward reference to %s in file %a"]
+                     ident (field 18 (global Location!)) file))))
+            case tag 2:
+             (let (path =a (field 1 param) file =a (field 0 param))
+               (before asmcomp/asmpackager.ml(288):9779-9897
+                 (after asmcomp/asmpackager.ml(288):9779-9897
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11:
+                       "File "
+                       [15:
+                        [17:
+                         [0: "@ " 1 0]
+                         [11:
+                          "was not compiled with the `-for-pack "
+                          [2: 0a [11: "' option" 0a]]]]]]
+                      "File %a@ was not compiled with the `-for-pack %s' option"]
+                     (field 18 (global Location!)) file path))))
+            case tag 3:
+             (let (file =a (field 0 param))
+               (before asmcomp/asmpackager.ml(293):10002-10046
+                 (after asmcomp/asmpackager.ml(293):10002-10046
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11: "Error while assembling " [2: 0a 0a]]
+                      "Error while assembling %s"]
+                     file))))
+            case tag 4:
+             (let (file =a (field 0 param))
+               (before asmcomp/asmpackager.ml(291):9931-9967
+                 (after asmcomp/asmpackager.ml(291):9931-9967
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11: "File " [2: 0a [11: " not found" 0a]]]
+                      "File %s not found"]
+                     file)))))))
+     *match* =
+       (after asmcomp/asmpackager.ml(298):10129-10273
+         (apply (field 46 (global Location!))
+           (function param
+             (funct-body asmcomp/asmpackager.ml(299):10164-10273
+               (let (tag =a (field 0 param))
+                 (if (== tag Error)
+                   (let (err =a (field 1 param))
+                     (before asmcomp/asmpackager.ml(300):10195-10249
+                       (makeblock 0
+                         (after asmcomp/asmpackager.ml(300):10200-10249
+                           (apply (field 45 (global Location!)) report_error
+                             err)))))
+                   (before asmcomp/asmpackager.ml(301):10263-10267 0a))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 package_files Error report_error))))

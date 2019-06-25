@@ -1,0 +1,1277 @@
+(setglobal Printmach!
+  (let
+    (reg =
+       (function ppf r
+         (funct-body asmcomp/printmach.ml(26)<ghost>:1212-1689
+           (before asmcomp/printmach.ml(27):1222-1689
+             (seq
+               (if
+                 (not
+                   (after asmcomp/printmach.ml(27):1229-1246
+                     (apply (field 7 (global Reg!)) r)))
+                 (before asmcomp/printmach.ml(28):1256-1285
+                   (after asmcomp/printmach.ml(28):1256-1285
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [2: 0a 0a] "%s"]
+                       (after asmcomp/printmach.ml(28):1273-1285
+                         (apply (field 8 (global Reg!)) r)))))
+                 (before asmcomp/printmach.ml(30):1297-1391
+                   (after asmcomp/printmach.ml(30):1297-1391
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [2: 0a 0a] "%s"]
+                       (let (*match* = (field 2 r))
+                         (switch* *match*
+                          case int 0:
+                           (before asmcomp/printmach.ml(31):1345-1348 "V")
+                          case int 1:
+                           (before asmcomp/printmach.ml(31):1359-1362 "A")
+                          case int 2:
+                           (before asmcomp/printmach.ml(31):1372-1375 "I")
+                          case int 3:
+                           (before asmcomp/printmach.ml(31):1387-1390 "F")))))))
+               (before asmcomp/printmach.ml(32):1395-1689
+                 (seq
+                   (after asmcomp/printmach.ml(32):1395-1420
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [12: '/' [4: 3a 0a 0a 0a]] "/%i"] (field 1 r)))
+                   (before asmcomp/printmach.ml(33):1424-1689
+                     (let (*match* = (field 3 r))
+                       (switch* *match*
+                        case int 0:
+                         (before asmcomp/printmach.ml(34):1462-1464 0a)
+                        case tag 0:
+                         (let (r =a (field 0 *match*))
+                           (before asmcomp/printmach.ml(36):1484-1525
+                             (after asmcomp/printmach.ml(36):1484-1525
+                               (apply (field 122 (global Stdlib__format!))
+                                 ppf
+                                 [0: [12: '[' [2: 0a [12: ']' 0a]]] "[%s]"]
+                                 (after asmcomp/printmach.ml(36):1503-1525
+                                   (apply (field 5 (global Proc!)) r))))))
+                        case tag 1:
+                         (let (*match* =a (field 0 *match*))
+                           (switch* *match*
+                            case tag 0:
+                             (let (s =a (field 0 *match*))
+                               (before asmcomp/printmach.ml(38):1554-1575
+                                 (after asmcomp/printmach.ml(38):1554-1575
+                                   (apply
+                                     (field 122 (global Stdlib__format!)) ppf
+                                     [0:
+                                      [11: "[s" [4: 3a 0a 0a [12: ']' 0a]]]
+                                      "[s%i]"]
+                                     s))))
+                            case tag 1:
+                             (let (s =a (field 0 *match*))
+                               (before asmcomp/printmach.ml(40):1607-1629
+                                 (after asmcomp/printmach.ml(40):1607-1629
+                                   (apply
+                                     (field 122 (global Stdlib__format!)) ppf
+                                     [0:
+                                      [11: "[si" [4: 3a 0a 0a [12: ']' 0a]]]
+                                      "[si%i]"]
+                                     s))))
+                            case tag 2:
+                             (let (s =a (field 0 *match*))
+                               (before asmcomp/printmach.ml(42):1661-1683
+                                 (after asmcomp/printmach.ml(42):1661-1683
+                                   (apply
+                                     (field 122 (global Stdlib__format!)) ppf
+                                     [0:
+                                      [11: "[so" [4: 3a 0a 0a [12: ']' 0a]]]
+                                      "[so%i]"]
+                                     s)))))))))))))))
+     regs =
+       (function ppf v
+         (funct-body asmcomp/printmach.ml(45)<ghost>:1700-1856
+           (before asmcomp/printmach.ml(46):1710-1856
+             (let (n = (array.length[addr] v))
+               (if (!= n 0)
+                 (if (!= n 1)
+                   (before asmcomp/printmach.ml(49):1780-1856
+                     (seq
+                       (after asmcomp/printmach.ml(49):1780-1793
+                         (apply reg ppf
+                           (after asmcomp/printmach.ml(49):1788-1793
+                             (array.get[addr] v 0))))
+                       (before asmcomp/printmach.ml(50):1804-1856
+                         (for i 1 to (- n 1)
+                           (before asmcomp/printmach.ml(50):1824-1851
+                             (after asmcomp/printmach.ml(50):1824-1851
+                               (apply (field 122 (global Stdlib__format!))
+                                 ppf [0: [12: ' ' [15: 0a]] " %a"] reg
+                                 (after asmcomp/printmach.ml(50):1846-1851
+                                   (array.get[addr] v i)))))))))
+                   (before asmcomp/printmach.ml(48):1757-1770
+                     (after asmcomp/printmach.ml(48):1757-1770
+                       (apply reg ppf
+                         (after asmcomp/printmach.ml(48):1765-1770
+                           (array.get[addr] v 0))))))
+                 (before asmcomp/printmach.ml(47):1745-1747 0a))))))
+     regset =
+       (function ppf s
+         (funct-body asmcomp/printmach.ml(52)<ghost>:1869-2044
+           (before asmcomp/printmach.ml(53):1879-2044
+             (let (first = (makemutable 0 1a))
+               (before asmcomp/printmach.ml(54):1905-2044
+                 (after asmcomp/printmach.ml(54):1905-2044
+                   (apply (field 13 (field 9 (global Reg!)))
+                     (function r
+                       (funct-body asmcomp/printmach.ml(55):1922-2038
+                         (before asmcomp/printmach.ml(56):1938-2037
+                           (if (field 0 first)
+                             (before asmcomp/printmach.ml(56):1953-2001
+                               (seq (setfield_imm 0 first 0a)
+                                 (before asmcomp/printmach.ml(56):1975-1997
+                                   (after asmcomp/printmach.ml(56):1975-1997
+                                     (apply
+                                       (field 122 (global Stdlib__format!))
+                                       ppf [0: [15: 0a] "%a"] reg r)))))
+                             (before asmcomp/printmach.ml(57):2013-2037
+                               (after asmcomp/printmach.ml(57):2013-2037
+                                 (apply (field 122 (global Stdlib__format!))
+                                   ppf
+                                   [0: [17: [0: "@ " 1 0] [15: 0a]] "@ %a"]
+                                   reg r)))))))
+                     s)))))))
+     regsetaddr =
+       (function ppf s
+         (funct-body asmcomp/printmach.ml(60)<ghost>:2061-2339
+           (before asmcomp/printmach.ml(61):2071-2339
+             (let (first = (makemutable 0 1a))
+               (before asmcomp/printmach.ml(62):2097-2339
+                 (after asmcomp/printmach.ml(62):2097-2339
+                   (apply (field 13 (field 9 (global Reg!)))
+                     (function r
+                       (funct-body asmcomp/printmach.ml(63):2114-2333
+                         (before asmcomp/printmach.ml(64):2130-2332
+                           (seq
+                             (if (field 0 first)
+                               (before asmcomp/printmach.ml(64):2145-2193
+                                 (seq (setfield_imm 0 first 0a)
+                                   (before asmcomp/printmach.ml(64):2167-2189
+                                     (after asmcomp/printmach.ml(64):2167-2189
+                                       (apply
+                                         (field 122 (global Stdlib__format!))
+                                         ppf [0: [15: 0a] "%a"] reg r)))))
+                               (before asmcomp/printmach.ml(65):2205-2229
+                                 (after asmcomp/printmach.ml(65):2205-2229
+                                   (apply
+                                     (field 122 (global Stdlib__format!)) ppf
+                                     [0: [17: [0: "@ " 1 0] [15: 0a]] "@ %a"]
+                                     reg r))))
+                             (before asmcomp/printmach.ml(66):2237-2332
+                               (let (*match* = (field 2 r))
+                                 (if (!= *match* 1)
+                                   (if *match*
+                                     (before asmcomp/printmach.ml(69):2330-2332
+                                       0a)
+                                     (before asmcomp/printmach.ml(67):2269-2284
+                                       (after asmcomp/printmach.ml(67):2269-2284
+                                         (apply
+                                           (field 122
+                                             (global Stdlib__format!))
+                                           ppf [0: [12: '*' 0a] "*"]))))
+                                   (before asmcomp/printmach.ml(68):2301-2316
+                                     (after asmcomp/printmach.ml(68):2301-2316
+                                       (apply
+                                         (field 122 (global Stdlib__format!))
+                                         ppf [0: [12: '!' 0a] "!"]))))))))))
+                     s)))))))
+     intcomp =
+       (function param
+         (funct-body asmcomp/printmach.ml(72):2355-2509
+           (switch* param
+            case tag 0:
+             (let (c =a (field 0 param))
+               (before asmcomp/printmach.ml(73):2381-2435
+                 (after asmcomp/printmach.ml(73):2381-2435
+                   (apply (field 3 (global Stdlib__printf!))
+                     [0: [12: ' ' [2: 0a [11: "s " 0a]]] " %ss "]
+                     (after asmcomp/printmach.ml(73):2404-2435
+                       (apply (field 3 (global Printcmm!)) c))))))
+            case tag 1:
+             (let (c =a (field 0 param))
+               (before asmcomp/printmach.ml(74):2455-2509
+                 (after asmcomp/printmach.ml(74):2455-2509
+                   (apply (field 3 (global Stdlib__printf!))
+                     [0: [12: ' ' [2: 0a [11: "u " 0a]]] " %su "]
+                     (after asmcomp/printmach.ml(74):2478-2509
+                       (apply (field 3 (global Printcmm!)) c)))))))))
+     floatcomp =
+       (function c
+         (funct-body asmcomp/printmach.ml(76)<ghost>:2525-2585
+           (before asmcomp/printmach.ml(77):2533-2585
+             (after asmcomp/printmach.ml(77):2533-2585
+               (apply (field 3 (global Stdlib__printf!))
+                 [0: [12: ' ' [2: 0a [11: "f " 0a]]] " %sf "]
+                 (after asmcomp/printmach.ml(77):2556-2585
+                   (apply (field 4 (global Printcmm!)) c)))))))
+     intop =
+       (function param
+         (funct-body asmcomp/printmach.ml(79):2599-3179
+           (switch* param
+            case int 0: (before asmcomp/printmach.ml(80):2620-2625 " + ")
+            case int 1: (before asmcomp/printmach.ml(81):2638-2643 " - ")
+            case int 2: (before asmcomp/printmach.ml(82):2656-2661 " * ")
+            case int 3: (before asmcomp/printmach.ml(83):2675-2681 " *h ")
+            case int 4: (before asmcomp/printmach.ml(84):2694-2701 " div ")
+            case int 5: (before asmcomp/printmach.ml(85):2714-2721 " mod ")
+            case int 6: (before asmcomp/printmach.ml(86):2734-2739 " & ")
+            case int 7: (before asmcomp/printmach.ml(87):2752-2757 " | ")
+            case int 8: (before asmcomp/printmach.ml(88):2770-2775 " ^ ")
+            case int 9: (before asmcomp/printmach.ml(89):2788-2794 " << ")
+            case int 10: (before asmcomp/printmach.ml(90):2807-2814 " >>u ")
+            case int 11: (before asmcomp/printmach.ml(91):2827-2834 " >>s ")
+            case tag 0:
+             (let (cmp =a (field 0 param))
+               (before asmcomp/printmach.ml(92):2852-2863
+                 (after asmcomp/printmach.ml(92):2852-2863
+                   (apply intcomp cmp))))
+            case tag 1:
+             (let
+               (spacetime_index =a (field 1 param)
+                label_after_error =a (field 0 param))
+               (before asmcomp/printmach.ml(94):2927-3179
+                 (if (not (field 52 (global Config!)))
+                   (before asmcomp/printmach.ml(94):2956-2967 " check > ")
+                   (before asmcomp/printmach.ml(96):2983-3179
+                     (after asmcomp/printmach.ml(96):2983-3179
+                       (apply (field 3 (global Stdlib__printf!))
+                         [0:
+                          [11:
+                           "check[lbl="
+                           [2:
+                            0a [11: ",index=" [4: 0a 0a 0a [11: "] > " 0a]]]]]
+                          "check[lbl=%s,index=%d] > "]
+                         (if label_after_error
+                           (let (lbl =a (field 0 label_after_error))
+                             (before asmcomp/printmach.ml(100):3126-3143
+                               (after asmcomp/printmach.ml(100):3126-3143
+                                 (apply (field 9 (global Stdlib__int!)) lbl))))
+                           (before asmcomp/printmach.ml(99):3099-3101 ""))
+                         spacetime_index)))))))))
+     test =
+       (function tst ppf arg
+         (funct-body asmcomp/printmach.ml(104)<ghost>:3190-3665
+           (before asmcomp/printmach.ml(105):3206-3665
+             (switch* tst
+              case int 0:
+               (before asmcomp/printmach.ml(106):3238-3253
+                 (after asmcomp/printmach.ml(106):3238-3253
+                   (apply reg ppf
+                     (after asmcomp/printmach.ml(106):3246-3253
+                       (array.get[addr] arg 0)))))
+              case int 1:
+               (before asmcomp/printmach.ml(107):3272-3304
+                 (after asmcomp/printmach.ml(107):3272-3304
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [11: "not " [15: 0a]] "not %a"] reg
+                     (after asmcomp/printmach.ml(107):3297-3304
+                       (array.get[addr] arg 0)))))
+              case int 2:
+               (before asmcomp/printmach.ml(114):3628-3665
+                 (after asmcomp/printmach.ml(114):3628-3665
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [15: [11: " & 1 == 1" 0a]] "%a & 1 == 1"] reg
+                     (after asmcomp/printmach.ml(114):3658-3665
+                       (array.get[addr] arg 0)))))
+              case int 3:
+               (before asmcomp/printmach.ml(113):3574-3611
+                 (after asmcomp/printmach.ml(113):3574-3611
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0: [15: [11: " & 1 == 0" 0a]] "%a & 1 == 0"] reg
+                     (after asmcomp/printmach.ml(113):3604-3611
+                       (array.get[addr] arg 0)))))
+              case tag 0:
+               (let (cmp =a (field 0 tst))
+                 (before asmcomp/printmach.ml(108):3325-3383
+                   (after asmcomp/printmach.ml(108):3325-3383
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [15: [2: 0a [15: 0a]]] "%a%s%a"] reg
+                       (after asmcomp/printmach.ml(108):3350-3357
+                         (array.get[addr] arg 0))
+                       (after asmcomp/printmach.ml(108):3358-3371
+                         (apply intcomp cmp))
+                       reg
+                       (after asmcomp/printmach.ml(108):3376-3383
+                         (array.get[addr] arg 1))))))
+              case tag 1:
+               (let (n =a (field 1 tst) cmp =a (field 0 tst))
+                 (before asmcomp/printmach.ml(109):3412-3460
+                   (after asmcomp/printmach.ml(109):3412-3460
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [15: [2: 0a [4: 3a 0a 0a 0a]]] "%a%s%i"] reg
+                       (after asmcomp/printmach.ml(109):3437-3444
+                         (array.get[addr] arg 0))
+                       (after asmcomp/printmach.ml(109):3445-3458
+                         (apply intcomp cmp))
+                       n))))
+              case tag 2:
+               (let (cmp =a (field 0 tst))
+                 (before asmcomp/printmach.ml(111):3489-3556
+                   (after asmcomp/printmach.ml(111):3489-3556
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [15: [2: 0a [15: 0a]]] "%a%s%a"] reg
+                       (after asmcomp/printmach.ml(112):3521-3528
+                         (array.get[addr] arg 0))
+                       (after asmcomp/printmach.ml(112):3529-3544
+                         (apply floatcomp cmp))
+                       reg
+                       (after asmcomp/printmach.ml(112):3549-3556
+                         (array.get[addr] arg 1))))))))))
+     print_live = (makemutable 0 0a)
+     operation =
+       (function op arg ppf res
+         (funct-body asmcomp/printmach.ml(118)<ghost>:3709-5992
+           (before asmcomp/printmach.ml(119):3728-5992
+             (seq
+               (if (> (array.length[addr] res) 0)
+                 (before asmcomp/printmach.ml(119):3757-3786
+                   (after asmcomp/printmach.ml(119):3757-3786
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0: [15: [11: " := " 0a]] "%a := "] regs res)))
+                 0a)
+               (before asmcomp/printmach.ml(120):3790-5992
+                 (switch* op
+                  case int 0:
+                   (before asmcomp/printmach.ml(121):3817-3829
+                     (after asmcomp/printmach.ml(121):3817-3829
+                       (apply regs ppf arg)))
+                  case int 1:
+                   (before asmcomp/printmach.ml(122):3844-3877
+                     (after asmcomp/printmach.ml(122):3844-3877
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [15: [11: " (spill)" 0a]] "%a (spill)"] regs
+                         arg)))
+                  case int 2:
+                   (before asmcomp/printmach.ml(123):3893-3927
+                     (after asmcomp/printmach.ml(123):3893-3927
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [15: [11: " (reload)" 0a]] "%a (reload)"] regs
+                         arg)))
+                  case int 3:
+                   (before asmcomp/printmach.ml(153):5247-5278
+                     (after asmcomp/printmach.ml(153):5247-5278
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [11: "-f " [15: 0a]] "-f %a"] reg
+                         (after asmcomp/printmach.ml(153):5271-5278
+                           (array.get[addr] arg 0)))))
+                  case int 4:
+                   (before asmcomp/printmach.ml(154):5292-5325
+                     (after asmcomp/printmach.ml(154):5292-5325
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [11: "absf " [15: 0a]] "absf %a"] reg
+                         (after asmcomp/printmach.ml(154):5318-5325
+                           (array.get[addr] arg 0)))))
+                  case int 5:
+                   (before asmcomp/printmach.ml(155):5339-5385
+                     (after asmcomp/printmach.ml(155):5339-5385
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [15: [11: " +f " [15: 0a]]] "%a +f %a"] reg
+                         (after asmcomp/printmach.ml(155):5366-5373
+                           (array.get[addr] arg 0))
+                         reg
+                         (after asmcomp/printmach.ml(155):5378-5385
+                           (array.get[addr] arg 1)))))
+                  case int 6:
+                   (before asmcomp/printmach.ml(156):5399-5445
+                     (after asmcomp/printmach.ml(156):5399-5445
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [15: [11: " -f " [15: 0a]]] "%a -f %a"] reg
+                         (after asmcomp/printmach.ml(156):5426-5433
+                           (array.get[addr] arg 0))
+                         reg
+                         (after asmcomp/printmach.ml(156):5438-5445
+                           (array.get[addr] arg 1)))))
+                  case int 7:
+                   (before asmcomp/printmach.ml(157):5459-5505
+                     (after asmcomp/printmach.ml(157):5459-5505
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [15: [11: " *f " [15: 0a]]] "%a *f %a"] reg
+                         (after asmcomp/printmach.ml(157):5486-5493
+                           (array.get[addr] arg 0))
+                         reg
+                         (after asmcomp/printmach.ml(157):5498-5505
+                           (array.get[addr] arg 1)))))
+                  case int 8:
+                   (before asmcomp/printmach.ml(158):5519-5565
+                     (after asmcomp/printmach.ml(158):5519-5565
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [15: [11: " /f " [15: 0a]]] "%a /f %a"] reg
+                         (after asmcomp/printmach.ml(158):5546-5553
+                           (array.get[addr] arg 0))
+                         reg
+                         (after asmcomp/printmach.ml(158):5558-5565
+                           (array.get[addr] arg 1)))))
+                  case int 9:
+                   (before asmcomp/printmach.ml(159):5585-5624
+                     (after asmcomp/printmach.ml(159):5585-5624
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [11: "floatofint " [15: 0a]] "floatofint %a"]
+                         reg
+                         (after asmcomp/printmach.ml(159):5617-5624
+                           (array.get[addr] arg 0)))))
+                  case int 10:
+                   (before asmcomp/printmach.ml(160):5644-5683
+                     (after asmcomp/printmach.ml(160):5644-5683
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [11: "intoffloat " [15: 0a]] "intoffloat %a"]
+                         reg
+                         (after asmcomp/printmach.ml(160):5676-5683
+                           (array.get[addr] arg 0)))))
+                  case tag 0:
+                   (let (n =a (field 0 op))
+                     (before asmcomp/printmach.ml(124):3948-3988
+                       (after asmcomp/printmach.ml(124):3948-3988
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0: [2: 0a 0a] "%s"]
+                           (after asmcomp/printmach.ml(124):3965-3988
+                             (apply (field 14 (global Stdlib__nativeint!)) n))))))
+                  case tag 1:
+                   (let (f =a (field 0 op))
+                     (before asmcomp/printmach.ml(125):4011-4051
+                       (after asmcomp/printmach.ml(125):4011-4051
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0: [8: [0: 0a 5a] 0a 0a 0a] "%F"]
+                           (after asmcomp/printmach.ml(125):4028-4051
+                             (caml_int64_float_of_bits f))))))
+                  case tag 2:
+                   (let (s =a (field 0 op))
+                     (before asmcomp/printmach.ml(126):4075-4097
+                       (after asmcomp/printmach.ml(126):4075-4097
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0: [12: '"' [2: 0a [12: '"' 0a]]] "\"%s\""] s))))
+                  case tag 3:
+                   (before asmcomp/printmach.ml(127):4117-4147
+                     (after asmcomp/printmach.ml(127):4117-4147
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [11: "call " [15: 0a]] "call %a"] regs arg)))
+                  case tag 4:
+                   (let (func =a (field 0 op))
+                     (before asmcomp/printmach.ml(128):4177-4219
+                       (after asmcomp/printmach.ml(128):4177-4219
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [11: "call \"" [2: 0a [11: "\" " [15: 0a]]]]
+                            "call \"%s\" %a"]
+                           func regs arg))))
+                  case tag 5:
+                   (before asmcomp/printmach.ml(129):4243-4277
+                     (after asmcomp/printmach.ml(129):4243-4277
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0: [11: "tailcall " [15: 0a]] "tailcall %a"] regs
+                         arg)))
+                  case tag 6:
+                   (let (func =a (field 0 op))
+                     (before asmcomp/printmach.ml(130):4309-4355
+                       (after asmcomp/printmach.ml(130):4309-4355
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [11: "tailcall \"" [2: 0a [11: "\" " [15: 0a]]]]
+                            "tailcall \"%s\" %a"]
+                           func regs arg))))
+                  case tag 7:
+                   (let (alloc =a (field 1 op) func =a (field 0 op))
+                     (before asmcomp/printmach.ml(132):4397-4487
+                       (after asmcomp/printmach.ml(132):4397-4487
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [11:
+                             "extcall \""
+                             [2: 0a [11: "\" " [15: [2: 0a 0a]]]]]
+                            "extcall \"%s\" %a%s"]
+                           func regs arg
+                           (if alloc
+                             (before asmcomp/printmach.ml(133):4466-4468 "")
+                             (before asmcomp/printmach.ml(133):4474-4486
+                               " (noalloc)"))))))
+                  case tag 8:
+                   (let (n =a (field 0 op))
+                     (before asmcomp/printmach.ml(135):4516-4547
+                       (after asmcomp/printmach.ml(135):4516-4547
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [11: "offset stack " [4: 3a 0a 0a 0a]]
+                            "offset stack %i"]
+                           n))))
+                  case tag 9:
+                   (let (addr =a (field 1 op) chunk =a (field 0 op))
+                     (before asmcomp/printmach.ml(137):4580-4667
+                       (after asmcomp/printmach.ml(137):4580-4667
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0: [2: 0a [12: '[' [15: [12: ']' 0a]]]] "%s[%a]"]
+                           (after asmcomp/printmach.ml(138):4608-4630
+                             (apply (field 5 (global Printcmm!)) chunk))
+                           (after asmcomp/printmach.ml(138):4631-4663
+                             (apply (field 11 (global Arch!)) reg addr))
+                           arg))))
+                  case tag 10:
+                   (let
+                     (is_assign =a (field 2 op)
+                      addr =a (field 1 op)
+                      chunk =a (field 0 op))
+                     (before asmcomp/printmach.ml(140):4712-4930
+                       (after asmcomp/printmach.ml(140):4712-4930
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [2:
+                             0a
+                             [12:
+                              '['
+                              [15: [11: "] := " [15: [12: ' ' [2: 0a 0a]]]]]]]
+                            "%s[%a] := %a %s"]
+                           (after asmcomp/printmach.ml(141):4749-4771
+                             (apply (field 5 (global Printcmm!)) chunk))
+                           (after asmcomp/printmach.ml(142):4779-4811
+                             (apply (field 11 (global Arch!)) reg addr))
+                           (after asmcomp/printmach.ml(143):4819-4859
+                             (apply (field 6 (global Stdlib__array!)) arg 1
+                               (- (array.length[addr] arg) 1)))
+                           reg
+                           (after asmcomp/printmach.ml(144):4871-4878
+                             (array.get[addr] arg 0))
+                           (if is_assign
+                             (before asmcomp/printmach.ml(145):4905-4915
+                               "(assign)")
+                             (before asmcomp/printmach.ml(145):4921-4929
+                               "(init)"))))))
+                  case tag 11:
+                   (let (n =a (field 0 op))
+                     (before asmcomp/printmach.ml(147):4966-5088
+                       (seq
+                         (after asmcomp/printmach.ml(147):4966-4990
+                           (apply (field 122 (global Stdlib__format!)) ppf
+                             [0: [11: "alloc " [4: 3a 0a 0a 0a]] "alloc %i"]
+                             n))
+                         (before asmcomp/printmach.ml(148):4996-5088
+                           (if (field 52 (global Config!))
+                             (before asmcomp/printmach.ml(148):5021-5088
+                               (after asmcomp/printmach.ml(148):5021-5088
+                                 (apply (field 122 (global Stdlib__format!))
+                                   ppf
+                                   [0:
+                                    [11:
+                                     "(spacetime node = " [15: [12: ')' 0a]]]
+                                    "(spacetime node = %a)"]
+                                   reg
+                                   (after asmcomp/printmach.ml(149):5073-5080
+                                     (array.get[addr] arg 0)))))
+                             0a)))))
+                  case tag 12:
+                   (let (op =a (field 0 op))
+                     (before asmcomp/printmach.ml(151):5107-5162
+                       (after asmcomp/printmach.ml(151):5107-5162
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0: [15: [2: 0a [15: 0a]]] "%a%s%a"] reg
+                           (after asmcomp/printmach.ml(151):5132-5139
+                             (array.get[addr] arg 0))
+                           (after asmcomp/printmach.ml(151):5140-5150
+                             (apply intop op))
+                           reg
+                           (after asmcomp/printmach.ml(151):5155-5162
+                             (array.get[addr] arg 1))))))
+                  case tag 13:
+                   (let (n =a (field 1 op) op =a (field 0 op))
+                     (before asmcomp/printmach.ml(152):5188-5233
+                       (after asmcomp/printmach.ml(152):5188-5233
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0: [15: [2: 0a [4: 3a 0a 0a 0a]]] "%a%s%i"] reg
+                           (after asmcomp/printmach.ml(152):5213-5220
+                             (array.get[addr] arg 0))
+                           (after asmcomp/printmach.ml(152):5221-5231
+                             (apply intop op))
+                           n))))
+                  case tag 14:
+                   (let (op =a (field 0 op))
+                     (before asmcomp/printmach.ml(169):5948-5992
+                       (after asmcomp/printmach.ml(169):5948-5992
+                         (apply (field 12 (global Arch!)) reg op ppf arg))))
+                  case tag 15:
+                   (let
+                     (which_parameter =a (field 1 op) ident =a (field 0 op))
+                     (before asmcomp/printmach.ml(162):5742-5921
+                       (after asmcomp/printmach.ml(162):5742-5921
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [11:
+                             "name_for_debugger "
+                             [15: [2: 0a [12: '=' [15: 0a]]]]]
+                            "name_for_debugger %a%s=%a"]
+                           (field 3 (global Backend_var!)) ident
+                           (if which_parameter
+                             (let (index =a (field 0 which_parameter))
+                               (before asmcomp/printmach.ml(166):5881-5902
+                                 (after asmcomp/printmach.ml(166):5881-5902
+                                   (apply
+                                     (field 125 (global Stdlib__format!))
+                                     [0:
+                                      [11: "[P" [4: 0a 0a 0a [12: ']' 0a]]]
+                                      "[P%d]"]
+                                     index))))
+                             (before asmcomp/printmach.ml(165):5854-5856 ""))
+                           reg
+                           (after asmcomp/printmach.ml(167):5914-5921
+                             (array.get[addr] arg 0)))))))))))))
+    (letrec
+      (instr
+         (function ppf i
+           (funct-body asmcomp/printmach.ml(171)<ghost>:6008-8235
+             (before asmcomp/printmach.ml(172):6018-8235
+               (seq
+                 (if (field 0 print_live)
+                   (before asmcomp/printmach.ml(172):6038-6567
+                     (seq
+                       (after asmcomp/printmach.ml(173):6048-6088
+                         (apply (field 122 (global Stdlib__format!)) ppf
+                           [0:
+                            [18:
+                             [1: [0: [11: "<1>" 0a] "<1>"]]
+                             [12: '{' [15: 0a]]]
+                            "@[<1>{%a"]
+                           regsetaddr (field 5 i)))
+                       (before asmcomp/printmach.ml(174):6094-6561
+                         (seq
+                           (if (> (array.length[addr] (field 2 i)) 0)
+                             (before asmcomp/printmach.ml(174):6125-6157
+                               (after asmcomp/printmach.ml(174):6125-6157
+                                 (apply (field 122 (global Stdlib__format!))
+                                   ppf
+                                   [0:
+                                    [17:
+                                     [0: "@ " 1 0]
+                                     [12: '+' [17: [0: "@ " 1 0] [15: 0a]]]]
+                                    "@ +@ %a"]
+                                   regs (field 2 i))))
+                             0a)
+                           (before asmcomp/printmach.ml(175):6163-6561
+                             (seq
+                               (after asmcomp/printmach.ml(175):6163-6182
+                                 (apply (field 122 (global Stdlib__format!))
+                                   ppf
+                                   [0:
+                                    [12: '}' [17: 0a [17: [0: "@," 0 0] 0a]]]
+                                    "}@]@,"]))
+                               (before asmcomp/printmach.ml(176):6188-6561
+                                 (if (field 0 (field 81 (global Clflags!)))
+                                   (before asmcomp/printmach.ml(176):6216-6561
+                                     (seq
+                                       (after asmcomp/printmach.ml(178):6275-6347
+                                         (apply
+                                           (field 122
+                                             (global Stdlib__format!))
+                                           ppf
+                                           [0:
+                                            [18:
+                                             [1: [0: [11: "<1>" 0a] "<1>"]]
+                                             [11: "AB={" [15: [12: '}' 0a]]]]
+                                            "@[<1>AB={%a}"]
+                                           (after asmcomp/printmach.ml(178):6302-6328
+                                             (apply
+                                               (field 3
+                                                 (global Reg_availability_set!))
+                                               reg))
+                                           (field 6 i)))
+                                       (before asmcomp/printmach.ml(179):6355-6553
+                                         (seq
+                                           (let (*match* = (field 7 i))
+                                             (if *match*
+                                               (let
+                                                 (available_across =a
+                                                    (field 0 *match*))
+                                                 (before asmcomp/printmach.ml(182):6451-6517
+                                                   (after asmcomp/printmach.ml(182):6451-6517
+                                                     (apply
+                                                       (field 122
+                                                         (global Stdlib__format!))
+                                                       ppf
+                                                       [0:
+                                                        [11:
+                                                         ",AA={"
+                                                         [15: [12: '}' 0a]]]
+                                                        ",AA={%a}"]
+                                                       (after asmcomp/printmach.ml(182):6474-6500
+                                                         (apply
+                                                           (field 3
+                                                             (global Reg_availability_set!))
+                                                           reg))
+                                                       available_across))))
+                                               (before asmcomp/printmach.ml(180):6407-6409
+                                                 0a)))
+                                           (before asmcomp/printmach.ml(184):6535-6553
+                                             (after asmcomp/printmach.ml(184):6535-6553
+                                               (apply
+                                                 (field 122
+                                                   (global Stdlib__format!))
+                                                 ppf
+                                                 [0:
+                                                  [17:
+                                                   0a [17: [0: "@," 0 0] 0a]]
+                                                  "@]@,"])))))))
+                                   0a))))))))
+                   0a)
+                 (before asmcomp/printmach.ml(187):6571-8235
+                   (seq
+                     (let (*match* = (field 0 i))
+                       (switch* *match*
+                        case int 0:
+                         (before asmcomp/printmach.ml(188):6607-6609 0a)
+                        case int 1:
+                         (before asmcomp/printmach.ml(192):6680-6714
+                           (after asmcomp/printmach.ml(192):6680-6714
+                             (apply (field 122 (global Stdlib__format!)) ppf
+                               [0: [11: "return " [15: 0a]] "return %a"] regs
+                               (field 2 i))))
+                        case tag 0:
+                         (let (op =a (field 0 *match*))
+                           (before asmcomp/printmach.ml(190):6630-6658
+                             (after asmcomp/printmach.ml(190):6630-6658
+                               (apply operation op (field 2 i) ppf
+                                 (field 3 i)))))
+                        case tag 1:
+                         (let
+                           (ifnot =a (field 2 *match*)
+                            ifso =a (field 1 *match*)
+                            tst =a (field 0 *match*))
+                           (before asmcomp/printmach.ml(194):6758-6978
+                             (seq
+                               (after asmcomp/printmach.ml(194):6758-6821
+                                 (apply (field 122 (global Stdlib__format!))
+                                   ppf
+                                   [0:
+                                    [18:
+                                     [1: [0: [11: "<v 2>" 0a] "<v 2>"]]
+                                     [11:
+                                      "if "
+                                      [15:
+                                       [11:
+                                        " then" [17: [0: "@," 0 0] [15: 0a]]]]]]
+                                    "@[<v 2>if %a then@,%a"]
+                                   (after asmcomp/printmach.ml(194):6794-6804
+                                     (apply test tst))
+                                   (field 2 i) instr ifso))
+                               (before asmcomp/printmach.ml(195):6829-6978
+                                 (seq
+                                   (let (*match* = (field 0 ifnot))
+                                     (catch
+                                       (if (isint *match*)
+                                         (if *match* (exit 4)
+                                           (before asmcomp/printmach.ml(196):6873-6875
+                                             0a))
+                                         (exit 4))
+                                      with (4)
+                                       (before asmcomp/printmach.ml(197):6889-6931
+                                         (after asmcomp/printmach.ml(197):6889-6931
+                                           (apply
+                                             (field 122
+                                               (global Stdlib__format!))
+                                             ppf
+                                             [0:
+                                              [17:
+                                               [0: "@;<0 -2>" 0 -2]
+                                               [11:
+                                                "else"
+                                                [17: [0: "@," 0 0] [15: 0a]]]]
+                                              "@;<0 -2>else@,%a"]
+                                             instr ifnot)))))
+                                   (before asmcomp/printmach.ml(199):6949-6978
+                                     (after asmcomp/printmach.ml(199):6949-6978
+                                       (apply
+                                         (field 122 (global Stdlib__format!))
+                                         ppf
+                                         [0:
+                                          [17:
+                                           [0: "@;<0 -2>" 0 -2]
+                                           [11: "endif" [17: 0a 0a]]]
+                                          "@;<0 -2>endif@]"]))))))))
+                        case tag 2:
+                         (let
+                           (cases =a (field 1 *match*)
+                            index =a (field 0 *match*))
+                           (before asmcomp/printmach.ml(201):7014-7343
+                             (seq
+                               (after asmcomp/printmach.ml(201):7014-7051
+                                 (apply (field 122 (global Stdlib__format!))
+                                   ppf
+                                   [0: [11: "switch " [15: 0a]] "switch %a"]
+                                   reg
+                                   (after asmcomp/printmach.ml(201):7042-7051
+                                     (array.get[addr] (field 2 i) 0))))
+                               (before asmcomp/printmach.ml(202):7059-7343
+                                 (seq
+                                   (for i 0 to
+                                     (- (array.length[addr] cases) 1)
+                                     (before asmcomp/printmach.ml(203):7106-7299
+                                       (seq
+                                         (after asmcomp/printmach.ml(203):7106-7131
+                                           (apply
+                                             (field 122
+                                               (global Stdlib__format!))
+                                             ppf
+                                             [0:
+                                              [17:
+                                               [0: "@," 0 0]
+                                               [18:
+                                                [1:
+                                                 [0:
+                                                  [11: "<v 2>" 0a] "<v 2>"]]
+                                                [18: [1: [0: 0a ""]] 0a]]]
+                                              "@,@[<v 2>@["]))
+                                         (before asmcomp/printmach.ml(204):7141-7299
+                                           (seq
+                                             (for j 0 to
+                                               (- (array.length[int] index)
+                                                 1)
+                                               (before asmcomp/printmach.ml(205):7190-7238
+                                                 (if
+                                                   (==
+                                                     (after asmcomp/printmach.ml(205):7193-7202
+                                                       (array.get[int] index
+                                                         j))
+                                                     i)
+                                                   (before asmcomp/printmach.ml(205):7212-7238
+                                                     (after asmcomp/printmach.ml(205):7212-7238
+                                                       (apply
+                                                         (field 122
+                                                           (global Stdlib__format!))
+                                                         ppf
+                                                         [0:
+                                                          [11:
+                                                           "case "
+                                                           [4:
+                                                            3a 0a 0a
+                                                            [12:
+                                                             ':'
+                                                             [17:
+                                                              [0: "@," 0 0]
+                                                              0a]]]]
+                                                          "case %i:@,"]
+                                                         j)))
+                                                   0a)))
+                                             (before asmcomp/printmach.ml(207):7261-7299
+                                               (after asmcomp/printmach.ml(207):7261-7299
+                                                 (apply
+                                                   (field 122
+                                                     (global Stdlib__format!))
+                                                   ppf
+                                                   [0:
+                                                    [17:
+                                                     0a
+                                                     [17:
+                                                      [0: "@," 0 0]
+                                                      [15: [17: 0a 0a]]]]
+                                                    "@]@,%a@]"]
+                                                   instr
+                                                   (after asmcomp/printmach.ml(207):7290-7299
+                                                     (array.get[addr] cases
+                                                       i))))))))))
+                                   (before asmcomp/printmach.ml(209):7318-7343
+                                     (after asmcomp/printmach.ml(209):7318-7343
+                                       (apply
+                                         (field 122 (global Stdlib__format!))
+                                         ppf
+                                         [0:
+                                          [17:
+                                           [0: "@," 0 0] [11: "endswitch" 0a]]
+                                          "@,endswitch"]))))))))
+                        case tag 3:
+                         (let
+                           (body =a (field 2 *match*)
+                            handlers =a (field 1 *match*)
+                            flag =a (field 0 *match*))
+                           (before asmcomp/printmach.ml(211):7386-7785
+                             (seq
+                               (after asmcomp/printmach.ml(211):7386-7472
+                                 (apply (field 122 (global Stdlib__format!))
+                                   ppf
+                                   [0:
+                                    [18:
+                                     [1: [0: [11: "<v 2>" 0a] "<v 2>"]]
+                                     [11:
+                                      "catch"
+                                      [15:
+                                       [17:
+                                        [0: "@," 0 0]
+                                        [15:
+                                         [17:
+                                          [0: "@;<0 -2>" 0 -2]
+                                          [11: "with" 0a]]]]]]]
+                                    "@[<v 2>catch%a@,%a@;<0 -2>with"]
+                                   (field 0 (global Printcmm!)) flag instr
+                                   body))
+                               (before asmcomp/printmach.ml(213):7480-7785
+                                 (let
+                                   (h =
+                                      (function param
+                                        (funct-body asmcomp/printmach.ml(213)<ghost>:7486-7557
+                                          (let
+                                            (handler =a (field 1 param)
+                                             nfail =a (field 0 param))
+                                            (before asmcomp/printmach.ml(214):7513-7557
+                                              (after asmcomp/printmach.ml(214):7513-7557
+                                                (apply
+                                                  (field 122
+                                                    (global Stdlib__format!))
+                                                  ppf
+                                                  [0:
+                                                   [12:
+                                                    '('
+                                                    [4:
+                                                     0a 0a 0a
+                                                     [12:
+                                                      ')'
+                                                      [17:
+                                                       [0: "@," 0 0]
+                                                       [15:
+                                                        [17:
+                                                         [0: "@;" 1 0] 0a]]]]]]
+                                                   "(%d)@,%a@;"]
+                                                  nfail instr handler)))))))
+                                   (before asmcomp/printmach.ml(215):7567-7785
+                                     (letrec
+                                       (aux
+                                          (function param
+                                            (funct-body asmcomp/printmach.ml(215):7581-7717
+                                              (if param
+                                                (let
+                                                  (t =a (field 1 param)
+                                                   v =a (field 0 param))
+                                                  (if t
+                                                    (let (v =a v)
+                                                      (before asmcomp/printmach.ml(219):7662-7717
+                                                        (seq
+                                                          (after asmcomp/printmach.ml(219):7662-7665
+                                                            (apply h v))
+                                                          (before asmcomp/printmach.ml(220):7679-7717
+                                                            (seq
+                                                              (after asmcomp/printmach.ml(220):7679-7698
+                                                                (apply
+                                                                  (field 122
+                                                                    (global Stdlib__format!))
+                                                                  ppf
+                                                                  [0:
+                                                                   [17:
+                                                                    [0:
+                                                                    "@ " 1 0]
+                                                                    [11:
+                                                                    "and" 0a]]
+                                                                   "@ and"]))
+                                                              (before asmcomp/printmach.ml(221):7712-7717
+                                                                (after asmcomp/printmach.ml(221):7712-7717
+                                                                  (apply aux
+                                                                    t))))))))
+                                                    (before asmcomp/printmach.ml(217):7626-7629
+                                                      (after asmcomp/printmach.ml(217):7626-7629
+                                                        (apply h v)))))
+                                                (before asmcomp/printmach.ml(216):7606-7608
+                                                  0a)))))
+                                       (before asmcomp/printmach.ml(223):7733-7785
+                                         (seq
+                                           (after asmcomp/printmach.ml(223):7733-7745
+                                             (apply aux handlers))
+                                           (before asmcomp/printmach.ml(224):7753-7785
+                                             (after asmcomp/printmach.ml(224):7753-7785
+                                               (apply
+                                                 (field 122
+                                                   (global Stdlib__format!))
+                                                 ppf
+                                                 [0:
+                                                  [17:
+                                                   [0: "@;<0 -2>" 0 -2]
+                                                   [11:
+                                                    "endcatch" [17: 0a 0a]]]
+                                                  "@;<0 -2>endcatch@]"]))))))))))))
+                        case tag 4:
+                         (let (i =a (field 0 *match*))
+                           (before asmcomp/printmach.ml(226):7807-7831
+                             (after asmcomp/printmach.ml(226):7807-7831
+                               (apply (field 122 (global Stdlib__format!))
+                                 ppf
+                                 [0:
+                                  [11: "exit(" [4: 0a 0a 0a [12: ')' 0a]]]
+                                  "exit(%d)"]
+                                 i))))
+                        case tag 5:
+                         (let
+                           (handler =a (field 1 *match*)
+                            body =a (field 0 *match*))
+                           (before asmcomp/printmach.ml(228):7869-7967
+                             (after asmcomp/printmach.ml(228):7869-7967
+                               (apply (field 122 (global Stdlib__format!))
+                                 ppf
+                                 [0:
+                                  [18:
+                                   [1: [0: [11: "<v 2>" 0a] "<v 2>"]]
+                                   [11:
+                                    "try"
+                                    [17:
+                                     [0: "@," 0 0]
+                                     [15:
+                                      [17:
+                                       [0: "@;<0 -2>" 0 -2]
+                                       [11:
+                                        "with"
+                                        [17:
+                                         [0: "@," 0 0]
+                                         [15:
+                                          [17:
+                                           [0: "@;<0 -2>" 0 -2]
+                                           [11: "endtry" [17: 0a 0a]]]]]]]]]]]
+                                  "@[<v 2>try@,%a@;<0 -2>with@,%a@;<0 -2>endtry@]"]
+                                 instr body instr handler))))
+                        case tag 6:
+                         (let (k =a (field 0 *match*))
+                           (before asmcomp/printmach.ml(231):7990-8045
+                             (after asmcomp/printmach.ml(231):7990-8045
+                               (apply (field 122 (global Stdlib__format!))
+                                 ppf [0: [15: [12: ' ' [15: 0a]]] "%a %a"]
+                                 (field 11 (global Printcmm!)) k reg
+                                 (after asmcomp/printmach.ml(231):8036-8045
+                                   (array.get[addr] (field 2 i) 0))))))))
+                     (before asmcomp/printmach.ml(233):8055-8235
+                       (seq
+                         (if
+                           (not
+                             (after asmcomp/printmach.ml(233):8062-8087
+                               (apply (field 1 (global Debuginfo!))
+                                 (field 4 i))))
+                           (before asmcomp/printmach.ml(234):8097-8141
+                             (after asmcomp/printmach.ml(234):8097-8141
+                               (apply (field 122 (global Stdlib__format!))
+                                 ppf [0: [2: 0a 0a] "%s"]
+                                 (after asmcomp/printmach.ml(234):8114-8141
+                                   (apply (field 2 (global Debuginfo!))
+                                     (field 4 i))))))
+                           0a)
+                         (before asmcomp/printmach.ml(235):8145-8235
+                           (let (*match* = (field 0 (field 1 i)))
+                             (catch
+                               (if (isint *match*)
+                                 (if *match* (exit 3)
+                                   (before asmcomp/printmach.ml(236):8186-8188
+                                     0a))
+                                 (exit 3))
+                              with (3)
+                               (before asmcomp/printmach.ml(237):8198-8229
+                                 (after asmcomp/printmach.ml(237):8198-8229
+                                   (apply
+                                     (field 122 (global Stdlib__format!)) ppf
+                                     [0: [17: [0: "@," 0 0] [15: 0a]] "@,%a"]
+                                     instr (field 1 i))))))))))))))))
+      (let
+        (fundecl =
+           (function ppf f
+             (funct-body asmcomp/printmach.ml(240)<ghost>:8249-8461
+               (before asmcomp/printmach.ml(241):8259-8461
+                 (let
+                   (dbg =
+                      (if
+                        (after asmcomp/printmach.ml(242):8276-8303
+                          (apply (field 1 (global Debuginfo!)) (field 4 f)))
+                        (before asmcomp/printmach.ml(243):8315-8317 "")
+                        (before asmcomp/printmach.ml(245):8333-8368
+                          (after asmcomp/printmach.ml(245):8333-8368
+                            (apply (field 27 (global Stdlib!)) " "
+                              (after asmcomp/printmach.ml(245):8339-8368
+                                (apply (field 2 (global Debuginfo!))
+                                  (field 4 f))))))))
+                   (before asmcomp/printmach.ml(246):8374-8461
+                     (after asmcomp/printmach.ml(246):8374-8461
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [18:
+                           [1: [0: [11: "<v 2>" 0a] "<v 2>"]]
+                           [2:
+                            0a
+                            [12:
+                             '('
+                             [15:
+                              [12:
+                               ')'
+                               [2: 0a [17: [0: "@," 0 0] [15: [17: 0a 0a]]]]]]]]]
+                          "@[<v 2>%s(%a)%s@,%a@]"]
+                         (field 0 f) regs (field 1 f) dbg instr (field 2 f))))))))
+         phase =
+           (function msg ppf f
+             (funct-body asmcomp/printmach.ml(249)<ghost>:8473-8527
+               (before asmcomp/printmach.ml(250):8487-8527
+                 (after asmcomp/printmach.ml(250):8487-8527
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11: "*** " [2: 0a [17: 4a [15: [17: 4a 0a]]]]]
+                      "*** %s@.%a@."]
+                     msg fundecl f)))))
+         interference =
+           (function ppf r
+             (funct-body asmcomp/printmach.ml(252)<ghost>:8546-8685
+               (before asmcomp/printmach.ml(253):8556-8685
+                 (let
+                   (interf =
+                      (function ppf
+                        (funct-body asmcomp/printmach.ml(253)<ghost>:8567-8638
+                          (before asmcomp/printmach.ml(254):8576-8638
+                            (after asmcomp/printmach.ml(254):8576-8638
+                              (apply (field 14 (global Stdlib__list!))
+                                (function r
+                                  (funct-body asmcomp/printmach.ml(255):8590-8625
+                                    (before asmcomp/printmach.ml(255):8600-8624
+                                      (after asmcomp/printmach.ml(255):8600-8624
+                                        (apply
+                                          (field 122
+                                            (global Stdlib__format!))
+                                          ppf
+                                          [0:
+                                           [17: [0: "@ " 1 0] [15: 0a]]
+                                           "@ %a"]
+                                          reg r)))))
+                                (field 6 r)))))))
+                   (before asmcomp/printmach.ml(257):8644-8685
+                     (after asmcomp/printmach.ml(257):8644-8685
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [18:
+                           [1: [0: [11: "<2>" 0a] "<2>"]]
+                           [15: [12: ':' [16: [17: 0a [17: 4a 0a]]]]]]
+                          "@[<2>%a:%t@]@."]
+                         reg r interf)))))))
+         interferences =
+           (function ppf param
+             (funct-body asmcomp/printmach.ml(259)<ghost>:8705-8803
+               (before asmcomp/printmach.ml(260):8716-8803
+                 (seq
+                   (after asmcomp/printmach.ml(260):8716-8749
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [11: "*** Interferences" [17: 4a 0a]]
+                        "*** Interferences@."]))
+                   (before asmcomp/printmach.ml(261):8753-8803
+                     (after asmcomp/printmach.ml(261):8753-8803
+                       (apply (field 14 (global Stdlib__list!))
+                         (after asmcomp/printmach.ml(261):8763-8781
+                           (apply interference ppf))
+                         (after asmcomp/printmach.ml(261):8782-8803
+                           (apply (field 17 (global Reg!)) 0a)))))))))
+         interval =
+           (function ppf i
+             (funct-body asmcomp/printmach.ml(263)<ghost>:8818-8981
+               (before asmcomp/printmach.ml(264):8828-8981
+                 (let
+                   (interv =
+                      (function ppf
+                        (funct-body asmcomp/printmach.ml(264)<ghost>:8839-8930
+                          (before asmcomp/printmach.ml(265):8849-8930
+                            (after asmcomp/printmach.ml(265):8849-8930
+                              (apply (field 14 (global Stdlib__list!))
+                                (function r
+                                  (funct-body asmcomp/printmach.ml(266):8865-8915
+                                    (before asmcomp/printmach.ml(266):8875-8914
+                                      (after asmcomp/printmach.ml(266):8875-8914
+                                        (apply
+                                          (field 122
+                                            (global Stdlib__format!))
+                                          ppf
+                                          [0:
+                                           [17:
+                                            [0: "@ " 1 0]
+                                            [12:
+                                             '['
+                                             [4:
+                                              0a 0a 0a
+                                              [12:
+                                               ';' [4: 0a 0a 0a [12: ']' 0a]]]]]]
+                                           "@ [%d;%d]"]
+                                          (field 0 r) (field 1 r))))))
+                                (field 3 i)))))))
+                   (before asmcomp/printmach.ml(268):8936-8981
+                     (after asmcomp/printmach.ml(268):8936-8981
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [18:
+                           [1: [0: [11: "<2>" 0a] "<2>"]]
+                           [15: [12: ':' [16: [17: 0a [17: 4a 0a]]]]]]
+                          "@[<2>%a:%t@]@."]
+                         reg (field 0 i) interv)))))))
+         intervals =
+           (function ppf param
+             (funct-body asmcomp/printmach.ml(270)<ghost>:8997-9153
+               (before asmcomp/printmach.ml(271):9008-9153
+                 (seq
+                   (after asmcomp/printmach.ml(271):9008-9037
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [11: "*** Intervals" [17: 4a 0a]] "*** Intervals@."]))
+                   (before asmcomp/printmach.ml(272):9041-9153
+                     (seq
+                       (after asmcomp/printmach.ml(272):9041-9098
+                         (apply (field 14 (global Stdlib__list!))
+                           (after asmcomp/printmach.ml(272):9051-9065
+                             (apply interval ppf))
+                           (after asmcomp/printmach.ml(272):9066-9098
+                             (apply (field 1 (global Interval!)) 0a))))
+                       (before asmcomp/printmach.ml(273):9102-9153
+                         (after asmcomp/printmach.ml(273):9102-9153
+                           (apply (field 14 (global Stdlib__list!))
+                             (after asmcomp/printmach.ml(273):9112-9126
+                               (apply interval ppf))
+                             (after asmcomp/printmach.ml(273):9127-9153
+                               (apply (field 0 (global Interval!)) 0a)))))))))))
+         preference =
+           (function ppf r
+             (funct-body asmcomp/printmach.ml(275)<ghost>:9170-9330
+               (before asmcomp/printmach.ml(276):9180-9330
+                 (let
+                   (prefs =
+                      (function ppf
+                        (funct-body asmcomp/printmach.ml(276)<ghost>:9190-9283
+                          (before asmcomp/printmach.ml(277):9200-9283
+                            (after asmcomp/printmach.ml(277):9200-9283
+                              (apply (field 14 (global Stdlib__list!))
+                                (function param
+                                  (funct-body asmcomp/printmach.ml(278):9216-9268
+                                    (let
+                                      (w =a (field 1 param)
+                                       r =a (field 0 param))
+                                      (before asmcomp/printmach.ml(278):9231-9267
+                                        (after asmcomp/printmach.ml(278):9231-9267
+                                          (apply
+                                            (field 122
+                                              (global Stdlib__format!))
+                                            ppf
+                                            [0:
+                                             [17:
+                                              [0: "@ " 1 0]
+                                              [15:
+                                               [11:
+                                                " weight " [4: 3a 0a 0a 0a]]]]
+                                             "@ %a weight %i"]
+                                            reg r w))))))
+                                (field 7 r)))))))
+                   (before asmcomp/printmach.ml(280):9289-9330
+                     (after asmcomp/printmach.ml(280):9289-9330
+                       (apply (field 122 (global Stdlib__format!)) ppf
+                         [0:
+                          [18:
+                           [1: [0: [11: "<2>" 0a] "<2>"]]
+                           [15: [11: ": " [16: [17: 0a [17: 4a 0a]]]]]]
+                          "@[<2>%a: %t@]@."]
+                         reg r prefs)))))))
+         preferences =
+           (function ppf param
+             (funct-body asmcomp/printmach.ml(282)<ghost>:9348-9442
+               (before asmcomp/printmach.ml(283):9359-9442
+                 (seq
+                   (after asmcomp/printmach.ml(283):9359-9390
+                     (apply (field 122 (global Stdlib__format!)) ppf
+                       [0:
+                        [11: "*** Preferences" [17: 4a 0a]]
+                        "*** Preferences@."]))
+                   (before asmcomp/printmach.ml(284):9394-9442
+                     (after asmcomp/printmach.ml(284):9394-9442
+                       (apply (field 14 (global Stdlib__list!))
+                         (after asmcomp/printmach.ml(284):9404-9420
+                           (apply preference ppf))
+                         (after asmcomp/printmach.ml(284):9421-9442
+                           (apply (field 17 (global Reg!)) 0a))))))))))
+        (pseudo _none_(0)<ghost>:-1--1
+          (makeblock 0 reg regs regset regsetaddr operation test instr
+            fundecl phase interferences intervals preferences print_live))))))

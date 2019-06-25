@@ -1,0 +1,1355 @@
+(setglobal X86_gas!
+  (let
+    (bprintf = (field 4 (global Stdlib__printf!))
+     print_reg =
+       (function b f r
+         (funct-body asmcomp/x86_gas.ml(21)<ghost>:1151-1211
+           (before asmcomp/x86_gas.ml(22):1161-1211
+             (seq
+               (after asmcomp/x86_gas.ml(22):1161-1182
+                 (apply (field 9 (global Stdlib__buffer!)) b '%'))
+               (before asmcomp/x86_gas.ml(23):1186-1211
+                 (after asmcomp/x86_gas.ml(23):1186-1211
+                   (apply (field 13 (global Stdlib__buffer!)) b
+                     (after asmcomp/x86_gas.ml(23):1206-1211 (apply f r)))))))))
+     opt_displ =
+       (function b displ[int]
+         (funct-body asmcomp/x86_gas.ml(25)<ghost>:1227-1334
+           (before asmcomp/x86_gas.ml(26):1239-1334
+             (if (== displ 0) (before asmcomp/x86_gas.ml(26):1257-1259 0a)
+               (before asmcomp/x86_gas.ml(27):1267-1334
+                 (if (> displ 0)
+                   (before asmcomp/x86_gas.ml(27):1285-1306
+                     (after asmcomp/x86_gas.ml(27):1285-1306
+                       (apply bprintf b [0: [12: '+' [4: 0a 0a 0a 0a]] "+%d"]
+                         displ)))
+                   (before asmcomp/x86_gas.ml(28):1314-1334
+                     (after asmcomp/x86_gas.ml(28):1314-1334
+                       (apply bprintf b [0: [4: 0a 0a 0a 0a] "%d"] displ)))))))))
+     arg_mem =
+       (function b param
+         (funct-body asmcomp/x86_gas.ml(30)<ghost>:1348-2059
+           (let
+             (displ =a (field 6 param)
+              sym =a (field 5 param)
+              base =a (field 4 param)
+              scale =a (field 3 param)
+              idx =a (field 2 param)
+              arch =a (field 0 param))
+             (before asmcomp/x86_gas.ml(31):1398-2059
+               (let
+                 (string_of_register =
+                    (if arch
+                      (before asmcomp/x86_gas.ml(33):1456-1471
+                        (field 3 (global X86_proc!)))
+                      (before asmcomp/x86_gas.ml(34):1485-1500
+                        (field 4 (global X86_proc!)))))
+                 (before asmcomp/x86_gas.ml(36):1508-2059
+                   (seq
+                     (if sym
+                       (let (s =a (field 0 sym))
+                         (before asmcomp/x86_gas.ml(41):1649-1695
+                           (seq
+                             (after asmcomp/x86_gas.ml(41):1649-1670
+                               (apply (field 13 (global Stdlib__buffer!)) b
+                                 s))
+                             (before asmcomp/x86_gas.ml(42):1678-1695
+                               (after asmcomp/x86_gas.ml(42):1678-1695
+                                 (apply opt_displ b displ))))))
+                       (before asmcomp/x86_gas.ml(38):1547-1628
+                         (if (|| (!= displ 0) (== scale 0))
+                           (before asmcomp/x86_gas.ml(39):1587-1628
+                             (after asmcomp/x86_gas.ml(39):1587-1628
+                               (apply (field 13 (global Stdlib__buffer!)) b
+                                 (after asmcomp/x86_gas.ml(39):1607-1628
+                                   (apply (field 9 (global Stdlib__int!))
+                                     displ)))))
+                           0a)))
+                     (before asmcomp/x86_gas.ml(44):1705-2059
+                       (if (!= scale 0)
+                         (before asmcomp/x86_gas.ml(44):1724-2059
+                           (seq
+                             (after asmcomp/x86_gas.ml(45):1734-1755
+                               (apply (field 9 (global Stdlib__buffer!)) b
+                                 '('))
+                             (before asmcomp/x86_gas.ml(46):1761-2053
+                               (seq
+                                 (if base
+                                   (let (base =a (field 0 base))
+                                     (before asmcomp/x86_gas.ml(48):1819-1854
+                                       (after asmcomp/x86_gas.ml(48):1819-1854
+                                         (apply print_reg b
+                                           string_of_register base))))
+                                   (before asmcomp/x86_gas.ml(47):1797-1799
+                                     0a))
+                                 (before asmcomp/x86_gas.ml(50):1868-2053
+                                   (seq
+                                     (if (|| (!= base 0a) (!= scale 1))
+                                       (before asmcomp/x86_gas.ml(50):1903-1924
+                                         (after asmcomp/x86_gas.ml(50):1903-1924
+                                           (apply
+                                             (field 9
+                                               (global Stdlib__buffer!))
+                                             b ',')))
+                                       0a)
+                                     (before asmcomp/x86_gas.ml(51):1930-2053
+                                       (seq
+                                         (after asmcomp/x86_gas.ml(51):1930-1964
+                                           (apply print_reg b
+                                             string_of_register idx))
+                                         (before asmcomp/x86_gas.ml(52):1970-2053
+                                           (seq
+                                             (if (!= scale 1)
+                                               (before asmcomp/x86_gas.ml(52):1989-2026
+                                                 (after asmcomp/x86_gas.ml(52):1989-2026
+                                                   (apply bprintf b
+                                                     [0:
+                                                      [12: ',' [2: 0a 0a]]
+                                                      ",%s"]
+                                                     (after asmcomp/x86_gas.ml(52):2005-2026
+                                                       (apply
+                                                         (field 9
+                                                           (global Stdlib__int!))
+                                                         scale)))))
+                                               0a)
+                                             (before asmcomp/x86_gas.ml(53):2032-2053
+                                               (after asmcomp/x86_gas.ml(53):2032-2053
+                                                 (apply
+                                                   (field 9
+                                                     (global Stdlib__buffer!))
+                                                   b ')')))))))))))))
+                         0a)))))))))
+     arg =
+       (function b param
+         (funct-body asmcomp/x86_gas.ml(56)<ghost>:2069-2549
+           (switch* param
+            case tag 0:
+             (let (x =a (field 0 param))
+               (before asmcomp/x86_gas.ml(58):2153-2171
+                 (after asmcomp/x86_gas.ml(58):2153-2171
+                   (apply bprintf b [0: [12: '$' [7: 0a 0a 0a 0a]] "$%Ld"] x))))
+            case tag 1:
+             (let (x =a (field 0 param))
+               (before asmcomp/x86_gas.ml(57):2095-2139
+                 (seq
+                   (after asmcomp/x86_gas.ml(57):2095-2116
+                     (apply (field 9 (global Stdlib__buffer!)) b '$'))
+                   (before asmcomp/x86_gas.ml(57):2118-2139
+                     (after asmcomp/x86_gas.ml(57):2118-2139
+                       (apply (field 13 (global Stdlib__buffer!)) b x))))))
+            case tag 2:
+             (let (x =a (field 0 param))
+               (before asmcomp/x86_gas.ml(59):2187-2216
+                 (after asmcomp/x86_gas.ml(59):2187-2216
+                   (apply print_reg b (field 0 (global X86_proc!)) x))))
+            case tag 3:
+             (let (x =a (field 0 param))
+               (before asmcomp/x86_gas.ml(60):2232-2261
+                 (after asmcomp/x86_gas.ml(60):2232-2261
+                   (apply print_reg b (field 1 (global X86_proc!)) x))))
+            case tag 4:
+             (let (x =a (field 0 param))
+               (before asmcomp/x86_gas.ml(61):2277-2306
+                 (after asmcomp/x86_gas.ml(61):2277-2306
+                   (apply print_reg b (field 2 (global X86_proc!)) x))))
+            case tag 5:
+             (let (x =a (field 0 param))
+               (before asmcomp/x86_gas.ml(62):2322-2351
+                 (after asmcomp/x86_gas.ml(62):2322-2351
+                   (apply print_reg b (field 3 (global X86_proc!)) x))))
+            case tag 6:
+             (let (x =a (field 0 param))
+               (before asmcomp/x86_gas.ml(63):2367-2396
+                 (after asmcomp/x86_gas.ml(63):2367-2396
+                   (apply print_reg b (field 4 (global X86_proc!)) x))))
+            case tag 7:
+             (let (x =a (field 0 param))
+               (before asmcomp/x86_gas.ml(64):2412-2445
+                 (after asmcomp/x86_gas.ml(64):2412-2445
+                   (apply print_reg b (field 5 (global X86_proc!)) x))))
+            case tag 8:
+             (let (addr =a (field 0 param))
+               (before asmcomp/x86_gas.ml(65):2462-2476
+                 (after asmcomp/x86_gas.ml(65):2462-2476
+                   (apply arg_mem b addr))))
+            case tag 9:
+             (let (displ =a (field 2 param) s =a (field 1 param))
+               (before asmcomp/x86_gas.ml(66):2508-2549
+                 (after asmcomp/x86_gas.ml(66):2508-2549
+                   (apply bprintf b
+                     [0:
+                      [2: 0a [15: [12: '(' [12: '%' [11: "rip)" 0a]]]]]
+                      "%s%a(%%rip)"]
+                     s opt_displ displ))))))))
+    (letrec
+      (cst
+         (function b c
+           (funct-body asmcomp/x86_gas.ml(68)<ghost>:2563-2753
+             (catch
+               (switch c
+                case tag 2:
+                 (let (c2 =a (field 1 c) c1 =a (field 0 c))
+                   (before asmcomp/x86_gas.ml(70):2657-2692
+                     (after asmcomp/x86_gas.ml(70):2657-2692
+                       (apply bprintf b
+                         [0: [15: [11: " + " [15: 0a]]] "%a + %a"] scst c1
+                         scst c2))))
+                case tag 3:
+                 (let (c2 =a (field 1 c) c1 =a (field 0 c))
+                   (before asmcomp/x86_gas.ml(71):2718-2753
+                     (after asmcomp/x86_gas.ml(71):2718-2753
+                       (apply bprintf b
+                         [0: [15: [11: " - " [15: 0a]]] "%a - %a"] scst c1
+                         scst c2))))
+                default: (exit 1))
+              with (1)
+               (before asmcomp/x86_gas.ml(69):2623-2631
+                 (after asmcomp/x86_gas.ml(69):2623-2631 (apply scst b c))))))
+        scst
+          (function b param
+            (funct-body asmcomp/x86_gas.ml(73)<ghost>:2764-3126
+              (switch* param
+               case int 0:
+                (before asmcomp/x86_gas.ml(74):2794-2817
+                  (after asmcomp/x86_gas.ml(74):2794-2817
+                    (apply (field 13 (global Stdlib__buffer!)) b ".")))
+               case tag 0:
+                (let (n =a (field 0 param))
+                  (before asmcomp/x86_gas.ml(76):2877-2916
+                    (if
+                      (&& (Int64.<= n 2147483647L) (Int64.>= n -2147483648L))
+                      (before asmcomp/x86_gas.ml(77):2926-2965
+                        (after asmcomp/x86_gas.ml(77):2926-2965
+                          (apply (field 13 (global Stdlib__buffer!)) b
+                            (after asmcomp/x86_gas.ml(77):2946-2965
+                              (apply (field 13 (global Stdlib__int64!)) n)))))
+                      (let (n =a[int64] n)
+                        (before asmcomp/x86_gas.ml(78):2981-3000
+                          (after asmcomp/x86_gas.ml(78):2981-3000
+                            (apply bprintf b
+                              [0: [11: "0x" [7: 6a 0a 0a 0a]] "0x%Lx"] n)))))))
+               case tag 1:
+                (let (l =a (field 0 param))
+                  (before asmcomp/x86_gas.ml(75):2838-2859
+                    (after asmcomp/x86_gas.ml(75):2838-2859
+                      (apply (field 13 (global Stdlib__buffer!)) b l))))
+               case tag 2:
+                (let (c2 =a (field 1 param) c1 =a (field 0 param))
+                  (before asmcomp/x86_gas.ml(79):3026-3063
+                    (after asmcomp/x86_gas.ml(79):3026-3063
+                      (apply bprintf b
+                        [0:
+                         [12: '(' [15: [11: " + " [15: [12: ')' 0a]]]]]
+                         "(%a + %a)"]
+                        scst c1 scst c2))))
+               case tag 3:
+                (let (c2 =a (field 1 param) c1 =a (field 0 param))
+                  (before asmcomp/x86_gas.ml(80):3089-3126
+                    (after asmcomp/x86_gas.ml(80):3089-3126
+                      (apply bprintf b
+                        [0:
+                         [12: '(' [15: [11: " - " [15: [12: ')' 0a]]]]]
+                         "(%a - %a)"]
+                        scst c1 scst c2))))))))
+      (let
+        (typeof =
+           (function param
+             (funct-body asmcomp/x86_gas.ml(82):3141-3342
+               (catch
+                 (catch
+                   (catch
+                     (switch* param
+                      case tag 0: (exit 4)
+                      case tag 1: (exit 4)
+                      case tag 2: (exit 3)
+                      case tag 3: (exit 3)
+                      case tag 4:
+                       (before asmcomp/x86_gas.ml(85):3243-3247 4a)
+                      case tag 5:
+                       (before asmcomp/x86_gas.ml(86):3263-3268 5a)
+                      case tag 6:
+                       (before asmcomp/x86_gas.ml(87):3284-3289 6a)
+                      case tag 7:
+                       (before asmcomp/x86_gas.ml(89):3330-3342
+                         (raise
+                           (after asmcomp/x86_gas.ml(89):3330-3342
+                             (makeblock 0 (global Assert_failure!)
+                               [0: "asmcomp/x86_gas.ml" 89 14]))))
+                      case tag 8:
+                       (let
+                         (*match* =a (field 0 param)
+                          typ =a (field 1 *match*))
+                         (exit 2 typ))
+                      case tag 9: (let (typ =a (field 0 param)) (exit 2 typ)))
+                    with (2 typ)
+                     (before asmcomp/x86_gas.ml(83):3194-3197 typ))
+                  with (3) (before asmcomp/x86_gas.ml(84):3223-3227 3a))
+                with (4) (before asmcomp/x86_gas.ml(88):3311-3315 0a))))
+         suf =
+           (function arg
+             (funct-body asmcomp/x86_gas.ml(91)<ghost>:3352-3527
+               (before asmcomp/x86_gas.ml(92):3360-3527
+                 (let
+                   (*match* =
+                      (after asmcomp/x86_gas.ml(92):3366-3376
+                        (apply typeof arg)))
+                   (catch
+                     (catch
+                       (switch* *match*
+                        case int 0:
+                         (before asmcomp/x86_gas.ml(98):3485-3487 "")
+                        case int 1:
+                         (before asmcomp/x86_gas.ml(97):3469-3472 "s")
+                        case int 2: (exit 5)
+                        case int 3:
+                         (before asmcomp/x86_gas.ml(93):3394-3397 "b")
+                        case int 4:
+                         (before asmcomp/x86_gas.ml(94):3410-3413 "w")
+                        case int 5: (exit 5)
+                        case int 6:
+                         (before asmcomp/x86_gas.ml(96):3452-3455 "q")
+                        case int 7: (exit 6)
+                        case int 8: (exit 6)
+                        case int 9: (exit 6))
+                      with (5) (before asmcomp/x86_gas.ml(95):3435-3438 "l"))
+                    with (6)
+                     (before asmcomp/x86_gas.ml(99):3515-3527
+                       (raise
+                         (after asmcomp/x86_gas.ml(99):3515-3527
+                           (makeblock 0 (global Assert_failure!)
+                             [0: "asmcomp/x86_gas.ml" 99 27])))))))))
+         i0 =
+           (function b s
+             (funct-body asmcomp/x86_gas.ml(101)<ghost>:3536-3560
+               (before asmcomp/x86_gas.ml(101):3542-3560
+                 (after asmcomp/x86_gas.ml(101):3542-3560
+                   (apply bprintf b [0: [12: '\t' [2: 0a 0a]] "\t%s"] s)))))
+         i1 =
+           (function b s x
+             (funct-body asmcomp/x86_gas.ml(102)<ghost>:3568-3604
+               (before asmcomp/x86_gas.ml(102):3576-3604
+                 (after asmcomp/x86_gas.ml(102):3576-3604
+                   (apply bprintf b
+                     [0: [12: '\t' [2: 0a [12: '\t' [15: 0a]]]] "\t%s\t%a"] s
+                     arg x)))))
+         i1_s =
+           (function b s x
+             (funct-body asmcomp/x86_gas.ml(103)<ghost>:3614-3660
+               (before asmcomp/x86_gas.ml(103):3622-3660
+                 (after asmcomp/x86_gas.ml(103):3622-3660
+                   (apply bprintf b
+                     [0:
+                      [12: '\t' [2: 0a [2: 0a [12: '\t' [15: 0a]]]]]
+                      "\t%s%s\t%a"]
+                     s
+                     (after asmcomp/x86_gas.ml(103):3647-3654 (apply suf x))
+                     arg x)))))
+         i2 =
+           (function b s x y
+             (funct-body asmcomp/x86_gas.ml(104)<ghost>:3668-3716
+               (before asmcomp/x86_gas.ml(104):3678-3716
+                 (after asmcomp/x86_gas.ml(104):3678-3716
+                   (apply bprintf b
+                     [0:
+                      [12: '\t' [2: 0a [12: '\t' [15: [11: ", " [15: 0a]]]]]]
+                      "\t%s\t%a, %a"]
+                     s arg x arg y)))))
+         i2_s =
+           (function b s x y
+             (funct-body asmcomp/x86_gas.ml(105)<ghost>:3726-3784
+               (before asmcomp/x86_gas.ml(105):3736-3784
+                 (after asmcomp/x86_gas.ml(105):3736-3784
+                   (apply bprintf b
+                     [0:
+                      [12:
+                       '\t'
+                       [2: 0a [2: 0a [12: '\t' [15: [11: ", " [15: 0a]]]]]]]
+                      "\t%s%s\t%a, %a"]
+                     s
+                     (after asmcomp/x86_gas.ml(105):3765-3772 (apply suf y))
+                     arg x arg y)))))
+         i2_ss =
+           (function b s x y
+             (funct-body asmcomp/x86_gas.ml(106)<ghost>:3795-3863
+               (before asmcomp/x86_gas.ml(106):3805-3863
+                 (after asmcomp/x86_gas.ml(106):3805-3863
+                   (apply bprintf b
+                     [0:
+                      [12:
+                       '\t'
+                       [2:
+                        0a
+                        [2: 0a [2: 0a [12: '\t' [15: [11: ", " [15: 0a]]]]]]]]
+                      "\t%s%s%s\t%a, %a"]
+                     s
+                     (after asmcomp/x86_gas.ml(106):3836-3843 (apply suf x))
+                     (after asmcomp/x86_gas.ml(106):3844-3851 (apply suf y))
+                     arg x arg y)))))
+         i1_call_jmp =
+           (function b s x
+             (funct-body asmcomp/x86_gas.ml(108)<ghost>:3881-4187
+               (catch
+                 (switch x
+                  case tag 1:
+                   (let (x =a (field 0 x))
+                     (before asmcomp/x86_gas.ml(114):4141-4165
+                       (after asmcomp/x86_gas.ml(114):4141-4165
+                         (apply bprintf b
+                           [0:
+                            [12: '\t' [2: 0a [12: '\t' [2: 0a 0a]]]]
+                            "\t%s\t%s"]
+                           s x))))
+                  case tag 5: (exit 7)
+                  case tag 6: (exit 7)
+                  case tag 8:
+                   (let (*match* =a (field 0 x) *match* =a (field 0 *match*))
+                     (catch
+                       (if *match*
+                         (let (*match* =a (field 3 *match*))
+                           (if (!= *match* 0) (exit 9)
+                             (let (*match* =a (field 4 *match*))
+                               (if *match* (exit 9)
+                                 (let (*match* =a (field 5 *match*))
+                                   (if *match*
+                                     (before asmcomp/x86_gas.ml(111):4030-4038
+                                       (after asmcomp/x86_gas.ml(111):4030-4038
+                                         (apply i1 b s x)))
+                                     (exit 9)))))))
+                         (exit 9))
+                      with (9) (exit 7)))
+                  case tag 9: (exit 7)
+                  default:
+                   (before asmcomp/x86_gas.ml(115):4175-4187
+                     (raise
+                       (after asmcomp/x86_gas.ml(115):4175-4187
+                         (makeblock 0 (global Assert_failure!)
+                           [0: "asmcomp/x86_gas.ml" 115 9])))))
+                with (7)
+                 (let (x =a x)
+                   (before asmcomp/x86_gas.ml(113):4098-4127
+                     (after asmcomp/x86_gas.ml(113):4098-4127
+                       (apply bprintf b
+                         [0:
+                          [12: '\t' [2: 0a [11: "\t*" [15: 0a]]]] "\t%s\t*%a"]
+                         s arg x)))))))
+         print_instr =
+           (function b param
+             (funct-body asmcomp/x86_gas.ml(117)<ghost>:4205-8539
+               (switch* param
+                case int 0:
+                 (before asmcomp/x86_gas.ml(124):4497-4508
+                   (after asmcomp/x86_gas.ml(124):4497-4508
+                     (apply i0 b "cltd")))
+                case int 1:
+                 (before asmcomp/x86_gas.ml(128):4695-4706
+                   (after asmcomp/x86_gas.ml(128):4695-4706
+                     (apply i0 b "cqto")))
+                case int 2:
+                 (before asmcomp/x86_gas.ml(136):5092-5103
+                   (after asmcomp/x86_gas.ml(136):5092-5103
+                     (apply i0 b "fabs")))
+                case int 3:
+                 (before asmcomp/x86_gas.ml(139):5200-5211
+                   (after asmcomp/x86_gas.ml(139):5200-5211
+                     (apply i0 b "fchs")))
+                case int 4:
+                 (before asmcomp/x86_gas.ml(141):5262-5275
+                   (after asmcomp/x86_gas.ml(141):5262-5275
+                     (apply i0 b "fcompp")))
+                case int 5:
+                 (before asmcomp/x86_gas.ml(142):5288-5299
+                   (after asmcomp/x86_gas.ml(142):5288-5299
+                     (apply i0 b "fcos")))
+                case int 6:
+                 (before asmcomp/x86_gas.ml(153):5794-5805
+                   (after asmcomp/x86_gas.ml(153):5794-5805
+                     (apply i0 b "fld1")))
+                case int 7:
+                 (before asmcomp/x86_gas.ml(155):5854-5867
+                   (after asmcomp/x86_gas.ml(155):5854-5867
+                     (apply i0 b "fldlg2")))
+                case int 8:
+                 (before asmcomp/x86_gas.ml(156):5882-5895
+                   (after asmcomp/x86_gas.ml(156):5882-5895
+                     (apply i0 b "fldln2")))
+                case int 9:
+                 (before asmcomp/x86_gas.ml(157):5908-5919
+                   (after asmcomp/x86_gas.ml(157):5908-5919
+                     (apply i0 b "fldz")))
+                case int 10:
+                 (before asmcomp/x86_gas.ml(162):6090-6103
+                   (after asmcomp/x86_gas.ml(162):6090-6103
+                     (apply i0 b "fpatan")))
+                case int 11:
+                 (before asmcomp/x86_gas.ml(163):6117-6129
+                   (after asmcomp/x86_gas.ml(163):6117-6129
+                     (apply i0 b "fptan")))
+                case int 12:
+                 (before asmcomp/x86_gas.ml(164):6142-6153
+                   (after asmcomp/x86_gas.ml(164):6142-6153
+                     (apply i0 b "fsin")))
+                case int 13:
+                 (before asmcomp/x86_gas.ml(165):6167-6179
+                   (after asmcomp/x86_gas.ml(165):6167-6179
+                     (apply i0 b "fsqrt")))
+                case int 14:
+                 (before asmcomp/x86_gas.ml(175):6640-6652
+                   (after asmcomp/x86_gas.ml(175):6640-6652
+                     (apply i0 b "fyl2x")))
+                case int 15:
+                 (before asmcomp/x86_gas.ml(176):6664-6674
+                   (after asmcomp/x86_gas.ml(176):6664-6674
+                     (apply i0 b "hlt")))
+                case int 16:
+                 (before asmcomp/x86_gas.ml(184):7002-7014
+                   (after asmcomp/x86_gas.ml(184):7002-7014
+                     (apply i0 b "leave")))
+                case int 17:
+                 (before asmcomp/x86_gas.ml(200):7731-7741
+                   (after asmcomp/x86_gas.ml(200):7731-7741
+                     (apply i0 b "nop")))
+                case int 18:
+                 (before asmcomp/x86_gas.ml(204):7866-7876
+                   (after asmcomp/x86_gas.ml(204):7866-7876
+                     (apply i0 b "ret")))
+                case tag 0:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(118):4242-4264
+                     (after asmcomp/x86_gas.ml(118):4242-4264
+                       (apply i2_s b "add" arg1 arg2))))
+                case tag 1:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(119):4291-4313
+                     (after asmcomp/x86_gas.ml(119):4291-4313
+                       (apply i2 b "addsd" arg1 arg2))))
+                case tag 2:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(120):4338-4360
+                     (after asmcomp/x86_gas.ml(120):4338-4360
+                       (apply i2_s b "and" arg1 arg2))))
+                case tag 3:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(121):4387-4409
+                     (after asmcomp/x86_gas.ml(121):4387-4409
+                       (apply i2 b "andpd" arg1 arg2))))
+                case tag 4:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(122):4427-4443
+                     (after asmcomp/x86_gas.ml(122):4427-4443
+                       (apply i1 b "bswap" arg))))
+                case tag 5:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(123):4461-4485
+                     (after asmcomp/x86_gas.ml(123):4461-4485
+                       (apply i1_call_jmp b "call" arg))))
+                case tag 6:
+                 (let
+                   (arg2 =a (field 2 param)
+                    arg1 =a (field 1 param)
+                    c =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(125):4537-4584
+                     (after asmcomp/x86_gas.ml(125):4537-4584
+                       (apply i2 b
+                         (after asmcomp/x86_gas.ml(125):4542-4574
+                           (apply (field 27 (global Stdlib!)) "cmov"
+                             (after asmcomp/x86_gas.ml(125):4552-4573
+                               (apply (field 7 (global X86_proc!)) c))))
+                         arg1 arg2))))
+                case tag 7:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(126):4609-4631
+                     (after asmcomp/x86_gas.ml(126):4609-4631
+                       (apply i2_s b "cmp" arg1 arg2))))
+                case tag 8:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(127):4659-4682
+                     (after asmcomp/x86_gas.ml(127):4659-4682
+                       (apply i2 b "comisd" arg1 arg2))))
+                case tag 9:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(129):4736-4761
+                     (after asmcomp/x86_gas.ml(129):4736-4761
+                       (apply i2 b "cvtsd2si" arg1 arg2))))
+                case tag 10:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(130):4791-4816
+                     (after asmcomp/x86_gas.ml(130):4791-4816
+                       (apply i2 b "cvtsd2ss" arg1 arg2))))
+                case tag 11:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(131):4846-4884
+                     (after asmcomp/x86_gas.ml(131):4846-4884
+                       (apply i2 b
+                         (after asmcomp/x86_gas.ml(131):4851-4874
+                           (apply (field 27 (global Stdlib!)) "cvtsi2sd"
+                             (after asmcomp/x86_gas.ml(131):4865-4873
+                               (apply suf arg1))))
+                         arg1 arg2))))
+                case tag 12:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(132):4914-4939
+                     (after asmcomp/x86_gas.ml(132):4914-4939
+                       (apply i2 b "cvtss2sd" arg1 arg2))))
+                case tag 13:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(133):4970-4998
+                     (after asmcomp/x86_gas.ml(133):4970-4998
+                       (apply i2_s b "cvttsd2si" arg1 arg2))))
+                case tag 14:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(134):5014-5030
+                     (after asmcomp/x86_gas.ml(134):5014-5030
+                       (apply i1_s b "dec" arg))))
+                case tag 15:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(135):5057-5079
+                     (after asmcomp/x86_gas.ml(135):5057-5079
+                       (apply i2 b "divsd" arg1 arg2))))
+                case tag 16:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(137):5120-5137
+                     (after asmcomp/x86_gas.ml(137):5120-5137
+                       (apply i1_s b "fadd" arg))))
+                case tag 17:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(138):5165-5187
+                     (after asmcomp/x86_gas.ml(138):5165-5187
+                       (apply i2 b "faddp" arg1 arg2))))
+                case tag 18:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(140):5229-5247
+                     (after asmcomp/x86_gas.ml(140):5229-5247
+                       (apply i1_s b "fcomp" arg))))
+                case tag 19:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(143):5316-5333
+                     (after asmcomp/x86_gas.ml(143):5316-5333
+                       (apply i1_s b "fdiv" arg))))
+                case tag 20:
+                 (let (arg1 =a (field 0 param))
+                   (catch
+                     (switch arg1
+                      case tag 7:
+                       (let (*match* =a (field 0 arg1))
+                         (switch* *match*
+                          case int 0: (exit 10)
+                          case tag 0: (exit 10)
+                          case tag 1:
+                           (let (*match* =a (field 0 *match*))
+                             (if (!= *match* 0) (exit 10)
+                               (let (arg2 =a (field 1 param))
+                                 (before asmcomp/x86_gas.ml(144):5368-5400
+                                   (after asmcomp/x86_gas.ml(144):5368-5400
+                                     (apply i2 b "fdivrp" [7: [1: 0]] arg2))))))))
+                      default: (exit 10))
+                    with (10)
+                     (let (arg2 =a (field 1 param))
+                       (before asmcomp/x86_gas.ml(145):5438-5460
+                         (after asmcomp/x86_gas.ml(145):5438-5460
+                           (apply i2 b "fdivp" arg1 arg2))))))
+                case tag 21:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(146):5478-5496
+                     (after asmcomp/x86_gas.ml(146):5478-5496
+                       (apply i1_s b "fdivr" arg))))
+                case tag 22:
+                 (let (arg1 =a (field 0 param))
+                   (catch
+                     (switch arg1
+                      case tag 7:
+                       (let (*match* =a (field 0 arg1))
+                         (switch* *match*
+                          case int 0: (exit 11)
+                          case tag 0: (exit 11)
+                          case tag 1:
+                           (let (*match* =a (field 0 *match*))
+                             (if (!= *match* 0) (exit 11)
+                               (let (arg2 =a (field 1 param))
+                                 (before asmcomp/x86_gas.ml(147):5532-5563
+                                   (after asmcomp/x86_gas.ml(147):5532-5563
+                                     (apply i2 b "fdivp" [7: [1: 0]] arg2))))))))
+                      default: (exit 11))
+                    with (11)
+                     (let (arg2 =a (field 1 param))
+                       (before asmcomp/x86_gas.ml(148):5602-5625
+                         (after asmcomp/x86_gas.ml(148):5602-5625
+                           (apply i2 b "fdivrp" arg1 arg2))))))
+                case tag 23:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(149):5642-5659
+                     (after asmcomp/x86_gas.ml(149):5642-5659
+                       (apply i1_s b "fild" arg))))
+                case tag 24:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(150):5677-5695
+                     (after asmcomp/x86_gas.ml(150):5677-5695
+                       (apply i1_s b "fistp" arg))))
+                case tag 25:
+                 (let (arg =a (field 0 param))
+                   (catch
+                     (switch arg
+                      case tag 8:
+                       (let
+                         (*match* =a (field 0 arg)
+                          *match* =a (field 1 *match*))
+                         (if (!= *match* 1) (exit 12)
+                           (before asmcomp/x86_gas.ml(151):5735-5750
+                             (after asmcomp/x86_gas.ml(151):5735-5750
+                               (apply i1 b "flds" arg)))))
+                      default: (exit 12))
+                    with (12)
+                     (let (arg =a arg)
+                       (before asmcomp/x86_gas.ml(152):5766-5781
+                         (after asmcomp/x86_gas.ml(152):5766-5781
+                           (apply i1 b "fldl" arg))))))
+                case tag 26:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(154):5823-5839
+                     (after asmcomp/x86_gas.ml(154):5823-5839
+                       (apply i1 b "fldcw" arg))))
+                case tag 27:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(158):5936-5953
+                     (after asmcomp/x86_gas.ml(158):5936-5953
+                       (apply i1_s b "fmul" arg))))
+                case tag 28:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(159):5981-6003
+                     (after asmcomp/x86_gas.ml(159):5981-6003
+                       (apply i2 b "fmulp" arg1 arg2))))
+                case tag 29:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(160):6022-6039
+                     (after asmcomp/x86_gas.ml(160):6022-6039
+                       (apply i1 b "fnstcw" arg))))
+                case tag 30:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(161):6058-6075
+                     (after asmcomp/x86_gas.ml(161):6058-6075
+                       (apply i1 b "fnstsw" arg))))
+                case tag 31:
+                 (let (arg =a (field 0 param))
+                   (catch
+                     (switch arg
+                      case tag 8:
+                       (let
+                         (*match* =a (field 0 arg)
+                          *match* =a (field 1 *match*))
+                         (if (!= *match* 1) (exit 13)
+                           (before asmcomp/x86_gas.ml(166):6220-6236
+                             (after asmcomp/x86_gas.ml(166):6220-6236
+                               (apply i1 b "fstps" arg)))))
+                      default: (exit 13))
+                    with (13)
+                     (let (arg =a arg)
+                       (before asmcomp/x86_gas.ml(167):6253-6269
+                         (after asmcomp/x86_gas.ml(167):6253-6269
+                           (apply i1 b "fstpl" arg))))))
+                case tag 32:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(168):6286-6303
+                     (after asmcomp/x86_gas.ml(168):6286-6303
+                       (apply i1_s b "fsub" arg))))
+                case tag 33:
+                 (let (arg1 =a (field 0 param))
+                   (catch
+                     (switch arg1
+                      case tag 7:
+                       (let (*match* =a (field 0 arg1))
+                         (switch* *match*
+                          case int 0: (exit 14)
+                          case tag 0: (exit 14)
+                          case tag 1:
+                           (let (*match* =a (field 0 *match*))
+                             (if (!= *match* 0) (exit 14)
+                               (let (arg2 =a (field 1 param))
+                                 (before asmcomp/x86_gas.ml(169):6338-6370
+                                   (after asmcomp/x86_gas.ml(169):6338-6370
+                                     (apply i2 b "fsubrp" [7: [1: 0]] arg2))))))))
+                      default: (exit 14))
+                    with (14)
+                     (let (arg2 =a (field 1 param))
+                       (before asmcomp/x86_gas.ml(170):6408-6430
+                         (after asmcomp/x86_gas.ml(170):6408-6430
+                           (apply i2 b "fsubp" arg1 arg2))))))
+                case tag 34:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(171):6448-6466
+                     (after asmcomp/x86_gas.ml(171):6448-6466
+                       (apply i1_s b "fsubr" arg))))
+                case tag 35:
+                 (let (arg1 =a (field 0 param))
+                   (catch
+                     (switch arg1
+                      case tag 7:
+                       (let (*match* =a (field 0 arg1))
+                         (switch* *match*
+                          case int 0: (exit 15)
+                          case tag 0: (exit 15)
+                          case tag 1:
+                           (let (*match* =a (field 0 *match*))
+                             (if (!= *match* 0) (exit 15)
+                               (let (arg2 =a (field 1 param))
+                                 (before asmcomp/x86_gas.ml(172):6501-6532
+                                   (after asmcomp/x86_gas.ml(172):6501-6532
+                                     (apply i2 b "fsubp" [7: [1: 0]] arg2))))))))
+                      default: (exit 15))
+                    with (15)
+                     (let (arg2 =a (field 1 param))
+                       (before asmcomp/x86_gas.ml(173):6571-6594
+                         (after asmcomp/x86_gas.ml(173):6571-6594
+                           (apply i2 b "fsubrp" arg1 arg2))))))
+                case tag 36:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(174):6611-6626
+                     (after asmcomp/x86_gas.ml(174):6611-6626
+                       (apply i1 b "fxch" arg))))
+                case tag 37:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(177):6691-6708
+                     (after asmcomp/x86_gas.ml(177):6691-6708
+                       (apply i1_s b "idiv" arg))))
+                case tag 38:
+                 (let (*match* =a (field 1 param) arg =a (field 0 param))
+                   (if *match*
+                     (let (arg1 =a arg arg2 =a (field 0 *match*))
+                       (before asmcomp/x86_gas.ml(179):6781-6804
+                         (after asmcomp/x86_gas.ml(179):6781-6804
+                           (apply i2_s b "imul" arg1 arg2))))
+                     (before asmcomp/x86_gas.ml(178):6733-6750
+                       (after asmcomp/x86_gas.ml(178):6733-6750
+                         (apply i1_s b "imul" arg)))))
+                case tag 39:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(180):6820-6836
+                     (after asmcomp/x86_gas.ml(180):6820-6836
+                       (apply i1_s b "inc" arg))))
+                case tag 40:
+                 (let (arg =a (field 1 param) c =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(181):6855-6902
+                     (after asmcomp/x86_gas.ml(181):6855-6902
+                       (apply i1_call_jmp b
+                         (after asmcomp/x86_gas.ml(181):6869-6898
+                           (apply (field 27 (global Stdlib!)) "j"
+                             (after asmcomp/x86_gas.ml(181):6876-6897
+                               (apply (field 7 (global X86_proc!)) c))))
+                         arg))))
+                case tag 41:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(182):6918-6941
+                     (after asmcomp/x86_gas.ml(182):6918-6941
+                       (apply i1_call_jmp b "jmp" arg))))
+                case tag 42:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(183):6966-6988
+                     (after asmcomp/x86_gas.ml(183):6966-6988
+                       (apply i2_s b "lea" arg1 arg2))))
+                case tag 43:
+                 (let (arg1 =a (field 0 param))
+                   (catch
+                     (switch arg1
+                      case tag 0:
+                       (let (arg2 =a (field 1 param))
+                         (switch arg2
+                          case tag 6:
+                           (let (n =a (field 0 arg1))
+                             (before asmcomp/x86_gas.ml(186):7069-7114
+                               (if
+                                 (not
+                                   (&& (Int64.<= n 2147483647L)
+                                     (Int64.>= n -2147483648L)))
+                                 (before asmcomp/x86_gas.ml(187):7124-7148
+                                   (after asmcomp/x86_gas.ml(187):7124-7148
+                                     (apply i2 b "movabsq" arg1 arg2)))
+                                 (exit 16))))
+                          default: (exit 16)))
+                      case tag 1:
+                       (let (arg2 =a (field 1 param))
+                         (switch arg2
+                          case tag 6:
+                           (let (arg1 =a arg1)
+                             (before asmcomp/x86_gas.ml(188):7199-7206
+                               (if (field 18 (global X86_proc!))
+                                 (before asmcomp/x86_gas.ml(189):7216-7240
+                                   (after asmcomp/x86_gas.ml(189):7216-7240
+                                     (apply i2 b "movabsq" arg1 arg2)))
+                                 (exit 16))))
+                          default: (exit 16)))
+                      default: (exit 16))
+                    with (16)
+                     (let (arg1 =a arg1 arg2 =a (field 1 param))
+                       (before asmcomp/x86_gas.ml(190):7265-7287
+                         (after asmcomp/x86_gas.ml(190):7265-7287
+                           (apply i2_s b "mov" arg1 arg2))))))
+                case tag 44:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(191):7315-7338
+                     (after asmcomp/x86_gas.ml(191):7315-7338
+                       (apply i2 b "movapd" arg1 arg2))))
+                case tag 45:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(192):7366-7389
+                     (after asmcomp/x86_gas.ml(192):7366-7389
+                       (apply i2 b "movlpd" arg1 arg2))))
+                case tag 46:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(193):7416-7438
+                     (after asmcomp/x86_gas.ml(193):7416-7438
+                       (apply i2 b "movsd" arg1 arg2))))
+                case tag 47:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(194):7465-7487
+                     (after asmcomp/x86_gas.ml(194):7465-7487
+                       (apply i2 b "movss" arg1 arg2))))
+                case tag 48:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(195):7514-7538
+                     (after asmcomp/x86_gas.ml(195):7514-7538
+                       (apply i2_ss b "movs" arg1 arg2))))
+                case tag 49:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(196):7566-7589
+                     (after asmcomp/x86_gas.ml(196):7566-7589
+                       (apply i2 b "movslq" arg1 arg2))))
+                case tag 50:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(197):7616-7640
+                     (after asmcomp/x86_gas.ml(197):7616-7640
+                       (apply i2_ss b "movz" arg1 arg2))))
+                case tag 51:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(198):7667-7689
+                     (after asmcomp/x86_gas.ml(198):7667-7689
+                       (apply i2 b "mulsd" arg1 arg2))))
+                case tag 52:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(199):7705-7719
+                     (after asmcomp/x86_gas.ml(199):7705-7719
+                       (apply i1 b "neg" arg))))
+                case tag 53:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(201):7765-7786
+                     (after asmcomp/x86_gas.ml(201):7765-7786
+                       (apply i2_s b "or" arg1 arg2))))
+                case tag 54:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(202):7803-7819
+                     (after asmcomp/x86_gas.ml(202):7803-7819
+                       (apply i1_s b "pop" arg))))
+                case tag 55:
+                 (let (arg =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(203):7836-7853
+                     (after asmcomp/x86_gas.ml(203):7836-7853
+                       (apply i1_s b "push" arg))))
+                case tag 56:
+                 (let
+                   (arg2 =a (field 2 param)
+                    arg1 =a (field 1 param)
+                    r =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(205):7908-7945
+                     (after asmcomp/x86_gas.ml(205):7908-7945
+                       (apply i2 b
+                         (after asmcomp/x86_gas.ml(205):7913-7935
+                           (apply (field 9 (global X86_proc!)) r))
+                         arg1 arg2))))
+                case tag 57:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(206):7970-7992
+                     (after asmcomp/x86_gas.ml(206):7970-7992
+                       (apply i2_s b "sal" arg1 arg2))))
+                case tag 58:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(207):8017-8039
+                     (after asmcomp/x86_gas.ml(207):8017-8039
+                       (apply i2_s b "sar" arg1 arg2))))
+                case tag 59:
+                 (let (arg =a (field 1 param) c =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(208):8060-8100
+                     (after asmcomp/x86_gas.ml(208):8060-8100
+                       (apply i1 b
+                         (after asmcomp/x86_gas.ml(208):8065-8096
+                           (apply (field 27 (global Stdlib!)) "set"
+                             (after asmcomp/x86_gas.ml(208):8074-8095
+                               (apply (field 7 (global X86_proc!)) c))))
+                         arg))))
+                case tag 60:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(209):8125-8147
+                     (after asmcomp/x86_gas.ml(209):8125-8147
+                       (apply i2_s b "shr" arg1 arg2))))
+                case tag 61:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(210):8175-8198
+                     (after asmcomp/x86_gas.ml(210):8175-8198
+                       (apply i2 b "sqrtsd" arg1 arg2))))
+                case tag 62:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(211):8223-8245
+                     (after asmcomp/x86_gas.ml(211):8223-8245
+                       (apply i2_s b "sub" arg1 arg2))))
+                case tag 63:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(212):8272-8294
+                     (after asmcomp/x86_gas.ml(212):8272-8294
+                       (apply i2 b "subsd" arg1 arg2))))
+                case tag 64:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(213):8320-8343
+                     (after asmcomp/x86_gas.ml(213):8320-8343
+                       (apply i2_s b "test" arg1 arg2))))
+                case tag 65:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(214):8372-8396
+                     (after asmcomp/x86_gas.ml(214):8372-8396
+                       (apply i2 b "ucomisd" arg1 arg2))))
+                case tag 66:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(215):8422-8443
+                     (after asmcomp/x86_gas.ml(215):8422-8443
+                       (apply i2 b "xchg" arg1 arg2))))
+                case tag 67:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(216):8468-8490
+                     (after asmcomp/x86_gas.ml(216):8468-8490
+                       (apply i2_s b "xor" arg1 arg2))))
+                case tag 68:
+                 (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                   (before asmcomp/x86_gas.ml(217):8517-8539
+                     (after asmcomp/x86_gas.ml(217):8517-8539
+                       (apply i2 b "xorpd" arg1 arg2)))))))
+         print_line =
+           (function b param
+             (funct-body asmcomp/x86_gas.ml(243)<ghost>:9148-11367
+               (catch
+                 (switch param
+                  case int 1:
+                   (before asmcomp/x86_gas.ml(280):10558-10584
+                     (after asmcomp/x86_gas.ml(280):10558-10584
+                       (apply bprintf b
+                         [0: [11: "\t.cfi_endproc" 0a] "\t.cfi_endproc"])))
+                  case int 2:
+                   (before asmcomp/x86_gas.ml(281):10606-10634
+                     (after asmcomp/x86_gas.ml(281):10606-10634
+                       (apply bprintf b
+                         [0: [11: "\t.cfi_startproc" 0a] "\t.cfi_startproc"])))
+                  case tag 0:
+                   (let (instr =a (field 0 param))
+                     (before asmcomp/x86_gas.ml(244):9178-9197
+                       (after asmcomp/x86_gas.ml(244):9178-9197
+                         (apply print_instr b instr))))
+                  case tag 1:
+                   (let (n =a (field 1 param))
+                     (before asmcomp/x86_gas.ml(248):9301-9389
+                       (let
+                         (n =[int]
+                            (if (== (field 16 (global X86_proc!)) 0a)
+                              (before asmcomp/x86_gas.ml(248):9335-9346
+                                (after asmcomp/x86_gas.ml(248):9335-9346
+                                  (apply (field 24 (global Misc!)) n)))
+                              (before asmcomp/x86_gas.ml(248):9352-9353 n)))
+                         (before asmcomp/x86_gas.ml(249):9363-9389
+                           (after asmcomp/x86_gas.ml(249):9363-9389
+                             (apply bprintf b
+                               [0:
+                                [11: "\t.align\t" [4: 0a 0a 0a 0a]]
+                                "\t.align\t%d"]
+                               n))))))
+                  case tag 2:
+                   (let (n =a (field 0 param))
+                     (before asmcomp/x86_gas.ml(250):9404-9433
+                       (after asmcomp/x86_gas.ml(250):9404-9433
+                         (apply bprintf b
+                           [0: [11: "\t.byte\t" [15: 0a]] "\t.byte\t%a"] cst
+                           n))))
+                  case tag 3:
+                   (let (s =a (field 0 param))
+                     (before asmcomp/x86_gas.ml(252):9455-9582
+                       (if (== (field 16 (global X86_proc!)) 3a)
+                         (before asmcomp/x86_gas.ml(252):9482-9513
+                           (after asmcomp/x86_gas.ml(252):9482-9513
+                             (apply (field 10 (global X86_proc!)) b ".byte"
+                               s)))
+                         (before asmcomp/x86_gas.ml(253):9525-9582
+                           (after asmcomp/x86_gas.ml(253):9525-9582
+                             (apply bprintf b
+                               [0:
+                                [11: "\t.ascii\t\"" [2: 0a [12: '"' 0a]]]
+                                "\t.ascii\t\"%s\""]
+                               (after asmcomp/x86_gas.ml(253):9554-9582
+                                 (apply (field 6 (global X86_proc!)) s))))))))
+                  case tag 4:
+                   (let (s =a (field 0 param))
+                     (before asmcomp/x86_gas.ml(254):9600-9630
+                       (after asmcomp/x86_gas.ml(254):9600-9630
+                         (apply bprintf b
+                           [0:
+                            [11: "\t\t\t\t/* " [2: 0a [11: " */" 0a]]]
+                            "\t\t\t\t/* %s */"]
+                           s))))
+                  case tag 5:
+                   (let (s =a (field 0 param))
+                     (before asmcomp/x86_gas.ml(255):9647-9673
+                       (after asmcomp/x86_gas.ml(255):9647-9673
+                         (apply bprintf b
+                           [0: [11: "\t.globl\t" [2: 0a 0a]] "\t.globl\t%s"]
+                           s))))
+                  case tag 6:
+                   (let (n =a (field 0 param))
+                     (before asmcomp/x86_gas.ml(256):9689-9718
+                       (after asmcomp/x86_gas.ml(256):9689-9718
+                         (apply bprintf b
+                           [0: [11: "\t.long\t" [15: 0a]] "\t.long\t%a"] cst
+                           n))))
+                  case tag 7:
+                   (let (s =a (field 0 param))
+                     (before asmcomp/x86_gas.ml(257):9742-9759
+                       (after asmcomp/x86_gas.ml(257):9742-9759
+                         (apply bprintf b [0: [2: 0a [12: ':' 0a]] "%s:"] s))))
+                  case tag 8:
+                   (let (n =a (field 0 param))
+                     (before asmcomp/x86_gas.ml(258):9774-9803
+                       (after asmcomp/x86_gas.ml(258):9774-9803
+                         (apply bprintf b
+                           [0: [11: "\t.quad\t" [15: 0a]] "\t.quad\t%a"] cst
+                           n))))
+                  case tag 9:
+                   (let (name =a (field 0 param))
+                     (catch
+                       (if name
+                         (let (*match* =a (field 0 name))
+                           (stringswitch *match*
+                            case ".data":
+                             (let (*match* =a (field 1 name))
+                               (if *match* (exit 19)
+                                 (before asmcomp/x86_gas.ml(259):9838-9857
+                                   (after asmcomp/x86_gas.ml(259):9838-9857
+                                     (apply bprintf b
+                                       [0: [11: "\t.data" 0a] "\t.data"])))))
+                            case ".text":
+                             (let (*match* =a (field 1 name))
+                               (if *match* (exit 19)
+                                 (before asmcomp/x86_gas.ml(260):9892-9911
+                                   (after asmcomp/x86_gas.ml(260):9892-9911
+                                     (apply bprintf b
+                                       [0: [11: "\t.text" 0a] "\t.text"])))))
+                            default: (exit 19)))
+                         (exit 19))
+                      with (19)
+                       (let
+                         (args =a (field 2 param) flags =a (field 1 param))
+                         (before asmcomp/x86_gas.ml(262):9953-10216
+                           (seq
+                             (after asmcomp/x86_gas.ml(262):9953-10003
+                               (apply bprintf b
+                                 [0:
+                                  [11: "\t.section " [2: 0a 0a]]
+                                  "\t.section %s"]
+                                 (after asmcomp/x86_gas.ml(262):9979-10003
+                                   (apply (field 6 (global Stdlib__string!))
+                                     "," name))))
+                             (before asmcomp/x86_gas.ml(263):10011-10216
+                               (seq
+                                 (if flags
+                                   (let (flags =a (field 0 flags))
+                                     (before asmcomp/x86_gas.ml(265):10075-10096
+                                       (after asmcomp/x86_gas.ml(265):10075-10096
+                                         (apply bprintf b
+                                           [0: [12: ',' [3: 0a 0a]] ",%S"]
+                                           flags))))
+                                   (before asmcomp/x86_gas.ml(264):10050-10052
+                                     0a))
+                                 (before asmcomp/x86_gas.ml(267):10114-10216
+                                   (if args
+                                     (before asmcomp/x86_gas.ml(269):10166-10206
+                                       (after asmcomp/x86_gas.ml(269):10166-10206
+                                         (apply bprintf b
+                                           [0: [12: ',' [2: 0a 0a]] ",%s"]
+                                           (after asmcomp/x86_gas.ml(269):10182-10206
+                                             (apply
+                                               (field 6
+                                                 (global Stdlib__string!))
+                                               "," args)))))
+                                     (before asmcomp/x86_gas.ml(268):10150-10152
+                                       0a))))))))))
+                  case tag 10:
+                   (let (n =a (field 0 param))
+                     (before asmcomp/x86_gas.ml(272):10238-10328
+                       (if (== (field 16 (global X86_proc!)) 3a)
+                         (before asmcomp/x86_gas.ml(272):10265-10290
+                           (after asmcomp/x86_gas.ml(272):10265-10290
+                             (apply bprintf b
+                               [0:
+                                [11: "\t.zero\t" [4: 0a 0a 0a 0a]]
+                                "\t.zero\t%d"]
+                               n)))
+                         (before asmcomp/x86_gas.ml(273):10302-10328
+                           (after asmcomp/x86_gas.ml(273):10302-10328
+                             (apply bprintf b
+                               [0:
+                                [11: "\t.space\t" [4: 0a 0a 0a 0a]]
+                                "\t.space\t%d"]
+                               n))))))
+                  case tag 11:
+                   (let (n =a (field 0 param))
+                     (before asmcomp/x86_gas.ml(275):10349-10447
+                       (if (== (field 16 (global X86_proc!)) 3a)
+                         (before asmcomp/x86_gas.ml(275):10376-10406
+                           (after asmcomp/x86_gas.ml(275):10376-10406
+                             (apply bprintf b
+                               [0:
+                                [11: "\t.value\t" [15: 0a]] "\t.value\t%a"]
+                               cst n)))
+                         (before asmcomp/x86_gas.ml(276):10418-10447
+                           (after asmcomp/x86_gas.ml(276):10418-10447
+                             (apply bprintf b
+                               [0: [11: "\t.word\t" [15: 0a]] "\t.word\t%a"]
+                               cst n))))))
+                  case tag 14:
+                   (let (n =a (field 0 param))
+                     (before asmcomp/x86_gas.ml(279):10497-10538
+                       (after asmcomp/x86_gas.ml(279):10497-10538
+                         (apply bprintf b
+                           [0:
+                            [11:
+                             "\t.cfi_adjust_cfa_offset " [4: 0a 0a 0a 0a]]
+                            "\t.cfi_adjust_cfa_offset %d"]
+                           n))))
+                  case tag 15:
+                   (let
+                     (file_name =a (field 1 param)
+                      file_num =a (field 0 param))
+                     (before asmcomp/x86_gas.ml(283):10675-10769
+                       (after asmcomp/x86_gas.ml(283):10675-10769
+                         (apply bprintf b
+                           [0:
+                            [11:
+                             "\t.file\t"
+                             [4: 0a 0a 0a [11: "\t\"" [2: 0a [12: '"' 0a]]]]]
+                            "\t.file\t%d\t\"%s\""]
+                           file_num
+                           (after asmcomp/x86_gas.ml(284):10724-10769
+                             (apply (field 6 (global X86_proc!)) file_name))))))
+                  case tag 16:
+                   (let (s =a (field 0 param))
+                     (before asmcomp/x86_gas.ml(285):10795-10830
+                       (after asmcomp/x86_gas.ml(285):10795-10830
+                         (apply bprintf b
+                           [0:
+                            [11: "\t.indirect_symbol " [2: 0a 0a]]
+                            "\t.indirect_symbol %s"]
+                           s))))
+                  case tag 17:
+                   (let
+                     (col =a (field 2 param)
+                      line =a (field 1 param)
+                      file_num =a (field 0 param))
+                     (before asmcomp/x86_gas.ml(288):10943-11060
+                       (if (>= col 0)
+                         (before asmcomp/x86_gas.ml(288):10960-11008
+                           (after asmcomp/x86_gas.ml(288):10960-11008
+                             (apply bprintf b
+                               [0:
+                                [11:
+                                 "\t.loc\t"
+                                 [4:
+                                  0a 0a 0a
+                                  [12:
+                                   '\t'
+                                   [4: 0a 0a 0a [12: '\t' [4: 0a 0a 0a 0a]]]]]]
+                                "\t.loc\t%d\t%d\t%d"]
+                               file_num line col)))
+                         (before asmcomp/x86_gas.ml(289):11020-11060
+                           (after asmcomp/x86_gas.ml(289):11020-11060
+                             (apply bprintf b
+                               [0:
+                                [11:
+                                 "\t.loc\t"
+                                 [4: 0a 0a 0a [12: '\t' [4: 0a 0a 0a 0a]]]]
+                                "\t.loc\t%d\t%d"]
+                               file_num line))))))
+                  case tag 18:
+                   (let (s =a (field 0 param))
+                     (before asmcomp/x86_gas.ml(290):11085-11119
+                       (after asmcomp/x86_gas.ml(290):11085-11119
+                         (apply bprintf b
+                           [0:
+                            [11: "\t.private_extern " [2: 0a 0a]]
+                            "\t.private_extern %s"]
+                           s))))
+                  case tag 19:
+                   (let (arg2 =a (field 1 param) arg1 =a (field 0 param))
+                     (before asmcomp/x86_gas.ml(291):11144-11183
+                       (after asmcomp/x86_gas.ml(291):11144-11183
+                         (apply bprintf b
+                           [0:
+                            [11: "\t.set " [2: 0a [11: ", " [15: 0a]]]]
+                            "\t.set %s, %a"]
+                           arg1 cst arg2))))
+                  case tag 20:
+                   (let (c =a (field 1 param) s =a (field 0 param))
+                     (before asmcomp/x86_gas.ml(292):11203-11236
+                       (after asmcomp/x86_gas.ml(292):11203-11236
+                         (apply bprintf b
+                           [0:
+                            [11: "\t.size " [2: 0a [12: ',' [15: 0a]]]]
+                            "\t.size %s,%a"]
+                           s cst c))))
+                  case tag 21:
+                   (let (typ =a (field 1 param) s =a (field 0 param))
+                     (before asmcomp/x86_gas.ml(293):11258-11289
+                       (after asmcomp/x86_gas.ml(293):11258-11289
+                         (apply bprintf b
+                           [0:
+                            [11: "\t.type " [2: 0a [12: ',' [2: 0a 0a]]]]
+                            "\t.type %s,%s"]
+                           s typ))))
+                  default: (exit 18))
+                with (18)
+                 (before asmcomp/x86_gas.ml(299):11355-11367
+                   (raise
+                     (after asmcomp/x86_gas.ml(299):11355-11367
+                       (makeblock 0 (global Assert_failure!)
+                         [0: "asmcomp/x86_gas.ml" 299 7])))))))
+         generate_asm =
+           (function oc lines
+             (funct-body asmcomp/x86_gas.ml(301)<ghost>:11386-11633
+               (before asmcomp/x86_gas.ml(302):11399-11633
+                 (let
+                   (b =
+                      (after asmcomp/x86_gas.ml(302):11407-11426
+                        (apply (field 0 (global Stdlib__buffer!)) 10000)))
+                   (before asmcomp/x86_gas.ml(303):11432-11633
+                     (seq
+                       (after asmcomp/x86_gas.ml(303):11432-11465
+                         (apply (field 65 (global Stdlib!)) oc
+                           "\t.file \"\"\n"))
+                       (before asmcomp/x86_gas.ml(304):11483-11633
+                         (after asmcomp/x86_gas.ml(304):11483-11633
+                           (apply (field 14 (global Stdlib__list!))
+                             (function i
+                               (funct-body asmcomp/x86_gas.ml(305):11497-11623
+                                 (before asmcomp/x86_gas.ml(306):11514-11617
+                                   (seq
+                                     (after asmcomp/x86_gas.ml(306):11514-11528
+                                       (apply
+                                         (field 7 (global Stdlib__buffer!))
+                                         b))
+                                     (before asmcomp/x86_gas.ml(307):11537-11617
+                                       (seq
+                                         (after asmcomp/x86_gas.ml(307):11537-11551
+                                           (apply print_line b i))
+                                         (before asmcomp/x86_gas.ml(308):11560-11617
+                                           (seq
+                                             (after asmcomp/x86_gas.ml(308):11560-11582
+                                               (apply
+                                                 (field 9
+                                                   (global Stdlib__buffer!))
+                                                 b '\n'))
+                                             (before asmcomp/x86_gas.ml(309):11591-11616
+                                               (after asmcomp/x86_gas.ml(309):11591-11616
+                                                 (apply
+                                                   (field 20
+                                                     (global Stdlib__buffer!))
+                                                   oc b)))))))))))
+                             lines))))))))))
+        (pseudo _none_(0)<ghost>:-1--1 (makeblock 0 generate_asm))))))

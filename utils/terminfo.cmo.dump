@@ -1,0 +1,78 @@
+(setglobal Terminfo!
+  (let
+    (setup =
+       (function oc
+         (funct-body utils/terminfo.ml(26)<ghost>:1287-1491
+           (before utils/terminfo.ml(27):1294-1491
+             (let
+               (term =
+                  (try
+                    (after utils/terminfo.ml(27):1309-1326
+                      (caml_sys_getenv "TERM"))
+                   with exn
+                    (if (== exn (field 7 (global Stdlib!)))
+                      (before utils/terminfo.ml(27):1345-1347 "")
+                      (reraise exn))))
+               (before utils/terminfo.ml(29):1414-1491
+                 (if
+                   (&&
+                     (after utils/terminfo.ml(29):1417-1427
+                       (caml_string_notequal term ""))
+                     (&&
+                       (after utils/terminfo.ml(29):1431-1445
+                         (caml_string_notequal term "dumb"))
+                       (after utils/terminfo.ml(29):1449-1458
+                         (caml_sys_isatty oc))))
+                   (before utils/terminfo.ml(30):1466-1475 2a)
+                   (before utils/terminfo.ml(31):1483-1491 1a)))))))
+     num_lines =
+       (function oc : int
+         (funct-body utils/terminfo.ml(33)<ghost>:1507-1576
+           (before utils/terminfo.ml(34):1514-1576
+             (let
+               (rows =[int]
+                  (after utils/terminfo.ml(34):1525-1541
+                    (caml_terminfo_rows oc)))
+               (before utils/terminfo.ml(35):1547-1576
+                 (if (> rows 0) (before utils/terminfo.ml(35):1564-1568 rows)
+                   (before utils/terminfo.ml(35):1574-1576 24)))))))
+     backup =
+       (function oc n[int]
+         (funct-body utils/terminfo.ml(38)<ghost>:1653-1702
+           (before utils/terminfo.ml(39):1662-1702
+             (if (>= n 1)
+               (before utils/terminfo.ml(39):1677-1702
+                 (after utils/terminfo.ml(39):1677-1702
+                   (apply (field 0 (global Stdlib__printf!)) oc
+                     [0:
+                      [11: "\027[" [4: 0a 0a 0a [12: 'A' [10: 0a]]]]
+                      "\027[%dA%!"]
+                     n)))
+               0a))))
+     resume =
+       (function oc n[int]
+         (funct-body utils/terminfo.ml(41)<ghost>:1715-1764
+           (before utils/terminfo.ml(42):1724-1764
+             (if (>= n 1)
+               (before utils/terminfo.ml(42):1739-1764
+                 (after utils/terminfo.ml(42):1739-1764
+                   (apply (field 0 (global Stdlib__printf!)) oc
+                     [0:
+                      [11: "\027[" [4: 0a 0a 0a [12: 'B' [10: 0a]]]]
+                      "\027[%dB%!"]
+                     n)))
+               0a))))
+     standout =
+       (function oc b
+         (funct-body utils/terminfo.ml(44)<ghost>:1779-1851
+           (before utils/terminfo.ml(45):1788-1851
+             (seq
+               (after utils/terminfo.ml(45):1788-1841
+                 (apply (field 65 (global Stdlib!)) oc
+                   (if b (before utils/terminfo.ml(45):1816-1825 "\027[4m")
+                     (before utils/terminfo.ml(45):1831-1840 "\027[0m"))))
+               (before utils/terminfo.ml(45):1843-1851
+                 (after utils/terminfo.ml(45):1843-1851
+                   (apply (field 62 (global Stdlib!)) oc))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 setup num_lines backup standout resume))))

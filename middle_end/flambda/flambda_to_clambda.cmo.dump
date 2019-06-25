@@ -1,0 +1,2292 @@
+(setglobal Flambda_to_clambda!
+  (let
+    (get_fun_offset =
+       (function t closure_id : int
+         (funct-body middle_end/flambda/flambda_to_clambda.ml(39)<ghost>:1767-2166
+           (before middle_end/flambda/flambda_to_clambda.ml(40):1784-2166
+             (let
+               (fun_offset_table =
+                  (if
+                    (after middle_end/flambda/flambda_to_clambda.ml(41):1814-1883
+                      (apply (field 13 (global Closure_id!)) closure_id
+                        (after middle_end/flambda/flambda_to_clambda.ml(41):1856-1883
+                          (apply (field 6 (global Compilenv!)) 0a))))
+                    (before middle_end/flambda/flambda_to_clambda.ml(43):1899-1930
+                      (field 0 (field 0 t)))
+                    (before middle_end/flambda/flambda_to_clambda.ml(45):1946-1979
+                      (field 0 (field 1 t)))))
+               (before middle_end/flambda/flambda_to_clambda.ml(47):1987-2166
+                 (try
+                   (after middle_end/flambda/flambda_to_clambda.ml(47):1991-2038
+                     (apply (field 26 (field 7 (global Closure_id!)))
+                       closure_id fun_offset_table))
+                  with exn
+                   (if (== exn (field 7 (global Stdlib!)))
+                     (before middle_end/flambda/flambda_to_clambda.ml(49):2063-2166
+                       (after middle_end/flambda/flambda_to_clambda.ml(49):2063-2166
+                         (apply (field 1 (global Misc!))
+                           [0:
+                            [11:
+                             "Flambda_to_clambda: missing offset for closure "
+                             [15: 0a]]
+                            "Flambda_to_clambda: missing offset for closure %a"]
+                           (field 5 (global Closure_id!)) closure_id)))
+                     (reraise exn))))))))
+     get_fv_offset =
+       (function t var_within_closure : int
+         (funct-body middle_end/flambda/flambda_to_clambda.ml(52)<ghost>:2186-2634
+           (before middle_end/flambda/flambda_to_clambda.ml(53):2211-2634
+             (let
+               (fv_offset_table =
+                  (if
+                    (after middle_end/flambda/flambda_to_clambda.ml(54):2240-2333
+                      (apply (field 13 (global Var_within_closure!))
+                        var_within_closure
+                        (after middle_end/flambda/flambda_to_clambda.ml(55):2306-2333
+                          (apply (field 6 (global Compilenv!)) 0a))))
+                    (before middle_end/flambda/flambda_to_clambda.ml(56):2343-2373
+                      (field 1 (field 0 t)))
+                    (before middle_end/flambda/flambda_to_clambda.ml(57):2383-2415
+                      (field 1 (field 1 t)))))
+               (before middle_end/flambda/flambda_to_clambda.ml(59):2423-2634
+                 (try
+                   (after middle_end/flambda/flambda_to_clambda.ml(59):2427-2489
+                     (apply (field 26 (field 7 (global Var_within_closure!)))
+                       var_within_closure fv_offset_table))
+                  with exn
+                   (if (== exn (field 7 (global Stdlib!)))
+                     (before middle_end/flambda/flambda_to_clambda.ml(61):2514-2634
+                       (after middle_end/flambda/flambda_to_clambda.ml(61):2514-2634
+                         (apply (field 1 (global Misc!))
+                           [0:
+                            [11:
+                             "Flambda_to_clambda: missing offset for variable "
+                             [15: 0a]]
+                            "Flambda_to_clambda: missing offset for variable %a"]
+                           (field 5 (global Var_within_closure!))
+                           var_within_closure)))
+                     (reraise exn))))))))
+     is_function_constant =
+       (function t closure_id
+         (funct-body middle_end/flambda/flambda_to_clambda.ml(64)<ghost>:2661-3050
+           (before middle_end/flambda/flambda_to_clambda.ml(65):2678-3050
+             (if
+               (after middle_end/flambda/flambda_to_clambda.ml(65):2681-2734
+                 (apply (field 2 (field 6 (global Closure_id!))) closure_id
+                   (field 3 (field 0 t))))
+               (before middle_end/flambda/flambda_to_clambda.ml(66):2744-2806
+                 (after middle_end/flambda/flambda_to_clambda.ml(66):2744-2806
+                   (apply (field 2 (field 6 (global Closure_id!))) closure_id
+                     (field 2 (field 0 t)))))
+               (before middle_end/flambda/flambda_to_clambda.ml(67):2814-3050
+                 (if
+                   (after middle_end/flambda/flambda_to_clambda.ml(67):2817-2872
+                     (apply (field 2 (field 6 (global Closure_id!)))
+                       closure_id (field 3 (field 1 t))))
+                   (before middle_end/flambda/flambda_to_clambda.ml(68):2882-2946
+                     (after middle_end/flambda/flambda_to_clambda.ml(68):2882-2946
+                       (apply (field 2 (field 6 (global Closure_id!)))
+                         closure_id (field 2 (field 1 t)))))
+                   (before middle_end/flambda/flambda_to_clambda.ml(70):2958-3050
+                     (after middle_end/flambda/flambda_to_clambda.ml(70):2958-3050
+                       (apply (field 1 (global Misc!))
+                         [0:
+                          [11:
+                           "Flambda_to_clambda: missing closure " [15: 0a]]
+                          "Flambda_to_clambda: missing closure %a"]
+                         (field 5 (global Closure_id!)) closure_id)))))))))
+     check_closure =
+       (function t ulam named
+         (funct-body middle_end/flambda/flambda_to_clambda.ml(76)<ghost>:3157-3831
+           (before middle_end/flambda/flambda_to_clambda.ml(77):3192-3831
+             (if (not (field 0 (field 139 (global Clflags!))))
+               (before middle_end/flambda/flambda_to_clambda.ml(77):3228-3232
+                 ulam)
+               (before middle_end/flambda/flambda_to_clambda.ml(79):3244-3831
+                 (let
+                   (desc =
+                      (after middle_end/flambda/flambda_to_clambda.ml(80):3261-3343
+                        (apply (field 0 (global Primitive!))
+                          "caml_check_value_is_closure" 2 0a)))
+                   (before middle_end/flambda/flambda_to_clambda.ml(83):3355-3831
+                     (let
+                       (str =
+                          (after middle_end/flambda/flambda_to_clambda.ml(83):3365-3411
+                            (apply (field 126 (global Stdlib__format!))
+                              [0: [15: 0a] "%a"] (field 27 (global Flambda!))
+                              named)))
+                       (before middle_end/flambda/flambda_to_clambda.ml(84):3419-3831
+                         (let
+                           (sym =
+                              (after middle_end/flambda/flambda_to_clambda.ml(84):3429-3458
+                                (apply (field 23 (global Compilenv!)) 0a)))
+                           (before middle_end/flambda/flambda_to_clambda.ml(85):3466-3831
+                             (let
+                               (sym' =
+                                  (after middle_end/flambda/flambda_to_clambda.ml(86):3483-3579
+                                    (apply (field 10 (global Symbol!))
+                                      (after middle_end/flambda/flambda_to_clambda.ml(86):3508-3545
+                                        (apply
+                                          (field 15
+                                            (global Compilation_unit!))
+                                          0a))
+                                      (after middle_end/flambda/flambda_to_clambda.ml(87):3554-3579
+                                        (apply
+                                          (field 9 (global Linkage_name!))
+                                          sym)))))
+                               (before middle_end/flambda/flambda_to_clambda.ml(89):3591-3831
+                                 (seq
+                                   (setfield_ptr 3 t
+                                     (after middle_end/flambda/flambda_to_clambda.ml(90):3632-3719
+                                       (apply
+                                         (field 3 (field 7 (global Symbol!)))
+                                         sym' (makeblock 6 str) (field 3 t))))
+                                   (before middle_end/flambda/flambda_to_clambda.ml(92):3725-3831
+                                     (makeblock 9 (makeblock 8 desc)
+                                       (makeblock 0 ulam
+                                         (makeblock 0
+                                           (makeblock 1 (makeblock 0 sym 0a))
+                                           0a))
+                                       (field 0 (global Debuginfo!))))))))))))))))))
+     check_field =
+       (function t ulam pos[int] named_opt
+         (funct-body middle_end/flambda/flambda_to_clambda.ml(96)<ghost>:3849-4630
+           (before middle_end/flambda/flambda_to_clambda.ml(97):3892-4630
+             (if (not (field 0 (field 139 (global Clflags!))))
+               (before middle_end/flambda/flambda_to_clambda.ml(97):3928-3932
+                 ulam)
+               (before middle_end/flambda/flambda_to_clambda.ml(99):3944-4630
+                 (let
+                   (desc =
+                      (after middle_end/flambda/flambda_to_clambda.ml(100):3961-4039
+                        (apply (field 0 (global Primitive!))
+                          "caml_check_field_access" 3 0a)))
+                   (before middle_end/flambda/flambda_to_clambda.ml(103):4051-4630
+                     (let
+                       (str =
+                          (if named_opt
+                            (let (named =a (field 0 named_opt))
+                              (before middle_end/flambda/flambda_to_clambda.ml(106):4135-4181
+                                (after middle_end/flambda/flambda_to_clambda.ml(106):4135-4181
+                                  (apply (field 126 (global Stdlib__format!))
+                                    [0: [15: 0a] "%a"]
+                                    (field 27 (global Flambda!)) named))))
+                            (before middle_end/flambda/flambda_to_clambda.ml(105):4104-4112
+                              "<none>")))
+                       (before middle_end/flambda/flambda_to_clambda.ml(108):4193-4630
+                         (let
+                           (sym =
+                              (after middle_end/flambda/flambda_to_clambda.ml(108):4203-4232
+                                (apply (field 23 (global Compilenv!)) 0a)))
+                           (before middle_end/flambda/flambda_to_clambda.ml(109):4240-4630
+                             (let
+                               (sym' =
+                                  (after middle_end/flambda/flambda_to_clambda.ml(110):4257-4353
+                                    (apply (field 10 (global Symbol!))
+                                      (after middle_end/flambda/flambda_to_clambda.ml(110):4282-4319
+                                        (apply
+                                          (field 15
+                                            (global Compilation_unit!))
+                                          0a))
+                                      (after middle_end/flambda/flambda_to_clambda.ml(111):4328-4353
+                                        (apply
+                                          (field 9 (global Linkage_name!))
+                                          sym)))))
+                               (before middle_end/flambda/flambda_to_clambda.ml(113):4365-4630
+                                 (seq
+                                   (setfield_ptr 3 t
+                                     (after middle_end/flambda/flambda_to_clambda.ml(114):4406-4493
+                                       (apply
+                                         (field 3 (field 7 (global Symbol!)))
+                                         sym' (makeblock 6 str) (field 3 t))))
+                                   (before middle_end/flambda/flambda_to_clambda.ml(116):4499-4630
+                                     (makeblock 9 (makeblock 8 desc)
+                                       (makeblock 0 ulam
+                                         (makeblock 0
+                                           (makeblock 1
+                                             (makeblock 1 (int) pos))
+                                           (makeblock 0
+                                             (makeblock 1
+                                               (makeblock 0 sym 0a))
+                                             0a)))
+                                       (field 0 (global Debuginfo!))))))))))))))))))
+     Env =
+       (module-defn(Env) middle_end/flambda/flambda_to_clambda.ml(120):4632-6751
+         (let
+           (empty =
+              (makeblock 0 (field 0 (field 7 (global Variable!)))
+                (field 0 (field 7 (global Variable!)))
+                (field 0 (field 7 (global Mutable_variable!))) 0a
+                (field 0 (field 7 (global Symbol!))))
+            add_subst =
+              (function t id subst
+                (funct-body middle_end/flambda/flambda_to_clambda.ml(155)<ghost>:5687-5756
+                  (before middle_end/flambda/flambda_to_clambda.ml(156):5704-5756
+                    (let (init = t)
+                      (makeblock 0
+                        (after middle_end/flambda/flambda_to_clambda.ml(156):5721-5754
+                          (apply (field 3 (field 7 (global Variable!))) id
+                            subst (field 0 t)))
+                        (field 1 init) (field 2 init) (field 3 init)
+                        (field 4 init))))))
+            find_subst_exn =
+              (function t id
+                (funct-body middle_end/flambda/flambda_to_clambda.ml(158)<ghost>:5779-5814
+                  (before middle_end/flambda/flambda_to_clambda.ml(158):5786-5814
+                    (after middle_end/flambda/flambda_to_clambda.ml(158):5786-5814
+                      (apply (field 26 (field 7 (global Variable!))) id
+                        (field 0 t))))))
+            ident_for_var_exn =
+              (function t id
+                (funct-body middle_end/flambda/flambda_to_clambda.ml(160)<ghost>:5840-5873
+                  (before middle_end/flambda/flambda_to_clambda.ml(160):5847-5873
+                    (after middle_end/flambda/flambda_to_clambda.ml(160):5847-5873
+                      (apply (field 26 (field 7 (global Variable!))) id
+                        (field 1 t))))))
+            add_fresh_ident =
+              (function t var
+                (funct-body middle_end/flambda/flambda_to_clambda.ml(162)<ghost>:5897-6010
+                  (before middle_end/flambda/flambda_to_clambda.ml(163):5909-6010
+                    (let
+                      (id =
+                         (after middle_end/flambda/flambda_to_clambda.ml(163):5918-5952
+                           (apply (field 6 (global Backend_var!))
+                             (after middle_end/flambda/flambda_to_clambda.ml(163):5933-5952
+                               (apply (field 13 (global Variable!)) var)))))
+                      (before middle_end/flambda/flambda_to_clambda.ml(164):5960-6010
+                        (makeblock 0 id
+                          (let (init = t)
+                            (makeblock 0 (field 0 init)
+                              (after middle_end/flambda/flambda_to_clambda.ml(164):5979-6008
+                                (apply (field 3 (field 7 (global Variable!)))
+                                  var id (field 1 t)))
+                              (field 2 init) (field 3 init) (field 4 init)))))))))
+            ident_for_mutable_var_exn =
+              (function t mut_var
+                (funct-body middle_end/flambda/flambda_to_clambda.ml(166)<ghost>:6044-6107
+                  (before middle_end/flambda/flambda_to_clambda.ml(167):6060-6107
+                    (after middle_end/flambda/flambda_to_clambda.ml(167):6060-6107
+                      (apply (field 26 (field 7 (global Mutable_variable!)))
+                        mut_var (field 2 t))))))
+            add_fresh_mutable_ident =
+              (function t mut_var
+                (funct-body middle_end/flambda/flambda_to_clambda.ml(169)<ghost>:6139-6320
+                  (before middle_end/flambda/flambda_to_clambda.ml(170):6155-6320
+                    (let
+                      (id =
+                         (after middle_end/flambda/flambda_to_clambda.ml(170):6164-6210
+                           (apply (field 6 (global Backend_var!))
+                             (after middle_end/flambda/flambda_to_clambda.ml(170):6179-6210
+                               (apply (field 14 (global Mutable_variable!))
+                                 mut_var)))))
+                      (before middle_end/flambda/flambda_to_clambda.ml(171):6218-6320
+                        (let
+                          (mutable_var =
+                             (after middle_end/flambda/flambda_to_clambda.ml(171):6236-6285
+                               (apply
+                                 (field 3
+                                   (field 7 (global Mutable_variable!)))
+                                 mut_var id (field 2 t))))
+                          (before middle_end/flambda/flambda_to_clambda.ml(172):6293-6320
+                            (makeblock 0 id
+                              (let (init = t)
+                                (makeblock 0 (field 0 init) (field 1 init)
+                                  mutable_var (field 3 init) (field 4 init)))))))))))
+            add_allocated_const =
+              (function t sym cons
+                (funct-body middle_end/flambda/flambda_to_clambda.ml(174)<ghost>:6348-6482
+                  (before middle_end/flambda/flambda_to_clambda.ml(175):6365-6482
+                    (let (init = t)
+                      (makeblock 0 (field 0 init) (field 1 init)
+                        (field 2 init) (field 3 init)
+                        (after middle_end/flambda/flambda_to_clambda.ml(177):6420-6475
+                          (apply (field 3 (field 7 (global Symbol!))) sym
+                            cons (field 4 t))))))))
+            allocated_const_for_symbol =
+              (function t sym
+                (funct-body middle_end/flambda/flambda_to_clambda.ml(180)<ghost>:6517-6624
+                  (before middle_end/flambda/flambda_to_clambda.ml(181):6529-6624
+                    (try
+                      (makeblock 0
+                        (after middle_end/flambda/flambda_to_clambda.ml(182):6544-6597
+                          (apply (field 26 (field 7 (global Symbol!))) sym
+                            (field 4 t))))
+                     with exn
+                      (if (== exn (field 7 (global Stdlib!)))
+                        (before middle_end/flambda/flambda_to_clambda.ml(183):6620-6624
+                          0a)
+                        (reraise exn))))))
+            keep_only_symbols =
+              (function t
+                (funct-body middle_end/flambda/flambda_to_clambda.ml(185)<ghost>:6650-6747
+                  (before middle_end/flambda/flambda_to_clambda.ml(186):6658-6747
+                    (let (init = empty)
+                      (makeblock 0 (field 0 init) (field 1 init)
+                        (field 2 init) (field 3 init) (field 4 t)))))))
+           (pseudo middle_end/flambda/flambda_to_clambda.ml(138):5212-6751
+             (makeblock 0 empty add_subst find_subst_exn add_fresh_ident
+               ident_for_var_exn add_fresh_mutable_ident
+               ident_for_mutable_var_exn add_allocated_const
+               allocated_const_for_symbol keep_only_symbols))))
+     subst_var =
+       (function env var
+         (funct-body middle_end/flambda/flambda_to_clambda.ml(191)<ghost>:6767-7009
+           (before middle_end/flambda/flambda_to_clambda.ml(192):6797-7009
+             (try
+               (after middle_end/flambda/flambda_to_clambda.ml(192):6801-6827
+                 (apply (field 2 Env) env var))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before middle_end/flambda/flambda_to_clambda.ml(194):6852-7009
+                   (try
+                     (makeblock 0
+                       (after middle_end/flambda/flambda_to_clambda.ml(194):6861-6892
+                         (apply (field 4 Env) env var)))
+                    with exn
+                     (if (== exn (field 7 (global Stdlib!)))
+                       (before middle_end/flambda/flambda_to_clambda.ml(196):6921-7009
+                         (after middle_end/flambda/flambda_to_clambda.ml(196):6921-7009
+                           (apply (field 1 (global Misc!))
+                             [0:
+                              [11:
+                               "Flambda_to_clambda: unbound variable "
+                               [15: [17: 4a 0a]]]
+                              "Flambda_to_clambda: unbound variable %a@."]
+                             (field 5 (global Variable!)) var)))
+                       (reraise exn))))
+                 (reraise exn))))))
+     subst_vars =
+       (function env vars
+         (funct-body middle_end/flambda/flambda_to_clambda.ml(199)<ghost>:7026-7066
+           (before middle_end/flambda/flambda_to_clambda.ml(199):7037-7066
+             (after middle_end/flambda/flambda_to_clambda.ml(199):7037-7066
+               (apply (field 16 (global Stdlib__list!))
+                 (after middle_end/flambda/flambda_to_clambda.ml(199):7046-7061
+                   (apply subst_var env))
+                 vars)))))
+     build_uoffset =
+       (function ulam offset[int]
+         (funct-body middle_end/flambda/flambda_to_clambda.ml(201)<ghost>:7086-7173
+           (before middle_end/flambda/flambda_to_clambda.ml(202):7120-7173
+             (if (== offset 0)
+               (before middle_end/flambda/flambda_to_clambda.ml(202):7139-7143
+                 ulam)
+               (before middle_end/flambda/flambda_to_clambda.ml(203):7151-7173
+                 (makeblock 5 (*,int) ulam offset))))))
+     to_clambda_allocated_constant =
+       (function const
+         (funct-body middle_end/flambda/flambda_to_clambda.ml(205)<ghost>:7209-7543
+           (before middle_end/flambda/flambda_to_clambda.ml(207):7278-7543
+             (catch
+               (catch
+                 (switch* const
+                  case tag 0:
+                   (let (f =a (field 0 const))
+                     (before middle_end/flambda/flambda_to_clambda.ml(208):7310-7324
+                       (makeblock 0 (float) f)))
+                  case tag 1:
+                   (let (i =a (field 0 const))
+                     (before middle_end/flambda/flambda_to_clambda.ml(209):7340-7354
+                       (makeblock 1 (int32) i)))
+                  case tag 2:
+                   (let (i =a (field 0 const))
+                     (before middle_end/flambda/flambda_to_clambda.ml(210):7370-7384
+                       (makeblock 2 (int64) i)))
+                  case tag 3:
+                   (let (i =a (field 0 const))
+                     (before middle_end/flambda/flambda_to_clambda.ml(211):7404-7422
+                       (makeblock 3 (nativeint) i)))
+                  case tag 4: (exit 8)
+                  case tag 5: (exit 8)
+                  case tag 6: (exit 9)
+                  case tag 7: (exit 9))
+                with (8)
+                 (let (a =a (field 0 const) a = a)
+                   (before middle_end/flambda/flambda_to_clambda.ml(213):7523-7543
+                     (makeblock 5 a))))
+              with (9)
+               (let (s =a (field 0 const) s = s)
+                 (before middle_end/flambda/flambda_to_clambda.ml(212):7460-7475
+                   (makeblock 6 s)))))))
+     to_uconst_symbol =
+       (function env symbol
+         (funct-body middle_end/flambda/flambda_to_clambda.ml(215)<ghost>:7566-7866
+           (before middle_end/flambda/flambda_to_clambda.ml(216):7619-7866
+             (let
+               (*match* =
+                  (after middle_end/flambda/flambda_to_clambda.ml(216):7625-7666
+                    (apply (field 8 Env) env symbol)))
+               (catch
+                 (if *match*
+                   (let (const =a (field 0 *match*))
+                     (catch
+                       (switch const
+                        case tag 0: (exit 11)
+                        case tag 1: (exit 11)
+                        case tag 2: (exit 11)
+                        case tag 3: (exit 11)
+                        default: (exit 10))
+                      with (11)
+                       (before middle_end/flambda/flambda_to_clambda.ml(218):7743-7785
+                         (makeblock 0
+                           (after middle_end/flambda/flambda_to_clambda.ml(218):7748-7785
+                             (apply to_clambda_allocated_constant const))))))
+                   (exit 10))
+                with (10)
+                 (before middle_end/flambda/flambda_to_clambda.ml(220):7862-7866
+                   0a))))))
+     to_clambda_symbol' =
+       (function env sym
+         (funct-body middle_end/flambda/flambda_to_clambda.ml(222)<ghost>:7891-8022
+           (before middle_end/flambda/flambda_to_clambda.ml(223):7923-8022
+             (let
+               (lbl =
+                  (after middle_end/flambda/flambda_to_clambda.ml(223):7933-7974
+                    (apply (field 10 (global Linkage_name!))
+                      (after middle_end/flambda/flambda_to_clambda.ml(223):7956-7974
+                        (apply (field 13 (global Symbol!)) sym)))))
+               (before middle_end/flambda/flambda_to_clambda.ml(224):7980-8022
+                 (makeblock 0 lbl
+                   (after middle_end/flambda/flambda_to_clambda.ml(224):7997-8021
+                     (apply to_uconst_symbol env sym))))))))
+     to_clambda_symbol =
+       (function env sym
+         (funct-body middle_end/flambda/flambda_to_clambda.ml(226)<ghost>:8046-8111
+           (before middle_end/flambda/flambda_to_clambda.ml(227):8076-8111
+             (makeblock 1
+               (after middle_end/flambda/flambda_to_clambda.ml(227):8083-8111
+                 (apply to_clambda_symbol' env sym))))))
+     to_clambda_const =
+       (function env const
+         (funct-body middle_end/flambda/flambda_to_clambda.ml(229)<ghost>:8134-8414
+           (before middle_end/flambda/flambda_to_clambda.ml(231):8222-8414
+             (switch* const
+              case tag 0:
+               (let (symbol =a (field 0 const))
+                 (before middle_end/flambda/flambda_to_clambda.ml(232):8260-8289
+                   (after middle_end/flambda/flambda_to_clambda.ml(232):8260-8289
+                     (apply to_clambda_symbol' env symbol))))
+              case tag 1:
+               (let (*match* =a (field 0 const))
+                 (switch* *match*
+                  case tag 0:
+                   (let (i =a (field 0 *match*))
+                     (before middle_end/flambda/flambda_to_clambda.ml(233):8311-8323
+                       (makeblock 1 (int) i)))
+                  case tag 1:
+                   (let (c =a (field 0 *match*))
+                     (before middle_end/flambda/flambda_to_clambda.ml(234):8346-8370
+                       (makeblock 1 (int) c)))
+                  case tag 2:
+                   (let (i =a (field 0 *match*))
+                     (before middle_end/flambda/flambda_to_clambda.ml(235):8402-8414
+                       (makeblock 2 (int) i))))))))))
+    (letrec
+      (to_clambda
+         (function t env flam
+           (funct-body middle_end/flambda/flambda_to_clambda.ml(237)<ghost>:8435-13440
+             (before middle_end/flambda/flambda_to_clambda.ml(238):8482-13440
+               (switch* flam
+                case int 0:
+                 (before middle_end/flambda/flambda_to_clambda.ml(355):13428-13440
+                   0a)
+                case tag 0:
+                 (let (var =a (field 0 flam))
+                   (before middle_end/flambda/flambda_to_clambda.ml(239):8513-8530
+                     (after middle_end/flambda/flambda_to_clambda.ml(239):8513-8530
+                       (apply subst_var env var))))
+                case tag 1:
+                 (let
+                   (*match* =a (field 0 flam)
+                    body =a (field 2 *match*)
+                    defining_expr =a (field 1 *match*)
+                    var =a (field 0 *match*))
+                   (before middle_end/flambda/flambda_to_clambda.ml(242):8623-8798
+                     (let
+                       (*match* =
+                          (after middle_end/flambda/flambda_to_clambda.ml(242):8642-8669
+                            (apply (field 3 Env) env var))
+                        env_body =a (field 1 *match*)
+                        id =a (field 0 *match*))
+                       (before middle_end/flambda/flambda_to_clambda.ml(243):8677-8798
+                         (makeblock 6 0a 0a
+                           (after middle_end/flambda/flambda_to_clambda.ml(243):8703-8715
+                             (apply
+                               (field 1 (field 33 (global Backend_var!))) 0a
+                               id))
+                           (after middle_end/flambda/flambda_to_clambda.ml(244):8723-8763
+                             (apply to_clambda_named t env var defining_expr))
+                           (after middle_end/flambda/flambda_to_clambda.ml(245):8771-8797
+                             (apply to_clambda t env_body body)))))))
+                case tag 2:
+                 (let
+                   (*match* =a (field 0 flam)
+                    body =a (field 3 *match*)
+                    contents_kind =a (field 2 *match*)
+                    var =a (field 1 *match*)
+                    mut_var =a (field 0 *match*))
+                   (before middle_end/flambda/flambda_to_clambda.ml(247):8882-9059
+                     (let
+                       (*match* =
+                          (after middle_end/flambda/flambda_to_clambda.ml(247):8901-8940
+                            (apply (field 5 Env) env mut_var))
+                        env_body =a (field 1 *match*)
+                        id =a (field 0 *match*))
+                       (before middle_end/flambda/flambda_to_clambda.ml(248):8948-9059
+                         (let
+                           (def =
+                              (after middle_end/flambda/flambda_to_clambda.ml(248):8958-8975
+                                (apply subst_var env var)))
+                           (before middle_end/flambda/flambda_to_clambda.ml(249):8983-9059
+                             (makeblock 6 1a contents_kind
+                               (after middle_end/flambda/flambda_to_clambda.ml(249):9013-9025
+                                 (apply
+                                   (field 1 (field 33 (global Backend_var!)))
+                                   0a id))
+                               def
+                               (after middle_end/flambda/flambda_to_clambda.ml(249):9032-9058
+                                 (apply to_clambda t env_body body)))))))))
+                case tag 3:
+                 (let (body =a (field 1 flam) defs =a (field 0 flam))
+                   (before middle_end/flambda/flambda_to_clambda.ml(251):9092-9455
+                     (let
+                       (*match* =
+                          (after middle_end/flambda/flambda_to_clambda.ml(252):9114-9277
+                            (apply (field 21 (global Stdlib__list!))
+                              (function param param
+                                (funct-body middle_end/flambda/flambda_to_clambda.ml(252):9130-9254
+                                  (let
+                                    (defs =a (field 1 param)
+                                     env =a (field 0 param)
+                                     def =a (field 1 param)
+                                     var =a (field 0 param))
+                                    (before middle_end/flambda/flambda_to_clambda.ml(253):9171-9253
+                                      (let
+                                        (*match* =
+                                           (after middle_end/flambda/flambda_to_clambda.ml(253):9185-9212
+                                             (apply (field 3 Env) env var))
+                                         env =a (field 1 *match*)
+                                         id =a (field 0 *match*))
+                                        (before middle_end/flambda/flambda_to_clambda.ml(254):9226-9253
+                                          (makeblock 0 env
+                                            (makeblock 0
+                                              (makeblock 0 id var def) defs))))))))
+                              defs (makeblock 0 env 0a)))
+                        defs =a (field 1 *match*)
+                        env =a (field 0 *match*))
+                       (before middle_end/flambda/flambda_to_clambda.ml(257):9289-9455
+                         (let
+                           (defs =
+                              (after middle_end/flambda/flambda_to_clambda.ml(258):9306-9406
+                                (apply (field 16 (global Stdlib__list!))
+                                  (function param
+                                    (funct-body middle_end/flambda/flambda_to_clambda.ml(258):9315-9393
+                                      (let
+                                        (def =a (field 2 param)
+                                         var =a (field 1 param)
+                                         id =a (field 0 param))
+                                        (before middle_end/flambda/flambda_to_clambda.ml(259):9348-9392
+                                          (makeblock 0
+                                            (after middle_end/flambda/flambda_to_clambda.ml(259):9348-9360
+                                              (apply
+                                                (field 1
+                                                  (field 33
+                                                    (global Backend_var!)))
+                                                0a id))
+                                            (after middle_end/flambda/flambda_to_clambda.ml(259):9362-9392
+                                              (apply to_clambda_named t env
+                                                var def)))))))
+                                  defs)))
+                           (before middle_end/flambda/flambda_to_clambda.ml(262):9418-9455
+                             (makeblock 8 defs
+                               (after middle_end/flambda/flambda_to_clambda.ml(262):9433-9454
+                                 (apply to_clambda t env body)))))))))
+                case tag 4:
+                 (let
+                   (*match* =a (field 0 flam)
+                    *match* =a (field 2 *match*)
+                    args =a (field 1 *match*)
+                    func =a (field 0 *match*))
+                   (if *match*
+                     (let
+                       (dbg =a (field 3 *match*)
+                        direct_func =a (field 0 *match*))
+                       (before middle_end/flambda/flambda_to_clambda.ml(271):9983-10038
+                         (after middle_end/flambda/flambda_to_clambda.ml(271):9983-10038
+                           (apply to_clambda_direct_apply t func args
+                             direct_func dbg env))))
+                     (let
+                       (args =a args func =a func dbg =a (field 3 *match*))
+                       (before middle_end/flambda/flambda_to_clambda.ml(273):10099-10235
+                         (let
+                           (callee =
+                              (after middle_end/flambda/flambda_to_clambda.ml(273):10112-10130
+                                (apply subst_var env func)))
+                           (before middle_end/flambda/flambda_to_clambda.ml(274):10138-10235
+                             (makeblock 3
+                               (after middle_end/flambda/flambda_to_clambda.ml(274):10154-10202
+                                 (apply check_closure t callee
+                                   (makeblock 10 (makeblock 0 func))))
+                               (after middle_end/flambda/flambda_to_clambda.ml(275):10210-10229
+                                 (apply subst_vars env args))
+                               dbg)))))))
+                case tag 5:
+                 (let
+                   (*match* =a (field 0 flam)
+                    dbg =a (field 4 *match*)
+                    args =a (field 3 *match*)
+                    obj =a (field 2 *match*)
+                    meth =a (field 1 *match*)
+                    kind =a (field 0 *match*))
+                   (before middle_end/flambda/flambda_to_clambda.ml(353):13318-13401
+                     (makeblock 20 kind
+                       (after middle_end/flambda/flambda_to_clambda.ml(353):13331-13349
+                         (apply subst_var env meth))
+                       (after middle_end/flambda/flambda_to_clambda.ml(353):13351-13368
+                         (apply subst_var env obj))
+                       (after middle_end/flambda/flambda_to_clambda.ml(354):13376-13395
+                         (apply subst_vars env args))
+                       dbg)))
+                case tag 6:
+                 (let
+                   (*match* =a (field 0 flam)
+                    new_value =a (field 1 *match*)
+                    being_assigned =a (field 0 *match*))
+                   (before middle_end/flambda/flambda_to_clambda.ml(344):12981-13270
+                     (let
+                       (id =
+                          (try
+                            (after middle_end/flambda/flambda_to_clambda.ml(345):13000-13048
+                              (apply (field 6 Env) env being_assigned))
+                           with exn
+                            (if (== exn (field 7 (global Stdlib!)))
+                              (before middle_end/flambda/flambda_to_clambda.ml(347):13081-13221
+                                (after middle_end/flambda/flambda_to_clambda.ml(347):13081-13221
+                                  (apply (field 1 (global Misc!))
+                                    [0:
+                                     [11:
+                                      "Unbound mutable variable "
+                                      [15: [11: " in [Assign]: " [15: 0a]]]]
+                                     "Unbound mutable variable %a in [Assign]: %a"]
+                                    (field 5 (global Mutable_variable!))
+                                    being_assigned
+                                    (field 26 (global Flambda!)) flam)))
+                              (reraise exn))))
+                       (before middle_end/flambda/flambda_to_clambda.ml(351):13233-13270
+                         (makeblock 19 id
+                           (after middle_end/flambda/flambda_to_clambda.ml(351):13246-13269
+                             (apply subst_var env new_value)))))))
+                case tag 7:
+                 (let
+                   (ifnot =a (field 2 flam)
+                    ifso =a (field 1 flam)
+                    arg =a (field 0 flam))
+                   (before middle_end/flambda/flambda_to_clambda.ml(335):12521-12605
+                     (makeblock 15
+                       (after middle_end/flambda/flambda_to_clambda.ml(335):12534-12551
+                         (apply subst_var env arg))
+                       (after middle_end/flambda/flambda_to_clambda.ml(335):12553-12574
+                         (apply to_clambda t env ifso))
+                       (after middle_end/flambda/flambda_to_clambda.ml(336):12582-12604
+                         (apply to_clambda t env ifnot)))))
+                case tag 8:
+                 (let (sw =a (field 1 flam) arg =a (field 0 flam))
+                   (before middle_end/flambda/flambda_to_clambda.ml(277):10264-11561
+                     (let
+                       (aux =
+                          (function param
+                            (funct-body middle_end/flambda/flambda_to_clambda.ml(277)<ghost>:10272-10769
+                              (before middle_end/flambda/flambda_to_clambda.ml(278):10301-10769
+                                (let
+                                  (*match* =
+                                     (after middle_end/flambda/flambda_to_clambda.ml(279):10342-10402
+                                       (apply to_clambda_switch t env
+                                         (field 1 sw) (field 0 sw)
+                                         (field 4 sw)))
+                                   const_actions =a (field 1 *match*)
+                                   const_index =a (field 0 *match*))
+                                  (before middle_end/flambda/flambda_to_clambda.ml(281):10418-10769
+                                    (let
+                                      (*match* =
+                                         (after middle_end/flambda/flambda_to_clambda.ml(282):10459-10519
+                                           (apply to_clambda_switch t env
+                                             (field 3 sw) (field 2 sw)
+                                             (field 4 sw)))
+                                       block_actions =a (field 1 *match*)
+                                       block_index =a (field 0 *match*))
+                                      (before middle_end/flambda/flambda_to_clambda.ml(284):10535-10769
+                                        (makeblock 10
+                                          (after middle_end/flambda/flambda_to_clambda.ml(284):10544-10561
+                                            (apply subst_var env arg))
+                                          (makeblock 0 const_index
+                                            const_actions block_index
+                                            block_actions)
+                                          (field 0 (global Debuginfo!)))))))))))
+                       (before middle_end/flambda/flambda_to_clambda.ml(298):11152-11561
+                         (let (*match* = (field 4 sw))
+                           (if *match*
+                             (let (failaction =a (field 0 *match*))
+                               (catch
+                                 (switch failaction
+                                  case tag 10:
+                                   (before middle_end/flambda/flambda_to_clambda.ml(300):11235-11241
+                                     (after middle_end/flambda/flambda_to_clambda.ml(300):11235-11241
+                                       (apply aux 0a)))
+                                  default: (exit 25))
+                                with (25)
+                                 (before middle_end/flambda/flambda_to_clambda.ml(302):11273-11553
+                                   (let
+                                     (exn =
+                                        (after middle_end/flambda/flambda_to_clambda.ml(302):11283-11309
+                                          (apply
+                                            (field 9
+                                              (global Static_exception!))
+                                            0a)))
+                                     (before middle_end/flambda/flambda_to_clambda.ml(303):11319-11553
+                                       (let
+                                         (sw =
+                                            (let (init = sw)
+                                              (makeblock 0 (field 0 init)
+                                                (field 1 init) (field 2 init)
+                                                (field 3 init)
+                                                (makeblock 0
+                                                  (makeblock 10 exn 0a)))))
+                                         (before middle_end/flambda/flambda_to_clambda.ml(308):11433-11553
+                                           (let
+                                             (expr =
+                                                (makeblock 11 exn 0a
+                                                  (makeblock 8 arg sw)
+                                                  failaction))
+                                             (before middle_end/flambda/flambda_to_clambda.ml(311):11532-11553
+                                               (after middle_end/flambda/flambda_to_clambda.ml(311):11532-11553
+                                                 (apply to_clambda t env
+                                                   expr)))))))))))
+                             (before middle_end/flambda/flambda_to_clambda.ml(299):11197-11203
+                               (after middle_end/flambda/flambda_to_clambda.ml(299):11197-11203
+                                 (apply aux 0a)))))))))
+                case tag 9:
+                 (let
+                   (def =a (field 2 flam)
+                    sw =a (field 1 flam)
+                    arg =a (field 0 flam))
+                   (before middle_end/flambda/flambda_to_clambda.ml(314):11602-11782
+                     (let
+                       (arg =
+                          (after middle_end/flambda/flambda_to_clambda.ml(314):11612-11629
+                            (apply subst_var env arg)))
+                       (before middle_end/flambda/flambda_to_clambda.ml(315):11637-11782
+                         (let
+                           (sw =
+                              (after middle_end/flambda/flambda_to_clambda.ml(315):11646-11695
+                                (apply (field 16 (global Stdlib__list!))
+                                  (function param
+                                    (funct-body middle_end/flambda/flambda_to_clambda.ml(315):11655-11692
+                                      (let
+                                        (e =a (field 1 param)
+                                         s =a (field 0 param))
+                                        (before middle_end/flambda/flambda_to_clambda.ml(315):11670-11691
+                                          (makeblock 0 s
+                                            (after middle_end/flambda/flambda_to_clambda.ml(315):11673-11691
+                                              (apply to_clambda t env e)))))))
+                                  sw)))
+                           (before middle_end/flambda/flambda_to_clambda.ml(316):11703-11782
+                             (let
+                               (def =
+                                  (after middle_end/flambda/flambda_to_clambda.ml(316):11713-11746
+                                    (apply (field 6 (global Stdlib__option!))
+                                      (after middle_end/flambda/flambda_to_clambda.ml(316):11724-11742
+                                        (apply to_clambda t env))
+                                      def)))
+                               (before middle_end/flambda/flambda_to_clambda.ml(317):11754-11782
+                                 (makeblock 11 arg sw def)))))))))
+                case tag 10:
+                 (let (args =a (field 1 flam) static_exn =a (field 0 flam))
+                   (before middle_end/flambda/flambda_to_clambda.ml(319):11826-11911
+                     (makeblock 12 (int,*)
+                       (after middle_end/flambda/flambda_to_clambda.ml(319):11839-11873
+                         (apply (field 10 (global Static_exception!))
+                           static_exn))
+                       (after middle_end/flambda/flambda_to_clambda.ml(320):11881-11910
+                         (apply (field 16 (global Stdlib__list!))
+                           (after middle_end/flambda/flambda_to_clambda.ml(320):11890-11905
+                             (apply subst_var env))
+                           args)))))
+                case tag 11:
+                 (let
+                   (handler =a (field 3 flam)
+                    body =a (field 2 flam)
+                    vars =a (field 1 flam)
+                    static_exn =a (field 0 flam))
+                   (before middle_end/flambda/flambda_to_clambda.ml(322):11970-12292
+                     (let
+                       (*match* =
+                          (after middle_end/flambda/flambda_to_clambda.ml(323):11999-12169
+                            (apply (field 21 (global Stdlib__list!))
+                              (function var param
+                                (funct-body middle_end/flambda/flambda_to_clambda.ml(323):12015-12146
+                                  (let
+                                    (ids =a (field 1 param)
+                                     env =a (field 0 param))
+                                    (before middle_end/flambda/flambda_to_clambda.ml(324):12048-12145
+                                      (let
+                                        (*match* =
+                                           (after middle_end/flambda/flambda_to_clambda.ml(324):12062-12089
+                                             (apply (field 3 Env) env var))
+                                         env =a (field 1 *match*)
+                                         id =a (field 0 *match*))
+                                        (before middle_end/flambda/flambda_to_clambda.ml(325):12103-12145
+                                          (makeblock 0 env
+                                            (makeblock 0
+                                              (makeblock 0
+                                                (after middle_end/flambda/flambda_to_clambda.ml(325):12109-12121
+                                                  (apply
+                                                    (field 1
+                                                      (field 33
+                                                        (global Backend_var!)))
+                                                    0a id))
+                                                0a)
+                                              ids))))))))
+                              vars (makeblock 0 env 0a)))
+                        ids =a (field 1 *match*)
+                        env_handler =a (field 0 *match*))
+                       (before middle_end/flambda/flambda_to_clambda.ml(328):12181-12292
+                         (makeblock 13 (int,*,*,*)
+                           (after middle_end/flambda/flambda_to_clambda.ml(328):12189-12223
+                             (apply (field 10 (global Static_exception!))
+                               static_exn))
+                           ids
+                           (after middle_end/flambda/flambda_to_clambda.ml(329):12236-12257
+                             (apply to_clambda t env body))
+                           (after middle_end/flambda/flambda_to_clambda.ml(329):12259-12291
+                             (apply to_clambda t env_handler handler)))))))
+                case tag 12:
+                 (let
+                   (handler =a (field 2 flam)
+                    var =a (field 1 flam)
+                    body =a (field 0 flam))
+                   (before middle_end/flambda/flambda_to_clambda.ml(331):12334-12477
+                     (let
+                       (*match* =
+                          (after middle_end/flambda/flambda_to_clambda.ml(331):12356-12383
+                            (apply (field 3 Env) env var))
+                        env_handler =a (field 1 *match*)
+                        id =a (field 0 *match*))
+                       (before middle_end/flambda/flambda_to_clambda.ml(332):12391-12477
+                         (makeblock 14
+                           (after middle_end/flambda/flambda_to_clambda.ml(332):12401-12422
+                             (apply to_clambda t env body))
+                           (after middle_end/flambda/flambda_to_clambda.ml(332):12424-12436
+                             (apply
+                               (field 1 (field 33 (global Backend_var!))) 0a
+                               id))
+                           (after middle_end/flambda/flambda_to_clambda.ml(333):12444-12476
+                             (apply to_clambda t env_handler handler)))))))
+                case tag 13:
+                 (let (body =a (field 1 flam) cond =a (field 0 flam))
+                   (before middle_end/flambda/flambda_to_clambda.ml(338):12636-12689
+                     (makeblock 17
+                       (after middle_end/flambda/flambda_to_clambda.ml(338):12644-12665
+                         (apply to_clambda t env cond))
+                       (after middle_end/flambda/flambda_to_clambda.ml(338):12667-12688
+                         (apply to_clambda t env body)))))
+                case tag 14:
+                 (let
+                   (*match* =a (field 0 flam)
+                    body =a (field 4 *match*)
+                    direction =a (field 3 *match*)
+                    to_value =a (field 2 *match*)
+                    from_value =a (field 1 *match*)
+                    bound_var =a (field 0 *match*))
+                   (before middle_end/flambda/flambda_to_clambda.ml(340):12758-12932
+                     (let
+                       (*match* =
+                          (after middle_end/flambda/flambda_to_clambda.ml(340):12777-12810
+                            (apply (field 3 Env) env bound_var))
+                        env_body =a (field 1 *match*)
+                        id =a (field 0 *match*))
+                       (before middle_end/flambda/flambda_to_clambda.ml(341):12818-12932
+                         (makeblock 18
+                           (after middle_end/flambda/flambda_to_clambda.ml(341):12824-12836
+                             (apply
+                               (field 1 (field 33 (global Backend_var!))) 0a
+                               id))
+                           (after middle_end/flambda/flambda_to_clambda.ml(341):12838-12862
+                             (apply subst_var env from_value))
+                           (after middle_end/flambda/flambda_to_clambda.ml(341):12864-12886
+                             (apply subst_var env to_value))
+                           direction
+                           (after middle_end/flambda/flambda_to_clambda.ml(342):12905-12931
+                             (apply to_clambda t env_body body)))))))))))
+        to_clambda_named
+          (function t env var named
+            (funct-body middle_end/flambda/flambda_to_clambda.ml(357)<ghost>:13463-16118
+              (before middle_end/flambda/flambda_to_clambda.ml(358):13519-16118
+                (switch* named
+                 case tag 0:
+                  (let (sym =a (field 0 named))
+                    (before middle_end/flambda/flambda_to_clambda.ml(359):13554-13579
+                      (after middle_end/flambda/flambda_to_clambda.ml(359):13554-13579
+                        (apply to_clambda_symbol env sym))))
+                 case tag 1:
+                  (let (*match* =a (field 0 named))
+                    (switch* *match*
+                     case tag 0:
+                      (let (n =a (field 0 *match*))
+                        (before middle_end/flambda/flambda_to_clambda.ml(361):13654-13675
+                          (makeblock 1 (makeblock 1 (int) n))))
+                     case tag 1:
+                      (let (c =a (field 0 *match*))
+                        (before middle_end/flambda/flambda_to_clambda.ml(362):13698-13731
+                          (makeblock 1 (makeblock 1 (int) c))))
+                     case tag 2:
+                      (let (n =a (field 0 *match*))
+                        (before middle_end/flambda/flambda_to_clambda.ml(360):13611-13632
+                          (makeblock 1 (makeblock 2 (int) n))))))
+                 case tag 2:
+                  (before middle_end/flambda/flambda_to_clambda.ml(364):13761-13957
+                    (after middle_end/flambda/flambda_to_clambda.ml(364):13761-13957
+                      (apply (field 1 (global Misc!))
+                        [0:
+                         [11:
+                          "[Allocated_const] should have been lifted to a [Let_symbol] construction before [Flambda_to_clambda]: "
+                          [15: [11: " = " [15: 0a]]]]
+                         "[Allocated_const] should have been lifted to a [Let_symbol] construction before [Flambda_to_clambda]: %a = %a"]
+                        (field 5 (global Variable!)) var
+                        (field 27 (global Flambda!)) named)))
+                 case tag 3:
+                  (let (mut_var =a (field 0 named))
+                    (before middle_end/flambda/flambda_to_clambda.ml(369):13990-14227
+                      (try
+                        (makeblock 0
+                          (after middle_end/flambda/flambda_to_clambda.ml(369):14005-14048
+                            (apply (field 6 Env) env mut_var)))
+                       with exn
+                        (if (== exn (field 7 (global Stdlib!)))
+                          (before middle_end/flambda/flambda_to_clambda.ml(371):14077-14219
+                            (after middle_end/flambda/flambda_to_clambda.ml(371):14077-14219
+                              (apply (field 1 (global Misc!))
+                                [0:
+                                 [11:
+                                  "Unbound mutable variable "
+                                  [15: [11: " in [Read_mutable]: " [15: 0a]]]]
+                                 "Unbound mutable variable %a in [Read_mutable]: %a"]
+                                (field 5 (global Mutable_variable!)) mut_var
+                                (field 27 (global Flambda!)) named)))
+                          (reraise exn)))))
+                 case tag 4:
+                  (let (field =a (field 1 named) symbol =a (field 0 named))
+                    (before middle_end/flambda/flambda_to_clambda.ml(376):14273-14341
+                      (makeblock 9 (makeblock 2 (int) field)
+                        (makeblock 0
+                          (after middle_end/flambda/flambda_to_clambda.ml(376):14295-14323
+                            (apply to_clambda_symbol env symbol))
+                          0a)
+                        (field 0 (global Debuginfo!)))))
+                 case tag 5:
+                  (let (set_of_closures =a (field 0 named))
+                    (before middle_end/flambda/flambda_to_clambda.ml(378):14385-14433
+                      (after middle_end/flambda/flambda_to_clambda.ml(378):14385-14433
+                        (apply to_clambda_set_of_closures t env
+                          set_of_closures))))
+                 case tag 6:
+                  (let
+                    (*match* =a (field 0 named)
+                     closure_id =a (field 1 *match*)
+                     set_of_closures =a (field 0 *match*))
+                    (before middle_end/flambda/flambda_to_clambda.ml(384):14760-14954
+                      (after middle_end/flambda/flambda_to_clambda.ml(384):14760-14954
+                        (apply check_closure t
+                          (after middle_end/flambda/flambda_to_clambda.ml(384):14776-14942
+                            (apply build_uoffset
+                              (after middle_end/flambda/flambda_to_clambda.ml(386):14806-14903
+                                (apply check_closure t
+                                  (after middle_end/flambda/flambda_to_clambda.ml(386):14823-14854
+                                    (apply subst_var env set_of_closures))
+                                  (makeblock 10
+                                    (makeblock 0 set_of_closures))))
+                              (after middle_end/flambda/flambda_to_clambda.ml(388):14912-14941
+                                (apply get_fun_offset t closure_id))))
+                          named))))
+                 case tag 7:
+                  (let
+                    (*match* =a (field 0 named)
+                     move_to =a (field 2 *match*)
+                     start_from =a (field 1 *match*)
+                     closure =a (field 0 *match*))
+                    (before middle_end/flambda/flambda_to_clambda.ml(391):15027-15223
+                      (after middle_end/flambda/flambda_to_clambda.ml(391):15027-15223
+                        (apply check_closure t
+                          (after middle_end/flambda/flambda_to_clambda.ml(391):15043-15211
+                            (apply build_uoffset
+                              (after middle_end/flambda/flambda_to_clambda.ml(392):15064-15143
+                                (apply check_closure t
+                                  (after middle_end/flambda/flambda_to_clambda.ml(392):15081-15104
+                                    (apply subst_var env closure))
+                                  (makeblock 10 (makeblock 0 closure))))
+                              (-
+                                (after middle_end/flambda/flambda_to_clambda.ml(394):15151-15177
+                                  (apply get_fun_offset t move_to))
+                                (after middle_end/flambda/flambda_to_clambda.ml(394):15180-15209
+                                  (apply get_fun_offset t start_from)))))
+                          named))))
+                 case tag 8:
+                  (let
+                    (*match* =a (field 0 named)
+                     var =a (field 2 *match*)
+                     closure_id =a (field 1 *match*)
+                     closure =a (field 0 *match*))
+                    (before middle_end/flambda/flambda_to_clambda.ml(397):15276-15586
+                      (let
+                        (ulam =
+                           (after middle_end/flambda/flambda_to_clambda.ml(397):15287-15308
+                             (apply subst_var env closure)))
+                        (before middle_end/flambda/flambda_to_clambda.ml(398):15316-15586
+                          (let
+                            (fun_offset =[int]
+                               (after middle_end/flambda/flambda_to_clambda.ml(398):15333-15360
+                                 (apply get_fun_offset t closure_id)))
+                            (before middle_end/flambda/flambda_to_clambda.ml(399):15368-15586
+                              (let
+                                (var_offset =[int]
+                                   (after middle_end/flambda/flambda_to_clambda.ml(399):15385-15404
+                                     (apply get_fv_offset t var)))
+                                (before middle_end/flambda/flambda_to_clambda.ml(400):15412-15586
+                                  (let (pos =[int] (- var_offset fun_offset))
+                                    (before middle_end/flambda/flambda_to_clambda.ml(401):15453-15586
+                                      (makeblock 9 (makeblock 2 (int) pos)
+                                        (makeblock 0
+                                          (after middle_end/flambda/flambda_to_clambda.ml(402):15479-15562
+                                            (apply check_field t
+                                              (after middle_end/flambda/flambda_to_clambda.ml(402):15493-15536
+                                                (apply check_closure t ulam
+                                                  (makeblock 10
+                                                    (makeblock 0 closure))))
+                                              pos (makeblock 0 named)))
+                                          0a)
+                                        (field 0 (global Debuginfo!)))))))))))))
+                 case tag 9:
+                  (let (p =a (field 0 named))
+                    (catch
+                      (switch p
+                       case int 34:
+                        (let (dbg =a (field 2 named) args =a (field 1 named))
+                          (before middle_end/flambda/flambda_to_clambda.ml(413):15971-16012
+                            (makeblock 9 34a
+                              (after middle_end/flambda/flambda_to_clambda.ml(413):15987-16006
+                                (apply subst_vars env args))
+                              dbg)))
+                       case tag 2:
+                        (let (*match* =a (field 1 named))
+                          (if *match*
+                            (let (*match* =a (field 1 *match*))
+                              (if *match* (exit 46)
+                                (let
+                                  (dbg =a (field 2 named)
+                                   block =a (field 0 *match*)
+                                   index =a (field 0 p))
+                                  (before middle_end/flambda/flambda_to_clambda.ml(406):15632-15707
+                                    (makeblock 9 (makeblock 2 (int) index)
+                                      (makeblock 0
+                                        (after middle_end/flambda/flambda_to_clambda.ml(406):15654-15700
+                                          (apply check_field t
+                                            (after middle_end/flambda/flambda_to_clambda.ml(406):15668-15689
+                                              (apply subst_var env block))
+                                            index 0a))
+                                        0a)
+                                      dbg)))))
+                            (exit 46)))
+                       case tag 3:
+                        (let (*match* =a (field 1 named))
+                          (if *match*
+                            (let (*match* =a (field 1 *match*))
+                              (if *match*
+                                (let (*match* =a (field 1 *match*))
+                                  (if *match* (exit 46)
+                                    (let
+                                      (dbg =a (field 2 named)
+                                       new_value =a (field 0 *match*)
+                                       block =a (field 0 *match*)
+                                       init =a (field 2 p)
+                                       maybe_ptr =a (field 1 p)
+                                       index =a (field 0 p))
+                                      (before middle_end/flambda/flambda_to_clambda.ml(408):15786-15933
+                                        (makeblock 9
+                                          (makeblock 3 (int,*,*) index
+                                            maybe_ptr init)
+                                          (makeblock 0
+                                            (after middle_end/flambda/flambda_to_clambda.ml(409):15839-15885
+                                              (apply check_field t
+                                                (after middle_end/flambda/flambda_to_clambda.ml(409):15853-15874
+                                                  (apply subst_var env block))
+                                                index 0a))
+                                            (makeblock 0
+                                              (after middle_end/flambda/flambda_to_clambda.ml(410):15895-15918
+                                                (apply subst_var env
+                                                  new_value))
+                                              0a))
+                                          dbg)))))
+                                (exit 46)))
+                            (exit 46)))
+                       default: (exit 46))
+                     with (46)
+                      (let (dbg =a (field 2 named) args =a (field 1 named))
+                        (before middle_end/flambda/flambda_to_clambda.ml(415):16044-16079
+                          (makeblock 9 p
+                            (after middle_end/flambda/flambda_to_clambda.ml(415):16054-16073
+                              (apply subst_vars env args))
+                            dbg)))))
+                 case tag 10:
+                  (let (expr =a (field 0 named))
+                    (before middle_end/flambda/flambda_to_clambda.ml(416):16097-16118
+                      (after middle_end/flambda/flambda_to_clambda.ml(416):16097-16118
+                        (apply to_clambda t env expr))))))))
+        to_clambda_switch
+          (function t env cases num_keys default
+            (funct-body middle_end/flambda/flambda_to_clambda.ml(418)<ghost>:16142-17116
+              (before middle_end/flambda/flambda_to_clambda.ml(419):16175-17116
+                (let
+                  (num_keys =[int]
+                     (if
+                       (==
+                         (after middle_end/flambda/flambda_to_clambda.ml(420):16197-16230
+                           (apply
+                             (field 19 (field 6 (field 0 (global Numbers!))))
+                             num_keys))
+                         0)
+                       (before middle_end/flambda/flambda_to_clambda.ml(420):16240-16241
+                         0)
+                       (before middle_end/flambda/flambda_to_clambda.ml(421):16251-16287
+                         (+
+                           (after middle_end/flambda/flambda_to_clambda.ml(421):16251-16283
+                             (apply
+                               (field 23
+                                 (field 6 (field 0 (global Numbers!))))
+                               num_keys))
+                           1))))
+                  (before middle_end/flambda/flambda_to_clambda.ml(423):16295-17116
+                    (let
+                      (store =
+                         (after middle_end/flambda/flambda_to_clambda.ml(423):16307-16346
+                           (apply
+                             (field 0 (field 27 (global Flambda_utils!))) 0a)))
+                      (before middle_end/flambda/flambda_to_clambda.ml(424):16352-17116
+                        (let
+                          (default_action =[int]
+                             (catch
+                               (if default
+                                 (let (def =a (field 0 default))
+                                   (before middle_end/flambda/flambda_to_clambda.ml(426):16416-16444
+                                     (if
+                                       (<
+                                         (after middle_end/flambda/flambda_to_clambda.ml(426):16416-16433
+                                           (apply
+                                             (field 0 (global Stdlib__list!))
+                                             cases))
+                                         num_keys)
+                                       (before middle_end/flambda/flambda_to_clambda.ml(427):16454-16476
+                                         (after middle_end/flambda/flambda_to_clambda.ml(427):16454-16476
+                                           (apply (field 2 store) 0a def)))
+                                       (exit 48))))
+                                 (exit 48))
+                              with (48)
+                               (before middle_end/flambda/flambda_to_clambda.ml(428):16488-16490
+                                 -1)))
+                          (before middle_end/flambda/flambda_to_clambda.ml(430):16498-17116
+                            (let
+                              (index =
+                                 (after middle_end/flambda/flambda_to_clambda.ml(430):16510-16544
+                                   (caml_make_vect num_keys default_action)))
+                              (before middle_end/flambda/flambda_to_clambda.ml(431):16550-17116
+                                (let
+                                  (smallest_key =
+                                     (makemutable 0 (int) num_keys))
+                                  (before middle_end/flambda/flambda_to_clambda.ml(432):16587-17116
+                                    (seq
+                                      (after middle_end/flambda/flambda_to_clambda.ml(432):16587-16724
+                                        (apply
+                                          (field 14 (global Stdlib__list!))
+                                          (function param
+                                            (funct-body middle_end/flambda/flambda_to_clambda.ml(433):16601-16714
+                                              (let
+                                                (lam =a (field 1 param)
+                                                 key =a (field 0 param))
+                                                (before middle_end/flambda/flambda_to_clambda.ml(434):16626-16708
+                                                  (seq
+                                                    (after middle_end/flambda/flambda_to_clambda.ml(434):16626-16663
+                                                      (array.set[int] index
+                                                        key
+                                                        (after middle_end/flambda/flambda_to_clambda.ml(434):16641-16663
+                                                          (apply
+                                                            (field 2 store)
+                                                            0a lam))))
+                                                    (before middle_end/flambda/flambda_to_clambda.ml(435):16671-16708
+                                                      (setfield_imm 0
+                                                        smallest_key
+                                                        (after middle_end/flambda/flambda_to_clambda.ml(435):16687-16708
+                                                          (apply
+                                                            (field 15
+                                                              (global Stdlib!))
+                                                            key
+                                                            (field 0
+                                                              smallest_key))))))))))
+                                          cases))
+                                      (before middle_end/flambda/flambda_to_clambda.ml(438):16728-17116
+                                        (seq
+                                          (if
+                                            (< (field 0 smallest_key)
+                                              num_keys)
+                                            (before middle_end/flambda/flambda_to_clambda.ml(438):16761-16933
+                                              (let
+                                                (action =
+                                                   (makemutable 0 (int)
+                                                     (after middle_end/flambda/flambda_to_clambda.ml(439):16788-16809
+                                                       (array.get[int] index
+                                                         (field 0
+                                                           smallest_key)))))
+                                                (before middle_end/flambda/flambda_to_clambda.ml(440):16817-16927
+                                                  (after middle_end/flambda/flambda_to_clambda.ml(440):16817-16927
+                                                    (apply
+                                                      (field 13
+                                                        (global Stdlib__array!))
+                                                      (function i[int]
+                                                        act[int]
+                                                        (funct-body middle_end/flambda/flambda_to_clambda.ml(441):16835-16915
+                                                          (before middle_end/flambda/flambda_to_clambda.ml(442):16858-16914
+                                                            (if (>= act 0)
+                                                              (before middle_end/flambda/flambda_to_clambda.ml(442):16875-16888
+                                                                (setfield_imm 0
+                                                                  action act))
+                                                              (before middle_end/flambda/flambda_to_clambda.ml(442):16894-16914
+                                                                (after middle_end/flambda/flambda_to_clambda.ml(442):16894-16914
+                                                                  (array.set[int]
+                                                                    index i
+                                                                    (field 0
+                                                                    action))))))))
+                                                      index)))))
+                                            0a)
+                                          (before middle_end/flambda/flambda_to_clambda.ml(445):16937-17116
+                                            (let
+                                              (actions =
+                                                 (after middle_end/flambda/flambda_to_clambda.ml(445):16951-16998
+                                                   (apply
+                                                     (field 14
+                                                       (global Stdlib__array!))
+                                                     (after middle_end/flambda/flambda_to_clambda.ml(445):16961-16979
+                                                       (apply to_clambda t
+                                                         env))
+                                                     (after middle_end/flambda/flambda_to_clambda.ml(445):16980-16998
+                                                       (apply (field 0 store)
+                                                         0a)))))
+                                              (before middle_end/flambda/flambda_to_clambda.ml(446):17004-17116
+                                                (let
+                                                  (len =a
+                                                     (array.length[addr]
+                                                       actions))
+                                                  (if len
+                                                    (before middle_end/flambda/flambda_to_clambda.ml(448):17102-17116
+                                                      (makeblock 0 index
+                                                        actions))
+                                                    (before middle_end/flambda/flambda_to_clambda.ml(447):17036-17048
+                                                      (makeblock 0
+                                                        (makearray[int])
+                                                        (makearray[addr]))))))))))))))))))))))))
+        to_clambda_direct_apply
+          (function t func args direct_func dbg env
+            (funct-body middle_end/flambda/flambda_to_clambda.ml(450)<ghost>:17146-17647
+              (before middle_end/flambda/flambda_to_clambda.ml(451):17200-17647
+                (let
+                  (closed =
+                     (after middle_end/flambda/flambda_to_clambda.ml(451):17213-17247
+                       (apply is_function_constant t direct_func)))
+                  (before middle_end/flambda/flambda_to_clambda.ml(452):17253-17647
+                    (let
+                      (label =
+                         (after middle_end/flambda/flambda_to_clambda.ml(452):17265-17301
+                           (apply (field 25 (global Compilenv!)) direct_func)))
+                      (before middle_end/flambda/flambda_to_clambda.ml(453):17307-17647
+                        (let
+                          (uargs =
+                             (let
+                               (uargs =
+                                  (after middle_end/flambda/flambda_to_clambda.ml(454):17335-17354
+                                    (apply subst_vars env args)))
+                               (before middle_end/flambda/flambda_to_clambda.ml(458):17552-17606
+                                 (if closed
+                                   (before middle_end/flambda/flambda_to_clambda.ml(458):17567-17572
+                                     uargs)
+                                   (before middle_end/flambda/flambda_to_clambda.ml(458):17578-17606
+                                     (after middle_end/flambda/flambda_to_clambda.ml(458):17578-17606
+                                       (apply (field 36 (global Stdlib!))
+                                         uargs
+                                         (makeblock 0
+                                           (after middle_end/flambda/flambda_to_clambda.ml(458):17587-17605
+                                             (apply subst_var env func))
+                                           0a))))))))
+                          (before middle_end/flambda/flambda_to_clambda.ml(460):17614-17647
+                            (makeblock 2 label uargs dbg))))))))))
+        to_clambda_set_of_closures
+          (function t env set_of_closures
+            (funct-body middle_end/flambda/flambda_to_clambda.ml(486)<ghost>:18516-21651
+              (let
+                (free_vars =a (field 1 set_of_closures)
+                 function_decls =a (field 0 set_of_closures))
+                (before middle_end/flambda/flambda_to_clambda.ml(489):18637-21651
+                  (let
+                    (all_functions =
+                       (after middle_end/flambda/flambda_to_clambda.ml(489):18657-18698
+                         (apply (field 18 (field 7 (global Variable!)))
+                           (field 3 function_decls))))
+                    (before middle_end/flambda/flambda_to_clambda.ml(490):18704-21651
+                      (let
+                        (env_var =
+                           (after middle_end/flambda/flambda_to_clambda.ml(490):18718-18738
+                             (apply (field 6 (global Backend_var!)) "env")))
+                        (before middle_end/flambda/flambda_to_clambda.ml(491):18744-21651
+                          (let
+                            (to_clambda_function =
+                               (function param
+                                 (funct-body middle_end/flambda/flambda_to_clambda.ml(492)<ghost>:18776-21380
+                                   (let
+                                     (function_decl =a (field 1 param)
+                                      closure_id =a (field 0 param))
+                                     (before middle_end/flambda/flambda_to_clambda.ml(494):18871-21380
+                                       (let
+                                         (closure_id =
+                                            (after middle_end/flambda/flambda_to_clambda.ml(494):18888-18914
+                                              (apply
+                                                (field 9
+                                                  (global Closure_id!))
+                                                closure_id)))
+                                         (before middle_end/flambda/flambda_to_clambda.ml(495):18922-21380
+                                           (let
+                                             (fun_offset =[int]
+                                                (after middle_end/flambda/flambda_to_clambda.ml(496):18945-19007
+                                                  (apply
+                                                    (field 26
+                                                      (field 7
+                                                        (global Closure_id!)))
+                                                    closure_id
+                                                    (field 0 (field 0 t)))))
+                                             (before middle_end/flambda/flambda_to_clambda.ml(498):19019-21380
+                                               (let
+                                                 (env =
+                                                    (let
+                                                      (env =
+                                                         (after middle_end/flambda/flambda_to_clambda.ml(503):19313-19338
+                                                           (apply
+                                                             (field 9 Env)
+                                                             env)))
+                                                      (before middle_end/flambda/flambda_to_clambda.ml(506):19456-20777
+                                                        (let
+                                                          (add_env_free_variable =
+                                                             (function id
+                                                               param env
+                                                               (funct-body middle_end/flambda/flambda_to_clambda.ml(506)<ghost>:19482-20068
+                                                                 (before middle_end/flambda/flambda_to_clambda.ml(507):19501-20068
+                                                                   (let
+                                                                    (var_offset =[int]
+                                                                    (try
+                                                                    (after middle_end/flambda/flambda_to_clambda.ml(509):19544-19645
+                                                                    (apply
+                                                                    (field 26
+                                                                    (field 7
+                                                                    (global Var_within_closure!)))
+                                                                    (after middle_end/flambda/flambda_to_clambda.ml(510):19586-19614
+                                                                    (apply
+                                                                    (field 9
+                                                                    (global Var_within_closure!))
+                                                                    id))
+                                                                    (field 1
+                                                                    (field 0
+                                                                    t))))
+                                                                    with exn
+                                                                    (if
+                                                                    (== exn
+                                                                    (field 7
+                                                                    (global Stdlib!)))
+                                                                    (before middle_end/flambda/flambda_to_clambda.ml(512):19686-19912
+                                                                    (after middle_end/flambda/flambda_to_clambda.ml(512):19686-19912
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Misc!))
+                                                                    [0:
+                                                                    [11:
+                                                                    "Clambda.to_clambda_set_of_closures: offset for free variable "
+                                                                    [15:
+                                                                    [11:
+                                                                    " is unknown.  Set of closures: "
+                                                                    [15: 0a]]]]
+                                                                    "Clambda.to_clambda_set_of_closures: offset for free variable %a is unknown.  Set of closures: %a"]
+                                                                    (field 5
+                                                                    (global Variable!))
+                                                                    id
+                                                                    (field 36
+                                                                    (global Flambda!))
+                                                                    set_of_closures)))
+                                                                    (reraise
+                                                                    exn))))
+                                                                    (before middle_end/flambda/flambda_to_clambda.ml(517):19932-20068
+                                                                    (let
+                                                                    (pos =[int]
+                                                                    (-
+                                                                    var_offset
+                                                                    fun_offset))
+                                                                    (before middle_end/flambda/flambda_to_clambda.ml(518):19977-20068
+                                                                    (after middle_end/flambda/flambda_to_clambda.ml(518):19977-20068
+                                                                    (apply
+                                                                    (field 1
+                                                                    Env) env
+                                                                    id
+                                                                    (makeblock 9
+                                                                    (makeblock 2 (int)
+                                                                    pos)
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    env_var)
+                                                                    0a)
+                                                                    (field 0
+                                                                    (global Debuginfo!)))))))))))))
+                                                          (before middle_end/flambda/flambda_to_clambda.ml(521):20084-20777
+                                                            (let
+                                                              (env =
+                                                                 (after middle_end/flambda/flambda_to_clambda.ml(521):20094-20147
+                                                                   (apply
+                                                                    (field 12
+                                                                    (field 7
+                                                                    (global Variable!)))
+                                                                    add_env_free_variable
+                                                                    free_vars
+                                                                    env)))
+                                                              (before middle_end/flambda/flambda_to_clambda.ml(526):20425-20777
+                                                                (let
+                                                                  (add_env_function =
+                                                                    (function
+                                                                    pos[int]
+                                                                    env param
+                                                                    (funct-body middle_end/flambda/flambda_to_clambda.ml(526)<ghost>:20446-20699
+                                                                    (let
+                                                                    (id =a
+                                                                    (field 0
+                                                                    param))
+                                                                    (before middle_end/flambda/flambda_to_clambda.ml(527):20472-20699
+                                                                    (let
+                                                                    (offset =[int]
+                                                                    (after middle_end/flambda/flambda_to_clambda.ml(528):20495-20579
+                                                                    (apply
+                                                                    (field 26
+                                                                    (field 7
+                                                                    (global Closure_id!)))
+                                                                    (after middle_end/flambda/flambda_to_clambda.ml(528):20515-20535
+                                                                    (apply
+                                                                    (field 9
+                                                                    (global Closure_id!))
+                                                                    id))
+                                                                    (field 0
+                                                                    (field 0
+                                                                    t)))))
+                                                                    (before middle_end/flambda/flambda_to_clambda.ml(531):20599-20699
+                                                                    (let
+                                                                    (exp =
+                                                                    (makeblock 5 (*,int)
+                                                                    (makeblock 0
+                                                                    env_var)
+                                                                    (- offset
+                                                                    pos)))
+                                                                    (before middle_end/flambda/flambda_to_clambda.ml(532):20675-20699
+                                                                    (after middle_end/flambda/flambda_to_clambda.ml(532):20675-20699
+                                                                    (apply
+                                                                    (field 1
+                                                                    Env) env
+                                                                    id exp)))))))))))
+                                                                  (before middle_end/flambda/flambda_to_clambda.ml(534):20715-20777
+                                                                    (after middle_end/flambda/flambda_to_clambda.ml(534):20715-20777
+                                                                    (apply
+                                                                    (field 20
+                                                                    (global Stdlib__list!))
+                                                                    (after middle_end/flambda/flambda_to_clambda.ml(534):20730-20759
+                                                                    (apply
+                                                                    add_env_function
+                                                                    fun_offset))
+                                                                    env
+                                                                    all_functions)))))))))))
+                                                 (before middle_end/flambda/flambda_to_clambda.ml(536):20789-21380
+                                                   (let
+                                                     (*match* =
+                                                        (after middle_end/flambda/flambda_to_clambda.ml(537):20818-20998
+                                                          (apply
+                                                            (field 21
+                                                              (global Stdlib__list!))
+                                                            (function var
+                                                              param
+                                                              (funct-body middle_end/flambda/flambda_to_clambda.ml(537):20834-20959
+                                                                (let
+                                                                  (params =a
+                                                                    (field 1
+                                                                    param)
+                                                                   env =a
+                                                                    (field 0
+                                                                    param))
+                                                                  (before middle_end/flambda/flambda_to_clambda.ml(538):20870-20958
+                                                                    (let
+                                                                    (*match* =
+                                                                    (after middle_end/flambda/flambda_to_clambda.ml(538):20884-20927
+                                                                    (apply
+                                                                    (field 3
+                                                                    Env) env
+                                                                    (after middle_end/flambda/flambda_to_clambda.ml(538):20908-20927
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Parameter!))
+                                                                    var))))
+                                                                    env =a
+                                                                    (field 1
+                                                                    *match*)
+                                                                    id =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                    (before middle_end/flambda/flambda_to_clambda.ml(539):20941-20958
+                                                                    (makeblock 0
+                                                                    env
+                                                                    (makeblock 0
+                                                                    id
+                                                                    params))))))))
+                                                            (field 1
+                                                              function_decl)
+                                                            (makeblock 0 env
+                                                              0a)))
+                                                      params =a
+                                                        (field 1 *match*)
+                                                      env_body =a
+                                                        (field 0 *match*))
+                                                     (before middle_end/flambda/flambda_to_clambda.ml(542):21010-21380
+                                                       (makeblock 0 (*,int,*,*,*,*,*)
+                                                         (after middle_end/flambda/flambda_to_clambda.ml(542):21020-21055
+                                                           (apply
+                                                             (field 25
+                                                               (global Compilenv!))
+                                                             closure_id))
+                                                         (after middle_end/flambda/flambda_to_clambda.ml(543):21071-21113
+                                                           (apply
+                                                             (field 3
+                                                               (global Flambda_utils!))
+                                                             function_decl))
+                                                         (after middle_end/flambda/flambda_to_clambda.ml(545):21138-21230
+                                                           (apply
+                                                             (field 16
+                                                               (global Stdlib__list!))
+                                                             (function var
+                                                               (funct-body middle_end/flambda/flambda_to_clambda.ml(546):21157-21199
+                                                                 (before middle_end/flambda/flambda_to_clambda.ml(546):21169-21198
+                                                                   (makeblock 0
+                                                                    (after middle_end/flambda/flambda_to_clambda.ml(546):21169-21182
+                                                                    (apply
+                                                                    (field 1
+                                                                    (field 33
+                                                                    (global Backend_var!)))
+                                                                    0a var))
+                                                                    0a))))
+                                                             (after middle_end/flambda/flambda_to_clambda.ml(547):21210-21230
+                                                               (apply
+                                                                 (field 36
+                                                                   (global Stdlib!))
+                                                                 params
+                                                                 (makeblock 0
+                                                                   env_var
+                                                                   0a)))))
+                                                         0a
+                                                         (after middle_end/flambda/flambda_to_clambda.ml(549):21276-21316
+                                                           (apply to_clambda
+                                                             t env_body
+                                                             (field 2
+                                                               function_decl)))
+                                                         (field 6
+                                                           function_decl)
+                                                         (makeblock 0
+                                                           env_var)))))))))))))))
+                            (before middle_end/flambda/flambda_to_clambda.ml(554):21388-21651
+                              (let
+                                (funs =
+                                   (after middle_end/flambda/flambda_to_clambda.ml(554):21399-21441
+                                     (apply (field 16 (global Stdlib__list!))
+                                       to_clambda_function all_functions)))
+                                (before middle_end/flambda/flambda_to_clambda.ml(555):21447-21651
+                                  (let
+                                    (free_vars =
+                                       (after middle_end/flambda/flambda_to_clambda.ml(556):21467-21604
+                                         (apply
+                                           (field 18
+                                             (field 7 (global Variable!)))
+                                           (after middle_end/flambda/flambda_to_clambda.ml(556):21489-21604
+                                             (apply
+                                               (field 32
+                                                 (field 7 (global Variable!)))
+                                               (function free_var
+                                                 (funct-body middle_end/flambda/flambda_to_clambda.ml(556):21507-21593
+                                                   (before middle_end/flambda/flambda_to_clambda.ml(558):21566-21592
+                                                     (after middle_end/flambda/flambda_to_clambda.ml(558):21566-21592
+                                                       (apply subst_var env
+                                                         (field 0 free_var))))))
+                                               free_vars)))))
+                                    (before middle_end/flambda/flambda_to_clambda.ml(560):21612-21651
+                                      (makeblock 4 funs
+                                        (after middle_end/flambda/flambda_to_clambda.ml(560):21628-21650
+                                          (apply
+                                            (field 16 (global Stdlib__list!))
+                                            (function prim stub
+                                              (field 1 prim))
+                                            free_vars)))))))))))))))))
+        to_clambda_closed_set_of_closures
+          (function t env symbol param
+            (funct-body middle_end/flambda/flambda_to_clambda.ml(562)<ghost>:21691-23331
+              (let (function_decls =a (field 0 param))
+                (before middle_end/flambda/flambda_to_clambda.ml(565):21799-23331
+                  (let
+                    (functions =
+                       (after middle_end/flambda/flambda_to_clambda.ml(565):21815-21856
+                         (apply (field 18 (field 7 (global Variable!)))
+                           (field 3 function_decls))))
+                    (before middle_end/flambda/flambda_to_clambda.ml(566):21862-23331
+                      (let
+                        (to_clambda_function =
+                           (function param
+                             (funct-body middle_end/flambda/flambda_to_clambda.ml(566)<ghost>:21886-23158
+                               (let
+                                 (function_decl =a (field 1 param)
+                                  id =a (field 0 param))
+                                 (before middle_end/flambda/flambda_to_clambda.ml(572):22231-23158
+                                   (let
+                                     (env =
+                                        (after middle_end/flambda/flambda_to_clambda.ml(573):22247-22512
+                                          (apply
+                                            (field 20 (global Stdlib__list!))
+                                            (function env param
+                                              (funct-body middle_end/flambda/flambda_to_clambda.ml(573):22262-22458
+                                                (let (var =a (field 0 param))
+                                                  (before middle_end/flambda/flambda_to_clambda.ml(574):22293-22457
+                                                    (let
+                                                      (closure_id =
+                                                         (after middle_end/flambda/flambda_to_clambda.ml(574):22310-22329
+                                                           (apply
+                                                             (field 9
+                                                               (global Closure_id!))
+                                                             var)))
+                                                      (before middle_end/flambda/flambda_to_clambda.ml(575):22343-22457
+                                                        (let
+                                                          (symbol =
+                                                             (after middle_end/flambda/flambda_to_clambda.ml(575):22356-22391
+                                                               (apply
+                                                                 (field 24
+                                                                   (global Compilenv!))
+                                                                 closure_id)))
+                                                          (before middle_end/flambda/flambda_to_clambda.ml(576):22405-22457
+                                                            (after middle_end/flambda/flambda_to_clambda.ml(576):22405-22457
+                                                              (apply
+                                                                (field 1 Env)
+                                                                env var
+                                                                (after middle_end/flambda/flambda_to_clambda.ml(576):22427-22457
+                                                                  (apply
+                                                                    to_clambda_symbol
+                                                                    env
+                                                                    symbol))))))))))))
+                                            (after middle_end/flambda/flambda_to_clambda.ml(577):22467-22494
+                                              (apply (field 9 Env) env))
+                                            functions)))
+                                     (before middle_end/flambda/flambda_to_clambda.ml(580):22524-23158
+                                       (let
+                                         (*match* =
+                                            (after middle_end/flambda/flambda_to_clambda.ml(581):22553-22733
+                                              (apply
+                                                (field 21
+                                                  (global Stdlib__list!))
+                                                (function var param
+                                                  (funct-body middle_end/flambda/flambda_to_clambda.ml(581):22569-22694
+                                                    (let
+                                                      (params =a
+                                                         (field 1 param)
+                                                       env =a (field 0 param))
+                                                      (before middle_end/flambda/flambda_to_clambda.ml(582):22605-22693
+                                                        (let
+                                                          (*match* =
+                                                             (after middle_end/flambda/flambda_to_clambda.ml(582):22619-22662
+                                                               (apply
+                                                                 (field 3
+                                                                   Env)
+                                                                 env
+                                                                 (after middle_end/flambda/flambda_to_clambda.ml(582):22643-22662
+                                                                   (apply
+                                                                    (field 1
+                                                                    (global Parameter!))
+                                                                    var))))
+                                                           env =a
+                                                             (field 1
+                                                               *match*)
+                                                           id =a
+                                                             (field 0
+                                                               *match*))
+                                                          (before middle_end/flambda/flambda_to_clambda.ml(583):22676-22693
+                                                            (makeblock 0 env
+                                                              (makeblock 0 id
+                                                                params))))))))
+                                                (field 1 function_decl)
+                                                (makeblock 0 env 0a)))
+                                          params =a (field 1 *match*)
+                                          env_body =a (field 0 *match*))
+                                         (before middle_end/flambda/flambda_to_clambda.ml(586):22745-23158
+                                           (let
+                                             (body =
+                                                (after middle_end/flambda/flambda_to_clambda.ml(587):22762-22859
+                                                  (apply
+                                                    (field 0
+                                                      (global Un_anf!))
+                                                    symbol (field 2 t)
+                                                    (after middle_end/flambda/flambda_to_clambda.ml(588):22817-22859
+                                                      (apply to_clambda t
+                                                        env_body
+                                                        (field 2
+                                                          function_decl))))))
+                                             (before middle_end/flambda/flambda_to_clambda.ml(590):22871-23158
+                                               (makeblock 0 (*,int,*,*,*,*,*)
+                                                 (after middle_end/flambda/flambda_to_clambda.ml(590):22881-22926
+                                                   (apply
+                                                     (field 25
+                                                       (global Compilenv!))
+                                                     (after middle_end/flambda/flambda_to_clambda.ml(590):22906-22926
+                                                       (apply
+                                                         (field 9
+                                                           (global Closure_id!))
+                                                         id))))
+                                                 (after middle_end/flambda/flambda_to_clambda.ml(591):22942-22984
+                                                   (apply
+                                                     (field 3
+                                                       (global Flambda_utils!))
+                                                     function_decl))
+                                                 (after middle_end/flambda/flambda_to_clambda.ml(592):23001-23059
+                                                   (apply
+                                                     (field 16
+                                                       (global Stdlib__list!))
+                                                     (function var
+                                                       (funct-body middle_end/flambda/flambda_to_clambda.ml(592):23010-23052
+                                                         (before middle_end/flambda/flambda_to_clambda.ml(592):23022-23051
+                                                           (makeblock 0
+                                                             (after middle_end/flambda/flambda_to_clambda.ml(592):23022-23035
+                                                               (apply
+                                                                 (field 1
+                                                                   (field 33
+                                                                    (global Backend_var!)))
+                                                                 0a var))
+                                                             0a))))
+                                                     params))
+                                                 0a body
+                                                 (field 6 function_decl) 0a))))))))))))
+                        (before middle_end/flambda/flambda_to_clambda.ml(599):23166-23331
+                          (let
+                            (ufunct =
+                               (after middle_end/flambda/flambda_to_clambda.ml(599):23179-23217
+                                 (apply (field 16 (global Stdlib__list!))
+                                   to_clambda_function functions)))
+                            (before middle_end/flambda/flambda_to_clambda.ml(600):23223-23331
+                              (let
+                                (closure_lbl =
+                                   (after middle_end/flambda/flambda_to_clambda.ml(600):23241-23285
+                                     (apply (field 10 (global Linkage_name!))
+                                       (after middle_end/flambda/flambda_to_clambda.ml(600):23264-23285
+                                         (apply (field 13 (global Symbol!))
+                                           symbol)))))
+                                (before middle_end/flambda/flambda_to_clambda.ml(601):23291-23331
+                                  (makeblock 7 ufunct closure_lbl 0a))))))))))))))
+      (let
+        (to_clambda_initialize_symbol =
+           (function t env symbol fields
+             (funct-body middle_end/flambda/flambda_to_clambda.ml(603)<ghost>:23366-23981
+               (before middle_end/flambda/flambda_to_clambda.ml(604):23408-23981
+                 (let
+                   (fields =
+                      (after middle_end/flambda/flambda_to_clambda.ml(605):23425-23492
+                        (apply (field 16 (global Stdlib__list!))
+                          (function param
+                            (funct-body middle_end/flambda/flambda_to_clambda.ml(605):23434-23485
+                              (let
+                                (expr =a (field 1 param)
+                                 index =a (field 0 param))
+                                (before middle_end/flambda/flambda_to_clambda.ml(605):23456-23484
+                                  (makeblock 0 (int,*) index
+                                    (after middle_end/flambda/flambda_to_clambda.ml(605):23463-23484
+                                      (apply to_clambda t env expr)))))))
+                          fields)))
+                   (before middle_end/flambda/flambda_to_clambda.ml(607):23500-23981
+                     (let
+                       (build_setfield =
+                          (function param
+                            (funct-body middle_end/flambda/flambda_to_clambda.ml(607)<ghost>:23519-23781
+                              (let
+                                (field =a (field 1 param)
+                                 index =a (field 0 param))
+                                (before middle_end/flambda/flambda_to_clambda.ml(610):23659-23781
+                                  (makeblock 9
+                                    (makeblock 3 (int,*,*) index 1a 2a)
+                                    (makeblock 0
+                                      (after middle_end/flambda/flambda_to_clambda.ml(611):23722-23750
+                                        (apply to_clambda_symbol env symbol))
+                                      (makeblock 0 field 0a))
+                                    (field 0 (global Debuginfo!))))))))
+                       (before middle_end/flambda/flambda_to_clambda.ml(614):23789-23981
+                         (if fields
+                           (let (t =a (field 1 fields) h =a (field 0 fields))
+                             (before middle_end/flambda/flambda_to_clambda.ml(617):23857-23981
+                               (after middle_end/flambda/flambda_to_clambda.ml(617):23857-23981
+                                 (apply (field 20 (global Stdlib__list!))
+                                   (function acc param
+                                     (funct-body middle_end/flambda/flambda_to_clambda.ml(617):23872-23954
+                                       (let
+                                         (field =a (field 1 param)
+                                          p =a (field 0 param))
+                                         (before middle_end/flambda/flambda_to_clambda.ml(618):23903-23953
+                                           (makeblock 16
+                                             (after middle_end/flambda/flambda_to_clambda.ml(618):23922-23947
+                                               (apply build_setfield
+                                                 (makeblock 0 (int,*) p
+                                                   field)))
+                                             acc)))))
+                                   (after middle_end/flambda/flambda_to_clambda.ml(619):23961-23979
+                                     (apply build_setfield h))
+                                   t))))
+                           (before middle_end/flambda/flambda_to_clambda.ml(615):23817-23838
+                             [1: [2: 0]])))))))))
+         accumulate_structured_constants =
+           (function t env symbol c acc
+             (funct-body middle_end/flambda/flambda_to_clambda.ml(621)<ghost>:24019-24587
+               (before middle_end/flambda/flambda_to_clambda.ml(623):24084-24587
+                 (switch* c
+                  case tag 0:
+                   (let (c =a (field 0 c))
+                     (before middle_end/flambda/flambda_to_clambda.ml(625):24126-24185
+                       (after middle_end/flambda/flambda_to_clambda.ml(625):24126-24185
+                         (apply (field 3 (field 7 (global Symbol!))) symbol
+                           (after middle_end/flambda/flambda_to_clambda.ml(625):24148-24181
+                             (apply to_clambda_allocated_constant c))
+                           acc))))
+                  case tag 1:
+                   (let (fields =a (field 1 c) tag =a (field 0 c))
+                     (before middle_end/flambda/flambda_to_clambda.ml(627):24217-24349
+                       (let
+                         (fields =
+                            (after middle_end/flambda/flambda_to_clambda.ml(627):24230-24268
+                              (apply (field 16 (global Stdlib__list!))
+                                (after middle_end/flambda/flambda_to_clambda.ml(627):24239-24261
+                                  (apply to_clambda_const env))
+                                fields)))
+                         (before middle_end/flambda/flambda_to_clambda.ml(628):24276-24349
+                           (after middle_end/flambda/flambda_to_clambda.ml(628):24276-24349
+                             (apply (field 3 (field 7 (global Symbol!)))
+                               symbol
+                               (makeblock 4 (int,*)
+                                 (after middle_end/flambda/flambda_to_clambda.ml(628):24321-24335
+                                   (apply (field 9 (global Tag!)) tag))
+                                 fields)
+                               acc))))))
+                  case tag 2:
+                   (let (set_of_closures =a (field 0 c))
+                     (before middle_end/flambda/flambda_to_clambda.ml(630):24393-24558
+                       (let
+                         (to_clambda_set_of_closures =
+                            (after middle_end/flambda/flambda_to_clambda.ml(631):24432-24494
+                              (apply to_clambda_closed_set_of_closures t env
+                                symbol set_of_closures)))
+                         (before middle_end/flambda/flambda_to_clambda.ml(633):24506-24558
+                           (after middle_end/flambda/flambda_to_clambda.ml(633):24506-24558
+                             (apply (field 3 (field 7 (global Symbol!)))
+                               symbol to_clambda_set_of_closures acc))))))
+                  case tag 3:
+                   (before middle_end/flambda/flambda_to_clambda.ml(634):24584-24587
+                     acc)))))
+         to_clambda_program =
+           (function t env constants program
+             (funct-body middle_end/flambda/flambda_to_clambda.ml(636)<ghost>:24612-27447
+               (before middle_end/flambda/flambda_to_clambda.ml(637):24660-27447
+                 (letrec
+                   (loop
+                      (function env constants program
+                        (funct-body middle_end/flambda/flambda_to_clambda.ml(637)<ghost>:24673-27400
+                          (before middle_end/flambda/flambda_to_clambda.ml(641):24850-27400
+                            (switch* program
+                             case tag 0:
+                              (let
+                                (program =a (field 2 program)
+                                 alloc =a (field 1 program)
+                                 symbol =a (field 0 program))
+                                (before middle_end/flambda/flambda_to_clambda.ml(646):25092-25363
+                                  (let
+                                    (env =
+                                       (switch alloc
+                                        case tag 0:
+                                         (let (const =a (field 0 alloc))
+                                           (before middle_end/flambda/flambda_to_clambda.ml(648):25162-25202
+                                             (after middle_end/flambda/flambda_to_clambda.ml(648):25162-25202
+                                               (apply (field 7 Env) env
+                                                 symbol const))))
+                                        default:
+                                         (before middle_end/flambda/flambda_to_clambda.ml(649):25218-25221
+                                           env)))
+                                    (before middle_end/flambda/flambda_to_clambda.ml(651):25237-25363
+                                      (let
+                                        (constants =
+                                           (after middle_end/flambda/flambda_to_clambda.ml(652):25261-25321
+                                             (apply
+                                               accumulate_structured_constants
+                                               t env symbol alloc constants)))
+                                        (before middle_end/flambda/flambda_to_clambda.ml(654):25337-25363
+                                          (after middle_end/flambda/flambda_to_clambda.ml(654):25337-25363
+                                            (apply loop env constants
+                                              program))))))))
+                             case tag 1:
+                              (let
+                                (program =a (field 1 program)
+                                 defs =a (field 0 program))
+                                (before middle_end/flambda/flambda_to_clambda.ml(656):25410-25623
+                                  (let
+                                    (constants =
+                                       (after middle_end/flambda/flambda_to_clambda.ml(657):25434-25581
+                                         (apply
+                                           (field 20 (global Stdlib__list!))
+                                           (function constants param
+                                             (funct-body middle_end/flambda/flambda_to_clambda.ml(657):25449-25556
+                                               (let
+                                                 (alloc =a (field 1 param)
+                                                  symbol =a (field 0 param))
+                                                 (before middle_end/flambda/flambda_to_clambda.ml(658):25495-25555
+                                                   (after middle_end/flambda/flambda_to_clambda.ml(658):25495-25555
+                                                     (apply
+                                                       accumulate_structured_constants
+                                                       t env symbol alloc
+                                                       constants))))))
+                                           constants defs)))
+                                    (before middle_end/flambda/flambda_to_clambda.ml(661):25597-25623
+                                      (after middle_end/flambda/flambda_to_clambda.ml(661):25597-25623
+                                        (apply loop env constants program))))))
+                             case tag 2:
+                              (let
+                                (program =a (field 3 program)
+                                 fields =a (field 2 program)
+                                 tag =a (field 1 program)
+                                 symbol =a (field 0 program))
+                                (before middle_end/flambda/flambda_to_clambda.ml(663):25688-27136
+                                  (let
+                                    (fields =
+                                       (after middle_end/flambda/flambda_to_clambda.ml(664):25709-25839
+                                         (apply
+                                           (field 17 (global Stdlib__list!))
+                                           (function i[int] field
+                                             (funct-body middle_end/flambda/flambda_to_clambda.ml(664):25719-25822
+                                               (before middle_end/flambda/flambda_to_clambda.ml(665):25747-25821
+                                                 (makeblock 0 (int,*,*) i
+                                                   field
+                                                   (after middle_end/flambda/flambda_to_clambda.ml(666):25769-25821
+                                                     (apply
+                                                       (field 0
+                                                         (global Initialize_symbol_to_let_symbol!))
+                                                       field))))))
+                                           fields)))
+                                    (before middle_end/flambda/flambda_to_clambda.ml(669):25855-27136
+                                      (let
+                                        (init_fields =
+                                           (after middle_end/flambda/flambda_to_clambda.ml(670):25881-26011
+                                             (apply
+                                               (field 19
+                                                 (global Stdlib__list!))
+                                               (function param
+                                                 (funct-body middle_end/flambda/flambda_to_clambda.ml(670):25897-25994
+                                                   (let
+                                                     (*match* =a
+                                                        (field 2 param)
+                                                      field =a
+                                                        (field 1 param)
+                                                      i =a (field 0 param))
+                                                     (if *match*
+                                                       (before middle_end/flambda/flambda_to_clambda.ml(672):25989-25993
+                                                         0a)
+                                                       (before middle_end/flambda/flambda_to_clambda.ml(671):25941-25956
+                                                         (makeblock 0
+                                                           (makeblock 0 (int,*)
+                                                             i field)))))))
+                                               fields)))
+                                        (before middle_end/flambda/flambda_to_clambda.ml(675):26027-27136
+                                          (let
+                                            (constant_fields =
+                                               (after middle_end/flambda/flambda_to_clambda.ml(676):26057-26631
+                                                 (apply
+                                                   (field 16
+                                                     (global Stdlib__list!))
+                                                   (function param
+                                                     (funct-body middle_end/flambda/flambda_to_clambda.ml(676):26066-26614
+                                                       (let
+                                                         (constant_field =a
+                                                            (field 2 param))
+                                                         (before middle_end/flambda/flambda_to_clambda.ml(677):26109-26613
+                                                           (if constant_field
+                                                             (let
+                                                               (*match* =a
+                                                                  (field 0
+                                                                    constant_field))
+                                                               (switch* *match*
+                                                                case tag 0:
+                                                                 (let
+                                                                   (sym =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                   (before middle_end/flambda/flambda_to_clambda.ml(688):26507-26613
+                                                                    (let
+                                                                    (lbl =
+                                                                    (after middle_end/flambda/flambda_to_clambda.ml(688):26517-26558
+                                                                    (apply
+                                                                    (field 10
+                                                                    (global Linkage_name!))
+                                                                    (after middle_end/flambda/flambda_to_clambda.ml(688):26540-26558
+                                                                    (apply
+                                                                    (field 13
+                                                                    (global Symbol!))
+                                                                    sym)))))
+                                                                    (before middle_end/flambda/flambda_to_clambda.ml(689):26578-26613
+                                                                    (makeblock 0
+                                                                    (makeblock 0
+                                                                    lbl))))))
+                                                                case tag 1:
+                                                                 (let
+                                                                   (const =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                   (before middle_end/flambda/flambda_to_clambda.ml(680):26222-26447
+                                                                    (let
+                                                                    (n =[int]
+                                                                    (switch* const
+                                                                    case tag 0:
+                                                                    (let
+                                                                    (i =a
+                                                                    (field 0
+                                                                    const))
+                                                                    (before middle_end/flambda/flambda_to_clambda.ml(682):26294-26295
+                                                                    i))
+                                                                    case tag 1:
+                                                                    (let
+                                                                    (c =a
+                                                                    (field 0
+                                                                    const))
+                                                                    (before middle_end/flambda/flambda_to_clambda.ml(683):26326-26337
+                                                                    c))
+                                                                    case tag 2:
+                                                                    (let
+                                                                    (i =a
+                                                                    (field 0
+                                                                    const))
+                                                                    (before middle_end/flambda/flambda_to_clambda.ml(684):26377-26378
+                                                                    i))))
+                                                                    (before middle_end/flambda/flambda_to_clambda.ml(686):26414-26447
+                                                                    (makeblock 0
+                                                                    (makeblock 1 (int)
+                                                                    n))))))))
+                                                             (before middle_end/flambda/flambda_to_clambda.ml(678):26157-26161
+                                                               0a))))))
+                                                   fields)))
+                                            (before middle_end/flambda/flambda_to_clambda.ml(692):26647-27136
+                                              (let
+                                                (e1 =
+                                                   (after middle_end/flambda/flambda_to_clambda.ml(692):26656-26709
+                                                     (apply
+                                                       to_clambda_initialize_symbol
+                                                       t env symbol
+                                                       init_fields)))
+                                                (before middle_end/flambda/flambda_to_clambda.ml(693):26719-27136
+                                                  (let
+                                                    (preallocated_block =
+                                                       (makeblock 0 (*,*,int,*,*)
+                                                         (after middle_end/flambda/flambda_to_clambda.ml(694):26792-26836
+                                                           (apply
+                                                             (field 10
+                                                               (global Linkage_name!))
+                                                             (after middle_end/flambda/flambda_to_clambda.ml(694):26815-26836
+                                                               (apply
+                                                                 (field 13
+                                                                   (global Symbol!))
+                                                                 symbol))))
+                                                         1a
+                                                         (after middle_end/flambda/flambda_to_clambda.ml(696):26881-26895
+                                                           (apply
+                                                             (field 9
+                                                               (global Tag!))
+                                                             tag))
+                                                         constant_fields 0a))
+                                                    (before middle_end/flambda/flambda_to_clambda.ml(701):26987-27136
+                                                      (let
+                                                        (*match* =
+                                                           (after middle_end/flambda/flambda_to_clambda.ml(701):27028-27054
+                                                             (apply loop env
+                                                               constants
+                                                               program))
+                                                         preallocated_blocks =a
+                                                           (field 2 *match*)
+                                                         constants =a
+                                                           (field 1 *match*)
+                                                         e2 =a
+                                                           (field 0 *match*))
+                                                        (before middle_end/flambda/flambda_to_clambda.ml(702):27064-27136
+                                                          (makeblock 0
+                                                            (makeblock 16 e1
+                                                              e2)
+                                                            constants
+                                                            (makeblock 0
+                                                              preallocated_block
+                                                              preallocated_blocks))))))))))))))))
+                             case tag 3:
+                              (let
+                                (program =a (field 1 program)
+                                 expr =a (field 0 program))
+                                (before middle_end/flambda/flambda_to_clambda.ml(704):27175-27342
+                                  (let
+                                    (e1 =
+                                       (after middle_end/flambda/flambda_to_clambda.ml(704):27184-27205
+                                         (apply to_clambda t env expr)))
+                                    (before middle_end/flambda/flambda_to_clambda.ml(705):27215-27342
+                                      (let
+                                        (*match* =
+                                           (after middle_end/flambda/flambda_to_clambda.ml(705):27256-27282
+                                             (apply loop env constants
+                                               program))
+                                         preallocated_blocks =a
+                                           (field 2 *match*)
+                                         constants =a (field 1 *match*)
+                                         e2 =a (field 0 *match*))
+                                        (before middle_end/flambda/flambda_to_clambda.ml(706):27292-27342
+                                          (makeblock 0 (makeblock 16 e1 e2)
+                                            constants preallocated_blocks)))))))
+                             case tag 4:
+                              (before middle_end/flambda/flambda_to_clambda.ml(708):27364-27400
+                                (makeblock 0 [1: [2: 0]] constants 0a)))))))
+                   (before middle_end/flambda/flambda_to_clambda.ml(710):27408-27447
+                     (after middle_end/flambda/flambda_to_clambda.ml(710):27408-27447
+                       (apply loop env constants (field 1 program))))))))
+         convert =
+           (function ppf_dump param
+             (funct-body middle_end/flambda/flambda_to_clambda.ml(719)<ghost>:27659-29631
+               (let
+                 (exported_transient =a (field 1 param)
+                  program =a (field 0 param))
+                 (before middle_end/flambda/flambda_to_clambda.ml(720):27712-29631
+                   (let
+                     (current_unit =
+                        (let
+                          (closures =
+                             (after middle_end/flambda/flambda_to_clambda.ml(722):27756-27816
+                               (apply
+                                 (field 46 (field 7 (global Closure_id!)))
+                                 (after middle_end/flambda/flambda_to_clambda.ml(722):27776-27816
+                                   (apply (field 19 (global Flambda_utils!))
+                                     program)))))
+                          (before middle_end/flambda/flambda_to_clambda.ml(724):27828-28121
+                            (let
+                              (constant_closures =
+                                 (after middle_end/flambda/flambda_to_clambda.ml(725):27858-27908
+                                   (apply (field 23 (global Flambda_utils!))
+                                     program)))
+                              (before middle_end/flambda/flambda_to_clambda.ml(727):27920-28121
+                                (let
+                                  (offsets =
+                                     (after middle_end/flambda/flambda_to_clambda.ml(727):27934-27965
+                                       (apply
+                                         (field 0 (global Closure_offsets!))
+                                         program)))
+                                  (before middle_end/flambda/flambda_to_clambda.ml(728):27973-28121
+                                    (makeblock 0 (field 0 offsets)
+                                      (field 1 offsets) constant_closures
+                                      closures))))))))
+                     (before middle_end/flambda/flambda_to_clambda.ml(734):28129-29631
+                       (let
+                         (imported_units =
+                            (let
+                              (imported =
+                                 (after middle_end/flambda/flambda_to_clambda.ml(735):28169-28192
+                                   (apply (field 18 (global Compilenv!)) 0a)))
+                              (before middle_end/flambda/flambda_to_clambda.ml(736):28200-28817
+                                (let
+                                  (closures =
+                                     (after middle_end/flambda/flambda_to_clambda.ml(737):28221-28644
+                                       (apply
+                                         (field 12
+                                           (field 7
+                                             (global Set_of_closures_id!)))
+                                         (function param fun_decls acc
+                                           (funct-body middle_end/flambda/flambda_to_clambda.ml(738):28257-28581
+                                             (before middle_end/flambda/flambda_to_clambda.ml(739):28317-28580
+                                               (after middle_end/flambda/flambda_to_clambda.ml(739):28317-28580
+                                                 (apply
+                                                   (field 12
+                                                     (field 7
+                                                       (global Variable!)))
+                                                   (function var param acc
+                                                     (funct-body middle_end/flambda/flambda_to_clambda.ml(740):28348-28515
+                                                       (before middle_end/flambda/flambda_to_clambda.ml(741):28426-28514
+                                                         (let
+                                                           (closure_id =
+                                                              (after middle_end/flambda/flambda_to_clambda.ml(741):28443-28462
+                                                                (apply
+                                                                  (field 9
+                                                                    (global Closure_id!))
+                                                                  var)))
+                                                           (before middle_end/flambda/flambda_to_clambda.ml(742):28481-28514
+                                                             (after middle_end/flambda/flambda_to_clambda.ml(742):28481-28514
+                                                               (apply
+                                                                 (field 3
+                                                                   (field 6
+                                                                    (global Closure_id!)))
+                                                                 closure_id
+                                                                 acc)))))))
+                                                   (field 3 fun_decls) acc)))))
+                                         (field 0 imported)
+                                         (field 0
+                                           (field 6 (global Closure_id!))))))
+                                  (before middle_end/flambda/flambda_to_clambda.ml(748):28656-28817
+                                    (makeblock 0 (field 3 imported)
+                                      (field 4 imported) (field 5 imported)
+                                      closures))))))
+                         (before middle_end/flambda/flambda_to_clambda.ml(754):28825-29631
+                           (let
+                             (t =
+                                (makemutable 0 current_unit imported_units
+                                  ppf_dump
+                                  (field 0 (field 7 (global Symbol!)))))
+                             (before middle_end/flambda/flambda_to_clambda.ml(761):28960-29631
+                               (let
+                                 (*match* =
+                                    (after middle_end/flambda/flambda_to_clambda.ml(762):29018-29073
+                                      (apply to_clambda_program t
+                                        (field 0 Env)
+                                        (field 0 (field 7 (global Symbol!)))
+                                        program))
+                                  preallocated_blocks =a (field 2 *match*)
+                                  structured_constants =a (field 1 *match*)
+                                  expr =a (field 0 *match*))
+                                 (before middle_end/flambda/flambda_to_clambda.ml(764):29081-29631
+                                   (let
+                                     (structured_constants =
+                                        (after middle_end/flambda/flambda_to_clambda.ml(765):29112-29196
+                                          (apply
+                                            (field 40
+                                              (field 7 (global Symbol!)))
+                                            0a 0a structured_constants
+                                            (field 3 t))))
+                                     (before middle_end/flambda/flambda_to_clambda.ml(768):29204-29631
+                                       (let
+                                         (exported =
+                                            (after middle_end/flambda/flambda_to_clambda.ml(769):29223-29561
+                                              (apply
+                                                (field 4
+                                                  (global Export_info!))
+                                                exported_transient program
+                                                (field 0 current_unit)
+                                                (field 1 current_unit)
+                                                (field 0 imported_units)
+                                                (field 1 imported_units)
+                                                (field 2 current_unit))))
+                                         (before middle_end/flambda/flambda_to_clambda.ml(777):29569-29631
+                                           (makeblock 0 expr
+                                             preallocated_blocks
+                                             structured_constants exported))))))))))))))))))
+        (pseudo _none_(0)<ghost>:-1--1 (makeblock 0 convert))))))

@@ -1,0 +1,178 @@
+(setglobal Opcodes!
+  (let
+    (opACC0 =[int] 0
+     opACC1 =[int] 1
+     opACC2 =[int] 2
+     opACC3 =[int] 3
+     opACC4 =[int] 4
+     opACC5 =[int] 5
+     opACC6 =[int] 6
+     opACC7 =[int] 7
+     opACC =[int] 8
+     opPUSH =[int] 9
+     opPUSHACC0 =[int] 10
+     opPUSHACC1 =[int] 11
+     opPUSHACC2 =[int] 12
+     opPUSHACC3 =[int] 13
+     opPUSHACC4 =[int] 14
+     opPUSHACC5 =[int] 15
+     opPUSHACC6 =[int] 16
+     opPUSHACC7 =[int] 17
+     opPUSHACC =[int] 18
+     opPOP =[int] 19
+     opASSIGN =[int] 20
+     opENVACC1 =[int] 21
+     opENVACC2 =[int] 22
+     opENVACC3 =[int] 23
+     opENVACC4 =[int] 24
+     opENVACC =[int] 25
+     opPUSHENVACC1 =[int] 26
+     opPUSHENVACC2 =[int] 27
+     opPUSHENVACC3 =[int] 28
+     opPUSHENVACC4 =[int] 29
+     opPUSHENVACC =[int] 30
+     opPUSH_RETADDR =[int] 31
+     opAPPLY =[int] 32
+     opAPPLY1 =[int] 33
+     opAPPLY2 =[int] 34
+     opAPPLY3 =[int] 35
+     opAPPTERM =[int] 36
+     opAPPTERM1 =[int] 37
+     opAPPTERM2 =[int] 38
+     opAPPTERM3 =[int] 39
+     opRETURN =[int] 40
+     opRESTART =[int] 41
+     opGRAB =[int] 42
+     opCLOSURE =[int] 43
+     opCLOSUREREC =[int] 44
+     opOFFSETCLOSUREM2 =[int] 45
+     opOFFSETCLOSURE0 =[int] 46
+     opOFFSETCLOSURE2 =[int] 47
+     opOFFSETCLOSURE =[int] 48
+     opPUSHOFFSETCLOSUREM2 =[int] 49
+     opPUSHOFFSETCLOSURE0 =[int] 50
+     opPUSHOFFSETCLOSURE2 =[int] 51
+     opPUSHOFFSETCLOSURE =[int] 52
+     opGETGLOBAL =[int] 53
+     opPUSHGETGLOBAL =[int] 54
+     opGETGLOBALFIELD =[int] 55
+     opPUSHGETGLOBALFIELD =[int] 56
+     opSETGLOBAL =[int] 57
+     opATOM0 =[int] 58
+     opATOM =[int] 59
+     opPUSHATOM0 =[int] 60
+     opPUSHATOM =[int] 61
+     opMAKEBLOCK =[int] 62
+     opMAKEBLOCK1 =[int] 63
+     opMAKEBLOCK2 =[int] 64
+     opMAKEBLOCK3 =[int] 65
+     opMAKEFLOATBLOCK =[int] 66
+     opGETFIELD0 =[int] 67
+     opGETFIELD1 =[int] 68
+     opGETFIELD2 =[int] 69
+     opGETFIELD3 =[int] 70
+     opGETFIELD =[int] 71
+     opGETFLOATFIELD =[int] 72
+     opSETFIELD0 =[int] 73
+     opSETFIELD1 =[int] 74
+     opSETFIELD2 =[int] 75
+     opSETFIELD3 =[int] 76
+     opSETFIELD =[int] 77
+     opSETFLOATFIELD =[int] 78
+     opVECTLENGTH =[int] 79
+     opGETVECTITEM =[int] 80
+     opSETVECTITEM =[int] 81
+     opGETBYTESCHAR =[int] 82
+     opSETBYTESCHAR =[int] 83
+     opBRANCH =[int] 84
+     opBRANCHIF =[int] 85
+     opBRANCHIFNOT =[int] 86
+     opSWITCH =[int] 87
+     opBOOLNOT =[int] 88
+     opPUSHTRAP =[int] 89
+     opPOPTRAP =[int] 90
+     opRAISE =[int] 91
+     opCHECK_SIGNALS =[int] 92
+     opC_CALL1 =[int] 93
+     opC_CALL2 =[int] 94
+     opC_CALL3 =[int] 95
+     opC_CALL4 =[int] 96
+     opC_CALL5 =[int] 97
+     opC_CALLN =[int] 98
+     opCONST0 =[int] 99
+     opCONST1 =[int] 100
+     opCONST2 =[int] 101
+     opCONST3 =[int] 102
+     opCONSTINT =[int] 103
+     opPUSHCONST0 =[int] 104
+     opPUSHCONST1 =[int] 105
+     opPUSHCONST2 =[int] 106
+     opPUSHCONST3 =[int] 107
+     opPUSHCONSTINT =[int] 108
+     opNEGINT =[int] 109
+     opADDINT =[int] 110
+     opSUBINT =[int] 111
+     opMULINT =[int] 112
+     opDIVINT =[int] 113
+     opMODINT =[int] 114
+     opANDINT =[int] 115
+     opORINT =[int] 116
+     opXORINT =[int] 117
+     opLSLINT =[int] 118
+     opLSRINT =[int] 119
+     opASRINT =[int] 120
+     opEQ =[int] 121
+     opNEQ =[int] 122
+     opLTINT =[int] 123
+     opLEINT =[int] 124
+     opGTINT =[int] 125
+     opGEINT =[int] 126
+     opOFFSETINT =[int] 127
+     opOFFSETREF =[int] 128
+     opISINT =[int] 129
+     opGETMETHOD =[int] 130
+     opBEQ =[int] 131
+     opBNEQ =[int] 132
+     opBLTINT =[int] 133
+     opBLEINT =[int] 134
+     opBGTINT =[int] 135
+     opBGEINT =[int] 136
+     opULTINT =[int] 137
+     opUGEINT =[int] 138
+     opBULTINT =[int] 139
+     opBUGEINT =[int] 140
+     opGETPUBMET =[int] 141
+     opGETDYNMET =[int] 142
+     opSTOP =[int] 143
+     opEVENT =[int] 144
+     opBREAK =[int] 145
+     opRERAISE =[int] 146
+     opRAISE_NOTRACE =[int] 147
+     opGETSTRINGCHAR =[int] 148)
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 opACC0 opACC1 opACC2 opACC3 opACC4 opACC5 opACC6 opACC7
+        opACC opPUSH opPUSHACC0 opPUSHACC1 opPUSHACC2 opPUSHACC3 opPUSHACC4
+        opPUSHACC5 opPUSHACC6 opPUSHACC7 opPUSHACC opPOP opASSIGN opENVACC1
+        opENVACC2 opENVACC3 opENVACC4 opENVACC opPUSHENVACC1 opPUSHENVACC2
+        opPUSHENVACC3 opPUSHENVACC4 opPUSHENVACC opPUSH_RETADDR opAPPLY
+        opAPPLY1 opAPPLY2 opAPPLY3 opAPPTERM opAPPTERM1 opAPPTERM2 opAPPTERM3
+        opRETURN opRESTART opGRAB opCLOSURE opCLOSUREREC opOFFSETCLOSUREM2
+        opOFFSETCLOSURE0 opOFFSETCLOSURE2 opOFFSETCLOSURE
+        opPUSHOFFSETCLOSUREM2 opPUSHOFFSETCLOSURE0 opPUSHOFFSETCLOSURE2
+        opPUSHOFFSETCLOSURE opGETGLOBAL opPUSHGETGLOBAL opGETGLOBALFIELD
+        opPUSHGETGLOBALFIELD opSETGLOBAL opATOM0 opATOM opPUSHATOM0
+        opPUSHATOM opMAKEBLOCK opMAKEBLOCK1 opMAKEBLOCK2 opMAKEBLOCK3
+        opMAKEFLOATBLOCK opGETFIELD0 opGETFIELD1 opGETFIELD2 opGETFIELD3
+        opGETFIELD opGETFLOATFIELD opSETFIELD0 opSETFIELD1 opSETFIELD2
+        opSETFIELD3 opSETFIELD opSETFLOATFIELD opVECTLENGTH opGETVECTITEM
+        opSETVECTITEM opGETBYTESCHAR opSETBYTESCHAR opBRANCH opBRANCHIF
+        opBRANCHIFNOT opSWITCH opBOOLNOT opPUSHTRAP opPOPTRAP opRAISE
+        opCHECK_SIGNALS opC_CALL1 opC_CALL2 opC_CALL3 opC_CALL4 opC_CALL5
+        opC_CALLN opCONST0 opCONST1 opCONST2 opCONST3 opCONSTINT opPUSHCONST0
+        opPUSHCONST1 opPUSHCONST2 opPUSHCONST3 opPUSHCONSTINT opNEGINT
+        opADDINT opSUBINT opMULINT opDIVINT opMODINT opANDINT opORINT
+        opXORINT opLSLINT opLSRINT opASRINT opEQ opNEQ opLTINT opLEINT
+        opGTINT opGEINT opOFFSETINT opOFFSETREF opISINT opGETMETHOD opBEQ
+        opBNEQ opBLTINT opBLEINT opBGTINT opBGEINT opULTINT opUGEINT
+        opBULTINT opBUGEINT opGETPUBMET opGETDYNMET opSTOP opEVENT opBREAK
+        opRERAISE opRAISE_NOTRACE opGETSTRINGCHAR))))

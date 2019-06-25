@@ -1,0 +1,1945 @@
+(setglobal Emitcode!
+  (let
+    (Error = (makeblock 248 "Emitcode.Error" (caml_fresh_oo_id 0))
+     marshal_to_channel_with_possibly_32bit_compat =
+       (function filename kind outchan obj
+         (funct-body bytecomp/emitcode.ml(31)<ghost>:1435-1663
+           (before bytecomp/emitcode.ml(32):1467-1663
+             (try
+               (after bytecomp/emitcode.ml(33):1475-1588
+                 (apply (field 0 (global Stdlib__marshal!)) outchan obj
+                   (if (field 0 (field 23 (global Clflags!)))
+                     (before bytecomp/emitcode.ml(35):1560-1579 [0: 2a 0a])
+                     (before bytecomp/emitcode.ml(35):1585-1587 0a))))
+              with exn
+               (let (tag =a (field 0 exn))
+                 (if (== tag (field 6 (global Stdlib!)))
+                   (before bytecomp/emitcode.ml(37):1613-1663
+                     (raise
+                       (after bytecomp/emitcode.ml(37):1619-1663
+                         (makeblock 0 Error
+                           (makeblock 0 (makeblock 0 filename kind))))))
+                   (reraise exn)))))))
+     report_error =
+       (function ppf param
+         (funct-body bytecomp/emitcode.ml(40)<ghost>:1683-1807
+           (let (kind =a (field 1 param) file =a (field 0 param))
+             (before bytecomp/emitcode.ml(41):1704-1807
+               (after bytecomp/emitcode.ml(41):1704-1807
+                 (apply (field 122 (global Stdlib__format!)) ppf
+                   [0:
+                    [11:
+                     "Generated "
+                     [2:
+                      0a
+                      [12:
+                       ' '
+                       [3:
+                        0a [11: " cannot be used on a 32-bit platform" 0a]]]]]
+                    "Generated %s %S cannot be used on a 32-bit platform"]
+                   kind file))))))
+     *match* =
+       (after bytecomp/emitcode.ml(44):1819-2005
+         (apply (field 46 (global Location!))
+           (function param
+             (funct-body bytecomp/emitcode.ml(45):1854-2005
+               (let (tag =a (field 0 param))
+                 (if (== tag Error)
+                   (let
+                     (*match* =a (field 1 param) info =a (field 0 *match*))
+                     (before bytecomp/emitcode.ml(47):1916-1971
+                       (makeblock 0
+                         (after bytecomp/emitcode.ml(47):1921-1971
+                           (apply (field 45 (global Location!)) report_error
+                             info)))))
+                   (before bytecomp/emitcode.ml(49):1995-1999 0a)))))))
+     out_buffer =
+       (makemutable 0
+         (after bytecomp/emitcode.ml(54):2056-2080
+           (apply (field 0 (field 44 (global Misc!))) 1024)))
+     out_position = (makemutable 0 (int) 0)
+     out_word =
+       (function b1[int] b2[int] b3[int] b4[int]
+         (funct-body bytecomp/emitcode.ml(57)<ghost>:2120-2646
+           (before bytecomp/emitcode.ml(58):2136-2646
+             (let (p =[int] (field 0 out_position))
+               (before bytecomp/emitcode.ml(59):2163-2646
+                 (seq
+                   (if
+                     (>= p
+                       (after bytecomp/emitcode.ml(59):2171-2200
+                         (apply (field 1 (field 44 (global Misc!)))
+                           (field 0 out_buffer))))
+                     (before bytecomp/emitcode.ml(59):2206-2397
+                       (let
+                         (len =[int]
+                            (after bytecomp/emitcode.ml(60):2226-2255
+                              (apply (field 1 (field 44 (global Misc!)))
+                                (field 0 out_buffer))))
+                         (before bytecomp/emitcode.ml(61):2263-2391
+                           (let
+                             (new_buffer =
+                                (after bytecomp/emitcode.ml(61):2280-2307
+                                  (apply (field 0 (field 44 (global Misc!)))
+                                    (* 2 len))))
+                             (before bytecomp/emitcode.ml(62):2315-2391
+                               (seq
+                                 (after bytecomp/emitcode.ml(62):2315-2361
+                                   (apply (field 4 (field 44 (global Misc!)))
+                                     (field 0 out_buffer) 0 new_buffer 0 len))
+                                 (before bytecomp/emitcode.ml(63):2367-2391
+                                   (setfield_ptr 0 out_buffer new_buffer))))))))
+                     0a)
+                   (before bytecomp/emitcode.ml(65):2401-2646
+                     (seq
+                       (after bytecomp/emitcode.ml(65):2401-2450
+                         (apply (field 3 (field 44 (global Misc!)))
+                           (field 0 out_buffer) p b1))
+                       (before bytecomp/emitcode.ml(66):2454-2646
+                         (seq
+                           (after bytecomp/emitcode.ml(66):2454-2507
+                             (apply (field 3 (field 44 (global Misc!)))
+                               (field 0 out_buffer) (+ p 1) b2))
+                           (before bytecomp/emitcode.ml(67):2511-2646
+                             (seq
+                               (after bytecomp/emitcode.ml(67):2511-2564
+                                 (apply (field 3 (field 44 (global Misc!)))
+                                   (field 0 out_buffer) (+ p 2) b3))
+                               (before bytecomp/emitcode.ml(68):2568-2646
+                                 (seq
+                                   (after bytecomp/emitcode.ml(68):2568-2621
+                                     (apply
+                                       (field 3 (field 44 (global Misc!)))
+                                       (field 0 out_buffer) (+ p 3) b4))
+                                   (before bytecomp/emitcode.ml(69):2625-2646
+                                     (setfield_imm 0 out_position (+ p 4)))))))))))))))))
+     out =
+       (function opcode[int]
+         (funct-body bytecomp/emitcode.ml(71)<ghost>:2656-2688
+           (before bytecomp/emitcode.ml(72):2667-2688
+             (after bytecomp/emitcode.ml(72):2667-2688
+               (apply out_word opcode 0 0 0)))))
+     AsInt = (makeblock 248 "Emitcode.AsInt" (caml_fresh_oo_id 0))
+     const_as_int =
+       (function param : int
+         (funct-body bytecomp/emitcode.ml(77):2727-2858
+           (catch
+             (switch param
+              case tag 0:
+               (let (*match* =a (field 0 param))
+                 (switch *match*
+                  case tag 0:
+                   (let (i =a (field 0 *match*))
+                     (before bytecomp/emitcode.ml(78):2767-2768 i))
+                  case tag 1:
+                   (let (c =a (field 0 *match*))
+                     (before bytecomp/emitcode.ml(79):2801-2812 c))
+                  default: (exit 3)))
+              case tag 1:
+               (let (i =a (field 0 param))
+                 (before bytecomp/emitcode.ml(80):2836-2837 i))
+              default: (exit 3))
+            with (3)
+             (before bytecomp/emitcode.ml(81):2847-2858
+               (raise (after bytecomp/emitcode.ml(81):2853-2858 AsInt))))))
+     is_immed =
+       (function i[int]
+         (funct-body bytecomp/emitcode.ml(83)<ghost>:2873-2909
+           (before bytecomp/emitcode.ml(83):2877-2909
+             (&& (<= (field 0 (global Instruct!)) i)
+               (<= i (field 1 (global Instruct!)))))))
+     is_immed_const =
+       (function k
+         (funct-body bytecomp/emitcode.ml(84)<ghost>:2929-2994
+           (before bytecomp/emitcode.ml(85):2935-2994
+             (try
+               (after bytecomp/emitcode.ml(86):2943-2968
+                 (apply is_immed
+                   (after bytecomp/emitcode.ml(86):2952-2968
+                     (apply const_as_int k))))
+              with exn
+               (if (== exn AsInt)
+                 (before bytecomp/emitcode.ml(88):2989-2994 0a)
+                 (reraise exn))))))
+     out_int =
+       (function n[int]
+         (funct-body bytecomp/emitcode.ml(91)<ghost>:3009-3057
+           (before bytecomp/emitcode.ml(92):3015-3057
+             (after bytecomp/emitcode.ml(92):3015-3057
+               (apply out_word n (asr n 8) (asr n 16) (asr n 24))))))
+     out_const =
+       (function c
+         (funct-body bytecomp/emitcode.ml(94)<ghost>:3073-3172
+           (before bytecomp/emitcode.ml(95):3079-3172
+             (try
+               (after bytecomp/emitcode.ml(96):3087-3111
+                 (apply out_int
+                   (after bytecomp/emitcode.ml(96):3095-3111
+                     (apply const_as_int c))))
+              with exn
+               (if (== exn AsInt)
+                 (before bytecomp/emitcode.ml(98):3132-3172
+                   (after bytecomp/emitcode.ml(98):3132-3172
+                     (apply (field 0 (global Misc!)) "Emitcode.const_as_int")))
+                 (reraise exn))))))
+     label_table = (makemutable 0 (makearray[addr]))
+     extend_label_table =
+       (function needed[int]
+         (funct-body bytecomp/emitcode.ml(109)<ghost>:3394-3675
+           (before bytecomp/emitcode.ml(110):3405-3675
+             (let
+               (new_size =
+                  (makemutable 0 (int)
+                    (array.length[addr] (field 0 label_table))))
+               (before bytecomp/emitcode.ml(111):3456-3675
+                 (seq
+                   (while (>= needed (field 0 new_size))
+                     (before bytecomp/emitcode.ml(111):3485-3510
+                       (setfield_imm 0 new_size (* 2 (field 0 new_size)))))
+                   (before bytecomp/emitcode.ml(112):3519-3675
+                     (let
+                       (new_table =
+                          (after bytecomp/emitcode.ml(112):3535-3576
+                            (caml_make_vect (field 0 new_size) [1: 0a])))
+                       (before bytecomp/emitcode.ml(113):3582-3675
+                         (seq
+                           (after bytecomp/emitcode.ml(113):3582-3647
+                             (apply (field 9 (global Stdlib__array!))
+                               (field 0 label_table) 0 new_table 0
+                               (array.length[addr] (field 0 label_table))))
+                           (before bytecomp/emitcode.ml(114):3651-3675
+                             (setfield_ptr 0 label_table new_table))))))))))))
+     backpatch =
+       (function param
+         (funct-body bytecomp/emitcode.ml(116)<ghost>:3691-4019
+           (let (orig =a (field 1 param) pos =a (field 0 param))
+             (before bytecomp/emitcode.ml(117):3707-4019
+               (let (displ =[int] (asr (- (field 0 out_position) orig) 2))
+                 (before bytecomp/emitcode.ml(118):3753-4019
+                   (seq
+                     (after bytecomp/emitcode.ml(118):3753-3807
+                       (apply (field 3 (field 44 (global Misc!)))
+                         (field 0 out_buffer) pos displ))
+                     (before bytecomp/emitcode.ml(119):3811-4019
+                       (seq
+                         (after bytecomp/emitcode.ml(119):3811-3877
+                           (apply (field 3 (field 44 (global Misc!)))
+                             (field 0 out_buffer) (+ pos 1) (asr displ 8)))
+                         (before bytecomp/emitcode.ml(120):3881-4019
+                           (seq
+                             (after bytecomp/emitcode.ml(120):3881-3948
+                               (apply (field 3 (field 44 (global Misc!)))
+                                 (field 0 out_buffer) (+ pos 2)
+                                 (asr displ 16)))
+                             (before bytecomp/emitcode.ml(121):3952-4019
+                               (after bytecomp/emitcode.ml(121):3952-4019
+                                 (apply (field 3 (field 44 (global Misc!)))
+                                   (field 0 out_buffer) (+ pos 3)
+                                   (asr displ 24)))))))))))))))
+     define_label =
+       (function lbl[int]
+         (funct-body bytecomp/emitcode.ml(123)<ghost>:4038-4337
+           (before bytecomp/emitcode.ml(124):4046-4337
+             (seq
+               (if (>= lbl (array.length[addr] (field 0 label_table)))
+                 (before bytecomp/emitcode.ml(124):4087-4109
+                   (after bytecomp/emitcode.ml(124):4087-4109
+                     (apply extend_label_table lbl)))
+                 0a)
+               (before bytecomp/emitcode.ml(125):4113-4337
+                 (let
+                   (*match* =
+                      (after bytecomp/emitcode.ml(125):4119-4139
+                        (array.get[addr] (field 0 label_table) lbl)))
+                   (switch* *match*
+                    case tag 0:
+                     (before bytecomp/emitcode.ml(127):4174-4209
+                       (after bytecomp/emitcode.ml(127):4174-4209
+                         (apply (field 0 (global Misc!))
+                           "Emitcode.define_label")))
+                    case tag 1:
+                     (let (patchlist =a (field 0 *match*))
+                       (before bytecomp/emitcode.ml(129):4249-4337
+                         (seq
+                           (after bytecomp/emitcode.ml(129):4249-4278
+                             (apply (field 14 (global Stdlib__list!))
+                               backpatch patchlist))
+                           (before bytecomp/emitcode.ml(130):4286-4337
+                             (after bytecomp/emitcode.ml(130):4286-4337
+                               (array.set[addr] (field 0 label_table) lbl
+                                 (makeblock 0 (int) (field 0 out_position)))))))))))))))
+     out_label_with_orig =
+       (function orig[int] lbl[int]
+         (funct-body bytecomp/emitcode.ml(132)<ghost>:4363-4674
+           (before bytecomp/emitcode.ml(133):4376-4674
+             (seq
+               (if (>= lbl (array.length[addr] (field 0 label_table)))
+                 (before bytecomp/emitcode.ml(133):4417-4439
+                   (after bytecomp/emitcode.ml(133):4417-4439
+                     (apply extend_label_table lbl)))
+                 0a)
+               (before bytecomp/emitcode.ml(134):4443-4674
+                 (let
+                   (*match* =
+                      (after bytecomp/emitcode.ml(134):4449-4469
+                        (array.get[addr] (field 0 label_table) lbl)))
+                   (switch* *match*
+                    case tag 0:
+                     (let (def =a (field 0 *match*))
+                       (before bytecomp/emitcode.ml(136):4506-4533
+                         (after bytecomp/emitcode.ml(136):4506-4533
+                           (apply out_int (asr (- def orig) 2)))))
+                    case tag 1:
+                     (let (patchlist =a (field 0 *match*))
+                       (before bytecomp/emitcode.ml(138):4573-4674
+                         (seq
+                           (after bytecomp/emitcode.ml(138):4573-4657
+                             (array.set[addr] (field 0 label_table) lbl
+                               (makeblock 1
+                                 (makeblock 0
+                                   (makeblock 0 (int,int)
+                                     (field 0 out_position) orig)
+                                   patchlist))))
+                           (before bytecomp/emitcode.ml(140):4665-4674
+                             (after bytecomp/emitcode.ml(140):4665-4674
+                               (apply out_int 0)))))))))))))
+     out_label =
+       (function l[int]
+         (funct-body bytecomp/emitcode.ml(142)<ghost>:4690-4729
+           (before bytecomp/emitcode.ml(142):4694-4729
+             (after bytecomp/emitcode.ml(142):4694-4729
+               (apply out_label_with_orig (field 0 out_position) l)))))
+     reloc_info = (makemutable 0 0a)
+     enter =
+       (function info
+         (funct-body bytecomp/emitcode.ml(148)<ghost>:4824-4883
+           (before bytecomp/emitcode.ml(149):4833-4883
+             (setfield_ptr 0 reloc_info
+               (makeblock 0 (makeblock 0 (*,int) info (field 0 out_position))
+                 (field 0 reloc_info))))))
+     slot_for_literal =
+       (function sc
+         (funct-body bytecomp/emitcode.ml(151)<ghost>:4906-4950
+           (before bytecomp/emitcode.ml(152):4913-4950
+             (seq
+               (after bytecomp/emitcode.ml(152):4913-4937
+                 (apply enter (makeblock 0 sc)))
+               (before bytecomp/emitcode.ml(153):4941-4950
+                 (after bytecomp/emitcode.ml(153):4941-4950
+                   (apply out_int 0)))))))
+     slot_for_getglobal =
+       (function id
+         (funct-body bytecomp/emitcode.ml(154)<ghost>:4974-5020
+           (before bytecomp/emitcode.ml(155):4981-5020
+             (seq
+               (after bytecomp/emitcode.ml(155):4981-5007
+                 (apply enter (makeblock 1 id)))
+               (before bytecomp/emitcode.ml(156):5011-5020
+                 (after bytecomp/emitcode.ml(156):5011-5020
+                   (apply out_int 0)))))))
+     slot_for_setglobal =
+       (function id
+         (funct-body bytecomp/emitcode.ml(157)<ghost>:5044-5090
+           (before bytecomp/emitcode.ml(158):5051-5090
+             (seq
+               (after bytecomp/emitcode.ml(158):5051-5077
+                 (apply enter (makeblock 2 id)))
+               (before bytecomp/emitcode.ml(159):5081-5090
+                 (after bytecomp/emitcode.ml(159):5081-5090
+                   (apply out_int 0)))))))
+     slot_for_c_prim =
+       (function name
+         (funct-body bytecomp/emitcode.ml(160)<ghost>:5111-5161
+           (before bytecomp/emitcode.ml(161):5120-5161
+             (seq
+               (after bytecomp/emitcode.ml(161):5120-5148
+                 (apply enter (makeblock 3 name)))
+               (before bytecomp/emitcode.ml(162):5152-5161
+                 (after bytecomp/emitcode.ml(162):5152-5161
+                   (apply out_int 0)))))))
+     events = (makemutable 0 0a)
+     debug_dirs =
+       (makemutable 0
+         (field 0 (field 38 (field 3 (field 11 (global Misc!))))))
+     record_event =
+       (function ev
+         (funct-body bytecomp/emitcode.ml(169)<ghost>:5284-5687
+           (before bytecomp/emitcode.ml(170):5291-5687
+             (let (path = (field 0 (field 0 (field 2 ev))))
+               (before bytecomp/emitcode.ml(171):5353-5687
+                 (let
+                   (abspath =
+                      (after bytecomp/emitcode.ml(171):5367-5394
+                        (apply (field 16 (global Location!)) path)))
+                   (before bytecomp/emitcode.ml(172):5400-5687
+                     (seq
+                       (setfield_ptr 0 debug_dirs
+                         (after bytecomp/emitcode.ml(172):5414-5467
+                           (apply
+                             (field 3
+                               (field 38 (field 3 (field 11 (global Misc!)))))
+                             (after bytecomp/emitcode.ml(172):5429-5455
+                               (apply (field 13 (global Stdlib__filename!))
+                                 abspath))
+                             (field 0 debug_dirs))))
+                       (before bytecomp/emitcode.ml(173):5471-5687
+                         (seq
+                           (if
+                             (after bytecomp/emitcode.ml(173):5474-5499
+                               (apply (field 4 (global Stdlib__filename!))
+                                 path))
+                             (before bytecomp/emitcode.ml(173):5505-5630
+                               (let
+                                 (cwd =
+                                    (after bytecomp/emitcode.ml(174):5525-5571
+                                      (apply (field 15 (global Location!))
+                                        (after bytecomp/emitcode.ml(174):5556-5571
+                                          (caml_sys_getcwd 0a)))))
+                                 (before bytecomp/emitcode.ml(175):5579-5623
+                                   (setfield_ptr 0 debug_dirs
+                                     (after bytecomp/emitcode.ml(175):5593-5623
+                                       (apply
+                                         (field 3
+                                           (field 38
+                                             (field 3
+                                               (field 11 (global Misc!)))))
+                                         cwd (field 0 debug_dirs)))))))
+                             0a)
+                           (before bytecomp/emitcode.ml(177):5634-5687
+                             (seq (setfield_imm 0 ev (field 0 out_position))
+                               (before bytecomp/emitcode.ml(178):5664-5687
+                                 (setfield_ptr 0 events
+                                   (makeblock 0 ev (field 0 events))))))))))))))))
+     init =
+       (function param
+         (funct-body bytecomp/emitcode.ml(182)<ghost>:5720-5867
+           (before bytecomp/emitcode.ml(183):5727-5867
+             (seq (setfield_imm 0 out_position 0)
+               (before bytecomp/emitcode.ml(184):5748-5867
+                 (seq
+                   (setfield_ptr 0 label_table
+                     (after bytecomp/emitcode.ml(184):5763-5797
+                       (caml_make_vect 16 [1: 0a])))
+                   (before bytecomp/emitcode.ml(185):5801-5867
+                     (seq (setfield_ptr 0 reloc_info 0a)
+                       (before bytecomp/emitcode.ml(186):5821-5867
+                         (seq
+                           (setfield_ptr 0 debug_dirs
+                             (field 0
+                               (field 38 (field 3 (field 11 (global Misc!))))))
+                           (before bytecomp/emitcode.ml(187):5855-5867
+                             (setfield_ptr 0 events 0a))))))))))))
+     emit_comp =
+       (function param
+         (funct-body bytecomp/emitcode.ml(191):5920-6052
+           (switch* param
+            case int 0:
+             (before bytecomp/emitcode.ml(192):5938-5946
+               (after bytecomp/emitcode.ml(192):5938-5946
+                 (apply out (field 121 (global Opcodes!)))))
+            case int 1:
+             (before bytecomp/emitcode.ml(192):5959-5968
+               (after bytecomp/emitcode.ml(192):5959-5968
+                 (apply out (field 122 (global Opcodes!)))))
+            case int 2:
+             (before bytecomp/emitcode.ml(193):5978-5989
+               (after bytecomp/emitcode.ml(193):5978-5989
+                 (apply out (field 123 (global Opcodes!)))))
+            case int 3:
+             (before bytecomp/emitcode.ml(194):6020-6031
+               (after bytecomp/emitcode.ml(194):6020-6031
+                 (apply out (field 125 (global Opcodes!)))))
+            case int 4:
+             (before bytecomp/emitcode.ml(193):5999-6010
+               (after bytecomp/emitcode.ml(193):5999-6010
+                 (apply out (field 124 (global Opcodes!)))))
+            case int 5:
+             (before bytecomp/emitcode.ml(194):6041-6052
+               (after bytecomp/emitcode.ml(194):6041-6052
+                 (apply out (field 126 (global Opcodes!))))))))
+     emit_branch_comp =
+       (function param
+         (funct-body bytecomp/emitcode.ml(196):6077-6215
+           (switch* param
+            case int 0:
+             (before bytecomp/emitcode.ml(197):6095-6104
+               (after bytecomp/emitcode.ml(197):6095-6104
+                 (apply out (field 131 (global Opcodes!)))))
+            case int 1:
+             (before bytecomp/emitcode.ml(197):6117-6127
+               (after bytecomp/emitcode.ml(197):6117-6127
+                 (apply out (field 132 (global Opcodes!)))))
+            case int 2:
+             (before bytecomp/emitcode.ml(198):6137-6149
+               (after bytecomp/emitcode.ml(198):6137-6149
+                 (apply out (field 133 (global Opcodes!)))))
+            case int 3:
+             (before bytecomp/emitcode.ml(199):6181-6193
+               (after bytecomp/emitcode.ml(199):6181-6193
+                 (apply out (field 135 (global Opcodes!)))))
+            case int 4:
+             (before bytecomp/emitcode.ml(198):6159-6171
+               (after bytecomp/emitcode.ml(198):6159-6171
+                 (apply out (field 134 (global Opcodes!)))))
+            case int 5:
+             (before bytecomp/emitcode.ml(199):6203-6215
+               (after bytecomp/emitcode.ml(199):6203-6215
+                 (apply out (field 136 (global Opcodes!))))))))
+     emit_instr =
+       (function param
+         (funct-body bytecomp/emitcode.ml(201):6234-10601
+           (switch* param
+            case int 0:
+             (before bytecomp/emitcode.ml(210):6489-6499
+               (after bytecomp/emitcode.ml(210):6489-6499
+                 (apply out (field 9 (global Opcodes!)))))
+            case int 1:
+             (before bytecomp/emitcode.ml(222):6932-6945
+               (after bytecomp/emitcode.ml(222):6932-6945
+                 (apply out (field 41 (global Opcodes!)))))
+            case int 2:
+             (before bytecomp/emitcode.ml(265):8708-8724
+               (after bytecomp/emitcode.ml(265):8708-8724
+                 (apply out (field 79 (global Opcodes!)))))
+            case int 3:
+             (before bytecomp/emitcode.ml(266):8745-8762
+               (after bytecomp/emitcode.ml(266):8745-8762
+                 (apply out (field 80 (global Opcodes!)))))
+            case int 4:
+             (before bytecomp/emitcode.ml(267):8783-8800
+               (after bytecomp/emitcode.ml(267):8783-8800
+                 (apply out (field 81 (global Opcodes!)))))
+            case int 5:
+             (before bytecomp/emitcode.ml(268):8823-8842
+               (after bytecomp/emitcode.ml(268):8823-8842
+                 (apply out (field 148 (global Opcodes!)))))
+            case int 6:
+             (before bytecomp/emitcode.ml(269):8864-8882
+               (after bytecomp/emitcode.ml(269):8864-8882
+                 (apply out (field 82 (global Opcodes!)))))
+            case int 7:
+             (before bytecomp/emitcode.ml(270):8904-8922
+               (after bytecomp/emitcode.ml(270):8904-8922
+                 (apply out (field 83 (global Opcodes!)))))
+            case int 8:
+             (before bytecomp/emitcode.ml(282):9485-9498
+               (after bytecomp/emitcode.ml(282):9485-9498
+                 (apply out (field 88 (global Opcodes!)))))
+            case int 9:
+             (before bytecomp/emitcode.ml(284):9566-9579
+               (after bytecomp/emitcode.ml(284):9566-9579
+                 (apply out (field 90 (global Opcodes!)))))
+            case int 10:
+             (before bytecomp/emitcode.ml(288):9732-9751
+               (after bytecomp/emitcode.ml(288):9732-9751
+                 (apply out (field 92 (global Opcodes!)))))
+            case int 11:
+             (before bytecomp/emitcode.ml(293):9925-9937
+               (after bytecomp/emitcode.ml(293):9925-9937
+                 (apply out (field 109 (global Opcodes!)))))
+            case int 12:
+             (before bytecomp/emitcode.ml(293):9952-9964
+               (after bytecomp/emitcode.ml(293):9952-9964
+                 (apply out (field 110 (global Opcodes!)))))
+            case int 13:
+             (before bytecomp/emitcode.ml(294):9980-9992
+               (after bytecomp/emitcode.ml(294):9980-9992
+                 (apply out (field 111 (global Opcodes!)))))
+            case int 14:
+             (before bytecomp/emitcode.ml(294):10007-10019
+               (after bytecomp/emitcode.ml(294):10007-10019
+                 (apply out (field 112 (global Opcodes!)))))
+            case int 15:
+             (before bytecomp/emitcode.ml(295):10035-10047
+               (after bytecomp/emitcode.ml(295):10035-10047
+                 (apply out (field 113 (global Opcodes!)))))
+            case int 16:
+             (before bytecomp/emitcode.ml(295):10062-10074
+               (after bytecomp/emitcode.ml(295):10062-10074
+                 (apply out (field 114 (global Opcodes!)))))
+            case int 17:
+             (before bytecomp/emitcode.ml(296):10090-10102
+               (after bytecomp/emitcode.ml(296):10090-10102
+                 (apply out (field 115 (global Opcodes!)))))
+            case int 18:
+             (before bytecomp/emitcode.ml(296):10116-10127
+               (after bytecomp/emitcode.ml(296):10116-10127
+                 (apply out (field 116 (global Opcodes!)))))
+            case int 19:
+             (before bytecomp/emitcode.ml(297):10143-10155
+               (after bytecomp/emitcode.ml(297):10143-10155
+                 (apply out (field 117 (global Opcodes!)))))
+            case int 20:
+             (before bytecomp/emitcode.ml(297):10170-10182
+               (after bytecomp/emitcode.ml(297):10170-10182
+                 (apply out (field 118 (global Opcodes!)))))
+            case int 21:
+             (before bytecomp/emitcode.ml(298):10198-10210
+               (after bytecomp/emitcode.ml(298):10198-10210
+                 (apply out (field 119 (global Opcodes!)))))
+            case int 22:
+             (before bytecomp/emitcode.ml(298):10225-10237
+               (after bytecomp/emitcode.ml(298):10225-10237
+                 (apply out (field 120 (global Opcodes!)))))
+            case int 23:
+             (before bytecomp/emitcode.ml(302):10376-10387
+               (after bytecomp/emitcode.ml(302):10376-10387
+                 (apply out (field 129 (global Opcodes!)))))
+            case int 24:
+             (before bytecomp/emitcode.ml(303):10402-10414
+               (after bytecomp/emitcode.ml(303):10402-10414
+                 (apply out (field 137 (global Opcodes!)))))
+            case int 25:
+             (before bytecomp/emitcode.ml(304):10433-10448
+               (after bytecomp/emitcode.ml(304):10433-10448
+                 (apply out (field 130 (global Opcodes!)))))
+            case int 26:
+             (before bytecomp/emitcode.ml(306):10529-10544
+               (after bytecomp/emitcode.ml(306):10529-10544
+                 (apply out (field 142 (global Opcodes!)))))
+            case int 27:
+             (before bytecomp/emitcode.ml(308):10591-10601
+               (after bytecomp/emitcode.ml(308):10591-10601
+                 (apply out (field 143 (global Opcodes!)))))
+            case tag 0:
+             (let (lbl =a (field 0 param))
+               (before bytecomp/emitcode.ml(202):6261-6277
+                 (after bytecomp/emitcode.ml(202):6261-6277
+                   (apply define_label lbl))))
+            case tag 1:
+             (let (n =a (field 0 param))
+               (before bytecomp/emitcode.ml(204):6298-6355
+                 (if (< n 8)
+                   (before bytecomp/emitcode.ml(204):6312-6327
+                     (after bytecomp/emitcode.ml(204):6312-6327
+                       (apply out (+ (field 0 (global Opcodes!)) n))))
+                   (before bytecomp/emitcode.ml(204):6333-6355
+                     (seq
+                       (after bytecomp/emitcode.ml(204):6334-6343
+                         (apply out (field 8 (global Opcodes!))))
+                       (before bytecomp/emitcode.ml(204):6345-6354
+                         (after bytecomp/emitcode.ml(204):6345-6354
+                           (apply out_int n))))))))
+            case tag 2:
+             (let (n =a (field 0 param))
+               (before bytecomp/emitcode.ml(206):6379-6469
+                 (if (&& (>= n 1) (<= n 4))
+                   (before bytecomp/emitcode.ml(207):6410-6432
+                     (after bytecomp/emitcode.ml(207):6410-6432
+                       (apply out (- (+ (field 21 (global Opcodes!)) n) 1))))
+                   (before bytecomp/emitcode.ml(208):6444-6469
+                     (seq
+                       (after bytecomp/emitcode.ml(208):6445-6457
+                         (apply out (field 25 (global Opcodes!))))
+                       (before bytecomp/emitcode.ml(208):6459-6468
+                         (after bytecomp/emitcode.ml(208):6459-6468
+                           (apply out_int n))))))))
+            case tag 3:
+             (let (n =a (field 0 param))
+               (before bytecomp/emitcode.ml(212):6520-6540
+                 (seq
+                   (after bytecomp/emitcode.ml(212):6520-6529
+                     (apply out (field 19 (global Opcodes!))))
+                   (before bytecomp/emitcode.ml(212):6531-6540
+                     (after bytecomp/emitcode.ml(212):6531-6540
+                       (apply out_int n))))))
+            case tag 4:
+             (let (n =a (field 0 param))
+               (before bytecomp/emitcode.ml(214):6564-6587
+                 (seq
+                   (after bytecomp/emitcode.ml(214):6564-6576
+                     (apply out (field 20 (global Opcodes!))))
+                   (before bytecomp/emitcode.ml(214):6578-6587
+                     (after bytecomp/emitcode.ml(214):6578-6587
+                       (apply out_int n))))))
+            case tag 5:
+             (let (lbl =a (field 0 param))
+               (before bytecomp/emitcode.ml(215):6613-6646
+                 (seq
+                   (after bytecomp/emitcode.ml(215):6613-6631
+                     (apply out (field 31 (global Opcodes!))))
+                   (before bytecomp/emitcode.ml(215):6633-6646
+                     (after bytecomp/emitcode.ml(215):6633-6646
+                       (apply out_label lbl))))))
+            case tag 6:
+             (let (n =a (field 0 param))
+               (before bytecomp/emitcode.ml(217):6669-6734
+                 (if (< n 4)
+                   (before bytecomp/emitcode.ml(217):6683-6704
+                     (after bytecomp/emitcode.ml(217):6683-6704
+                       (apply out (- (+ (field 33 (global Opcodes!)) n) 1))))
+                   (before bytecomp/emitcode.ml(217):6710-6734
+                     (seq
+                       (after bytecomp/emitcode.ml(217):6711-6722
+                         (apply out (field 32 (global Opcodes!))))
+                       (before bytecomp/emitcode.ml(217):6724-6733
+                         (after bytecomp/emitcode.ml(217):6724-6733
+                           (apply out_int n))))))))
+            case tag 7:
+             (let (sz =a (field 1 param) n =a (field 0 param))
+               (before bytecomp/emitcode.ml(219):6764-6874
+                 (if (< n 4)
+                   (before bytecomp/emitcode.ml(219):6778-6815
+                     (seq
+                       (after bytecomp/emitcode.ml(219):6779-6802
+                         (apply out (- (+ (field 37 (global Opcodes!)) n) 1)))
+                       (before bytecomp/emitcode.ml(219):6804-6814
+                         (after bytecomp/emitcode.ml(219):6804-6814
+                           (apply out_int sz)))))
+                   (before bytecomp/emitcode.ml(220):6836-6874
+                     (seq
+                       (after bytecomp/emitcode.ml(220):6837-6850
+                         (apply out (field 36 (global Opcodes!))))
+                       (before bytecomp/emitcode.ml(220):6852-6873
+                         (seq
+                           (after bytecomp/emitcode.ml(220):6852-6861
+                             (apply out_int n))
+                           (before bytecomp/emitcode.ml(220):6863-6873
+                             (after bytecomp/emitcode.ml(220):6863-6873
+                               (apply out_int sz))))))))))
+            case tag 8:
+             (let (n =a (field 0 param))
+               (before bytecomp/emitcode.ml(221):6892-6915
+                 (seq
+                   (after bytecomp/emitcode.ml(221):6892-6904
+                     (apply out (field 40 (global Opcodes!))))
+                   (before bytecomp/emitcode.ml(221):6906-6915
+                     (after bytecomp/emitcode.ml(221):6906-6915
+                       (apply out_int n))))))
+            case tag 9:
+             (let (n =a (field 0 param))
+               (before bytecomp/emitcode.ml(223):6961-6982
+                 (seq
+                   (after bytecomp/emitcode.ml(223):6961-6971
+                     (apply out (field 42 (global Opcodes!))))
+                   (before bytecomp/emitcode.ml(223):6973-6982
+                     (after bytecomp/emitcode.ml(223):6973-6982
+                       (apply out_int n))))))
+            case tag 10:
+             (let (n =a (field 1 param) lbl =a (field 0 param))
+               (before bytecomp/emitcode.ml(224):7007-7046
+                 (seq
+                   (after bytecomp/emitcode.ml(224):7007-7020
+                     (apply out (field 43 (global Opcodes!))))
+                   (before bytecomp/emitcode.ml(224):7022-7046
+                     (seq
+                       (after bytecomp/emitcode.ml(224):7022-7031
+                         (apply out_int n))
+                       (before bytecomp/emitcode.ml(224):7033-7046
+                         (after bytecomp/emitcode.ml(224):7033-7046
+                           (apply out_label lbl))))))))
+            case tag 11:
+             (let (n =a (field 1 param) lbls =a (field 0 param))
+               (before bytecomp/emitcode.ml(226):7081-7217
+                 (seq
+                   (after bytecomp/emitcode.ml(226):7081-7097
+                     (apply out (field 44 (global Opcodes!))))
+                   (before bytecomp/emitcode.ml(226):7099-7217
+                     (seq
+                       (after bytecomp/emitcode.ml(226):7099-7125
+                         (apply out_int
+                           (after bytecomp/emitcode.ml(226):7107-7125
+                             (apply (field 0 (global Stdlib__list!)) lbls))))
+                       (before bytecomp/emitcode.ml(226):7127-7217
+                         (seq
+                           (after bytecomp/emitcode.ml(226):7127-7136
+                             (apply out_int n))
+                           (before bytecomp/emitcode.ml(227):7144-7217
+                             (let (org =[int] (field 0 out_position))
+                               (before bytecomp/emitcode.ml(228):7177-7217
+                                 (after bytecomp/emitcode.ml(228):7177-7217
+                                   (apply (field 14 (global Stdlib__list!))
+                                     (after bytecomp/emitcode.ml(228):7187-7212
+                                       (apply out_label_with_orig org))
+                                     lbls))))))))))))
+            case tag 12:
+             (let (ofs =a (field 0 param))
+               (before bytecomp/emitcode.ml(230):7250-7373
+                 (if (|| (== ofs -2) (|| (== ofs 0) (== ofs 2)))
+                   (before bytecomp/emitcode.ml(231):7295-7327
+                     (after bytecomp/emitcode.ml(231):7295-7327
+                       (apply out (+ (field 46 (global Opcodes!)) (/ ofs 2)))))
+                   (before bytecomp/emitcode.ml(232):7339-7373
+                     (seq
+                       (after bytecomp/emitcode.ml(232):7340-7359
+                         (apply out (field 48 (global Opcodes!))))
+                       (before bytecomp/emitcode.ml(232):7361-7372
+                         (after bytecomp/emitcode.ml(232):7361-7372
+                           (apply out_int ofs))))))))
+            case tag 13:
+             (let (q =a (field 0 param))
+               (before bytecomp/emitcode.ml(233):7394-7431
+                 (seq
+                   (after bytecomp/emitcode.ml(233):7394-7409
+                     (apply out (field 53 (global Opcodes!))))
+                   (before bytecomp/emitcode.ml(233):7411-7431
+                     (after bytecomp/emitcode.ml(233):7411-7431
+                       (apply slot_for_getglobal q))))))
+            case tag 14:
+             (let (q =a (field 0 param))
+               (before bytecomp/emitcode.ml(234):7452-7489
+                 (seq
+                   (after bytecomp/emitcode.ml(234):7452-7467
+                     (apply out (field 57 (global Opcodes!))))
+                   (before bytecomp/emitcode.ml(234):7469-7489
+                     (after bytecomp/emitcode.ml(234):7469-7489
+                       (apply slot_for_setglobal q))))))
+            case tag 15:
+             (let (sc =a (field 0 param))
+               (before bytecomp/emitcode.ml(236):7513-8073
+                 (catch
+                   (switch* sc
+                    case tag 0:
+                     (let (*match* =a (field 0 sc))
+                       (switch *match*
+                        case tag 0:
+                         (let (i =a (field 0 *match*))
+                           (before bytecomp/emitcode.ml(237):7570-7580
+                             (if
+                               (after bytecomp/emitcode.ml(237):7570-7580
+                                 (apply is_immed i))
+                               (before bytecomp/emitcode.ml(238):7594-7690
+                                 (if (&& (>= i 0) (<= i 3))
+                                   (before bytecomp/emitcode.ml(239):7629-7647
+                                     (after bytecomp/emitcode.ml(239):7629-7647
+                                       (apply out
+                                         (+ (field 99 (global Opcodes!)) i))))
+                                   (before bytecomp/emitcode.ml(240):7663-7690
+                                     (seq
+                                       (after bytecomp/emitcode.ml(240):7664-7678
+                                         (apply out
+                                           (field 103 (global Opcodes!))))
+                                       (before bytecomp/emitcode.ml(240):7680-7689
+                                         (after bytecomp/emitcode.ml(240):7680-7689
+                                           (apply out_int i)))))))
+                               (exit 6))))
+                        case tag 1:
+                         (let (c =a (field 0 *match*))
+                           (before bytecomp/emitcode.ml(242):7737-7774
+                             (seq
+                               (after bytecomp/emitcode.ml(242):7737-7751
+                                 (apply out (field 103 (global Opcodes!))))
+                               (before bytecomp/emitcode.ml(242):7753-7774
+                                 (after bytecomp/emitcode.ml(242):7753-7774
+                                   (apply out_int c))))))
+                        default: (exit 6)))
+                    case tag 1:
+                     (let (i =a (field 0 sc))
+                       (before bytecomp/emitcode.ml(244):7812-7908
+                         (if (&& (>= i 0) (<= i 3))
+                           (before bytecomp/emitcode.ml(245):7847-7865
+                             (after bytecomp/emitcode.ml(245):7847-7865
+                               (apply out (+ (field 99 (global Opcodes!)) i))))
+                           (before bytecomp/emitcode.ml(246):7881-7908
+                             (seq
+                               (after bytecomp/emitcode.ml(246):7882-7896
+                                 (apply out (field 103 (global Opcodes!))))
+                               (before bytecomp/emitcode.ml(246):7898-7907
+                                 (after bytecomp/emitcode.ml(246):7898-7907
+                                   (apply out_int i))))))))
+                    case tag 2:
+                     (let (*match* =a (field 1 sc))
+                       (if *match* (exit 6)
+                         (let (t =a (field 0 sc))
+                           (before bytecomp/emitcode.ml(248):7949-8003
+                             (if (== t 0)
+                               (before bytecomp/emitcode.ml(248):7963-7974
+                                 (after bytecomp/emitcode.ml(248):7963-7974
+                                   (apply out (field 58 (global Opcodes!)))))
+                               (before bytecomp/emitcode.ml(248):7980-8003
+                                 (seq
+                                   (after bytecomp/emitcode.ml(248):7981-7991
+                                     (apply out (field 59 (global Opcodes!))))
+                                   (before bytecomp/emitcode.ml(248):7993-8002
+                                     (after bytecomp/emitcode.ml(248):7993-8002
+                                       (apply out_int t))))))))))
+                    case tag 3: (exit 6)
+                    case tag 4: (exit 6))
+                  with (6)
+                   (before bytecomp/emitcode.ml(250):8027-8063
+                     (seq
+                       (after bytecomp/emitcode.ml(250):8027-8042
+                         (apply out (field 53 (global Opcodes!))))
+                       (before bytecomp/emitcode.ml(250):8044-8063
+                         (after bytecomp/emitcode.ml(250):8044-8063
+                           (apply slot_for_literal sc))))))))
+            case tag 16:
+             (let (t =a (field 1 param) n =a (field 0 param))
+               (before bytecomp/emitcode.ml(253):8104-8295
+                 (if (== n 0)
+                   (before bytecomp/emitcode.ml(254):8126-8180
+                     (if (== t 0)
+                       (before bytecomp/emitcode.ml(254):8140-8151
+                         (after bytecomp/emitcode.ml(254):8140-8151
+                           (apply out (field 58 (global Opcodes!)))))
+                       (before bytecomp/emitcode.ml(254):8157-8180
+                         (seq
+                           (after bytecomp/emitcode.ml(254):8158-8168
+                             (apply out (field 59 (global Opcodes!))))
+                           (before bytecomp/emitcode.ml(254):8170-8179
+                             (after bytecomp/emitcode.ml(254):8170-8179
+                               (apply out_int t)))))))
+                   (before bytecomp/emitcode.ml(255):8192-8295
+                     (if (< n 4)
+                       (before bytecomp/emitcode.ml(255):8206-8244
+                         (seq
+                           (after bytecomp/emitcode.ml(255):8207-8232
+                             (apply out
+                               (- (+ (field 63 (global Opcodes!)) n) 1)))
+                           (before bytecomp/emitcode.ml(255):8234-8243
+                             (after bytecomp/emitcode.ml(255):8234-8243
+                               (apply out_int t)))))
+                       (before bytecomp/emitcode.ml(256):8256-8295
+                         (seq
+                           (after bytecomp/emitcode.ml(256):8257-8272
+                             (apply out (field 62 (global Opcodes!))))
+                           (before bytecomp/emitcode.ml(256):8274-8294
+                             (seq
+                               (after bytecomp/emitcode.ml(256):8274-8283
+                                 (apply out_int n))
+                               (before bytecomp/emitcode.ml(256):8285-8294
+                                 (after bytecomp/emitcode.ml(256):8285-8294
+                                   (apply out_int t))))))))))))
+            case tag 17:
+             (let (n =a (field 0 param))
+               (before bytecomp/emitcode.ml(262):8514-8578
+                 (if (== n 0)
+                   (before bytecomp/emitcode.ml(262):8528-8539
+                     (after bytecomp/emitcode.ml(262):8528-8539
+                       (apply out (field 58 (global Opcodes!)))))
+                   (before bytecomp/emitcode.ml(262):8545-8578
+                     (seq
+                       (after bytecomp/emitcode.ml(262):8546-8566
+                         (apply out (field 66 (global Opcodes!))))
+                       (before bytecomp/emitcode.ml(262):8568-8577
+                         (after bytecomp/emitcode.ml(262):8568-8577
+                           (apply out_int n))))))))
+            case tag 18:
+             (let (n =a (field 0 param))
+               (before bytecomp/emitcode.ml(258):8321-8388
+                 (if (< n 4)
+                   (before bytecomp/emitcode.ml(258):8335-8355
+                     (after bytecomp/emitcode.ml(258):8335-8355
+                       (apply out (+ (field 67 (global Opcodes!)) n))))
+                   (before bytecomp/emitcode.ml(258):8361-8388
+                     (seq
+                       (after bytecomp/emitcode.ml(258):8362-8376
+                         (apply out (field 71 (global Opcodes!))))
+                       (before bytecomp/emitcode.ml(258):8378-8387
+                         (after bytecomp/emitcode.ml(258):8378-8387
+                           (apply out_int n))))))))
+            case tag 19:
+             (let (n =a (field 0 param))
+               (before bytecomp/emitcode.ml(260):8414-8481
+                 (if (< n 4)
+                   (before bytecomp/emitcode.ml(260):8428-8448
+                     (after bytecomp/emitcode.ml(260):8428-8448
+                       (apply out (+ (field 73 (global Opcodes!)) n))))
+                   (before bytecomp/emitcode.ml(260):8454-8481
+                     (seq
+                       (after bytecomp/emitcode.ml(260):8455-8469
+                         (apply out (field 77 (global Opcodes!))))
+                       (before bytecomp/emitcode.ml(260):8471-8480
+                         (after bytecomp/emitcode.ml(260):8471-8480
+                           (apply out_int n))))))))
+            case tag 20:
+             (let (n =a (field 0 param))
+               (before bytecomp/emitcode.ml(263):8603-8633
+                 (seq
+                   (after bytecomp/emitcode.ml(263):8603-8622
+                     (apply out (field 72 (global Opcodes!))))
+                   (before bytecomp/emitcode.ml(263):8624-8633
+                     (after bytecomp/emitcode.ml(263):8624-8633
+                       (apply out_int n))))))
+            case tag 21:
+             (let (n =a (field 0 param))
+               (before bytecomp/emitcode.ml(264):8658-8688
+                 (seq
+                   (after bytecomp/emitcode.ml(264):8658-8677
+                     (apply out (field 78 (global Opcodes!))))
+                   (before bytecomp/emitcode.ml(264):8679-8688
+                     (after bytecomp/emitcode.ml(264):8679-8688
+                       (apply out_int n))))))
+            case tag 22:
+             (let (lbl =a (field 0 param))
+               (before bytecomp/emitcode.ml(271):8942-8969
+                 (seq
+                   (after bytecomp/emitcode.ml(271):8942-8954
+                     (apply out (field 84 (global Opcodes!))))
+                   (before bytecomp/emitcode.ml(271):8956-8969
+                     (after bytecomp/emitcode.ml(271):8956-8969
+                       (apply out_label lbl))))))
+            case tag 23:
+             (let (lbl =a (field 0 param))
+               (before bytecomp/emitcode.ml(272):8991-9020
+                 (seq
+                   (after bytecomp/emitcode.ml(272):8991-9005
+                     (apply out (field 85 (global Opcodes!))))
+                   (before bytecomp/emitcode.ml(272):9007-9020
+                     (after bytecomp/emitcode.ml(272):9007-9020
+                       (apply out_label lbl))))))
+            case tag 24:
+             (let (lbl =a (field 0 param))
+               (before bytecomp/emitcode.ml(273):9045-9077
+                 (seq
+                   (after bytecomp/emitcode.ml(273):9045-9062
+                     (apply out (field 86 (global Opcodes!))))
+                   (before bytecomp/emitcode.ml(273):9064-9077
+                     (after bytecomp/emitcode.ml(273):9064-9077
+                       (apply out_label lbl))))))
+            case tag 25:
+             (let (lbl =a (field 0 param))
+               (before bytecomp/emitcode.ml(274):9105-9134
+                 (seq
+                   (after bytecomp/emitcode.ml(274):9105-9119
+                     (apply out (field 85 (global Opcodes!))))
+                   (before bytecomp/emitcode.ml(274):9121-9134
+                     (after bytecomp/emitcode.ml(274):9121-9134
+                       (apply out_label lbl))))))
+            case tag 26:
+             (let (lbl =a (field 0 param))
+               (before bytecomp/emitcode.ml(275):9165-9197
+                 (seq
+                   (after bytecomp/emitcode.ml(275):9165-9182
+                     (apply out (field 86 (global Opcodes!))))
+                   (before bytecomp/emitcode.ml(275):9184-9197
+                     (after bytecomp/emitcode.ml(275):9184-9197
+                       (apply out_label lbl))))))
+            case tag 27:
+             (let (tbl_block =a (field 1 param) tbl_const =a (field 0 param))
+               (before bytecomp/emitcode.ml(277):9241-9468
+                 (seq
+                   (after bytecomp/emitcode.ml(277):9241-9253
+                     (apply out (field 87 (global Opcodes!))))
+                   (before bytecomp/emitcode.ml(278):9261-9468
+                     (seq
+                       (after bytecomp/emitcode.ml(278):9261-9327
+                         (apply out_int
+                           (+ (array.length[int] tbl_const)
+                             (lsl (array.length[int] tbl_block) 16))))
+                       (before bytecomp/emitcode.ml(279):9335-9468
+                         (let (org =[int] (field 0 out_position))
+                           (before bytecomp/emitcode.ml(280):9368-9468
+                             (seq
+                               (after bytecomp/emitcode.ml(280):9368-9414
+                                 (apply (field 12 (global Stdlib__array!))
+                                   (after bytecomp/emitcode.ml(280):9379-9404
+                                     (apply out_label_with_orig org))
+                                   tbl_const))
+                               (before bytecomp/emitcode.ml(281):9422-9468
+                                 (after bytecomp/emitcode.ml(281):9422-9468
+                                   (apply (field 12 (global Stdlib__array!))
+                                     (after bytecomp/emitcode.ml(281):9433-9458
+                                       (apply out_label_with_orig org))
+                                     tbl_block))))))))))))
+            case tag 28:
+             (let (lbl =a (field 0 param))
+               (before bytecomp/emitcode.ml(283):9520-9549
+                 (seq
+                   (after bytecomp/emitcode.ml(283):9520-9534
+                     (apply out (field 89 (global Opcodes!))))
+                   (before bytecomp/emitcode.ml(283):9536-9549
+                     (after bytecomp/emitcode.ml(283):9536-9549
+                       (apply out_label lbl))))))
+            case tag 29:
+             (let (*match* =a (field 0 param))
+               (switch* *match*
+                case int 0:
+                 (before bytecomp/emitcode.ml(285):9608-9619
+                   (after bytecomp/emitcode.ml(285):9608-9619
+                     (apply out (field 91 (global Opcodes!)))))
+                case int 1:
+                 (before bytecomp/emitcode.ml(286):9648-9661
+                   (after bytecomp/emitcode.ml(286):9648-9661
+                     (apply out (field 146 (global Opcodes!)))))
+                case int 2:
+                 (before bytecomp/emitcode.ml(287):9690-9709
+                   (after bytecomp/emitcode.ml(287):9690-9709
+                     (apply out (field 147 (global Opcodes!)))))))
+            case tag 30:
+             (let (n =a (field 1 param) name =a (field 0 param))
+               (before bytecomp/emitcode.ml(290):9781-9909
+                 (if (<= n 5)
+                   (before bytecomp/emitcode.ml(291):9802-9849
+                     (seq
+                       (after bytecomp/emitcode.ml(291):9803-9826
+                         (apply out (- (+ (field 93 (global Opcodes!)) n) 1)))
+                       (before bytecomp/emitcode.ml(291):9828-9848
+                         (after bytecomp/emitcode.ml(291):9828-9848
+                           (apply slot_for_c_prim name)))))
+                   (before bytecomp/emitcode.ml(292):9861-9909
+                     (seq
+                       (after bytecomp/emitcode.ml(292):9862-9875
+                         (apply out (field 98 (global Opcodes!))))
+                       (before bytecomp/emitcode.ml(292):9877-9908
+                         (seq
+                           (after bytecomp/emitcode.ml(292):9877-9886
+                             (apply out_int n))
+                           (before bytecomp/emitcode.ml(292):9888-9908
+                             (after bytecomp/emitcode.ml(292):9888-9908
+                               (apply slot_for_c_prim name))))))))))
+            case tag 31:
+             (let (c =a (field 0 param))
+               (before bytecomp/emitcode.ml(299):10256-10267
+                 (after bytecomp/emitcode.ml(299):10256-10267
+                   (apply emit_comp c))))
+            case tag 32:
+             (let (n =a (field 0 param))
+               (before bytecomp/emitcode.ml(300):10288-10314
+                 (seq
+                   (after bytecomp/emitcode.ml(300):10288-10303
+                     (apply out (field 127 (global Opcodes!))))
+                   (before bytecomp/emitcode.ml(300):10305-10314
+                     (after bytecomp/emitcode.ml(300):10305-10314
+                       (apply out_int n))))))
+            case tag 33:
+             (let (n =a (field 0 param))
+               (before bytecomp/emitcode.ml(301):10335-10361
+                 (seq
+                   (after bytecomp/emitcode.ml(301):10335-10350
+                     (apply out (field 128 (global Opcodes!))))
+                   (before bytecomp/emitcode.ml(301):10352-10361
+                     (after bytecomp/emitcode.ml(301):10352-10361
+                       (apply out_int n))))))
+            case tag 34:
+             (let (tag =a (field 0 param))
+               (before bytecomp/emitcode.ml(305):10471-10510
+                 (seq
+                   (after bytecomp/emitcode.ml(305):10471-10486
+                     (apply out (field 141 (global Opcodes!))))
+                   (before bytecomp/emitcode.ml(305):10488-10510
+                     (seq
+                       (after bytecomp/emitcode.ml(305):10488-10499
+                         (apply out_int tag))
+                       (before bytecomp/emitcode.ml(305):10501-10510
+                         (after bytecomp/emitcode.ml(305):10501-10510
+                           (apply out_int 0))))))))
+            case tag 35:
+             (let (ev =a (field 0 param))
+               (before bytecomp/emitcode.ml(307):10562-10577
+                 (after bytecomp/emitcode.ml(307):10562-10577
+                   (apply record_event ev)))))))
+     remerge_events =
+       (function ev1 c
+         (funct-body bytecomp/emitcode.ml(312)<ghost>:10701-10810
+           (catch
+             (if c
+               (let (*match* =a (field 0 c))
+                 (switch *match*
+                  case tag 35:
+                   (let (c =a (field 1 c) ev2 =a (field 0 *match*))
+                     (before bytecomp/emitcode.ml(314):10743-10785
+                       (makeblock 0
+                         (makeblock 35
+                           (after bytecomp/emitcode.ml(314):10750-10780
+                             (apply (field 3 (global Bytegen!)) ev1 ev2)))
+                         c)))
+                  default: (exit 7)))
+               (exit 7))
+            with (7)
+             (before bytecomp/emitcode.ml(315):10795-10810
+               (makeblock 0 (makeblock 35 ev1) c))))))
+    (letrec
+      (emit
+         (function param
+           (funct-body bytecomp/emitcode.ml(317):10827-13718
+             (if param
+               (let (instr =a (field 0 param))
+                 (catch
+                   (switch instr
+                    case int 0:
+                     (let (*match* =a (field 1 param))
+                       (if *match*
+                         (let (*match* =a (field 0 *match*))
+                           (switch *match*
+                            case tag 1:
+                             (let (n =a (field 0 *match*))
+                               (catch
+                                 (if (!= n 0) (exit 10)
+                                   (let (*match* =a (field 1 *match*))
+                                     (if *match*
+                                       (let (*match* =a (field 0 *match*))
+                                         (switch *match*
+                                          case tag 8:
+                                           (let
+                                             (c =a (field 1 *match*)
+                                              m =a (field 0 *match*))
+                                             (before bytecomp/emitcode.ml(348):11780-11805
+                                               (after bytecomp/emitcode.ml(348):11780-11805
+                                                 (apply emit
+                                                   (makeblock 0
+                                                     (makeblock 8 (int)
+                                                       (- m 1))
+                                                     c)))))
+                                          default: (exit 10)))
+                                       (exit 10))))
+                                with (10)
+                                 (let (c =a (field 1 *match*))
+                                   (before bytecomp/emitcode.ml(351):11878-11957
+                                     (seq
+                                       (if (< n 8)
+                                         (before bytecomp/emitcode.ml(351):11892-11911
+                                           (after bytecomp/emitcode.ml(351):11892-11911
+                                             (apply out
+                                               (+
+                                                 (field 10 (global Opcodes!))
+                                                 n))))
+                                         (before bytecomp/emitcode.ml(351):11917-11943
+                                           (seq
+                                             (after bytecomp/emitcode.ml(351):11918-11931
+                                               (apply out
+                                                 (field 18 (global Opcodes!))))
+                                             (before bytecomp/emitcode.ml(351):11933-11942
+                                               (after bytecomp/emitcode.ml(351):11933-11942
+                                                 (apply out_int n))))))
+                                       (before bytecomp/emitcode.ml(352):11951-11957
+                                         (after bytecomp/emitcode.ml(352):11951-11957
+                                           (apply emit c))))))))
+                            case tag 2:
+                             (let
+                               (c =a (field 1 *match*)
+                                n =a (field 0 *match*))
+                               (before bytecomp/emitcode.ml(354):11995-12106
+                                 (seq
+                                   (if (&& (>= n 1) (< n 4))
+                                     (before bytecomp/emitcode.ml(355):12025-12051
+                                       (after bytecomp/emitcode.ml(355):12025-12051
+                                         (apply out
+                                           (-
+                                             (+ (field 26 (global Opcodes!))
+                                               n)
+                                             1))))
+                                     (before bytecomp/emitcode.ml(356):12063-12092
+                                       (seq
+                                         (after bytecomp/emitcode.ml(356):12064-12080
+                                           (apply out
+                                             (field 30 (global Opcodes!))))
+                                         (before bytecomp/emitcode.ml(356):12082-12091
+                                           (after bytecomp/emitcode.ml(356):12082-12091
+                                             (apply out_int n))))))
+                                   (before bytecomp/emitcode.ml(357):12100-12106
+                                     (after bytecomp/emitcode.ml(357):12100-12106
+                                       (apply emit c))))))
+                            case tag 12:
+                             (let
+                               (c =a (field 1 *match*)
+                                ofs =a (field 0 *match*))
+                               (before bytecomp/emitcode.ml(359):12153-12297
+                                 (seq
+                                   (if
+                                     (|| (== ofs -2)
+                                       (|| (== ofs 0) (== ofs 2)))
+                                     (before bytecomp/emitcode.ml(360):12198-12233
+                                       (after bytecomp/emitcode.ml(360):12198-12233
+                                         (apply out
+                                           (+ (field 50 (global Opcodes!))
+                                             (/ ofs 2)))))
+                                     (before bytecomp/emitcode.ml(361):12245-12283
+                                       (seq
+                                         (after bytecomp/emitcode.ml(361):12246-12269
+                                           (apply out
+                                             (field 52 (global Opcodes!))))
+                                         (before bytecomp/emitcode.ml(361):12271-12282
+                                           (after bytecomp/emitcode.ml(361):12271-12282
+                                             (apply out_int ofs))))))
+                                   (before bytecomp/emitcode.ml(362):12291-12297
+                                     (after bytecomp/emitcode.ml(362):12291-12297
+                                       (apply emit c))))))
+                            case tag 13:
+                             (let
+                               (c =a (field 1 *match*)
+                                id =a (field 0 *match*))
+                               (catch
+                                 (if c
+                                   (let (*match* =a (field 0 c))
+                                     (switch *match*
+                                      case tag 18:
+                                       (let
+                                         (c =a (field 1 c)
+                                          n =a (field 0 *match*))
+                                         (before bytecomp/emitcode.ml(364):12354-12420
+                                           (seq
+                                             (after bytecomp/emitcode.ml(364):12354-12378
+                                               (apply out
+                                                 (field 56 (global Opcodes!))))
+                                             (before bytecomp/emitcode.ml(364):12380-12420
+                                               (seq
+                                                 (after bytecomp/emitcode.ml(364):12380-12401
+                                                   (apply slot_for_getglobal
+                                                     id))
+                                                 (before bytecomp/emitcode.ml(364):12403-12420
+                                                   (seq
+                                                     (after bytecomp/emitcode.ml(364):12403-12412
+                                                       (apply out_int n))
+                                                     (before bytecomp/emitcode.ml(364):12414-12420
+                                                       (after bytecomp/emitcode.ml(364):12414-12420
+                                                         (apply emit c))))))))))
+                                      default: (exit 11)))
+                                   (exit 11))
+                                with (11)
+                                 (let (id =a id)
+                                   (before bytecomp/emitcode.ml(366):12462-12512
+                                     (seq
+                                       (after bytecomp/emitcode.ml(366):12462-12481
+                                         (apply out
+                                           (field 54 (global Opcodes!))))
+                                       (before bytecomp/emitcode.ml(366):12483-12512
+                                         (seq
+                                           (after bytecomp/emitcode.ml(366):12483-12504
+                                             (apply slot_for_getglobal id))
+                                           (before bytecomp/emitcode.ml(366):12506-12512
+                                             (after bytecomp/emitcode.ml(366):12506-12512
+                                               (apply emit c))))))))))
+                            case tag 15:
+                             (let
+                               (c =a (field 1 *match*)
+                                k =a (field 0 *match*))
+                               (catch
+                                 (if c
+                                   (let (*match* =a (field 0 c))
+                                     (switch *match*
+                                      case int 24:
+                                       (let (*match* =a (field 1 c))
+                                         (if *match*
+                                           (let
+                                             (*match* =a (field 0 *match*))
+                                             (switch *match*
+                                              case tag 23:
+                                               (let
+                                                 (k =a k
+                                                  rem =a (field 1 *match*)
+                                                  lbl =a (field 0 *match*))
+                                                 (before bytecomp/emitcode.ml(335):11383-11399
+                                                   (if
+                                                     (after bytecomp/emitcode.ml(335):11383-11399
+                                                       (apply is_immed_const
+                                                         k))
+                                                     (before bytecomp/emitcode.ml(336):11411-11489
+                                                       (seq
+                                                         (after bytecomp/emitcode.ml(336):11411-11424
+                                                           (apply out
+                                                             (field 139
+                                                               (global Opcodes!))))
+                                                         (before bytecomp/emitcode.ml(337):11435-11489
+                                                           (seq
+                                                             (after bytecomp/emitcode.ml(337):11435-11446
+                                                               (apply
+                                                                 out_const k))
+                                                             (before bytecomp/emitcode.ml(338):11457-11489
+                                                               (seq
+                                                                 (after bytecomp/emitcode.ml(338):11457-11470
+                                                                   (apply
+                                                                    out_label
+                                                                    lbl))
+                                                                 (before bytecomp/emitcode.ml(339):11481-11489
+                                                                   (after bytecomp/emitcode.ml(339):11481-11489
+                                                                    (apply
+                                                                    emit rem)))))))))
+                                                     (exit 12))))
+                                              case tag 24:
+                                               (let
+                                                 (k =a k
+                                                  rem =a (field 1 *match*)
+                                                  lbl =a (field 0 *match*))
+                                                 (before bytecomp/emitcode.ml(341):11552-11568
+                                                   (if
+                                                     (after bytecomp/emitcode.ml(341):11552-11568
+                                                       (apply is_immed_const
+                                                         k))
+                                                     (before bytecomp/emitcode.ml(342):11580-11658
+                                                       (seq
+                                                         (after bytecomp/emitcode.ml(342):11580-11593
+                                                           (apply out
+                                                             (field 140
+                                                               (global Opcodes!))))
+                                                         (before bytecomp/emitcode.ml(343):11604-11658
+                                                           (seq
+                                                             (after bytecomp/emitcode.ml(343):11604-11615
+                                                               (apply
+                                                                 out_const k))
+                                                             (before bytecomp/emitcode.ml(344):11626-11658
+                                                               (seq
+                                                                 (after bytecomp/emitcode.ml(344):11626-11639
+                                                                   (apply
+                                                                    out_label
+                                                                    lbl))
+                                                                 (before bytecomp/emitcode.ml(345):11650-11658
+                                                                   (after bytecomp/emitcode.ml(345):11650-11658
+                                                                    (apply
+                                                                    emit rem)))))))))
+                                                     (exit 12))))
+                                              default: (exit 12)))
+                                           (exit 12)))
+                                      case tag 31:
+                                       (let (*match* =a (field 1 c))
+                                         (if *match*
+                                           (let
+                                             (*match* =a (field 0 *match*)
+                                              c =a (field 0 *match*))
+                                             (switch *match*
+                                              case tag 23:
+                                               (let
+                                                 (rem =a (field 1 *match*)
+                                                  lbl =a (field 0 *match*))
+                                                 (before bytecomp/emitcode.ml(322):10979-10995
+                                                   (if
+                                                     (after bytecomp/emitcode.ml(322):10979-10995
+                                                       (apply is_immed_const
+                                                         k))
+                                                     (before bytecomp/emitcode.ml(323):11007-11090
+                                                       (seq
+                                                         (after bytecomp/emitcode.ml(323):11007-11025
+                                                           (apply
+                                                             emit_branch_comp
+                                                             c))
+                                                         (before bytecomp/emitcode.ml(324):11036-11090
+                                                           (seq
+                                                             (after bytecomp/emitcode.ml(324):11036-11047
+                                                               (apply
+                                                                 out_const k))
+                                                             (before bytecomp/emitcode.ml(325):11058-11090
+                                                               (seq
+                                                                 (after bytecomp/emitcode.ml(325):11058-11071
+                                                                   (apply
+                                                                    out_label
+                                                                    lbl))
+                                                                 (before bytecomp/emitcode.ml(326):11082-11090
+                                                                   (after bytecomp/emitcode.ml(326):11082-11090
+                                                                    (apply
+                                                                    emit rem)))))))))
+                                                     (exit 12))))
+                                              case tag 24:
+                                               (let
+                                                 (c =a c
+                                                  k =a k
+                                                  rem =a (field 1 *match*)
+                                                  lbl =a (field 0 *match*))
+                                                 (before bytecomp/emitcode.ml(328):11157-11173
+                                                   (if
+                                                     (after bytecomp/emitcode.ml(328):11157-11173
+                                                       (apply is_immed_const
+                                                         k))
+                                                     (before bytecomp/emitcode.ml(329):11185-11296
+                                                       (seq
+                                                         (after bytecomp/emitcode.ml(329):11185-11231
+                                                           (apply
+                                                             emit_branch_comp
+                                                             (after bytecomp/emitcode.ml(329):11202-11231
+                                                               (apply
+                                                                 (field 26
+                                                                   (global Lambda!))
+                                                                 c))))
+                                                         (before bytecomp/emitcode.ml(330):11242-11296
+                                                           (seq
+                                                             (after bytecomp/emitcode.ml(330):11242-11253
+                                                               (apply
+                                                                 out_const k))
+                                                             (before bytecomp/emitcode.ml(331):11264-11296
+                                                               (seq
+                                                                 (after bytecomp/emitcode.ml(331):11264-11277
+                                                                   (apply
+                                                                    out_label
+                                                                    lbl))
+                                                                 (before bytecomp/emitcode.ml(332):11288-11296
+                                                                   (after bytecomp/emitcode.ml(332):11288-11296
+                                                                    (apply
+                                                                    emit rem)))))))))
+                                                     (exit 12))))
+                                              default: (exit 12)))
+                                           (exit 12)))
+                                      default: (exit 12)))
+                                   (exit 12))
+                                with (12)
+                                 (let (sc =a k)
+                                   (before bytecomp/emitcode.ml(368):12550-13155
+                                     (seq
+                                       (catch
+                                         (switch* sc
+                                          case tag 0:
+                                           (let (*match* =a (field 0 sc))
+                                             (switch *match*
+                                              case tag 0:
+                                               (let (i =a (field 0 *match*))
+                                                 (before bytecomp/emitcode.ml(369):12607-12617
+                                                   (if
+                                                     (after bytecomp/emitcode.ml(369):12607-12617
+                                                       (apply is_immed i))
+                                                     (before bytecomp/emitcode.ml(370):12631-12735
+                                                       (if
+                                                         (&& (>= i 0)
+                                                           (<= i 3))
+                                                         (before bytecomp/emitcode.ml(371):12666-12688
+                                                           (after bytecomp/emitcode.ml(371):12666-12688
+                                                             (apply out
+                                                               (+
+                                                                 (field 104
+                                                                   (global Opcodes!))
+                                                                 i))))
+                                                         (before bytecomp/emitcode.ml(372):12704-12735
+                                                           (seq
+                                                             (after bytecomp/emitcode.ml(372):12705-12723
+                                                               (apply out
+                                                                 (field 108
+                                                                   (global Opcodes!))))
+                                                             (before bytecomp/emitcode.ml(372):12725-12734
+                                                               (after bytecomp/emitcode.ml(372):12725-12734
+                                                                 (apply
+                                                                   out_int i)))))))
+                                                     (exit 8))))
+                                              case tag 1:
+                                               (let (c =a (field 0 *match*))
+                                                 (before bytecomp/emitcode.ml(374):12782-12822
+                                                   (seq
+                                                     (after bytecomp/emitcode.ml(374):12782-12800
+                                                       (apply out
+                                                         (field 108
+                                                           (global Opcodes!))))
+                                                     (before bytecomp/emitcode.ml(374):12802-12822
+                                                       (after bytecomp/emitcode.ml(374):12802-12822
+                                                         (apply out_int c))))))
+                                              default: (exit 8)))
+                                          case tag 1:
+                                           (let (i =a (field 0 sc))
+                                             (before bytecomp/emitcode.ml(376):12860-12964
+                                               (if (&& (>= i 0) (<= i 3))
+                                                 (before bytecomp/emitcode.ml(377):12895-12917
+                                                   (after bytecomp/emitcode.ml(377):12895-12917
+                                                     (apply out
+                                                       (+
+                                                         (field 104
+                                                           (global Opcodes!))
+                                                         i))))
+                                                 (before bytecomp/emitcode.ml(378):12933-12964
+                                                   (seq
+                                                     (after bytecomp/emitcode.ml(378):12934-12952
+                                                       (apply out
+                                                         (field 108
+                                                           (global Opcodes!))))
+                                                     (before bytecomp/emitcode.ml(378):12954-12963
+                                                       (after bytecomp/emitcode.ml(378):12954-12963
+                                                         (apply out_int i))))))))
+                                          case tag 2:
+                                           (let (*match* =a (field 1 sc))
+                                             (if *match* (exit 8)
+                                               (let (t =a (field 0 sc))
+                                                 (before bytecomp/emitcode.ml(380):13005-13067
+                                                   (if (== t 0)
+                                                     (before bytecomp/emitcode.ml(380):13019-13034
+                                                       (after bytecomp/emitcode.ml(380):13019-13034
+                                                         (apply out
+                                                           (field 60
+                                                             (global Opcodes!)))))
+                                                     (before bytecomp/emitcode.ml(380):13040-13067
+                                                       (seq
+                                                         (after bytecomp/emitcode.ml(380):13041-13055
+                                                           (apply out
+                                                             (field 61
+                                                               (global Opcodes!))))
+                                                         (before bytecomp/emitcode.ml(380):13057-13066
+                                                           (after bytecomp/emitcode.ml(380):13057-13066
+                                                             (apply out_int
+                                                               t))))))))))
+                                          case tag 3: (exit 8)
+                                          case tag 4: (exit 8))
+                                        with (8)
+                                         (before bytecomp/emitcode.ml(382):13091-13131
+                                           (seq
+                                             (after bytecomp/emitcode.ml(382):13091-13110
+                                               (apply out
+                                                 (field 54 (global Opcodes!))))
+                                             (before bytecomp/emitcode.ml(382):13112-13131
+                                               (after bytecomp/emitcode.ml(382):13112-13131
+                                                 (apply slot_for_literal sc))))))
+                                       (before bytecomp/emitcode.ml(384):13149-13155
+                                         (after bytecomp/emitcode.ml(384):13149-13155
+                                           (apply emit c))))))))
+                            case tag 35:
+                             (let
+                               (ev =a (field 0 *match*)
+                                *match* =a (field 3 ev))
+                               (if (isint *match*)
+                                 (if *match* (exit 9)
+                                   (let (*match* =a (field 1 *match*))
+                                     (if *match*
+                                       (let (instr1 =a (field 0 *match*))
+                                         (catch
+                                           (switch instr1
+                                            case tag 1: (exit 13)
+                                            case tag 2: (exit 13)
+                                            case tag 12: (exit 13)
+                                            case tag 13:
+                                             (let
+                                               (*match* =a (field 1 *match*))
+                                               (if *match*
+                                                 (let
+                                                   (instr2 =a
+                                                      (field 0 *match*))
+                                                   (switch instr2
+                                                    case tag 18:
+                                                     (let
+                                                       (c =a
+                                                          (field 1 *match*))
+                                                       (before bytecomp/emitcode.ml(387):13284-13339
+                                                         (after bytecomp/emitcode.ml(387):13284-13339
+                                                           (apply emit
+                                                             (makeblock 0 0a
+                                                               (makeblock 0
+                                                                 instr1
+                                                                 (makeblock 0
+                                                                   instr2
+                                                                   (after bytecomp/emitcode.ml(387):13319-13338
+                                                                    (apply
+                                                                    remerge_events
+                                                                    ev c)))))))))
+                                                    default: (exit 13)))
+                                                 (exit 13)))
+                                            case tag 15: (exit 13)
+                                            default: (exit 9))
+                                          with (13)
+                                           (let
+                                             (instr =a instr1
+                                              ev =a ev
+                                              c =a (field 1 *match*))
+                                             (before bytecomp/emitcode.ml(391):13494-13538
+                                               (after bytecomp/emitcode.ml(391):13494-13538
+                                                 (apply emit
+                                                   (makeblock 0 0a
+                                                     (makeblock 0 instr
+                                                       (after bytecomp/emitcode.ml(391):13518-13537
+                                                         (apply
+                                                           remerge_events ev
+                                                           c))))))))))
+                                       (exit 9))))
+                                 (exit 9)))
+                            default: (exit 9)))
+                         (exit 9)))
+                    case tag 13:
+                     (let (*match* =a (field 1 param))
+                       (if *match*
+                         (let (*match* =a (field 0 *match*))
+                           (switch *match*
+                            case tag 18:
+                             (let
+                               (c =a (field 1 *match*)
+                                n =a (field 0 *match*)
+                                id =a (field 0 instr))
+                               (before bytecomp/emitcode.ml(393):13586-13648
+                                 (seq
+                                   (after bytecomp/emitcode.ml(393):13586-13606
+                                     (apply out (field 55 (global Opcodes!))))
+                                   (before bytecomp/emitcode.ml(393):13608-13648
+                                     (seq
+                                       (after bytecomp/emitcode.ml(393):13608-13629
+                                         (apply slot_for_getglobal id))
+                                       (before bytecomp/emitcode.ml(393):13631-13648
+                                         (seq
+                                           (after bytecomp/emitcode.ml(393):13631-13640
+                                             (apply out_int n))
+                                           (before bytecomp/emitcode.ml(393):13642-13648
+                                             (after bytecomp/emitcode.ml(393):13642-13648
+                                               (apply emit c))))))))))
+                            default: (exit 9)))
+                         (exit 9)))
+                    default: (exit 9))
+                  with (9)
+                   (let (c =a (field 1 param))
+                     (before bytecomp/emitcode.ml(396):13694-13718
+                       (seq
+                         (after bytecomp/emitcode.ml(396):13694-13710
+                           (apply emit_instr instr))
+                         (before bytecomp/emitcode.ml(396):13712-13718
+                           (after bytecomp/emitcode.ml(396):13712-13718
+                             (apply emit c))))))))
+               (before bytecomp/emitcode.ml(318):10846-10848 0a)))))
+      (let
+        (to_file =
+           (function outchan unit_name objfile required_globals code
+             (funct-body bytecomp/emitcode.ml(400)<ghost>:13758-15322
+               (before bytecomp/emitcode.ml(401):13811-15322
+                 (seq
+                   (after bytecomp/emitcode.ml(401):13811-13817
+                     (apply init 0a))
+                   (before bytecomp/emitcode.ml(402):13821-15322
+                     (seq
+                       (after bytecomp/emitcode.ml(402):13821-13859
+                         (apply (field 65 (global Stdlib!)) outchan
+                           (field 22 (global Config!))))
+                       (before bytecomp/emitcode.ml(403):13863-15322
+                         (let
+                           (pos_depl =[int]
+                              (after bytecomp/emitcode.ml(403):13878-13893
+                                (apply (field 73 (global Stdlib!)) outchan)))
+                           (before bytecomp/emitcode.ml(404):13899-15322
+                             (seq
+                               (after bytecomp/emitcode.ml(404):13899-13926
+                                 (apply (field 70 (global Stdlib!)) outchan
+                                   0))
+                               (before bytecomp/emitcode.ml(405):13930-15322
+                                 (let
+                                   (pos_code =[int]
+                                      (after bytecomp/emitcode.ml(405):13945-13960
+                                        (apply (field 73 (global Stdlib!))
+                                          outchan)))
+                                   (before bytecomp/emitcode.ml(406):13966-15322
+                                     (seq
+                                       (after bytecomp/emitcode.ml(406):13966-13975
+                                         (apply emit code))
+                                       (before bytecomp/emitcode.ml(407):13979-15322
+                                         (seq
+                                           (after bytecomp/emitcode.ml(407):13979-14032
+                                             (apply
+                                               (field 6
+                                                 (field 44 (global Misc!)))
+                                               outchan (field 0 out_buffer) 0
+                                               (field 0 out_position)))
+                                           (before bytecomp/emitcode.ml(408):14036-15322
+                                             (catch
+                                               (if
+                                                 (field 0
+                                                   (field 16
+                                                     (global Clflags!)))
+                                                 (before bytecomp/emitcode.ml(409):14093-14384
+                                                   (seq
+                                                     (setfield_ptr 0
+                                                       debug_dirs
+                                                       (after bytecomp/emitcode.ml(410):14119-14213
+                                                         (apply
+                                                           (field 3
+                                                             (field 38
+                                                               (field 3
+                                                                 (field 11
+                                                                   (global Misc!)))))
+                                                           (after bytecomp/emitcode.ml(411):14142-14193
+                                                             (apply
+                                                               (field 13
+                                                                 (global Stdlib__filename!))
+                                                               (after bytecomp/emitcode.ml(411):14160-14192
+                                                                 (apply
+                                                                   (field 16
+                                                                    (global Location!))
+                                                                   objfile))))
+                                                           (field 0
+                                                             debug_dirs))))
+                                                     (before bytecomp/emitcode.ml(413):14221-14376
+                                                       (let
+                                                         (p =[int]
+                                                            (after bytecomp/emitcode.ml(413):14229-14244
+                                                              (apply
+                                                                (field 73
+                                                                  (global Stdlib!))
+                                                                outchan)))
+                                                         (before bytecomp/emitcode.ml(414):14254-14376
+                                                           (seq
+                                                             (after bytecomp/emitcode.ml(414):14254-14282
+                                                               (apply
+                                                                 (field 71
+                                                                   (global Stdlib!))
+                                                                 outchan
+                                                                 (field 0
+                                                                   events)))
+                                                             (before bytecomp/emitcode.ml(415):14290-14376
+                                                               (seq
+                                                                 (after bytecomp/emitcode.ml(415):14290-14344
+                                                                   (apply
+                                                                    (field 71
+                                                                    (global Stdlib!))
+                                                                    outchan
+                                                                    (after bytecomp/emitcode.ml(415):14311-14344
+                                                                    (apply
+                                                                    (field 21
+                                                                    (field 38
+                                                                    (field 3
+                                                                    (field 11
+                                                                    (global Misc!)))))
+                                                                    (field 0
+                                                                    debug_dirs)))))
+                                                                 (before bytecomp/emitcode.ml(416):14352-14376
+                                                                   (let
+                                                                    (size_debug =
+                                                                    (-
+                                                                    (after bytecomp/emitcode.ml(416):14356-14371
+                                                                    (apply
+                                                                    (field 73
+                                                                    (global Stdlib!))
+                                                                    outchan))
+                                                                    p)
+                                                                    pos_debug =a[int]
+                                                                    p)
+                                                                    (exit 15
+                                                                    size_debug
+                                                                    pos_debug)))))))))))
+                                                 (before bytecomp/emitcode.ml(418):14396-14402
+                                                   (let
+                                                     (size_debug = 0
+                                                      pos_debug = 0)
+                                                     (exit 15 size_debug
+                                                       pos_debug))))
+                                              with (15 size_debug[int] pos_debug[int])
+                                               (before bytecomp/emitcode.ml(419):14408-15322
+                                                 (let
+                                                   (compunit =
+                                                      (makemutable 0 (*,int,int,*,*,*,*,*,int,int)
+                                                        unit_name pos_code
+                                                        (field 0
+                                                          out_position)
+                                                        (after bytecomp/emitcode.ml(423):14527-14547
+                                                          (apply
+                                                            (field 8
+                                                              (global Stdlib__list!))
+                                                            (field 0
+                                                              reloc_info)))
+                                                        (after bytecomp/emitcode.ml(424):14568-14581
+                                                          (apply
+                                                            (field 80
+                                                              (global Env!))
+                                                            0a))
+                                                        (after bytecomp/emitcode.ml(427):14728-14763
+                                                          (apply
+                                                            (field 20
+                                                              (field 5
+                                                                (global Ident!)))
+                                                            required_globals))
+                                                        (after bytecomp/emitcode.ml(425):14605-14698
+                                                          (apply
+                                                            (field 16
+                                                              (global Stdlib__list!))
+                                                            (field 5
+                                                              (global Primitive!))
+                                                            (field 0
+                                                              (field 10
+                                                                (global Translmod!)))))
+                                                        (field 0
+                                                          (field 20
+                                                            (global Clflags!)))
+                                                        pos_debug size_debug))
+                                                   (before bytecomp/emitcode.ml(431):14880-15322
+                                                     (seq
+                                                       (after bytecomp/emitcode.ml(431):14880-14886
+                                                         (apply init 0a))
+                                                       (before bytecomp/emitcode.ml(432):14957-15322
+                                                         (seq
+                                                           (after bytecomp/emitcode.ml(432):14957-14980
+                                                             (apply
+                                                               (field 49
+                                                                 (global Btype!))
+                                                               0a))
+                                                           (before bytecomp/emitcode.ml(434):15101-15322
+                                                             (let
+                                                               (pos_compunit =[int]
+                                                                  (after bytecomp/emitcode.ml(434):15120-15135
+                                                                    (apply
+                                                                    (field 73
+                                                                    (global Stdlib!))
+                                                                    outchan)))
+                                                               (before bytecomp/emitcode.ml(435):15141-15322
+                                                                 (seq
+                                                                   (after bytecomp/emitcode.ml(435):15141-15251
+                                                                    (apply
+                                                                    marshal_to_channel_with_possibly_32bit_compat
+                                                                    objfile
+                                                                    "bytecode unit"
+                                                                    outchan
+                                                                    compunit))
+                                                                   (before bytecomp/emitcode.ml(438):15255-15322
+                                                                    (seq
+                                                                    (after bytecomp/emitcode.ml(438):15255-15280
+                                                                    (apply
+                                                                    (field 72
+                                                                    (global Stdlib!))
+                                                                    outchan
+                                                                    pos_depl))
+                                                                    (before bytecomp/emitcode.ml(439):15284-15322
+                                                                    (after bytecomp/emitcode.ml(439):15284-15322
+                                                                    (apply
+                                                                    (field 70
+                                                                    (global Stdlib!))
+                                                                    outchan
+                                                                    pos_compunit)))))))))))))))))))))))))))))))))
+         to_memory =
+           (function init_code fun_code
+             (funct-body bytecomp/emitcode.ml(443)<ghost>:15372-15637
+               (before bytecomp/emitcode.ml(444):15395-15637
+                 (seq
+                   (after bytecomp/emitcode.ml(444):15395-15401
+                     (apply init 0a))
+                   (before bytecomp/emitcode.ml(445):15405-15637
+                     (seq
+                       (after bytecomp/emitcode.ml(445):15405-15419
+                         (apply emit init_code))
+                       (before bytecomp/emitcode.ml(446):15423-15637
+                         (seq
+                           (after bytecomp/emitcode.ml(446):15423-15436
+                             (apply emit fun_code))
+                           (before bytecomp/emitcode.ml(447):15440-15637
+                             (let
+                               (code =
+                                  (after bytecomp/emitcode.ml(447):15451-15482
+                                    (apply
+                                      (field 0 (field 44 (global Misc!)))
+                                      (field 0 out_position))))
+                               (before bytecomp/emitcode.ml(448):15488-15637
+                                 (seq
+                                   (after bytecomp/emitcode.ml(448):15488-15538
+                                     (apply
+                                       (field 4 (field 44 (global Misc!)))
+                                       (field 0 out_buffer) 0 code 0
+                                       (field 0 out_position)))
+                                   (before bytecomp/emitcode.ml(449):15542-15637
+                                     (let
+                                       (reloc =
+                                          (after bytecomp/emitcode.ml(449):15554-15574
+                                            (apply
+                                              (field 8
+                                                (global Stdlib__list!))
+                                              (field 0 reloc_info))))
+                                       (before bytecomp/emitcode.ml(450):15580-15637
+                                         (let (events = (field 0 events))
+                                           (before bytecomp/emitcode.ml(451):15606-15637
+                                             (seq
+                                               (after bytecomp/emitcode.ml(451):15606-15612
+                                                 (apply init 0a))
+                                               (before bytecomp/emitcode.ml(452):15616-15637
+                                                 (makeblock 0 code reloc
+                                                   events))))))))))))))))))))
+         to_packed_file =
+           (function outchan code
+             (funct-body bytecomp/emitcode.ml(456)<ghost>:15705-15846
+               (before bytecomp/emitcode.ml(457):15722-15846
+                 (seq
+                   (after bytecomp/emitcode.ml(457):15722-15728
+                     (apply init 0a))
+                   (before bytecomp/emitcode.ml(458):15732-15846
+                     (seq
+                       (after bytecomp/emitcode.ml(458):15732-15741
+                         (apply emit code))
+                       (before bytecomp/emitcode.ml(459):15745-15846
+                         (seq
+                           (after bytecomp/emitcode.ml(459):15745-15798
+                             (apply (field 6 (field 44 (global Misc!)))
+                               outchan (field 0 out_buffer) 0
+                               (field 0 out_position)))
+                           (before bytecomp/emitcode.ml(460):15802-15846
+                             (let (reloc = (field 0 reloc_info))
+                               (before bytecomp/emitcode.ml(461):15831-15846
+                                 (seq
+                                   (after bytecomp/emitcode.ml(461):15831-15837
+                                     (apply init 0a))
+                                   (before bytecomp/emitcode.ml(462):15841-15846
+                                     reloc)))))))))))))
+         reset =
+           (function param
+             (funct-body bytecomp/emitcode.ml(464)<ghost>:15858-15966
+               (before bytecomp/emitcode.ml(465):15865-15966
+                 (seq
+                   (setfield_ptr 0 out_buffer
+                     (after bytecomp/emitcode.ml(465):15879-15901
+                       (apply (field 0 (field 44 (global Misc!))) 1024)))
+                   (before bytecomp/emitcode.ml(466):15905-15966
+                     (seq (setfield_imm 0 out_position 0)
+                       (before bytecomp/emitcode.ml(467):15926-15966
+                         (seq (setfield_ptr 0 label_table (makearray[addr]))
+                           (before bytecomp/emitcode.ml(468):15950-15966
+                             (setfield_ptr 0 reloc_info 0a)))))))))))
+        (pseudo _none_(0)<ghost>:-1--1
+          (makeblock 0 to_file to_memory to_packed_file reset
+            marshal_to_channel_with_possibly_32bit_compat))))))

@@ -1,0 +1,143 @@
+(setglobal Compile!
+  (let
+    (tool_name = "ocamlc"
+     with_info =
+       (after driver/compile.ml(22):1154-1203
+         (apply (field 0 (global Compile_common!)) 0a tool_name))
+     interface =
+       (function source_file output_prefix
+         (funct-body driver/compile.ml(24)<ghost>:1219-1351
+           (before driver/compile.ml(25):1251-1351
+             (after driver/compile.ml(25):1251-1351
+               (apply with_info source_file output_prefix "cmi"
+                 (function info
+                   (funct-body driver/compile.ml(25):1308-1351
+                     (before driver/compile.ml(26):1322-1351
+                       (after driver/compile.ml(26):1322-1351
+                         (apply (field 4 (global Compile_common!)) info))))))))))
+     to_bytecode =
+       (function i param
+         (funct-body driver/compile.ml(30)<ghost>:1421-2027
+           (let (coercion =a (field 1 param) typedtree =a (field 0 param))
+             (before driver/compile.ml(31):1449-2027
+               (after driver/compile.ml(31):1449-2027
+                 (apply
+                   (after driver/compile.ml(34):1566-1598
+                     (apply (field 2 (global Profile!)) [0: 1a]
+                       (field 6 (global Profile!))))
+                   (function param
+                     (funct-body driver/compile.ml(35):1604-2027
+                       (let
+                         (lambda =a (field 3 param)
+                          required_globals =a (field 2 param))
+                         (before driver/compile.ml(36):1662-2021
+                           (after driver/compile.ml(36):1662-2021
+                             (apply
+                               (function bytecode
+                                 (funct-body driver/compile.ml(42):1979-2021
+                                   (before driver/compile.ml(42):1995-2021
+                                     (makeblock 0 bytecode required_globals))))
+                               (after driver/compile.ml(36):1662-1968
+                                 (apply (field 58 (global Misc!)) (field 4 i)
+                                   (field 73 (global Clflags!))
+                                   (field 1 (global Printinstr!))
+                                   (after driver/compile.ml(36):1662-1898
+                                     (apply (field 0 (global Bytegen!))
+                                       (field 1 i)
+                                       (after driver/compile.ml(36):1662-1843
+                                         (apply (field 58 (global Misc!))
+                                           (field 4 i)
+                                           (field 67 (global Clflags!))
+                                           (field 3 (global Printlambda!))
+                                           (after driver/compile.ml(36):1662-1774
+                                             (apply
+                                               (field 0 (global Simplif!))
+                                               (after driver/compile.ml(36):1662-1740
+                                                 (apply
+                                                   (field 58 (global Misc!))
+                                                   (field 4 i)
+                                                   (field 66
+                                                     (global Clflags!))
+                                                   (field 3
+                                                     (global Printlambda!))
+                                                   lambda))))))))))))))))
+                   (after driver/compile.ml(31):1449-1551
+                     (apply
+                       (after driver/compile.ml(32):1485-1498
+                         (apply (field 2 (global Profile!)) 0a
+                           (field 7 (global Profile!))))
+                       (after driver/compile.ml(33):1504-1551
+                         (apply (field 0 (global Translmod!)) (field 1 i)))
+                       (makeblock 0 typedtree coercion)))))))))
+     emit_bytecode =
+       (function i param
+         (funct-body driver/compile.ml(45)<ghost>:2047-2413
+           (let
+             (required_globals =a (field 1 param)
+              bytecode =a (field 0 param))
+             (before driver/compile.ml(46):2082-2413
+               (let
+                 (cmofile =
+                    (after driver/compile.ml(46):2096-2101
+                      (apply (field 8 (global Compile_common!)) i)))
+                 (before driver/compile.ml(47):2107-2413
+                   (let
+                     (oc =
+                        (after driver/compile.ml(47):2116-2136
+                          (apply (field 60 (global Stdlib!)) cmofile)))
+                     (before driver/compile.ml(48):2142-2413
+                       (after driver/compile.ml(48):2142-2413
+                         (apply (field 3 (global Misc!))
+                           (makeblock 0
+                             (function param
+                               (funct-body driver/compile.ml(49):2171-2195
+                                 (before driver/compile.ml(49):2182-2194
+                                   (after driver/compile.ml(49):2182-2194
+                                     (apply (field 75 (global Stdlib!)) oc))))))
+                           (makeblock 0
+                             (function param
+                               (funct-body driver/compile.ml(50):2215-2251
+                                 (before driver/compile.ml(50):2226-2250
+                                   (after driver/compile.ml(50):2226-2250
+                                     (apply (field 15 (global Misc!))
+                                       cmofile))))))
+                           (function param
+                             (funct-body driver/compile.ml(51):2256-2413
+                               (before driver/compile.ml(52):2274-2406
+                                 (after driver/compile.ml(52):2274-2406
+                                   (apply
+                                     (after driver/compile.ml(53):2302-2334
+                                       (apply (field 2 (global Profile!))
+                                         [0: 1a] (field 6 (global Profile!))))
+                                     (after driver/compile.ml(54):2345-2406
+                                       (apply (field 0 (global Emitcode!)) oc
+                                         (field 1 i) cmofile
+                                         required_globals))
+                                     bytecode)))))))))))))))
+     implementation =
+       (function source_file output_prefix
+         (funct-body driver/compile.ml(57)<ghost>:2434-2689
+           (before driver/compile.ml(58):2466-2689
+             (let
+               (backend =
+                  (function info typed
+                    (funct-body driver/compile.ml(58)<ghost>:2478-2567
+                      (before driver/compile.ml(59):2495-2567
+                        (let
+                          (bytecode =
+                             (after driver/compile.ml(59):2510-2532
+                               (apply to_bytecode info typed)))
+                          (before driver/compile.ml(60):2540-2567
+                            (after driver/compile.ml(60):2540-2567
+                              (apply emit_bytecode info bytecode))))))))
+               (before driver/compile.ml(62):2575-2689
+                 (after driver/compile.ml(62):2575-2689
+                   (apply with_info source_file output_prefix "cmo"
+                     (function info
+                       (funct-body driver/compile.ml(62):2632-2689
+                         (before driver/compile.ml(63):2646-2689
+                           (after driver/compile.ml(63):2646-2689
+                             (apply (field 7 (global Compile_common!)) info
+                               backend)))))))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 interface implementation to_bytecode emit_bytecode))))

@@ -1,0 +1,102 @@
+(setglobal Attr_helper!
+  (let
+    (Error = (makeblock 248 "Attr_helper.Error" (caml_fresh_oo_id 0))
+     get_no_payload_attribute =
+       (function alt_names attrs
+         (funct-body parsing/attr_helper.ml(25)<ghost>:1259-1636
+           (before parsing/attr_helper.ml(26):1279-1636
+             (let
+               (*match* =
+                  (after parsing/attr_helper.ml(26):1285-1348
+                    (apply (field 35 (global Stdlib__list!))
+                      (function a
+                        (funct-body parsing/attr_helper.ml(26):1297-1342
+                          (before parsing/attr_helper.ml(26):1307-1341
+                            (after parsing/attr_helper.ml(26):1307-1341
+                              (apply (field 31 (global Stdlib__list!))
+                                (field 0 (field 0 a)) alt_names)))))
+                      attrs)))
+               (if *match*
+                 (let
+                   (*match* =a (field 0 *match*)
+                    *match* =a (field 1 *match*)
+                    name =a (field 0 *match*))
+                   (catch
+                     (switch *match*
+                      case tag 0:
+                       (let (*match* =a (field 0 *match*))
+                         (if *match* (exit 1)
+                           (let (*match* =a (field 1 *match*))
+                             (if *match* (exit 1)
+                               (before parsing/attr_helper.ml(28):1437-1446
+                                 (makeblock 0 name))))))
+                      default: (exit 1))
+                    with (1)
+                     (let (*match* =a (field 1 *match*))
+                       (if *match*
+                         (let
+                           (*match* =a (field 0 *match*)
+                            name =a (field 0 *match*))
+                           (before parsing/attr_helper.ml(32):1582-1636
+                             (raise
+                               (after parsing/attr_helper.ml(32):1588-1636
+                                 (makeblock 0 Error (field 1 name)
+                                   (makeblock 0 (field 0 name)))))))
+                         (let (name =a name)
+                           (before parsing/attr_helper.ml(30):1484-1538
+                             (raise
+                               (after parsing/attr_helper.ml(30):1490-1538
+                                 (makeblock 0 Error (field 1 name)
+                                   (makeblock 1 (field 0 name)))))))))))
+                 (before parsing/attr_helper.ml(27):1364-1368 0a))))))
+     has_no_payload_attribute =
+       (function alt_names attrs
+         (funct-body parsing/attr_helper.ml(34)<ghost>:1667-1777
+           (before parsing/attr_helper.ml(35):1687-1777
+             (let
+               (*match* =
+                  (after parsing/attr_helper.ml(35):1693-1733
+                    (apply get_no_payload_attribute alt_names attrs)))
+               (if *match* (before parsing/attr_helper.ml(37):1773-1777 1a)
+                 (before parsing/attr_helper.ml(36):1753-1758 0a))))))
+     report_error =
+       (function ppf param
+         (funct-body parsing/attr_helper.ml(41)<ghost>:1809-1999
+           (switch* param
+            case tag 0:
+             (let (name =a (field 0 param))
+               (before parsing/attr_helper.ml(43):1860-1903
+                 (after parsing/attr_helper.ml(43):1860-1903
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11: "Too many `" [2: 0a [11: "' attributes" 0a]]]
+                      "Too many `%s' attributes"]
+                     name))))
+            case tag 1:
+             (let (name =a (field 0 param))
+               (before parsing/attr_helper.ml(45):1940-1999
+                 (after parsing/attr_helper.ml(45):1940-1999
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11:
+                       "Attribute `"
+                       [2: 0a [11: "' does not accept a payload" 0a]]]
+                      "Attribute `%s' does not accept a payload"]
+                     name)))))))
+     *match* =
+       (after parsing/attr_helper.ml(48):2012-2179
+         (apply (field 46 (global Location!))
+           (function param
+             (funct-body parsing/attr_helper.ml(49):2047-2179
+               (let (tag =a (field 0 param))
+                 (if (== tag Error)
+                   (let (err =a (field 2 param) loc =a (field 1 param))
+                     (before parsing/attr_helper.ml(51):2093-2147
+                       (makeblock 0
+                         (after parsing/attr_helper.ml(51):2098-2147
+                           (apply (field 44 (global Location!))
+                             (makeblock 0 loc) 0a report_error err)))))
+                   (before parsing/attr_helper.ml(53):2169-2173 0a))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 get_no_payload_attribute has_no_payload_attribute Error
+        report_error))))

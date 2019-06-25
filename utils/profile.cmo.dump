@@ -1,0 +1,970 @@
+(setglobal Profile!
+  (let
+    (cpu_time =
+       (function param : float
+         (funct-body utils/profile.ml(21)<ghost>:1230-1261
+           (before utils/profile.ml(21):1235-1261
+             (after utils/profile.ml(21):1235-1261
+               (caml_sys_time_include_children 1a)))))
+     Measure =
+       (module-defn(Measure) utils/profile.ml(23):1263-1646
+         (let
+           (create =
+              (function param
+                (funct-body utils/profile.ml(29)<ghost>:1390-1573
+                  (before utils/profile.ml(30):1399-1573
+                    (let
+                      (stat =
+                         (after utils/profile.ml(30):1410-1426
+                           (caml_gc_quick_stat 0a)))
+                      (before utils/profile.ml(31):1434-1573
+                        (makeblock 0 (float,float,int)
+                          (after utils/profile.ml(32):1449-1460
+                            (apply cpu_time 0a))
+                          (+. (field 0 stat) (field 2 stat)) (field 14 stat)))))))
+            zero = [0: 0. 0. 0])
+           (pseudo utils/profile.ml(23):1280-1646 (makeblock 0 create zero))))
+     Measure_diff =
+       (module-defn(Measure_diff) utils/profile.ml(39):1648-2385
+         (let
+           (timestamp =
+              (let (r = (makemutable 0 (int) -1))
+                (before utils/profile.ml(40):1715-1735
+                  (function param : int
+                    (funct-body utils/profile.ml(40):1715-1735
+                      (before utils/profile.ml(40):1725-1735
+                        (seq (+:=1 r)
+                          (before utils/profile.ml(40):1733-1735 (field 0 r))))))))
+            zero =
+              (function param
+                (funct-body utils/profile.ml(47)<ghost>:1871-1989
+                  (before utils/profile.ml(47):1876-1989
+                    (makeblock 0 (int,float,float,int)
+                      (after utils/profile.ml(48):1894-1906
+                        (apply timestamp 0a))
+                      0. 0. 0))))
+            accumulate =
+              (function t m1 m2
+                (funct-body utils/profile.ml(53)<ghost>:2007-2328
+                  (before utils/profile.ml(53):2045-2328
+                    (makeblock 0 (int,float,float,int) (field 0 t)
+                      (+. (field 1 t) (-. (field 0 m2) (field 0 m1)))
+                      (+. (field 2 t) (-. (field 1 m2) (field 1 m1)))
+                      (+ (field 3 t) (- (field 2 m2) (field 2 m1)))))))
+            of_diff =
+              (function m1 m2
+                (funct-body utils/profile.ml(61)<ghost>:2343-2381
+                  (before utils/profile.ml(62):2355-2381
+                    (after utils/profile.ml(62):2355-2381
+                      (apply accumulate
+                        (after utils/profile.ml(62):2366-2375
+                          (apply zero 0a))
+                        m1 m2))))))
+           (pseudo utils/profile.ml(39):1670-2385
+             (makeblock 0 timestamp zero accumulate of_diff))))
+     create =
+       (function param
+         (funct-body utils/profile.ml(69)<ghost>:2484-2509
+           (before utils/profile.ml(69):2489-2509
+             (after utils/profile.ml(69):2491-2509
+               (apply (field 0 (global Stdlib__hashtbl!)) 0a 2)))))
+     hierarchy =
+       (makemutable 0
+         (after utils/profile.ml(70):2530-2541 (apply create 0a)))
+     initial_measure = (makemutable 0 0a)
+     reset =
+       (function param
+         (funct-body utils/profile.ml(72)<ghost>:2583-2635
+           (before utils/profile.ml(72):2588-2635
+             (seq
+               (setfield_ptr 0 hierarchy
+                 (after utils/profile.ml(72):2601-2610 (apply create 0a)))
+               (before utils/profile.ml(72):2612-2635
+                 (setfield_ptr 0 initial_measure 0a))))))
+     record_call =
+       (function *opt* name f
+         (funct-body utils/profile.ml(74)<ghost>:2653-3749
+           (before utils/profile.ml(75):2686-3749
+             (let
+               (accumulate =
+                  (if *opt*
+                    (let (*sth* =a (field 0 *opt*))
+                      (before utils/profile.ml(74):2668-2673 *sth*))
+                    (before utils/profile.ml(74):2668-2673 0a)))
+               (before utils/profile.ml(75):2686-3749
+                 (let
+                   (*match* = (field 0 hierarchy) prev_hierarchy =a *match*)
+                   (before utils/profile.ml(76):2725-3749
+                     (let
+                       (start_measure =
+                          (after utils/profile.ml(76):2745-2762
+                            (apply (field 0 Measure) 0a)))
+                       (before utils/profile.ml(77):2768-3749
+                         (seq
+                           (if (== (field 0 initial_measure) 0a)
+                             (before utils/profile.ml(77):2800-2837
+                               (setfield_ptr 0 initial_measure
+                                 (makeblock 0 start_measure)))
+                             0a)
+                           (before utils/profile.ml(78):2841-3749
+                             (catch
+                               (if accumulate
+                                 (before utils/profile.ml(84):3141-3359
+                                   (catch
+                                     (try
+                                       (exit 1
+                                         (after utils/profile.ml(84):3147-3179
+                                           (apply
+                                             (field 5
+                                               (global Stdlib__hashtbl!))
+                                             prev_hierarchy name)))
+                                      with exn
+                                       (if
+                                         (== exn (field 7 (global Stdlib!)))
+                                         (before utils/profile.ml(85):3216-3254
+                                           (let
+                                             (this_table =
+                                                (after utils/profile.ml(85):3238-3254
+                                                  (apply
+                                                    (field 0
+                                                      (global Stdlib__hashtbl!))
+                                                    0a 2))
+                                              this_measure_diff =
+                                                (after utils/profile.ml(85):3216-3236
+                                                  (apply
+                                                    (field 1 Measure_diff)
+                                                    0a)))
+                                             (exit 3 this_table
+                                               this_measure_diff)))
+                                         (reraise exn)))
+                                    with (1 val)
+                                     (let
+                                       (*match* =a (field 1 val)
+                                        table =a *match*
+                                        measure_diff =a (field 0 val))
+                                       (before utils/profile.ml(87):3296-3359
+                                         (seq
+                                           (after utils/profile.ml(87):3296-3330
+                                             (apply
+                                               (field 9
+                                                 (global Stdlib__hashtbl!))
+                                               prev_hierarchy name))
+                                           (before utils/profile.ml(88):3340-3359
+                                             (let
+                                               (this_table =a table
+                                                this_measure_diff =a
+                                                  measure_diff)
+                                               (exit 3 this_table
+                                                 this_measure_diff))))))))
+                                 (before utils/profile.ml(89):3369-3407
+                                   (let
+                                     (this_table =
+                                        (after utils/profile.ml(89):3391-3407
+                                          (apply
+                                            (field 0
+                                              (global Stdlib__hashtbl!))
+                                            0a 2))
+                                      this_measure_diff =
+                                        (after utils/profile.ml(89):3369-3389
+                                          (apply (field 1 Measure_diff) 0a)))
+                                     (exit 3 this_table this_measure_diff))))
+                              with (3 this_table this_measure_diff)
+                               (before utils/profile.ml(91):3415-3749
+                                 (seq (setfield_ptr 0 hierarchy this_table)
+                                   (before utils/profile.ml(92):3444-3749
+                                     (after utils/profile.ml(92):3444-3749
+                                       (apply (field 3 (global Misc!))
+                                         (makeblock 0
+                                           (function param
+                                             (funct-body utils/profile.ml(93):3475-3749
+                                               (before utils/profile.ml(94):3494-3748
+                                                 (seq
+                                                   (setfield_ptr 0 hierarchy
+                                                     prev_hierarchy)
+                                                   (before utils/profile.ml(95):3533-3748
+                                                     (let
+                                                       (end_measure =
+                                                          (after utils/profile.ml(95):3551-3568
+                                                            (apply
+                                                              (field 0
+                                                                Measure)
+                                                              0a)))
+                                                       (before utils/profile.ml(96):3580-3748
+                                                         (let
+                                                           (measure_diff =
+                                                              (after utils/profile.ml(97):3609-3676
+                                                                (apply
+                                                                  (field 2
+                                                                    Measure_diff)
+                                                                  this_measure_diff
+                                                                  start_measure
+                                                                  end_measure)))
+                                                           (before utils/profile.ml(98):3688-3748
+                                                             (after utils/profile.ml(98):3688-3748
+                                                               (apply
+                                                                 (field 4
+                                                                   (global Stdlib__hashtbl!))
+                                                                 prev_hierarchy
+                                                                 name
+                                                                 (makeblock 0
+                                                                   measure_diff
+                                                                   this_table)))))))))))))
+                                         0a f)))))))))))))))))
+     record =
+       (function accumulate pass f x
+         (funct-body utils/profile.ml(100)<ghost>:3762-3829
+           (before utils/profile.ml(100):3785-3829
+             (after utils/profile.ml(100):3785-3829
+               (apply record_call accumulate pass
+                 (function param
+                   (funct-body utils/profile.ml(100):3814-3829
+                     (before utils/profile.ml(100):3825-3828
+                       (after utils/profile.ml(100):3825-3828 (apply f x))))))))))
+     time_display =
+       (function v[float]
+         (funct-body utils/profile.ml(107)<ghost>:3956-4405
+           (before utils/profile.ml(110):4112-4405
+             (let
+               (to_string_without_unit =
+                  (function v[float] width[int]
+                    (funct-body utils/profile.ml(110)<ghost>:4139-4182
+                      (before utils/profile.ml(110):4150-4182
+                        (after utils/profile.ml(110):4150-4182
+                          (apply (field 3 (global Stdlib__printf!))
+                            [0: [8: [0: 0a 0a] [1: 2a] [0: 3] 0a] "%0*.03f"]
+                            width v))))))
+               (before utils/profile.ml(111):4188-4405
+                 (let
+                   (to_string =
+                      (function param width[int]
+                        (funct-body utils/profile.ml(111)<ghost>:4202-4271
+                          (before utils/profile.ml(112):4222-4271
+                            (after utils/profile.ml(112):4222-4271
+                              (apply (field 27 (global Stdlib!))
+                                (after utils/profile.ml(112):4222-4265
+                                  (apply to_string_without_unit v
+                                    (- width 1)))
+                                "s"))))))
+                   (before utils/profile.ml(113):4277-4405
+                     (let
+                       (worth_displaying =
+                          (function param
+                            (funct-body utils/profile.ml(113)<ghost>:4298-4368
+                              (before utils/profile.ml(114):4311-4368
+                                (!=.
+                                  (after utils/profile.ml(114):4311-4362
+                                    (caml_float_of_string
+                                      (after utils/profile.ml(114):4327-4362
+                                        (apply to_string_without_unit v 0))))
+                                  0.)))))
+                       (before utils/profile.ml(115):4374-4405
+                         (makeblock 0 to_string worth_displaying))))))))))
+     memory_word_display =
+       (let
+         (bytes_of_words =
+            (function words[float] : float
+              (funct-body utils/profile.ml(124)<ghost>:4879-4928
+                (before utils/profile.ml(124):4887-4928
+                  (*. words
+                    (float_of_int (/ (field 8 (global Stdlib__sys!)) 8)))))))
+         (before utils/profile.ml(125):4934-6622
+           (let
+             (to_string_without_unit =
+                (function v[float] width[int] scale[float]
+                  (funct-body utils/profile.ml(125)<ghost>:4961-5480
+                    (before utils/profile.ml(126):4982-5480
+                      (let (precision =[int] 3 precision_power =[float] 1e3)
+                        (before utils/profile.ml(127):5033-5480
+                          (let
+                            (v_rescaled =[float]
+                               (/.
+                                 (after utils/profile.ml(127):5050-5066
+                                   (apply bytes_of_words v))
+                                 scale))
+                            (before utils/profile.ml(128):5083-5480
+                              (let
+                                (v_rounded =[float]
+                                   (/.
+                                     (after utils/profile.ml(129):5105-5149
+                                       (caml_floor_float
+                                         (+. (*. v_rescaled precision_power)
+                                           0.5)))
+                                     precision_power))
+                                (before utils/profile.ml(130):5176-5480
+                                  (let
+                                    (v_str =
+                                       (after utils/profile.ml(130):5188-5229
+                                         (apply
+                                           (field 3 (global Stdlib__printf!))
+                                           [0:
+                                            [8: [0: 0a 0a] 0a 1a 0a] "%.*f"]
+                                           precision v_rounded)))
+                                    (before utils/profile.ml(131):5237-5480
+                                      (let
+                                        (index_of_dot =[int]
+                                           (after utils/profile.ml(131):5256-5278
+                                             (apply
+                                               (field 13
+                                                 (global Stdlib__string!))
+                                               v_str '.')))
+                                        (before utils/profile.ml(132):5286-5480
+                                          (let
+                                            (v_str_truncated =
+                                               (after utils/profile.ml(133):5314-5426
+                                                 (apply
+                                                   (field 3
+                                                     (global Stdlib__string!))
+                                                   v_str 0
+                                                   (if
+                                                     (>= index_of_dot
+                                                       precision)
+                                                     (before utils/profile.ml(135):5385-5397
+                                                       index_of_dot)
+                                                     (before utils/profile.ml(136):5412-5425
+                                                       (+ precision 1))))))
+                                            (before utils/profile.ml(138):5438-5480
+                                              (after utils/profile.ml(138):5438-5480
+                                                (apply
+                                                  (field 3
+                                                    (global Stdlib__printf!))
+                                                  [0: [2: [1: 1a] 0a] "%*s"]
+                                                  width v_str_truncated))))))))))))))))))
+             (before utils/profile.ml(140):5488-6622
+               (let
+                 (choose_memory_scale =
+                    (let (units = (makearray[addr] "B" "kB" "MB" "GB"))
+                      (before utils/profile.ml(142):5563-5815
+                        (function words[float]
+                          (funct-body utils/profile.ml(142):5563-5815
+                            (before utils/profile.ml(143):5582-5815
+                              (let
+                                (bytes =[float]
+                                   (after utils/profile.ml(143):5594-5614
+                                     (apply bytes_of_words words)))
+                                (before utils/profile.ml(144):5624-5815
+                                  (let
+                                    (scale =
+                                       (makemutable 0 (int)
+                                         (- (array.length[addr] units) 1)))
+                                    (before utils/profile.ml(145):5674-5815
+                                      (seq
+                                        (while
+                                          (&& (> (field 0 scale) 0)
+                                            (<. bytes
+                                              (after utils/profile.ml(145):5702-5730
+                                                (caml_power_float 1024.
+                                                  (float_of_int
+                                                    (field 0 scale))))))
+                                          (before utils/profile.ml(146):5742-5752
+                                            (+:=-1 scale)))
+                                        (before utils/profile.ml(148):5771-5815
+                                          (makeblock 0 (float,*)
+                                            (after utils/profile.ml(148):5771-5799
+                                              (caml_power_float 1024.
+                                                (float_of_int
+                                                  (field 0 scale))))
+                                            (after utils/profile.ml(148):5801-5815
+                                              (array.get[addr] units
+                                                (field 0 scale))))))))))))))))
+                 (before utils/profile.ml(150):5823-6622
+                   (function previous v[float]
+                     (funct-body utils/profile.ml(150):5823-6622
+                       (before utils/profile.ml(151):5856-6622
+                         (let
+                           (to_string =
+                              (function max[float] width[int]
+                                (funct-body utils/profile.ml(151)<ghost>:5870-6048
+                                  (before utils/profile.ml(152):5890-6048
+                                    (let
+                                      (*match* =
+                                         (after utils/profile.ml(152):5913-5936
+                                           (apply choose_memory_scale max))
+                                       scale_str =a (field 1 *match*)
+                                       scale =a (field 0 *match*))
+                                      (before utils/profile.ml(153):5946-6048
+                                        (let
+                                          (width =[int]
+                                             (- width
+                                               (string.length scale_str)))
+                                          (before utils/profile.ml(154):5999-6048
+                                            (after utils/profile.ml(154):5999-6048
+                                              (apply
+                                                (field 27 (global Stdlib!))
+                                                (after utils/profile.ml(154):5999-6036
+                                                  (apply
+                                                    to_string_without_unit v
+                                                    width scale))
+                                                scale_str))))))))))
+                           (before utils/profile.ml(156):6060-6622
+                             (let
+                               (worth_displaying =
+                                  (function max[float]
+                                    (funct-body utils/profile.ml(156)<ghost>:6081-6579
+                                      (before utils/profile.ml(157):6094-6579
+                                        (let
+                                          (*match* =
+                                             (after utils/profile.ml(157):6109-6132
+                                               (apply choose_memory_scale
+                                                 max))
+                                           scale =a (field 0 *match*))
+                                          (before utils/profile.ml(158):6142-6579
+                                            (&&
+                                              (!=.
+                                                (after utils/profile.ml(158):6142-6199
+                                                  (caml_float_of_string
+                                                    (after utils/profile.ml(158):6158-6199
+                                                      (apply
+                                                        to_string_without_unit
+                                                        v 0 scale))))
+                                                0.)
+                                              (if previous
+                                                (let
+                                                  (p =a (field 0 previous))
+                                                  (before utils/profile.ml(165):6488-6579
+                                                    (after utils/profile.ml(165):6488-6579
+                                                      (caml_string_notequal
+                                                        (after utils/profile.ml(165):6488-6527
+                                                          (apply
+                                                            to_string_without_unit
+                                                            p 0 scale))
+                                                        (after utils/profile.ml(166):6540-6579
+                                                          (apply
+                                                            to_string_without_unit
+                                                            v 0 scale))))))
+                                                (before utils/profile.ml(160):6251-6255
+                                                  1a)))))))))
+                               (before utils/profile.ml(168):6591-6622
+                                 (makeblock 0 to_string worth_displaying))))))))))))))
+     profile_list =
+       (function param
+         (funct-body utils/profile.ml(170)<ghost>:6641-6827
+           (let (table =a param)
+             (before utils/profile.ml(171):6655-6827
+               (let
+                 (l =
+                    (after utils/profile.ml(171):6663-6711
+                      (apply (field 13 (global Stdlib__hashtbl!))
+                        (function k d l
+                          (funct-body utils/profile.ml(171):6676-6702
+                            (before utils/profile.ml(171):6690-6701
+                              (makeblock 0 (makeblock 0 k d) l))))
+                        table 0a)))
+                 (before utils/profile.ml(172):6717-6827
+                   (after utils/profile.ml(172):6717-6827
+                     (apply (field 48 (global Stdlib__list!))
+                       (function param param : int
+                         (funct-body utils/profile.ml(172):6727-6825
+                           (let
+                             (*match* =a (field 1 param)
+                              p2 =a (field 0 *match*)
+                              *match* =a (field 1 param)
+                              p1 =a (field 0 *match*))
+                             (before utils/profile.ml(173):6765-6824
+                               (after utils/profile.ml(173):6765-6824
+                                 (caml_int_compare (field 0 p1) (field 0 p2)))))))
+                       l))))))))
+     compute_other_category =
+       (function param total
+         (funct-body utils/profile.ml(175)<ghost>:6856-7275
+           (let (table =a param)
+             (before utils/profile.ml(176):6907-7275
+               (let (r = (makemutable 0 total))
+                 (before utils/profile.ml(177):6930-7275
+                   (seq
+                     (after utils/profile.ml(177):6930-7269
+                       (apply (field 11 (global Stdlib__hashtbl!))
+                         (function _pass param
+                           (funct-body utils/profile.ml(177):6943-7263
+                             (let (p2 =a (field 0 param))
+                               (before utils/profile.ml(178):6988-7259
+                                 (let (p1 = (field 0 r))
+                                   (before utils/profile.ml(179):7007-7259
+                                     (setfield_ptr 0 r
+                                       (makeblock 0 (int,float,float,int)
+                                         (field 0 p1)
+                                         (-. (field 1 p1) (field 1 p2))
+                                         (-. (field 2 p1) (field 2 p2))
+                                         (- (field 3 p1) (field 3 p2))))))))))
+                         table))
+                     (before utils/profile.ml(187):7273-7275 (field 0 r))))))))))
+    (letrec
+      (rows_of_hierarchy
+         (function nesting[int] make_row name measure_diff hierarchy env
+           (funct-body utils/profile.ml(192)<ghost>:7424-7714
+             (before utils/profile.ml(193):7478-7714
+               (let
+                 (rows =
+                    (after utils/profile.ml(194):7493-7580
+                      (apply rows_of_hierarchy_list (+ nesting 1) make_row
+                        hierarchy measure_diff env)))
+                 (before utils/profile.ml(196):7586-7714
+                   (let
+                     (*match* =
+                        (after utils/profile.ml(197):7608-7681
+                          (apply make_row env measure_diff
+                            (&& (== nesting 0)
+                              (after utils/profile.ml(197):7666-7680
+                                (caml_string_equal name "other")))))
+                      env =a (field 1 *match*)
+                      values =a (field 0 *match*))
+                     (before utils/profile.ml(198):7687-7714
+                       (makeblock 0 (makeblock 0 name values rows) env))))))))
+        rows_of_hierarchy_list
+          (function nesting[int] make_row hierarchy total env
+            (funct-body utils/profile.ml(200)<ghost>:7743-8169
+              (before utils/profile.ml(201):7785-8169
+                (let
+                  (list =
+                     (after utils/profile.ml(201):7796-7818
+                       (apply profile_list hierarchy)))
+                  (before utils/profile.ml(202):7824-8169
+                    (let
+                      (list =
+                         (if (|| (!= list 0a) (== nesting 0))
+                           (before utils/profile.ml(204):7877-7948
+                             (after utils/profile.ml(204):7877-7948
+                               (apply (field 36 (global Stdlib!)) list
+                                 (makeblock 0
+                                   (makeblock 0 "other"
+                                     (makeblock 0
+                                       (after utils/profile.ml(204):7896-7934
+                                         (apply compute_other_category
+                                           hierarchy total))
+                                       (after utils/profile.ml(204):7936-7945
+                                         (apply create 0a))))
+                                   0a))))
+                           (before utils/profile.ml(205):7958-7960 0a)))
+                      (before utils/profile.ml(207):7968-8169
+                        (let (env = (makemutable 0 env))
+                          (before utils/profile.ml(208):7991-8169
+                            (after utils/profile.ml(208):7991-8169
+                              (apply (field 16 (global Stdlib__list!))
+                                (function param
+                                  (funct-body utils/profile.ml(208):8000-8164
+                                    (let
+                                      (*match* =a (field 1 param)
+                                       hierarchy =a (field 1 *match*)
+                                       measure_diff =a (field 0 *match*)
+                                       name =a (field 0 param))
+                                      (before utils/profile.ml(209):8046-8160
+                                        (let
+                                          (*match* =
+                                             (after utils/profile.ml(210):8066-8134
+                                               (apply rows_of_hierarchy
+                                                 nesting make_row name
+                                                 measure_diff hierarchy
+                                                 (field 0 env)))
+                                           env' =a (field 1 *match*)
+                                           a =a (field 0 *match*))
+                                          (before utils/profile.ml(211):8142-8160
+                                            (seq (setfield_ptr 0 env env')
+                                              (before utils/profile.ml(212):8159-8160
+                                                a))))))))
+                                list))))))))))))
+      (let
+        (rows_of_hierarchy =
+           (function hierarchy measure_diff initial_measure columns
+             (funct-body utils/profile.ml(215)<ghost>:8193-10110
+               (before utils/profile.ml(230):9233-10110
+                 (let
+                   (make_row =
+                      (function prev_top_heap_words[int] p toplevel_other
+                        (funct-body utils/profile.ml(230)<ghost>:9246-10002
+                          (before utils/profile.ml(231):9311-10002
+                            (let
+                              (top_heap_words =[int]
+                                 (- (+ prev_top_heap_words (field 3 p))
+                                   (if toplevel_other
+                                     (before utils/profile.ml(235):9439-9477
+                                       (field 2 initial_measure))
+                                     (before utils/profile.ml(236):9493-9494
+                                       0))))
+                              (before utils/profile.ml(238):9510-10002
+                                (let
+                                  (make =
+                                     (function value f
+                                       (funct-body utils/profile.ml(238)<ghost>:9519-9544
+                                         (before utils/profile.ml(238):9530-9544
+                                           (makeblock 0 value
+                                             (after utils/profile.ml(238):9537-9544
+                                               (apply f value)))))))
+                                  (before utils/profile.ml(239):9554-10002
+                                    (makeblock 0 (*,int)
+                                      (after utils/profile.ml(239):9554-9980
+                                        (apply
+                                          (field 16 (global Stdlib__list!))
+                                          (function param
+                                            (funct-body utils/profile.ml(239):9563-9972
+                                              (if (>= param 885068885)
+                                                (if (>= param 936769581)
+                                                  (before utils/profile.ml(241):9602-9633
+                                                    (after utils/profile.ml(241):9602-9633
+                                                      (apply make (field 1 p)
+                                                        time_display)))
+                                                  (before utils/profile.ml(243):9664-9709
+                                                    (after utils/profile.ml(243):9664-9709
+                                                      (apply make (field 2 p)
+                                                        (let
+                                                          (arg =
+                                                             memory_word_display)
+                                                          (before _none_(0)<ghost>:-1--1
+                                                            (function
+                                                              eta[float]
+                                                              (funct-body _none_(0)<ghost>:-1--1
+                                                                (before _none_(0)<ghost>:-1--1
+                                                                  (after _none_(0)<ghost>:-1--1
+                                                                    (apply
+                                                                    arg 0a
+                                                                    eta)))))))))))
+                                                (if (>= param 208707190)
+                                                  (before utils/profile.ml(245):9743-9811
+                                                    (after utils/profile.ml(245):9743-9811
+                                                      (apply make
+                                                        (float_of_int
+                                                          (field 3 p))
+                                                        (let
+                                                          (arg =
+                                                             memory_word_display)
+                                                          (before _none_(0)<ghost>:-1--1
+                                                            (function
+                                                              eta[float]
+                                                              (funct-body _none_(0)<ghost>:-1--1
+                                                                (before _none_(0)<ghost>:-1--1
+                                                                  (after _none_(0)<ghost>:-1--1
+                                                                    (apply
+                                                                    arg 0a
+                                                                    eta))))))))))
+                                                  (before utils/profile.ml(247):9849-9964
+                                                    (after utils/profile.ml(247):9849-9964
+                                                      (apply make
+                                                        (float_of_int
+                                                          top_heap_words)
+                                                        (after utils/profile.ml(248):9898-9964
+                                                          (apply
+                                                            memory_word_display
+                                                            (makeblock 0 (float)
+                                                              (float_of_int
+                                                                prev_top_heap_words)))))))))))
+                                          columns))
+                                      top_heap_words)))))))))
+                   (before utils/profile.ml(252):10010-10110
+                     (after utils/profile.ml(252):10010-10110
+                       (apply rows_of_hierarchy_list 0 make_row hierarchy
+                         measure_diff (field 2 initial_measure))))))))
+         max_by_column =
+           (function n_columns[int] rows
+             (funct-body utils/profile.ml(255)<ghost>:10130-10341
+               (before utils/profile.ml(256):10150-10341
+                 (let
+                   (a =
+                      (after utils/profile.ml(256):10158-10181
+                        (caml_make_vect n_columns 0.)))
+                   (before utils/profile.ml(257):10187-10341
+                     (letrec
+                       (loop
+                          (function param
+                            (funct-body utils/profile.ml(257)<ghost>:10200-10309
+                              (let
+                                (rows =a (field 2 param)
+                                 values =a (field 1 param))
+                                (before utils/profile.ml(258):10228-10309
+                                  (seq
+                                    (after utils/profile.ml(258):10228-10284
+                                      (apply
+                                        (field 15 (global Stdlib__list!))
+                                        (function i[int] param
+                                          (funct-body utils/profile.ml(258):10239-10277
+                                            (let (v =a (field 0 param))
+                                              (before utils/profile.ml(258):10256-10276
+                                                (after utils/profile.ml(258):10256-10276
+                                                  (array.set[float] a i
+                                                    (after utils/profile.ml(258):10265-10276
+                                                      (apply
+                                                        (field 16
+                                                          (global Stdlib!))
+                                                        (after utils/profile.ml(258):10269-10274
+                                                          (array.get[float] a
+                                                            i))
+                                                        v))))))))
+                                        values))
+                                    (before utils/profile.ml(259):10290-10309
+                                      (after utils/profile.ml(259):10290-10309
+                                        (apply
+                                          (field 14 (global Stdlib__list!))
+                                          loop rows)))))))))
+                       (before utils/profile.ml(261):10317-10341
+                         (seq
+                           (after utils/profile.ml(261):10317-10336
+                             (apply (field 14 (global Stdlib__list!)) loop
+                               rows))
+                           (before utils/profile.ml(262):10340-10341 a)))))))))
+         width_by_column =
+           (function n_columns[int] display_cell rows
+             (funct-body utils/profile.ml(264)<ghost>:10363-10666
+               (before utils/profile.ml(265):10397-10666
+                 (let
+                   (a =
+                      (after utils/profile.ml(265):10405-10427
+                        (caml_make_vect n_columns 1)))
+                   (before utils/profile.ml(266):10433-10666
+                     (letrec
+                       (loop
+                          (function param
+                            (funct-body utils/profile.ml(266)<ghost>:10446-10634
+                              (let
+                                (rows =a (field 2 param)
+                                 values =a (field 1 param))
+                                (before utils/profile.ml(267):10474-10634
+                                  (seq
+                                    (after utils/profile.ml(267):10474-10608
+                                      (apply
+                                        (field 15 (global Stdlib__list!))
+                                        (function i[int] cell
+                                          (funct-body utils/profile.ml(267):10485-10601
+                                            (before utils/profile.ml(268):10506-10595
+                                              (let
+                                                (*match* =
+                                                   (after utils/profile.ml(268):10519-10547
+                                                     (apply display_cell i
+                                                       cell 0))
+                                                 str =a (field 1 *match*))
+                                                (before utils/profile.ml(269):10557-10595
+                                                  (after utils/profile.ml(269):10557-10595
+                                                    (array.set[int] a i
+                                                      (after utils/profile.ml(269):10566-10595
+                                                        (apply
+                                                          (field 16
+                                                            (global Stdlib!))
+                                                          (after utils/profile.ml(269):10570-10575
+                                                            (array.get[int] a
+                                                              i))
+                                                          (string.length str))))))))))
+                                        values))
+                                    (before utils/profile.ml(271):10614-10633
+                                      (after utils/profile.ml(271):10614-10633
+                                        (apply
+                                          (field 14 (global Stdlib__list!))
+                                          loop rows)))))))))
+                       (before utils/profile.ml(273):10642-10666
+                         (seq
+                           (after utils/profile.ml(273):10642-10661
+                             (apply (field 14 (global Stdlib__list!)) loop
+                               rows))
+                           (before utils/profile.ml(274):10665-10666 a)))))))))
+         display_rows =
+           (function ppf rows
+             (funct-body utils/profile.ml(276)<ghost>:10685-11614
+               (before utils/profile.ml(277):10698-11614
+                 (let
+                   (n_columns =[int]
+                      (if rows
+                        (let
+                          (*match* =a (field 0 rows)
+                           values =a (field 1 *match*))
+                          (before utils/profile.ml(280):10779-10797
+                            (after utils/profile.ml(280):10779-10797
+                              (apply (field 0 (global Stdlib__list!)) values))))
+                        (before utils/profile.ml(279):10746-10747 0)))
+                   (before utils/profile.ml(282):10805-11614
+                     (let
+                       (maxs =
+                          (after utils/profile.ml(282):10816-10845
+                            (apply max_by_column n_columns rows)))
+                       (before utils/profile.ml(283):10851-11614
+                         (let
+                           (display_cell =
+                              (function i[int] param width[int]
+                                (funct-body utils/profile.ml(283)<ghost>:10868-11079
+                                  (let (c =a (field 1 param))
+                                    (before utils/profile.ml(284):10890-11079
+                                      (let
+                                        (display_cell =
+                                           (after utils/profile.ml(284):10909-10941
+                                             (apply (field 1 c)
+                                               (after utils/profile.ml(284):10933-10941
+                                                 (array.get[float] maxs i)))))
+                                        (before utils/profile.ml(285):10949-11079
+                                          (makeblock 0 display_cell
+                                            (if display_cell
+                                              (before utils/profile.ml(286):11002-11034
+                                                (after utils/profile.ml(286):11002-11034
+                                                  (apply (field 0 c)
+                                                    (after utils/profile.ml(286):11019-11027
+                                                      (array.get[float] maxs
+                                                        i))
+                                                    width)))
+                                              (before utils/profile.ml(287):11058-11079
+                                                (after utils/profile.ml(287):11058-11079
+                                                  (apply
+                                                    (field 0
+                                                      (global Stdlib__string!))
+                                                    width '-'))))))))))))
+                           (before utils/profile.ml(289):11087-11614
+                             (let
+                               (widths =
+                                  (after utils/profile.ml(289):11100-11145
+                                    (apply width_by_column n_columns
+                                      display_cell rows)))
+                               (before utils/profile.ml(290):11151-11614
+                                 (letrec
+                                   (loop
+                                      (function param indentation
+                                        (funct-body utils/profile.ml(290)<ghost>:11164-11569
+                                          (let
+                                            (rows =a (field 2 param)
+                                             values =a (field 1 param)
+                                             name =a (field 0 param))
+                                            (before utils/profile.ml(291):11208-11569
+                                              (let
+                                                (*match* =
+                                                   (after utils/profile.ml(292):11251-11350
+                                                     (apply
+                                                       (field 46
+                                                         (global Stdlib__list!))
+                                                       (after utils/profile.ml(292):11251-11330
+                                                         (apply
+                                                           (field 17
+                                                             (global Stdlib__list!))
+                                                           (function i[int]
+                                                             cell
+                                                             (funct-body utils/profile.ml(293):11277-11330
+                                                               (before utils/profile.ml(293):11292-11329
+                                                                 (after utils/profile.ml(293):11292-11329
+                                                                   (apply
+                                                                    display_cell
+                                                                    i cell
+                                                                    (after utils/profile.ml(293):11319-11329
+                                                                    (array.get[int]
+                                                                    widths i)))))))
+                                                           values))))
+                                                 cell_strings =a
+                                                   (field 1 *match*)
+                                                 worth_displaying =a
+                                                   (field 0 *match*))
+                                                (before utils/profile.ml(296):11362-11569
+                                                  (seq
+                                                    (if
+                                                      (after utils/profile.ml(296):11365-11406
+                                                        (apply
+                                                          (field 28
+                                                            (global Stdlib__list!))
+                                                          (function b
+                                                            (funct-body utils/profile.ml(296):11377-11389
+                                                              (before utils/profile.ml(296):11387-11388
+                                                                b)))
+                                                          worth_displaying))
+                                                      (before utils/profile.ml(297):11418-11507
+                                                        (after utils/profile.ml(297):11418-11507
+                                                          (apply
+                                                            (field 122
+                                                              (global Stdlib__format!))
+                                                            ppf
+                                                            [0:
+                                                             [2:
+                                                              0a
+                                                              [2:
+                                                               0a
+                                                               [12:
+                                                                ' '
+                                                                [2:
+                                                                 0a
+                                                                 [17: 3a 0a]]]]]
+                                                             "%s%s %s@\n"]
+                                                            indentation
+                                                            (after utils/profile.ml(298):11470-11502
+                                                              (apply
+                                                                (field 6
+                                                                  (global Stdlib__string!))
+                                                                " "
+                                                                cell_strings))
+                                                            name)))
+                                                      0a)
+                                                    (before utils/profile.ml(299):11513-11568
+                                                      (after utils/profile.ml(299):11513-11568
+                                                        (apply
+                                                          (field 14
+                                                            (global Stdlib__list!))
+                                                          (after utils/profile.ml(299):11523-11563
+                                                            (let
+                                                              (arg =
+                                                                 (after utils/profile.ml(299):11542-11562
+                                                                   (apply
+                                                                    (field 27
+                                                                    (global Stdlib!))
+                                                                    "  "
+                                                                    indentation)))
+                                                              (function param
+                                                                stub
+                                                                (apply loop
+                                                                  param arg))))
+                                                          rows)))))))))))
+                                   (before utils/profile.ml(301):11577-11614
+                                     (after utils/profile.ml(301):11577-11614
+                                       (apply
+                                         (field 14 (global Stdlib__list!))
+                                         (after utils/profile.ml(301):11587-11609
+                                           (function param stub
+                                             (apply loop param "")))
+                                         rows)))))))))))))))
+         print =
+           (function ppf columns
+             (funct-body utils/profile.ml(303)<ghost>:11626-11972
+               (before utils/profile.ml(304):11642-11972
+                 (if columns
+                   (before utils/profile.ml(307):11693-11972
+                     (let
+                       (initial_measure =
+                          (let (*match* = (field 0 initial_measure))
+                            (if *match*
+                              (let (v =a (field 0 *match*))
+                                (before utils/profile.ml(309):11769-11770 v))
+                              (before utils/profile.ml(310):11788-11800
+                                (field 1 Measure)))))
+                       (before utils/profile.ml(312):11814-11972
+                         (let
+                           (total =
+                              (after utils/profile.ml(312):11826-11879
+                                (apply (field 3 Measure_diff)
+                                  (field 1 Measure)
+                                  (after utils/profile.ml(312):11860-11879
+                                    (apply (field 0 Measure) 0a)))))
+                           (before utils/profile.ml(313):11888-11972
+                             (after utils/profile.ml(313):11888-11972
+                               (apply display_rows ppf
+                                 (after utils/profile.ml(314):11912-11972
+                                   (apply rows_of_hierarchy
+                                     (field 0 hierarchy) total
+                                     initial_measure columns)))))))))
+                   (before utils/profile.ml(305):11671-11673 0a)))))
+         column_mapping =
+           [0:
+            [0: "time" 936769581a]
+            [0:
+             [0: "alloc" 885068885a]
+             [0:
+              [0: "top-heap" 208707190a]
+              [0: [0: "absolute-top-heap" -494364893a] 0a]]]]
+         column_names =
+           (after utils/profile.ml(323):12118-12145
+             (apply (field 16 (global Stdlib__list!))
+               (function prim stub (field 0 prim)) column_mapping))
+         options_doc =
+           (after utils/profile.ml(326):12167-12300
+             (apply (field 3 (global Stdlib__printf!))
+               [0:
+                [11:
+                 " Print performance information for each pass\n    The columns are: "
+                 [2: 0a [12: '.' 0a]]]
+                " Print performance information for each pass\n    The columns are: %s."]
+               (after utils/profile.ml(329):12268-12300
+                 (apply (field 6 (global Stdlib__string!)) " " column_names))))
+         all_columns =
+           (after utils/profile.ml(331):12320-12347
+             (apply (field 16 (global Stdlib__list!))
+               (function prim stub (field 1 prim)) column_mapping))
+         generate = "generate"
+         transl = "transl"
+         typing = "typing")
+        (pseudo _none_(0)<ghost>:-1--1
+          (makeblock 0 reset record_call record print options_doc all_columns
+            generate transl typing))))))

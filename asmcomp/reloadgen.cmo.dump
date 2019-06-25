@@ -1,0 +1,457 @@
+(setglobal Reloadgen!
+  (let
+    (shared =a
+       [0:
+        #"reload_test" #"reload_operation" #"reload" #"makeregs" #"makereg1"
+        #"makereg" #"fundecl"]
+     shared =a [0: #"redo_regalloc"]
+     shared =a [0: #"reload_test" #"makereg" #"fundecl" #"reload_operation"]
+     insert_move =
+       (function src dst next
+         (funct-body asmcomp/reloadgen.ml(22)<ghost>:1204-1304
+           (before asmcomp/reloadgen.ml(23):1221-1304
+             (if
+               (after asmcomp/reloadgen.ml(23):1224-1241
+                 (caml_equal (field 3 src) (field 3 dst)))
+               (before asmcomp/reloadgen.ml(24):1249-1253 next)
+               (before asmcomp/reloadgen.ml(25):1261-1304
+                 (after asmcomp/reloadgen.ml(25):1261-1304
+                   (apply (field 2 (global Mach!)) [0: 0a]
+                     (makearray[addr] src) (makearray[addr] dst) next)))))))
+     insert_moves =
+       (function src dst next
+         (funct-body asmcomp/reloadgen.ml(27)<ghost>:1323-1473
+           (before asmcomp/reloadgen.ml(28):1340-1473
+             (letrec
+               (insmoves
+                  (function i[int]
+                    (funct-body asmcomp/reloadgen.ml(28)<ghost>:1357-1457
+                      (before asmcomp/reloadgen.ml(29):1365-1457
+                        (if (>= i (array.length[addr] src))
+                          (before asmcomp/reloadgen.ml(30):1399-1403 next)
+                          (before asmcomp/reloadgen.ml(31):1413-1457
+                            (after asmcomp/reloadgen.ml(31):1413-1457
+                              (apply insert_move
+                                (after asmcomp/reloadgen.ml(31):1425-1432
+                                  (array.get[addr] src i))
+                                (after asmcomp/reloadgen.ml(31):1433-1440
+                                  (array.get[addr] dst i))
+                                (after asmcomp/reloadgen.ml(31):1441-1457
+                                  (apply insmoves (+ i 1)))))))))))
+               (before asmcomp/reloadgen.ml(32):1463-1473
+                 (after asmcomp/reloadgen.ml(32):1463-1473
+                   (apply insmoves 0))))))))
+    (letrec
+      (reload_generic
+         (let
+           (reload_generic_init =
+              (function class
+                (let
+                  (ids =
+                     (apply (field 3 (global CamlinternalOO!)) class shared
+                       shared)
+                   reload_test =o (field 0 ids)
+                   reload_operation =o (field 1 ids)
+                   reload =o (field 2 ids)
+                   makeregs =o (field 3 ids)
+                   makereg1 =o (field 4 ids)
+                   makereg =o (field 5 ids)
+                   fundecl =o (field 6 ids)
+                   redo_regalloc =o (field 7 ids))
+                  (seq
+                    (apply (field 10 (global CamlinternalOO!)) class
+                      (makeblock 0 makereg
+                        (function self-1 r
+                          (funct-body asmcomp/reloadgen.ml(38)<ghost>:1563-1819
+                            (before asmcomp/reloadgen.ml(39):1569-1819
+                              (let (*match* = (field 3 r))
+                                (switch* *match*
+                                 case int 0:
+                                  (before asmcomp/reloadgen.ml(40):1601-1629
+                                    (after asmcomp/reloadgen.ml(40):1601-1629
+                                      (apply (field 0 (global Misc!))
+                                        "Reload.makereg")))
+                                 case tag 0:
+                                  (before asmcomp/reloadgen.ml(41):1643-1644
+                                    r)
+                                 case tag 1:
+                                  (before asmcomp/reloadgen.ml(43):1666-1819
+                                    (seq
+                                      (setfield_imm_computed self-1
+                                        redo_regalloc 1a)
+                                      (before asmcomp/reloadgen.ml(44):1695-1819
+                                        (let
+                                          (newr =
+                                             (after asmcomp/reloadgen.ml(44):1706-1717
+                                               (apply (field 5 (global Reg!))
+                                                 r)))
+                                          (before asmcomp/reloadgen.ml(46):1782-1819
+                                            (seq (setfield_imm 9 newr 100000)
+                                              (before asmcomp/reloadgen.ml(47):1815-1819
+                                                newr))))))))))))
+                        makeregs
+                        (function self-1 rv
+                          (funct-body asmcomp/reloadgen.ml(49)<ghost>:1845-1984
+                            (before asmcomp/reloadgen.ml(50):1852-1984
+                              (let (n =[int] (array.length[addr] rv))
+                                (before asmcomp/reloadgen.ml(51):1881-1984
+                                  (let
+                                    (newv =
+                                       (after asmcomp/reloadgen.ml(51):1892-1914
+                                         (caml_make_vect n
+                                           (field 1 (global Reg!)))))
+                                    (before asmcomp/reloadgen.ml(52):1920-1984
+                                      (seq
+                                        (for i 0 to (- n 1)
+                                          (before asmcomp/reloadgen.ml(52):1940-1971
+                                            (after asmcomp/reloadgen.ml(52):1940-1971
+                                              (array.set[addr] newv i
+                                                (after asmcomp/reloadgen.ml(52):1952-1971
+                                                  (sendself self-1 makereg
+                                                    (after asmcomp/reloadgen.ml(52):1965-1971
+                                                      (array.get[addr] rv i))))))))
+                                        (before asmcomp/reloadgen.ml(53):1980-1984
+                                          newv)))))))))
+                        makereg1
+                        (function self-1 rv
+                          (funct-body asmcomp/reloadgen.ml(55)<ghost>:2010-2086
+                            (before asmcomp/reloadgen.ml(56):2017-2086
+                              (let
+                                (newv =
+                                   (after asmcomp/reloadgen.ml(56):2028-2041
+                                     (apply (field 7 (global Stdlib__array!))
+                                       rv)))
+                                (before asmcomp/reloadgen.ml(57):2047-2086
+                                  (seq
+                                    (after asmcomp/reloadgen.ml(57):2047-2078
+                                      (array.set[addr] newv 0
+                                        (after asmcomp/reloadgen.ml(57):2059-2078
+                                          (sendself self-1 makereg
+                                            (after asmcomp/reloadgen.ml(57):2072-2078
+                                              (array.get[addr] rv 0))))))
+                                    (before asmcomp/reloadgen.ml(58):2082-2086
+                                      newv)))))))
+                        reload_operation
+                        (function self-1 op arg res
+                          (funct-body asmcomp/reloadgen.ml(60)<ghost>:2112-2619
+                            (before asmcomp/reloadgen.ml(65):2332-2619
+                              (catch
+                                (if (isint op)
+                                  (if (>= op 3) (exit 10)
+                                    (before asmcomp/reloadgen.ml(67):2384-2565
+                                      (let
+                                        (*match* =
+                                           (after asmcomp/reloadgen.ml(67):2396-2403
+                                             (array.get[addr] arg 0))
+                                         *match* =
+                                           (after asmcomp/reloadgen.ml(67):2405-2412
+                                             (array.get[addr] res 0))
+                                         *match* = *match*
+                                         *match* = *match*
+                                         *match* =o (field 3 *match*))
+                                        (catch
+                                          (switch* *match*
+                                           case int 0: (exit 8)
+                                           case tag 0: (exit 8)
+                                           case tag 1:
+                                            (let
+                                              (s1 =a (field 0 *match*)
+                                               *match* =o (field 3 *match*))
+                                              (switch* *match*
+                                               case int 0: (exit 8)
+                                               case tag 0: (exit 8)
+                                               case tag 1:
+                                                (let
+                                                  (s2 =a (field 0 *match*))
+                                                  (before asmcomp/reloadgen.ml(68):2466-2474
+                                                    (if
+                                                      (after asmcomp/reloadgen.ml(68):2466-2474
+                                                        (caml_notequal s1 s2))
+                                                      (before asmcomp/reloadgen.ml(69):2488-2521
+                                                        (makeblock 0
+                                                          (makearray[addr]
+                                                            (after asmcomp/reloadgen.ml(69):2492-2512
+                                                              (sendself
+                                                                self-1
+                                                                makereg
+                                                                (after asmcomp/reloadgen.ml(69):2505-2512
+                                                                  (array.get[addr]
+                                                                    arg 0)))))
+                                                          res))
+                                                      (exit 8)))))))
+                                         with (8)
+                                          (before asmcomp/reloadgen.ml(71):2545-2555
+                                            (makeblock 0 arg res))))))
+                                  (exit 10))
+                               with (10)
+                                (before asmcomp/reloadgen.ml(74):2581-2619
+                                  (makeblock 0
+                                    (after asmcomp/reloadgen.ml(74):2582-2599
+                                      (sendself self-1 makeregs arg))
+                                    (after asmcomp/reloadgen.ml(74):2601-2618
+                                      (sendself self-1 makeregs res))))))))
+                        reload_test
+                        (function self-1 _tst args
+                          (funct-body asmcomp/reloadgen.ml(76)<ghost>:2640-2672
+                            (before asmcomp/reloadgen.ml(77):2654-2672
+                              (after asmcomp/reloadgen.ml(77):2654-2672
+                                (sendself self-1 makeregs args)))))
+                        reload
+                        (function self-1 i
+                          (funct-body asmcomp/reloadgen.ml(79)<ghost>:2696-4561
+                            (before asmcomp/reloadgen.ml(80):2702-4561
+                              (let (*match* = (field 0 i))
+                                (catch
+                                  (switch *match*
+                                   case tag 0:
+                                    (let (op =a (field 0 *match*))
+                                      (catch
+                                        (catch
+                                          (switch op
+                                           case tag 3:
+                                            (before asmcomp/reloadgen.ml(93):3261-3385
+                                              (let
+                                                (newarg =
+                                                   (after asmcomp/reloadgen.ml(93):3274-3293
+                                                     (sendself self-1
+                                                       makereg1 (field 2 i))))
+                                                (before asmcomp/reloadgen.ml(94):3303-3385
+                                                  (after asmcomp/reloadgen.ml(94):3303-3385
+                                                    (apply insert_moves
+                                                      (field 2 i) newarg
+                                                      (let (init = i)
+                                                        (makemutable 0
+                                                          (field 0 init)
+                                                          (after asmcomp/reloadgen.ml(95):3366-3384
+                                                            (sendself self-1
+                                                              reload
+                                                              (field 1 i)))
+                                                          newarg
+                                                          (field 3 init)
+                                                          (field 4 init)
+                                                          (field 5 init)
+                                                          (field 6 init)
+                                                          (field 7 init))))))))
+                                           case tag 4: (exit 5)
+                                           case tag 5:
+                                            (before asmcomp/reloadgen.ml(87):3055-3152
+                                              (let
+                                                (newarg =
+                                                   (after asmcomp/reloadgen.ml(87):3068-3087
+                                                     (sendself self-1
+                                                       makereg1 (field 2 i))))
+                                                (before asmcomp/reloadgen.ml(88):3097-3152
+                                                  (after asmcomp/reloadgen.ml(88):3097-3152
+                                                    (apply insert_moves
+                                                      (field 2 i) newarg
+                                                      (let (init = i)
+                                                        (makemutable 0
+                                                          (field 0 init)
+                                                          (field 1 init)
+                                                          newarg
+                                                          (field 3 init)
+                                                          (field 4 init)
+                                                          (field 5 init)
+                                                          (field 6 init)
+                                                          (field 7 init))))))))
+                                           case tag 6: (exit 4)
+                                           case tag 7: (exit 5)
+                                           default: (exit 6))
+                                         with (6)
+                                          (before asmcomp/reloadgen.ml(97):3406-3623
+                                            (let
+                                              (*match* =
+                                                 (after asmcomp/reloadgen.ml(97):3429-3465
+                                                   (sendself self-1
+                                                     reload_operation op
+                                                     (field 2 i) (field 3 i)))
+                                               newres =a (field 1 *match*)
+                                               newarg =a (field 0 *match*))
+                                              (before asmcomp/reloadgen.ml(98):3475-3623
+                                                (after asmcomp/reloadgen.ml(98):3475-3623
+                                                  (apply insert_moves
+                                                    (field 2 i) newarg
+                                                    (let (init = i)
+                                                      (makemutable 0
+                                                        (field 0 init)
+                                                        (after asmcomp/reloadgen.ml(100):3562-3622
+                                                          (apply insert_moves
+                                                            newres
+                                                            (field 3 i)
+                                                            (after asmcomp/reloadgen.ml(101):3601-3621
+                                                              (sendself
+                                                                self-1 reload
+                                                                (field 1 i)))))
+                                                        newarg newres
+                                                        (field 4 init)
+                                                        (field 5 init)
+                                                        (field 6 init)
+                                                        (field 7 init)))))))))
+                                       with (5)
+                                        (before asmcomp/reloadgen.ml(91):3196-3230
+                                          (let (init = i)
+                                            (makemutable 0 (field 0 init)
+                                              (after asmcomp/reloadgen.ml(91):3211-3229
+                                                (sendself self-1 reload
+                                                  (field 1 i)))
+                                              (field 2 init) (field 3 init)
+                                              (field 4 init) (field 5 init)
+                                              (field 6 init) (field 7 init))))))
+                                   case tag 1:
+                                    (let
+                                      (ifnot =a (field 2 *match*)
+                                       ifso =a (field 1 *match*)
+                                       tst =a (field 0 *match*))
+                                      (before asmcomp/reloadgen.ml(103):3667-3871
+                                        (let
+                                          (newarg =
+                                             (after asmcomp/reloadgen.ml(103):3680-3706
+                                               (sendself self-1 reload_test
+                                                 tst (field 2 i))))
+                                          (before asmcomp/reloadgen.ml(104):3716-3871
+                                            (after asmcomp/reloadgen.ml(104):3716-3871
+                                              (apply insert_moves (field 2 i)
+                                                newarg
+                                                (after asmcomp/reloadgen.ml(105):3750-3871
+                                                  (apply
+                                                    (field 2 (global Mach!))
+                                                    (makeblock 1 tst
+                                                      (after asmcomp/reloadgen.ml(106):3790-3806
+                                                        (sendself self-1
+                                                          reload ifso))
+                                                      (after asmcomp/reloadgen.ml(106):3808-3825
+                                                        (sendself self-1
+                                                          reload ifnot)))
+                                                    newarg (makearray[addr])
+                                                    (after asmcomp/reloadgen.ml(107):3850-3870
+                                                      (sendself self-1 reload
+                                                        (field 1 i)))))))))))
+                                   case tag 2:
+                                    (let
+                                      (cases =a (field 1 *match*)
+                                       index =a (field 0 *match*))
+                                      (before asmcomp/reloadgen.ml(109):3907-4086
+                                        (let
+                                          (newarg =
+                                             (after asmcomp/reloadgen.ml(109):3920-3939
+                                               (sendself self-1 makeregs
+                                                 (field 2 i))))
+                                          (before asmcomp/reloadgen.ml(110):3949-4086
+                                            (after asmcomp/reloadgen.ml(110):3949-4086
+                                              (apply insert_moves (field 2 i)
+                                                newarg
+                                                (after asmcomp/reloadgen.ml(111):3983-4086
+                                                  (apply
+                                                    (field 2 (global Mach!))
+                                                    (makeblock 2 index
+                                                      (after asmcomp/reloadgen.ml(111):4011-4040
+                                                        (apply
+                                                          (field 14
+                                                            (global Stdlib__array!))
+                                                          (after asmcomp/reloadgen.ml(111):4021-4034
+                                                            (sendself self-1
+                                                              reload))
+                                                          cases)))
+                                                    newarg (makearray[addr])
+                                                    (after asmcomp/reloadgen.ml(112):4065-4085
+                                                      (sendself self-1 reload
+                                                        (field 1 i)))))))))))
+                                   case tag 3:
+                                    (let
+                                      (body =a (field 2 *match*)
+                                       handlers =a (field 1 *match*)
+                                       rec_flag =a (field 0 *match*))
+                                      (before asmcomp/reloadgen.ml(114):4133-4360
+                                        (let
+                                          (new_handlers =
+                                             (after asmcomp/reloadgen.ml(114):4152-4242
+                                               (apply
+                                                 (field 16
+                                                   (global Stdlib__list!))
+                                                 (function param
+                                                   (funct-body asmcomp/reloadgen.ml(115):4171-4223
+                                                     (let
+                                                       (handler =a
+                                                          (field 1 param)
+                                                        nfail =a
+                                                          (field 0 param))
+                                                       (before asmcomp/reloadgen.ml(115):4196-4222
+                                                         (makeblock 0 (int,*)
+                                                           nfail
+                                                           (after asmcomp/reloadgen.ml(115):4203-4222
+                                                             (sendself self-1
+                                                               reload
+                                                               handler)))))))
+                                                 handlers)))
+                                          (before asmcomp/reloadgen.ml(117):4252-4360
+                                            (after asmcomp/reloadgen.ml(117):4252-4360
+                                              (apply (field 2 (global Mach!))
+                                                (makeblock 3 rec_flag
+                                                  new_handlers
+                                                  (after asmcomp/reloadgen.ml(118):4303-4319
+                                                    (sendself self-1 reload
+                                                      body)))
+                                                (makearray[addr])
+                                                (makearray[addr])
+                                                (after asmcomp/reloadgen.ml(119):4340-4360
+                                                  (sendself self-1 reload
+                                                    (field 1 i)))))))))
+                                   case tag 4:
+                                    (let (i =a (field 0 *match*))
+                                      (before asmcomp/reloadgen.ml(121):4382-4424
+                                        (after asmcomp/reloadgen.ml(121):4382-4424
+                                          (apply (field 2 (global Mach!))
+                                            (makeblock 4 (int) i)
+                                            (makearray[addr])
+                                            (makearray[addr])
+                                            (field 0 (global Mach!))))))
+                                   case tag 5:
+                                    (let
+                                      (handler =a (field 1 *match*)
+                                       body =a (field 0 *match*))
+                                      (before asmcomp/reloadgen.ml(123):4462-4561
+                                        (after asmcomp/reloadgen.ml(123):4462-4561
+                                          (apply (field 2 (global Mach!))
+                                            (makeblock 5
+                                              (after asmcomp/reloadgen.ml(123):4483-4499
+                                                (sendself self-1 reload body))
+                                              (after asmcomp/reloadgen.ml(123):4501-4520
+                                                (sendself self-1 reload
+                                                  handler)))
+                                            (makearray[addr])
+                                            (makearray[addr])
+                                            (after asmcomp/reloadgen.ml(124):4541-4561
+                                              (sendself self-1 reload
+                                                (field 1 i)))))))
+                                   default: (exit 4))
+                                 with (4)
+                                  (before asmcomp/reloadgen.ml(85):3019-3020
+                                    i))))))
+                        fundecl
+                        (function self-1 f
+                          (funct-body asmcomp/reloadgen.ml(126)<ghost>:4578-4860
+                            (before asmcomp/reloadgen.ml(127):4584-4860
+                              (seq
+                                (setfield_imm_computed self-1 redo_regalloc
+                                  0a)
+                                (before asmcomp/reloadgen.ml(128):4610-4860
+                                  (let
+                                    (new_body =
+                                       (after asmcomp/reloadgen.ml(128):4625-4647
+                                         (sendself self-1 reload (field 2 f))))
+                                    (before asmcomp/reloadgen.ml(129):4653-4860
+                                      (makeblock 0
+                                        (makeblock 0 (field 0 f) (field 1 f)
+                                          new_body (field 3 f) (field 4 f)
+                                          (field 5 f))
+                                        (field_computed self-1 redo_regalloc)))))))))))
+                    (function env self
+                      (let
+                        (self =
+                           (apply (field 23 (global CamlinternalOO!)) self
+                             class))
+                        (seq (setfield_imm_computed self redo_regalloc 0a)
+                          self)))))))
+           (apply (field 18 (global CamlinternalOO!)) shared
+             reload_generic_init)))
+      (pseudo _none_(0)<ghost>:-1--1 (makeblock 0 reload_generic)))))

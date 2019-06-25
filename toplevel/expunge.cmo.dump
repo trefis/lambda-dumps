@@ -1,0 +1,279 @@
+(setglobal Expunge!
+  (let
+    (is_exn =
+       (let
+         (h =
+            (after toplevel/expunge.ml(23):1297-1314
+              (apply (field 0 (global Stdlib__hashtbl!)) 0a 64)))
+         (before toplevel/expunge.ml(24):1320-1407
+           (seq
+             (after toplevel/expunge.ml(24):1320-1390
+               (apply (field 12 (global Stdlib__array!))
+                 (function n
+                   (funct-body toplevel/expunge.ml(24):1331-1360
+                     (before toplevel/expunge.ml(24):1341-1359
+                       (after toplevel/expunge.ml(24):1341-1359
+                         (apply (field 4 (global Stdlib__hashtbl!)) h n 0a)))))
+                 (field 0 (global Runtimedef!))))
+             (before toplevel/expunge.ml(25):1394-1407
+               (after toplevel/expunge.ml(25):1394-1407
+                 (apply (field 8 (global Stdlib__hashtbl!)) h))))))
+     to_keep =
+       (makemutable 0
+         (field 0 (field 38 (field 3 (field 11 (global Misc!))))))
+     negate =
+       (after toplevel/expunge.ml(29):1458-1477
+         (caml_string_equal
+           (after toplevel/expunge.ml(29):1458-1470
+             (array.get[addr] (caml_sys_argv 0a) 3))
+           "-v"))
+     keep =
+       (if negate
+         (before toplevel/expunge.ml(32):1507-1568
+           (function name
+             (funct-body toplevel/expunge.ml(32):1507-1568
+               (before toplevel/expunge.ml(32):1519-1568
+                 (||
+                   (after toplevel/expunge.ml(32):1519-1530
+                     (apply is_exn name))
+                   (not
+                     (after toplevel/expunge.ml(32):1538-1568
+                       (apply
+                         (field 2
+                           (field 38 (field 3 (field 11 (global Misc!)))))
+                         name (field 0 to_keep)))))))))
+         (before toplevel/expunge.ml(33):1576-1633
+           (function name
+             (funct-body toplevel/expunge.ml(33):1576-1633
+               (before toplevel/expunge.ml(33):1588-1633
+                 (||
+                   (after toplevel/expunge.ml(33):1588-1599
+                     (apply is_exn name))
+                   (after toplevel/expunge.ml(33):1603-1633
+                     (apply
+                       (field 2
+                         (field 38 (field 3 (field 11 (global Misc!)))))
+                       name (field 0 to_keep)))))))))
+     expunge_map =
+       (function tbl
+         (funct-body toplevel/expunge.ml(35)<ghost>:1651-1722
+           (before toplevel/expunge.ml(36):1659-1722
+             (after toplevel/expunge.ml(36):1659-1722
+               (apply (field 23 (global Symtable!))
+                 (function id
+                   (funct-body toplevel/expunge.ml(36):1686-1718
+                     (before toplevel/expunge.ml(36):1697-1717
+                       (after toplevel/expunge.ml(36):1697-1717
+                         (apply keep
+                           (after toplevel/expunge.ml(36):1702-1717
+                             (apply (field 14 (global Ident!)) id)))))))
+                 tbl)))))
+     expunge_crcs =
+       (function tbl
+         (funct-body toplevel/expunge.ml(38)<ghost>:1741-1796
+           (before toplevel/expunge.ml(39):1749-1796
+             (after toplevel/expunge.ml(39):1749-1796
+               (apply (field 35 (global Stdlib__list!))
+                 (function param
+                   (funct-body toplevel/expunge.ml(39):1761-1792
+                     (let (unit =a (field 0 param))
+                       (before toplevel/expunge.ml(39):1782-1791
+                         (after toplevel/expunge.ml(39):1782-1791
+                           (apply keep unit))))))
+                 tbl)))))
+     main =
+       (function param
+         (funct-body toplevel/expunge.ml(41)<ghost>:1807-3090
+           (before toplevel/expunge.ml(42):1814-3090
+             (let
+               (input_name =
+                  (after toplevel/expunge.ml(42):1831-1843
+                    (array.get[addr] (caml_sys_argv 0a) 1)))
+               (before toplevel/expunge.ml(43):1849-3090
+                 (let
+                   (output_name =
+                      (after toplevel/expunge.ml(43):1867-1879
+                        (array.get[addr] (caml_sys_argv 0a) 2)))
+                   (before toplevel/expunge.ml(44):1885-3090
+                     (seq
+                       (for i
+                         (if negate
+                           (before toplevel/expunge.ml(44):1909-1910 4)
+                           (before toplevel/expunge.ml(44):1916-1917 3))
+                         to (- (array.length[addr] (caml_sys_argv 0a)) 1)
+                         (before toplevel/expunge.ml(45):1955-2028
+                           (setfield_ptr 0 to_keep
+                             (after toplevel/expunge.ml(45):1966-2028
+                               (apply
+                                 (field 3
+                                   (field 38
+                                     (field 3 (field 11 (global Misc!)))))
+                                 (after toplevel/expunge.ml(45):1981-2019
+                                   (apply
+                                     (field 30
+                                       (field 3 (field 11 (global Misc!))))
+                                     (after toplevel/expunge.ml(45):2006-2018
+                                       (array.get[addr] (caml_sys_argv 0a) i))))
+                                 (field 0 to_keep))))))
+                       (before toplevel/expunge.ml(47):2039-3090
+                         (let
+                           (ic =
+                              (after toplevel/expunge.ml(47):2048-2070
+                                (apply (field 79 (global Stdlib!))
+                                  input_name)))
+                           (before toplevel/expunge.ml(48):2076-3090
+                             (seq
+                               (after toplevel/expunge.ml(48):2076-2100
+                                 (apply (field 3 (global Bytesections!)) ic))
+                               (before toplevel/expunge.ml(49):2104-3090
+                                 (let
+                                   (toc =
+                                      (after toplevel/expunge.ml(49):2114-2132
+                                        (apply
+                                          (field 5 (global Bytesections!))
+                                          0a)))
+                                   (before toplevel/expunge.ml(50):2138-3090
+                                     (let
+                                       (pos_first_section =[int]
+                                          (after toplevel/expunge.ml(50):2162-2195
+                                            (apply
+                                              (field 9
+                                                (global Bytesections!))
+                                              ic)))
+                                       (before toplevel/expunge.ml(51):2201-3090
+                                         (let
+                                           (oc =
+                                              (after toplevel/expunge.ml(52):2214-2312
+                                                (apply
+                                                  (field 61 (global Stdlib!))
+                                                  [0:
+                                                   1a
+                                                   [0: 3a [0: 4a [0: 6a 0a]]]]
+                                                  511 output_name)))
+                                           (before toplevel/expunge.ml(55):2371-3090
+                                             (seq
+                                               (after toplevel/expunge.ml(55):2371-2383
+                                                 (apply
+                                                   (field 89
+                                                     (global Stdlib!))
+                                                   ic 0))
+                                               (before toplevel/expunge.ml(56):2387-3090
+                                                 (seq
+                                                   (after toplevel/expunge.ml(56):2387-2426
+                                                     (apply
+                                                       (field 20
+                                                         (global Misc!))
+                                                       ic oc
+                                                       pos_first_section))
+                                                   (before toplevel/expunge.ml(58):2497-3090
+                                                     (seq
+                                                       (after toplevel/expunge.ml(58):2497-2524
+                                                         (apply
+                                                           (field 0
+                                                             (global Bytesections!))
+                                                           oc))
+                                                       (before toplevel/expunge.ml(59):2528-3090
+                                                         (seq
+                                                           (after toplevel/expunge.ml(59):2528-2969
+                                                             (apply
+                                                               (field 14
+                                                                 (global Stdlib__list!))
+                                                               (function
+                                                                 param
+                                                                 (funct-body toplevel/expunge.ml(60):2542-2961
+                                                                   (let
+                                                                    (len =a
+                                                                    (field 1
+                                                                    param)
+                                                                    name =a
+                                                                    (field 0
+                                                                    param))
+                                                                    (before toplevel/expunge.ml(61):2568-2960
+                                                                    (seq
+                                                                    (catch
+                                                                    (stringswitch name
+                                                                    case "CRCS":
+                                                                    (before toplevel/expunge.ml(66):2756-2866
+                                                                    (let
+                                                                    (crcs =
+                                                                    (after toplevel/expunge.ml(66):2768-2782
+                                                                    (apply
+                                                                    (field 88
+                                                                    (global Stdlib!))
+                                                                    ic)))
+                                                                    (before toplevel/expunge.ml(67):2831-2866
+                                                                    (after toplevel/expunge.ml(67):2831-2866
+                                                                    (apply
+                                                                    (field 71
+                                                                    (global Stdlib!))
+                                                                    oc
+                                                                    (after toplevel/expunge.ml(67):2847-2866
+                                                                    (apply
+                                                                    expunge_crcs
+                                                                    crcs)))))))
+                                                                    case "SYMB":
+                                                                    (before toplevel/expunge.ml(63):2618-2727
+                                                                    (let
+                                                                    (global_map =
+                                                                    (after toplevel/expunge.ml(63):2636-2650
+                                                                    (apply
+                                                                    (field 88
+                                                                    (global Stdlib!))
+                                                                    ic)))
+                                                                    (before toplevel/expunge.ml(64):2687-2727
+                                                                    (after toplevel/expunge.ml(64):2687-2727
+                                                                    (apply
+                                                                    (field 71
+                                                                    (global Stdlib!))
+                                                                    oc
+                                                                    (after toplevel/expunge.ml(64):2703-2727
+                                                                    (apply
+                                                                    expunge_map
+                                                                    global_map)))))))
+                                                                    default:
+                                                                    (exit 7))
+                                                                    with (7)
+                                                                    (before toplevel/expunge.ml(69):2890-2915
+                                                                    (after toplevel/expunge.ml(69):2890-2915
+                                                                    (apply
+                                                                    (field 20
+                                                                    (global Misc!))
+                                                                    ic oc
+                                                                    len))))
+                                                                    (before toplevel/expunge.ml(71):2933-2960
+                                                                    (after toplevel/expunge.ml(71):2933-2960
+                                                                    (apply
+                                                                    (field 1
+                                                                    (global Bytesections!))
+                                                                    oc name))))))))
+                                                               toc))
+                                                           (before toplevel/expunge.ml(74):3009-3090
+                                                             (seq
+                                                               (after toplevel/expunge.ml(74):3009-3046
+                                                                 (apply
+                                                                   (field 2
+                                                                    (global Bytesections!))
+                                                                   oc))
+                                                               (before toplevel/expunge.ml(76):3063-3090
+                                                                 (seq
+                                                                   (after toplevel/expunge.ml(76):3063-3074
+                                                                    (apply
+                                                                    (field 92
+                                                                    (global Stdlib!))
+                                                                    ic))
+                                                                   (before toplevel/expunge.ml(77):3078-3090
+                                                                    (after toplevel/expunge.ml(77):3078-3090
+                                                                    (apply
+                                                                    (field 75
+                                                                    (global Stdlib!))
+                                                                    oc))))))))))))))))))))))))))))))))))
+    (seq
+      (seq
+        (after toplevel/expunge.ml(79):3100-3122
+          (apply (field 3 (global Stdlib__printexc!)) main 0a))
+        (before toplevel/expunge.ml(79):3124-3130
+          (after toplevel/expunge.ml(79):3124-3130
+            (apply (field 98 (global Stdlib!)) 0))))
+      (pseudo _none_(0)<ghost>:-1--1
+        (makeblock 0 is_exn to_keep negate keep expunge_map expunge_crcs
+          main)))))

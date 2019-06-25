@@ -1,0 +1,107 @@
+(setglobal Cmm!
+  (let
+    (typ_void = (makearray[int])
+     typ_val = (makearray[int] 0a)
+     typ_addr = (makearray[int] 1a)
+     typ_int = (makearray[int] 2a)
+     typ_float = (makearray[int] 3a)
+     lub_component =
+       (function comp1 comp2
+         (funct-body asmcomp/cmm.ml(47)<ghost>:1809-2208
+           (before asmcomp/cmm.ml(48):1825-2208
+             (let (*match* = comp1 *match* = comp2)
+               (catch
+                 (switch* *match*
+                  case int 0:
+                   (switch* *match*
+                    case int 0: (before asmcomp/cmm.ml(53):1947-1950 0a)
+                    case int 1: (before asmcomp/cmm.ml(54):1968-1972 1a)
+                    case int 2: (before asmcomp/cmm.ml(52):1927-1930 0a)
+                    case int 3: (exit 1))
+                  case int 1:
+                   (switch* *match*
+                    case int 0: (before asmcomp/cmm.ml(57):2035-2039 1a)
+                    case int 1: (before asmcomp/cmm.ml(56):2013-2017 1a)
+                    case int 2: (before asmcomp/cmm.ml(55):1990-1994 1a)
+                    case int 3: (exit 1))
+                  case int 2:
+                   (switch* *match*
+                    case int 0: (before asmcomp/cmm.ml(50):1885-1888 0a)
+                    case int 1: (before asmcomp/cmm.ml(51):1906-1910 1a)
+                    case int 2: (before asmcomp/cmm.ml(49):1865-1868 2a)
+                    case int 3: (exit 1))
+                  case int 3:
+                   (if (>= *match* 3)
+                     (before asmcomp/cmm.ml(58):2060-2065 3a) (exit 1)))
+                with (1)
+                 (before asmcomp/cmm.ml(62):2196-2208
+                   (raise
+                     (after asmcomp/cmm.ml(62):2196-2208
+                       (makeblock 0 (global Assert_failure!)
+                         [0: "asmcomp/cmm.ml" 62 4])))))))))
+     ge_component =
+       (function comp1 comp2
+         (funct-body asmcomp/cmm.ml(64)<ghost>:2227-2569
+           (before asmcomp/cmm.ml(65):2243-2569
+             (let (*match* = comp1 *match* = comp2)
+               (catch
+                 (switch* *match*
+                  case int 0:
+                   (switch* *match*
+                    case int 0: (before asmcomp/cmm.ml(70):2370-2374 1a)
+                    case int 1: (before asmcomp/cmm.ml(71):2392-2397 0a)
+                    case int 2: (before asmcomp/cmm.ml(69):2349-2353 1a)
+                    case int 3: (exit 7))
+                  case int 1:
+                   (switch* *match*
+                    case int 0: (before asmcomp/cmm.ml(74):2460-2464 1a)
+                    case int 1: (before asmcomp/cmm.ml(73):2438-2442 1a)
+                    case int 2: (before asmcomp/cmm.ml(72):2415-2419 1a)
+                    case int 3: (exit 7))
+                  case int 2:
+                   (switch* *match*
+                    case int 0: (before asmcomp/cmm.ml(68):2327-2332 0a)
+                    case int 1: (before asmcomp/cmm.ml(67):2305-2310 0a)
+                    case int 2: (before asmcomp/cmm.ml(66):2283-2287 1a)
+                    case int 3: (exit 7))
+                  case int 3:
+                   (if (>= *match* 3)
+                     (before asmcomp/cmm.ml(75):2485-2489 1a) (exit 7)))
+                with (7)
+                 (before asmcomp/cmm.ml(78):2557-2569
+                   (raise
+                     (after asmcomp/cmm.ml(78):2557-2569
+                       (makeblock 0 (global Assert_failure!)
+                         [0: "asmcomp/cmm.ml" 78 4])))))))))
+     negate_integer_comparison = (field 26 (global Lambda!))
+     swap_integer_comparison = (field 27 (global Lambda!))
+     negate_float_comparison = (field 28 (global Lambda!))
+     swap_float_comparison = (field 29 (global Lambda!))
+     label_counter = (makemutable 0 (int) 99)
+     new_label =
+       (function param : int
+         (funct-body asmcomp/cmm.ml(99)<ghost>:3238-3277
+           (before asmcomp/cmm.ml(99):3243-3277
+             (seq (+:=1 label_counter)
+               (before asmcomp/cmm.ml(99):3263-3277 (field 0 label_counter))))))
+     ccatch =
+       (function param
+         (funct-body asmcomp/cmm.ml(208)<ghost>:6472-6541
+           (let
+             (dbg =a (field 4 param)
+              e2 =a (field 3 param)
+              e1 =a (field 2 param)
+              ids =a (field 1 param)
+              i =a (field 0 param))
+             (before asmcomp/cmm.ml(209):6498-6541
+               (makeblock 16 0a
+                 (makeblock 0 (makeblock 0 (int,*,*,*) i ids e2 dbg) 0a) e1)))))
+     reset =
+       (function param
+         (funct-body asmcomp/cmm.ml(211)<ghost>:6553-6579
+           (before asmcomp/cmm.ml(212):6560-6579
+             (setfield_imm 0 label_counter 99)))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 typ_void typ_val typ_addr typ_int typ_float lub_component
+        ge_component negate_integer_comparison swap_integer_comparison
+        negate_float_comparison swap_float_comparison new_label ccatch reset))))

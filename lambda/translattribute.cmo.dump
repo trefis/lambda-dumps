@@ -1,0 +1,960 @@
+(setglobal Translattribute!
+  (let
+    (is_inline_attribute =
+       (function param
+         (funct-body lambda/translattribute.ml(20):1147-1214
+           (let (*match* =a (field 0 param))
+             (catch
+               (catch
+                 (stringswitch *match*
+                  case "inline": (exit 1)
+                  case "ocaml.inline": (exit 1)
+                  default: (exit 2))
+                with (2) (before lambda/translattribute.ml(22):1209-1214 0a))
+              with (1) (before lambda/translattribute.ml(21):1195-1199 1a)))))
+     is_inlined_attribute =
+       (function param
+         (funct-body lambda/translattribute.ml(24):1243-1380
+           (let (*match* =a (field 0 param))
+             (catch
+               (catch
+                 (catch
+                   (stringswitch *match*
+                    case "inlined": (exit 4)
+                    case "ocaml.inlined": (exit 4)
+                    case "ocaml.unrolled": (exit 5)
+                    case "unrolled": (exit 5)
+                    default: (exit 3))
+                  with (4)
+                   (before lambda/translattribute.ml(25):1293-1297 1a))
+                with (5)
+                 (before lambda/translattribute.ml(26):1343-1357
+                   (if (field 50 (global Config!))
+                     (before lambda/translattribute.ml(26):1361-1365 1a)
+                     (exit 3))))
+              with (3) (before lambda/translattribute.ml(27):1375-1380 0a)))))
+     is_specialise_attribute =
+       (function param
+         (funct-body lambda/translattribute.ml(29):1412-1507
+           (let (*match* =a (field 0 param))
+             (catch
+               (catch
+                 (stringswitch *match*
+                  case "ocaml.specialise": (exit 7)
+                  case "specialise": (exit 7)
+                  default: (exit 6))
+                with (7)
+                 (before lambda/translattribute.ml(30):1470-1484
+                   (if (field 50 (global Config!))
+                     (before lambda/translattribute.ml(30):1488-1492 1a)
+                     (exit 6))))
+              with (6) (before lambda/translattribute.ml(31):1502-1507 0a)))))
+     is_specialised_attribute =
+       (function param
+         (funct-body lambda/translattribute.ml(33):1540-1637
+           (let (*match* =a (field 0 param))
+             (catch
+               (catch
+                 (stringswitch *match*
+                  case "ocaml.specialised": (exit 9)
+                  case "specialised": (exit 9)
+                  default: (exit 8))
+                with (9)
+                 (before lambda/translattribute.ml(34):1600-1614
+                   (if (field 50 (global Config!))
+                     (before lambda/translattribute.ml(34):1618-1622 1a)
+                     (exit 8))))
+              with (8) (before lambda/translattribute.ml(35):1632-1637 0a)))))
+     is_local_attribute =
+       (function param
+         (funct-body lambda/translattribute.ml(37):1664-1729
+           (let (*match* =a (field 0 param))
+             (catch
+               (catch
+                 (stringswitch *match*
+                  case "local": (exit 10)
+                  case "ocaml.local": (exit 10)
+                  default: (exit 11))
+                with (11)
+                 (before lambda/translattribute.ml(39):1724-1729 0a))
+              with (10) (before lambda/translattribute.ml(38):1710-1714 1a)))))
+     find_attribute =
+       (function p attributes
+         (funct-body lambda/translattribute.ml(41)<ghost>:1750-2132
+           (before lambda/translattribute.ml(42):1767-2132
+             (let
+               (*match* =
+                  (after lambda/translattribute.ml(43):1812-1872
+                    (apply (field 37 (global Stdlib__list!))
+                      (function a
+                        (funct-body lambda/translattribute.ml(43):1827-1861
+                          (before lambda/translattribute.ml(43):1837-1860
+                            (after lambda/translattribute.ml(43):1837-1860
+                              (apply p (field 0 a))))))
+                      attributes))
+                other_attributes =a (field 1 *match*)
+                inline_attribute =a (field 0 *match*))
+               (before lambda/translattribute.ml(45):1880-2132
+                 (let
+                   (attr =
+                      (if inline_attribute
+                        (let
+                          (*match* =a (field 1 inline_attribute)
+                           attr =a (field 0 inline_attribute))
+                          (if *match*
+                            (let
+                              (*match* =a (field 0 *match*)
+                               *match* =a (field 0 *match*)
+                               loc =a (field 1 *match*)
+                               txt =a (field 0 *match*))
+                              (before lambda/translattribute.ml(50):2028-2102
+                                (seq
+                                  (after lambda/translattribute.ml(50):2028-2090
+                                    (apply (field 34 (global Location!)) loc
+                                      (makeblock 35 txt)))
+                                  (before lambda/translattribute.ml(51):2098-2102
+                                    0a))))
+                            (before lambda/translattribute.ml(48):1956-1965
+                              (makeblock 0 attr))))
+                        (before lambda/translattribute.ml(47):1935-1939 0a)))
+                   (before lambda/translattribute.ml(53):2110-2132
+                     (makeblock 0 attr other_attributes))))))))
+     is_unrolled =
+       (function param
+         (funct-body lambda/translattribute.ml(55):2152-2297
+           (let (*match* =a (field 0 param))
+             (catch
+               (catch
+                 (catch
+                   (stringswitch *match*
+                    case "inline": (exit 16)
+                    case "inlined": (exit 16)
+                    case "ocaml.inline": (exit 16)
+                    case "ocaml.inlined": (exit 16)
+                    case "ocaml.unrolled": (exit 15)
+                    case "unrolled": (exit 15)
+                    default: (exit 17))
+                  with (17)
+                   (before lambda/translattribute.ml(58):2285-2297
+                     (raise
+                       (after lambda/translattribute.ml(58):2285-2297
+                         (makeblock 0 (global Assert_failure!)
+                           [0: "lambda/translattribute.ml" 58 9])))))
+                with (15)
+                 (before lambda/translattribute.ml(56):2202-2206 1a))
+              with (16) (before lambda/translattribute.ml(57):2270-2275 0a)))))
+     get_id_payload =
+       (function param
+         (funct-body lambda/translattribute.ml(62):2346-2567
+           (catch
+             (switch param
+              case tag 0:
+               (let (*match* =a (field 0 param))
+                 (if *match*
+                   (let
+                     (*match* =a (field 0 *match*)
+                      *match* =a (field 0 *match*))
+                     (switch *match*
+                      case tag 0:
+                       (let (*match* =a (field 1 *match*))
+                         (if *match* (exit 19)
+                           (let (*match* =a (field 1 *match*))
+                             (if *match* (exit 19)
+                               (let
+                                 (*match* =a (field 0 *match*)
+                                  pexp_desc =a (field 0 *match*))
+                                 (before lambda/translattribute.ml(65):2439-2553
+                                   (catch
+                                     (switch pexp_desc
+                                      case tag 0:
+                                       (let
+                                         (*match* =a (field 0 pexp_desc)
+                                          *match* =a (field 0 *match*))
+                                         (switch* *match*
+                                          case tag 0:
+                                           (let (id =a (field 0 *match*))
+                                             (before lambda/translattribute.ml(66):2518-2525
+                                               (makeblock 0 id)))
+                                          case tag 1: (exit 18)
+                                          case tag 2: (exit 18)))
+                                      default: (exit 18))
+                                    with (18)
+                                     (before lambda/translattribute.ml(67):2539-2543
+                                       0a))))))))
+                      default: (exit 19)))
+                   (before lambda/translattribute.ml(63):2370-2377 [0: ""])))
+              default: (exit 19))
+            with (19) (before lambda/translattribute.ml(69):2563-2567 0a))))
+     parse_id_payload =
+       (function txt loc default empty cases payload
+         (funct-body lambda/translattribute.ml(71)<ghost>:2590-3119
+           (before lambda/translattribute.ml(72):2632-3119
+             (let
+               (warn =
+                  (function param always_local
+                    (funct-body lambda/translattribute.ml(72)<ghost>:2649-2937
+                      (before lambda/translattribute.ml(73):2658-2937
+                        (let
+                          (%> =
+                             (function f g x
+                               (funct-body lambda/translattribute.ml(73)<ghost>:2669-2684
+                                 (before lambda/translattribute.ml(73):2677-2684
+                                   (after lambda/translattribute.ml(73):2677-2684
+                                     (apply g
+                                       (after lambda/translattribute.ml(73):2679-2684
+                                         (apply f x))))))))
+                          (before lambda/translattribute.ml(74):2692-2937
+                            (let
+                              (msg =
+                                 (after lambda/translattribute.ml(75):2708-2846
+                                   (apply (field 3 (global Stdlib__printf!))
+                                     [0:
+                                      [11:
+                                       "It must be either "
+                                       [2: 0a [11: " or empty" 0a]]]
+                                      "It must be either %s or empty"]
+                                     (after lambda/translattribute.ml(75):2708-2790
+                                       (apply
+                                         (field 6 (global Stdlib__string!))
+                                         ", "
+                                         (after lambda/translattribute.ml(75):2708-2762
+                                           (apply
+                                             (field 16
+                                               (global Stdlib__list!))
+                                             (after lambda/translattribute.ml(76):2732-2762
+                                               (apply %>
+                                                 (function prim stub
+                                                   (field 0 prim))
+                                                 (after lambda/translattribute.ml(76):2740-2761
+                                                   (apply
+                                                     (field 3
+                                                       (global Stdlib__printf!))
+                                                     [0:
+                                                      [12:
+                                                       '\''
+                                                       [2: 0a [12: '\'' 0a]]]
+                                                      "'%s'"]))))
+                                             cases)))))))
+                              (before lambda/translattribute.ml(80):2858-2937
+                                (seq
+                                  (after lambda/translattribute.ml(80):2858-2924
+                                    (apply (field 34 (global Location!)) loc
+                                      (makeblock 30 txt msg)))
+                                  (before lambda/translattribute.ml(81):2930-2937
+                                    default))))))))))
+               (before lambda/translattribute.ml(83):2945-3119
+                 (let
+                   (*match* =
+                      (after lambda/translattribute.ml(83):2951-2973
+                        (apply get_id_payload payload)))
+                   (if *match*
+                     (let (id =a (field 0 *match*))
+                       (stringswitch id
+                        case "":
+                         (before lambda/translattribute.ml(84):2994-2999
+                           empty)
+                        default:
+                         (before lambda/translattribute.ml(87):3041-3119
+                           (let
+                             (*match* =
+                                (after lambda/translattribute.ml(87):3047-3070
+                                  (apply (field 39 (global Stdlib__list!)) id
+                                    cases)))
+                             (if *match*
+                               (let (r =a (field 0 *match*))
+                                 (before lambda/translattribute.ml(88):3094-3095
+                                   r))
+                               (before lambda/translattribute.ml(89):3112-3119
+                                 (after lambda/translattribute.ml(89):3112-3119
+                                   (apply warn 0a))))))))
+                     (before lambda/translattribute.ml(85):3012-3019
+                       (after lambda/translattribute.ml(85):3012-3019
+                         (apply warn 0a))))))))))
+     parse_inline_attribute =
+       (function attr
+         (funct-body lambda/translattribute.ml(91)<ghost>:3148-4312
+           (before lambda/translattribute.ml(92):3157-4312
+             (if attr
+               (let
+                 (*match* =a (field 0 attr)
+                  payload =a (field 1 *match*)
+                  id =a (field 0 *match*)
+                  loc =a (field 1 id)
+                  txt =a (field 0 id))
+                 (before lambda/translattribute.ml(95):3280-4312
+                   (if
+                     (after lambda/translattribute.ml(96):3309-3323
+                       (apply is_unrolled id))
+                     (before lambda/translattribute.ml(96):3329-4111
+                       (let
+                         (warning =
+                            (function txt
+                              (funct-body lambda/translattribute.ml(98)<ghost>:3422-3503
+                                (before lambda/translattribute.ml(98):3428-3503
+                                  (makeblock 30 txt
+                                    "It must be an integer literal")))))
+                         (before lambda/translattribute.ml(101):3519-4103
+                           (catch
+                             (switch payload
+                              case tag 0:
+                               (let (*match* =a (field 0 payload))
+                                 (if *match*
+                                   (let
+                                     (*match* =a (field 0 *match*)
+                                      *match* =a (field 0 *match*))
+                                     (switch *match*
+                                      case tag 0:
+                                       (let (*match* =a (field 1 *match*))
+                                         (if *match* (exit 23)
+                                           (let
+                                             (*match* =a (field 1 *match*))
+                                             (if *match* (exit 23)
+                                               (let
+                                                 (*match* =a
+                                                    (field 0 *match*)
+                                                  pexp_desc =a
+                                                    (field 0 *match*))
+                                                 (before lambda/translattribute.ml(102):3597-4017
+                                                   (catch
+                                                     (switch pexp_desc
+                                                      case tag 1:
+                                                       (let
+                                                         (*match* =a
+                                                            (field 0
+                                                              pexp_desc))
+                                                         (switch *match*
+                                                          case tag 0:
+                                                           (let
+                                                             (*match* =a
+                                                                (field 1
+                                                                  *match*))
+                                                             (if *match*
+                                                               (exit 22)
+                                                               (let
+                                                                 (s =a
+                                                                    (field 0
+                                                                    *match*))
+                                                                 (before lambda/translattribute.ml(104):3689-3907
+                                                                   (try
+                                                                    (makeblock 0 (int)
+                                                                    (after lambda/translattribute.ml(106):3736-3770
+                                                                    (apply
+                                                                    (field 0
+                                                                    (field 30
+                                                                    (global Misc!)))
+                                                                    s)))
+                                                                    with exn
+                                                                    (let
+                                                                    (tag =a
+                                                                    (field 0
+                                                                    exn))
+                                                                    (if
+                                                                    (== tag
+                                                                    (field 6
+                                                                    (global Stdlib!)))
+                                                                    (before lambda/translattribute.ml(108):3819-3891
+                                                                    (seq
+                                                                    (after lambda/translattribute.ml(108):3819-3859
+                                                                    (apply
+                                                                    (field 34
+                                                                    (global Location!))
+                                                                    loc
+                                                                    (after lambda/translattribute.ml(108):3846-3859
+                                                                    (apply
+                                                                    warning
+                                                                    txt))))
+                                                                    (before lambda/translattribute.ml(109):3877-3891
+                                                                    2a)))
+                                                                    (reraise
+                                                                    exn))))))))
+                                                          default: (exit 22)))
+                                                      default: (exit 22))
+                                                    with (22)
+                                                     (before lambda/translattribute.ml(112):3937-4005
+                                                       (seq
+                                                         (after lambda/translattribute.ml(112):3937-3977
+                                                           (apply
+                                                             (field 34
+                                                               (global Location!))
+                                                             loc
+                                                             (after lambda/translattribute.ml(112):3964-3977
+                                                               (apply warning
+                                                                 txt))))
+                                                         (before lambda/translattribute.ml(113):3991-4005
+                                                           2a))))))))))
+                                      default: (exit 23)))
+                                   (exit 23)))
+                              default: (exit 23))
+                            with (23)
+                             (before lambda/translattribute.ml(116):4039-4103
+                               (seq
+                                 (after lambda/translattribute.ml(116):4039-4079
+                                   (apply (field 34 (global Location!)) loc
+                                     (after lambda/translattribute.ml(116):4066-4079
+                                       (apply warning txt))))
+                                 (before lambda/translattribute.ml(117):4089-4103
+                                   2a)))))))
+                     (before lambda/translattribute.ml(119):4123-4312
+                       (after lambda/translattribute.ml(119):4123-4312
+                         (apply parse_id_payload txt loc 2a 0a
+                           [0: [0: "never" 1a] [0: [0: "always" 0a] 0a]]
+                           payload))))))
+               (before lambda/translattribute.ml(93):3185-3199 2a)))))
+     parse_specialise_attribute =
+       (function attr
+         (funct-body lambda/translattribute.ml(128)<ghost>:4345-4683
+           (before lambda/translattribute.ml(129):4354-4683
+             (if attr
+               (let
+                 (*match* =a (field 0 attr)
+                  payload =a (field 1 *match*)
+                  *match* =a (field 0 *match*)
+                  loc =a (field 1 *match*)
+                  txt =a (field 0 *match*))
+                 (before lambda/translattribute.ml(132):4478-4683
+                   (after lambda/translattribute.ml(132):4478-4683
+                     (apply parse_id_payload txt loc 2a 0a
+                       [0: [0: "never" 1a] [0: [0: "always" 0a] 0a]] payload))))
+               (before lambda/translattribute.ml(130):4382-4400 2a)))))
+     parse_local_attribute =
+       (function attr
+         (funct-body lambda/translattribute.ml(141)<ghost>:4711-5058
+           (before lambda/translattribute.ml(142):4720-5058
+             (if attr
+               (let
+                 (*match* =a (field 0 attr)
+                  payload =a (field 1 *match*)
+                  *match* =a (field 0 *match*)
+                  loc =a (field 1 *match*)
+                  txt =a (field 0 *match*))
+                 (before lambda/translattribute.ml(145):4839-5058
+                   (after lambda/translattribute.ml(145):4839-5058
+                     (apply parse_id_payload txt loc 2a 0a
+                       [0:
+                        [0: "never" 1a]
+                        [0: [0: "always" 0a] [0: [0: "maybe" 2a] 0a]]]
+                       payload))))
+               (before lambda/translattribute.ml(143):4748-4761 2a)))))
+     get_inline_attribute =
+       (function l
+         (funct-body lambda/translattribute.ml(155)<ghost>:5085-5174
+           (before lambda/translattribute.ml(156):5091-5174
+             (let
+               (*match* =
+                  (after lambda/translattribute.ml(156):5105-5141
+                    (apply find_attribute is_inline_attribute l))
+                attr =a (field 0 *match*))
+               (before lambda/translattribute.ml(157):5147-5174
+                 (after lambda/translattribute.ml(157):5147-5174
+                   (apply parse_inline_attribute attr)))))))
+     get_specialise_attribute =
+       (function l
+         (funct-body lambda/translattribute.ml(159)<ghost>:5205-5302
+           (before lambda/translattribute.ml(160):5211-5302
+             (let
+               (*match* =
+                  (after lambda/translattribute.ml(160):5225-5265
+                    (apply find_attribute is_specialise_attribute l))
+                attr =a (field 0 *match*))
+               (before lambda/translattribute.ml(161):5271-5302
+                 (after lambda/translattribute.ml(161):5271-5302
+                   (apply parse_specialise_attribute attr)))))))
+     get_local_attribute =
+       (function l
+         (funct-body lambda/translattribute.ml(163)<ghost>:5328-5415
+           (before lambda/translattribute.ml(164):5334-5415
+             (let
+               (*match* =
+                  (after lambda/translattribute.ml(164):5348-5383
+                    (apply find_attribute is_local_attribute l))
+                attr =a (field 0 *match*))
+               (before lambda/translattribute.ml(165):5389-5415
+                 (after lambda/translattribute.ml(165):5389-5415
+                   (apply parse_local_attribute attr)))))))
+     check_local_inline =
+       (function loc attr
+         (funct-body lambda/translattribute.ml(167)<ghost>:5440-5641
+           (before lambda/translattribute.ml(168):5453-5641
+             (let
+               (*match* = (field 2 attr)
+                *match* = (field 0 attr)
+                *match* = *match*
+                *match* = *match*)
+               (catch
+                 (if *match* (exit 33)
+                   (catch
+                     (if (isint *match*) (if *match* (exit 33) (exit 34))
+                       (exit 34))
+                    with (34)
+                     (before lambda/translattribute.ml(170):5542-5623
+                       (after lambda/translattribute.ml(170):5542-5623
+                         (apply (field 34 (global Location!)) loc
+                           [35: "local/inline"])))))
+                with (33)
+                 (before lambda/translattribute.ml(173):5639-5641 0a))))))
+     add_inline_attribute =
+       (function expr loc attributes
+         (funct-body lambda/translattribute.ml(175)<ghost>:5668-6327
+           (before lambda/translattribute.ml(176):5692-6327
+             (let
+               (*match* =
+                  (after lambda/translattribute.ml(176):5704-5735
+                    (apply get_inline_attribute attributes))
+                *match* = expr
+                *match* = *match*)
+               (catch
+                 (catch
+                   (if (isint *match*)
+                     (if (>= *match* 2)
+                       (let (expr =a *match*)
+                         (before lambda/translattribute.ml(177):5769-5773
+                           expr))
+                       (exit 37))
+                     (exit 37))
+                  with (37)
+                   (switch *match*
+                    case tag 3:
+                     (let
+                       (funct =a (field 0 *match*)
+                        attr =a (field 4 funct)
+                        *match* =a (field 4 attr))
+                       (if *match* (exit 36)
+                         (let (inline =a *match*)
+                           (before lambda/translattribute.ml(179):5851-6179
+                             (seq
+                               (let (*match* = (field 0 attr))
+                                 (catch
+                                   (if (isint *match*)
+                                     (if (>= *match* 2)
+                                       (before lambda/translattribute.ml(180):5906-5908
+                                         0a)
+                                       (exit 35))
+                                     (exit 35))
+                                  with (35)
+                                   (before lambda/translattribute.ml(182):5970-6049
+                                     (after lambda/translattribute.ml(182):5970-6049
+                                       (apply (field 34 (global Location!))
+                                         loc [35: "inline"])))))
+                               (before lambda/translattribute.ml(185):6067-6179
+                                 (let
+                                   (attr =
+                                      (let (init = attr)
+                                        (makeblock 0 inline (field 1 init)
+                                          (field 2 init) (field 3 init)
+                                          (field 4 init))))
+                                   (before lambda/translattribute.ml(186):6108-6179
+                                     (seq
+                                       (after lambda/translattribute.ml(186):6108-6135
+                                         (apply check_local_inline loc attr))
+                                       (before lambda/translattribute.ml(187):6143-6179
+                                         (makeblock 3
+                                           (let (init = funct)
+                                             (makeblock 0 (field 0 init)
+                                               (field 1 init) (field 2 init)
+                                               (field 3 init) attr
+                                               (field 5 init))))))))))))))
+                    default: (exit 36)))
+                with (36)
+                 (let (expr =a *match*)
+                   (before lambda/translattribute.ml(189):6241-6327
+                     (seq
+                       (after lambda/translattribute.ml(189):6241-6315
+                         (apply (field 34 (global Location!)) loc
+                           [34: "inline"]))
+                       (before lambda/translattribute.ml(191):6323-6327 expr)))))))))
+     add_specialise_attribute =
+       (function expr loc attributes
+         (funct-body lambda/translattribute.ml(193)<ghost>:6358-7001
+           (before lambda/translattribute.ml(194):6382-7001
+             (let
+               (*match* =
+                  (after lambda/translattribute.ml(194):6394-6429
+                    (apply get_specialise_attribute attributes))
+                *match* = expr
+                *match* = *match*)
+               (catch
+                 (if (>= *match* 2)
+                   (let (expr =a *match*)
+                     (before lambda/translattribute.ml(195):6467-6471 expr))
+                   (switch *match*
+                    case tag 3:
+                     (let
+                       (funct =a (field 0 *match*)
+                        attr =a (field 4 funct)
+                        *match* =a (field 4 attr))
+                       (if *match* (exit 40)
+                         (let (specialise =a *match*)
+                           (before lambda/translattribute.ml(197):6553-6852
+                             (seq
+                               (let (*match* = (field 1 attr))
+                                 (if (>= *match* 2)
+                                   (before lambda/translattribute.ml(198):6616-6618
+                                     0a)
+                                   (before lambda/translattribute.ml(200):6677-6760
+                                     (after lambda/translattribute.ml(200):6677-6760
+                                       (apply (field 34 (global Location!))
+                                         loc [35: "specialise"])))))
+                               (before lambda/translattribute.ml(203):6778-6852
+                                 (let
+                                   (attr =
+                                      (let (init = attr)
+                                        (makeblock 0 (field 0 init)
+                                          specialise (field 2 init)
+                                          (field 3 init) (field 4 init))))
+                                   (before lambda/translattribute.ml(204):6823-6852
+                                     (makeblock 3
+                                       (let (init = funct)
+                                         (makeblock 0 (field 0 init)
+                                           (field 1 init) (field 2 init)
+                                           (field 3 init) attr
+                                           (field 5 init))))))))))))
+                    default: (exit 40)))
+                with (40)
+                 (let (expr =a *match*)
+                   (before lambda/translattribute.ml(206):6911-7001
+                     (seq
+                       (after lambda/translattribute.ml(206):6911-6989
+                         (apply (field 34 (global Location!)) loc
+                           [34: "specialise"]))
+                       (before lambda/translattribute.ml(208):6997-7001 expr)))))))))
+     add_local_attribute =
+       (function expr loc attributes
+         (funct-body lambda/translattribute.ml(210)<ghost>:7027-7645
+           (before lambda/translattribute.ml(211):7051-7645
+             (let
+               (*match* =
+                  (after lambda/translattribute.ml(211):7063-7093
+                    (apply get_local_attribute attributes))
+                *match* = expr
+                *match* = *match*)
+               (catch
+                 (if (>= *match* 2)
+                   (let (expr =a *match*)
+                     (before lambda/translattribute.ml(212):7126-7130 expr))
+                   (switch *match*
+                    case tag 3:
+                     (let
+                       (funct =a (field 0 *match*)
+                        attr =a (field 4 funct)
+                        *match* =a (field 4 attr))
+                       (if *match* (exit 44)
+                         (let (local =a *match*)
+                           (before lambda/translattribute.ml(214):7207-7511
+                             (seq
+                               (let (*match* = (field 2 attr))
+                                 (if (>= *match* 2)
+                                   (before lambda/translattribute.ml(215):7260-7262
+                                     0a)
+                                   (before lambda/translattribute.ml(217):7311-7389
+                                     (after lambda/translattribute.ml(217):7311-7389
+                                       (apply (field 34 (global Location!))
+                                         loc [35: "local"])))))
+                               (before lambda/translattribute.ml(220):7407-7511
+                                 (let
+                                   (attr =
+                                      (let (init = attr)
+                                        (makeblock 0 (field 0 init)
+                                          (field 1 init) local (field 3 init)
+                                          (field 4 init))))
+                                   (before lambda/translattribute.ml(221):7447-7511
+                                     (seq
+                                       (after lambda/translattribute.ml(221):7447-7474
+                                         (apply check_local_inline loc attr))
+                                       (before lambda/translattribute.ml(222):7482-7511
+                                         (makeblock 3
+                                           (let (init = funct)
+                                             (makeblock 0 (field 0 init)
+                                               (field 1 init) (field 2 init)
+                                               (field 3 init) attr
+                                               (field 5 init))))))))))))))
+                    default: (exit 44)))
+                with (44)
+                 (let (expr =a *match*)
+                   (before lambda/translattribute.ml(224):7560-7645
+                     (seq
+                       (after lambda/translattribute.ml(224):7560-7633
+                         (apply (field 34 (global Location!)) loc
+                           [34: "local"]))
+                       (before lambda/translattribute.ml(226):7641-7645 expr)))))))))
+     get_and_remove_inlined_attribute =
+       (function e
+         (funct-body lambda/translattribute.ml(233)<ghost>:7987-8165
+           (before lambda/translattribute.ml(234):7993-8165
+             (let
+               (*match* =
+                  (after lambda/translattribute.ml(235):8024-8076
+                    (apply find_attribute is_inlined_attribute (field 5 e)))
+                exp_attributes =a (field 1 *match*)
+                attr =a (field 0 *match*))
+               (before lambda/translattribute.ml(237):8084-8165
+                 (let
+                   (inlined =
+                      (after lambda/translattribute.ml(237):8098-8125
+                        (apply parse_inline_attribute attr)))
+                   (before lambda/translattribute.ml(238):8131-8165
+                     (makeblock 0 inlined
+                       (let (init = e)
+                         (makeblock 0 (field 0 init) (field 1 init)
+                           (field 2 init) (field 3 init) (field 4 init)
+                           exp_attributes))))))))))
+     get_and_remove_inlined_attribute_on_module =
+       (function e
+         (funct-body lambda/translattribute.ml(240)<ghost>:8214-8880
+           (before lambda/translattribute.ml(241):8220-8880
+             (letrec
+               (get_and_remove
+                  (function mod_expr
+                    (funct-body lambda/translattribute.ml(241)<ghost>:8243-8856
+                      (before lambda/translattribute.ml(242):8258-8856
+                        (let
+                          (*match* =
+                             (after lambda/translattribute.ml(243):8291-8350
+                               (apply find_attribute is_inlined_attribute
+                                 (field 4 mod_expr)))
+                           mod_attributes =a (field 1 *match*)
+                           attr =a (field 0 *match*))
+                          (before lambda/translattribute.ml(245):8362-8856
+                            (let
+                              (attr =
+                                 (after lambda/translattribute.ml(245):8373-8400
+                                   (apply parse_inline_attribute attr)))
+                              (before lambda/translattribute.ml(246):8408-8856
+                                (catch
+                                  (let
+                                    (md = (field 0 mod_expr)
+                                     *match* =
+                                       (switch md
+                                        case tag 4:
+                                         (let
+                                           (mc =a (field 3 md)
+                                            mtc =a (field 2 md)
+                                            mt =a (field 1 md)
+                                            me =a (field 0 md))
+                                           (before lambda/translattribute.ml(249):8527-8773
+                                             (let
+                                               (*match* =
+                                                  (after lambda/translattribute.ml(249):8548-8565
+                                                    (apply get_and_remove me))
+                                                me =a (field 1 *match*)
+                                                inner_attr =a
+                                                  (field 0 *match*))
+                                               (before lambda/translattribute.ml(250):8577-8773
+                                                 (let
+                                                   (attr =
+                                                      (catch
+                                                        (if (isint attr)
+                                                          (if (>= attr 2)
+                                                            (before lambda/translattribute.ml(253):8704-8714
+                                                              inner_attr)
+                                                            (exit 50))
+                                                          (exit 50))
+                                                       with (50)
+                                                        (before lambda/translattribute.ml(252):8669-8673
+                                                          attr)))
+                                                   (before lambda/translattribute.ml(255):8734-8773
+                                                     (makeblock 0 attr
+                                                       (makeblock 4 me mt mtc
+                                                         mc))))))))
+                                        default:
+                                         (before lambda/translattribute.ml(256):8788-8796
+                                           (let (mod_desc =a md attr =a attr)
+                                             (exit 55 mod_desc attr))))
+                                     mod_desc =a (field 1 *match*)
+                                     attr =a (field 0 *match*))
+                                    (exit 55 mod_desc attr))
+                                 with (55 mod_desc attr)
+                                  (before lambda/translattribute.ml(258):8808-8856
+                                    (makeblock 0 attr
+                                      (let (init = mod_expr)
+                                        (makeblock 0 mod_desc (field 1 init)
+                                          (field 2 init) (field 3 init)
+                                          mod_attributes)))))))))))))
+               (before lambda/translattribute.ml(260):8864-8880
+                 (after lambda/translattribute.ml(260):8864-8880
+                   (apply get_and_remove e)))))))
+     get_and_remove_specialised_attribute =
+       (function e
+         (funct-body lambda/translattribute.ml(262)<ghost>:8923-9117
+           (before lambda/translattribute.ml(263):8929-9117
+             (let
+               (*match* =
+                  (after lambda/translattribute.ml(264):8960-9016
+                    (apply find_attribute is_specialised_attribute
+                      (field 5 e)))
+                exp_attributes =a (field 1 *match*)
+                attr =a (field 0 *match*))
+               (before lambda/translattribute.ml(266):9024-9117
+                 (let
+                   (specialised =
+                      (after lambda/translattribute.ml(266):9042-9073
+                        (apply parse_specialise_attribute attr)))
+                   (before lambda/translattribute.ml(267):9079-9117
+                     (makeblock 0 specialised
+                       (let (init = e)
+                         (makeblock 0 (field 0 init) (field 1 init)
+                           (field 2 init) (field 3 init) (field 4 init)
+                           exp_attributes))))))))))
+     get_tailcall_attribute =
+       (function e
+         (funct-body lambda/translattribute.ml(271)<ghost>:9233-9744
+           (before lambda/translattribute.ml(272):9239-9744
+             (let
+               (is_tailcall_attribute =
+                  (function param
+                    (funct-body lambda/translattribute.ml(272):9267-9369
+                      (let
+                        (*match* =a (field 0 param)
+                         *match* =a (field 0 *match*))
+                        (catch
+                          (catch
+                            (stringswitch *match*
+                             case "ocaml.tailcall": (exit 68)
+                             case "tailcall": (exit 68)
+                             default: (exit 69))
+                           with (69)
+                            (before lambda/translattribute.ml(274):9364-9369
+                              0a))
+                         with (68)
+                          (before lambda/translattribute.ml(273):9348-9352
+                            1a))))))
+               (before lambda/translattribute.ml(276):9377-9744
+                 (let
+                   (*match* =
+                      (after lambda/translattribute.ml(277):9413-9466
+                        (apply (field 37 (global Stdlib__list!))
+                          is_tailcall_attribute (field 5 e)))
+                    exp_attributes =a (field 1 *match*)
+                    tailcalls =a (field 0 *match*))
+                   (before lambda/translattribute.ml(279):9474-9744
+                     (if tailcalls
+                       (let (r =a (field 1 tailcalls))
+                         (before lambda/translattribute.ml(282):9534-9744
+                           (seq
+                             (if r
+                               (let
+                                 (*match* =a (field 0 r)
+                                  *match* =a (field 0 *match*)
+                                  loc =a (field 1 *match*)
+                                  txt =a (field 0 *match*))
+                                 (before lambda/translattribute.ml(285):9633-9695
+                                   (after lambda/translattribute.ml(285):9633-9695
+                                     (apply (field 34 (global Location!)) loc
+                                       (makeblock 35 txt)))))
+                               (before lambda/translattribute.ml(283):9567-9569
+                                 0a))
+                             (before lambda/translattribute.ml(287):9713-9744
+                               (makeblock 0 1a
+                                 (let (init = e)
+                                   (makeblock 0 (field 0 init) (field 1 init)
+                                     (field 2 init) (field 3 init)
+                                     (field 4 init) exp_attributes)))))))
+                       (before lambda/translattribute.ml(280):9505-9513
+                         (makeblock 0 0a e))))))))))
+     check_attribute =
+       (function e param
+         (funct-body lambda/translattribute.ml(289)<ghost>:9766-10307
+           (let
+             (*match* =a (field 0 param)
+              loc =a (field 1 *match*)
+              txt =a (field 0 *match*))
+             (before lambda/translattribute.ml(290):9812-10307
+               (catch
+                 (catch
+                   (catch
+                     (stringswitch txt
+                      case "inline": (exit 71)
+                      case "inlined": (exit 72)
+                      case "ocaml.inline": (exit 71)
+                      case "ocaml.inlined": (exit 72)
+                      case "ocaml.specialise": (exit 71)
+                      case "ocaml.specialised": (exit 72)
+                      case "ocaml.tailcall": (exit 72)
+                      case "specialise": (exit 71)
+                      case "specialised": (exit 72)
+                      case "tailcall": (exit 72)
+                      default: (exit 73))
+                    with (73)
+                     (before lambda/translattribute.ml(305):10305-10307 0a))
+                  with (71)
+                   (before lambda/translattribute.ml(292):9898-10066
+                     (let (*match* = (field 0 e))
+                       (catch
+                         (switch *match*
+                          case tag 3:
+                           (before lambda/translattribute.ml(294):9959-9961
+                             0a)
+                          default: (exit 70))
+                        with (70)
+                         (before lambda/translattribute.ml(296):9985-10058
+                           (after lambda/translattribute.ml(296):9985-10058
+                             (apply (field 34 (global Location!)) loc
+                               (makeblock 34 txt))))))))
+                with (72)
+                 (before lambda/translattribute.ml(303):10226-10295
+                   (after lambda/translattribute.ml(303):10226-10295
+                     (apply (field 34 (global Location!)) loc
+                       (makeblock 34 txt)))))))))
+     check_attribute_on_module =
+       (function e param
+         (funct-body lambda/translattribute.ml(307)<ghost>:10339-10768
+           (let
+             (*match* =a (field 0 param)
+              loc =a (field 1 *match*)
+              txt =a (field 0 *match*))
+             (before lambda/translattribute.ml(308):10385-10768
+               (catch
+                 (catch
+                   (catch
+                     (stringswitch txt
+                      case "inline": (exit 75)
+                      case "inlined": (exit 76)
+                      case "ocaml.inline": (exit 75)
+                      case "ocaml.inlined": (exit 76)
+                      default: (exit 77))
+                    with (77)
+                     (before lambda/translattribute.ml(320):10766-10768 0a))
+                  with (75)
+                   (before lambda/translattribute.ml(309):10434-10601
+                     (let (*match* = (field 0 e))
+                       (switch *match*
+                        case tag 2:
+                         (before lambda/translattribute.ml(311):10494-10496
+                           0a)
+                        default:
+                         (before lambda/translattribute.ml(313):10520-10593
+                           (after lambda/translattribute.ml(313):10520-10593
+                             (apply (field 34 (global Location!)) loc
+                               (makeblock 34 txt))))))))
+                with (76)
+                 (before lambda/translattribute.ml(318):10687-10756
+                   (after lambda/translattribute.ml(318):10687-10756
+                     (apply (field 34 (global Location!)) loc
+                       (makeblock 34 txt)))))))))
+     add_function_attributes =
+       (function lam loc attr
+         (funct-body lambda/translattribute.ml(322)<ghost>:10798-10986
+           (before lambda/translattribute.ml(323):10815-10986
+             (let
+               (lam =
+                  (after lambda/translattribute.ml(324):10829-10862
+                    (apply add_inline_attribute lam loc attr)))
+               (before lambda/translattribute.ml(326):10870-10986
+                 (let
+                   (lam =
+                      (after lambda/translattribute.ml(327):10884-10921
+                        (apply add_specialise_attribute lam loc attr)))
+                   (before lambda/translattribute.ml(329):10929-10986
+                     (let
+                       (lam =
+                          (after lambda/translattribute.ml(330):10943-10975
+                            (apply add_local_attribute lam loc attr)))
+                       (before lambda/translattribute.ml(332):10983-10986
+                         lam))))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 check_attribute check_attribute_on_module
+        add_inline_attribute get_inline_attribute add_specialise_attribute
+        get_specialise_attribute add_local_attribute get_local_attribute
+        get_and_remove_inlined_attribute
+        get_and_remove_inlined_attribute_on_module
+        get_and_remove_specialised_attribute get_tailcall_attribute
+        add_function_attributes))))

@@ -1,0 +1,808 @@
+(setglobal Proc!
+  (let
+    (fp = (field 40 (global Config!))
+     win64 = (field 13 (global Arch!))
+     max_arguments_for_tailcalls =[int] 10
+     int_reg_name =
+       (let (*match* = (field 2 (global Config!)))
+         (stringswitch *match*
+          case "msvc":
+           (before asmcomp/amd64/proc.ml(84):2920-3022
+             (duparray[addr]
+               [0:
+                "rax" "rbx" "rdi" "rsi" "rdx" "rcx" "r8" "r9" "r12" "r13"
+                "r10" "r11" "rbp"]))
+          default:
+           (before asmcomp/amd64/proc.ml(87):3038-3153
+             (duparray[addr]
+               [0:
+                "%rax" "%rbx" "%rdi" "%rsi" "%rdx" "%rcx" "%r8" "%r9" "%r12"
+                "%r13" "%r10" "%r11" "%rbp"]))))
+     float_reg_name =
+       (let (*match* = (field 2 (global Config!)))
+         (stringswitch *match*
+          case "msvc":
+           (before asmcomp/amd64/proc.ml(93):3227-3383
+             (duparray[addr]
+               [0:
+                "xmm0" "xmm1" "xmm2" "xmm3" "xmm4" "xmm5" "xmm6" "xmm7"
+                "xmm8" "xmm9" "xmm10" "xmm11" "xmm12" "xmm13" "xmm14" "xmm15"]))
+          default:
+           (before asmcomp/amd64/proc.ml(97):3399-3571
+             (duparray[addr]
+               [0:
+                "%xmm0" "%xmm1" "%xmm2" "%xmm3" "%xmm4" "%xmm5" "%xmm6"
+                "%xmm7" "%xmm8" "%xmm9" "%xmm10" "%xmm11" "%xmm12" "%xmm13"
+                "%xmm14" "%xmm15"]))))
+     num_register_classes =[int] 2
+     register_class =
+       (function r : int
+         (funct-body asmcomp/amd64/proc.ml(103)<ghost>:3622-3685
+           (before asmcomp/amd64/proc.ml(104):3628-3685
+             (let (*match* = (field 2 r))
+               (if (>= *match* 3)
+                 (before asmcomp/amd64/proc.ml(106):3684-3685 1)
+                 (before asmcomp/amd64/proc.ml(105):3669-3670 0))))))
+     num_available_registers = (makearray[int] 13 16)
+     first_available_register = (makearray[int] 0 100)
+     register_name =
+       (function r[int]
+         (funct-body asmcomp/amd64/proc.ml(112)<ghost>:3794-3862
+           (before asmcomp/amd64/proc.ml(113):3800-3862
+             (if (< r 100)
+               (before asmcomp/amd64/proc.ml(113):3816-3832
+                 (after asmcomp/amd64/proc.ml(113):3816-3832
+                   (array.get[addr] int_reg_name r)))
+               (before asmcomp/amd64/proc.ml(113):3838-3862
+                 (after asmcomp/amd64/proc.ml(113):3838-3862
+                   (array.get[addr] float_reg_name (- r 100))))))))
+     rotate_registers = 0a
+     hard_int_reg =
+       (let
+         (v =
+            (after asmcomp/amd64/proc.ml(122):4097-4120
+              (caml_make_vect 13 (field 1 (global Reg!)))))
+         (before asmcomp/amd64/proc.ml(123):4126-4191
+           (seq
+             (for i 0 to 12
+               (before asmcomp/amd64/proc.ml(123):4145-4181
+                 (after asmcomp/amd64/proc.ml(123):4145-4181
+                   (array.set[addr] v i
+                     (after asmcomp/amd64/proc.ml(123):4154-4181
+                       (apply (field 6 (global Reg!)) 2a
+                         (makeblock 0 (int) i)))))))
+             (before asmcomp/amd64/proc.ml(124):4190-4191 v))))
+     hard_float_reg =
+       (let
+         (v =
+            (after asmcomp/amd64/proc.ml(127):4224-4247
+              (caml_make_vect 16 (field 1 (global Reg!)))))
+         (before asmcomp/amd64/proc.ml(128):4253-4328
+           (seq
+             (for i 0 to 15
+               (before asmcomp/amd64/proc.ml(128):4272-4318
+                 (after asmcomp/amd64/proc.ml(128):4272-4318
+                   (array.set[addr] v i
+                     (after asmcomp/amd64/proc.ml(128):4281-4318
+                       (apply (field 6 (global Reg!)) 3a
+                         (makeblock 0 (int) (+ 100 i))))))))
+             (before asmcomp/amd64/proc.ml(129):4327-4328 v))))
+     all_phys_regs =
+       (after asmcomp/amd64/proc.ml(132):4352-4392
+         (apply (field 4 (global Stdlib__array!)) hard_int_reg
+           hard_float_reg))
+     phys_reg =
+       (function n[int]
+         (funct-body asmcomp/amd64/proc.ml(134)<ghost>:4407-4475
+           (before asmcomp/amd64/proc.ml(135):4413-4475
+             (if (< n 100)
+               (before asmcomp/amd64/proc.ml(135):4429-4445
+                 (after asmcomp/amd64/proc.ml(135):4429-4445
+                   (array.get[addr] hard_int_reg n)))
+               (before asmcomp/amd64/proc.ml(135):4451-4475
+                 (after asmcomp/amd64/proc.ml(135):4451-4475
+                   (array.get[addr] hard_float_reg (- n 100))))))))
+     rax = (after asmcomp/amd64/proc.ml(137):4487-4497 (apply phys_reg 0))
+     rdx = (after asmcomp/amd64/proc.ml(138):4508-4518 (apply phys_reg 4))
+     r10 = (after asmcomp/amd64/proc.ml(139):4529-4540 (apply phys_reg 10))
+     r11 = (after asmcomp/amd64/proc.ml(140):4551-4562 (apply phys_reg 11))
+     r13 = (after asmcomp/amd64/proc.ml(141):4573-4583 (apply phys_reg 9))
+     rbp = (after asmcomp/amd64/proc.ml(142):4594-4605 (apply phys_reg 12))
+     rxmm15 =
+       (after asmcomp/amd64/proc.ml(143):4619-4631 (apply phys_reg 115))
+     destroyed_by_plt_stub =
+       (if (not (field 19 (global X86_proc!)))
+         (before asmcomp/amd64/proc.ml(146):4692-4697 (makearray[addr]))
+         (before asmcomp/amd64/proc.ml(146):4703-4717
+           (makearray[addr] r10 r11)))
+     num_destroyed_by_plt_stub =[int]
+       (array.length[addr] destroyed_by_plt_stub)
+     destroyed_by_plt_stub_set =
+       (after asmcomp/amd64/proc.ml(150):4819-4857
+         (apply (field 15 (global Reg!)) destroyed_by_plt_stub))
+     stack_slot =
+       (function slot ty
+         (funct-body asmcomp/amd64/proc.ml(152)<ghost>:4874-4917
+           (before asmcomp/amd64/proc.ml(153):4886-4917
+             (after asmcomp/amd64/proc.ml(153):4886-4917
+               (apply (field 6 (global Reg!)) ty (makeblock 1 slot))))))
+     word_addressed = 0a
+     calling_conventions =
+       (function first_int[int] last_int[int] first_float[int]
+         last_float[int] make_stack arg
+         (funct-body asmcomp/amd64/proc.ml(161)<ghost>:5027-5911
+           (before asmcomp/amd64/proc.ml(163):5112-5911
+             (let
+               (loc =
+                  (after asmcomp/amd64/proc.ml(163):5122-5161
+                    (caml_make_vect (array.length[addr] arg)
+                      (field 1 (global Reg!)))))
+               (before asmcomp/amd64/proc.ml(164):5167-5911
+                 (let (int = (makemutable 0 (int) first_int))
+                   (before asmcomp/amd64/proc.ml(165):5196-5911
+                     (let (float = (makemutable 0 (int) first_float))
+                       (before asmcomp/amd64/proc.ml(166):5229-5911
+                         (let (ofs = (makemutable 0 (int) 0))
+                           (before asmcomp/amd64/proc.ml(167):5250-5911
+                             (seq
+                               (for i 0 to (- (array.length[addr] arg) 1)
+                                 (before asmcomp/amd64/proc.ml(168):5291-5875
+                                   (let
+                                     (ty =
+                                        (field 2
+                                          (after asmcomp/amd64/proc.ml(168):5297-5304
+                                            (array.get[addr] arg i))))
+                                     (if (>= ty 3)
+                                       (before asmcomp/amd64/proc.ml(179):5655-5875
+                                         (if (<= (field 0 float) last_float)
+                                           (before asmcomp/amd64/proc.ml(179):5684-5760
+                                             (seq
+                                               (after asmcomp/amd64/proc.ml(180):5700-5726
+                                                 (array.set[addr] loc i
+                                                   (after asmcomp/amd64/proc.ml(180):5711-5726
+                                                     (apply phys_reg
+                                                       (field 0 float)))))
+                                               (before asmcomp/amd64/proc.ml(181):5738-5748
+                                                 (+:=1 float))))
+                                           (before asmcomp/amd64/proc.ml(182):5766-5875
+                                             (seq
+                                               (after asmcomp/amd64/proc.ml(183):5782-5827
+                                                 (array.set[addr] loc i
+                                                   (after asmcomp/amd64/proc.ml(183):5793-5827
+                                                     (apply stack_slot
+                                                       (after asmcomp/amd64/proc.ml(183):5804-5821
+                                                         (apply make_stack
+                                                           (field 0 ofs)))
+                                                       3a))))
+                                               (before asmcomp/amd64/proc.ml(184):5839-5863
+                                                 (setfield_imm 0 ofs
+                                                   (+ (field 0 ofs)
+                                                     (field 5 (global Arch!)))))))))
+                                       (before asmcomp/amd64/proc.ml(170):5354-5631
+                                         (seq
+                                           (if (<= (field 0 int) last_int)
+                                             (before asmcomp/amd64/proc.ml(170):5379-5451
+                                               (seq
+                                                 (after asmcomp/amd64/proc.ml(171):5395-5419
+                                                   (array.set[addr] loc i
+                                                     (after asmcomp/amd64/proc.ml(171):5406-5419
+                                                       (apply phys_reg
+                                                         (field 0 int)))))
+                                                 (before asmcomp/amd64/proc.ml(172):5431-5439
+                                                   (+:=1 int))))
+                                             (before asmcomp/amd64/proc.ml(173):5457-5561
+                                               (seq
+                                                 (after asmcomp/amd64/proc.ml(174):5473-5515
+                                                   (array.set[addr] loc i
+                                                     (after asmcomp/amd64/proc.ml(174):5484-5515
+                                                       (apply stack_slot
+                                                         (after asmcomp/amd64/proc.ml(174):5495-5512
+                                                           (apply make_stack
+                                                             (field 0 ofs)))
+                                                         ty))))
+                                                 (before asmcomp/amd64/proc.ml(175):5527-5549
+                                                   (setfield_imm 0 ofs
+                                                     (+ (field 0 ofs)
+                                                       (field 4
+                                                         (global Arch!))))))))
+                                           (before asmcomp/amd64/proc.ml(177):5571-5631
+                                             (if
+                                               (not
+                                                 (after asmcomp/amd64/proc.ml(177):5583-5630
+                                                   (apply
+                                                     (field 2
+                                                       (field 9
+                                                         (global Reg!)))
+                                                     (after asmcomp/amd64/proc.ml(177):5596-5603
+                                                       (array.get[addr] loc
+                                                         i))
+                                                     destroyed_by_plt_stub_set)))
+                                               0a
+                                               (raise
+                                                 (after asmcomp/amd64/proc.ml(177):5571-5631
+                                                   (makeblock 0
+                                                     (global Assert_failure!)
+                                                     [0:
+                                                      "asmcomp/amd64/proc.ml"
+                                                      177 8])))))))))))
+                               (before asmcomp/amd64/proc.ml(187):5886-5911
+                                 (makeblock 0 (*,int) loc
+                                   (after asmcomp/amd64/proc.ml(187):5892-5910
+                                     (apply (field 25 (global Misc!))
+                                       (field 0 ofs) 16))))))))))))))))
+     incoming =
+       (function ofs[int]
+         (funct-body asmcomp/amd64/proc.ml(189)<ghost>:5955-5973
+           (before asmcomp/amd64/proc.ml(189):5961-5973
+             (makeblock 1 (int) ofs))))
+     outgoing =
+       (function ofs[int]
+         (funct-body asmcomp/amd64/proc.ml(190)<ghost>:5987-6005
+           (before asmcomp/amd64/proc.ml(190):5993-6005
+             (makeblock 2 (int) ofs))))
+     not_supported =
+       (function _ofs
+         (funct-body asmcomp/amd64/proc.ml(191)<ghost>:6024-6074
+           (before asmcomp/amd64/proc.ml(191):6031-6074
+             (after asmcomp/amd64/proc.ml(191):6031-6074
+               (apply (field 0 (global Misc!))
+                 "Proc.loc_results: cannot call")))))
+     max_int_args_in_regs =
+       (function param : int
+         (funct-body asmcomp/amd64/proc.ml(193)<ghost>:6101-6142
+           (before asmcomp/amd64/proc.ml(194):6108-6142
+             (if (field 52 (global Config!))
+               (before asmcomp/amd64/proc.ml(194):6133-6134 9)
+               (before asmcomp/amd64/proc.ml(194):6140-6142 10)))))
+     loc_arguments =
+       (function arg
+         (funct-body asmcomp/amd64/proc.ml(196)<ghost>:6162-6244
+           (before asmcomp/amd64/proc.ml(197):6170-6244
+             (after asmcomp/amd64/proc.ml(197):6170-6244
+               (apply calling_conventions 0
+                 (-
+                   (after asmcomp/amd64/proc.ml(197):6193-6218
+                     (apply max_int_args_in_regs 0a))
+                   1)
+                 100 109 outgoing arg)))))
+     loc_parameters =
+       (function arg
+         (funct-body asmcomp/amd64/proc.ml(198)<ghost>:6264-6379
+           (before asmcomp/amd64/proc.ml(199):6272-6379
+             (let
+               (*match* =
+                  (after asmcomp/amd64/proc.ml(200):6294-6368
+                    (apply calling_conventions 0
+                      (-
+                        (after asmcomp/amd64/proc.ml(200):6317-6342
+                          (apply max_int_args_in_regs 0a))
+                        1)
+                      100 109 incoming arg))
+                loc =a (field 0 *match*))
+               (before asmcomp/amd64/proc.ml(202):6376-6379 loc)))))
+     loc_results =
+       (function res
+         (funct-body asmcomp/amd64/proc.ml(203)<ghost>:6396-6478
+           (before asmcomp/amd64/proc.ml(204):6404-6478
+             (let
+               (*match* =
+                  (after asmcomp/amd64/proc.ml(204):6422-6471
+                    (apply calling_conventions 0 0 100 100 not_supported res))
+                loc =a (field 0 *match*))
+               (before asmcomp/amd64/proc.ml(204):6475-6478 loc)))))
+     loc_spacetime_node_hole = r13
+     loc_external_results =
+       (function res
+         (funct-body asmcomp/amd64/proc.ml(221)<ghost>:7029-7111
+           (before asmcomp/amd64/proc.ml(222):7037-7111
+             (let
+               (*match* =
+                  (after asmcomp/amd64/proc.ml(222):7055-7104
+                    (apply calling_conventions 0 0 100 100 not_supported res))
+                loc =a (field 0 *match*))
+               (before asmcomp/amd64/proc.ml(222):7108-7111 loc)))))
+     unix_loc_external_arguments =
+       (function arg
+         (funct-body asmcomp/amd64/proc.ml(224)<ghost>:7145-7197
+           (before asmcomp/amd64/proc.ml(225):7153-7197
+             (after asmcomp/amd64/proc.ml(225):7153-7197
+               (apply calling_conventions 2 7 100 107 outgoing arg)))))
+     win64_int_external_arguments = (makearray[int] 5 4 6 7)
+     win64_float_external_arguments = (makearray[int] 100 101 102 103)
+     win64_loc_external_arguments =
+       (function arg
+         (funct-body asmcomp/amd64/proc.ml(232)<ghost>:7417-8147
+           (before asmcomp/amd64/proc.ml(233):7425-8147
+             (let
+               (loc =
+                  (after asmcomp/amd64/proc.ml(233):7435-7474
+                    (caml_make_vect (array.length[addr] arg)
+                      (field 1 (global Reg!)))))
+               (before asmcomp/amd64/proc.ml(234):7480-8147
+                 (let
+                   (reg = (makemutable 0 (int) 0)
+                    ofs = (makemutable 0 (int) 32))
+                   (before asmcomp/amd64/proc.ml(236):7520-8147
+                     (seq
+                       (for i 0 to (- (array.length[addr] arg) 1)
+                         (before asmcomp/amd64/proc.ml(237):7561-8111
+                           (let
+                             (ty =
+                                (field 2
+                                  (after asmcomp/amd64/proc.ml(237):7567-7574
+                                    (array.get[addr] arg i))))
+                             (if (>= ty 3)
+                               (before asmcomp/amd64/proc.ml(247):7876-8111
+                                 (if (< (field 0 reg) 4)
+                                   (before asmcomp/amd64/proc.ml(247):7893-7998
+                                     (seq
+                                       (after asmcomp/amd64/proc.ml(248):7909-7966
+                                         (array.set[addr] loc i
+                                           (after asmcomp/amd64/proc.ml(248):7920-7966
+                                             (apply phys_reg
+                                               (after asmcomp/amd64/proc.ml(248):7929-7966
+                                                 (array.get[int]
+                                                   win64_float_external_arguments
+                                                   (field 0 reg)))))))
+                                       (before asmcomp/amd64/proc.ml(249):7978-7986
+                                         (+:=1 reg))))
+                                   (before asmcomp/amd64/proc.ml(250):8004-8111
+                                     (seq
+                                       (after asmcomp/amd64/proc.ml(251):8020-8063
+                                         (array.set[addr] loc i
+                                           (after asmcomp/amd64/proc.ml(251):8031-8063
+                                             (apply stack_slot
+                                               (makeblock 2 (int)
+                                                 (field 0 ofs))
+                                               3a))))
+                                       (before asmcomp/amd64/proc.ml(252):8075-8099
+                                         (setfield_imm 0 ofs
+                                           (+ (field 0 ofs)
+                                             (field 5 (global Arch!)))))))))
+                               (before asmcomp/amd64/proc.ml(239):7624-7852
+                                 (if (< (field 0 reg) 4)
+                                   (before asmcomp/amd64/proc.ml(239):7641-7744
+                                     (seq
+                                       (after asmcomp/amd64/proc.ml(240):7657-7712
+                                         (array.set[addr] loc i
+                                           (after asmcomp/amd64/proc.ml(240):7668-7712
+                                             (apply phys_reg
+                                               (after asmcomp/amd64/proc.ml(240):7677-7712
+                                                 (array.get[int]
+                                                   win64_int_external_arguments
+                                                   (field 0 reg)))))))
+                                       (before asmcomp/amd64/proc.ml(241):7724-7732
+                                         (+:=1 reg))))
+                                   (before asmcomp/amd64/proc.ml(242):7750-7852
+                                     (seq
+                                       (after asmcomp/amd64/proc.ml(243):7766-7806
+                                         (array.set[addr] loc i
+                                           (after asmcomp/amd64/proc.ml(243):7777-7806
+                                             (apply stack_slot
+                                               (makeblock 2 (int)
+                                                 (field 0 ofs))
+                                               ty))))
+                                       (before asmcomp/amd64/proc.ml(244):7818-7840
+                                         (setfield_imm 0 ofs
+                                           (+ (field 0 ofs)
+                                             (field 4 (global Arch!)))))))))))))
+                       (before asmcomp/amd64/proc.ml(255):8122-8147
+                         (makeblock 0 (*,int) loc
+                           (after asmcomp/amd64/proc.ml(255):8128-8146
+                             (apply (field 25 (global Misc!)) (field 0 ofs)
+                               16))))))))))))
+     loc_external_arguments =
+       (function arg
+         (funct-body asmcomp/amd64/proc.ml(257)<ghost>:8205-8468
+           (before asmcomp/amd64/proc.ml(258):8213-8468
+             (let
+               (arg =
+                  (after asmcomp/amd64/proc.ml(259):8227-8295
+                    (apply (field 14 (global Stdlib__array!))
+                      (function regs
+                        (funct-body asmcomp/amd64/proc.ml(259):8237-8291
+                          (before asmcomp/amd64/proc.ml(259):8250-8290
+                            (seq
+                              (if (== (array.length[addr] regs) 1) 0a
+                                (raise
+                                  (after asmcomp/amd64/proc.ml(259):8250-8280
+                                    (makeblock 0 (global Assert_failure!)
+                                      [0: "asmcomp/amd64/proc.ml" 259 27]))))
+                              (before asmcomp/amd64/proc.ml(259):8282-8290
+                                (after asmcomp/amd64/proc.ml(259):8282-8290
+                                  (array.get[addr] regs 0)))))))
+                      arg)))
+               (before asmcomp/amd64/proc.ml(261):8303-8468
+                 (let
+                   (*match* =
+                      (if win64
+                        (before asmcomp/amd64/proc.ml(262):8342-8374
+                          (after asmcomp/amd64/proc.ml(262):8342-8374
+                            (apply win64_loc_external_arguments arg)))
+                        (before asmcomp/amd64/proc.ml(263):8384-8415
+                          (after asmcomp/amd64/proc.ml(263):8384-8415
+                            (apply unix_loc_external_arguments arg))))
+                    alignment =a (field 1 *match*)
+                    loc =a (field 0 *match*))
+                   (before asmcomp/amd64/proc.ml(265):8423-8468
+                     (makeblock 0 (*,int)
+                       (after asmcomp/amd64/proc.ml(265):8423-8457
+                         (apply (field 14 (global Stdlib__array!))
+                           (function reg
+                             (funct-body asmcomp/amd64/proc.ml(265):8433-8453
+                               (before asmcomp/amd64/proc.ml(265):8445-8452
+                                 (makearray[addr] reg))))
+                           loc))
+                       alignment))))))))
+     loc_exn_bucket = rax
+     int_dwarf_reg_numbers =
+       (duparray[int] [0: 0 3 5 4 1 2 8 9 12 13 10 11 6])
+     float_dwarf_reg_numbers =
+       (duparray[int] [0: 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32])
+     dwarf_register_numbers =
+       (function reg_class[int]
+         (funct-body asmcomp/amd64/proc.ml(277)<ghost>:8859-9019
+           (before asmcomp/amd64/proc.ml(278):8874-9019
+             (if (!= reg_class 0)
+               (if (!= reg_class 1)
+                 (before asmcomp/amd64/proc.ml(281):8968-9019
+                   (after asmcomp/amd64/proc.ml(281):8968-9019
+                     (apply (field 1 (global Misc!))
+                       [0:
+                        [11: "Bad register class " [4: 0a 0a 0a 0a]]
+                        "Bad register class %d"]
+                       reg_class)))
+                 (before asmcomp/amd64/proc.ml(280):8935-8958
+                   float_dwarf_reg_numbers))
+               (before asmcomp/amd64/proc.ml(279):8904-8925
+                 int_dwarf_reg_numbers)))))
+     stack_ptr_dwarf_register_number =[int] 7
+     regs_are_volatile =
+       (function _rs
+         (funct-body asmcomp/amd64/proc.ml(287)<ghost>:9116-9127
+           (before asmcomp/amd64/proc.ml(287):9122-9127 0a)))
+     destroyed_at_c_call =
+       (if win64
+         (before asmcomp/amd64/proc.ml(294):9283-9371
+           (after asmcomp/amd64/proc.ml(294):9283-9371
+             (apply (field 11 (global Stdlib__array!))
+               (after asmcomp/amd64/proc.ml(294):9296-9371
+                 (apply (field 16 (global Stdlib__list!)) phys_reg
+                   [0:
+                    0
+                    [0:
+                     4
+                     [0:
+                      5
+                      [0:
+                       6
+                       [0:
+                        7
+                        [0:
+                         10
+                         [0:
+                          11
+                          [0:
+                           100
+                           [0: 101 [0: 102 [0: 103 [0: 104 [0: 105 0a]]]]]]]]]]]]])))))
+         (before asmcomp/amd64/proc.ml(299):9427-9567
+           (after asmcomp/amd64/proc.ml(299):9427-9567
+             (apply (field 11 (global Stdlib__array!))
+               (after asmcomp/amd64/proc.ml(299):9440-9567
+                 (apply (field 16 (global Stdlib__list!)) phys_reg
+                   [0:
+                    0
+                    [0:
+                     2
+                     [0:
+                      3
+                      [0:
+                       4
+                       [0:
+                        5
+                        [0:
+                         6
+                         [0:
+                          7
+                          [0:
+                           10
+                           [0:
+                            11
+                            [0:
+                             100
+                             [0:
+                              101
+                              [0:
+                               102
+                               [0:
+                                103
+                                [0:
+                                 104
+                                 [0:
+                                  105
+                                  [0:
+                                   106
+                                   [0:
+                                    107
+                                    [0:
+                                     108
+                                     [0:
+                                      109
+                                      [0:
+                                       110
+                                       [0:
+                                        111
+                                        [0:
+                                         112 [0: 113 [0: 114 [0: 115 0a]]]]]]]]]]]]]]]]]]]]]]]]]))))))
+     destroyed_at_alloc =
+       (let
+         (regs =
+            (if (field 52 (global Config!))
+              (before asmcomp/amd64/proc.ml(307):9642-9676
+                (makearray[addr] rax loc_spacetime_node_hole))
+              (before asmcomp/amd64/proc.ml(309):9692-9701
+                (makearray[addr] rax))))
+         (before asmcomp/amd64/proc.ml(311):9709-9751
+           (after asmcomp/amd64/proc.ml(311):9709-9751
+             (apply (field 5 (global Stdlib__array!))
+               (makeblock 0 regs (makeblock 0 destroyed_by_plt_stub 0a))))))
+     destroyed_at_oper =
+       (function param
+         (funct-body asmcomp/amd64/proc.ml(313):9777-10523
+           (catch
+             (catch
+               (switch param
+                case tag 0:
+                 (let (*match* =a (field 0 param))
+                   (catch
+                     (catch
+                       (switch *match*
+                        case tag 3: (exit 22)
+                        case tag 4: (exit 22)
+                        case tag 7:
+                         (let (*match* =a (field 1 *match*))
+                           (if *match* (exit 22)
+                             (before asmcomp/amd64/proc.ml(316):9911-9930
+                               destroyed_at_c_call)))
+                        case tag 10:
+                         (let (*match* =a (field 0 *match*))
+                           (if (!= *match* 8) (exit 21)
+                             (before asmcomp/amd64/proc.ml(319):10055-10067
+                               (makearray[addr] rxmm15))))
+                        case tag 11:
+                         (before asmcomp/amd64/proc.ml(320):10089-10107
+                           destroyed_at_alloc)
+                        case tag 12:
+                         (let (*match* =a (field 0 *match*))
+                           (switch *match*
+                            case int 3: (exit 23)
+                            case int 4: (exit 20)
+                            case int 5: (exit 20)
+                            case tag 0: (exit 23)
+                            case tag 1:
+                             (before asmcomp/amd64/proc.ml(323):10227-10243
+                               (if (field 52 (global Config!))
+                                 (before asmcomp/amd64/proc.ml(324):10253-10282
+                                   (makearray[addr] loc_spacetime_node_hole))
+                                 (exit 21)))
+                            default: (exit 21)))
+                        case tag 13:
+                         (let (*match* =a (field 0 *match*))
+                           (catch
+                             (switch *match*
+                              case int 4: (exit 26)
+                              case int 5: (exit 26)
+                              case tag 0: (exit 23)
+                              case tag 1:
+                               (before asmcomp/amd64/proc.ml(325):10327-10343
+                                 (if (field 52 (global Config!))
+                                   (before asmcomp/amd64/proc.ml(326):10353-10382
+                                     (makearray[addr]
+                                       loc_spacetime_node_hole))
+                                   (exit 21)))
+                              default: (exit 21))
+                            with (26) (exit 20)))
+                        default: (exit 21))
+                      with (22)
+                       (before asmcomp/amd64/proc.ml(315):9857-9870
+                         all_phys_regs))
+                    with (23)
+                     (before asmcomp/amd64/proc.ml(322):10179-10188
+                       (makearray[addr] rax))))
+                case tag 2:
+                 (before asmcomp/amd64/proc.ml(327):10404-10418
+                   (makearray[addr] rax rdx))
+                default: (exit 21))
+              with (21)
+               (before asmcomp/amd64/proc.ml(329):10432-10523
+                 (if fp
+                   (before asmcomp/amd64/proc.ml(331):10494-10503
+                     (makearray[addr] rbp))
+                   (before asmcomp/amd64/proc.ml(333):10519-10523
+                     (makearray[addr])))))
+            with (20)
+             (before asmcomp/amd64/proc.ml(318):10007-10021
+               (makearray[addr] rax rdx)))))
+     destroyed_at_raise = all_phys_regs
+     destroyed_at_reloadretaddr = (makearray[gen])
+     safe_register_pressure =
+       (function param : int
+         (funct-body asmcomp/amd64/proc.ml(343):10669-10767
+           (catch
+             (switch param
+              case tag 7:
+               (before asmcomp/amd64/proc.ml(344):10696-10736
+                 (if win64
+                   (before asmcomp/amd64/proc.ml(344):10710-10729
+                     (if fp (before asmcomp/amd64/proc.ml(344):10721-10722 7)
+                       (before asmcomp/amd64/proc.ml(344):10728-10729 8)))
+                   (before asmcomp/amd64/proc.ml(344):10735-10736 0)))
+              default: (exit 27))
+            with (27)
+             (before asmcomp/amd64/proc.ml(345):10746-10767
+               (if fp (before asmcomp/amd64/proc.ml(345):10757-10759 10)
+                 (before asmcomp/amd64/proc.ml(345):10765-10767 11))))))
+     max_register_pressure =
+       (function param
+         (funct-body asmcomp/amd64/proc.ml(347):10797-11399
+           (catch
+             (catch
+               (catch
+                 (switch param
+                  case tag 7:
+                   (before asmcomp/amd64/proc.ml(349):10830-10952
+                     (if win64
+                       (before asmcomp/amd64/proc.ml(350):10852-10892
+                         (if fp
+                           (before asmcomp/amd64/proc.ml(350):10863-10874
+                             (makearray[int] 7 10))
+                           (before asmcomp/amd64/proc.ml(350):10881-10892
+                             (makearray[int] 8 10))))
+                       (before asmcomp/amd64/proc.ml(352):10914-10952
+                         (if fp
+                           (before asmcomp/amd64/proc.ml(352):10925-10935
+                             (makearray[int] 3 0))
+                           (before asmcomp/amd64/proc.ml(352):10942-10952
+                             (makearray[int] 4 0))))))
+                  case tag 10:
+                   (let (*match* =a (field 0 param))
+                     (if (!= *match* 8) (exit 30)
+                       (before asmcomp/amd64/proc.ml(361):11307-11348
+                         (if fp
+                           (before asmcomp/amd64/proc.ml(361):11318-11330
+                             (makearray[int] 12 15))
+                           (before asmcomp/amd64/proc.ml(361):11336-11348
+                             (makearray[int] 13 15))))))
+                  case tag 11:
+                   (before asmcomp/amd64/proc.ml(356):11077-11178
+                     (if fp
+                       (before asmcomp/amd64/proc.ml(356):11088-11128
+                         (makearray[int] (- 11 num_destroyed_by_plt_stub) 16))
+                       (before asmcomp/amd64/proc.ml(357):11138-11178
+                         (makearray[int] (- 12 num_destroyed_by_plt_stub) 16))))
+                  case tag 12:
+                   (let (*match* =a (field 0 param))
+                     (switch *match*
+                      case int 4: (exit 28)
+                      case int 5: (exit 28)
+                      case tag 0: (exit 29)
+                      default: (exit 30)))
+                  case tag 13:
+                   (let (*match* =a (field 0 param))
+                     (catch
+                       (switch *match*
+                        case int 4: (exit 32)
+                        case int 5: (exit 32)
+                        case tag 0: (exit 29)
+                        default: (exit 30))
+                      with (32) (exit 28)))
+                  default: (exit 30))
+                with (30)
+                 (before asmcomp/amd64/proc.ml(362):11358-11399
+                   (if fp
+                     (before asmcomp/amd64/proc.ml(362):11369-11381
+                       (makearray[int] 12 16))
+                     (before asmcomp/amd64/proc.ml(362):11387-11399
+                       (makearray[int] 13 16)))))
+              with (28)
+               (before asmcomp/amd64/proc.ml(354):11015-11056
+                 (if fp
+                   (before asmcomp/amd64/proc.ml(354):11026-11038
+                     (makearray[int] 10 16))
+                   (before asmcomp/amd64/proc.ml(354):11044-11056
+                     (makearray[int] 11 16)))))
+            with (29)
+             (before asmcomp/amd64/proc.ml(359):11233-11274
+               (if fp
+                 (before asmcomp/amd64/proc.ml(359):11244-11256
+                   (makearray[int] 11 16))
+                 (before asmcomp/amd64/proc.ml(359):11262-11274
+                   (makearray[int] 12 16)))))))
+     op_is_pure =
+       (function param
+         (funct-body asmcomp/amd64/proc.ml(367):11511-11785
+           (catch
+             (catch
+               (switch param
+                case tag 3: (exit 33)
+                case tag 4: (exit 33)
+                case tag 5: (exit 33)
+                case tag 6: (exit 33)
+                case tag 7: (exit 33)
+                case tag 8: (exit 33)
+                case tag 10: (exit 33)
+                case tag 11: (exit 33)
+                case tag 12:
+                 (let (*match* =a (field 0 param))
+                   (switch *match* case tag 1: (exit 33)
+                                   default: (exit 34)))
+                case tag 13:
+                 (let (*match* =a (field 0 param))
+                   (switch *match* case tag 1: (exit 33)
+                                   default: (exit 34)))
+                case tag 14:
+                 (let (*match* =a (field 0 param))
+                   (catch
+                     (catch
+                       (switch *match*
+                        case int 1: (exit 35)
+                        case tag 0: (exit 35)
+                        default: (exit 36))
+                      with (36)
+                       (before asmcomp/amd64/proc.ml(372):11766-11771 0a))
+                    with (35)
+                     (before asmcomp/amd64/proc.ml(371):11742-11746 1a)))
+                default: (exit 34))
+              with (34) (before asmcomp/amd64/proc.ml(373):11781-11785 1a))
+            with (33) (before asmcomp/amd64/proc.ml(370):11700-11705 0a))))
+     num_stack_slots = (makearray[int] 0 0)
+     contains_calls = (makemutable 0 0a)
+     frame_required =
+       (function param
+         (funct-body asmcomp/amd64/proc.ml(380)<ghost>:11904-11986
+           (before asmcomp/amd64/proc.ml(381):11911-11986
+             (|| fp
+               (|| (field 0 contains_calls)
+                 (||
+                   (>
+                     (after asmcomp/amd64/proc.ml(381):11936-11955
+                       (array.get[int] num_stack_slots 0))
+                     0)
+                   (>
+                     (after asmcomp/amd64/proc.ml(381):11963-11982
+                       (array.get[int] num_stack_slots 1))
+                     0)))))))
+     prologue_required =
+       (function param
+         (funct-body asmcomp/amd64/proc.ml(383)<ghost>:12010-12034
+           (before asmcomp/amd64/proc.ml(384):12017-12034
+             (after asmcomp/amd64/proc.ml(384):12017-12034
+               (apply frame_required 0a)))))
+     assemble_file =
+       (function infile outfile : int
+         (funct-body asmcomp/amd64/proc.ml(388)<ghost>:12083-12139
+           (before asmcomp/amd64/proc.ml(389):12102-12139
+             (after asmcomp/amd64/proc.ml(389):12102-12139
+               (apply (field 15 (global X86_proc!)) infile outfile)))))
+     init =
+       (function param
+         (funct-body asmcomp/amd64/proc.ml(391)<ghost>:12150-12260
+           (before asmcomp/amd64/proc.ml(392):12157-12260
+             (if fp
+               (before asmcomp/amd64/proc.ml(392):12168-12217
+                 (after asmcomp/amd64/proc.ml(392):12168-12217
+                   (array.set[int] num_available_registers 0 12)))
+               (before asmcomp/amd64/proc.ml(395):12227-12260
+                 (after asmcomp/amd64/proc.ml(395):12227-12260
+                   (array.set[int] num_available_registers 0 13))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 word_addressed num_register_classes register_class
+        num_available_registers first_available_register register_name
+        phys_reg rotate_registers loc_arguments loc_results loc_parameters
+        loc_external_arguments loc_external_results loc_exn_bucket
+        loc_spacetime_node_hole max_arguments_for_tailcalls
+        safe_register_pressure max_register_pressure destroyed_at_oper
+        destroyed_at_raise destroyed_at_reloadretaddr regs_are_volatile
+        op_is_pure num_stack_slots contains_calls frame_required
+        prologue_required dwarf_register_numbers
+        stack_ptr_dwarf_register_number assemble_file init))))

@@ -1,0 +1,159 @@
+(setglobal Typedecl_properties!
+  (let
+    (add_type =
+       (function check id decl env
+         (funct-body typing/typedecl_properties.ml(30)<ghost>:1484-1645
+           (before typing/typedecl_properties.ml(31):1507-1645
+             (after typing/typedecl_properties.ml(32):1527-1645
+               (apply (field 10 (global Builtin_attributes!)) [0: 0a]
+                 (field 9 decl)
+                 (function param
+                   (funct-body typing/typedecl_properties.ml(33):1602-1645
+                     (before typing/typedecl_properties.ml(33):1613-1644
+                       (after typing/typedecl_properties.ml(33):1613-1644
+                         (apply (field 48 (global Env!)) check id decl env))))))))))
+     add_types_to_env =
+       (function decls env
+         (funct-body typing/typedecl_properties.ml(35)<ghost>:1668-1772
+           (before typing/typedecl_properties.ml(36):1682-1772
+             (after typing/typedecl_properties.ml(36):1682-1772
+               (apply (field 21 (global Stdlib__list!))
+                 (function param env
+                   (funct-body typing/typedecl_properties.ml(37):1702-1758
+                     (let (decl =a (field 1 param) id =a (field 0 param))
+                       (before typing/typedecl_properties.ml(37):1725-1757
+                         (after typing/typedecl_properties.ml(37):1725-1757
+                           (apply add_type 1a id decl env))))))
+                 decls env)))))
+     compute_property =
+       (function property env decls required
+         (funct-body typing/typedecl_properties.ml(43):1896-2890
+           (before typing/typedecl_properties.ml(47):2095-2890
+             (let
+               (props =
+                  (after typing/typedecl_properties.ml(47):2107-2164
+                    (apply (field 16 (global Stdlib__list!))
+                      (function param
+                        (funct-body typing/typedecl_properties.ml(47):2116-2158
+                          (let (decl =a (field 1 param))
+                            (before typing/typedecl_properties.ml(47):2136-2157
+                              (after typing/typedecl_properties.ml(47):2136-2157
+                                (apply (field 2 property) decl))))))
+                      decls)))
+               (before typing/typedecl_properties.ml(48):2170-2890
+                 (letrec
+                   (compute_fixpoint
+                      (function props
+                        (funct-body typing/typedecl_properties.ml(48)<ghost>:2195-2860
+                          (before typing/typedecl_properties.ml(49):2207-2860
+                            (let
+                              (new_decls =
+                                 (after typing/typedecl_properties.ml(50):2229-2330
+                                   (apply (field 23 (global Stdlib__list!))
+                                     (function param prop
+                                       (funct-body typing/typedecl_properties.ml(50):2239-2310
+                                         (let
+                                           (decl =a (field 1 param)
+                                            id =a (field 0 param))
+                                           (before typing/typedecl_properties.ml(51):2273-2309
+                                             (makeblock 0 id
+                                               (after typing/typedecl_properties.ml(51):2278-2308
+                                                 (apply (field 4 property)
+                                                   decl prop)))))))
+                                     decls props)))
+                              (before typing/typedecl_properties.ml(53):2338-2860
+                                (let
+                                  (new_env =
+                                     (after typing/typedecl_properties.ml(53):2352-2382
+                                       (apply add_types_to_env new_decls env)))
+                                  (before typing/typedecl_properties.ml(54):2390-2860
+                                    (let
+                                      (new_props =
+                                         (after typing/typedecl_properties.ml(55):2412-2615
+                                           (apply
+                                             (field 23
+                                               (global Stdlib__list!))
+                                             (function param param
+                                               (funct-body typing/typedecl_properties.ml(56):2430-2567
+                                                 (let
+                                                   (req =a (field 1 param)
+                                                    prop =a (field 0 param)
+                                                    decl =a (field 1 param))
+                                                   (before typing/typedecl_properties.ml(57):2473-2566
+                                                     (let
+                                                       (new_prop =
+                                                          (after typing/typedecl_properties.ml(57):2488-2521
+                                                            (apply
+                                                              (field 3
+                                                                property)
+                                                              new_env decl
+                                                              req)))
+                                                       (before typing/typedecl_properties.ml(58):2536-2566
+                                                         (after typing/typedecl_properties.ml(58):2536-2566
+                                                           (apply
+                                                             (field 1
+                                                               property)
+                                                             prop new_prop))))))))
+                                             new_decls
+                                             (after typing/typedecl_properties.ml(59):2586-2615
+                                               (apply
+                                                 (field 47
+                                                   (global Stdlib__list!))
+                                                 props required)))))
+                                      (before typing/typedecl_properties.ml(60):2623-2860
+                                        (if
+                                          (not
+                                            (after typing/typedecl_properties.ml(60):2630-2673
+                                              (apply
+                                                (field 29
+                                                  (global Stdlib__list!))
+                                                (field 0 property) props
+                                                new_props)))
+                                          (before typing/typedecl_properties.ml(61):2683-2709
+                                            (after typing/typedecl_properties.ml(61):2683-2709
+                                              (apply compute_fixpoint
+                                                new_props)))
+                                          (before typing/typedecl_properties.ml(62):2719-2860
+                                            (seq
+                                              (after typing/typedecl_properties.ml(63):2731-2835
+                                                (apply
+                                                  (field 22
+                                                    (global Stdlib__list!))
+                                                  (function param req
+                                                    (funct-body typing/typedecl_properties.ml(64):2750-2808
+                                                      (let
+                                                        (decl =a
+                                                           (field 1 param)
+                                                         id =a
+                                                           (field 0 param))
+                                                        (before typing/typedecl_properties.ml(64):2773-2807
+                                                          (after typing/typedecl_properties.ml(64):2773-2807
+                                                            (apply
+                                                              (field 5
+                                                                property)
+                                                              new_env id decl
+                                                              req))))))
+                                                  new_decls required))
+                                              (before typing/typedecl_properties.ml(66):2843-2852
+                                                new_decls))))))))))))))
+                   (before typing/typedecl_properties.ml(69):2868-2890
+                     (after typing/typedecl_properties.ml(69):2868-2890
+                       (apply compute_fixpoint props)))))))))
+     compute_property_noreq =
+       (function property env decls
+         (funct-body typing/typedecl_properties.ml(71)<ghost>:2919-3025
+           (before typing/typedecl_properties.ml(72):2942-3025
+             (let
+               (req =
+                  (after typing/typedecl_properties.ml(72):2952-2980
+                    (apply (field 16 (global Stdlib__list!))
+                      (function param
+                        (funct-body typing/typedecl_properties.ml(72):2961-2974
+                          (before typing/typedecl_properties.ml(72):2971-2973
+                            0a)))
+                      decls)))
+               (before typing/typedecl_properties.ml(73):2986-3025
+                 (after typing/typedecl_properties.ml(73):2986-3025
+                   (apply compute_property property env decls req))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 compute_property compute_property_noreq))))

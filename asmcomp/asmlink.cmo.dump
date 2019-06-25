@@ -1,0 +1,1637 @@
+(setglobal Asmlink!
+  (let
+    (Error = (makeblock 248 "Asmlink.Error" (caml_fresh_oo_id 0))
+     Cmi_consistbl =
+       (module-defn(Cmi_consistbl) asmcomp/asmlink.ml(40):1730-1788
+         (apply (field 0 (global Consistbl!))
+           (let (let = (field 3 (field 11 (global Misc!))))
+             (makeblock 0 (field 38 let) (field 39 let) (field 40 let)
+               (field 32 let)))))
+     crc_interfaces =
+       (after asmcomp/asmlink.ml(41):1810-1833
+         (apply (field 0 Cmi_consistbl) 0a))
+     interfaces = (makemutable 0 0a)
+     Cmx_consistbl =
+       (module-defn(Cmx_consistbl) asmcomp/asmlink.ml(44):1875-1933
+         (apply (field 0 (global Consistbl!))
+           (let (let = (field 3 (field 11 (global Misc!))))
+             (makeblock 0 (field 38 let) (field 39 let) (field 40 let)
+               (field 32 let)))))
+     crc_implementations =
+       (after asmcomp/asmlink.ml(45):1960-1983
+         (apply (field 0 Cmx_consistbl) 0a))
+     implementations = (makemutable 0 0a)
+     implementations_defined = (makemutable 0 0a)
+     cmx_required = (makemutable 0 0a)
+     check_consistency =
+       (function file_name unit crc
+         (funct-body asmcomp/asmlink.ml(50)<ghost>:2158-3660
+           (before asmcomp/asmlink.ml(51):2181-3660
+             (seq
+               (try
+                 (after asmcomp/asmlink.ml(52):2195-2543
+                   (apply (field 14 (global Stdlib__list!))
+                     (function param
+                       (funct-body asmcomp/asmlink.ml(53):2211-2517
+                         (let
+                           (crco =a (field 1 param) name =a (field 0 param))
+                           (before asmcomp/asmlink.ml(54):2240-2516
+                             (seq
+                               (setfield_ptr 0 interfaces
+                                 (makeblock 0 name (field 0 interfaces)))
+                               (before asmcomp/asmlink.ml(55):2283-2516
+                                 (if crco
+                                   (let (crc =a (field 0 crco))
+                                     (before asmcomp/asmlink.ml(58):2354-2516
+                                       (if
+                                         (after asmcomp/asmlink.ml(58):2357-2376
+                                           (caml_string_equal name
+                                             (field 0 unit)))
+                                         (before asmcomp/asmlink.ml(59):2394-2445
+                                           (after asmcomp/asmlink.ml(59):2394-2445
+                                             (apply (field 4 Cmi_consistbl)
+                                               crc_interfaces name crc
+                                               file_name)))
+                                         (before asmcomp/asmlink.ml(60):2463-2516
+                                           (after asmcomp/asmlink.ml(60):2463-2516
+                                             (apply (field 2 Cmi_consistbl)
+                                               crc_interfaces name crc
+                                               file_name))))))
+                                   (before asmcomp/asmlink.ml(56):2317-2319
+                                     0a))))))))
+                     (field 3 unit)))
+                with exn
+                 (let (tag =a (field 0 exn))
+                   (if (== tag (field 9 Cmi_consistbl))
+                     (let
+                       (auth =a (field 3 exn)
+                        user =a (field 2 exn)
+                        name =a (field 1 exn))
+                       (before asmcomp/asmlink.ml(63):2604-2658
+                         (raise
+                           (after asmcomp/asmlink.ml(63):2609-2658
+                             (makeblock 0 Error (makeblock 3 name user auth))))))
+                     (reraise exn))))
+               (before asmcomp/asmlink.ml(65):2668-3660
+                 (seq
+                   (try
+                     (after asmcomp/asmlink.ml(66):2682-3048
+                       (apply (field 14 (global Stdlib__list!))
+                         (function param
+                           (funct-body asmcomp/asmlink.ml(67):2698-3022
+                             (let
+                               (crco =a (field 1 param)
+                                name =a (field 0 param))
+                               (before asmcomp/asmlink.ml(68):2727-3021
+                                 (seq
+                                   (setfield_ptr 0 implementations
+                                     (makeblock 0 name
+                                       (field 0 implementations)))
+                                   (before asmcomp/asmlink.ml(69):2780-3021
+                                     (if crco
+                                       (let (crc =a (field 0 crco))
+                                         (before asmcomp/asmlink.ml(74):2963-3021
+                                           (after asmcomp/asmlink.ml(74):2963-3021
+                                             (apply (field 2 Cmx_consistbl)
+                                               crc_implementations name crc
+                                               file_name))))
+                                       (before asmcomp/asmlink.ml(71):2830-2924
+                                         (if
+                                           (after asmcomp/asmlink.ml(71):2833-2860
+                                             (apply
+                                               (field 31
+                                                 (global Stdlib__list!))
+                                               name (field 0 cmx_required)))
+                                           (before asmcomp/asmlink.ml(72):2882-2924
+                                             (raise
+                                               (after asmcomp/asmlink.ml(72):2887-2924
+                                                 (makeblock 0 Error
+                                                   (makeblock 7 file_name
+                                                     name)))))
+                                           0a)))))))))
+                         (field 4 unit)))
+                    with exn
+                     (let (tag =a (field 0 exn))
+                       (if (== tag (field 9 Cmx_consistbl))
+                         (let
+                           (auth =a (field 3 exn)
+                            user =a (field 2 exn)
+                            name =a (field 1 exn))
+                           (before asmcomp/asmlink.ml(77):3109-3168
+                             (raise
+                               (after asmcomp/asmlink.ml(77):3114-3168
+                                 (makeblock 0 Error
+                                   (makeblock 4 name user auth))))))
+                         (reraise exn))))
+                   (before asmcomp/asmlink.ml(79):3178-3660
+                     (seq
+                       (try
+                         (let
+                           (source =
+                              (after asmcomp/asmlink.ml(80):3205-3253
+                                (apply (field 38 (global Stdlib__list!))
+                                  (field 0 unit)
+                                  (field 0 implementations_defined))))
+                           (before asmcomp/asmlink.ml(81):3261-3328
+                             (raise
+                               (after asmcomp/asmlink.ml(81):3267-3328
+                                 (makeblock 0 Error
+                                   (makeblock 6 (field 0 unit) file_name
+                                     source))))))
+                        with exn
+                         (if (== exn (field 7 (global Stdlib!)))
+                           (before asmcomp/asmlink.ml(82):3349-3351 0a)
+                           (reraise exn)))
+                       (before asmcomp/asmlink.ml(84):3361-3660
+                         (seq
+                           (setfield_ptr 0 implementations
+                             (makeblock 0 (field 0 unit)
+                               (field 0 implementations)))
+                           (before asmcomp/asmlink.ml(85):3416-3660
+                             (seq
+                               (after asmcomp/asmlink.ml(85):3416-3480
+                                 (apply (field 4 Cmx_consistbl)
+                                   crc_implementations (field 0 unit) crc
+                                   file_name))
+                               (before asmcomp/asmlink.ml(86):3484-3660
+                                 (seq
+                                   (setfield_ptr 0 implementations_defined
+                                     (makeblock 0
+                                       (makeblock 0 (field 0 unit) file_name)
+                                       (field 0 implementations_defined)))
+                                   (before asmcomp/asmlink.ml(88):3572-3660
+                                     (if
+                                       (after asmcomp/asmlink.ml(88):3575-3605
+                                         (caml_string_notequal (field 1 unit)
+                                           (field 0 unit)))
+                                       (before asmcomp/asmlink.ml(89):3615-3660
+                                         (setfield_ptr 0 cmx_required
+                                           (makeblock 0 (field 0 unit)
+                                             (field 0 cmx_required))))
+                                       0a))))))))))))))))
+     extract_crc_interfaces =
+       (function param
+         (funct-body asmcomp/asmlink.ml(91)<ghost>:3689-3744
+           (before asmcomp/asmlink.ml(92):3696-3744
+             (after asmcomp/asmlink.ml(92):3696-3744
+               (apply (field 6 Cmi_consistbl) (field 0 interfaces)
+                 crc_interfaces)))))
+     extract_crc_implementations =
+       (function param
+         (funct-body asmcomp/asmlink.ml(93)<ghost>:3777-3842
+           (before asmcomp/asmlink.ml(94):3784-3842
+             (after asmcomp/asmlink.ml(94):3784-3842
+               (apply (field 6 Cmx_consistbl) (field 0 implementations)
+                 crc_implementations)))))
+     lib_ccobjs = (makemutable 0 0a)
+     lib_ccopts = (makemutable 0 0a)
+     add_ccobjs =
+       (function origin l
+         (funct-body asmcomp/asmlink.ml(102)<ghost>:4054-4324
+           (before asmcomp/asmlink.ml(103):4067-4324
+             (if (not (field 0 (field 55 (global Clflags!))))
+               (before asmcomp/asmlink.ml(103):4101-4324
+                 (seq
+                   (setfield_ptr 0 lib_ccobjs
+                     (after asmcomp/asmlink.ml(104):4125-4151
+                       (apply (field 36 (global Stdlib!)) (field 1 l)
+                         (field 0 lib_ccobjs))))
+                   (before asmcomp/asmlink.ml(105):4157-4318
+                     (let
+                       (replace_origin =
+                          (after asmcomp/asmlink.ml(106):4184-4242
+                            (apply (field 33 (global Misc!)) "$CAMLORIGIN"
+                              origin)))
+                       (before asmcomp/asmlink.ml(108):4254-4318
+                         (setfield_ptr 0 lib_ccopts
+                           (after asmcomp/asmlink.ml(108):4268-4318
+                             (apply (field 36 (global Stdlib!))
+                               (after asmcomp/asmlink.ml(108):4268-4304
+                                 (apply (field 16 (global Stdlib__list!))
+                                   replace_origin (field 2 l)))
+                               (field 0 lib_ccopts)))))))))
+               0a))))
+     runtime_lib =
+       (function param
+         (funct-body asmcomp/asmlink.ml(111)<ghost>:4342-4583
+           (before asmcomp/asmlink.ml(112):4349-4583
+             (let
+               (libname =
+                  (after asmcomp/asmlink.ml(112):4363-4411
+                    (apply (field 27 (global Stdlib!)) "libasmrun"
+                      (after asmcomp/asmlink.ml(112):4377-4411
+                        (apply (field 27 (global Stdlib!))
+                          (field 0 (field 125 (global Clflags!)))
+                          (field 43 (global Config!)))))))
+               (before asmcomp/asmlink.ml(113):4417-4583
+                 (try
+                   (if
+                     (|| (field 0 (field 28 (global Clflags!)))
+                       (not (field 0 (field 126 (global Clflags!)))))
+                     (before asmcomp/asmlink.ml(114):4484-4486 0a)
+                     (before asmcomp/asmlink.ml(115):4496-4522
+                       (makeblock 0
+                         (after asmcomp/asmlink.ml(115):4498-4520
+                           (apply (field 5 (global Load_path!)) libname))
+                         0a)))
+                  with exn
+                   (if (== exn (field 7 (global Stdlib!)))
+                     (before asmcomp/asmlink.ml(117):4547-4583
+                       (raise
+                         (after asmcomp/asmlink.ml(117):4552-4583
+                           (makeblock 0 Error (makeblock 0 libname)))))
+                     (reraise exn))))))))
+     object_file_name =
+       (function name
+         (funct-body asmcomp/asmlink.ml(119)<ghost>:4606-5022
+           (before asmcomp/asmlink.ml(120):4615-5022
+             (let
+               (file_name =
+                  (try
+                    (after asmcomp/asmlink.ml(122):4645-4664
+                      (apply (field 5 (global Load_path!)) name))
+                   with exn
+                    (if (== exn (field 7 (global Stdlib!)))
+                      (before asmcomp/asmlink.ml(124):4693-4751
+                        (after asmcomp/asmlink.ml(124):4693-4751
+                          (apply (field 1 (global Misc!))
+                            [0:
+                             [11:
+                              "Asmlink.object_file_name: "
+                              [2: 0a [11: " not found" 0a]]]
+                             "Asmlink.object_file_name: %s not found"]
+                            name)))
+                      (reraise exn))))
+               (before asmcomp/asmlink.ml(125):4757-5022
+                 (if
+                   (after asmcomp/asmlink.ml(125):4760-4798
+                     (apply (field 6 (global Stdlib__filename!)) file_name
+                       ".cmx"))
+                   (before asmcomp/asmlink.ml(126):4808-4855
+                     (after asmcomp/asmlink.ml(126):4808-4855
+                       (apply (field 27 (global Stdlib!))
+                         (after asmcomp/asmlink.ml(126):4808-4845
+                           (apply (field 7 (global Stdlib__filename!))
+                             file_name ".cmx"))
+                         (field 41 (global Config!)))))
+                   (before asmcomp/asmlink.ml(127):4863-5022
+                     (if
+                       (after asmcomp/asmlink.ml(127):4866-4905
+                         (apply (field 6 (global Stdlib__filename!))
+                           file_name ".cmxa"))
+                       (before asmcomp/asmlink.ml(128):4915-4963
+                         (after asmcomp/asmlink.ml(128):4915-4963
+                           (apply (field 27 (global Stdlib!))
+                             (after asmcomp/asmlink.ml(128):4915-4953
+                               (apply (field 7 (global Stdlib__filename!))
+                                 file_name ".cmxa"))
+                             (field 43 (global Config!)))))
+                       (before asmcomp/asmlink.ml(130):4975-5022
+                         (after asmcomp/asmlink.ml(130):4975-5022
+                           (apply (field 0 (global Misc!))
+                             "Asmlink.object_file_name: bad ext")))))))))))
+     missing_globals =
+       (after asmcomp/asmlink.ml(134):5099-5116
+         (apply (field 0 (global Stdlib__hashtbl!)) 0a 17))
+     is_required =
+       (function name
+         (funct-body asmcomp/asmlink.ml(136)<ghost>:5173-5260
+           (before asmcomp/asmlink.ml(137):5182-5260
+             (try
+               (seq
+                 (ignore
+                   (after asmcomp/asmlink.ml(137):5193-5228
+                     (apply (field 5 (global Stdlib__hashtbl!))
+                       missing_globals name)))
+                 (before asmcomp/asmlink.ml(137):5230-5234 1a))
+              with exn
+               (if (== exn (field 7 (global Stdlib!)))
+                 (before asmcomp/asmlink.ml(138):5255-5260 0a) (reraise exn))))))
+     add_required =
+       (function by param
+         (funct-body asmcomp/asmlink.ml(140)<ghost>:5279-5440
+           (let (name =a (field 0 param))
+             (before asmcomp/asmlink.ml(141):5299-5440
+               (try
+                 (let
+                   (rq =
+                      (after asmcomp/asmlink.ml(142):5316-5349
+                        (apply (field 5 (global Stdlib__hashtbl!))
+                          missing_globals name)))
+                   (before asmcomp/asmlink.ml(143):5357-5372
+                     (setfield_ptr 0 rq (makeblock 0 by (field 0 rq)))))
+                with exn
+                 (if (== exn (field 7 (global Stdlib!)))
+                   (before asmcomp/asmlink.ml(145):5397-5440
+                     (after asmcomp/asmlink.ml(145):5397-5440
+                       (apply (field 4 (global Stdlib__hashtbl!))
+                         missing_globals name
+                         (makemutable 0 (makeblock 0 by 0a)))))
+                   (reraise exn)))))))
+     remove_required =
+       (function name
+         (funct-body asmcomp/asmlink.ml(147)<ghost>:5462-5506
+           (before asmcomp/asmlink.ml(148):5471-5506
+             (after asmcomp/asmlink.ml(148):5471-5506
+               (apply (field 9 (global Stdlib__hashtbl!)) missing_globals
+                 name)))))
+     extract_missing_globals =
+       (function param
+         (funct-body asmcomp/asmlink.ml(150)<ghost>:5536-5637
+           (before asmcomp/asmlink.ml(151):5543-5637
+             (let (mg = (makemutable 0 0a))
+               (before asmcomp/asmlink.ml(152):5564-5637
+                 (seq
+                   (after asmcomp/asmlink.ml(152):5564-5630
+                     (apply (field 11 (global Stdlib__hashtbl!))
+                       (function md rq
+                         (funct-body asmcomp/asmlink.ml(152):5577-5614
+                           (before asmcomp/asmlink.ml(152):5591-5613
+                             (setfield_ptr 0 mg
+                               (makeblock 0 (makeblock 0 md (field 0 rq))
+                                 (field 0 mg))))))
+                       missing_globals))
+                   (before asmcomp/asmlink.ml(153):5634-5637 (field 0 mg))))))))
+     read_file =
+       (function obj_name
+         (funct-body asmcomp/asmlink.ml(159)<ghost>:5747-6449
+           (before asmcomp/asmlink.ml(160):5760-6449
+             (let
+               (file_name =
+                  (try
+                    (after asmcomp/asmlink.ml(162):5790-5813
+                      (apply (field 5 (global Load_path!)) obj_name))
+                   with exn
+                    (if (== exn (field 7 (global Stdlib!)))
+                      (before asmcomp/asmlink.ml(164):5842-5879
+                        (raise
+                          (after asmcomp/asmlink.ml(164):5847-5879
+                            (makeblock 0 Error (makeblock 0 obj_name)))))
+                      (reraise exn))))
+               (before asmcomp/asmlink.ml(165):5885-6449
+                 (if
+                   (after asmcomp/asmlink.ml(165):5888-5926
+                     (apply (field 6 (global Stdlib__filename!)) file_name
+                       ".cmx"))
+                   (before asmcomp/asmlink.ml(165):5932-6141
+                     (let
+                       (*match* =
+                          (after asmcomp/asmlink.ml(168):6078-6102
+                            (apply (field 32 (global Compilenv!)) file_name))
+                        crc =a (field 1 *match*)
+                        info =a (field 0 *match*))
+                       (before asmcomp/asmlink.ml(169):6110-6135
+                         (makeblock 0 file_name info crc))))
+                   (before asmcomp/asmlink.ml(171):6149-6449
+                     (if
+                       (after asmcomp/asmlink.ml(171):6152-6191
+                         (apply (field 6 (global Stdlib__filename!))
+                           file_name ".cmxa"))
+                       (before asmcomp/asmlink.ml(171):6197-6399
+                         (let
+                           (infos =
+                              (try
+                                (after asmcomp/asmlink.ml(173):6229-6256
+                                  (apply (field 37 (global Compilenv!))
+                                    file_name))
+                               with exn
+                                (catch
+                                  (let (tag =a (field 0 exn))
+                                    (if
+                                      (== tag (field 38 (global Compilenv!)))
+                                      (let (*match* =a (field 1 exn))
+                                        (switch* *match*
+                                         case tag 0:
+                                          (before asmcomp/asmlink.ml(175):6314-6356
+                                            (raise
+                                              (after asmcomp/asmlink.ml(175):6319-6356
+                                                (makeblock 0 Error
+                                                  (makeblock 1 file_name)))))
+                                         case tag 1: (exit 8)
+                                         case tag 2: (exit 8)))
+                                      (exit 8)))
+                                 with (8) (reraise exn))))
+                           (before asmcomp/asmlink.ml(177):6368-6393
+                             (makeblock 1 file_name infos))))
+                       (before asmcomp/asmlink.ml(179):6407-6449
+                         (raise
+                           (after asmcomp/asmlink.ml(179):6412-6449
+                             (makeblock 0 Error (makeblock 1 file_name)))))))))))))
+     scan_file =
+       (function obj_name tolink
+         (funct-body asmcomp/asmlink.ml(181)<ghost>:6465-7450
+           (before asmcomp/asmlink.ml(181):6483-7450
+             (let
+               (*match* =
+                  (after asmcomp/asmlink.ml(181):6489-6507
+                    (apply read_file obj_name)))
+               (switch* *match*
+                case tag 0:
+                 (let
+                   (crc =a (field 2 *match*)
+                    info =a (field 1 *match*)
+                    file_name =a (field 0 *match*))
+                   (before asmcomp/asmlink.ml(184):6616-6746
+                     (seq
+                       (after asmcomp/asmlink.ml(184):6616-6644
+                         (apply remove_required (field 0 info)))
+                       (before asmcomp/asmlink.ml(185):6652-6746
+                         (seq
+                           (after asmcomp/asmlink.ml(185):6652-6706
+                             (apply (field 14 (global Stdlib__list!))
+                               (after asmcomp/asmlink.ml(185):6662-6686
+                                 (apply add_required file_name))
+                               (field 4 info)))
+                           (before asmcomp/asmlink.ml(186):6714-6746
+                             (makeblock 0 (makeblock 0 info file_name crc)
+                               tolink)))))))
+                case tag 1:
+                 (let
+                   (infos =a (field 1 *match*)
+                    file_name =a (field 0 *match*))
+                   (before asmcomp/asmlink.ml(190):6892-7450
+                     (seq
+                       (after asmcomp/asmlink.ml(190):6892-6937
+                         (apply add_ccobjs
+                           (after asmcomp/asmlink.ml(190):6903-6931
+                             (apply (field 13 (global Stdlib__filename!))
+                               file_name))
+                           infos))
+                       (before asmcomp/asmlink.ml(191):6945-7450
+                         (after asmcomp/asmlink.ml(191):6945-7450
+                           (apply (field 21 (global Stdlib__list!))
+                             (function param reqd
+                               (funct-body asmcomp/asmlink.ml(192):6969-7419
+                                 (let
+                                   (crc =a (field 1 param)
+                                    info =a (field 0 param))
+                                   (before asmcomp/asmlink.ml(193):7005-7418
+                                     (if
+                                       (|| (field 9 info)
+                                         (||
+                                           (field 0
+                                             (field 20 (global Clflags!)))
+                                           (after asmcomp/asmlink.ml(195):7084-7108
+                                             (apply is_required
+                                               (field 0 info)))))
+                                       (before asmcomp/asmlink.ml(196):7125-7395
+                                         (seq
+                                           (after asmcomp/asmlink.ml(197):7144-7172
+                                             (apply remove_required
+                                               (field 0 info)))
+                                           (before asmcomp/asmlink.ml(198):7187-7380
+                                             (seq
+                                               (after asmcomp/asmlink.ml(198):7187-7335
+                                                 (apply
+                                                   (field 14
+                                                     (global Stdlib__list!))
+                                                   (after asmcomp/asmlink.ml(198):7197-7300
+                                                     (apply add_required
+                                                       (after asmcomp/asmlink.ml(198):7211-7299
+                                                         (apply
+                                                           (field 3
+                                                             (global Stdlib__printf!))
+                                                           [0:
+                                                            [2:
+                                                             0a
+                                                             [12:
+                                                              '('
+                                                              [2:
+                                                               0a
+                                                               [12: ')' 0a]]]]
+                                                            "%s(%s)"]
+                                                           file_name
+                                                           (field 0 info)))))
+                                                   (field 4 info)))
+                                               (before asmcomp/asmlink.ml(201):7350-7380
+                                                 (makeblock 0
+                                                   (makeblock 0 info
+                                                     file_name crc)
+                                                   reqd))))))
+                                       (before asmcomp/asmlink.ml(203):7414-7418
+                                         reqd))))))
+                             (field 0 infos) tolink)))))))))))
+     force_linking_of_startup =
+       (function ppf_dump
+         (funct-body asmcomp/asmlink.ml(208)<ghost>:7560-7660
+           (before asmcomp/asmlink.ml(209):7574-7660
+             (after asmcomp/asmlink.ml(209):7574-7660
+               (apply (field 1 (global Asmgen!)) ppf_dump
+                 [1: [0: [8: "caml_startup"] 0a]])))))
+     make_globals_map =
+       (function units_list crc_interfaces
+         (funct-body asmcomp/asmlink.ml(212)<ghost>:7683-8158
+           (before asmcomp/asmlink.ml(213):7714-8158
+             (let
+               (crc_interfaces =
+                  (after asmcomp/asmlink.ml(213):7735-7781
+                    (apply
+                      (field 21
+                        (field 40 (field 3 (field 11 (global Misc!)))))
+                      (after asmcomp/asmlink.ml(213):7753-7781
+                        (apply (field 53 (global Stdlib__list!))
+                          crc_interfaces)))))
+               (before asmcomp/asmlink.ml(214):7787-8158
+                 (let
+                   (defined =
+                      (after asmcomp/asmlink.ml(215):7805-8049
+                        (apply (field 16 (global Stdlib__list!))
+                          (function param
+                            (funct-body asmcomp/asmlink.ml(215):7814-8032
+                              (let
+                                (impl_crc =a (field 2 param)
+                                 unit =a (field 0 param))
+                                (before asmcomp/asmlink.ml(216):7850-8031
+                                  (let
+                                    (intf_crc =
+                                       (after asmcomp/asmlink.ml(216):7865-7908
+                                         (apply
+                                           (field 6
+                                             (field 40
+                                               (field 3
+                                                 (field 11 (global Misc!)))))
+                                           crc_interfaces (field 0 unit))))
+                                    (before asmcomp/asmlink.ml(217):7920-8031
+                                      (seq
+                                        (after asmcomp/asmlink.ml(217):7920-7965
+                                          (apply
+                                            (field 5
+                                              (field 40
+                                                (field 3
+                                                  (field 11 (global Misc!)))))
+                                            crc_interfaces (field 0 unit)))
+                                        (before asmcomp/asmlink.ml(218):7975-8031
+                                          (makeblock 0 (field 0 unit)
+                                            intf_crc (makeblock 0 impl_crc)
+                                            (field 2 unit))))))))))
+                          units_list)))
+                   (before asmcomp/asmlink.ml(221):8057-8158
+                     (after asmcomp/asmlink.ml(221):8057-8158
+                       (apply
+                         (field 13
+                           (field 40 (field 3 (field 11 (global Misc!)))))
+                         (function name intf acc
+                           (funct-body asmcomp/asmlink.ml(221):8073-8131
+                             (before asmcomp/asmlink.ml(222):8101-8130
+                               (makeblock 0 (makeblock 0 name intf 0a 0a)
+                                 acc))))
+                         crc_interfaces defined)))))))))
+     make_startup_file =
+       (function ppf_dump units_list crc_interfaces
+         (funct-body asmcomp/asmlink.ml(225)<ghost>:8182-9469
+           (before asmcomp/asmlink.ml(226):8223-9469
+             (let
+               (compile_phrase =
+                  (function p
+                    (funct-body asmcomp/asmlink.ml(226)<ghost>:8242-8279
+                      (before asmcomp/asmlink.ml(226):8246-8279
+                        (after asmcomp/asmlink.ml(226):8246-8279
+                          (apply (field 1 (global Asmgen!)) ppf_dump p))))))
+               (before asmcomp/asmlink.ml(227):8285-9469
+                 (seq
+                   (setfield_ptr 0 (field 11 (global Location!))
+                     "caml_startup")
+                   (before asmcomp/asmlink.ml(228):8360-9469
+                     (seq
+                       (after asmcomp/asmlink.ml(228):8360-8386
+                         (apply (field 1 (global Compilenv!)) 0a "_startup"))
+                       (before asmcomp/asmlink.ml(230):8437-9469
+                         (seq
+                           (after asmcomp/asmlink.ml(230):8437-8459
+                             (apply (field 2 (global Emit!)) 0a))
+                           (before asmcomp/asmlink.ml(231):8463-9469
+                             (let
+                               (name_list =
+                                  (after asmcomp/asmlink.ml(232):8483-8553
+                                    (apply (field 13 (global Stdlib__list!))
+                                      (after asmcomp/asmlink.ml(232):8496-8553
+                                        (apply
+                                          (field 16 (global Stdlib__list!))
+                                          (function param
+                                            (funct-body asmcomp/asmlink.ml(232):8506-8541
+                                              (let (info =a (field 0 param))
+                                                (before asmcomp/asmlink.ml(232):8525-8540
+                                                  (field 2 info)))))
+                                          units_list)))))
+                               (before asmcomp/asmlink.ml(233):8559-9469
+                                 (seq
+                                   (after asmcomp/asmlink.ml(233):8559-8604
+                                     (apply compile_phrase
+                                       (after asmcomp/asmlink.ml(233):8574-8604
+                                         (apply (field 5 (global Cmmgen!))
+                                           name_list))))
+                                   (before asmcomp/asmlink.ml(234):8608-9469
+                                     (let
+                                       (units =
+                                          (after asmcomp/asmlink.ml(234):8620-8664
+                                            (apply
+                                              (field 16
+                                                (global Stdlib__list!))
+                                              (function param
+                                                (funct-body asmcomp/asmlink.ml(234):8629-8653
+                                                  (let
+                                                    (info =a (field 0 param))
+                                                    (before asmcomp/asmlink.ml(234):8648-8652
+                                                      info))))
+                                              units_list)))
+                                       (before asmcomp/asmlink.ml(235):8670-9469
+                                         (seq
+                                           (after asmcomp/asmlink.ml(235):8670-8733
+                                             (apply
+                                               (field 14
+                                                 (global Stdlib__list!))
+                                               compile_phrase
+                                               (after asmcomp/asmlink.ml(235):8695-8733
+                                                 (apply
+                                                   (field 4 (global Cmmgen!))
+                                                   0a units))))
+                                           (before asmcomp/asmlink.ml(236):8737-9469
+                                             (seq
+                                               (after asmcomp/asmlink.ml(236):8737-8850
+                                                 (apply
+                                                   (field 13
+                                                     (global Stdlib__array!))
+                                                   (function i[int] name
+                                                     (funct-body asmcomp/asmlink.ml(237):8753-8816
+                                                       (before asmcomp/asmlink.ml(237):8768-8815
+                                                         (after asmcomp/asmlink.ml(237):8768-8815
+                                                           (apply
+                                                             compile_phrase
+                                                             (after asmcomp/asmlink.ml(237):8783-8815
+                                                               (apply
+                                                                 (field 13
+                                                                   (global Cmmgen!))
+                                                                 i name)))))))
+                                                   (field 0
+                                                     (global Runtimedef!))))
+                                               (before asmcomp/asmlink.ml(239):8854-9469
+                                                 (seq
+                                                   (after asmcomp/asmlink.ml(239):8854-8900
+                                                     (apply compile_phrase
+                                                       (after asmcomp/asmlink.ml(239):8869-8900
+                                                         (apply
+                                                           (field 6
+                                                             (global Cmmgen!))
+                                                           name_list))))
+                                                   (before asmcomp/asmlink.ml(240):8904-9469
+                                                     (let
+                                                       (globals_map =
+                                                          (after asmcomp/asmlink.ml(240):8922-8965
+                                                            (apply
+                                                              make_globals_map
+                                                              units_list
+                                                              crc_interfaces)))
+                                                       (before asmcomp/asmlink.ml(241):8971-9469
+                                                         (seq
+                                                           (after asmcomp/asmlink.ml(241):8971-9018
+                                                             (apply
+                                                               compile_phrase
+                                                               (after asmcomp/asmlink.ml(241):8986-9018
+                                                                 (apply
+                                                                   (field 8
+                                                                    (global Cmmgen!))
+                                                                   globals_map))))
+                                                           (before asmcomp/asmlink.ml(242):9022-9469
+                                                             (seq
+                                                               (after asmcomp/asmlink.ml(242):9022-9089
+                                                                 (apply
+                                                                   compile_phrase
+                                                                   (after asmcomp/asmlink.ml(242):9036-9089
+                                                                    (apply
+                                                                    (field 11
+                                                                    (global Cmmgen!))
+                                                                    (makeblock 0
+                                                                    "_startup"
+                                                                    name_list)))))
+                                                               (before asmcomp/asmlink.ml(243):9093-9469
+                                                                 (seq
+                                                                   (after asmcomp/asmlink.ml(243):9093-9160
+                                                                    (apply
+                                                                    compile_phrase
+                                                                    (after asmcomp/asmlink.ml(243):9107-9160
+                                                                    (apply
+                                                                    (field 12
+                                                                    (global Cmmgen!))
+                                                                    (makeblock 0
+                                                                    "_startup"
+                                                                    name_list)))))
+                                                                   (before asmcomp/asmlink.ml(244):9164-9469
+                                                                    (let
+                                                                    (all_names =
+                                                                    (makeblock 0
+                                                                    "_startup"
+                                                                    (makeblock 0
+                                                                    "_system"
+                                                                    name_list)))
+                                                                    (before asmcomp/asmlink.ml(245):9222-9469
+                                                                    (seq
+                                                                    (after asmcomp/asmlink.ml(245):9222-9267
+                                                                    (apply
+                                                                    compile_phrase
+                                                                    (after asmcomp/asmlink.ml(245):9237-9267
+                                                                    (apply
+                                                                    (field 9
+                                                                    (global Cmmgen!))
+                                                                    all_names))))
+                                                                    (before asmcomp/asmlink.ml(246):9271-9469
+                                                                    (seq
+                                                                    (if
+                                                                    (field 52
+                                                                    (global Config!))
+                                                                    (before asmcomp/asmlink.ml(246):9296-9363
+                                                                    (after asmcomp/asmlink.ml(246):9296-9363
+                                                                    (apply
+                                                                    compile_phrase
+                                                                    (after asmcomp/asmlink.ml(247):9321-9356
+                                                                    (apply
+                                                                    (field 10
+                                                                    (global Cmmgen!))
+                                                                    all_names)))))
+                                                                    0a)
+                                                                    (before asmcomp/asmlink.ml(249):9367-9469
+                                                                    (seq
+                                                                    (if
+                                                                    (field 0
+                                                                    (field 25
+                                                                    (global Clflags!)))
+                                                                    (before asmcomp/asmlink.ml(250):9411-9445
+                                                                    (after asmcomp/asmlink.ml(250):9411-9445
+                                                                    (apply
+                                                                    force_linking_of_startup
+                                                                    ppf_dump)))
+                                                                    0a)
+                                                                    (before asmcomp/asmlink.ml(251):9449-9469
+                                                                    (after asmcomp/asmlink.ml(251):9449-9469
+                                                                    (apply
+                                                                    (field 3
+                                                                    (global Emit!))
+                                                                    0a)))))))))))))))))))))))))))))))))))))))))
+     make_shared_startup_file =
+       (function ppf_dump units
+         (funct-body asmcomp/asmlink.ml(253)<ghost>:9500-10141
+           (before asmcomp/asmlink.ml(254):9520-10141
+             (let
+               (compile_phrase =
+                  (function p
+                    (funct-body asmcomp/asmlink.ml(254)<ghost>:9539-9576
+                      (before asmcomp/asmlink.ml(254):9543-9576
+                        (after asmcomp/asmlink.ml(254):9543-9576
+                          (apply (field 1 (global Asmgen!)) ppf_dump p))))))
+               (before asmcomp/asmlink.ml(255):9582-10141
+                 (seq
+                   (setfield_ptr 0 (field 11 (global Location!))
+                     "caml_startup")
+                   (before asmcomp/asmlink.ml(256):9623-10141
+                     (seq
+                       (after asmcomp/asmlink.ml(256):9623-9656
+                         (apply (field 1 (global Compilenv!)) 0a
+                           "_shared_startup"))
+                       (before asmcomp/asmlink.ml(257):9660-10141
+                         (seq
+                           (after asmcomp/asmlink.ml(257):9660-9682
+                             (apply (field 2 (global Emit!)) 0a))
+                           (before asmcomp/asmlink.ml(258):9686-10141
+                             (seq
+                               (after asmcomp/asmlink.ml(258):9686-9767
+                                 (apply (field 14 (global Stdlib__list!))
+                                   compile_phrase
+                                   (after asmcomp/asmlink.ml(259):9715-9767
+                                     (apply (field 4 (global Cmmgen!)) 1a
+                                       (after asmcomp/asmlink.ml(259):9746-9766
+                                         (apply
+                                           (field 16 (global Stdlib__list!))
+                                           (function prim stub
+                                             (field 0 prim))
+                                           units))))))
+                               (before asmcomp/asmlink.ml(260):9771-10141
+                                 (seq
+                                   (after asmcomp/asmlink.ml(260):9771-9814
+                                     (apply compile_phrase
+                                       (after asmcomp/asmlink.ml(260):9786-9814
+                                         (apply (field 14 (global Cmmgen!))
+                                           units))))
+                                   (before asmcomp/asmlink.ml(261):9818-10141
+                                     (seq
+                                       (after asmcomp/asmlink.ml(261):9818-9911
+                                         (apply compile_phrase
+                                           (after asmcomp/asmlink.ml(262):9837-9911
+                                             (apply
+                                               (field 6 (global Cmmgen!))
+                                               (after asmcomp/asmlink.ml(263):9865-9910
+                                                 (apply
+                                                   (field 16
+                                                     (global Stdlib__list!))
+                                                   (function param
+                                                     (funct-body asmcomp/asmlink.ml(263):9875-9903
+                                                       (let
+                                                         (ui =a
+                                                            (field 0 param))
+                                                         (before asmcomp/asmlink.ml(263):9890-9902
+                                                           (field 1 ui)))))
+                                                   units))))))
+                                       (before asmcomp/asmlink.ml(264):9915-10141
+                                         (seq
+                                           (if
+                                             (field 0
+                                               (field 25 (global Clflags!)))
+                                             (before asmcomp/asmlink.ml(265):9959-9993
+                                               (after asmcomp/asmlink.ml(265):9959-9993
+                                                 (apply
+                                                   force_linking_of_startup
+                                                   ppf_dump)))
+                                             0a)
+                                           (before asmcomp/asmlink.ml(268):10121-10141
+                                             (after asmcomp/asmlink.ml(268):10121-10141
+                                               (apply
+                                                 (field 3 (global Emit!)) 0a)))))))))))))))))))))
+     call_linker_shared =
+       (function file_list output_name
+         (funct-body asmcomp/asmlink.ml(270)<ghost>:10166-10287
+           (before asmcomp/asmlink.ml(271):10192-10287
+             (if
+               (not
+                 (after asmcomp/asmlink.ml(271):10199-10253
+                   (apply (field 7 (global Ccomp!)) 1a output_name file_list
+                     "")))
+               (before asmcomp/asmlink.ml(272):10261-10287
+                 (raise
+                   (after asmcomp/asmlink.ml(272):10266-10287
+                     (makeblock 0 Error 0a))))
+               0a))))
+     link_shared =
+       (function ppf_dump objfiles output_name
+         (funct-body asmcomp/asmlink.ml(274)<ghost>:10305-11330
+           (before asmcomp/asmlink.ml(275):10340-11330
+             (after asmcomp/asmlink.ml(275):10340-11330
+               (apply (field 1 (global Profile!)) 0a output_name
+                 (function param
+                   (funct-body asmcomp/asmlink.ml(275):10372-11330
+                     (before asmcomp/asmlink.ml(276):10387-11326
+                       (let
+                         (units_tolink =
+                            (after asmcomp/asmlink.ml(276):10406-10443
+                              (apply (field 21 (global Stdlib__list!))
+                                scan_file objfiles 0a)))
+                         (before asmcomp/asmlink.ml(277):10451-11326
+                           (seq
+                             (after asmcomp/asmlink.ml(277):10451-10554
+                               (apply (field 14 (global Stdlib__list!))
+                                 (function param
+                                   (funct-body asmcomp/asmlink.ml(278):10467-10535
+                                     (let
+                                       (crc =a (field 2 param)
+                                        file_name =a (field 1 param)
+                                        info =a (field 0 param))
+                                       (before asmcomp/asmlink.ml(278):10498-10534
+                                         (after asmcomp/asmlink.ml(278):10498-10534
+                                           (apply check_consistency file_name
+                                             info crc))))))
+                                 units_tolink))
+                             (before asmcomp/asmlink.ml(280):10560-11326
+                               (seq
+                                 (setfield_ptr 0 (field 8 (global Clflags!))
+                                   (after asmcomp/asmlink.ml(280):10578-10607
+                                     (apply (field 36 (global Stdlib!))
+                                       (field 0 (field 8 (global Clflags!)))
+                                       (field 0 lib_ccobjs))))
+                                 (before asmcomp/asmlink.ml(281):10613-11326
+                                   (seq
+                                     (setfield_ptr 0
+                                       (field 26 (global Clflags!))
+                                       (after asmcomp/asmlink.ml(281):10635-10668
+                                         (apply (field 36 (global Stdlib!))
+                                           (field 0 lib_ccopts)
+                                           (field 0
+                                             (field 26 (global Clflags!))))))
+                                     (before asmcomp/asmlink.ml(282):10674-11326
+                                       (let
+                                         (objfiles =
+                                            (after asmcomp/asmlink.ml(282):10689-10769
+                                              (apply
+                                                (field 36 (global Stdlib!))
+                                                (after asmcomp/asmlink.ml(282):10689-10734
+                                                  (apply
+                                                    (field 8
+                                                      (global Stdlib__list!))
+                                                    (after asmcomp/asmlink.ml(282):10698-10734
+                                                      (apply
+                                                        (field 16
+                                                          (global Stdlib__list!))
+                                                        object_file_name
+                                                        objfiles))))
+                                                (after asmcomp/asmlink.ml(283):10743-10769
+                                                  (apply
+                                                    (field 8
+                                                      (global Stdlib__list!))
+                                                    (field 0
+                                                      (field 8
+                                                        (global Clflags!))))))))
+                                         (before asmcomp/asmlink.ml(285):10778-11326
+                                           (let
+                                             (startup =
+                                                (if
+                                                  (||
+                                                    (field 0
+                                                      (field 92
+                                                        (global Clflags!)))
+                                                    (field 0
+                                                      (field 25
+                                                        (global Emitaux!))))
+                                                  (before asmcomp/asmlink.ml(287):10876-10910
+                                                    (after asmcomp/asmlink.ml(287):10876-10910
+                                                      (apply
+                                                        (field 27
+                                                          (global Stdlib!))
+                                                        output_name
+                                                        (after asmcomp/asmlink.ml(287):10890-10910
+                                                          (apply
+                                                            (field 27
+                                                              (global Stdlib!))
+                                                            ".startup"
+                                                            (field 42
+                                                              (global Config!)))))))
+                                                  (before asmcomp/asmlink.ml(288):10922-10962
+                                                    (after asmcomp/asmlink.ml(288):10922-10962
+                                                      (apply
+                                                        (field 14
+                                                          (global Stdlib__filename!))
+                                                        0a "camlstartup"
+                                                        (field 42
+                                                          (global Config!)))))))
+                                             (before asmcomp/asmlink.ml(289):10970-11326
+                                               (let
+                                                 (startup_obj =
+                                                    (after asmcomp/asmlink.ml(289):10988-11022
+                                                      (apply
+                                                        (field 27
+                                                          (global Stdlib!))
+                                                        output_name
+                                                        (after asmcomp/asmlink.ml(289):11002-11022
+                                                          (apply
+                                                            (field 27
+                                                              (global Stdlib!))
+                                                            ".startup"
+                                                            (field 41
+                                                              (global Config!)))))))
+                                                 (before asmcomp/asmlink.ml(290):11030-11326
+                                                   (seq
+                                                     (after asmcomp/asmlink.ml(290):11030-11235
+                                                       (apply
+                                                         (field 4
+                                                           (global Asmgen!))
+                                                         startup
+                                                         (field 0
+                                                           (field 92
+                                                             (global Clflags!)))
+                                                         startup_obj
+                                                         (function param
+                                                           (funct-body asmcomp/asmlink.ml(292):11109-11235
+                                                             (before asmcomp/asmlink.ml(293):11129-11227
+                                                               (after asmcomp/asmlink.ml(293):11129-11227
+                                                                 (apply
+                                                                   make_shared_startup_file
+                                                                   ppf_dump
+                                                                   (after asmcomp/asmlink.ml(294):11175-11227
+                                                                    (apply
+                                                                    (field 16
+                                                                    (global Stdlib__list!))
+                                                                    (function
+                                                                    param
+                                                                    (funct-body asmcomp/asmlink.ml(294):11185-11213
+                                                                    (let
+                                                                    (crc =a
+                                                                    (field 2
+                                                                    param)
+                                                                    ui =a
+                                                                    (field 0
+                                                                    param))
+                                                                    (before asmcomp/asmlink.ml(294):11204-11212
+                                                                    (makeblock 0
+                                                                    ui crc)))))
+                                                                    units_tolink)))))))))
+                                                     (before asmcomp/asmlink.ml(296):11241-11326
+                                                       (seq
+                                                         (after asmcomp/asmlink.ml(296):11241-11297
+                                                           (apply
+                                                             call_linker_shared
+                                                             (makeblock 0
+                                                               startup_obj
+                                                               objfiles)
+                                                             output_name))
+                                                         (before asmcomp/asmlink.ml(297):11303-11326
+                                                           (after asmcomp/asmlink.ml(297):11303-11326
+                                                             (apply
+                                                               (field 15
+                                                                 (global Misc!))
+                                                               startup_obj))))))))))))))))))))))))))))
+     call_linker =
+       (function file_list startup_file output_name
+         (funct-body asmcomp/asmlink.ml(300)<ghost>:11348-12299
+           (before asmcomp/asmlink.ml(301):11387-12299
+             (let
+               (main_dll =
+                  (&& (field 0 (field 24 (global Clflags!)))
+                    (after asmcomp/asmlink.ml(302):11447-11495
+                      (apply (field 6 (global Stdlib__filename!)) output_name
+                        (field 44 (global Config!)))))
+                main_obj_runtime = (field 0 (field 25 (global Clflags!))))
+               (before asmcomp/asmlink.ml(305):11560-12299
+                 (let
+                   (files =
+                      (makeblock 0 startup_file
+                        (after asmcomp/asmlink.ml(305):11588-11608
+                          (apply (field 8 (global Stdlib__list!)) file_list))))
+                   (before asmcomp/asmlink.ml(306):11614-12299
+                     (let
+                       (libunwind =
+                          (if (not (field 52 (global Config!)))
+                            (before asmcomp/asmlink.ml(307):11663-11665 0a)
+                            (before asmcomp/asmlink.ml(308):11675-11778
+                              (if (not (field 56 (global Config!)))
+                                (before asmcomp/asmlink.ml(308):11714-11716
+                                  0a)
+                                (before asmcomp/asmlink.ml(309):11726-11778
+                                  (after asmcomp/asmlink.ml(309):11726-11778
+                                    (apply
+                                      (field 34
+                                        (field 3 (field 11 (global Misc!))))
+                                      ' ' (field 57 (global Config!)))))))))
+                       (before asmcomp/asmlink.ml(311):11786-12299
+                         (catch
+                           (if
+                             (|| (not (field 0 (field 24 (global Clflags!))))
+                               (|| main_dll main_obj_runtime))
+                             (before asmcomp/asmlink.ml(313):11886-12049
+                               (let
+                                 (c_lib =
+                                    (if
+                                      (||
+                                        (field 0
+                                          (field 28 (global Clflags!)))
+                                        main_obj_runtime)
+                                      (before asmcomp/asmlink.ml(315):12015-12017
+                                        "")
+                                      (before asmcomp/asmlink.ml(315):12023-12048
+                                        (field 12 (global Config!))))
+                                  files =
+                                    (after asmcomp/asmlink.ml(313):11886-11949
+                                      (apply (field 36 (global Stdlib!))
+                                        files
+                                        (after asmcomp/asmlink.ml(313):11894-11949
+                                          (apply (field 36 (global Stdlib!))
+                                            (after asmcomp/asmlink.ml(313):11894-11920
+                                              (apply
+                                                (field 8
+                                                  (global Stdlib__list!))
+                                                (field 0
+                                                  (field 8 (global Clflags!)))))
+                                            (after asmcomp/asmlink.ml(313):11923-11949
+                                              (apply
+                                                (field 36 (global Stdlib!))
+                                                (after asmcomp/asmlink.ml(313):11923-11937
+                                                  (apply runtime_lib 0a))
+                                                libunwind)))))))
+                                 (exit 13 c_lib files)))
+                             (before asmcomp/asmlink.ml(317):12065-12074
+                               (let (c_lib = "" files =a files)
+                                 (exit 13 c_lib files))))
+                          with (13 c_lib files)
+                           (before asmcomp/asmlink.ml(319):12082-12299
+                             (let
+                               (mode =
+                                  (if main_dll
+                                    (before asmcomp/asmlink.ml(320):12114-12127
+                                      2a)
+                                    (before asmcomp/asmlink.ml(321):12137-12202
+                                      (if
+                                        (field 0
+                                          (field 24 (global Clflags!)))
+                                        (before asmcomp/asmlink.ml(321):12170-12183
+                                          3a)
+                                        (before asmcomp/asmlink.ml(322):12193-12202
+                                          0a)))))
+                               (before asmcomp/asmlink.ml(324):12210-12299
+                                 (if
+                                   (not
+                                     (after asmcomp/asmlink.ml(324):12217-12265
+                                       (apply (field 7 (global Ccomp!)) mode
+                                         output_name files c_lib)))
+                                   (before asmcomp/asmlink.ml(325):12273-12299
+                                     (raise
+                                       (after asmcomp/asmlink.ml(325):12278-12299
+                                         (makeblock 0 Error 0a))))
+                                   0a))))))))))))))
+     link =
+       (function ppf_dump objfiles output_name
+         (funct-body asmcomp/asmlink.ml(329)<ghost>:12334-13856
+           (before asmcomp/asmlink.ml(330):12369-13856
+             (after asmcomp/asmlink.ml(330):12369-13856
+               (apply (field 1 (global Profile!)) 0a output_name
+                 (function param
+                   (funct-body asmcomp/asmlink.ml(330):12401-13856
+                     (before asmcomp/asmlink.ml(331):12416-13852
+                       (let (stdlib = "stdlib.cmxa")
+                         (before asmcomp/asmlink.ml(332):12450-13852
+                           (let (stdexit = "std_exit.cmx")
+                             (before asmcomp/asmlink.ml(333):12486-13852
+                               (let
+                                 (objfiles =
+                                    (if
+                                      (field 0 (field 28 (global Clflags!)))
+                                      (before asmcomp/asmlink.ml(334):12537-12545
+                                        objfiles)
+                                      (before asmcomp/asmlink.ml(335):12557-12652
+                                        (if
+                                          (field 0
+                                            (field 24 (global Clflags!)))
+                                          (before asmcomp/asmlink.ml(335):12590-12608
+                                            (makeblock 0 stdlib objfiles))
+                                          (before asmcomp/asmlink.ml(336):12620-12652
+                                            (makeblock 0 stdlib
+                                              (after asmcomp/asmlink.ml(336):12630-12652
+                                                (apply
+                                                  (field 36 (global Stdlib!))
+                                                  objfiles
+                                                  (makeblock 0 stdexit 0a)))))))))
+                                 (before asmcomp/asmlink.ml(337):12660-13852
+                                   (let
+                                     (units_tolink =
+                                        (after asmcomp/asmlink.ml(337):12679-12716
+                                          (apply
+                                            (field 21 (global Stdlib__list!))
+                                            scan_file objfiles 0a)))
+                                     (before asmcomp/asmlink.ml(338):12724-13852
+                                       (seq
+                                         (after asmcomp/asmlink.ml(338):12724-12780
+                                           (apply
+                                             (field 12
+                                               (global Stdlib__array!))
+                                             remove_required
+                                             (field 0 (global Runtimedef!))))
+                                         (before asmcomp/asmlink.ml(339):12786-13852
+                                           (seq
+                                             (let
+                                               (mg =
+                                                  (after asmcomp/asmlink.ml(339):12798-12823
+                                                    (apply
+                                                      extract_missing_globals
+                                                      0a)))
+                                               (if mg
+                                                 (before asmcomp/asmlink.ml(341):12856-12896
+                                                   (raise
+                                                     (after asmcomp/asmlink.ml(341):12861-12896
+                                                       (makeblock 0 Error
+                                                         (makeblock 2 mg)))))
+                                                 (before asmcomp/asmlink.ml(340):12841-12843
+                                                   0a)))
+                                             (before asmcomp/asmlink.ml(343):12910-13852
+                                               (seq
+                                                 (after asmcomp/asmlink.ml(343):12910-13013
+                                                   (apply
+                                                     (field 14
+                                                       (global Stdlib__list!))
+                                                     (function param
+                                                       (funct-body asmcomp/asmlink.ml(344):12926-12994
+                                                         (let
+                                                           (crc =a
+                                                              (field 2 param)
+                                                            file_name =a
+                                                              (field 1 param)
+                                                            info =a
+                                                              (field 0 param))
+                                                           (before asmcomp/asmlink.ml(344):12957-12993
+                                                             (after asmcomp/asmlink.ml(344):12957-12993
+                                                               (apply
+                                                                 check_consistency
+                                                                 file_name
+                                                                 info crc))))))
+                                                     units_tolink))
+                                                 (before asmcomp/asmlink.ml(346):13019-13852
+                                                   (let
+                                                     (crc_interfaces =
+                                                        (after asmcomp/asmlink.ml(346):13040-13065
+                                                          (apply
+                                                            extract_crc_interfaces
+                                                            0a)))
+                                                     (before asmcomp/asmlink.ml(347):13073-13852
+                                                       (seq
+                                                         (setfield_ptr 0
+                                                           (field 8
+                                                             (global Clflags!))
+                                                           (after asmcomp/asmlink.ml(347):13091-13120
+                                                             (apply
+                                                               (field 36
+                                                                 (global Stdlib!))
+                                                               (field 0
+                                                                 (field 8
+                                                                   (global Clflags!)))
+                                                               (field 0
+                                                                 lib_ccobjs))))
+                                                         (before asmcomp/asmlink.ml(348):13126-13852
+                                                           (seq
+                                                             (setfield_ptr 0
+                                                               (field 26
+                                                                 (global Clflags!))
+                                                               (after asmcomp/asmlink.ml(348):13148-13181
+                                                                 (apply
+                                                                   (field 36
+                                                                    (global Stdlib!))
+                                                                   (field 0
+                                                                    lib_ccopts)
+                                                                   (field 0
+                                                                    (field 26
+                                                                    (global Clflags!))))))
+                                                             (before asmcomp/asmlink.ml(350):13264-13852
+                                                               (let
+                                                                 (startup =
+                                                                    (if
+                                                                    (||
+                                                                    (field 0
+                                                                    (field 92
+                                                                    (global Clflags!)))
+                                                                    (field 0
+                                                                    (field 25
+                                                                    (global Emitaux!))))
+                                                                    (before asmcomp/asmlink.ml(352):13362-13396
+                                                                    (after asmcomp/asmlink.ml(352):13362-13396
+                                                                    (apply
+                                                                    (field 27
+                                                                    (global Stdlib!))
+                                                                    output_name
+                                                                    (after asmcomp/asmlink.ml(352):13376-13396
+                                                                    (apply
+                                                                    (field 27
+                                                                    (global Stdlib!))
+                                                                    ".startup"
+                                                                    (field 42
+                                                                    (global Config!)))))))
+                                                                    (before asmcomp/asmlink.ml(353):13408-13448
+                                                                    (after asmcomp/asmlink.ml(353):13408-13448
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__filename!))
+                                                                    0a
+                                                                    "camlstartup"
+                                                                    (field 42
+                                                                    (global Config!)))))))
+                                                                 (before asmcomp/asmlink.ml(354):13456-13852
+                                                                   (let
+                                                                    (startup_obj =
+                                                                    (after asmcomp/asmlink.ml(354):13474-13514
+                                                                    (apply
+                                                                    (field 14
+                                                                    (global Stdlib__filename!))
+                                                                    0a
+                                                                    "camlstartup"
+                                                                    (field 41
+                                                                    (global Config!)))))
+                                                                    (before asmcomp/asmlink.ml(355):13522-13852
+                                                                    (seq
+                                                                    (after asmcomp/asmlink.ml(355):13522-13669
+                                                                    (apply
+                                                                    (field 4
+                                                                    (global Asmgen!))
+                                                                    startup
+                                                                    (field 0
+                                                                    (field 92
+                                                                    (global Clflags!)))
+                                                                    startup_obj
+                                                                    (function
+                                                                    param
+                                                                    (funct-body asmcomp/asmlink.ml(357):13601-13669
+                                                                    (before asmcomp/asmlink.ml(357):13612-13668
+                                                                    (after asmcomp/asmlink.ml(357):13612-13668
+                                                                    (apply
+                                                                    make_startup_file
+                                                                    ppf_dump
+                                                                    units_tolink
+                                                                    crc_interfaces)))))))
+                                                                    (before asmcomp/asmlink.ml(358):13675-13852
+                                                                    (after asmcomp/asmlink.ml(358):13675-13852
+                                                                    (apply
+                                                                    (field 3
+                                                                    (global Misc!))
+                                                                    (makeblock 0
+                                                                    (function
+                                                                    param
+                                                                    (funct-body asmcomp/asmlink.ml(362):13817-13852
+                                                                    (before asmcomp/asmlink.ml(362):13828-13851
+                                                                    (after asmcomp/asmlink.ml(362):13828-13851
+                                                                    (apply
+                                                                    (field 15
+                                                                    (global Misc!))
+                                                                    startup_obj))))))
+                                                                    0a
+                                                                    (function
+                                                                    param
+                                                                    (funct-body asmcomp/asmlink.ml(359):13698-13802
+                                                                    (before asmcomp/asmlink.ml(360):13718-13801
+                                                                    (after asmcomp/asmlink.ml(360):13718-13801
+                                                                    (apply
+                                                                    call_linker
+                                                                    (after asmcomp/asmlink.ml(360):13730-13766
+                                                                    (apply
+                                                                    (field 16
+                                                                    (global Stdlib__list!))
+                                                                    object_file_name
+                                                                    objfiles))
+                                                                    startup_obj
+                                                                    output_name)))))))))))))))))))))))))))))))))))))))))
+     report_error =
+       (function ppf param
+         (funct-body asmcomp/asmlink.ml(369)<ghost>:13908-15948
+           (switch* param
+            case int 0:
+             (before asmcomp/asmlink.ml(406):15276-15310
+               (after asmcomp/asmlink.ml(406):15276-15310
+                 (apply (field 122 (global Stdlib__format!)) ppf
+                   [0:
+                    [11: "Error during linking" 0a] "Error during linking"])))
+            case tag 0:
+             (let (name =a (field 0 param))
+               (before asmcomp/asmlink.ml(371):13956-13994
+                 (after asmcomp/asmlink.ml(371):13956-13994
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11: "Cannot find file " [2: 0a 0a]]
+                      "Cannot find file %s"]
+                     name))))
+            case tag 1:
+             (let (name =a (field 0 param))
+               (before asmcomp/asmlink.ml(373):14032-14132
+                 (after asmcomp/asmlink.ml(373):14032-14132
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11:
+                       "The file "
+                       [15:
+                        [11: " is not a compilation unit description" 0a]]]
+                      "The file %a is not a compilation unit description"]
+                     (field 18 (global Location!)) name))))
+            case tag 2:
+             (let (l =a (field 0 param))
+               (before asmcomp/asmlink.ml(376):14171-14627
+                 (let
+                   (print_references =
+                      (function ppf param
+                        (funct-body asmcomp/asmlink.ml(376)<ghost>:14192-14334
+                          (if param
+                            (let
+                              (rl =a (field 1 param) r1 =a (field 0 param))
+                              (before asmcomp/asmlink.ml(379):14257-14334
+                                (seq
+                                  (after asmcomp/asmlink.ml(379):14257-14276
+                                    (apply
+                                      (field 122 (global Stdlib__format!))
+                                      ppf [0: [2: 0a 0a] "%s"] r1))
+                                  (before asmcomp/asmlink.ml(380):14289-14334
+                                    (after asmcomp/asmlink.ml(380):14289-14334
+                                      (apply
+                                        (field 14 (global Stdlib__list!))
+                                        (function r
+                                          (funct-body asmcomp/asmlink.ml(380):14299-14331
+                                            (before asmcomp/asmlink.ml(380):14309-14330
+                                              (after asmcomp/asmlink.ml(380):14309-14330
+                                                (apply
+                                                  (field 122
+                                                    (global Stdlib__format!))
+                                                  ppf
+                                                  [0:
+                                                   [12:
+                                                    ','
+                                                    [17:
+                                                     [0: "@ " 1 0] [2: 0a 0a]]]
+                                                   ",@ %s"]
+                                                  r)))))
+                                        rl))))))
+                            (before asmcomp/asmlink.ml(377):14222-14224 0a)))))
+                   (before asmcomp/asmlink.ml(381):14344-14627
+                     (let
+                       (print_modules =
+                          (function ppf
+                            (funct-body asmcomp/asmlink.ml(381)<ghost>:14362-14508
+                              (before asmcomp/asmlink.ml(382):14376-14508
+                                (after asmcomp/asmlink.ml(382):14376-14508
+                                  (apply (field 14 (global Stdlib__list!))
+                                    (function param
+                                      (funct-body asmcomp/asmlink.ml(383):14395-14508
+                                        (let
+                                          (rq =a (field 1 param)
+                                           md =a (field 0 param))
+                                          (before asmcomp/asmlink.ml(384):14424-14507
+                                            (after asmcomp/asmlink.ml(384):14424-14507
+                                              (apply
+                                                (field 122
+                                                  (global Stdlib__format!))
+                                                ppf
+                                                [0:
+                                                 [17:
+                                                  [0: "@ " 1 0]
+                                                  [18:
+                                                   [1:
+                                                    [0:
+                                                     [11: "<hov 2>" 0a]
+                                                     "<hov 2>"]]
+                                                   [2:
+                                                    0a
+                                                    [11:
+                                                     " referenced from "
+                                                     [15: [17: 0a 0a]]]]]]
+                                                 "@ @[<hov 2>%s referenced from %a@]"]
+                                                md print_references rq))))))))))))
+                       (before asmcomp/asmlink.ml(386):14518-14627
+                         (after asmcomp/asmlink.ml(386):14518-14627
+                           (apply (field 122 (global Stdlib__format!)) ppf
+                             [0:
+                              [18:
+                               [1: [0: [11: "<v 2>" 0a] "<v 2>"]]
+                               [11:
+                                "No implementations provided for the following modules:"
+                                [15: [17: 0a 0a]]]]
+                              "@[<v 2>No implementations provided for the following modules:%a@]"]
+                             print_modules l))))))))
+            case tag 3:
+             (let
+               (file2 =a (field 2 param)
+                file1 =a (field 1 param)
+                intf =a (field 0 param))
+               (before asmcomp/asmlink.ml(390):14684-14881
+                 (after asmcomp/asmlink.ml(390):14684-14881
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [18:
+                       [1: [0: [11: "<hov>" 0a] "<hov>"]]
+                       [11:
+                        "Files "
+                        [15:
+                         [17:
+                          [0: "@ " 1 0]
+                          [11:
+                           "and "
+                           [15:
+                            [17:
+                             [0: "@ " 1 0]
+                             [11:
+                              "make inconsistent assumptions over interface "
+                              [2: 0a [17: 0a 0a]]]]]]]]]]
+                      "@[<hov>Files %a@ and %a@ make inconsistent assumptions over interface %s@]"]
+                     (field 18 (global Location!)) file1
+                     (field 18 (global Location!)) file2 intf))))
+            case tag 4:
+             (let
+               (file2 =a (field 2 param)
+                file1 =a (field 1 param)
+                intf =a (field 0 param))
+               (before asmcomp/asmlink.ml(397):14943-15145
+                 (after asmcomp/asmlink.ml(397):14943-15145
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [18:
+                       [1: [0: [11: "<hov>" 0a] "<hov>"]]
+                       [11:
+                        "Files "
+                        [15:
+                         [17:
+                          [0: "@ " 1 0]
+                          [11:
+                           "and "
+                           [15:
+                            [17:
+                             [0: "@ " 1 0]
+                             [11:
+                              "make inconsistent assumptions over implementation "
+                              [2: 0a [17: 0a 0a]]]]]]]]]]
+                      "@[<hov>Files %a@ and %a@ make inconsistent assumptions over implementation %s@]"]
+                     (field 18 (global Location!)) file1
+                     (field 18 (global Location!)) file2 intf))))
+            case tag 5:
+             (let (file =a (field 0 param))
+               (before asmcomp/asmlink.ml(404):15180-15248
+                 (after asmcomp/asmlink.ml(404):15180-15248
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [11: "Error while assembling " [15: 0a]]
+                      "Error while assembling %a"]
+                     (field 18 (global Location!)) file))))
+            case tag 6:
+             (let
+               (file2 =a (field 2 param)
+                file1 =a (field 1 param)
+                modname =a (field 0 param))
+               (before asmcomp/asmlink.ml(408):15367-15537
+                 (after asmcomp/asmlink.ml(408):15367-15537
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [18:
+                       [1: [0: [11: "<hov>" 0a] "<hov>"]]
+                       [11:
+                        "Files "
+                        [15:
+                         [17:
+                          [0: "@ " 1 0]
+                          [11:
+                           "and "
+                           [15:
+                            [17:
+                             [0: "@ " 1 0]
+                             [11:
+                              "both define a module named "
+                              [2: 0a [17: 0a 0a]]]]]]]]]]
+                      "@[<hov>Files %a@ and %a@ both define a module named %s@]"]
+                     (field 18 (global Location!)) file1
+                     (field 18 (global Location!)) file2 modname))))
+            case tag 7:
+             (let (name =a (field 1 param) filename =a (field 0 param))
+               (before asmcomp/asmlink.ml(414):15579-15948
+                 (after asmcomp/asmlink.ml(414):15579-15948
+                   (apply (field 122 (global Stdlib__format!)) ppf
+                     [0:
+                      [18:
+                       [1: [0: [11: "<hov>" 0a] "<hov>"]]
+                       [11:
+                        "File "
+                        [15:
+                         [17:
+                          [0: "@ " 1 0]
+                          [11:
+                           "was compiled without access"
+                           [17:
+                            [0: "@ " 1 0]
+                            [11:
+                             "to the .cmx file"
+                             [17:
+                              [0: "@ " 1 0]
+                              [11:
+                               "for module "
+                               [2:
+                                0a
+                                [12:
+                                 ','
+                                 [17:
+                                  [0: "@ " 1 0]
+                                  [11:
+                                   "which was produced by `ocamlopt -for-pack'."
+                                   [17:
+                                    [0: "@ " 1 0]
+                                    [11:
+                                     "Please recompile "
+                                     [15:
+                                      [17:
+                                       [0: "@ " 1 0]
+                                       [11:
+                                        "with the correct `-I' option"
+                                        [17:
+                                         [0: "@ " 1 0]
+                                         [11:
+                                          "so that "
+                                          [2:
+                                           0a
+                                           [11:
+                                            ".cmx"
+                                            [17:
+                                             [0: "@ " 1 0]
+                                             [11: "is found." [17: 0a 0a]]]]]]]]]]]]]]]]]]]]]]]]]
+                      "@[<hov>File %a@ was compiled without access@ to the .cmx file@ for module %s,@ which was produced by `ocamlopt -for-pack'.@ Please recompile %a@ with the correct `-I' option@ so that %s.cmx@ is found.@]"]
+                     (field 18 (global Location!)) filename name
+                     (field 18 (global Location!)) filename name)))))))
+     *match* =
+       (after asmcomp/asmlink.ml(425):15961-16105
+         (apply (field 46 (global Location!))
+           (function param
+             (funct-body asmcomp/asmlink.ml(426):15996-16105
+               (let (tag =a (field 0 param))
+                 (if (== tag Error)
+                   (let (err =a (field 1 param))
+                     (before asmcomp/asmlink.ml(427):16027-16081
+                       (makeblock 0
+                         (after asmcomp/asmlink.ml(427):16032-16081
+                           (apply (field 45 (global Location!)) report_error
+                             err)))))
+                   (before asmcomp/asmlink.ml(428):16095-16099 0a)))))))
+     reset =
+       (function param
+         (funct-body asmcomp/asmlink.ml(431)<ghost>:16117-16341
+           (before asmcomp/asmlink.ml(432):16124-16341
+             (seq
+               (after asmcomp/asmlink.ml(432):16124-16158
+                 (apply (field 1 Cmi_consistbl) crc_interfaces))
+               (before asmcomp/asmlink.ml(433):16162-16341
+                 (seq
+                   (after asmcomp/asmlink.ml(433):16162-16201
+                     (apply (field 1 Cmx_consistbl) crc_implementations))
+                   (before asmcomp/asmlink.ml(434):16205-16341
+                     (seq (setfield_ptr 0 implementations_defined 0a)
+                       (before asmcomp/asmlink.ml(435):16238-16341
+                         (seq (setfield_ptr 0 cmx_required 0a)
+                           (before asmcomp/asmlink.ml(436):16260-16341
+                             (seq (setfield_ptr 0 interfaces 0a)
+                               (before asmcomp/asmlink.ml(437):16280-16341
+                                 (seq (setfield_ptr 0 implementations 0a)
+                                   (before asmcomp/asmlink.ml(438):16305-16341
+                                     (seq (setfield_ptr 0 lib_ccobjs 0a)
+                                       (before asmcomp/asmlink.ml(439):16325-16341
+                                         (setfield_ptr 0 lib_ccopts 0a)))))))))))))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0 link link_shared call_linker_shared reset
+        check_consistency extract_crc_interfaces extract_crc_implementations
+        Error report_error))))

@@ -1,0 +1,1163 @@
+(setglobal Strmatch!
+  (let
+    (Make =
+       (module-defn(Make) asmcomp/strmatch.ml(32):1471-11602
+         (function I is_a_functor
+           (let
+             (I =a I
+              dbg = 0a
+              mask =[nativeint]
+                (Nativeint.sub
+                  (Nativeint.lsl (field 1 (global Stdlib__nativeint!)) 8)
+                  (field 1 (global Stdlib__nativeint!)))
+              pat_as_string =
+                (function p[nativeint]
+                  (funct-body asmcomp/strmatch.ml(42)<ghost>:1621-1993
+                    (before asmcomp/strmatch.ml(43):1629-1993
+                      (letrec
+                        (digits
+                           (function k n[int] p[nativeint]
+                             (funct-body asmcomp/strmatch.ml(43)<ghost>:1644-1857
+                               (before asmcomp/strmatch.ml(44):1658-1857
+                                 (if (<= n 0)
+                                   (before asmcomp/strmatch.ml(44):1673-1674
+                                     k)
+                                   (before asmcomp/strmatch.ml(46):1694-1857
+                                     (let
+                                       (d =[int]
+                                          (Nativeint.to_int
+                                            (Nativeint.and mask p)))
+                                       (before asmcomp/strmatch.ml(47):1756-1857
+                                         (let
+                                           (d =
+                                              (after asmcomp/strmatch.ml(47):1764-1789
+                                                (apply
+                                                  (field 1
+                                                    (global Stdlib__char!))
+                                                  (after asmcomp/strmatch.ml(47):1777-1789
+                                                    (apply
+                                                      (field 0
+                                                        (global Stdlib__char!))
+                                                      d)))))
+                                           (before asmcomp/strmatch.ml(48):1801-1857
+                                             (after asmcomp/strmatch.ml(48):1801-1857
+                                               (apply digits
+                                                 (makeblock 0 d k) (- n 1)
+                                                 (Nativeint.lsr p 8)))))))))))))
+                        (before asmcomp/strmatch.ml(49):1865-1993
+                          (let
+                            (ds =
+                               (after asmcomp/strmatch.ml(49):1874-1900
+                                 (apply digits 0a (field 3 (global Arch!)) p)))
+                            (before asmcomp/strmatch.ml(50):1908-1993
+                              (let
+                                (ds =
+                                   (if (field 2 (global Arch!))
+                                     (before asmcomp/strmatch.ml(51):1947-1949
+                                       ds)
+                                     (before asmcomp/strmatch.ml(51):1955-1966
+                                       (after asmcomp/strmatch.ml(51):1955-1966
+                                         (apply
+                                           (field 8 (global Stdlib__list!))
+                                           ds)))))
+                                (before asmcomp/strmatch.ml(52):1974-1993
+                                  (after asmcomp/strmatch.ml(52):1974-1993
+                                    (apply (field 6 (global Stdlib__string!))
+                                      "" ds)))))))))))
+              do_pp_cases =
+                (function chan cases
+                  (funct-body asmcomp/strmatch.ml(54)<ghost>:2013-2171
+                    (before asmcomp/strmatch.ml(55):2030-2171
+                      (after asmcomp/strmatch.ml(55):2030-2171
+                        (apply (field 14 (global Stdlib__list!))
+                          (function param
+                            (funct-body asmcomp/strmatch.ml(56):2046-2159
+                              (let (ps =a (field 0 param))
+                                (before asmcomp/strmatch.ml(57):2069-2158
+                                  (after asmcomp/strmatch.ml(57):2069-2158
+                                    (apply (field 0 (global Stdlib__printf!))
+                                      chan
+                                      [0:
+                                       [11: "  [" [2: 0a [11: "]\n" 0a]]]
+                                       "  [%s]\n"]
+                                      (after asmcomp/strmatch.ml(58):2110-2158
+                                        (apply
+                                          (field 6 (global Stdlib__string!))
+                                          "; "
+                                          (after asmcomp/strmatch.ml(58):2130-2157
+                                            (apply
+                                              (field 16
+                                                (global Stdlib__list!))
+                                              pat_as_string ps))))))))))
+                          cases)))))
+              pp_cases =
+                (function chan tag cases
+                  (funct-body asmcomp/strmatch.ml(61)<ghost>:2188-2264
+                    (before asmcomp/strmatch.ml(62):2209-2264
+                      (seq
+                        (after asmcomp/strmatch.ml(62):2209-2235
+                          (apply (field 2 (global Stdlib__printf!))
+                            [0: [2: 0a [11: ":\n" 0a]] "%s:\n"] tag))
+                        (before asmcomp/strmatch.ml(63):2242-2264
+                          (after asmcomp/strmatch.ml(63):2242-2264
+                            (apply do_pp_cases chan cases)))))))
+              pp_match =
+                (function chan tag idxs cases
+                  (funct-body asmcomp/strmatch.ml(65)<ghost>:2281-2434
+                    (before asmcomp/strmatch.ml(66):2307-2434
+                      (seq
+                        (after asmcomp/strmatch.ml(66):2307-2405
+                          (apply (field 2 (global Stdlib__printf!))
+                            [0:
+                             [2: 0a [11: ": idx=[" [2: 0a [11: "]\n" 0a]]]]
+                             "%s: idx=[%s]\n"]
+                            tag
+                            (after asmcomp/strmatch.ml(68):2355-2405
+                              (apply (field 6 (global Stdlib__string!)) "; "
+                                (after asmcomp/strmatch.ml(68):2375-2404
+                                  (apply (field 16 (global Stdlib__list!))
+                                    (field 9 (global Stdlib__int!)) idxs))))))
+                        (before asmcomp/strmatch.ml(69):2412-2434
+                          (after asmcomp/strmatch.ml(69):2412-2434
+                            (apply do_pp_cases chan cases)))))))
+              gen_cell_id =
+                (function param
+                  (funct-body asmcomp/strmatch.ml(73)<ghost>:2471-2497
+                    (before asmcomp/strmatch.ml(73):2476-2497
+                      (after asmcomp/strmatch.ml(73):2476-2497
+                        (apply (field 6 (global Backend_var!)) "cell")))))
+              gen_size_id =
+                (function param
+                  (funct-body asmcomp/strmatch.ml(74)<ghost>:2516-2542
+                    (before asmcomp/strmatch.ml(74):2521-2542
+                      (after asmcomp/strmatch.ml(74):2521-2542
+                        (apply (field 6 (global Backend_var!)) "size")))))
+              mk_let_cell =
+                (function id str ind[int] body
+                  (funct-body asmcomp/strmatch.ml(76)<ghost>:2562-2781
+                    (before asmcomp/strmatch.ml(77):2584-2781
+                      (let (dbg = (field 0 (global Debuginfo!)))
+                        (before asmcomp/strmatch.ml(78):2616-2781
+                          (let
+                            (cell =
+                               (makeblock 12 [2: 6a 1a]
+                                 (makeblock 0
+                                   (makeblock 12 14a
+                                     (makeblock 0 str
+                                       (makeblock 0
+                                         (makeblock 0 (int,*)
+                                           (* (field 4 (global Arch!)) ind)
+                                           dbg)
+                                         0a))
+                                     dbg)
+                                   0a)
+                                 dbg))
+                            (before asmcomp/strmatch.ml(82):2761-2781
+                              (makeblock 8 id cell body))))))))
+              mk_let_size =
+                (function id str body
+                  (funct-body asmcomp/strmatch.ml(84)<ghost>:2801-2883
+                    (before asmcomp/strmatch.ml(85):2819-2883
+                      (let
+                        (size =
+                           (after asmcomp/strmatch.ml(85):2830-2855
+                             (apply (field 0 I) str)))
+                        (before asmcomp/strmatch.ml(86):2863-2883
+                          (makeblock 8 id size body))))))
+              mk_cmp_gen =
+                (function cmp_op id nat[nativeint] ifso ifnot
+                  (funct-body asmcomp/strmatch.ml(88)<ghost>:2902-3106
+                    (before asmcomp/strmatch.ml(89):2933-3106
+                      (let (dbg = (field 0 (global Debuginfo!)))
+                        (before asmcomp/strmatch.ml(90):2965-3106
+                          (let
+                            (test =
+                               (makeblock 12 (makeblock 4 cmp_op)
+                                 (makeblock 0 (makeblock 7 id)
+                                   (makeblock 0
+                                     (makeblock 5 (nativeint,*) nat dbg) 0a))
+                                 dbg))
+                            (before asmcomp/strmatch.ml(93):3060-3106
+                              (makeblock 14 test dbg ifso dbg ifnot dbg))))))))
+              mk_lt =
+                (after asmcomp/strmatch.ml(95):3122-3136
+                  (apply mk_cmp_gen 2a))
+              mk_eq =
+                (after asmcomp/strmatch.ml(96):3151-3165
+                  (apply mk_cmp_gen 0a))
+              IntArg =
+                (module-defn(IntArg) asmcomp/strmatch.ml(98):3169-3327
+                  (let
+                    (compare =
+                       (function x[int] y[int] : int
+                         (funct-body asmcomp/strmatch.ml(101)<ghost>:3233-3319
+                           (before asmcomp/strmatch.ml(102):3259-3319
+                             (if (< x y)
+                               (before asmcomp/strmatch.ml(102):3273-3275 -1)
+                               (before asmcomp/strmatch.ml(103):3289-3319
+                                 (if (> x y)
+                                   (before asmcomp/strmatch.ml(103):3303-3304
+                                     1)
+                                   (before asmcomp/strmatch.ml(104):3318-3319
+                                     0))))))))
+                    (pseudo asmcomp/strmatch.ml(99):3189-3327
+                      (makeblock 0 compare))))
+              interval =
+                (function m0[int] n[int]
+                  (funct-body asmcomp/strmatch.ml(107)<ghost>:3344-3441
+                    (before asmcomp/strmatch.ml(108):3355-3441
+                      (letrec
+                        (do_rec
+                           (function m[int]
+                             (funct-body asmcomp/strmatch.ml(108)<ghost>:3370-3424
+                               (before asmcomp/strmatch.ml(109):3380-3424
+                                 (if (>= m n)
+                                   (before asmcomp/strmatch.ml(109):3395-3397
+                                     0a)
+                                   (before asmcomp/strmatch.ml(110):3409-3424
+                                     (makeblock 0 (int,*) m
+                                       (after asmcomp/strmatch.ml(110):3412-3424
+                                         (apply do_rec (+ m 1))))))))))
+                        (before asmcomp/strmatch.ml(111):3432-3441
+                          (after asmcomp/strmatch.ml(111):3432-3441
+                            (apply do_rec m0)))))))
+              pat_of_string =
+                (function str
+                  (funct-body asmcomp/strmatch.ml(118)<ghost>:3633-4475
+                    (before asmcomp/strmatch.ml(119):3643-4475
+                      (let (len =[int] (string.length str))
+                        (before asmcomp/strmatch.ml(120):3678-4475
+                          (let
+                            (n =[int] (+ (/ len (field 3 (global Arch!))) 1))
+                            (before asmcomp/strmatch.ml(121):3718-4475
+                              (let
+                                (get_byte =
+                                   (function i[int] : int
+                                     (funct-body asmcomp/strmatch.ml(121)<ghost>:3731-3864
+                                       (before asmcomp/strmatch.ml(122):3741-3864
+                                         (if (< i len)
+                                           (before asmcomp/strmatch.ml(122):3757-3776
+                                             (after asmcomp/strmatch.ml(122):3769-3776
+                                               (string.get str i)))
+                                           (before asmcomp/strmatch.ml(123):3788-3864
+                                             (if
+                                               (< i
+                                                 (-
+                                                   (* n
+                                                     (field 3 (global Arch!)))
+                                                   1))
+                                               (before asmcomp/strmatch.ml(123):3823-3824
+                                                 0)
+                                               (before asmcomp/strmatch.ml(124):3836-3864
+                                                 (-
+                                                   (-
+                                                     (* n
+                                                       (field 3
+                                                         (global Arch!)))
+                                                     1)
+                                                   len)))))))))
+                                (before asmcomp/strmatch.ml(125):3872-4475
+                                  (let
+                                    (mk_word =
+                                       (function ind[int] : nativeint
+                                         (funct-body asmcomp/strmatch.ml(125)<ghost>:3884-4359
+                                           (before asmcomp/strmatch.ml(126):3896-4359
+                                             (let
+                                               (w =
+                                                  (makemutable 0 (nativeint)
+                                                    0n))
+                                               (before asmcomp/strmatch.ml(127):3920-4359
+                                                 (let
+                                                   (imin =[int]
+                                                      (* ind
+                                                        (field 3
+                                                          (global Arch!)))
+                                                    imax =[int]
+                                                      (-
+                                                        (* (+ ind 1)
+                                                          (field 3
+                                                            (global Arch!)))
+                                                        1))
+                                                   (before asmcomp/strmatch.ml(129):4009-4359
+                                                     (seq
+                                                       (if
+                                                         (field 2
+                                                           (global Arch!))
+                                                         (before asmcomp/strmatch.ml(130):4041-4183
+                                                           (for i imin to
+                                                             imax
+                                                             (before asmcomp/strmatch.ml(131):4075-4169
+                                                               (setfield_ptr 0
+                                                                 w
+                                                                 (Nativeint.or
+                                                                   (Nativeint.lsl
+                                                                    (field 0
+                                                                    w) 8)
+                                                                   (Nativeint.of_int
+                                                                    (after asmcomp/strmatch.ml(132):4156-4168
+                                                                    (apply
+                                                                    get_byte
+                                                                    i))))))))
+                                                         (before asmcomp/strmatch.ml(135):4203-4349
+                                                           (for i imax downto
+                                                             imin
+                                                             (before asmcomp/strmatch.ml(136):4241-4335
+                                                               (setfield_ptr 0
+                                                                 w
+                                                                 (Nativeint.or
+                                                                   (Nativeint.lsl
+                                                                    (field 0
+                                                                    w) 8)
+                                                                   (Nativeint.of_int
+                                                                    (after asmcomp/strmatch.ml(137):4322-4334
+                                                                    (apply
+                                                                    get_byte
+                                                                    i)))))))))
+                                                       (before asmcomp/strmatch.ml(139):4357-4359
+                                                         (field 0 w)))))))))))
+                                    (before asmcomp/strmatch.ml(140):4367-4475
+                                      (letrec
+                                        (mk_words
+                                           (function ind[int]
+                                             (funct-body asmcomp/strmatch.ml(140)<ghost>:4384-4457
+                                               (before asmcomp/strmatch.ml(141):4397-4457
+                                                 (if (>= ind n)
+                                                   (before asmcomp/strmatch.ml(141):4414-4416
+                                                     0a)
+                                                   (before asmcomp/strmatch.ml(142):4428-4457
+                                                     (makeblock 0 (nativeint,*)
+                                                       (after asmcomp/strmatch.ml(142):4428-4439
+                                                         (apply mk_word ind))
+                                                       (after asmcomp/strmatch.ml(142):4441-4457
+                                                         (apply mk_words
+                                                           (+ ind 1))))))))))
+                                        (before asmcomp/strmatch.ml(143):4465-4475
+                                          (after asmcomp/strmatch.ml(143):4465-4475
+                                            (apply mk_words 0)))))))))))))))
+              IntSet =
+                (module-defn(IntSet) asmcomp/strmatch.ml(149):4576-4608
+                  (apply
+                    (let (let = (field 0 (global Stdlib__set!)))
+                      (field 0 (global Stdlib__set!)))
+                    IntArg))
+              NativeSet =
+                (module-defn(NativeSet) asmcomp/strmatch.ml(150):4611-4649
+                  (apply
+                    (let (let = (field 0 (global Stdlib__set!)))
+                      (field 0 (global Stdlib__set!)))
+                    (let
+                      (let = (global Stdlib__nativeint!)
+                       let =a (global Stdlib__nativeint!))
+                      (makeblock 0 (field 15 let))))))
+             (letrec
+               (add_one
+                  (function sets ps
+                    (funct-body asmcomp/strmatch.ml(152)<ghost>:4669-4828
+                      (before asmcomp/strmatch.ml(152):4679-4828
+                        (let (*match* = sets *match* = ps)
+                          (catch
+                            (if *match*
+                              (if *match*
+                                (let
+                                  (ps =a (field 1 *match*)
+                                   p =a (field 0 *match*)
+                                   sets =a (field 1 *match*)
+                                   set =a (field 0 *match*))
+                                  (before asmcomp/strmatch.ml(155):4743-4804
+                                    (let
+                                      (sets =
+                                         (after asmcomp/strmatch.ml(155):4754-4769
+                                           (apply add_one sets ps)))
+                                      (before asmcomp/strmatch.ml(156):4779-4804
+                                        (makeblock 0
+                                          (after asmcomp/strmatch.ml(156):4779-4798
+                                            (apply (field 3 NativeSet) p set))
+                                          sets)))))
+                                (exit 1))
+                              (if *match* (exit 1)
+                                (before asmcomp/strmatch.ml(153):4711-4713
+                                  0a)))
+                           with (1)
+                            (before asmcomp/strmatch.ml(157):4816-4828
+                              (raise
+                                (after asmcomp/strmatch.ml(157):4816-4828
+                                  (makeblock 0 (global Assert_failure!)
+                                    [0: "asmcomp/strmatch.ml" 157 11]))))))))))
+               (let
+                 (count_arities =
+                    (function cases
+                      (funct-body asmcomp/strmatch.ml(159)<ghost>:4850-5100
+                        (before asmcomp/strmatch.ml(159):4858-5100
+                          (if cases
+                            (let
+                              (*match* =a (field 0 cases)
+                               ps =a (field 0 *match*))
+                              (before asmcomp/strmatch.ml(162):4921-5100
+                                (let
+                                  (sets =
+                                     (after asmcomp/strmatch.ml(163):4940-5058
+                                       (apply
+                                         (field 20 (global Stdlib__list!))
+                                         (function sets param
+                                           (funct-body asmcomp/strmatch.ml(164):4965-5001
+                                             (let (ps =a (field 0 param))
+                                               (before asmcomp/strmatch.ml(164):4985-5000
+                                                 (after asmcomp/strmatch.ml(164):4985-5000
+                                                   (apply add_one sets ps))))))
+                                         (after asmcomp/strmatch.ml(165):5012-5052
+                                           (apply
+                                             (field 16
+                                               (global Stdlib__list!))
+                                             (function param[nativeint]
+                                               (funct-body asmcomp/strmatch.ml(165):5022-5048
+                                                 (before asmcomp/strmatch.ml(165):5032-5047
+                                                   (field 0 NativeSet))))
+                                             ps))
+                                         cases)))
+                                  (before asmcomp/strmatch.ml(166):5068-5100
+                                    (after asmcomp/strmatch.ml(166):5068-5100
+                                      (apply
+                                        (field 16 (global Stdlib__list!))
+                                        (field 20 NativeSet) sets))))))
+                            (before asmcomp/strmatch.ml(160):4885-4897
+                              (raise
+                                (after asmcomp/strmatch.ml(160):4885-4897
+                                  (makeblock 0 (global Assert_failure!)
+                                    [0: "asmcomp/strmatch.ml" 160 10]))))))))
+                  count_arities_first =
+                    (function cases : int
+                      (funct-body asmcomp/strmatch.ml(168)<ghost>:5128-5342
+                        (before asmcomp/strmatch.ml(169):5140-5342
+                          (let
+                            (set =
+                               (after asmcomp/strmatch.ml(170):5156-5312
+                                 (apply (field 20 (global Stdlib__list!))
+                                   (function set case
+                                     (funct-body asmcomp/strmatch.ml(171):5179-5282
+                                       (before asmcomp/strmatch.ml(171):5196-5281
+                                         (let (*match* =a (field 0 case))
+                                           (if *match*
+                                             (let (p =a (field 0 *match*))
+                                               (before asmcomp/strmatch.ml(172):5234-5253
+                                                 (after asmcomp/strmatch.ml(172):5234-5253
+                                                   (apply (field 3 NativeSet)
+                                                     p set))))
+                                             (before asmcomp/strmatch.ml(173):5269-5281
+                                               (raise
+                                                 (after asmcomp/strmatch.ml(173):5269-5281
+                                                   (makeblock 0
+                                                     (global Assert_failure!)
+                                                     [0:
+                                                      "asmcomp/strmatch.ml"
+                                                      173 15])))))))))
+                                   (field 0 NativeSet) cases)))
+                            (before asmcomp/strmatch.ml(175):5320-5342
+                              (after asmcomp/strmatch.ml(175):5320-5342
+                                (apply (field 20 NativeSet) set)))))))
+                  count_arities_length =
+                    (function cases : int
+                      (funct-body asmcomp/strmatch.ml(177)<ghost>:5371-5527
+                        (before asmcomp/strmatch.ml(178):5383-5527
+                          (let
+                            (set =
+                               (after asmcomp/strmatch.ml(179):5399-5500
+                                 (apply (field 20 (global Stdlib__list!))
+                                   (function set param
+                                     (funct-body asmcomp/strmatch.ml(180):5422-5473
+                                       (let (ps =a (field 0 param))
+                                         (before asmcomp/strmatch.ml(180):5441-5472
+                                           (after asmcomp/strmatch.ml(180):5441-5472
+                                             (apply (field 3 IntSet)
+                                               (after asmcomp/strmatch.ml(180):5452-5468
+                                                 (apply
+                                                   (field 0
+                                                     (global Stdlib__list!))
+                                                   ps))
+                                               set))))))
+                                   (field 0 IntSet) cases)))
+                            (before asmcomp/strmatch.ml(182):5508-5527
+                              (after asmcomp/strmatch.ml(182):5508-5527
+                                (apply (field 20 IntSet) set)))))))
+                  best_col =
+                    (letrec
+                      (do_rec
+                         (function kbest[int] best k[int] param : int
+                           (funct-body asmcomp/strmatch.ml(185)<ghost>:5565-5738
+                             (if param
+                               (let
+                                 (xs =a (field 1 param) x =a (field 0 param))
+                                 (before asmcomp/strmatch.ml(188):5636-5738
+                                   (if
+                                     (after asmcomp/strmatch.ml(188):5639-5647
+                                       (caml_lessthan x best))
+                                     (before asmcomp/strmatch.ml(189):5665-5684
+                                       (after asmcomp/strmatch.ml(189):5665-5684
+                                         (apply do_rec k x (+ k 1) xs)))
+                                     (before asmcomp/strmatch.ml(191):5712-5738
+                                       (after asmcomp/strmatch.ml(191):5712-5738
+                                         (apply do_rec kbest best (+ k 1) xs))))))
+                               (before asmcomp/strmatch.ml(186):5603-5608
+                                 kbest)))))
+                      (before asmcomp/strmatch.ml(192):5746-5860
+                        (let
+                          (smallest =
+                             (after asmcomp/strmatch.ml(192):5761-5782
+                               (apply do_rec -1 (field 18 (global Stdlib!))
+                                 0)))
+                          (before asmcomp/strmatch.ml(193):5790-5860
+                            (function cases : int
+                              (funct-body asmcomp/strmatch.ml(193):5790-5860
+                                (before asmcomp/strmatch.ml(194):5809-5860
+                                  (let
+                                    (ars =
+                                       (after asmcomp/strmatch.ml(194):5819-5838
+                                         (apply count_arities cases)))
+                                    (before asmcomp/strmatch.ml(195):5848-5860
+                                      (after asmcomp/strmatch.ml(195):5848-5860
+                                        (apply smallest ars)))))))))))
+                  swap_list =
+                    (letrec
+                      (do_rec
+                         (function k[int] xs
+                           (funct-body asmcomp/strmatch.ml(198)<ghost>:5899-6071
+                             (before asmcomp/strmatch.ml(198):5906-6071
+                               (if xs
+                                 (let (xs =a (field 1 xs) x =a (field 0 xs))
+                                   (before asmcomp/strmatch.ml(201):5968-6071
+                                     (if (<= k 0)
+                                       (before asmcomp/strmatch.ml(201):5983-5990
+                                         (makeblock 0 0a x xs))
+                                       (before asmcomp/strmatch.ml(203):6014-6071
+                                         (let
+                                           (*match* =
+                                              (after asmcomp/strmatch.ml(203):6030-6045
+                                                (apply do_rec (- k 1) xs))
+                                            ys =a (field 2 *match*)
+                                            mid =a (field 1 *match*)
+                                            xs =a (field 0 *match*))
+                                           (before asmcomp/strmatch.ml(204):6059-6071
+                                             (makeblock 0 (makeblock 0 x xs)
+                                               mid ys)))))))
+                                 (before asmcomp/strmatch.ml(199):5932-5944
+                                   (raise
+                                     (after asmcomp/strmatch.ml(199):5932-5944
+                                       (makeblock 0 (global Assert_failure!)
+                                         [0: "asmcomp/strmatch.ml" 199 12])))))))))
+                      (before asmcomp/strmatch.ml(205):6079-6143
+                        (function k[int] xs
+                          (funct-body asmcomp/strmatch.ml(205):6079-6143
+                            (before asmcomp/strmatch.ml(206):6097-6143
+                              (let
+                                (*match* =
+                                   (after asmcomp/strmatch.ml(206):6111-6123
+                                     (apply do_rec k xs))
+                                 ys =a (field 2 *match*)
+                                 x =a (field 1 *match*)
+                                 xs =a (field 0 *match*))
+                                (before asmcomp/strmatch.ml(207):6133-6143
+                                  (after asmcomp/strmatch.ml(207):6133-6143
+                                    (apply (field 36 (global Stdlib!))
+                                      (makeblock 0 x xs) ys)))))))))
+                  swap =
+                    (function k[int] idxs cases
+                      (funct-body asmcomp/strmatch.ml(209)<ghost>:6156-6438
+                        (before asmcomp/strmatch.ml(210):6175-6438
+                          (if (== k 0)
+                            (before asmcomp/strmatch.ml(210):6189-6199
+                              (makeblock 0 idxs cases))
+                            (before asmcomp/strmatch.ml(212):6215-6438
+                              (let
+                                (idxs =
+                                   (after asmcomp/strmatch.ml(212):6226-6242
+                                     (apply swap_list k idxs))
+                                 cases =
+                                   (after asmcomp/strmatch.ml(214):6269-6340
+                                     (apply (field 16 (global Stdlib__list!))
+                                       (function param
+                                         (funct-body asmcomp/strmatch.ml(215):6288-6324
+                                           (let
+                                             (act =a (field 1 param)
+                                              ps =a (field 0 param))
+                                             (before asmcomp/strmatch.ml(215):6305-6323
+                                               (makeblock 0
+                                                 (after asmcomp/strmatch.ml(215):6305-6319
+                                                   (apply swap_list k ps))
+                                                 act)))))
+                                       cases)))
+                                (before asmcomp/strmatch.ml(217):6350-6438
+                                  (seq
+                                    (if dbg
+                                      (before asmcomp/strmatch.ml(217):6362-6419
+                                        (after asmcomp/strmatch.ml(217):6362-6419
+                                          (apply pp_match
+                                            (field 39 (global Stdlib!))
+                                            "SWAP" idxs cases)))
+                                      0a)
+                                    (before asmcomp/strmatch.ml(220):6428-6438
+                                      (makeblock 0 idxs cases))))))))))
+                  best_first =
+                    (function idxs cases
+                      (funct-body asmcomp/strmatch.ml(222)<ghost>:6457-6611
+                        (before asmcomp/strmatch.ml(222):6470-6611
+                          (catch
+                            (if idxs
+                              (let (*match* =a (field 1 idxs))
+                                (if *match*
+                                  (before asmcomp/strmatch.ml(225):6562-6611
+                                    (let
+                                      (k =[int]
+                                         (after asmcomp/strmatch.ml(225):6570-6584
+                                           (apply best_col cases)))
+                                      (before asmcomp/strmatch.ml(226):6594-6611
+                                        (after asmcomp/strmatch.ml(226):6594-6611
+                                          (apply swap k idxs cases)))))
+                                  (exit 9)))
+                              (exit 9))
+                           with (9)
+                            (before asmcomp/strmatch.ml(223):6500-6510
+                              (makeblock 0 idxs cases))))))
+                  Divide =
+                    (module-defn(Divide) asmcomp/strmatch.ml(232):6733-7170
+                      (function O is_a_functor
+                        (let
+                          (O =a O
+                           OMap =
+                             (module-defn(OMap) asmcomp/strmatch.ml(234):6780-6805
+                               (apply
+                                 (let (let = (field 0 (global Stdlib__map!)))
+                                   (field 0 (global Stdlib__map!)))
+                                 O))
+                           divide =
+                             (function cases
+                               (funct-body asmcomp/strmatch.ml(236)<ghost>:6822-7147
+                                 (before asmcomp/strmatch.ml(237):6836-7147
+                                   (let
+                                     (env =
+                                        (after asmcomp/strmatch.ml(238):6854-7064
+                                          (apply
+                                            (field 20 (global Stdlib__list!))
+                                            (function env param
+                                              (funct-body asmcomp/strmatch.ml(239):6879-7037
+                                                (let
+                                                  (psact =a (field 1 param)
+                                                   p =a (field 0 param))
+                                                  (before asmcomp/strmatch.ml(240):6913-7036
+                                                    (let
+                                                      (old =
+                                                         (try
+                                                           (after asmcomp/strmatch.ml(241):6941-6956
+                                                             (apply
+                                                               (field 26
+                                                                 OMap)
+                                                               p env))
+                                                          with exn
+                                                           (if
+                                                             (== exn
+                                                               (field 7
+                                                                 (global Stdlib!)))
+                                                             (before asmcomp/strmatch.ml(242):6989-6991
+                                                               0a)
+                                                             (reraise exn))))
+                                                      (before asmcomp/strmatch.ml(243):7007-7036
+                                                        (after asmcomp/strmatch.ml(243):7007-7036
+                                                          (apply
+                                                            (field 3 OMap) p
+                                                            (makeblock 0
+                                                              psact old)
+                                                            env))))))))
+                                            (field 0 OMap) cases)))
+                                     (before asmcomp/strmatch.ml(245):7074-7147
+                                       (let
+                                         (r =
+                                            (after asmcomp/strmatch.ml(245):7083-7127
+                                              (apply (field 12 OMap)
+                                                (function key v k
+                                                  (funct-body asmcomp/strmatch.ml(245):7093-7120
+                                                    (before asmcomp/strmatch.ml(245):7109-7119
+                                                      (makeblock 0
+                                                        (makeblock 0 key v)
+                                                        k))))
+                                                env 0a)))
+                                         (before asmcomp/strmatch.ml(246):7137-7147
+                                           (after asmcomp/strmatch.ml(246):7137-7147
+                                             (apply
+                                               (field 8
+                                                 (global Stdlib__list!))
+                                               r))))))))))
+                          (pseudo asmcomp/strmatch.ml(232):6768-7170
+                            (makeblock 0 OMap divide)))))
+                  DivideNative =
+                    (module-defn(DivideNative) asmcomp/strmatch.ml(255):7252-7291
+                      (apply Divide
+                        (let
+                          (let = (global Stdlib__nativeint!)
+                           let =a (global Stdlib__nativeint!))
+                          (makeblock 0 (field 15 let)))))
+                  by_cell =
+                    (function cases
+                      (funct-body asmcomp/strmatch.ml(257)<ghost>:7309-7492
+                        (before asmcomp/strmatch.ml(258):7323-7492
+                          (after asmcomp/strmatch.ml(258):7323-7492
+                            (apply (field 1 DivideNative)
+                              (after asmcomp/strmatch.ml(259):7351-7492
+                                (apply (field 16 (global Stdlib__list!))
+                                  (function case
+                                    (funct-body asmcomp/strmatch.ml(260):7372-7474
+                                      (before asmcomp/strmatch.ml(260):7385-7473
+                                        (let (*match* =a (field 0 case))
+                                          (if *match*
+                                            (let
+                                              (act =a (field 1 case)
+                                               ps =a (field 1 *match*)
+                                               p =a (field 0 *match*))
+                                              (before asmcomp/strmatch.ml(261):7429-7439
+                                                (makeblock 0 (nativeint,*) p
+                                                  (makeblock 0 ps act))))
+                                            (before asmcomp/strmatch.ml(262):7461-7473
+                                              (raise
+                                                (after asmcomp/strmatch.ml(262):7461-7473
+                                                  (makeblock 0
+                                                    (global Assert_failure!)
+                                                    [0:
+                                                     "asmcomp/strmatch.ml"
+                                                     262 21])))))))))
+                                  cases))))))))
+                 (letrec
+                   (do_split
+                      (function idx[int] env
+                        (funct-body asmcomp/strmatch.ml(267)<ghost>:7544-7754
+                          (before asmcomp/strmatch.ml(267):7554-7754
+                            (if env
+                              (let
+                                (rem =a (field 1 env)
+                                 x =a (field 0 env)
+                                 midkey =a (field 0 x))
+                                (before asmcomp/strmatch.ml(270):7632-7754
+                                  (if (<= idx 0)
+                                    (before asmcomp/strmatch.ml(270):7649-7662
+                                      (makeblock 0 0a midkey env))
+                                    (before asmcomp/strmatch.ml(272):7686-7754
+                                      (let
+                                        (*match* =
+                                           (after asmcomp/strmatch.ml(272):7705-7725
+                                             (apply do_split (- idx 1) rem))
+                                         ge =a (field 2 *match*)
+                                         midkey =a (field 1 *match*)
+                                         lt =a (field 0 *match*))
+                                        (before asmcomp/strmatch.ml(273):7739-7754
+                                          (makeblock 0 (makeblock 0 x lt)
+                                            midkey ge)))))))
+                              (before asmcomp/strmatch.ml(268):7581-7593
+                                (raise
+                                  (after asmcomp/strmatch.ml(268):7581-7593
+                                    (makeblock 0 (global Assert_failure!)
+                                      [0: "asmcomp/strmatch.ml" 268 12])))))))))
+                   (let
+                     (split_env =
+                        (function len[int] env
+                          (funct-body asmcomp/strmatch.ml(275)<ghost>:7774-7804
+                            (before asmcomp/strmatch.ml(275):7784-7804
+                              (after asmcomp/strmatch.ml(275):7784-7804
+                                (apply do_split (/ len 2) env)))))
+                      match_oncell =
+                        (function compile_rec str default idx[int] env
+                          (funct-body asmcomp/strmatch.ml(285)<ghost>:8095-8612
+                            (before asmcomp/strmatch.ml(286):8135-8612
+                              (let
+                                (id =
+                                   (after asmcomp/strmatch.ml(286):8144-8158
+                                     (apply gen_cell_id 0a)))
+                                (before asmcomp/strmatch.ml(287):8168-8612
+                                  (letrec
+                                    (comp_rec
+                                       (function env
+                                         (funct-body asmcomp/strmatch.ml(287)<ghost>:8185-8553
+                                           (before asmcomp/strmatch.ml(288):8199-8553
+                                             (let
+                                               (len =[int]
+                                                  (after asmcomp/strmatch.ml(288):8209-8224
+                                                    (apply
+                                                      (field 0
+                                                        (global Stdlib__list!))
+                                                      env)))
+                                               (before asmcomp/strmatch.ml(289):8236-8553
+                                                 (if (<= len 3)
+                                                   (before asmcomp/strmatch.ml(290):8263-8436
+                                                     (after asmcomp/strmatch.ml(290):8263-8436
+                                                       (apply
+                                                         (field 21
+                                                           (global Stdlib__list!))
+                                                         (function param
+                                                           ifnot
+                                                           (funct-body asmcomp/strmatch.ml(291):8291-8412
+                                                             (let
+                                                               (cases =a
+                                                                  (field 1
+                                                                    param)
+                                                                key =a
+                                                                  (field 0
+                                                                    param))
+                                                               (before asmcomp/strmatch.ml(292):8331-8411
+                                                                 (after asmcomp/strmatch.ml(292):8331-8411
+                                                                   (apply
+                                                                    mk_eq id
+                                                                    key
+                                                                    (after asmcomp/strmatch.ml(293):8360-8391
+                                                                    (apply
+                                                                    compile_rec
+                                                                    str
+                                                                    default
+                                                                    cases))
+                                                                    ifnot))))))
+                                                         env default)))
+                                                   (before asmcomp/strmatch.ml(297):8460-8553
+                                                     (let
+                                                       (*match* =
+                                                          (after asmcomp/strmatch.ml(297):8479-8496
+                                                            (apply split_env
+                                                              len env))
+                                                        ge =a
+                                                          (field 2 *match*)
+                                                        midkey =a
+                                                          (field 1 *match*)
+                                                        lt =a
+                                                          (field 0 *match*))
+                                                       (before asmcomp/strmatch.ml(298):8510-8553
+                                                         (after asmcomp/strmatch.ml(298):8510-8553
+                                                           (apply mk_lt id
+                                                             midkey
+                                                             (after asmcomp/strmatch.ml(298):8526-8539
+                                                               (apply
+                                                                 comp_rec lt))
+                                                             (after asmcomp/strmatch.ml(298):8540-8553
+                                                               (apply
+                                                                 comp_rec ge))))))))))))))
+                                    (before asmcomp/strmatch.ml(299):8563-8612
+                                      (after asmcomp/strmatch.ml(299):8563-8612
+                                        (apply mk_let_cell
+                                          (after asmcomp/strmatch.ml(299):8575-8589
+                                            (apply
+                                              (field 1
+                                                (field 33
+                                                  (global Backend_var!)))
+                                              0a id))
+                                          str idx
+                                          (after asmcomp/strmatch.ml(299):8598-8612
+                                            (apply comp_rec env))))))))))))
+                     (letrec
+                       (do_compile_pats
+                          (function idxs str default cases
+                            (funct-body asmcomp/strmatch.ml(307)<ghost>:8797-9305
+                              (before asmcomp/strmatch.ml(308):8828-9305
+                                (seq
+                                  (if dbg
+                                    (before asmcomp/strmatch.ml(308):8840-8900
+                                      (after asmcomp/strmatch.ml(308):8840-8900
+                                        (apply pp_match
+                                          (field 39 (global Stdlib!))
+                                          "COMPILE" idxs cases)))
+                                    0a)
+                                  (before asmcomp/strmatch.ml(311):8909-9305
+                                    (if idxs
+                                      (before asmcomp/strmatch.ml(318):9064-9305
+                                        (let
+                                          (*match* =
+                                             (after asmcomp/strmatch.ml(318):9081-9102
+                                               (apply best_first idxs cases))
+                                           cases =a (field 1 *match*)
+                                           idxs =a (field 0 *match*))
+                                          (before asmcomp/strmatch.ml(319):9116-9305
+                                            (if idxs
+                                              (let
+                                                (idxs =a (field 1 idxs)
+                                                 idx =a (field 0 idxs))
+                                                (before asmcomp/strmatch.ml(322):9208-9291
+                                                  (after asmcomp/strmatch.ml(322):9208-9291
+                                                    (apply match_oncell
+                                                      (after asmcomp/strmatch.ml(323):9237-9259
+                                                        (apply
+                                                          do_compile_pats
+                                                          idxs))
+                                                      str default idx
+                                                      (after asmcomp/strmatch.ml(323):9276-9291
+                                                        (apply by_cell cases))))))
+                                              (before asmcomp/strmatch.ml(320):9156-9168
+                                                (raise
+                                                  (after asmcomp/strmatch.ml(320):9156-9168
+                                                    (makeblock 0
+                                                      (global Assert_failure!)
+                                                      [0:
+                                                       "asmcomp/strmatch.ml"
+                                                       320 18]))))))))
+                                      (before asmcomp/strmatch.ml(313):8949-9037
+                                        (if cases
+                                          (let
+                                            (*match* =a (field 0 cases)
+                                             e =a (field 1 *match*))
+                                            (before asmcomp/strmatch.ml(315):9022-9023
+                                              e))
+                                          (before asmcomp/strmatch.ml(314):8990-8997
+                                            default))))))))))
+                       (let
+                         (DivideInt =
+                            (module-defn(DivideInt) asmcomp/strmatch.ml(329):9333-9366
+                              (apply Divide IntArg))
+                          by_size =
+                            (function cases
+                              (funct-body asmcomp/strmatch.ml(332)<ghost>:9385-9506
+                                (before asmcomp/strmatch.ml(333):9399-9506
+                                  (after asmcomp/strmatch.ml(333):9399-9506
+                                    (apply (field 1 DivideInt)
+                                      (after asmcomp/strmatch.ml(334):9424-9506
+                                        (apply
+                                          (field 16 (global Stdlib__list!))
+                                          (function case
+                                            (funct-body asmcomp/strmatch.ml(335):9445-9488
+                                              (let (ps =a (field 0 case))
+                                                (before asmcomp/strmatch.ml(335):9468-9487
+                                                  (makeblock 0 (int,*)
+                                                    (after asmcomp/strmatch.ml(335):9468-9482
+                                                      (apply
+                                                        (field 0
+                                                          (global Stdlib__list!))
+                                                        ps))
+                                                    case)))))
+                                          cases)))))))
+                          compile_by_size =
+                            (function dbg from_ind[int] str default cases
+                              (funct-body asmcomp/strmatch.ml(344)<ghost>:9771-10296
+                                (before asmcomp/strmatch.ml(345):9810-10296
+                                  (let
+                                    (size_cases =
+                                       (after asmcomp/strmatch.ml(346):9835-10090
+                                         (apply
+                                           (field 16 (global Stdlib__list!))
+                                           (function param
+                                             (funct-body asmcomp/strmatch.ml(347):9854-10064
+                                               (let
+                                                 (cases =a (field 1 param)
+                                                  len =a (field 0 param))
+                                                 (before asmcomp/strmatch.ml(348):9886-10063
+                                                   (let
+                                                     (len =[int]
+                                                        (+ len from_ind))
+                                                     (before asmcomp/strmatch.ml(349):9924-10063
+                                                       (let
+                                                         (act =
+                                                            (after asmcomp/strmatch.ml(350):9948-10038
+                                                              (apply
+                                                                do_compile_pats
+                                                                (after asmcomp/strmatch.ml(351):9980-10003
+                                                                  (apply
+                                                                    interval
+                                                                    from_ind
+                                                                    len))
+                                                                str default
+                                                                cases)))
+                                                         (before asmcomp/strmatch.ml(353):10054-10063
+                                                           (makeblock 0 (int,*)
+                                                             len act)))))))))
+                                           (after asmcomp/strmatch.ml(354):10075-10090
+                                             (apply by_size cases)))))
+                                    (before asmcomp/strmatch.ml(355):10100-10296
+                                      (let
+                                        (id =
+                                           (after asmcomp/strmatch.ml(355):10109-10123
+                                             (apply gen_size_id 0a)))
+                                        (before asmcomp/strmatch.ml(356):10133-10296
+                                          (let
+                                            (loc =
+                                               (after asmcomp/strmatch.ml(356):10143-10168
+                                                 (apply
+                                                   (field 4
+                                                     (global Debuginfo!))
+                                                   dbg)))
+                                            (before asmcomp/strmatch.ml(357):10178-10296
+                                              (let
+                                                (switch =
+                                                   (after asmcomp/strmatch.ml(357):10191-10249
+                                                     (apply (field 1 I) loc
+                                                       (makeblock 7 id) 1
+                                                       (field 18
+                                                         (global Stdlib!))
+                                                       size_cases default)))
+                                                (before asmcomp/strmatch.ml(358):10259-10296
+                                                  (after asmcomp/strmatch.ml(358):10259-10296
+                                                    (apply mk_let_size
+                                                      (after asmcomp/strmatch.ml(358):10271-10285
+                                                        (apply
+                                                          (field 1
+                                                            (field 33
+                                                              (global Backend_var!)))
+                                                          0a id))
+                                                      str switch)))))))))))))
+                          top_compile =
+                            (function debuginfo str default cases
+                              (funct-body asmcomp/strmatch.ml(365)<ghost>:10452-10978
+                                (before asmcomp/strmatch.ml(366):10488-10978
+                                  (let
+                                    (a_len =[int]
+                                       (after asmcomp/strmatch.ml(366):10500-10526
+                                         (apply count_arities_length cases))
+                                     a_fst =[int]
+                                       (after asmcomp/strmatch.ml(367):10545-10570
+                                         (apply count_arities_first cases)))
+                                    (before asmcomp/strmatch.ml(368):10580-10978
+                                      (if (<= a_len a_fst)
+                                        (before asmcomp/strmatch.ml(368):10603-10723
+                                          (seq
+                                            (if dbg
+                                              (before asmcomp/strmatch.ml(369):10629-10657
+                                                (after asmcomp/strmatch.ml(369):10629-10657
+                                                  (apply pp_cases
+                                                    (field 39
+                                                      (global Stdlib!))
+                                                    "SIZE" cases)))
+                                              0a)
+                                            (before asmcomp/strmatch.ml(370):10668-10713
+                                              (after asmcomp/strmatch.ml(370):10668-10713
+                                                (apply compile_by_size
+                                                  debuginfo 0 str default
+                                                  cases)))))
+                                        (before asmcomp/strmatch.ml(371):10729-10978
+                                          (seq
+                                            (if dbg
+                                              (before asmcomp/strmatch.ml(372):10755-10788
+                                                (after asmcomp/strmatch.ml(372):10755-10788
+                                                  (apply pp_cases
+                                                    (field 39
+                                                      (global Stdlib!))
+                                                    "FIRST COL" cases)))
+                                              0a)
+                                            (before asmcomp/strmatch.ml(373):10799-10968
+                                              (let
+                                                (compile_size_rest =
+                                                   (function str default
+                                                     cases
+                                                     (funct-body asmcomp/strmatch.ml(373)<ghost>:10821-10896
+                                                       (before asmcomp/strmatch.ml(374):10851-10896
+                                                         (after asmcomp/strmatch.ml(374):10851-10896
+                                                           (apply
+                                                             compile_by_size
+                                                             debuginfo 1 str
+                                                             default cases))))))
+                                                (before asmcomp/strmatch.ml(375):10908-10968
+                                                  (after asmcomp/strmatch.ml(375):10908-10968
+                                                    (apply match_oncell
+                                                      compile_size_rest str
+                                                      default 0
+                                                      (after asmcomp/strmatch.ml(375):10953-10968
+                                                        (apply by_cell cases)))))))))))))))
+                          catch =
+                            (function dbg arg k
+                              (funct-body asmcomp/strmatch.ml(380)<ghost>:11020-11174
+                                (before asmcomp/strmatch.ml(380):11032-11174
+                                  (catch
+                                    (switch arg
+                                     case tag 17:
+                                      (let (*match* =a (field 1 arg))
+                                        (if *match* (exit 21)
+                                          (before asmcomp/strmatch.ml(381):11071-11076
+                                            (after asmcomp/strmatch.ml(381):11071-11076
+                                              (apply k arg)))))
+                                     default: (exit 21))
+                                   with (21)
+                                    (before asmcomp/strmatch.ml(383):11096-11174
+                                      (let
+                                        (e =[int]
+                                           (after asmcomp/strmatch.ml(383):11105-11124
+                                             (apply
+                                               (field 33 (global Lambda!))
+                                               0a)))
+                                        (before asmcomp/strmatch.ml(384):11136-11174
+                                          (after asmcomp/strmatch.ml(384):11136-11174
+                                            (apply (field 12 (global Cmm!))
+                                              (makeblock 0 (int,*,*,*,*) e 0a
+                                                (after asmcomp/strmatch.ml(384):11149-11165
+                                                  (apply k
+                                                    (makeblock 17 (int,*) e
+                                                      0a)))
+                                                arg dbg))))))))))
+                          compile =
+                            (function dbg str default cases
+                              (funct-body asmcomp/strmatch.ml(386)<ghost>:11192-11595
+                                (before asmcomp/strmatch.ml(388):11278-11595
+                                  (let (*match* = cases *match* = default)
+                                    (catch
+                                      (catch
+                                        (if *match*
+                                          (if *match* (exit 23)
+                                            (let
+                                              (cases =a (field 1 *match*)
+                                               *match* =a (field 0 *match*)
+                                               e =a (field 1 *match*))
+                                              (exit 22 cases e)))
+                                          (if *match* (exit 23)
+                                            (before asmcomp/strmatch.ml(391):11400-11412
+                                              (raise
+                                                (after asmcomp/strmatch.ml(391):11400-11412
+                                                  (makeblock 0
+                                                    (global Assert_failure!)
+                                                    [0:
+                                                     "asmcomp/strmatch.ml"
+                                                     391 19]))))))
+                                       with (23)
+                                        (let
+                                          (cases =a *match*
+                                           e =a (field 0 *match*))
+                                          (exit 22 cases e)))
+                                     with (22 cases e)
+                                      (before asmcomp/strmatch.ml(390):11373-11380
+                                        (let
+                                          (default =a e
+                                           cases =a cases
+                                           default = default
+                                           cases = cases)
+                                          (before asmcomp/strmatch.ml(392):11422-11595
+                                            (let
+                                              (cases =
+                                                 (after asmcomp/strmatch.ml(393):11442-11517
+                                                   (apply
+                                                     (field 18
+                                                       (global Stdlib__list!))
+                                                     (function param
+                                                       (funct-body asmcomp/strmatch.ml(394):11465-11501
+                                                         (let
+                                                           (act =a
+                                                              (field 1 param)
+                                                            s =a
+                                                              (field 0 param))
+                                                           (before asmcomp/strmatch.ml(394):11481-11500
+                                                             (makeblock 0
+                                                               (after asmcomp/strmatch.ml(394):11481-11496
+                                                                 (apply
+                                                                   pat_of_string
+                                                                   s))
+                                                               act)))))
+                                                     cases)))
+                                              (before asmcomp/strmatch.ml(396):11527-11595
+                                                (after asmcomp/strmatch.ml(396):11527-11595
+                                                  (apply catch dbg default
+                                                    (function default
+                                                      (funct-body asmcomp/strmatch.ml(396):11545-11595
+                                                        (before asmcomp/strmatch.ml(396):11561-11594
+                                                          (after asmcomp/strmatch.ml(396):11561-11594
+                                                            (apply
+                                                              top_compile dbg
+                                                              str default
+                                                              cases))))))))))))))))))
+                         (pseudo asmcomp/strmatch.ml(32):1490-11602
+                           (makeblock 0 dbg mask pat_as_string do_pp_cases
+                             pp_cases pp_match gen_cell_id gen_size_id
+                             mk_let_cell mk_let_size mk_cmp_gen mk_lt mk_eq
+                             IntArg interval pat_of_string IntSet NativeSet
+                             add_one count_arities count_arities_first
+                             count_arities_length best_col swap_list swap
+                             best_first Divide DivideNative by_cell do_split
+                             split_env match_oncell do_compile_pats DivideInt
+                             by_size compile_by_size top_compile catch
+                             compile))))))))))))
+    (pseudo _none_(0)<ghost>:-1--1
+      (makeblock 0
+        (function funarg is_a_functor stub
+          (let (let = (apply Make funarg)) (makeblock 0 (field 38 let))))))))

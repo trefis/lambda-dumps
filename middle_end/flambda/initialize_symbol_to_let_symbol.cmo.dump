@@ -1,0 +1,138 @@
+(setglobal Initialize_symbol_to_let_symbol!
+  (let
+    (constant_field =
+       (function expr
+         (funct-body middle_end/flambda/initialize_symbol_to_let_symbol.ml(20)<ghost>:1257-1694
+           (before middle_end/flambda/initialize_symbol_to_let_symbol.ml(22):1333-1694
+             (catch
+               (switch expr
+                case tag 1:
+                 (let
+                   (*match* =a (field 0 expr)
+                    *match* =a (field 1 *match*)
+                    var =a (field 0 *match*))
+                   (switch *match*
+                    case tag 0:
+                     (let (*match* =a (field 2 *match*))
+                       (switch *match*
+                        case tag 0:
+                         (let
+                           (var =a var
+                            var' =a (field 0 *match*)
+                            s =a (field 0 *match*))
+                           (before middle_end/flambda/initialize_symbol_to_let_symbol.ml(28):1616-1676
+                             (seq
+                               (if
+                                 (after middle_end/flambda/initialize_symbol_to_let_symbol.ml(28):1622-1647
+                                   (apply (field 1 (global Variable!)) var
+                                     var'))
+                                 0a
+                                 (raise
+                                   (after middle_end/flambda/initialize_symbol_to_let_symbol.ml(28):1616-1647
+                                     (makeblock 0 (global Assert_failure!)
+                                       [0:
+                                        "middle_end/flambda/initialize_symbol_to_let_symbol.ml"
+                                        28 4]))))
+                               (before middle_end/flambda/initialize_symbol_to_let_symbol.ml(29):1653-1676
+                                 (makeblock 0 (makeblock 0 s))))))
+                        default: (exit 1)))
+                    case tag 1:
+                     (let (*match* =a (field 2 *match*))
+                       (switch *match*
+                        case tag 0:
+                         (let
+                           (var' =a (field 0 *match*) c =a (field 0 *match*))
+                           (before middle_end/flambda/initialize_symbol_to_let_symbol.ml(24):1418-1545
+                             (seq
+                               (if
+                                 (after middle_end/flambda/initialize_symbol_to_let_symbol.ml(24):1424-1449
+                                   (apply (field 1 (global Variable!)) var
+                                     var'))
+                                 0a
+                                 (raise
+                                   (after middle_end/flambda/initialize_symbol_to_let_symbol.ml(24):1418-1449
+                                     (makeblock 0 (global Assert_failure!)
+                                       [0:
+                                        "middle_end/flambda/initialize_symbol_to_let_symbol.ml"
+                                        24 4]))))
+                               (before middle_end/flambda/initialize_symbol_to_let_symbol.ml(26):1523-1545
+                                 (makeblock 0 (makeblock 1 c))))))
+                        default: (exit 1)))
+                    default: (exit 1)))
+                default: (exit 1))
+              with (1)
+               (before middle_end/flambda/initialize_symbol_to_let_symbol.ml(31):1690-1694
+                 0a))))))
+    (letrec
+      (loop
+         (function program
+           (funct-body middle_end/flambda/initialize_symbol_to_let_symbol.ml(33)<ghost>:1709-2422
+             (before middle_end/flambda/initialize_symbol_to_let_symbol.ml(34):1769-2422
+               (switch* program
+                case tag 0:
+                 (let
+                   (program =a (field 2 program)
+                    const =a (field 1 program)
+                    symbol =a (field 0 program))
+                   (before middle_end/flambda/initialize_symbol_to_let_symbol.ml(46):2209-2249
+                     (makeblock 0 symbol const
+                       (after middle_end/flambda/initialize_symbol_to_let_symbol.ml(46):2236-2248
+                         (apply loop program)))))
+                case tag 1:
+                 (let
+                   (program =a (field 1 program) defs =a (field 0 program))
+                   (before middle_end/flambda/initialize_symbol_to_let_symbol.ml(48):2292-2327
+                     (makeblock 1 defs
+                       (after middle_end/flambda/initialize_symbol_to_let_symbol.ml(48):2314-2326
+                         (apply loop program)))))
+                case tag 2:
+                 (let
+                   (program =a (field 3 program)
+                    fields =a (field 2 program)
+                    tag =a (field 1 program)
+                    symbol =a (field 0 program))
+                   (before middle_end/flambda/initialize_symbol_to_let_symbol.ml(36):1848-2161
+                     (let
+                       (constant_fields =
+                          (after middle_end/flambda/initialize_symbol_to_let_symbol.ml(36):1870-1900
+                            (apply (field 16 (global Stdlib__list!))
+                              constant_field fields)))
+                       (before middle_end/flambda/initialize_symbol_to_let_symbol.ml(37):1908-2161
+                         (let
+                           (*match* =
+                              (after middle_end/flambda/initialize_symbol_to_let_symbol.ml(38):1926-1988
+                                (apply
+                                  (field 3
+                                    (field 0 (field 11 (global Misc!))))
+                                  constant_fields)))
+                           (if *match*
+                             (let (fields =a (field 0 *match*))
+                               (before middle_end/flambda/initialize_symbol_to_let_symbol.ml(43):2099-2153
+                                 (makeblock 0 symbol (makeblock 1 tag fields)
+                                   (after middle_end/flambda/initialize_symbol_to_let_symbol.ml(43):2140-2152
+                                     (apply loop program)))))
+                             (before middle_end/flambda/initialize_symbol_to_let_symbol.ml(41):2018-2071
+                               (makeblock 2 symbol tag fields
+                                 (after middle_end/flambda/initialize_symbol_to_let_symbol.ml(41):2058-2070
+                                   (apply loop program))))))))))
+                case tag 3:
+                 (let
+                   (program =a (field 1 program) expr =a (field 0 program))
+                   (before middle_end/flambda/initialize_symbol_to_let_symbol.ml(50):2362-2389
+                     (makeblock 3 expr
+                       (after middle_end/flambda/initialize_symbol_to_let_symbol.ml(50):2376-2388
+                         (apply loop program)))))
+                case tag 4:
+                 (let (symbol =a (field 0 program))
+                   (before middle_end/flambda/initialize_symbol_to_let_symbol.ml(52):2412-2422
+                     (makeblock 4 symbol))))))))
+      (let
+        (run =
+           (function program
+             (funct-body middle_end/flambda/initialize_symbol_to_let_symbol.ml(54)<ghost>:2432-2528
+               (before middle_end/flambda/initialize_symbol_to_let_symbol.ml(55):2464-2528
+                 (let (init = program)
+                   (makeblock 0 (field 0 init)
+                     (after middle_end/flambda/initialize_symbol_to_let_symbol.ml(56):2498-2523
+                       (apply loop (field 1 program)))))))))
+        (pseudo _none_(0)<ghost>:-1--1 (makeblock 0 constant_field run))))))

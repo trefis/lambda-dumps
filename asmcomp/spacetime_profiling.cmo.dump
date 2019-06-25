@@ -1,0 +1,1428 @@
+(setglobal Spacetime_profiling!
+  (let
+    (shared =a [0: #"disable_instrumentation"]
+     shared =a [0: #"select_addressing" #"is_immediate"]
+     shared =a [0: #"instr_seq"]
+     shared =a
+       [0:
+        #"select_checkbound_extra_args" #"select_checkbound"
+        #"select_allocation_args" #"select_allocation" #"regs_for"
+        #"instrument_indirect_call" #"instrument_direct_call"
+        #"instrument_blockheader" #"insert_prologue" #"insert_moves"
+        #"initial_env" #"emit_prologue" #"emit_fundecl" #"emit_expr"
+        #"emit_blockheader" #"can_instrument" #"about_to_emit_call"]
+     shared =a
+       [0:
+        #"about_to_emit_call" #"adjust_type" #"adjust_types" #"effects_of"
+        #"emit_blockheader" #"emit_expr" #"emit_extcall_args" #"emit_fundecl"
+        #"emit_stores" #"emit_tail" #"extract" #"extract_core" #"initial_env"
+        #"insert" #"insert_debug" #"insert_move" #"insert_move_args"
+        #"insert_move_results" #"insert_moves" #"insert_op"
+        #"insert_op_debug" #"insert_prologue" #"is_simple_expr"
+        #"mark_c_tailcall" #"mark_call" #"mark_instr" #"mark_tailcall"
+        #"regs_for" #"select_allocation" #"select_allocation_args"
+        #"select_checkbound" #"select_checkbound_extra_args"
+        #"select_condition" #"select_operation" #"select_store"]
+     node_num_header_words =[int] 2
+     index_within_node = (makemutable 0 (int) node_num_header_words)
+     spacetime_node =
+       (makemutable 0
+         (makemutable 246
+           (function param
+             (makeblock 7
+               (after asmcomp/spacetime_profiling.ml(26):1499-1523
+                 (apply (field 6 (global Backend_var!)) "dummy"))))))
+     spacetime_node_ident =
+       (makemutable 0
+         (makemutable 246
+           (function param
+             (after asmcomp/spacetime_profiling.ml(27):1563-1587
+               (apply (field 6 (global Backend_var!)) "dummy")))))
+     current_function_label = (makemutable 0 0a)
+     direct_tail_call_point_indexes = (makemutable 0 0a)
+     reverse_shape = (makemutable 0 0a)
+     cconst_int =
+       (function i[int]
+         (funct-body asmcomp/spacetime_profiling.ml(35)<ghost>:1839-1877
+           (before asmcomp/spacetime_profiling.ml(35):1843-1877
+             (makeblock 0 (int,*) i (field 0 (global Debuginfo!))))))
+     cconst_natint =
+       (function i[nativeint]
+         (funct-body asmcomp/spacetime_profiling.ml(36)<ghost>:1896-1937
+           (before asmcomp/spacetime_profiling.ml(36):1900-1937
+             (makeblock 1 (nativeint,*) i (field 0 (global Debuginfo!))))))
+     cconst_symbol =
+       (function s
+         (funct-body asmcomp/spacetime_profiling.ml(37)<ghost>:1956-1997
+           (before asmcomp/spacetime_profiling.ml(37):1960-1997
+             (makeblock 3 s (field 0 (global Debuginfo!))))))
+     something_was_instrumented =
+       (function param
+         (funct-body asmcomp/spacetime_profiling.ml(39)<ghost>:2030-2079
+           (before asmcomp/spacetime_profiling.ml(40):2037-2079
+             (> (field 0 index_within_node) node_num_header_words))))
+     next_index_within_node =
+       (function part_of_shape label[int] : int
+         (funct-body asmcomp/spacetime_profiling.ml(42)<ghost>:2108-2588
+           (before asmcomp/spacetime_profiling.ml(43):2134-2588
+             (let (index =[int] (field 0 index_within_node))
+               (before asmcomp/spacetime_profiling.ml(44):2170-2588
+                 (seq
+                   (if (isint part_of_shape)
+                     (if part_of_shape
+                       (before asmcomp/spacetime_profiling.ml(53):2434-2512
+                         (seq (+:=1 index_within_node)
+                           (before asmcomp/spacetime_profiling.ml(54):2462-2512
+                             (seq (+:=1 index_within_node)
+                               (before asmcomp/spacetime_profiling.ml(55):2490-2512
+                                 (+:=1 index_within_node))))))
+                       (before asmcomp/spacetime_profiling.ml(51):2378-2400
+                         (+:=1 index_within_node)))
+                     (before asmcomp/spacetime_profiling.ml(46):2237-2341
+                       (seq (+:=1 index_within_node)
+                         (before asmcomp/spacetime_profiling.ml(47):2265-2341
+                           (if (field 53 (global Config!))
+                             (before asmcomp/spacetime_profiling.ml(47):2299-2341
+                               (+:=1 index_within_node))
+                             0a)))))
+                   (before asmcomp/spacetime_profiling.ml(57):2522-2588
+                     (seq
+                       (setfield_ptr 0 reverse_shape
+                         (makeblock 0
+                           (makeblock 0 (*,int) part_of_shape label)
+                           (field 0 reverse_shape)))
+                       (before asmcomp/spacetime_profiling.ml(58):2583-2588
+                         index)))))))))
+     reset =
+       (function ident function_label
+         (funct-body asmcomp/spacetime_profiling.ml(60)<ghost>:2600-2883
+           (before asmcomp/spacetime_profiling.ml(61):2648-2883
+             (seq (setfield_imm 0 index_within_node node_num_header_words)
+               (before asmcomp/spacetime_profiling.ml(62):2694-2883
+                 (seq
+                   (setfield_ptr 0 spacetime_node
+                     (makemutable 246 (function param (makeblock 7 ident))))
+                   (before asmcomp/spacetime_profiling.ml(63):2737-2883
+                     (seq
+                       (setfield_ptr 0 spacetime_node_ident
+                         (opaque (makeblock 250 ident)))
+                       (before asmcomp/spacetime_profiling.ml(64):2775-2883
+                         (seq
+                           (setfield_ptr 0 direct_tail_call_point_indexes 0a)
+                           (before asmcomp/spacetime_profiling.ml(65):2815-2883
+                             (seq
+                               (setfield_ptr 0 current_function_label
+                                 (makeblock 0 function_label))
+                               (before asmcomp/spacetime_profiling.ml(66):2864-2883
+                                 (setfield_ptr 0 reverse_shape 0a))))))))))))))
+     code_for_function_prologue =
+       (function function_name dbg node_hole
+         (funct-body asmcomp/spacetime_profiling.ml(68)<ghost>:2916-5539
+           (before asmcomp/spacetime_profiling.ml(69):2959-5539
+             (let
+               (node =
+                  (after asmcomp/spacetime_profiling.ml(69):2970-2991
+                    (apply (field 6 (global Backend_var!)) "node")))
+               (before asmcomp/spacetime_profiling.ml(70):2997-5539
+                 (let
+                   (new_node =
+                      (after asmcomp/spacetime_profiling.ml(70):3012-3037
+                        (apply (field 6 (global Backend_var!)) "new_node")))
+                   (before asmcomp/spacetime_profiling.ml(71):3043-5539
+                     (let
+                       (must_allocate_node =
+                          (after asmcomp/spacetime_profiling.ml(71):3068-3103
+                            (apply (field 6 (global Backend_var!))
+                              "must_allocate_node")))
+                       (before asmcomp/spacetime_profiling.ml(72):3109-5539
+                         (let
+                           (is_new_node =
+                              (after asmcomp/spacetime_profiling.ml(72):3127-3155
+                                (apply (field 6 (global Backend_var!))
+                                  "is_new_node")))
+                           (before asmcomp/spacetime_profiling.ml(73):3161-5539
+                             (let
+                               (no_tail_calls =
+                                  (<
+                                    (after asmcomp/spacetime_profiling.ml(73):3181-3224
+                                      (apply (field 0 (global Stdlib__list!))
+                                        (field 0
+                                          direct_tail_call_point_indexes)))
+                                    1))
+                               (before asmcomp/spacetime_profiling.ml(74):3234-5539
+                                 (let
+                                   (initialize_direct_tail_call_points_and_return_node =
+                                      (let
+                                        (new_node_encoded =
+                                           (after asmcomp/spacetime_profiling.ml(76):3336-3369
+                                             (apply
+                                               (field 6
+                                                 (global Backend_var!))
+                                               "new_node_encoded")))
+                                        (before asmcomp/spacetime_profiling.ml(80):3579-4293
+                                          (let
+                                            (indexes =
+                                               (field 0
+                                                 direct_tail_call_point_indexes))
+                                            (before asmcomp/spacetime_profiling.ml(81):3632-4293
+                                              (let
+                                                (body =
+                                                   (after asmcomp/spacetime_profiling.ml(82):3649-4066
+                                                     (apply
+                                                       (field 20
+                                                         (global Stdlib__list!))
+                                                       (function init_code
+                                                         index[int]
+                                                         (funct-body asmcomp/spacetime_profiling.ml(82):3664-4026
+                                                           (before asmcomp/spacetime_profiling.ml(84):3755-4025
+                                                             (let
+                                                               (offset_in_bytes =[int]
+                                                                  (* index
+                                                                    (field 3
+                                                                    (global Arch!))))
+                                                               (before asmcomp/spacetime_profiling.ml(85):3813-4025
+                                                                 (makeblock 13
+                                                                   (makeblock 12
+                                                                    [3:
+                                                                    6a 0a]
+                                                                    (makeblock 0
+                                                                    (makeblock 12
+                                                                    1a
+                                                                    (makeblock 0
+                                                                    (makeblock 7
+                                                                    new_node)
+                                                                    (makeblock 0
+                                                                    (after asmcomp/spacetime_profiling.ml(87):3923-3949
+                                                                    (apply
+                                                                    cconst_int
+                                                                    offset_in_bytes))
+                                                                    0a)) dbg)
+                                                                    (makeblock 0
+                                                                    (makeblock 7
+                                                                    new_node_encoded)
+                                                                    0a)) dbg)
+                                                                   init_code))))))
+                                                       (makeblock 7 new_node)
+                                                       indexes)))
+                                                (before asmcomp/spacetime_profiling.ml(93):4078-4293
+                                                  (if indexes
+                                                    (before asmcomp/spacetime_profiling.ml(96):4131-4293
+                                                      (makeblock 8
+                                                        (after asmcomp/spacetime_profiling.ml(96):4137-4163
+                                                          (apply
+                                                            (field 1
+                                                              (field 33
+                                                                (global Backend_var!)))
+                                                            0a
+                                                            new_node_encoded))
+                                                        (makeblock 12 8a
+                                                          (makeblock 0
+                                                            (makeblock 7
+                                                              new_node)
+                                                            (makeblock 0
+                                                              (after asmcomp/spacetime_profiling.ml(98):4259-4271
+                                                                (apply
+                                                                  cconst_int
+                                                                  1))
+                                                              0a))
+                                                          dbg)
+                                                        body))
+                                                    (before asmcomp/spacetime_profiling.ml(94):4109-4113
+                                                      body)))))))))
+                                   (before asmcomp/spacetime_profiling.ml(101):4301-5539
+                                     (let
+                                       (pc =
+                                          (after asmcomp/spacetime_profiling.ml(101):4310-4329
+                                            (apply
+                                              (field 6 (global Backend_var!))
+                                              "pc")))
+                                       (before asmcomp/spacetime_profiling.ml(102):4335-5539
+                                         (makeblock 8
+                                           (after asmcomp/spacetime_profiling.ml(102):4341-4355
+                                             (apply
+                                               (field 1
+                                                 (field 33
+                                                   (global Backend_var!)))
+                                               0a node))
+                                           (makeblock 12 [2: 6a 1a]
+                                             (makeblock 0
+                                               (makeblock 7 node_hole) 0a)
+                                             dbg)
+                                           (makeblock 8
+                                             (after asmcomp/spacetime_profiling.ml(104):4438-4466
+                                               (apply
+                                                 (field 1
+                                                   (field 33
+                                                     (global Backend_var!)))
+                                                 0a must_allocate_node))
+                                             (makeblock 12 7a
+                                               (makeblock 0
+                                                 (makeblock 7 node)
+                                                 (makeblock 0
+                                                   (after asmcomp/spacetime_profiling.ml(105):4499-4511
+                                                     (apply cconst_int 1))
+                                                   0a))
+                                               dbg)
+                                             (makeblock 14
+                                               (makeblock 12 [4: 1a]
+                                                 (makeblock 0
+                                                   (makeblock 7
+                                                     must_allocate_node)
+                                                   (makeblock 0
+                                                     (after asmcomp/spacetime_profiling.ml(107):4594-4606
+                                                       (apply cconst_int 1))
+                                                     0a))
+                                                 dbg)
+                                               dbg (makeblock 7 node) dbg
+                                               (makeblock 8
+                                                 (after asmcomp/spacetime_profiling.ml(111):4682-4703
+                                                   (apply
+                                                     (field 1
+                                                       (field 33
+                                                         (global Backend_var!)))
+                                                     0a is_new_node))
+                                                 (makeblock 8
+                                                   (after asmcomp/spacetime_profiling.ml(112):4723-4735
+                                                     (apply
+                                                       (field 1
+                                                         (field 33
+                                                           (global Backend_var!)))
+                                                       0a pc))
+                                                   (after asmcomp/spacetime_profiling.ml(112):4737-4764
+                                                     (apply cconst_symbol
+                                                       function_name))
+                                                   (makeblock 12
+                                                     (makeblock 1
+                                                       "caml_spacetime_allocate_node"
+                                                       (makearray[int] 2a) 0a
+                                                       0a)
+                                                     (makeblock 0
+                                                       (after asmcomp/spacetime_profiling.ml(115):4887-4935
+                                                         (apply cconst_int
+                                                           (+ 1
+                                                             (field 0
+                                                               index_within_node))))
+                                                       (makeblock 0
+                                                         (makeblock 7 pc)
+                                                         (makeblock 0
+                                                           (makeblock 7
+                                                             node_hole)
+                                                           0a)))
+                                                     dbg))
+                                                 (makeblock 8
+                                                   (after asmcomp/spacetime_profiling.ml(120):5056-5074
+                                                     (apply
+                                                       (field 1
+                                                         (field 33
+                                                           (global Backend_var!)))
+                                                       0a new_node))
+                                                   (makeblock 12 [2: 6a 1a]
+                                                     (makeblock 0
+                                                       (makeblock 7
+                                                         node_hole)
+                                                       0a)
+                                                     dbg)
+                                                   (if no_tail_calls
+                                                     (before asmcomp/spacetime_profiling.ml(122):5195-5208
+                                                       (makeblock 7 new_node))
+                                                     (before asmcomp/spacetime_profiling.ml(124):5248-5519
+                                                       (makeblock 14
+                                                         (makeblock 12
+                                                           [4: 0a]
+                                                           (makeblock 0
+                                                             (makeblock 7
+                                                               is_new_node)
+                                                             (makeblock 0
+                                                               (after asmcomp/spacetime_profiling.ml(125):5317-5329
+                                                                 (apply
+                                                                   cconst_int
+                                                                   0))
+                                                               0a))
+                                                           dbg)
+                                                         dbg
+                                                         (makeblock 7
+                                                           new_node)
+                                                         dbg
+                                                         initialize_direct_tail_call_points_and_return_node
+                                                         dbg)))))
+                                               dbg))))))))))))))))))))
+     code_for_blockheader =
+       (function value's_header[nativeint] node dbg
+         (funct-body asmcomp/spacetime_profiling.ml(133)<ghost>:5566-8913
+           (before asmcomp/spacetime_profiling.ml(134):5597-8913
+             (let (num_words =[nativeint] (Nativeint.lsr value's_header 10))
+               (before asmcomp/spacetime_profiling.ml(135):5666-8913
+                 (let
+                   (existing_profinfo =
+                      (after asmcomp/spacetime_profiling.ml(135):5690-5724
+                        (apply (field 6 (global Backend_var!))
+                          "existing_profinfo")))
+                   (before asmcomp/spacetime_profiling.ml(136):5730-8913
+                     (let
+                       (existing_count =
+                          (after asmcomp/spacetime_profiling.ml(136):5751-5782
+                            (apply (field 6 (global Backend_var!))
+                              "existing_count")))
+                       (before asmcomp/spacetime_profiling.ml(137):5788-8913
+                         (let
+                           (profinfo =
+                              (after asmcomp/spacetime_profiling.ml(137):5803-5828
+                                (apply (field 6 (global Backend_var!))
+                                  "profinfo")))
+                           (before asmcomp/spacetime_profiling.ml(138):5834-8913
+                             (let
+                               (address_of_profinfo =
+                                  (after asmcomp/spacetime_profiling.ml(138):5860-5896
+                                    (apply (field 6 (global Backend_var!))
+                                      "address_of_profinfo")))
+                               (before asmcomp/spacetime_profiling.ml(139):5902-8913
+                                 (let
+                                   (label =[int]
+                                      (after asmcomp/spacetime_profiling.ml(139):5914-5930
+                                        (apply (field 11 (global Cmm!)) 0a)))
+                                   (before asmcomp/spacetime_profiling.ml(140):5936-8913
+                                     (let
+                                       (index_within_node =[int]
+                                          (after asmcomp/spacetime_profiling.ml(141):5964-6030
+                                            (apply next_index_within_node 1a
+                                              label)))
+                                       (before asmcomp/spacetime_profiling.ml(143):6038-8913
+                                         (let
+                                           (offset_into_node =[int]
+                                              (* (field 3 (global Arch!))
+                                                index_within_node))
+                                           (before asmcomp/spacetime_profiling.ml(144):6101-8913
+                                             (let
+                                               (generate_new_profinfo =
+                                                  (makeblock 12
+                                                    (makeblock 1
+                                                      "caml_spacetime_generate_profinfo"
+                                                      (makearray[int] 2a) 0a
+                                                      (makeblock 0 (int)
+                                                        label))
+                                                    (makeblock 0
+                                                      (makeblock 7
+                                                        address_of_profinfo)
+                                                      (makeblock 0
+                                                        (after asmcomp/spacetime_profiling.ml(157):6715-6749
+                                                          (apply cconst_int
+                                                            (+
+                                                              index_within_node
+                                                              1)))
+                                                        0a))
+                                                    dbg))
+                                               (before asmcomp/spacetime_profiling.ml(163):6946-8913
+                                                 (makeblock 8
+                                                   (after asmcomp/spacetime_profiling.ml(163):6952-6981
+                                                     (apply
+                                                       (field 1
+                                                         (field 33
+                                                           (global Backend_var!)))
+                                                       0a
+                                                       address_of_profinfo))
+                                                   (makeblock 12 1a
+                                                     (makeblock 0
+                                                       (makeblock 7 node)
+                                                       (makeblock 0
+                                                         (after asmcomp/spacetime_profiling.ml(166):7024-7051
+                                                           (apply cconst_int
+                                                             offset_into_node))
+                                                         0a))
+                                                     dbg)
+                                                   (makeblock 8
+                                                     (after asmcomp/spacetime_profiling.ml(168):7076-7103
+                                                       (apply
+                                                         (field 1
+                                                           (field 33
+                                                             (global Backend_var!)))
+                                                         0a
+                                                         existing_profinfo))
+                                                     (makeblock 12 [2: 6a 1a]
+                                                       (makeblock 0
+                                                         (makeblock 7
+                                                           address_of_profinfo)
+                                                         0a)
+                                                       dbg)
+                                                     (makeblock 8
+                                                       (after asmcomp/spacetime_profiling.ml(171):7210-7228
+                                                         (apply
+                                                           (field 1
+                                                             (field 33
+                                                               (global Backend_var!)))
+                                                           0a profinfo))
+                                                       (makeblock 14
+                                                         (makeblock 12
+                                                           [4: 1a]
+                                                           (makeblock 0
+                                                             (makeblock 7
+                                                               existing_profinfo)
+                                                             (makeblock 0
+                                                               (after asmcomp/spacetime_profiling.ml(173):7303-7315
+                                                                 (apply
+                                                                   cconst_int
+                                                                   1))
+                                                               0a))
+                                                           dbg)
+                                                         dbg
+                                                         (makeblock 7
+                                                           existing_profinfo)
+                                                         dbg
+                                                         generate_new_profinfo
+                                                         dbg)
+                                                       (makeblock 8
+                                                         (after asmcomp/spacetime_profiling.ml(179):7460-7484
+                                                           (apply
+                                                             (field 1
+                                                               (field 33
+                                                                 (global Backend_var!)))
+                                                             0a
+                                                             existing_count))
+                                                         (makeblock 12
+                                                           [2: 6a 1a]
+                                                           (makeblock 0
+                                                             (makeblock 12 1a
+                                                               (makeblock 0
+                                                                 (makeblock 7
+                                                                   address_of_profinfo)
+                                                                 (makeblock 0
+                                                                   (after asmcomp/spacetime_profiling.ml(182):7604-7629
+                                                                    (apply
+                                                                    cconst_int
+                                                                    (field 3
+                                                                    (global Arch!))))
+                                                                   0a))
+                                                               dbg)
+                                                             0a)
+                                                           dbg)
+                                                         (makeblock 13
+                                                           (makeblock 12
+                                                             [3: 6a 0a]
+                                                             (makeblock 0
+                                                               (makeblock 12
+                                                                 1a
+                                                                 (makeblock 0
+                                                                   (makeblock 7
+                                                                    address_of_profinfo)
+                                                                   (makeblock 0
+                                                                    (after asmcomp/spacetime_profiling.ml(187):7803-7828
+                                                                    (apply
+                                                                    cconst_int
+                                                                    (field 3
+                                                                    (global Arch!))))
+                                                                    0a))
+                                                                 dbg)
+                                                               (makeblock 0
+                                                                 (makeblock 12
+                                                                   1a
+                                                                   (makeblock 0
+                                                                    (makeblock 7
+                                                                    existing_count)
+                                                                    (makeblock 0
+                                                                    (after asmcomp/spacetime_profiling.ml(192):8058-8107
+                                                                    (apply
+                                                                    cconst_int
+                                                                    (* 2
+                                                                    (+ 1
+                                                                    (Nativeint.to_int
+                                                                    num_words)))))
+                                                                    0a))
+                                                                   dbg)
+                                                                 0a))
+                                                             dbg)
+                                                           (let
+                                                             (value's_header =[nativeint]
+                                                                (Nativeint.xor
+                                                                  value's_header
+                                                                  (Nativeint.or
+                                                                    (Nativeint.or
+                                                                    (Nativeint.of_int
+                                                                    (field 8
+                                                                    (global Stdlib__obj!)))
+                                                                    (Nativeint.lsl
+                                                                    3n 8))
+                                                                    (Nativeint.lsl
+                                                                    (Nativeint.of_int
+                                                                    (+
+                                                                    index_within_node
+                                                                    1)) 10))))
+                                                             (before asmcomp/spacetime_profiling.ml(207):8846-8908
+                                                               (makeblock 12
+                                                                 9a
+                                                                 (makeblock 0
+                                                                   (makeblock 7
+                                                                    profinfo)
+                                                                   (makeblock 0
+                                                                    (after asmcomp/spacetime_profiling.ml(207):8873-8901
+                                                                    (apply
+                                                                    cconst_natint
+                                                                    value's_header))
+                                                                    0a))
+                                                                 dbg)))))))))))))))))))))))))))))
+     code_for_call =
+       (function node callee is_tail label[int] dbg
+         (funct-body asmcomp/spacetime_profiling.ml(213)<ghost>:9000-11606
+           (before asmcomp/spacetime_profiling.ml(216):9127-11606
+             (let
+               (is_self_recursive_call =
+                  (switch* callee
+                   case tag 0:
+                    (let (callee =a (field 0 callee))
+                      (before asmcomp/spacetime_profiling.ml(219):9207-9373
+                        (let (*match* = (field 0 current_function_label))
+                          (if *match*
+                            (let (label =a (field 0 *match*))
+                              (before asmcomp/spacetime_profiling.ml(221):9338-9363
+                                (after asmcomp/spacetime_profiling.ml(221):9338-9363
+                                  (apply (field 33 (global Stdlib__string!))
+                                    callee label))))
+                            (before asmcomp/spacetime_profiling.ml(220):9264-9315
+                              (after asmcomp/spacetime_profiling.ml(220):9264-9315
+                                (apply (field 0 (global Misc!))
+                                  "[current_function_label] not set")))))))
+                   case tag 1:
+                    (before asmcomp/spacetime_profiling.ml(223):9394-9399 0a)))
+               (before asmcomp/spacetime_profiling.ml(225):9407-11606
+                 (let (is_tail = (|| is_tail is_self_recursive_call))
+                   (before asmcomp/spacetime_profiling.ml(226):9460-11606
+                     (let
+                       (index_within_node =[int]
+                          (switch* callee
+                           case tag 0:
+                            (let (callee =a (field 0 callee))
+                              (before asmcomp/spacetime_profiling.ml(229):9535-9632
+                                (after asmcomp/spacetime_profiling.ml(229):9535-9632
+                                  (apply next_index_within_node
+                                    (makeblock 0 callee) label))))
+                           case tag 1:
+                            (before asmcomp/spacetime_profiling.ml(233):9659-9728
+                              (after asmcomp/spacetime_profiling.ml(233):9659-9728
+                                (apply next_index_within_node 0a label)))))
+                       (before asmcomp/spacetime_profiling.ml(235):9736-11606
+                         (seq
+                           (catch
+                             (switch* callee
+                              case tag 0:
+                               (before asmcomp/spacetime_profiling.ml(238):9933-9940
+                                 (if is_tail
+                                   (before asmcomp/spacetime_profiling.ml(239):9950-10042
+                                     (setfield_ptr 0
+                                       direct_tail_call_point_indexes
+                                       (makeblock 0 (int,*) index_within_node
+                                         (field 0
+                                           direct_tail_call_point_indexes))))
+                                   (exit 2)))
+                              case tag 1: (exit 2))
+                            with (2)
+                             (before asmcomp/spacetime_profiling.ml(241):10074-10076
+                               0a))
+                           (before asmcomp/spacetime_profiling.ml(243):10086-11606
+                             (let
+                               (place_within_node =
+                                  (after asmcomp/spacetime_profiling.ml(243):10110-10144
+                                    (apply (field 6 (global Backend_var!))
+                                      "place_within_node")))
+                               (before asmcomp/spacetime_profiling.ml(244):10150-11606
+                                 (makeblock 8
+                                   (after asmcomp/spacetime_profiling.ml(245):10174-10201
+                                     (apply
+                                       (field 1
+                                         (field 33 (global Backend_var!)))
+                                       0a place_within_node))
+                                   (makeblock 12 1a
+                                     (makeblock 0 node
+                                       (makeblock 0
+                                         (after asmcomp/spacetime_profiling.ml(246):10226-10273
+                                           (apply cconst_int
+                                             (* index_within_node
+                                               (field 3 (global Arch!)))))
+                                         0a))
+                                     dbg)
+                                   (switch* callee
+                                    case tag 0:
+                                     (before asmcomp/spacetime_profiling.ml(252):10529-11309
+                                       (if (field 53 (global Config!))
+                                         (before asmcomp/spacetime_profiling.ml(252):10563-11257
+                                           (let
+                                             (count_addr =
+                                                (after asmcomp/spacetime_profiling.ml(253):10594-10626
+                                                  (apply
+                                                    (field 6
+                                                      (global Backend_var!))
+                                                    "call_count_addr")))
+                                             (before asmcomp/spacetime_profiling.ml(254):10638-11247
+                                               (let
+                                                 (count =
+                                                    (after asmcomp/spacetime_profiling.ml(254):10650-10677
+                                                      (apply
+                                                        (field 6
+                                                          (global Backend_var!))
+                                                        "call_count")))
+                                                 (before asmcomp/spacetime_profiling.ml(255):10689-11247
+                                                   (makeblock 8
+                                                     (after asmcomp/spacetime_profiling.ml(255):10695-10715
+                                                       (apply
+                                                         (field 1
+                                                           (field 33
+                                                             (global Backend_var!)))
+                                                         0a count_addr))
+                                                     (makeblock 12 1a
+                                                       (makeblock 0
+                                                         (makeblock 7
+                                                           place_within_node)
+                                                         (makeblock 0
+                                                           (after asmcomp/spacetime_profiling.ml(256):10764-10789
+                                                             (apply
+                                                               cconst_int
+                                                               (field 3
+                                                                 (global Arch!))))
+                                                           0a))
+                                                       dbg)
+                                                     (makeblock 8
+                                                       (after asmcomp/spacetime_profiling.ml(257):10814-10829
+                                                         (apply
+                                                           (field 1
+                                                             (field 33
+                                                               (global Backend_var!)))
+                                                           0a count))
+                                                       (makeblock 12
+                                                         [2: 6a 1a]
+                                                         (makeblock 0
+                                                           (makeblock 7
+                                                             count_addr)
+                                                           0a)
+                                                         dbg)
+                                                       (makeblock 13
+                                                         (makeblock 12
+                                                           [3: 6a 0a]
+                                                           (makeblock 0
+                                                             (makeblock 7
+                                                               count_addr)
+                                                             (makeblock 0
+                                                               (makeblock 12
+                                                                 1a
+                                                                 (makeblock 0
+                                                                   (makeblock 7
+                                                                    count)
+                                                                   (makeblock 0
+                                                                    (after asmcomp/spacetime_profiling.ml(263):11164-11176
+                                                                    (apply
+                                                                    cconst_int
+                                                                    2)) 0a))
+                                                                 dbg)
+                                                               0a))
+                                                           dbg)
+                                                         (makeblock 7
+                                                           place_within_node)))))))))
+                                         (before asmcomp/spacetime_profiling.ml(266):11263-11309
+                                           (makeblock 7 place_within_node))))
+                                    case tag 1:
+                                     (let (callee =a (field 0 callee))
+                                       (before asmcomp/spacetime_profiling.ml(270):11341-11605
+                                         (let
+                                           (caller_node =
+                                              (if is_tail
+                                                (before asmcomp/spacetime_profiling.ml(271):11383-11387
+                                                  node)
+                                                (before asmcomp/spacetime_profiling.ml(272):11401-11413
+                                                  (after asmcomp/spacetime_profiling.ml(272):11401-11413
+                                                    (apply cconst_int 1)))))
+                                           (before asmcomp/spacetime_profiling.ml(274):11447-11605
+                                             (makeblock 12
+                                               (makeblock 1
+                                                 "caml_spacetime_indirect_node_hole_ptr"
+                                                 (makearray[int] 2a) 0a 0a)
+                                               (makeblock 0 callee
+                                                 (makeblock 0
+                                                   (makeblock 7
+                                                     place_within_node)
+                                                   (makeblock 0 caller_node
+                                                     0a)))
+                                               dbg)))))))))))))))))))))
+    (letrec
+      (instruction_selection
+         (makeblock 0 0a
+           (function class
+             (let
+               (ids =
+                  (apply (field 3 (global CamlinternalOO!)) class shared
+                    shared)
+                select_checkbound_extra_args =o (field 0 ids)
+                select_checkbound =o (field 1 ids)
+                select_allocation_args =o (field 2 ids)
+                select_allocation =o (field 3 ids)
+                regs_for =o (field 4 ids)
+                instrument_indirect_call =o (field 5 ids)
+                instrument_direct_call =o (field 6 ids)
+                instrument_blockheader =o (field 7 ids)
+                insert_prologue =o (field 8 ids)
+                insert_moves =o (field 9 ids)
+                initial_env =o (field 10 ids)
+                emit_prologue =o (field 11 ids)
+                emit_fundecl =o (field 12 ids)
+                emit_expr =o (field 13 ids)
+                emit_blockheader =o (field 14 ids)
+                can_instrument =o (field 15 ids)
+                about_to_emit_call =o (field 16 ids)
+                disable_instrumentation =o (field 17 ids)
+                inh =
+                  (apply (field 17 (global CamlinternalOO!)) class shared
+                    shared shared (field 6 (global Selectgen!)) 1a)
+                obj_init =o (field 0 inh)
+                emit_blockheader =o (field 6 inh)
+                emit_fundecl =o (field 9 inh)
+                initial_env =o (field 14 inh)
+                insert_prologue =o (field 23 inh)
+                select_allocation =o (field 30 inh)
+                select_allocation_args =o (field 31 inh)
+                select_checkbound =o (field 32 inh)
+                select_checkbound_extra_args =o (field 33 inh))
+               (seq
+                 (apply (field 10 (global CamlinternalOO!)) class
+                   (makeblock 0 instrument_direct_call
+                     (function self-1 env func is_tail label_after[int] dbg
+                       (funct-body asmcomp/spacetime_profiling.ml(286)<ghost>:11896-12220
+                         (before asmcomp/spacetime_profiling.ml(287):11939-12220
+                           (let
+                             (instrumentation =
+                                (after asmcomp/spacetime_profiling.ml(288):11967-12109
+                                  (apply code_for_call
+                                    (after asmcomp/spacetime_profiling.ml(289):11995-12023
+                                      (let
+                                        (lzarg = (field 0 spacetime_node)
+                                         tag =a (caml_obj_tag lzarg))
+                                        (if (== tag 250) (field 0 lzarg)
+                                          (if (== tag 246)
+                                            (apply
+                                              (field 1
+                                                (global CamlinternalLazy!))
+                                              lzarg)
+                                            lzarg))))
+                                    (makeblock 0 func) is_tail label_after
+                                    dbg)))
+                             (before asmcomp/spacetime_profiling.ml(295):12121-12220
+                               (let
+                                 (*match* =
+                                    (after asmcomp/spacetime_profiling.ml(295):12127-12161
+                                      (sendself self-1 emit_expr env
+                                        instrumentation)))
+                                 (if *match*
+                                   (let (reg =a (field 0 *match*))
+                                     (before asmcomp/spacetime_profiling.ml(297):12212-12220
+                                       (makeblock 0 reg)))
+                                   (before asmcomp/spacetime_profiling.ml(296):12181-12193
+                                     (raise
+                                       (after asmcomp/spacetime_profiling.ml(296):12181-12193
+                                         (makeblock 0
+                                           (global Assert_failure!)
+                                           [0:
+                                            "asmcomp/spacetime_profiling.ml"
+                                            296 14])))))))))))
+                     instrument_indirect_call
+                     (function self-1 env callee is_tail label_after[int] dbg
+                       (funct-body asmcomp/spacetime_profiling.ml(299)<ghost>:12264-12881
+                         (before asmcomp/spacetime_profiling.ml(303):12452-12881
+                           (let
+                             (callee_ident =
+                                (after asmcomp/spacetime_profiling.ml(303):12471-12494
+                                  (apply (field 6 (global Backend_var!))
+                                    "callee")))
+                             (before asmcomp/spacetime_profiling.ml(304):12502-12881
+                               (let
+                                 (env =
+                                    (after asmcomp/spacetime_profiling.ml(304):12512-12571
+                                      (apply (field 0 (global Selectgen!))
+                                        (after asmcomp/spacetime_profiling.ml(304):12530-12554
+                                          (apply
+                                            (field 1
+                                              (field 33
+                                                (global Backend_var!)))
+                                            0a callee_ident))
+                                        (makearray[addr] callee) env)))
+                                 (before asmcomp/spacetime_profiling.ml(305):12579-12881
+                                   (let
+                                     (instrumentation =
+                                        (after asmcomp/spacetime_profiling.ml(306):12607-12770
+                                          (apply code_for_call
+                                            (after asmcomp/spacetime_profiling.ml(307):12635-12663
+                                              (let
+                                                (lzarg =
+                                                   (field 0 spacetime_node)
+                                                 tag =a (caml_obj_tag lzarg))
+                                                (if (== tag 250)
+                                                  (field 0 lzarg)
+                                                  (if (== tag 246)
+                                                    (apply
+                                                      (field 1
+                                                        (global CamlinternalLazy!))
+                                                      lzarg)
+                                                    lzarg))))
+                                            (makeblock 1
+                                              (makeblock 7 callee_ident))
+                                            is_tail label_after dbg)))
+                                     (before asmcomp/spacetime_profiling.ml(313):12782-12881
+                                       (let
+                                         (*match* =
+                                            (after asmcomp/spacetime_profiling.ml(313):12788-12822
+                                              (sendself self-1 emit_expr env
+                                                instrumentation)))
+                                         (if *match*
+                                           (let (reg =a (field 0 *match*))
+                                             (before asmcomp/spacetime_profiling.ml(315):12873-12881
+                                               (makeblock 0 reg)))
+                                           (before asmcomp/spacetime_profiling.ml(314):12842-12854
+                                             (raise
+                                               (after asmcomp/spacetime_profiling.ml(314):12842-12854
+                                                 (makeblock 0
+                                                   (global Assert_failure!)
+                                                   [0:
+                                                    "asmcomp/spacetime_profiling.ml"
+                                                    314 14])))))))))))))))
+                     can_instrument
+                     (function self-1 param
+                       (funct-body asmcomp/spacetime_profiling.ml(317)<ghost>:12915-12971
+                         (before asmcomp/spacetime_profiling.ml(318):12924-12971
+                           (&& (field 52 (global Config!))
+                             (not
+                               (field_computed self-1
+                                 disable_instrumentation))))))
+                     about_to_emit_call
+                     (function self-1 env desc arg dbg
+                       (funct-body asmcomp/spacetime_profiling.ml(320)<ghost>:13002-14122
+                         (before asmcomp/spacetime_profiling.ml(321):13025-14122
+                           (if
+                             (not
+                               (after asmcomp/spacetime_profiling.ml(321):13032-13056
+                                 (sendself self-1 can_instrument 0a)))
+                             (before asmcomp/spacetime_profiling.ml(321):13062-13066
+                               0a)
+                             (before asmcomp/spacetime_profiling.ml(323):13082-14122
+                               (catch
+                                 (switch desc
+                                  case tag 0:
+                                   (let (*match* =a (field 0 desc))
+                                     (switch *match*
+                                      case tag 3:
+                                       (let
+                                         (label_after =a (field 0 *match*))
+                                         (before asmcomp/spacetime_profiling.ml(329):13355-13486
+                                           (seq
+                                             (if
+                                               (== (array.length[addr] arg)
+                                                 1)
+                                               0a
+                                               (raise
+                                                 (after asmcomp/spacetime_profiling.ml(329):13355-13384
+                                                   (makeblock 0
+                                                     (global Assert_failure!)
+                                                     [0:
+                                                      "asmcomp/spacetime_profiling.ml"
+                                                      329 8]))))
+                                             (before asmcomp/spacetime_profiling.ml(330):13394-13486
+                                               (after asmcomp/spacetime_profiling.ml(330):13394-13486
+                                                 (sendself self-1
+                                                   instrument_indirect_call
+                                                   env
+                                                   (after asmcomp/spacetime_profiling.ml(330):13437-13444
+                                                     (array.get[addr] arg 0))
+                                                   0a label_after dbg))))))
+                                      case tag 4:
+                                       (let
+                                         (label_after =a (field 1 *match*)
+                                          func =a (field 0 *match*))
+                                         (before asmcomp/spacetime_profiling.ml(326):13189-13298
+                                           (seq
+                                             (if
+                                               (== (array.length[addr] arg)
+                                                 0)
+                                               0a
+                                               (raise
+                                                 (after asmcomp/spacetime_profiling.ml(326):13189-13218
+                                                   (makeblock 0
+                                                     (global Assert_failure!)
+                                                     [0:
+                                                      "asmcomp/spacetime_profiling.ml"
+                                                      326 8]))))
+                                             (before asmcomp/spacetime_profiling.ml(327):13228-13298
+                                               (after asmcomp/spacetime_profiling.ml(327):13228-13298
+                                                 (sendself self-1
+                                                   instrument_direct_call env
+                                                   func 0a label_after dbg))))))
+                                      case tag 5:
+                                       (let
+                                         (label_after =a (field 0 *match*))
+                                         (before asmcomp/spacetime_profiling.ml(336):13722-13852
+                                           (seq
+                                             (if
+                                               (== (array.length[addr] arg)
+                                                 1)
+                                               0a
+                                               (raise
+                                                 (after asmcomp/spacetime_profiling.ml(336):13722-13751
+                                                   (makeblock 0
+                                                     (global Assert_failure!)
+                                                     [0:
+                                                      "asmcomp/spacetime_profiling.ml"
+                                                      336 8]))))
+                                             (before asmcomp/spacetime_profiling.ml(337):13761-13852
+                                               (after asmcomp/spacetime_profiling.ml(337):13761-13852
+                                                 (sendself self-1
+                                                   instrument_indirect_call
+                                                   env
+                                                   (after asmcomp/spacetime_profiling.ml(337):13804-13811
+                                                     (array.get[addr] arg 0))
+                                                   1a label_after dbg))))))
+                                      case tag 6:
+                                       (let
+                                         (label_after =a (field 1 *match*)
+                                          func =a (field 0 *match*))
+                                         (before asmcomp/spacetime_profiling.ml(333):13553-13661
+                                           (seq
+                                             (if
+                                               (== (array.length[addr] arg)
+                                                 0)
+                                               0a
+                                               (raise
+                                                 (after asmcomp/spacetime_profiling.ml(333):13553-13582
+                                                   (makeblock 0
+                                                     (global Assert_failure!)
+                                                     [0:
+                                                      "asmcomp/spacetime_profiling.ml"
+                                                      333 8]))))
+                                             (before asmcomp/spacetime_profiling.ml(334):13592-13661
+                                               (after asmcomp/spacetime_profiling.ml(334):13592-13661
+                                                 (sendself self-1
+                                                   instrument_direct_call env
+                                                   func 1a label_after dbg))))))
+                                      case tag 7:
+                                       (let (*match* =a (field 1 *match*))
+                                         (if *match*
+                                           (let
+                                             (label_after =a
+                                                (field 2 *match*)
+                                              func =a (field 0 *match*))
+                                             (before asmcomp/spacetime_profiling.ml(341):13995-14104
+                                               (seq
+                                                 (if
+                                                   (==
+                                                     (array.length[addr] arg)
+                                                     0)
+                                                   0a
+                                                   (raise
+                                                     (after asmcomp/spacetime_profiling.ml(341):13995-14024
+                                                       (makeblock 0
+                                                         (global Assert_failure!)
+                                                         [0:
+                                                          "asmcomp/spacetime_profiling.ml"
+                                                          341 8]))))
+                                                 (before asmcomp/spacetime_profiling.ml(342):14034-14104
+                                                   (after asmcomp/spacetime_profiling.ml(342):14034-14104
+                                                     (sendself self-1
+                                                       instrument_direct_call
+                                                       env func 0a
+                                                       label_after dbg))))))
+                                           (exit 8)))
+                                      default: (exit 8)))
+                                  default: (exit 8))
+                                with (8)
+                                 (before asmcomp/spacetime_profiling.ml(343):14118-14122
+                                   0a)))))))
+                     instrument_blockheader
+                     (function self-1 env value's_header[nativeint] dbg
+                       (funct-body asmcomp/spacetime_profiling.ml(345)<ghost>:14164-14368
+                         (before asmcomp/spacetime_profiling.ml(346):14196-14368
+                           (let
+                             (instrumentation =
+                                (after asmcomp/spacetime_profiling.ml(347):14224-14322
+                                  (apply code_for_blockheader value's_header
+                                    (after asmcomp/spacetime_profiling.ml(348):14259-14293
+                                      (let
+                                        (lzarg =
+                                           (field 0 spacetime_node_ident)
+                                         tag =a (caml_obj_tag lzarg))
+                                        (if (== tag 250) (field 0 lzarg)
+                                          (if (== tag 246)
+                                            (apply
+                                              (field 1
+                                                (global CamlinternalLazy!))
+                                              lzarg)
+                                            lzarg))))
+                                    dbg)))
+                             (before asmcomp/spacetime_profiling.ml(351):14334-14368
+                               (after asmcomp/spacetime_profiling.ml(351):14334-14368
+                                 (sendself self-1 emit_expr env
+                                   instrumentation)))))))
+                     emit_prologue
+                     (function self-1 f node_hole env
+                       (funct-body asmcomp/spacetime_profiling.ml(353)<ghost>:14401-15323
+                         (before asmcomp/spacetime_profiling.ml(357):14621-15323
+                           (if
+                             (after asmcomp/spacetime_profiling.ml(357):14624-14653
+                               (apply something_was_instrumented 0a))
+                             (before asmcomp/spacetime_profiling.ml(357):14659-15323
+                               (let
+                                 (prologue_cmm =
+                                    (after asmcomp/spacetime_profiling.ml(359):14698-14798
+                                      (apply code_for_function_prologue
+                                        (field 0 f) (field 4 f) node_hole)))
+                                 (before asmcomp/spacetime_profiling.ml(362):14814-15315
+                                   (seq
+                                     (setfield_imm_computed self-1
+                                       disable_instrumentation 1a)
+                                     (before asmcomp/spacetime_profiling.ml(363):14853-15315
+                                       (let
+                                         (node_temp_reg =
+                                            (let
+                                              (*match* =
+                                                 (after asmcomp/spacetime_profiling.ml(364):14887-14918
+                                                   (sendself self-1 emit_expr
+                                                     env prologue_cmm)))
+                                              (if *match*
+                                                (let
+                                                  (node_temp_reg =a
+                                                     (field 0 *match*))
+                                                  (before asmcomp/spacetime_profiling.ml(368):15097-15110
+                                                    node_temp_reg))
+                                                (before asmcomp/spacetime_profiling.ml(366):14952-15064
+                                                  (after asmcomp/spacetime_profiling.ml(366):14952-15064
+                                                    (apply
+                                                      (field 0
+                                                        (global Misc!))
+                                                      "Spacetime prologue instruction selection did not yield a destination register"))))))
+                                         (before asmcomp/spacetime_profiling.ml(370):15126-15315
+                                           (seq
+                                             (setfield_imm_computed self-1
+                                               disable_instrumentation 0a)
+                                             (before asmcomp/spacetime_profiling.ml(371):15166-15315
+                                               (let
+                                                 (node =
+                                                    (after asmcomp/spacetime_profiling.ml(371):15177-15209
+                                                      (let
+                                                        (lzarg =
+                                                           (field 0
+                                                             spacetime_node_ident)
+                                                         tag =a
+                                                           (caml_obj_tag
+                                                             lzarg))
+                                                        (if (== tag 250)
+                                                          (field 0 lzarg)
+                                                          (if (== tag 246)
+                                                            (apply
+                                                              (field 1
+                                                                (global CamlinternalLazy!))
+                                                              lzarg)
+                                                            lzarg)))))
+                                                 (before asmcomp/spacetime_profiling.ml(372):15219-15315
+                                                   (let
+                                                     (node_reg =
+                                                        (after asmcomp/spacetime_profiling.ml(372):15234-15261
+                                                          (apply
+                                                            (field 1
+                                                              (global Selectgen!))
+                                                            node env)))
+                                                     (before asmcomp/spacetime_profiling.ml(373):15271-15315
+                                                       (after asmcomp/spacetime_profiling.ml(373):15271-15315
+                                                         (sendself self-1
+                                                           insert_moves env
+                                                           node_temp_reg
+                                                           node_reg)))))))))))))))
+                             0a))))
+                     emit_blockheader
+                     (function self-1 env n[nativeint] dbg
+                       (funct-body asmcomp/spacetime_profiling.ml(376)<ghost>:15352-15640
+                         (before asmcomp/spacetime_profiling.ml(377):15368-15640
+                           (if
+                             (after asmcomp/spacetime_profiling.ml(377):15371-15393
+                               (sendself self-1 can_instrument 0a))
+                             (before asmcomp/spacetime_profiling.ml(377):15399-15582
+                               (seq
+                                 (setfield_imm_computed self-1
+                                   disable_instrumentation 1a)
+                                 (before asmcomp/spacetime_profiling.ml(379):15450-15574
+                                   (let
+                                     (result =
+                                        (after asmcomp/spacetime_profiling.ml(379):15463-15518
+                                          (sendself self-1
+                                            instrument_blockheader env n dbg)))
+                                     (before asmcomp/spacetime_profiling.ml(380):15528-15574
+                                       (seq
+                                         (setfield_imm_computed self-1
+                                           disable_instrumentation 0a)
+                                         (before asmcomp/spacetime_profiling.ml(381):15568-15574
+                                           result)))))))
+                             (before asmcomp/spacetime_profiling.ml(382):15588-15640
+                               (after asmcomp/spacetime_profiling.ml(382):15588-15640
+                                 (apply
+                                   (after asmcomp/spacetime_profiling.ml(383):15600-15622
+                                     (apply emit_blockheader self-1))
+                                   env n dbg)))))))
+                     select_allocation
+                     (function self-1 bytes[int]
+                       (funct-body asmcomp/spacetime_profiling.ml(386)<ghost>:15670-16290
+                         (before asmcomp/spacetime_profiling.ml(387):15682-16290
+                           (if
+                             (after asmcomp/spacetime_profiling.ml(387):15685-15707
+                               (sendself self-1 can_instrument 0a))
+                             (before asmcomp/spacetime_profiling.ml(387):15713-16235
+                               (let
+                                 (label =[int]
+                                    (after asmcomp/spacetime_profiling.ml(391):15936-15952
+                                      (apply (field 11 (global Cmm!)) 0a)))
+                                 (before asmcomp/spacetime_profiling.ml(392):15962-16227
+                                   (let
+                                     (index =[int]
+                                        (after asmcomp/spacetime_profiling.ml(393):15982-16100
+                                          (apply next_index_within_node
+                                            [0: "caml_call_gc"] label)))
+                                     (before asmcomp/spacetime_profiling.ml(397):16116-16227
+                                       (makeblock 11 (int,*,int) bytes
+                                         (makeblock 0 (int) label) index))))))
+                             (before asmcomp/spacetime_profiling.ml(402):16241-16290
+                               (after asmcomp/spacetime_profiling.ml(402):16241-16290
+                                 (apply
+                                   (after asmcomp/spacetime_profiling.ml(403):16253-16276
+                                     (apply select_allocation self-1))
+                                   bytes)))))))
+                     select_allocation_args
+                     (function self-1 env
+                       (funct-body asmcomp/spacetime_profiling.ml(406)<ghost>:16325-16644
+                         (before asmcomp/spacetime_profiling.ml(407):16335-16644
+                           (if
+                             (after asmcomp/spacetime_profiling.ml(407):16338-16360
+                               (sendself self-1 can_instrument 0a))
+                             (before asmcomp/spacetime_profiling.ml(407):16366-16586
+                               (let
+                                 (regs =
+                                    (after asmcomp/spacetime_profiling.ml(408):16389-16446
+                                      (apply (field 1 (global Selectgen!))
+                                        (after asmcomp/spacetime_profiling.ml(408):16408-16442
+                                          (let
+                                            (lzarg =
+                                               (field 0 spacetime_node_ident)
+                                             tag =a (caml_obj_tag lzarg))
+                                            (if (== tag 250) (field 0 lzarg)
+                                              (if (== tag 246)
+                                                (apply
+                                                  (field 1
+                                                    (global CamlinternalLazy!))
+                                                  lzarg)
+                                                lzarg))))
+                                        env)))
+                                 (before asmcomp/spacetime_profiling.ml(409):16456-16578
+                                   (let (len =a (array.length[addr] regs))
+                                     (if (!= len 1)
+                                       (before asmcomp/spacetime_profiling.ml(411):16516-16578
+                                         (after asmcomp/spacetime_profiling.ml(411):16516-16578
+                                           (apply (field 1 (global Stdlib!))
+                                             "Expected one register only for spacetime_node_ident")))
+                                       (let
+                                         (reg =o
+                                            (array.unsafe_get[addr] regs 0))
+                                         (before asmcomp/spacetime_profiling.ml(410):16493-16502
+                                           (makearray[addr] reg))))))))
+                             (before asmcomp/spacetime_profiling.ml(412):16592-16644
+                               (after asmcomp/spacetime_profiling.ml(412):16592-16644
+                                 (apply
+                                   (after asmcomp/spacetime_profiling.ml(413):16604-16632
+                                     (apply select_allocation_args self-1))
+                                   env)))))))
+                     select_checkbound
+                     (function self-1 param
+                       (funct-body asmcomp/spacetime_profiling.ml(416)<ghost>:16674-17154
+                         (before asmcomp/spacetime_profiling.ml(418):16734-17154
+                           (if
+                             (after asmcomp/spacetime_profiling.ml(418):16737-16759
+                               (sendself self-1 can_instrument 0a))
+                             (before asmcomp/spacetime_profiling.ml(418):16765-17102
+                               (let
+                                 (label =[int]
+                                    (after asmcomp/spacetime_profiling.ml(419):16789-16805
+                                      (apply (field 11 (global Cmm!)) 0a)))
+                                 (before asmcomp/spacetime_profiling.ml(420):16815-17094
+                                   (let
+                                     (index =[int]
+                                        (after asmcomp/spacetime_profiling.ml(421):16835-16979
+                                          (apply next_index_within_node
+                                            [0: "caml_ml_array_bound_error"]
+                                            label)))
+                                     (before asmcomp/spacetime_profiling.ml(426):16995-17094
+                                       (makeblock 1 (*,int)
+                                         (makeblock 0 (int) label) index))))))
+                             (before asmcomp/spacetime_profiling.ml(430):17108-17154
+                               (after asmcomp/spacetime_profiling.ml(430):17108-17154
+                                 (apply
+                                   (after asmcomp/spacetime_profiling.ml(431):17120-17143
+                                     (apply select_checkbound self-1))
+                                   0a)))))))
+                     select_checkbound_extra_args
+                     (function self-1 param
+                       (funct-body asmcomp/spacetime_profiling.ml(434)<ghost>:17195-17421
+                         (before asmcomp/spacetime_profiling.ml(435):17204-17421
+                           (if
+                             (after asmcomp/spacetime_profiling.ml(435):17207-17229
+                               (sendself self-1 can_instrument 0a))
+                             (before asmcomp/spacetime_profiling.ml(435):17235-17358
+                               (makeblock 0
+                                 (makeblock 7
+                                   (after asmcomp/spacetime_profiling.ml(437):17315-17349
+                                     (let
+                                       (lzarg =
+                                          (field 0 spacetime_node_ident)
+                                        tag =a (caml_obj_tag lzarg))
+                                       (if (== tag 250) (field 0 lzarg)
+                                         (if (== tag 246)
+                                           (apply
+                                             (field 1
+                                               (global CamlinternalLazy!))
+                                             lzarg)
+                                           lzarg)))))
+                                 0a))
+                             (before asmcomp/spacetime_profiling.ml(438):17364-17421
+                               (after asmcomp/spacetime_profiling.ml(438):17364-17421
+                                 (apply
+                                   (after asmcomp/spacetime_profiling.ml(439):17376-17410
+                                     (apply select_checkbound_extra_args
+                                       self-1))
+                                   0a)))))))
+                     initial_env
+                     (function self-1 param
+                       (funct-body asmcomp/spacetime_profiling.ml(442)<ghost>:17445-17646
+                         (before asmcomp/spacetime_profiling.ml(443):17454-17646
+                           (let
+                             (env =
+                                (after asmcomp/spacetime_profiling.ml(443):17464-17484
+                                  (apply
+                                    (after asmcomp/spacetime_profiling.ml(443):17464-17481
+                                      (apply initial_env self-1))
+                                    0a)))
+                             (before asmcomp/spacetime_profiling.ml(444):17492-17646
+                               (if (field 52 (global Config!))
+                                 (before asmcomp/spacetime_profiling.ml(445):17523-17627
+                                   (after asmcomp/spacetime_profiling.ml(445):17523-17627
+                                     (apply (field 0 (global Selectgen!))
+                                       (after asmcomp/spacetime_profiling.ml(445):17541-17587
+                                         (apply
+                                           (field 1
+                                             (field 33 (global Backend_var!)))
+                                           0a
+                                           (after asmcomp/spacetime_profiling.ml(445):17552-17586
+                                             (let
+                                               (lzarg =
+                                                  (field 0
+                                                    spacetime_node_ident)
+                                                tag =a (caml_obj_tag lzarg))
+                                               (if (== tag 250)
+                                                 (field 0 lzarg)
+                                                 (if (== tag 246)
+                                                   (apply
+                                                     (field 1
+                                                       (global CamlinternalLazy!))
+                                                     lzarg)
+                                                   lzarg))))))
+                                       (after asmcomp/spacetime_profiling.ml(446):17596-17623
+                                         (sendself self-1 regs_for
+                                           (field 3 (global Cmm!))))
+                                       env)))
+                                 (before asmcomp/spacetime_profiling.ml(448):17643-17646
+                                   env)))))))
+                     emit_fundecl
+                     (function self-1 f
+                       (funct-body asmcomp/spacetime_profiling.ml(450)<ghost>:17671-17905
+                         (before asmcomp/spacetime_profiling.ml(451):17679-17905
+                           (seq
+                             (if (field 52 (global Config!))
+                               (before asmcomp/spacetime_profiling.ml(451):17704-17879
+                                 (seq
+                                   (setfield_imm_computed self-1
+                                     disable_instrumentation 0a)
+                                   (before asmcomp/spacetime_profiling.ml(453):17756-17871
+                                     (let
+                                       (node =
+                                          (after asmcomp/spacetime_profiling.ml(453):17767-17798
+                                            (apply
+                                              (field 6 (global Backend_var!))
+                                              "spacetime_node")))
+                                       (before asmcomp/spacetime_profiling.ml(454):17808-17871
+                                         (after asmcomp/spacetime_profiling.ml(454):17808-17871
+                                           (apply reset node (field 0 f))))))))
+                               0a)
+                             (before asmcomp/spacetime_profiling.ml(456):17885-17905
+                               (after asmcomp/spacetime_profiling.ml(456):17885-17905
+                                 (apply
+                                   (after asmcomp/spacetime_profiling.ml(456):17885-17903
+                                     (apply emit_fundecl self-1))
+                                   f)))))))
+                     insert_prologue
+                     (function self-1 f loc_arg rarg spacetime_node_hole env
+                       (funct-body asmcomp/spacetime_profiling.ml(458)<ghost>:17933-18812
+                         (before asmcomp/spacetime_profiling.ml(459):17982-18812
+                           (let
+                             (fun_spacetime_shape =
+                                (after asmcomp/spacetime_profiling.ml(460):18014-18078
+                                  (apply
+                                    (after asmcomp/spacetime_profiling.ml(460):18014-18035
+                                      (apply insert_prologue self-1))
+                                    f loc_arg rarg spacetime_node_hole env)))
+                             (before asmcomp/spacetime_profiling.ml(464):18210-18812
+                               (if (not (field 52 (global Config!)))
+                                 (before asmcomp/spacetime_profiling.ml(464):18239-18258
+                                   fun_spacetime_shape)
+                                 (before asmcomp/spacetime_profiling.ml(465):18268-18812
+                                   (if spacetime_node_hole
+                                     (let
+                                       (*match* =a
+                                          (field 0 spacetime_node_hole)
+                                        reg =a (field 1 *match*)
+                                        node_hole =a (field 0 *match*))
+                                       (before asmcomp/spacetime_profiling.ml(469):18416-18430
+                                         (let
+                                           (node_hole_reg =a reg
+                                            node_hole =a node_hole
+                                            node_hole_reg = node_hole_reg
+                                            node_hole = node_hole)
+                                           (before asmcomp/spacetime_profiling.ml(471):18446-18804
+                                             (seq
+                                               (after asmcomp/spacetime_profiling.ml(471):18446-18516
+                                                 (sendself self-1
+                                                   insert_moves env
+                                                   (makearray[addr]
+                                                     (field 14
+                                                       (global Proc!)))
+                                                   node_hole_reg))
+                                               (before asmcomp/spacetime_profiling.ml(472):18524-18804
+                                                 (seq
+                                                   (after asmcomp/spacetime_profiling.ml(472):18524-18560
+                                                     (sendself self-1
+                                                       emit_prologue f
+                                                       node_hole env))
+                                                   (before asmcomp/spacetime_profiling.ml(473):18568-18804
+                                                     (let
+                                                       (reverse_shape =
+                                                          (field 0
+                                                            reverse_shape))
+                                                       (if reverse_shape
+                                                         (before asmcomp/spacetime_profiling.ml(477):18786-18804
+                                                           (makeblock 0
+                                                             reverse_shape))
+                                                         (before asmcomp/spacetime_profiling.ml(474):18608-18612
+                                                           0a)))))))))))
+                                     (before asmcomp/spacetime_profiling.ml(468):18368-18380
+                                       (raise
+                                         (after asmcomp/spacetime_profiling.ml(468):18368-18380
+                                           (makeblock 0
+                                             (global Assert_failure!)
+                                             [0:
+                                              "asmcomp/spacetime_profiling.ml"
+                                              468 18]))))))))))))))
+                 (function env self
+                   (let
+                     (self =
+                        (apply (field 23 (global CamlinternalOO!)) self
+                          class))
+                     (seq
+                       (seq (apply obj_init self)
+                         (setfield_imm_computed self disable_instrumentation
+                           0a))
+                       (apply (field 25 (global CamlinternalOO!)) self self
+                         class)))))))
+           0a 0a))
+      (pseudo _none_(0)<ghost>:-1--1 (makeblock 0 instruction_selection)))))
