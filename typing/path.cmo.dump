@@ -72,31 +72,32 @@
                               case tag 1: (exit 4)
                               case tag 2: (exit 4)))
                           case tag 1:
-                           (let
-                             (s1 =a (field 1 *match*)
-                              p1 =a (field 0 *match*))
-                             (switch* *match*
-                              case tag 0: (exit 4)
-                              case tag 1:
-                               (let
-                                 (s2 =a (field 1 *match*)
-                                  p2 =a (field 0 *match*))
-                                 (before typing/path.ml(35):1597-1670
+                           (let (p1 =a (field 0 *match*))
+                             (catch
+                               (let (s1 =a (field 1 *match*))
+                                 (switch* *match*
+                                  case tag 0: (exit 6)
+                                  case tag 1:
                                    (let
-                                     (h =[int]
-                                        (after typing/path.ml(35):1605-1618
-                                          (apply compare p1 p2)))
-                                     (before typing/path.ml(36):1628-1670
-                                       (if (!= h 0)
-                                         (before typing/path.ml(36):1643-1644
-                                           h)
-                                         (before typing/path.ml(36):1650-1670
-                                           (after typing/path.ml(36):1650-1670
-                                             (apply
-                                               (field 32
-                                                 (global Stdlib__string!))
-                                               s1 s2))))))))
-                              case tag 2: (exit 4)))
+                                     (s2 =a (field 1 *match*)
+                                      p2 =a (field 0 *match*))
+                                     (before typing/path.ml(35):1597-1670
+                                       (let
+                                         (h =[int]
+                                            (after typing/path.ml(35):1605-1618
+                                              (apply compare p1 p2)))
+                                         (before typing/path.ml(36):1628-1670
+                                           (if (!= h 0)
+                                             (before typing/path.ml(36):1643-1644
+                                               h)
+                                             (before typing/path.ml(36):1650-1670
+                                               (after typing/path.ml(36):1650-1670
+                                                 (apply
+                                                   (field 32
+                                                     (global Stdlib__string!))
+                                                   s1 s2))))))))
+                                  case tag 2: (exit 6)))
+                              with (6) (exit 4)))
                           case tag 2:
                            (let
                              (arg1 =a (field 1 *match*)

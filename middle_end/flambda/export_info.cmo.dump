@@ -116,28 +116,38 @@
                        1a)
                      (exit 8))
                   case tag 0:
-                   (let (f1 =a (field 1 *match*) t1 =a (field 0 *match*))
-                     (switch *match*
-                      case tag 0:
-                       (let (f2 =a (field 1 *match*) t2 =a (field 0 *match*))
-                         (before middle_end/flambda/export_info.ml(108):3631-3680
-                           (&&
-                             (after middle_end/flambda/export_info.ml(108):3631-3646
-                               (apply (field 1 (global Tag!)) t1 t2))
-                             (after middle_end/flambda/export_info.ml(108):3650-3680
-                               (apply equal_array equal_approx f1 f2)))))
-                      default: (exit 8)))
+                   (let (t1 =a (field 0 *match*))
+                     (catch
+                       (switch *match*
+                        case tag 0:
+                         (let
+                           (f2 =a (field 1 *match*)
+                            t2 =a (field 0 *match*)
+                            f1 =a (field 1 *match*))
+                           (before middle_end/flambda/export_info.ml(108):3631-3680
+                             (&&
+                               (after middle_end/flambda/export_info.ml(108):3631-3646
+                                 (apply (field 1 (global Tag!)) t1 t2))
+                               (after middle_end/flambda/export_info.ml(108):3650-3680
+                                 (apply equal_array equal_approx f1 f2)))))
+                        default: (exit 9))
+                      with (9) (exit 8)))
                   case tag 1:
-                   (let (s1 =a (field 1 *match*) t1 =a (field 0 *match*))
-                     (switch *match*
-                      case tag 1:
-                       (let (s2 =a (field 1 *match*) t2 =a (field 0 *match*))
-                         (before middle_end/flambda/export_info.ml(110):3751-3781
-                           (&&
-                             (after middle_end/flambda/export_info.ml(110):3751-3766
-                               (apply (field 1 (global Tag!)) t1 t2))
-                             (== s1 s2))))
-                      default: (exit 8)))
+                   (let (t1 =a (field 0 *match*))
+                     (catch
+                       (switch *match*
+                        case tag 1:
+                         (let
+                           (s2 =a (field 1 *match*)
+                            t2 =a (field 0 *match*)
+                            s1 =a (field 1 *match*))
+                           (before middle_end/flambda/export_info.ml(110):3751-3781
+                             (&&
+                               (after middle_end/flambda/export_info.ml(110):3751-3766
+                                 (apply (field 1 (global Tag!)) t1 t2))
+                               (== s1 s2))))
+                        default: (exit 10))
+                      with (10) (exit 8)))
                   case tag 2:
                    (let (i1 =a (field 0 *match*))
                      (switch *match*
@@ -180,15 +190,21 @@
                              (caml_equal s1 s2))))
                       default: (exit 8)))
                   case tag 7:
-                   (let (v1 =a (field 1 *match*) t1 =a (field 0 *match*))
-                     (switch *match*
-                      case tag 7:
-                       (let (v2 =a (field 1 *match*) t2 =a (field 0 *match*))
-                         (before middle_end/flambda/export_info.ml(123):4106-4135
-                           (after middle_end/flambda/export_info.ml(123):4106-4135
-                             (apply (field 44 (global Simple_value_approx!))
-                               t1 v1 t2 v2))))
-                      default: (exit 8)))
+                   (let (t1 =a (field 0 *match*))
+                     (catch
+                       (switch *match*
+                        case tag 7:
+                         (let
+                           (v2 =a (field 1 *match*)
+                            t2 =a (field 0 *match*)
+                            v1 =a (field 1 *match*))
+                           (before middle_end/flambda/export_info.ml(123):4106-4135
+                             (after middle_end/flambda/export_info.ml(123):4106-4135
+                               (apply
+                                 (field 44 (global Simple_value_approx!)) t1
+                                 v1 t2 v2))))
+                        default: (exit 16))
+                      with (16) (exit 8)))
                   case tag 8:
                    (let (s1 =a (field 0 *match*))
                      (switch *match*

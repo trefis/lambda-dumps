@@ -387,64 +387,73 @@
      reg =
        (function r
          (funct-body asmcomp/amd64/emit.mlp(174):5005-5329
-           (let (*match* =o (field 2 r) *match* =o (field 3 r))
-             (switch* *match*
-              case int 0:
-               (before asmcomp/amd64/emit.mlp(183):5317-5329
-                 (raise
-                   (after asmcomp/amd64/emit.mlp(183):5317-5329
-                     (makeblock 0 (global Assert_failure!)
-                       [0: "asmcomp/amd64/emit.mlp" 183 6]))))
-              case tag 0:
-               (let (r =a (field 0 *match*))
-                 (before asmcomp/amd64/emit.mlp(175):5041-5056
-                   (after asmcomp/amd64/emit.mlp(175):5041-5056
-                     (apply register_name r))))
-              case tag 1:
+           (let (*match* =o (field 2 r))
+             (catch
                (if (>= *match* 3)
-                 (let (*match* =o (field 3 r) s =a (field 0 *match*))
-                   (before asmcomp/amd64/emit.mlp(177):5106-5177
-                     (let
-                       (ofs =[int]
-                          (after asmcomp/amd64/emit.mlp(177):5116-5148
-                            (apply slot_offset s
-                              (after asmcomp/amd64/emit.mlp(177):5130-5148
-                                (apply (field 2 (global Proc!)) r)))))
-                       (before asmcomp/amd64/emit.mlp(178):5158-5177
-                         (after asmcomp/amd64/emit.mlp(178):5158-5177
-                           (apply (field 28 (global X86_dsl!)) 2a 0a 0a 0a
-                             ofs 4a))))))
-                 (let (*match* =o (field 3 r) s =a (field 0 *match*) r =a r)
-                   (before asmcomp/amd64/emit.mlp(180):5214-5285
-                     (let
-                       (ofs =[int]
-                          (after asmcomp/amd64/emit.mlp(180):5224-5256
-                            (apply slot_offset s
-                              (after asmcomp/amd64/emit.mlp(180):5238-5256
-                                (apply (field 2 (global Proc!)) r)))))
-                       (before asmcomp/amd64/emit.mlp(181):5266-5285
-                         (after asmcomp/amd64/emit.mlp(181):5266-5285
-                           (apply (field 28 (global X86_dsl!)) 6a 0a 0a 0a
-                             ofs 4a)))))))))))
+                 (let (*match* =o (field 3 r))
+                   (switch* *match*
+                    case int 0: (exit 5)
+                    case tag 0: (exit 5)
+                    case tag 1:
+                     (let (s =a (field 0 *match*))
+                       (before asmcomp/amd64/emit.mlp(177):5106-5177
+                         (let
+                           (ofs =[int]
+                              (after asmcomp/amd64/emit.mlp(177):5116-5148
+                                (apply slot_offset s
+                                  (after asmcomp/amd64/emit.mlp(177):5130-5148
+                                    (apply (field 2 (global Proc!)) r)))))
+                           (before asmcomp/amd64/emit.mlp(178):5158-5177
+                             (after asmcomp/amd64/emit.mlp(178):5158-5177
+                               (apply (field 28 (global X86_dsl!)) 2a 0a 0a
+                                 0a ofs 4a))))))))
+                 (exit 5))
+              with (5)
+               (let (*match* =o (field 3 r))
+                 (switch* *match*
+                  case int 0:
+                   (before asmcomp/amd64/emit.mlp(183):5317-5329
+                     (raise
+                       (after asmcomp/amd64/emit.mlp(183):5317-5329
+                         (makeblock 0 (global Assert_failure!)
+                           [0: "asmcomp/amd64/emit.mlp" 183 6]))))
+                  case tag 0:
+                   (let (r =a (field 0 *match*))
+                     (before asmcomp/amd64/emit.mlp(175):5041-5056
+                       (after asmcomp/amd64/emit.mlp(175):5041-5056
+                         (apply register_name r))))
+                  case tag 1:
+                   (let (s =a (field 0 *match*) r =a r)
+                     (before asmcomp/amd64/emit.mlp(180):5214-5285
+                       (let
+                         (ofs =[int]
+                            (after asmcomp/amd64/emit.mlp(180):5224-5256
+                              (apply slot_offset s
+                                (after asmcomp/amd64/emit.mlp(180):5238-5256
+                                  (apply (field 2 (global Proc!)) r)))))
+                         (before asmcomp/amd64/emit.mlp(181):5266-5285
+                           (after asmcomp/amd64/emit.mlp(181):5266-5285
+                             (apply (field 28 (global X86_dsl!)) 6a 0a 0a 0a
+                               ofs 4a))))))))))))
      reg64 =
        (function param
          (funct-body asmcomp/amd64/emit.mlp(185):5343-5417
-           (let (*match* =o (field 3 param))
-             (catch
+           (catch
+             (let (*match* =o (field 3 param))
                (switch* *match*
-                case int 0: (exit 7)
+                case int 0: (exit 6)
                 case tag 0:
                  (let (r =a (field 0 *match*))
                    (before asmcomp/amd64/emit.mlp(186):5379-5395
                      (after asmcomp/amd64/emit.mlp(186):5379-5395
                        (array.get[int] int_reg_name r))))
-                case tag 1: (exit 7))
-              with (7)
-               (before asmcomp/amd64/emit.mlp(187):5405-5417
-                 (raise
-                   (after asmcomp/amd64/emit.mlp(187):5405-5417
-                     (makeblock 0 (global Assert_failure!)
-                       [0: "asmcomp/amd64/emit.mlp" 187 9]))))))))
+                case tag 1: (exit 6)))
+            with (6)
+             (before asmcomp/amd64/emit.mlp(187):5405-5417
+               (raise
+                 (after asmcomp/amd64/emit.mlp(187):5405-5417
+                   (makeblock 0 (global Assert_failure!)
+                     [0: "asmcomp/amd64/emit.mlp" 187 9])))))))
      res =
        (function i n[int]
          (funct-body asmcomp/amd64/emit.mlp(190)<ghost>:5428-5447
@@ -489,7 +498,7 @@
              (let (*match* = (field 3 r))
                (catch
                  (switch* *match*
-                  case int 0: (exit 8)
+                  case int 0: (exit 7)
                   case tag 0:
                    (let (r =a (field 0 *match*))
                      (before asmcomp/amd64/emit.mlp(202):5807-5813
@@ -497,7 +506,7 @@
                          (before asmcomp/amd64/emit.mlp(202):5817-5824
                            (after asmcomp/amd64/emit.mlp(202):5817-5824
                              (array.get[addr] tbl r)))
-                         (exit 8))))
+                         (exit 7))))
                   case tag 1:
                    (let (s =a (field 0 *match*))
                      (before asmcomp/amd64/emit.mlp(203):5840-5888
@@ -508,7 +517,7 @@
                                (after asmcomp/amd64/emit.mlp(203):5865-5883
                                  (apply (field 2 (global Proc!)) r))))
                            4a)))))
-                with (8)
+                with (7)
                  (before asmcomp/amd64/emit.mlp(204):5898-5910
                    (raise
                      (after asmcomp/amd64/emit.mlp(204):5898-5910
@@ -649,13 +658,13 @@
                          (apply (field 13 (field 9 (global Reg!)))
                            (function reg
                              (funct-body asmcomp/amd64/emit.mlp(242):6998-7329
-                               (let (*match* =o (field 2 reg))
-                                 (catch
+                               (catch
+                                 (let (*match* =o (field 2 reg))
                                    (if (!= *match* 1)
-                                     (if *match* (exit 10)
+                                     (if *match* (exit 9)
                                        (let (*match* =o (field 3 reg))
                                          (switch* *match*
-                                          case int 0: (exit 10)
+                                          case int 0: (exit 9)
                                           case tag 0:
                                            (let (r =a (field 0 *match*))
                                              (before asmcomp/amd64/emit.mlp(244):7054-7100
@@ -687,10 +696,10 @@
                                                  (after asmcomp/amd64/emit.mlp(248):7296-7306
                                                    (apply
                                                      (field 8 (global Reg!))
-                                                     r)))))))))
-                                  with (10)
-                                   (before asmcomp/amd64/emit.mlp(249):7321-7323
-                                     0a)))))
+                                                     r))))))))))
+                                with (9)
+                                 (before asmcomp/amd64/emit.mlp(249):7321-7323
+                                   0a))))
                            live))
                        (before asmcomp/amd64/emit.mlp(252):7342-7459
                          (seq
@@ -907,9 +916,9 @@
                          (after asmcomp/amd64/emit.mlp(354):10814-10837
                            (apply (field 52 (field 31 (global X86_dsl!)))
                              arg1 (makeblock 0 arg2)))))))
-                case int 3: (exit 12)
-                case int 4: (exit 12)
-                case int 5: (exit 12)
+                case int 3: (exit 11)
+                case int 4: (exit 11)
+                case int 5: (exit 11)
                 case int 6:
                  (before asmcomp/amd64/emit.mlp(355):10851-10857
                    (field 2 (field 31 (global X86_dsl!))))
@@ -928,8 +937,8 @@
                 case int 11:
                  (before asmcomp/amd64/emit.mlp(360):10941-10946
                    (field 79 (field 31 (global X86_dsl!)))))
-               (exit 12))
-            with (12)
+               (exit 11))
+            with (11)
              (before asmcomp/amd64/emit.mlp(361):10956-10968
                (raise
                  (after asmcomp/amd64/emit.mlp(361):10956-10968
@@ -941,11 +950,11 @@
            (catch
              (if (isint param)
                (switch* param
-                case int 0: (exit 13)
-                case int 1: (exit 13)
-                case int 2: (exit 13)
-                case int 3: (exit 13)
-                case int 4: (exit 13)
+                case int 0: (exit 12)
+                case int 1: (exit 12)
+                case int 2: (exit 12)
+                case int 3: (exit 12)
+                case int 4: (exit 12)
                 case int 5:
                  (before asmcomp/amd64/emit.mlp(364):11016-11023
                    (field 1 (field 31 (global X86_dsl!))))
@@ -958,10 +967,10 @@
                 case int 8:
                  (before asmcomp/amd64/emit.mlp(367):11079-11086
                    (field 15 (field 31 (global X86_dsl!))))
-                case int 9: (exit 13)
-                case int 10: (exit 13))
-               (exit 13))
-            with (13)
+                case int 9: (exit 12)
+                case int 10: (exit 12))
+               (exit 12))
+            with (12)
              (before asmcomp/amd64/emit.mlp(368):11096-11108
                (raise
                  (after asmcomp/amd64/emit.mlp(368):11096-11108
@@ -1024,7 +1033,7 @@
              (let (*match* = (field 3 arg))
                (catch
                  (switch* *match*
-                  case int 0: (exit 14)
+                  case int 0: (exit 13)
                   case tag 0:
                    (before asmcomp/amd64/emit.mlp(388):11651-11677
                      (after asmcomp/amd64/emit.mlp(388):11651-11677
@@ -1033,8 +1042,8 @@
                            (apply reg arg))
                          (after asmcomp/amd64/emit.mlp(388):11668-11677
                            (apply reg arg)))))
-                  case tag 1: (exit 14))
-                with (14)
+                  case tag 1: (exit 13))
+                with (13)
                  (before asmcomp/amd64/emit.mlp(389):11688-11711
                    (after asmcomp/amd64/emit.mlp(389):11688-11711
                      (apply (field 7 (field 31 (global X86_dsl!)))
@@ -1434,9 +1443,9 @@
                          (catch
                            (catch
                              (switch floatop
-                              case int 0: (exit 38)
-                              case int 1: (exit 38)
-                              case int 2: (exit 38)
+                              case int 0: (exit 37)
+                              case int 1: (exit 37)
+                              case int 2: (exit 37)
                               case int 3:
                                (before asmcomp/amd64/emit.mlp(740):23651-23717
                                  (after asmcomp/amd64/emit.mlp(740):23651-23717
@@ -1494,7 +1503,7 @@
                                                   0))))
                                          (catch
                                            (switch* *match*
-                                            case int 0: (exit 18)
+                                            case int 0: (exit 17)
                                             case tag 0:
                                              (before asmcomp/amd64/emit.mlp(519):15726-15751
                                                (after asmcomp/amd64/emit.mlp(519):15726-15751
@@ -1506,8 +1515,8 @@
                                                      (apply res i 0))
                                                    (after asmcomp/amd64/emit.mlp(519):15742-15751
                                                      (apply res i 0)))))
-                                            case tag 1: (exit 18))
-                                          with (18)
+                                            case tag 1: (exit 17))
+                                          with (17)
                                            (before asmcomp/amd64/emit.mlp(520):15771-15794
                                              (after asmcomp/amd64/emit.mlp(520):15771-15794
                                                (apply
@@ -1877,8 +1886,8 @@
                                                      (apply addressing addr
                                                        5a i 0))
                                                    dest)))
-                                            case int 6: (exit 20)
-                                            case int 7: (exit 20)
+                                            case int 6: (exit 19)
+                                            case int 7: (exit 19)
                                             case int 8:
                                              (before asmcomp/amd64/emit.mlp(612):18838-18881
                                                (after asmcomp/amd64/emit.mlp(612):18838-18881
@@ -1890,9 +1899,9 @@
                                                      (apply addressing addr
                                                        1a i 0))
                                                    dest)))
-                                            case int 9: (exit 21)
-                                            case int 10: (exit 21))
-                                          with (20)
+                                            case int 9: (exit 20)
+                                            case int 10: (exit 20))
+                                          with (19)
                                            (before asmcomp/amd64/emit.mlp(598):18302-18340
                                              (after asmcomp/amd64/emit.mlp(598):18302-18340
                                                (apply
@@ -1903,7 +1912,7 @@
                                                    (apply addressing addr 6a
                                                      i 0))
                                                  dest))))
-                                        with (21)
+                                        with (20)
                                          (before asmcomp/amd64/emit.mlp(614):18921-18961
                                            (after asmcomp/amd64/emit.mlp(614):18921-18961
                                              (apply
@@ -1924,14 +1933,14 @@
                                          (catch
                                            (catch
                                              (switch* chunk
-                                              case int 0: (exit 23)
-                                              case int 1: (exit 23)
-                                              case int 2: (exit 24)
-                                              case int 3: (exit 24)
-                                              case int 4: (exit 25)
-                                              case int 5: (exit 25)
-                                              case int 6: (exit 22)
-                                              case int 7: (exit 22)
+                                              case int 0: (exit 22)
+                                              case int 1: (exit 22)
+                                              case int 2: (exit 23)
+                                              case int 3: (exit 23)
+                                              case int 4: (exit 24)
+                                              case int 5: (exit 24)
+                                              case int 6: (exit 21)
+                                              case int 7: (exit 21)
                                               case int 8:
                                                (before asmcomp/amd64/emit.mlp(627):19447-19526
                                                  (seq
@@ -1955,9 +1964,9 @@
                                                          (after asmcomp/amd64/emit.mlp(628):19499-19526
                                                            (apply addressing
                                                              addr 1a i 1)))))))
-                                              case int 9: (exit 26)
-                                              case int 10: (exit 26))
-                                            with (22)
+                                              case int 9: (exit 25)
+                                              case int 10: (exit 25))
+                                            with (21)
                                              (before asmcomp/amd64/emit.mlp(619):19077-19120
                                                (after asmcomp/amd64/emit.mlp(619):19077-19120
                                                  (apply
@@ -1969,7 +1978,7 @@
                                                    (after asmcomp/amd64/emit.mlp(619):19093-19120
                                                      (apply addressing addr
                                                        6a i 1))))))
-                                          with (23)
+                                          with (22)
                                            (before asmcomp/amd64/emit.mlp(621):19170-19213
                                              (after asmcomp/amd64/emit.mlp(621):19170-19213
                                                (apply
@@ -1981,7 +1990,7 @@
                                                  (after asmcomp/amd64/emit.mlp(621):19187-19213
                                                    (apply addressing addr 3a
                                                      i 1))))))
-                                        with (24)
+                                        with (23)
                                          (before asmcomp/amd64/emit.mlp(623):19269-19313
                                            (after asmcomp/amd64/emit.mlp(623):19269-19313
                                              (apply
@@ -1992,7 +2001,7 @@
                                                (after asmcomp/amd64/emit.mlp(623):19287-19313
                                                  (apply addressing addr 4a i
                                                    1))))))
-                                      with (25)
+                                      with (24)
                                        (before asmcomp/amd64/emit.mlp(625):19373-19418
                                          (after asmcomp/amd64/emit.mlp(625):19373-19418
                                            (apply
@@ -2002,7 +2011,7 @@
                                                (apply arg32 i 0))
                                              (after asmcomp/amd64/emit.mlp(625):19391-19418
                                                (apply addressing addr 5a i 1))))))
-                                    with (26)
+                                    with (25)
                                      (before asmcomp/amd64/emit.mlp(630):19566-19611
                                        (after asmcomp/amd64/emit.mlp(630):19566-19611
                                          (apply
@@ -2303,11 +2312,11 @@
                                              (after asmcomp/amd64/emit.mlp(726):23117-23126
                                                (apply arg i 1))
                                              0a)))
-                                      case int 4: (exit 42)
-                                      case int 5: (exit 42)
-                                      case int 9: (exit 43)
-                                      case int 10: (exit 43)
-                                      case int 11: (exit 43)
+                                      case int 4: (exit 41)
+                                      case int 5: (exit 41)
+                                      case int 9: (exit 42)
+                                      case int 10: (exit 42)
+                                      case int 11: (exit 42)
                                       case tag 0:
                                        (let (cmp =a (field 0 op))
                                          (before asmcomp/amd64/emit.mlp(696):22000-22080
@@ -2399,7 +2408,7 @@
                                                  (apply arg i 1))
                                                (after asmcomp/amd64/emit.mlp(729):23231-23240
                                                  (apply res i 0)))))))
-                                    with (42)
+                                    with (41)
                                      (before asmcomp/amd64/emit.mlp(720):22900-22932
                                        (seq
                                          (after asmcomp/amd64/emit.mlp(720):22900-22908
@@ -2414,7 +2423,7 @@
                                                  (field 31 (global X86_dsl!)))
                                                (after asmcomp/amd64/emit.mlp(721):22923-22932
                                                  (apply arg i 1))))))))
-                                  with (43)
+                                  with (42)
                                    (before asmcomp/amd64/emit.mlp(724):23047-23078
                                      (after asmcomp/amd64/emit.mlp(724):23047-23078
                                        (apply instr_for_intop op
@@ -2455,20 +2464,20 @@
                                                  (after asmcomp/amd64/emit.mlp(731):23348-23357
                                                    (apply res i 0)))))
                                            (let (switcher =a (1+ n))
-                                             (if (isout 2 switcher) (exit 46)
+                                             (if (isout 2 switcher) (exit 45)
                                                (switch* switcher
-                                                case int 0: (exit 40)
-                                                case int 1: (exit 46)
-                                                case int 2: (exit 39)))))))
+                                                case int 0: (exit 39)
+                                                case int 1: (exit 45)
+                                                case int 2: (exit 38)))))))
                                     case int 1:
                                      (let
                                        (*match* =a (field 1 floatop)
                                         switcher =a (1+ *match*))
-                                       (if (isout 2 switcher) (exit 46)
+                                       (if (isout 2 switcher) (exit 45)
                                          (switch* switcher
-                                          case int 0: (exit 39)
-                                          case int 1: (exit 46)
-                                          case int 2: (exit 40))))
+                                          case int 0: (exit 38)
+                                          case int 1: (exit 45)
+                                          case int 2: (exit 39))))
                                     case tag 0:
                                      (let
                                        (n =a (field 1 floatop)
@@ -2555,8 +2564,8 @@
                                                              (global X86_dsl!)))
                                                          (after asmcomp/amd64/emit.mlp(718):22850-22861
                                                            (apply label lbl))))))))))))
-                                    default: (exit 46))
-                                  with (46)
+                                    default: (exit 45))
+                                  with (45)
                                    (let (n =a (field 1 floatop))
                                      (before asmcomp/amd64/emit.mlp(738):23590-23626
                                        (after asmcomp/amd64/emit.mlp(738):23590-23626
@@ -2719,7 +2728,7 @@
                                        (apply arg i 1))
                                      (after asmcomp/amd64/emit.mlp(744):23904-23913
                                        (apply res i 0))))))
-                            with (38)
+                            with (37)
                              (before asmcomp/amd64/emit.mlp(509):15319-15621
                                (let
                                  (src =
@@ -2744,10 +2753,10 @@
                                          (if (>= *match* 3)
                                            (catch
                                              (switch* *match*
-                                              case int 0: (exit 17)
+                                              case int 0: (exit 16)
                                               case tag 0:
                                                (switch* *match*
-                                                case int 0: (exit 17)
+                                                case int 0: (exit 16)
                                                 case tag 0:
                                                  (before asmcomp/amd64/emit.mlp(512):15487-15515
                                                    (after asmcomp/amd64/emit.mlp(512):15487-15515
@@ -2759,9 +2768,9 @@
                                                          (apply reg src))
                                                        (after asmcomp/amd64/emit.mlp(512):15506-15515
                                                          (apply reg dst)))))
-                                                case tag 1: (exit 17))
-                                              case tag 1: (exit 17))
-                                            with (17)
+                                                case tag 1: (exit 16))
+                                              case tag 1: (exit 16))
+                                            with (16)
                                              (before asmcomp/amd64/emit.mlp(513):15541-15568
                                                (after asmcomp/amd64/emit.mlp(513):15541-15568
                                                  (apply
@@ -2783,13 +2792,13 @@
                                                  (after asmcomp/amd64/emit.mlp(514):15600-15609
                                                    (apply reg dst))))))))
                                      0a)))))
-                          with (39)
+                          with (38)
                            (before asmcomp/amd64/emit.mlp(733):23419-23434
                              (after asmcomp/amd64/emit.mlp(733):23419-23434
                                (apply (field 53 (field 31 (global X86_dsl!)))
                                  (after asmcomp/amd64/emit.mlp(733):23425-23434
                                    (apply res i 0))))))
-                        with (40)
+                        with (39)
                          (before asmcomp/amd64/emit.mlp(735):23496-23511
                            (after asmcomp/amd64/emit.mlp(735):23496-23511
                              (apply (field 14 (field 31 (global X86_dsl!)))
@@ -2902,9 +2911,9 @@
                                (let (cmp =a (field 0 tst))
                                  (catch
                                    (let (*match* =a (field 0 cmp))
-                                     (if (>= *match* 2) (exit 28)
+                                     (if (>= *match* 2) (exit 27)
                                        (let (*match* =a (field 1 tst))
-                                         (if (!= *match* 0) (exit 28)
+                                         (if (!= *match* 0) (exit 27)
                                            (before asmcomp/amd64/emit.mlp(798):25651-25707
                                              (seq
                                                (after asmcomp/amd64/emit.mlp(798):25651-25677
@@ -2921,7 +2930,7 @@
                                                      (after asmcomp/amd64/emit.mlp(799):25693-25703
                                                        (apply cond cmp))
                                                      lbl)))))))))
-                                  with (28)
+                                  with (27)
                                    (let (cmp =a cmp n =a (field 1 tst))
                                      (before asmcomp/amd64/emit.mlp(801):25750-25803
                                        (seq
@@ -3025,7 +3034,7 @@
                                       tmp1 =
                                         (after asmcomp/amd64/emit.mlp(835):26845-26855
                                           (apply (field 6 (global Proc!)) 4)))
-                                     (exit 33 tmp2 tmp1)))
+                                     (exit 32 tmp2 tmp1)))
                                  (before asmcomp/amd64/emit.mlp(836):26898-26938
                                    (let
                                      (tmp2 =
@@ -3034,8 +3043,8 @@
                                       tmp1 =
                                         (after asmcomp/amd64/emit.mlp(836):26899-26909
                                           (apply (field 6 (global Proc!)) 0)))
-                                     (exit 33 tmp2 tmp1))))
-                              with (33 tmp2 tmp1)
+                                     (exit 32 tmp2 tmp1))))
+                              with (32 tmp2 tmp1)
                                (before asmcomp/amd64/emit.mlp(838):26949-27596
                                  (seq
                                    (after asmcomp/amd64/emit.mlp(838):26949-26986
@@ -3095,32 +3104,32 @@
                                                          (catch
                                                            (switch* *match*
                                                             case int 0:
-                                                             (exit 31)
+                                                             (exit 30)
                                                             case int 1:
-                                                             (exit 32)
-                                                            case int 2:
-                                                             (exit 30)
-                                                            case int 3:
-                                                             (exit 32)
-                                                            case int 4:
-                                                             (exit 32)
-                                                            case int 5:
-                                                             (exit 32)
-                                                            case int 6:
-                                                             (exit 32)
-                                                            case int 7:
-                                                             (exit 32)
-                                                            case int 8:
-                                                             (exit 32)
-                                                            case int 9:
                                                              (exit 31)
-                                                            case int 10:
-                                                             (exit 32)
-                                                            case int 11:
+                                                            case int 2:
+                                                             (exit 29)
+                                                            case int 3:
+                                                             (exit 31)
+                                                            case int 4:
+                                                             (exit 31)
+                                                            case int 5:
+                                                             (exit 31)
+                                                            case int 6:
+                                                             (exit 31)
+                                                            case int 7:
+                                                             (exit 31)
+                                                            case int 8:
+                                                             (exit 31)
+                                                            case int 9:
                                                              (exit 30)
+                                                            case int 10:
+                                                             (exit 31)
+                                                            case int 11:
+                                                             (exit 29)
                                                             case int 12:
-                                                             (exit 32))
-                                                          with (32)
+                                                             (exit 31))
+                                                          with (31)
                                                            (before asmcomp/amd64/emit.mlp(847):27342-27371
                                                              (after asmcomp/amd64/emit.mlp(847):27342-27371
                                                                (apply
@@ -3131,7 +3140,7 @@
                                                                   ".rodata"
                                                                   0a]
                                                                  0a 0a))))
-                                                        with (30)
+                                                        with (29)
                                                          (before asmcomp/amd64/emit.mlp(845):27208-27243
                                                            (after asmcomp/amd64/emit.mlp(845):27208-27243
                                                              (apply
@@ -3141,7 +3150,7 @@
                                                                [0:
                                                                 ".rdata" 0a]
                                                                [0: "dr"] 0a))))
-                                                      with (31)
+                                                      with (30)
                                                        (before asmcomp/amd64/emit.mlp(846):27274-27276
                                                          0a)))
                                                    (before asmcomp/amd64/emit.mlp(849):27389-27596
@@ -3341,10 +3350,10 @@
                (let (*match* = (field 0 i))
                  (catch
                    (if (isint *match*)
-                     (if (!= *match* 1) (exit 48)
+                     (if (!= *match* 1) (exit 47)
                        (before asmcomp/amd64/emit.mlp(900):29017-29019 0a))
-                     (exit 48))
-                  with (48)
+                     (exit 47))
+                  with (47)
                    (before asmcomp/amd64/emit.mlp(902):29035-29117
                      (seq
                        (after asmcomp/amd64/emit.mlp(902):29035-29059
@@ -3552,9 +3561,9 @@
                                                                     10)
                                                                     (before asmcomp/amd64/emit.mlp(949):30423-30425
                                                                     0a)
-                                                                    (exit 49))
-                                                                    (exit 49))
-                                                                    with (49)
+                                                                    (exit 48))
+                                                                    (exit 48))
+                                                                    with (48)
                                                                     (before asmcomp/amd64/emit.mlp(944):30219-30413
                                                                     (seq
                                                                     (after asmcomp/amd64/emit.mlp(944):30219-30269
@@ -3880,14 +3889,14 @@
                                                                [0:
                                                                 "16byte_literals"
                                                                 0a])))
-                                                        case int 1: (exit 52)
-                                                        case int 2: (exit 51)
-                                                        case int 3: (exit 52)
-                                                        case int 4: (exit 52)
-                                                        case int 5: (exit 52)
-                                                        case int 6: (exit 52)
-                                                        case int 7: (exit 52)
-                                                        case int 8: (exit 52)
+                                                        case int 1: (exit 51)
+                                                        case int 2: (exit 50)
+                                                        case int 3: (exit 51)
+                                                        case int 4: (exit 51)
+                                                        case int 5: (exit 51)
+                                                        case int 6: (exit 51)
+                                                        case int 7: (exit 51)
+                                                        case int 8: (exit 51)
                                                         case int 9:
                                                          (before asmcomp/amd64/emit.mlp(1004):32154-32163
                                                            (after asmcomp/amd64/emit.mlp(1004):32154-32163
@@ -3897,12 +3906,12 @@
                                                                    (global X86_dsl!)))
                                                                0a)))
                                                         case int 10:
-                                                         (exit 52)
-                                                        case int 11:
                                                          (exit 51)
+                                                        case int 11:
+                                                         (exit 50)
                                                         case int 12:
-                                                         (exit 52))
-                                                      with (52)
+                                                         (exit 51))
+                                                      with (51)
                                                        (before asmcomp/amd64/emit.mlp(1005):32175-32226
                                                          (after asmcomp/amd64/emit.mlp(1005):32175-32226
                                                            (apply
@@ -3915,7 +3924,7 @@
                                                              [0: "a"]
                                                              [0:
                                                               "@progbits" 0a]))))
-                                                    with (51)
+                                                    with (50)
                                                      (before asmcomp/amd64/emit.mlp(1003):32101-32136
                                                        (after asmcomp/amd64/emit.mlp(1003):32101-32136
                                                          (apply
@@ -4215,31 +4224,31 @@
                                          (field 30 (global X86_dsl!)))
                                        [0: "__TEXT" [0: "__literal8" 0a]] 0a
                                        [0: "8byte_literals" 0a])))
-                                case int 1: (exit 54)
-                                case int 2: (exit 53)
-                                case int 3: (exit 54)
-                                case int 4: (exit 54)
-                                case int 5: (exit 54)
-                                case int 6: (exit 54)
-                                case int 7: (exit 54)
-                                case int 8: (exit 54)
+                                case int 1: (exit 53)
+                                case int 2: (exit 52)
+                                case int 3: (exit 53)
+                                case int 4: (exit 53)
+                                case int 5: (exit 53)
+                                case int 6: (exit 53)
+                                case int 7: (exit 53)
+                                case int 8: (exit 53)
                                 case int 9:
                                  (before asmcomp/amd64/emit.mlp(1064):34068-34077
                                    (after asmcomp/amd64/emit.mlp(1064):34068-34077
                                      (apply
                                        (field 7 (field 30 (global X86_dsl!)))
                                        0a)))
-                                case int 10: (exit 54)
-                                case int 11: (exit 53)
-                                case int 12: (exit 54))
-                              with (54)
+                                case int 10: (exit 53)
+                                case int 11: (exit 52)
+                                case int 12: (exit 53))
+                              with (53)
                                (before asmcomp/amd64/emit.mlp(1065):34089-34140
                                  (after asmcomp/amd64/emit.mlp(1065):34089-34140
                                    (apply
                                      (field 19 (field 30 (global X86_dsl!)))
                                      [0: ".rodata.cst8" 0a] [0: "a"]
                                      [0: "@progbits" 0a]))))
-                            with (53)
+                            with (52)
                              (before asmcomp/amd64/emit.mlp(1063):34015-34050
                                (after asmcomp/amd64/emit.mlp(1063):34015-34050
                                  (apply

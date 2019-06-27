@@ -310,12 +310,13 @@
              (catch
                (switch param
                 case tag 0:
-                 (let
-                   (*match* =a (field 1 param) *match* =a (field 1 *match*))
-                   (catch
+                 (catch
+                   (let
+                     (*match* =a (field 1 param)
+                      *match* =a (field 1 *match*))
                      (switch *match* case tag 0: (exit 9)
-                                     default: (exit 11))
-                    with (11) (exit 10)))
+                                     default: (exit 11)))
+                  with (11) (exit 10))
                 case tag 2: (exit 10)
                 case tag 3:
                  (let (*match* =a (field 1 param))

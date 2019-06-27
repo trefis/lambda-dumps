@@ -37,59 +37,64 @@
                                (exit 15 var' var))
                             default: (exit 14)))
                         case tag 3:
-                         (let
-                           (defs =a (field 0 expr) *match* =a (field 1 expr))
-                           (switch *match*
-                            case tag 0:
+                         (let (defs =a (field 0 expr))
+                           (catch
                              (if defs
                                (let (*match* =a (field 1 defs))
-                                 (if *match* (exit 11)
+                                 (if *match* (exit 16)
                                    (let
                                      (*match* =a (field 1 expr)
-                                      var' =a (field 0 *match*)
                                       *match* =a (field 0 defs)
                                       var =a (field 0 *match*))
-                                     (exit 15 var' var))))
-                               (exit 11))
-                            case tag 1:
-                             (let
-                               (*match* =a (field 0 *match*)
-                                *match* =a (field 1 *match*))
+                                     (switch *match*
+                                      case tag 0:
+                                       (let (var' =a (field 0 *match*))
+                                         (exit 15 var' var))
+                                      case tag 1: (exit 16)
+                                      default: (exit 14)))))
+                               (exit 16))
+                            with (16)
+                             (let (*match* =a (field 1 expr))
                                (switch *match*
-                                case tag 9:
-                                 (let (*match* =a (field 0 *match*))
+                                case tag 1:
+                                 (let
+                                   (*match* =a (field 0 *match*)
+                                    *match* =a (field 1 *match*))
                                    (switch *match*
-                                    case tag 1:
-                                     (let (*match* =a (field 2 *match*))
+                                    case tag 9:
+                                     (let (*match* =a (field 0 *match*))
                                        (switch *match*
-                                        case tag 0:
-                                         (let
-                                           (var' =a (field 0 *match*)
-                                            fields =a (field 1 *match*)
-                                            var =a (field 0 *match*))
-                                           (before middle_end/flambda/lift_let_to_initialize_symbol.ml(54):2315-2466
-                                             (if
-                                               (&&
-                                                 (after middle_end/flambda/lift_let_to_initialize_symbol.ml(54):2315-2338
-                                                   (apply
-                                                     (field 1
-                                                       (global Variable!))
-                                                     var var'))
-                                                 (after middle_end/flambda/lift_let_to_initialize_symbol.ml(55):2348-2466
-                                                   (apply
-                                                     (field 27
-                                                       (global Stdlib__list!))
-                                                     (function field
-                                                       (funct-body middle_end/flambda/lift_let_to_initialize_symbol.ml(55):2361-2453
-                                                         (before middle_end/flambda/lift_let_to_initialize_symbol.ml(56):2385-2452
-                                                           (after middle_end/flambda/lift_let_to_initialize_symbol.ml(56):2385-2452
-                                                             (apply
-                                                               (field 28
-                                                                 (global Stdlib__list!))
-                                                               (function
-                                                                 param
-                                                                 (funct-body middle_end/flambda/lift_let_to_initialize_symbol.ml(56):2397-2447
-                                                                   (let
+                                        case tag 1:
+                                         (let (*match* =a (field 2 *match*))
+                                           (switch *match*
+                                            case tag 0:
+                                             (let
+                                               (var' =a (field 0 *match*)
+                                                fields =a (field 1 *match*)
+                                                var =a (field 0 *match*))
+                                               (before middle_end/flambda/lift_let_to_initialize_symbol.ml(54):2315-2466
+                                                 (if
+                                                   (&&
+                                                     (after middle_end/flambda/lift_let_to_initialize_symbol.ml(54):2315-2338
+                                                       (apply
+                                                         (field 1
+                                                           (global Variable!))
+                                                         var var'))
+                                                     (after middle_end/flambda/lift_let_to_initialize_symbol.ml(55):2348-2466
+                                                       (apply
+                                                         (field 27
+                                                           (global Stdlib__list!))
+                                                         (function field
+                                                           (funct-body middle_end/flambda/lift_let_to_initialize_symbol.ml(55):2361-2453
+                                                             (before middle_end/flambda/lift_let_to_initialize_symbol.ml(56):2385-2452
+                                                               (after middle_end/flambda/lift_let_to_initialize_symbol.ml(56):2385-2452
+                                                                 (apply
+                                                                   (field 28
+                                                                    (global Stdlib__list!))
+                                                                   (function
+                                                                    param
+                                                                    (funct-body middle_end/flambda/lift_let_to_initialize_symbol.ml(56):2397-2447
+                                                                    (let
                                                                     (def_var =a
                                                                     (field 0
                                                                     param))
@@ -100,21 +105,21 @@
                                                                     (global Variable!))
                                                                     def_var
                                                                     field))))))
-                                                               defs)))))
-                                                     fields)))
-                                               (before middle_end/flambda/lift_let_to_initialize_symbol.ml(58):2474-2584
-                                                 (makeblock 0 copied_lets
-                                                   extracted_lets
-                                                   (after middle_end/flambda/lift_let_to_initialize_symbol.ml(59):2524-2577
-                                                     (apply
-                                                       (field 8
-                                                         (global Flambda_utils!))
-                                                       substitution expr))))
-                                               (exit 14))))
+                                                                   defs)))))
+                                                         fields)))
+                                                   (before middle_end/flambda/lift_let_to_initialize_symbol.ml(58):2474-2584
+                                                     (makeblock 0 copied_lets
+                                                       extracted_lets
+                                                       (after middle_end/flambda/lift_let_to_initialize_symbol.ml(59):2524-2577
+                                                         (apply
+                                                           (field 8
+                                                             (global Flambda_utils!))
+                                                           substitution expr))))
+                                                   (exit 14))))
+                                            default: (exit 14)))
                                         default: (exit 14)))
                                     default: (exit 14)))
-                                default: (exit 14)))
-                            default: (exit 14)))
+                                default: (exit 14)))))
                         default: (exit 10))
                       with (15 var' var)
                        (before middle_end/flambda/lift_let_to_initialize_symbol.ml(44):1929-1952

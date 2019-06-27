@@ -1151,23 +1151,21 @@
                                               (let
                                                 (*match* =a (field 2 *match*))
                                                 (catch
+                                                  (if (isint *match*)
+                                                    (if *match* (exit 41)
+                                                      (let
+                                                        (*match* =a
+                                                           (field 3 *match*))
+                                                        (if *match* (exit 41)
+                                                          (exit 40))))
+                                                    (exit 41))
+                                                 with (41)
                                                   (let
                                                     (*match* =a
                                                        (field 4 *match*))
-                                                    (if *match*
-                                                      (if (isint *match*)
-                                                        (if *match* (exit 40)
-                                                          (let
-                                                            (*match* =a
-                                                               (field 3
-                                                                 *match*))
-                                                            (if *match*
-                                                              (exit 40)
-                                                              (exit 39))))
-                                                        (exit 40))
-                                                      (exit 39)))
-                                                 with (40) (exit 38)))
-                                             with (39) (exit 37)))
+                                                    (if *match* (exit 38)
+                                                      (exit 40)))))
+                                             with (40) (exit 37)))
                                          case tag 2:
                                           (let
                                             (*match* =a (field 1 param)

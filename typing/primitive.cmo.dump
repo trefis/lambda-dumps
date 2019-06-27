@@ -70,8 +70,8 @@
                        (let (*match* = (field 2 valdecl))
                          (if *match*
                            (let
-                             (*match* =a (field 1 *match*)
-                              name =a (field 0 *match*))
+                             (name =a (field 0 *match*)
+                              *match* =a (field 1 *match*))
                              (if *match*
                                (let (name2 =a (field 0 *match*))
                                  (catch
@@ -82,20 +82,22 @@
                                           (let (*match* =a (field 1 *match*))
                                             (if *match*
                                               (let
-                                                (*match* =a (field 1 *match*)
-                                                 name2 =a (field 0 *match*))
+                                                (name2 =a (field 0 *match*))
                                                 (catch
-                                                  (if *match*
-                                                    (let
-                                                      (*match* =a
-                                                         (field 0 *match*))
-                                                      (stringswitch *match*
-                                                       case "float":
-                                                        (before typing/primitive.ml(88):3168-3193
-                                                          (makeblock 0 name
-                                                            name2 1a 1a))
-                                                       default: (exit 14)))
-                                                    (exit 14))
+                                                  (let
+                                                    (*match* =a
+                                                       (field 1 *match*))
+                                                    (if *match*
+                                                      (let
+                                                        (*match* =a
+                                                           (field 0 *match*))
+                                                        (stringswitch *match*
+                                                         case "float":
+                                                          (before typing/primitive.ml(88):3168-3193
+                                                            (makeblock 0 name
+                                                              name2 1a 1a))
+                                                         default: (exit 14)))
+                                                      (exit 14)))
                                                  with (14)
                                                   (let
                                                     (name2 =a name2

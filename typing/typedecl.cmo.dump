@@ -2444,8 +2444,8 @@
                  (function env loc dpath decl
                    (funct-body typing/typedecl.ml(644)<ghost>:24096-25249
                      (before typing/typedecl.ml(645):24119-25249
-                       (let (*match* =a (field 2 decl))
-                         (catch
+                       (catch
+                         (let (*match* =a (field 2 decl))
                            (catch
                              (switch *match*
                               case int 0: (exit 71)
@@ -2566,9 +2566,9 @@
                                              (after typing/typedecl.ml(671):25183-25227
                                                (makeblock 0 Error loc
                                                  (makeblock 4 ty 0a)))))))))
-                                 (exit 71))))
-                          with (71)
-                           (before typing/typedecl.ml(673):25247-25249 0a))))))
+                                 (exit 71)))))
+                        with (71)
+                         (before typing/typedecl.ml(673):25247-25249 0a)))))
                check_abbrev =
                  (function env sdecl param
                    (funct-body typing/typedecl.ml(675)<ghost>:25268-25350
@@ -3413,8 +3413,8 @@
                  (function sdecl id decl
                    (funct-body typing/typedecl.ml(846)<ghost>:31639-32103
                      (before typing/typedecl.ml(847):31657-32103
-                       (let (*match* =a (field 2 decl))
-                         (catch
+                       (catch
+                         (let (*match* =a (field 2 decl))
                            (if (isint *match*)
                              (if *match* (exit 105)
                                (let (*match* =a (field 3 decl))
@@ -3506,9 +3506,9 @@
                                                            decl)))))))
                                              (exit 105))))
                                        (exit 105))))))
-                             (exit 105))
-                          with (105)
-                           (before typing/typedecl.ml(858):32099-32103 decl))))))
+                             (exit 105)))
+                        with (105)
+                         (before typing/typedecl.ml(858):32099-32103 decl)))))
                name_recursion_decls =
                  (function sdecls decls
                    (funct-body typing/typedecl.ml(860)<ghost>:32130-32234
@@ -3539,35 +3539,36 @@
                                       "()"))))))
                          (before typing/typedecl.ml(869):32495-32741
                            (let
-                             (*match* =a (field 3 td)
-                              *match* =a (field 0 td)
+                             (*match* =a (field 0 td)
                               name =a (field 0 *match*))
                              (catch
-                               (switch *match*
-                                case tag 0:
-                                 (let (*match* =a (field 0 *match*))
-                                   (if *match*
-                                     (let (*match* =a (field 1 *match*))
-                                       (if *match* (exit 106)
-                                         (let (*match* =a (field 5 td))
-                                           (if *match* (exit 106)
-                                             (let (cd =a (field 0 *match*))
-                                               (before typing/typedecl.ml(873):32624-32646
-                                                 (if
-                                                   (after typing/typedecl.ml(873):32624-32646
-                                                     (apply
-                                                       is_unit_constructor
-                                                       cd))
-                                                   (before typing/typedecl.ml(874):32656-32723
-                                                     (after typing/typedecl.ml(874):32656-32723
+                               (let (*match* =a (field 3 td))
+                                 (switch *match*
+                                  case tag 0:
+                                   (let (*match* =a (field 0 *match*))
+                                     (if *match*
+                                       (let (*match* =a (field 1 *match*))
+                                         (if *match* (exit 106)
+                                           (let (*match* =a (field 5 td))
+                                             (if *match* (exit 106)
+                                               (let (cd =a (field 0 *match*))
+                                                 (before typing/typedecl.ml(873):32624-32646
+                                                   (if
+                                                     (after typing/typedecl.ml(873):32624-32646
                                                        (apply
-                                                         (field 34
-                                                           (global Location!))
-                                                         (field 7 td)
-                                                         (makeblock 42 name))))
-                                                   (exit 106))))))))
-                                     (exit 106)))
-                                default: (exit 106))
+                                                         is_unit_constructor
+                                                         cd))
+                                                     (before typing/typedecl.ml(874):32656-32723
+                                                       (after typing/typedecl.ml(874):32656-32723
+                                                         (apply
+                                                           (field 34
+                                                             (global Location!))
+                                                           (field 7 td)
+                                                           (makeblock 42
+                                                             name))))
+                                                     (exit 106))))))))
+                                       (exit 106)))
+                                  default: (exit 106)))
                               with (106)
                                (before typing/typedecl.ml(876):32739-32741
                                  0a))))))))
@@ -5604,14 +5605,14 @@
                                (catch
                                  (switch *match*
                                   case tag 1:
-                                   (let
-                                     (ct2 =a (field 2 *match*)
-                                      ct1 =a (field 1 *match*))
+                                   (catch
                                      (switch *match*
                                       case tag 1:
                                        (let
                                          (t2 =a (field 2 *match*)
-                                          t1 =a (field 1 *match*))
+                                          t1 =a (field 1 *match*)
+                                          ct2 =a (field 2 *match*)
+                                          ct1 =a (field 1 *match*))
                                          (if *match*
                                            (let (kind =a (field 0 *match*))
                                              (before typing/typedecl.ml(1345):49534-49601
@@ -5643,19 +5644,20 @@
                                                        (makeblock 0 repr_arg
                                                          repr_args)
                                                        repr_res))))))))
-                                      default: (exit 156)))
-                                  default: (exit 158))
-                                with (158)
+                                      default: (exit 162))
+                                    with (162) (exit 159))
+                                  default: (exit 161))
+                                with (161)
                                  (switch *match*
-                                  case tag 1: (exit 156)
-                                  default: (exit 157)))
-                              with (157)
+                                  case tag 1: (exit 159)
+                                  default: (exit 160)))
+                              with (160)
                                (before typing/typedecl.ml(1353):49922-49974
                                  (makeblock 0 0a
                                    (after typing/typedecl.ml(1353):49927-49973
                                      (apply make_native_repr env core_type ty
                                        global_repr)))))
-                            with (156)
+                            with (159)
                              (before typing/typedecl.ml(1352):49900-49912
                                (raise
                                  (after typing/typedecl.ml(1352):49900-49912
@@ -5710,8 +5712,8 @@
                                                                   p acc)))
                                                             (before typing/typedecl.ml(1364):50293-50296
                                                               acc))))))
-                                                 default: (exit 162))
-                                               with (162)
+                                                 default: (exit 165))
+                                               with (165)
                                                 (before typing/typedecl.ml(1365):50310-50313
                                                   acc)))
                                            with exn
@@ -6122,15 +6124,15 @@
                                                                     tman =
                                                                     (makeblock 0
                                                                     cty))
-                                                                    (exit 176
+                                                                    (exit 179
                                                                     man tman))))))
                                                                     (before typing/typedecl.ml(1462):53668-53678
                                                                     (let
                                                                     (man = 0a
                                                                     tman = 0a)
-                                                                    (exit 176
+                                                                    (exit 179
                                                                     man tman)))))
-                                                                    with (176 man tman)
+                                                                    with (179 man tman)
                                                                     (before typing/typedecl.ml(1467):53796-55762
                                                                     (let
                                                                     (priv =
@@ -6194,7 +6196,7 @@
                                                                     type_kind =
                                                                     (field 2
                                                                     orig_decl))
-                                                                    (exit 171
+                                                                    (exit 174
                                                                     type_unboxed
                                                                     type_kind)))
                                                                     (before typing/typedecl.ml(1479):54274-54316
@@ -6204,10 +6206,10 @@
                                                                     (global Types!))
                                                                     type_kind =
                                                                     0a)
-                                                                    (exit 171
+                                                                    (exit 174
                                                                     type_unboxed
                                                                     type_kind))))
-                                                                    with (171 type_unboxed type_kind)
+                                                                    with (174 type_unboxed type_kind)
                                                                     (before typing/typedecl.ml(1481):54324-55762
                                                                     (let
                                                                     (decl =
@@ -6680,7 +6682,7 @@
                                                                (catch
                                                                  (switch* *match*
                                                                   case int 0:
-                                                                   (exit 186)
+                                                                   (exit 189)
                                                                   case tag 0:
                                                                    (let
                                                                     (*match* =a
@@ -6695,7 +6697,7 @@
                                                                     (before typing/typedecl.ml(1606):58604-58605
                                                                     t))
                                                                     (exit
-                                                                    186)))
+                                                                    189)))
                                                                   case tag 1:
                                                                    (let
                                                                     (tl =a
@@ -6710,7 +6712,7 @@
                                                                     (if
                                                                     *match*
                                                                     (exit
-                                                                    187)
+                                                                    190)
                                                                     (let
                                                                     (t =a
                                                                     (field 0
@@ -6718,8 +6720,8 @@
                                                                     (before typing/typedecl.ml(1607):58639-58640
                                                                     t))))
                                                                     (exit
-                                                                    187))
-                                                                    with (187)
+                                                                    190))
+                                                                    with (190)
                                                                     (before typing/typedecl.ml(1608):58673-58699
                                                                     (after typing/typedecl.ml(1608):58673-58699
                                                                     (apply
@@ -6727,7 +6729,7 @@
                                                                     (global Btype!))
                                                                     (makeblock 2
                                                                     tl)))))))
-                                                                with (186)
+                                                                with (189)
                                                                  (before typing/typedecl.ml(1609):58715-58740
                                                                    (after typing/typedecl.ml(1609):58715-58740
                                                                     (apply
@@ -6752,8 +6754,8 @@
                                                                     (global Stdlib!))
                                                                     lab
                                                                     " of "))))))))))))))))
-                                    default: (exit 188))
-                                  with (188)
+                                    default: (exit 191))
+                                  with (191)
                                    (before typing/typedecl.ml(1611):58802-58812
                                      (after typing/typedecl.ml(1611):58802-58812
                                        (apply trivial ty))))))))))
@@ -7275,8 +7277,8 @@
                                                      (apply
                                                        explain_unbound_single
                                                        ppf ty ty'))))
-                                               (exit 189))
-                                            case int 1: (exit 189)
+                                               (exit 192))
+                                            case int 1: (exit 192)
                                             case tag 0:
                                              (let (tl =a (field 0 *match*))
                                                (before typing/typedecl.ml(1695):62427-62542
@@ -7346,7 +7348,7 @@
                                                                (field 17
                                                                  (global Printtyp!))
                                                                (field 1 c)))))))))))
-                                          with (189)
+                                          with (192)
                                            (before typing/typedecl.ml(1699):62635-62637
                                              0a)))))))))
                           case tag 10:
@@ -7602,7 +7604,7 @@
                                                             (if
                                                               (isout 2
                                                                 switcher)
-                                                              (exit 190)
+                                                              (exit 193)
                                                               (switch* switcher
                                                                case int 0:
                                                                 (before typing/typedecl.ml(1752):64656-64664
@@ -7612,7 +7614,7 @@
                                                                     (before typing/typedecl.ml(1752):64668-64672
                                                                     "st")
                                                                     (exit
-                                                                    190)))
+                                                                    193)))
                                                                case int 1:
                                                                 (before typing/typedecl.ml(1753):64690-64698
                                                                   (if
@@ -7621,7 +7623,7 @@
                                                                     (before typing/typedecl.ml(1753):64702-64706
                                                                     "nd")
                                                                     (exit
-                                                                    190)))
+                                                                    193)))
                                                                case int 2:
                                                                 (before typing/typedecl.ml(1754):64724-64732
                                                                   (if
@@ -7630,8 +7632,8 @@
                                                                     (before typing/typedecl.ml(1754):64736-64740
                                                                     "rd")
                                                                     (exit
-                                                                    190))))))
-                                                         with (190)
+                                                                    193))))))
+                                                         with (193)
                                                           (before typing/typedecl.ml(1755):64756-64760
                                                             "th")))))))))
                                          (before typing/typedecl.ml(1758):64845-65683

@@ -2255,9 +2255,9 @@
                      (exit 30))
                   case tag 0:
                    (let
-                     (args =a *match*
-                      arity =a (field 1 *match*)
-                      prim =a (field 0 *match*))
+                     (prim =a (field 0 *match*)
+                      args =a *match*
+                      arity =a (field 1 *match*))
                      (before lambda/translprim.ml(652):28253-28277
                        (if
                          (== arity
@@ -2267,7 +2267,7 @@
                            (makeblock 6 prim args loc))
                          (exit 30))))
                   case tag 1:
-                   (let (args =a *match* prim =a (field 0 *match*))
+                   (let (prim =a (field 0 *match*) args =a *match*)
                      (before lambda/translprim.ml(654):28339-28359
                        (if
                          (after lambda/translprim.ml(654):28339-28359
@@ -2279,23 +2279,26 @@
                            (before lambda/translprim.ml(657):28460-28489
                              (makeblock 6 (makeblock 9 prim) args loc))))))
                   case tag 2:
-                   (let (knd =a (field 1 *match*) comp =a (field 0 *match*))
-                     (if *match*
-                       (let (*match* =a (field 1 *match*))
-                         (if *match*
-                           (let (*match* =a (field 1 *match*))
-                             (if *match* (exit 30)
-                               (let (args =a *match*)
-                                 (before lambda/translprim.ml(659):28542-28614
-                                   (let
-                                     (prim =
-                                        (after lambda/translprim.ml(659):28553-28582
-                                          (apply comparison_primitive comp
-                                            knd)))
-                                     (before lambda/translprim.ml(660):28592-28614
-                                       (makeblock 6 prim args loc)))))))
-                           (exit 30)))
-                       (exit 30)))
+                   (let (comp =a (field 0 *match*))
+                     (catch
+                       (if *match*
+                         (let (*match* =a (field 1 *match*))
+                           (if *match*
+                             (let (*match* =a (field 1 *match*))
+                               (if *match* (exit 37)
+                                 (let
+                                   (args =a *match* knd =a (field 1 *match*))
+                                   (before lambda/translprim.ml(659):28542-28614
+                                     (let
+                                       (prim =
+                                          (after lambda/translprim.ml(659):28553-28582
+                                            (apply comparison_primitive comp
+                                              knd)))
+                                       (before lambda/translprim.ml(660):28592-28614
+                                         (makeblock 6 prim args loc)))))))
+                             (exit 37)))
+                         (exit 37))
+                      with (37) (exit 30)))
                   case tag 3:
                    (let (kind =a (field 0 *match*))
                      (if *match*
@@ -2402,8 +2405,8 @@
                          case int 1:
                           (before lambda/translprim.ml(716):30530-30546
                             (== (field 1 p) 1))
-                         case int 2: (exit 39)
-                         case int 3: (exit 39)
+                         case int 2: (exit 41)
+                         case int 3: (exit 41)
                          case int 4:
                           (before lambda/translprim.ml(719):30662-30678
                             (== (field 1 p) 4))
@@ -2422,7 +2425,7 @@
                          case tag 4:
                           (before lambda/translprim.ml(717):30562-30598
                             (|| (== (field 1 p) 1) (== (field 1 p) 0))))
-                       with (39)
+                       with (41)
                         (before lambda/translprim.ml(718):30625-30641
                           (== (field 1 p) 2))))
                    (before lambda/translprim.ml(721):30686-30761
@@ -2514,26 +2517,26 @@
            (catch
              (catch
                (switch param
-                case int 4: (exit 41)
-                case int 5: (exit 41)
-                case int 30: (exit 41)
-                case int 34: (exit 41)
-                case int 35: (exit 41)
-                case tag 8: (exit 41)
-                case tag 9: (exit 41)
-                case tag 22: (exit 41)
-                case tag 23: (exit 41)
-                case tag 40: (exit 41)
-                case tag 41: (exit 41)
-                default: (exit 42))
-              with (42) (before lambda/translprim.ml(756):31938-31943 0a))
-            with (41) (before lambda/translprim.ml(755):31924-31928 1a))))
+                case int 4: (exit 43)
+                case int 5: (exit 43)
+                case int 30: (exit 43)
+                case int 34: (exit 43)
+                case int 35: (exit 43)
+                case tag 8: (exit 43)
+                case tag 9: (exit 43)
+                case tag 22: (exit 43)
+                case tag 23: (exit 43)
+                case tag 40: (exit 43)
+                case tag 41: (exit 43)
+                default: (exit 44))
+              with (44) (before lambda/translprim.ml(756):31938-31943 0a))
+            with (43) (before lambda/translprim.ml(755):31924-31928 1a))))
      primitive_needs_event_after =
        (function param
          (funct-body lambda/translprim.ml(759):32057-32331
            (catch
              (switch param
-              case int 0: (exit 44)
+              case int 0: (exit 46)
               case tag 0:
                (let (prim =a (field 0 param))
                  (before lambda/translprim.ml(760):32092-32115
@@ -2547,10 +2550,10 @@
                      (apply primitive_is_ccall
                        (after lambda/translprim.ml(763):32193-32224
                          (apply comparison_primitive comp knd))))))
-              case tag 3: (exit 44)
-              case tag 4: (exit 44)
+              case tag 3: (exit 46)
+              case tag 4: (exit 46)
               default: (before lambda/translprim.ml(764):32275-32279 1a))
-            with (44) (before lambda/translprim.ml(765):32326-32331 0a))))
+            with (46) (before lambda/translprim.ml(765):32326-32331 0a))))
      transl_primitive_application =
        (function loc p env ty path exp args arg_exps
          (funct-body lambda/translprim.ml(767)<ghost>:32366-33200
@@ -2570,6 +2573,29 @@
                               (*match* =a (field 0 arg_exps)
                                *match* =a (field 0 *match*))
                               (catch
+                                (switch *match*
+                                 case tag 8:
+                                  (let
+                                    (*match* =a (field 1 *match*)
+                                     *match* =a (field 5 *match*))
+                                    (switch *match*
+                                     case tag 0:
+                                      (let (*match* =a (field 1 arg_exps))
+                                        (if *match*
+                                          (let (*match* =a (field 1 *match*))
+                                            (if *match* (exit 48) (exit 47)))
+                                          (exit 48)))
+                                     default: (exit 49)))
+                                 case tag 9:
+                                  (let (*match* =a (field 1 *match*))
+                                    (if *match* (exit 49)
+                                      (let (*match* =a (field 1 arg_exps))
+                                        (if *match*
+                                          (let (*match* =a (field 1 *match*))
+                                            (if *match* (exit 48) (exit 47)))
+                                          (exit 48)))))
+                                 default: (exit 49))
+                               with (49)
                                 (let (*match* =a (field 1 arg_exps))
                                   (if *match*
                                     (let
@@ -2584,43 +2610,22 @@
                                            case tag 0:
                                             (let
                                               (*match* =a (field 1 *match*))
-                                              (if *match* (exit 46)
-                                                (exit 45)))
-                                           default: (exit 47)))
+                                              (if *match* (exit 48)
+                                                (exit 47)))
+                                           default: (exit 48)))
                                        case tag 9:
                                         (let (*match* =a (field 1 *match*))
-                                          (if *match* (exit 47)
+                                          (if *match* (exit 48)
                                             (let
                                               (*match* =a (field 1 *match*))
-                                              (if *match* (exit 46)
-                                                (exit 45)))))
-                                       default: (exit 47)))
-                                    (exit 46)))
-                               with (47)
-                                (switch *match*
-                                 case tag 8:
-                                  (let
-                                    (*match* =a (field 1 *match*)
-                                     *match* =a (field 5 *match*))
-                                    (switch *match*
-                                     case tag 0:
-                                      (let
-                                        (*match* =a (field 1 arg_exps)
-                                         *match* =a (field 1 *match*))
-                                        (if *match* (exit 46) (exit 45)))
-                                     default: (exit 46)))
-                                 case tag 9:
-                                  (let (*match* =a (field 1 *match*))
-                                    (if *match* (exit 46)
-                                      (let
-                                        (*match* =a (field 1 arg_exps)
-                                         *match* =a (field 1 *match*))
-                                        (if *match* (exit 46) (exit 45)))))
-                                 default: (exit 46))))
-                            (exit 46))
-                         with (46)
+                                              (if *match* (exit 48)
+                                                (exit 47)))))
+                                       default: (exit 48)))
+                                    (exit 48)))))
+                            (exit 48))
+                         with (48)
                           (before lambda/translprim.ml(775):32791-32796 0a))
-                       with (45)
+                       with (47)
                         (before lambda/translprim.ml(774):32775-32779 1a)))
                    (before lambda/translprim.ml(777):32804-33200
                      (let

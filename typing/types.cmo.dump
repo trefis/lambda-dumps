@@ -152,17 +152,21 @@
                          (before typing/types.ml(338):11020-11027 (== i2 i1)))
                       default: (exit 1)))
                   case tag 2:
-                   (let (b1 =a (field 1 *match*) path1 =a (field 0 *match*))
-                     (switch *match*
-                      case tag 2:
-                       (let
-                         (b2 =a (field 1 *match*) path2 =a (field 0 *match*))
-                         (before typing/types.ml(341):11135-11167
-                           (&&
-                             (after typing/types.ml(341):11135-11156
-                               (apply (field 0 (global Path!)) path1 path2))
-                             (== b1 b2))))
-                      default: (exit 1))))
+                   (let (path1 =a (field 0 *match*))
+                     (catch
+                       (switch *match*
+                        case tag 2:
+                         (let
+                           (b2 =a (field 1 *match*)
+                            path2 =a (field 0 *match*)
+                            b1 =a (field 1 *match*))
+                           (before typing/types.ml(341):11135-11167
+                             (&&
+                               (after typing/types.ml(341):11135-11156
+                                 (apply (field 0 (global Path!)) path1 path2))
+                               (== b1 b2))))
+                        default: (exit 5))
+                      with (5) (exit 1))))
                 with (1) (before typing/types.ml(342):11239-11244 0a))))))
      may_equal_constr =
        (function c1 c2
